@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.16)
+
+# Incluimos todos los archivos .cpp que estén en la ruta RAIZ/src/Executable/ a la compilación
+# We include all .cpp files inside ROOT/src/Executable/ to compilation
+file(GLOB EXECUTABLE_SOURCES "${ROOT_DIR}/src/Executable/*.cpp")
+
+# Definimos el ejecutable
+# We define the executable
+add_executable(Executable ${EXECUTABLE_SOURCES})
+
+# Vinculamos el proyecto Engine al Executable
+# We link Engine project to the Executable project
+target_link_libraries(Executable PRIVATE Engine)
+
+# Incluimos y enlazamos SDL3
+# We include and link SDL3
+target_link_libraries(Executable PRIVATE SDL3::SDL3 lua::lua)
+target_include_directories(Executable PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/Executable/ ${ROOT_DIR}/src/Engine/)

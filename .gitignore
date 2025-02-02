@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Archivos y directorios del proyecto que no es necesario subir a GitHub
+dependencies/*
+
+# Archivos y directorios temporales generados por CLion o CMake al compilar
+.idea/*
+cmake-build-debug/*
+cmake-build-release/*
