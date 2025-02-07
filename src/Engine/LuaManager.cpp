@@ -4,6 +4,7 @@
 #include <iostream>
 #include <lua.hpp>
 
+
 lua_State *LuaManager::loadState(char* fileData, int fileLength) {
     lua_State* L = luaL_newstate();
     if (luaL_loadbuffer(L, fileData, fileLength, "filename") != LUA_OK) {

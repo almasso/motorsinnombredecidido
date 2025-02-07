@@ -14,5 +14,11 @@ target_link_libraries(Executable PRIVATE Engine)
 
 # Incluimos y enlazamos SDL3
 # We include and link SDL3
-target_link_libraries(Executable PRIVATE SDL3::SDL3 lua::lua)
+target_link_libraries(Executable PRIVATE SDL3-shared)
 target_include_directories(Executable PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/Executable/ ${ROOT_DIR}/src/Engine/)
+
+# Hacemos que el ejecutable tenga un _d cuando se compile en debug
+# We make so that the executable has a _d whenever it's compiled on debug
+set_target_properties(Executable PROPERTIES
+        OUTPUT_NAME "Executable$<$<CONFIG:Debug>:_d>"
+)

@@ -2,12 +2,26 @@ cmake_minimum_required(VERSION 3.16)
 
 project(motorsinnombredecidido LANGUAGES CXX)
 
+# Establecemos el tipo de compilación por defecto a Release
+# We set default build type to Release
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
+endif()
+
+# Añadimos Debug y Release a los tipos de compilación posibles
+# We add Debug and Release to the possible compilation types
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_compile_options(-static -static-libgcc -static-libstdc++)
+add_link_options(-static -static-libgcc -static-libstdc++)
 
 # Habilitamos FetchContent para la descarga de las dependencias
 # We enable FetchContent for dependencies download
 include(FetchContent)
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 # Directorio raíz / Root directory
 # Nos guardamos en una variable la ruta de la raíz del proyecto
@@ -20,10 +34,10 @@ set(DEPENDENCIES_DIR "${ROOT_DIR}/dependencies")
 
 # Le decimos a FetchContent a qué carpeta descargar los archivos necesarios
 # We tell FetchContent which folder where's going to download the dependencies
-set(FETCHCONTENT_BASE_DIR ${DEPENDENCIES_DIR})
+set(FETCHCONTENT_BASE_DIR ${DEPENDENCIES_DIR}/${CMAKE_BUILD_TYPE})
 
 # Directorios de salida / Output directories
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ROOT_DIR}/bin/${CMAKE_BUILD_TYPE})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ROOT_DIR}/bin/)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_BUILD_TYPE})
 
 # Obtenemos SDL 3.2.2 (última versión estable release a la fecha)
@@ -33,61 +47,40 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
         GIT_TAG release-3.2.2
 )
+set(BUILD_SHARED_LIBS ON CACHE BOOL "Build SDL3 as a shared library")
 FetchContent_MakeAvailable(SDL3)
 
+FetchContent_GetProperties(SDL3)
 set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
 
 # Hacemos lo mismo con LUA v5.4.7
 # We do the same with LUA v5.4.7
 FetchContent_Declare(
-        lua
-        GIT_REPOSITORY https://github.com/marovira/lua.git
-        GIT_TAG 5.4.7
+        lualib
+        GIT_REPOSITORY https://github.com/lua/lua.git
+        GIT_TAG v5.4.7
 )
-FetchContent_MakeAvailable(lua)
+FetchContent_MakeAvailable(lualib)
 
-set(LUA_INCLUDE_DIRS ${lua_SOURCE_DIR}/src)
+# Y con DearImGUI
+# And with DearImGUI
+FetchContent_Declare(
+        DearImGUI
+        GIT_REPOSITORY https://github.com/ocornut/imgui.git
+        GIT_TAG v1.91.8
+)
+FetchContent_MakeAvailable(DearImGUI)
+
+set(IMGUI_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src)
+set(IMGUI_BACKENDS_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src/backends)
 
 # Añadimos los subdirectorios de cada uno de nuestros proyectos
 # We add the subdirectories for each one of our projects
-add_subdirectory(projects/Engine)
-add_subdirectory(projects/Editor)
-add_subdirectory(projects/Executable)
+add_subdirectory(${ROOT_DIR}/projects/lua)
+add_subdirectory(${ROOT_DIR}/projects/Engine)
+add_subdirectory(${ROOT_DIR}/projects/Editor)
+add_subdirectory(${ROOT_DIR}/projects/Executable)
 
-# Vamos a mover las librerías dinámicas de SDL y LUA hasta bin/${CMAKE_BUILD_TYPE}, donde se generará nuestro ejecutable
-# We are moving SDL and LUA dynamic libraries into bin/${CMAKE_BUILD_TYPE}, where our executable will generate
-if(TARGET SDL3)
-    get_target_property(SDL3_BINARY_DIR SDL3 BINARY_DIR)
-
-    if(WIN32)
-        set(DYLIB_EXTENSION ".dll")
-    elseif(APPLE)
-        set(DYLIB_EXTENSION ".dylib")
-    else()
-        set(DYLIB_EXTENSION ".so")
-    endif()
-
-    add_custom_command(TARGET SDL3 POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL3_BINARY_DIR}/lib/${DYLIB_EXTENSION}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/"
-            COMMENT "SDL3${DYLIB_EXTENSION} copiado a/copied to ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
-    )
-endif()
-
-if(TARGET lua)
-    get_target_property(LUA_BINARY_DIR lua BINARY_DIR)
-
-    if(WIN32)
-        set(DYLIB_EXTENSION ".dll")
-    elseif(APPLE)
-        set(DYLIB_EXTENSION ".dylib")
-    else()
-        set(DYLIB_EXTENSION ".so")
-    endif()
-
-    add_custom_command(TARGET lua POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${LUA_BINARY_DIR}/lib/${DYLIB_EXTENSION}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/"
-            COMMENT "LUA${DYLIB_EXTENSION} copiado a/copied to ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
-    )
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    set_target_properties(SDL3-shared PROPERTIES OUTPUT_NAME "SDL3_d")
 endif()
