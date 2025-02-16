@@ -15,8 +15,10 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_compile_options(-static -static-libgcc -static-libstdc++)
-add_link_options(-static -static-libgcc -static-libstdc++)
+if(NOT ANDROID)
+    add_compile_options(-static -static-libgcc -static-libstdc++)
+    add_link_options(-static -static-libgcc -static-libstdc++)
+endif()
 
 # Habilitamos FetchContent para la descarga de las dependencias
 # We enable FetchContent for dependencies download
@@ -30,7 +32,7 @@ set(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Establecemos el directorio de las dependencias de nuestro proyecto
 # We set the directory for our project dependencies
-set(DEPENDENCIES_DIR "${ROOT_DIR}/dependencies")
+set(DEPENDENCIES_DIR "${ROOT_DIR}/dependencies/${CMAKE_SYSTEM_NAME}")
 
 # Le decimos a FetchContent a qué carpeta descargar los archivos necesarios
 # We tell FetchContent which folder where's going to download the dependencies
@@ -38,7 +40,11 @@ set(FETCHCONTENT_BASE_DIR ${DEPENDENCIES_DIR}/${CMAKE_BUILD_TYPE})
 
 # Directorios de salida / Output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ROOT_DIR}/bin/)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_BUILD_TYPE})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_SYSTEM_NAME}/${CMAKE_BUILD_TYPE})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_SYSTEM_NAME}/${CMAKE_BUILD_TYPE})
+if(ANDROID)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${ANDROID_ABI})
+endif()
 
 # Obtenemos SDL 3.2.2 (última versión estable release a la fecha)
 # We fetch SDL 3.2.2 (last stable release version to date)
@@ -49,7 +55,6 @@ FetchContent_Declare(
 )
 set(BUILD_SHARED_LIBS ON CACHE BOOL "Build SDL3 as a shared library")
 FetchContent_MakeAvailable(SDL3)
-
 FetchContent_GetProperties(SDL3)
 set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
 
@@ -64,23 +69,30 @@ FetchContent_MakeAvailable(lualib)
 
 # Y con DearImGUI
 # And with DearImGUI
-FetchContent_Declare(
-        DearImGUI
-        GIT_REPOSITORY https://github.com/ocornut/imgui.git
-        GIT_TAG v1.91.8
-)
-FetchContent_MakeAvailable(DearImGUI)
-
-set(IMGUI_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src)
-set(IMGUI_BACKENDS_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src/backends)
+if(NOT ANDROID)
+    FetchContent_Declare(
+            DearImGUI
+            GIT_REPOSITORY https://github.com/ocornut/imgui.git
+            GIT_TAG v1.91.8
+    )
+    FetchContent_MakeAvailable(DearImGUI)
+    set(IMGUI_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src)
+    set(IMGUI_BACKENDS_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src/backends)
+endif()
 
 # Añadimos los subdirectorios de cada uno de nuestros proyectos
 # We add the subdirectories for each one of our projects
 add_subdirectory(${ROOT_DIR}/projects/lua)
 add_subdirectory(${ROOT_DIR}/projects/Engine)
+if(NOT ANDROID)
 add_subdirectory(${ROOT_DIR}/projects/Editor)
 add_subdirectory(${ROOT_DIR}/projects/Executable)
+endif()
+if(ANDROID)
+    add_subdirectory(${ROOT_DIR}/projects/APK/app)
+endif()
 
-if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+
+if(NOT ANDROID AND ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     set_target_properties(SDL3-shared PROPERTIES OUTPUT_NAME "SDL3_d")
 endif()

@@ -16,7 +16,9 @@ target_include_directories(Engine PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/E
 
 # Hacemos que la librería dinámica tenga un _d cuando se compile en debug
 # We make so that the dynamic library has a _d whenever it's compiled on debug
-set_target_properties(Engine PROPERTIES
-        PREFIX ""
-        OUTPUT_NAME "Engine$<$<CONFIG:Debug>:_d>"
-)
+if(NOT ANDROID)
+    set_target_properties(Engine PROPERTIES
+            PREFIX ""
+            OUTPUT_NAME "Engine$<$<CONFIG:Debug>:_d>"
+    )
+endif()

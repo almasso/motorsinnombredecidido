@@ -31,10 +31,22 @@
 *.out
 *.app
 
+# Archivos de MacOS que no es necesario subir
+.DS_Store
+
 # Archivos y directorios del proyecto que no es necesario subir a GitHub
 dependencies/*
+projects/APK/local.properties
+projects/APK/gradlew.bat
+projects/APK/gradlew
+projects/APK/.gradle/*
+projects/APK/.idea/*
+projects/APK/gradle/*
+projects/APK/app/build/*
+projects/APK/app/.cxx/*
 
-# Archivos y directorios temporales generados por CLion o CMake al compilar
+# Archivos y directorios temporales generados por CLion, CMake o Android Studio al compilar
 .idea/*
 cmake-build-debug/*
 cmake-build-release/*
+
