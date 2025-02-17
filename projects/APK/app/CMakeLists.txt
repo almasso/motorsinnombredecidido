@@ -17,7 +17,6 @@ add_library(main SHARED ${APK_SOURCES})
 
 # Incluimos y enlazamos las dependencias necesarias
 # We include and link the necessary dependencies
-target_link_libraries(SDL3-shared PRIVATE OpenSLES log android GLESv1_CM GLESv2)
 target_link_libraries(main PRIVATE SDL3-shared lua Engine)
 target_include_directories(main PRIVATE ${SDL3_INCLUDE_DIRS} ${LUA_INCLUDE_DIRS} ${ROOT_DIR}/src/Engine/ ${ROOT_DIR}/src/APK/)
 
@@ -25,5 +24,5 @@ target_include_directories(main PRIVATE ${SDL3_INCLUDE_DIRS} ${LUA_INCLUDE_DIRS}
 # Especificamos las propiedades de la librería para Android
 # We specify the library properties for Android
 set_target_properties(main PROPERTIES
-        PREFIX ""
+        PREFIX "lib"
 )
