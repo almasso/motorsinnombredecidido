@@ -15,7 +15,7 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(NOT ANDROID)
+if(NOT ANDROID AND NOT APPLE)
     add_compile_options(-static -static-libgcc -static-libstdc++)
     add_link_options(-static -static-libgcc -static-libstdc++)
 endif()
