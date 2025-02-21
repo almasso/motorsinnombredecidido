@@ -1,5 +1,5 @@
 #include "AssetManager.h"
-#include "RPGError.h"
+#include <Utils/RPGError.h>
 #include <SDL3/SDL.h>
 
 bool AssetManager::readFile(const std::string& filename, char*& fileData, int& fileSize) {

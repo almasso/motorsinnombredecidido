@@ -1,6 +1,6 @@
 #include "LuaManager.h"
 #include "AssetManager.h"
-#include "RPGError.h"
+#include <Utils/RPGError.h>
 #include <iostream>
 #include <lua.hpp>
 

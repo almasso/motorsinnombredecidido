@@ -1,7 +1,3 @@
-//
-// Created by Usuario on 01/02/2025.
-//
-
 #ifndef RPGERROR_H
 #define RPGERROR_H
 #include <string>

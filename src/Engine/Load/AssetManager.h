@@ -1,7 +1,3 @@
-//
-// Created by Usuario on 01/02/2025.
-//
-
 #ifndef ASSETMANAGER_H
 #define ASSETMANAGER_H
 
