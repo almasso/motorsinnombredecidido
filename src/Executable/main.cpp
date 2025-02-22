@@ -1,6 +1,5 @@
-#include <Main/MainLoop.h>
+#include <Main/Main.h>
 
 int main(int argc, char *argv[]) {
-    MainLoop::loop();
-    return 0;
+    return Main::Loop();
 }
