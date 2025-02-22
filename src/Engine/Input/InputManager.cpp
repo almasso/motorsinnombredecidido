@@ -3,9 +3,7 @@
 #include <SDL3/SDL_init.h>
 #include <Utils/RPGError.h>
 
-
-InputManager::InputManager() {
-}
+InputState InputManager::input_state = InputState();
 
 bool InputManager::init() {
     if (!SDL_InitSubSystem(SDL_INIT_EVENTS)) {
@@ -17,17 +15,23 @@ bool InputManager::init() {
     return true;
 }
 
-bool InputManager::checkExit() {
+void InputManager::update() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_EVENT_FINGER_UP || event.type == SDL_EVENT_QUIT) {
-            return true;
+        switch (event.type) {
+            case SDL_EVENT_QUIT:
+                input_state.exit = true;
+                break;
+            default: ;
         }
     }
-    return false;
 }
 
-void InputManager::shutdown() const {
+void InputManager::shutdown() {
     SDL_QuitSubSystem(SDL_INIT_EVENTS);
+}
+
+const InputState & InputManager::getState() {
+    return input_state;
 }
 

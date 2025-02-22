@@ -8,18 +8,16 @@
 #include <Utils/TimeManager.h>
 
 RenderManager* Main::render = nullptr;
-InputManager* Main::input = nullptr;
 AudioManager* Main::audio = nullptr;
 TimeManager* Main::time = nullptr;
 
 bool Main::Init() {
     render = new RenderManager();
-    input = new InputManager();
     audio = new AudioManager();
     time = new TimeManager();
     if (!render->init(1280, 720))
         return false;
-    if (!input->init())
+    if (!InputManager::init())
         return false;
     if (!audio->init())
         return false;
@@ -28,11 +26,10 @@ bool Main::Init() {
 }
 void Main::Shutdown() {
     audio->shutdown();
-    input->shutdown();
     render->shutdown();
+    InputManager::shutdown();
     delete time;
     delete audio;
-    delete input;
     delete render;
 }
 
@@ -45,8 +42,9 @@ int Main::Loop() {
     int w, h;
     render->getWindowSize(&w, &h);
     float dirX = -0.1f, dirY = 0.1f;
-    while(!input->checkExit()) {
+    while(!InputManager::getState().exit) {
         time->update();
+        InputManager::update();
         audio->update();
         render->clear();
         render->drawRect(rect, color);

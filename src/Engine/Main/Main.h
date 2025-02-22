@@ -10,7 +10,6 @@ class Main {
 private:
   	static RenderManager* render;
   	static AudioManager* audio;
-  	static InputManager* input;
   	static TimeManager* time;
 
 	static bool Init();
