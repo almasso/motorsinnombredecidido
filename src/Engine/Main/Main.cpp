@@ -15,18 +15,23 @@ TimeManager* Main::time = nullptr;
 bool Main::Init() {
     render = new RenderManager();
     input = new InputManager();
+    audio = new AudioManager();
     time = new TimeManager();
     if (!render->init(1280, 720))
         return false;
     if (!input->init())
         return false;
+    if (!audio->init())
+        return false;
     time->init();
     return true;
 }
 void Main::Shutdown() {
+    audio->shutdown();
     input->shutdown();
     render->shutdown();
     delete time;
+    delete audio;
     delete input;
     delete render;
 }
@@ -42,6 +47,7 @@ int Main::Loop() {
     float dirX = -0.1f, dirY = 0.1f;
     while(!input->checkExit()) {
         time->update();
+        audio->update();
         render->clear();
         render->drawRect(rect, color);
         render->present();
