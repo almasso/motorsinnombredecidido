@@ -2,6 +2,16 @@
 #include <SDL3/SDL.h>
 
 #include "AudioMixer.h"
+#include "AudioClipData.h"
+
+#include <iostream>
+
+void AudioClip::Update(void* userdata, SDL_AudioStream* stream, int additional_amount, int total_amount) {
+    auto* instance = static_cast<AudioClip*>(userdata);
+    if (additional_amount > 0)
+        if (instance->loop_) SDL_PutAudioStreamData(stream, instance->data_->buffer, instance->data_->bufferLen);
+        else if (additional_amount == total_amount) instance->stop();
+}
 
 void AudioClip::reset() {
     stop();
@@ -12,22 +22,19 @@ void AudioClip::reset() {
     state_ = STOPPED;
 }
 
-AudioClip::AudioClip(AudioData* buffer, uint32_t bufferLen, AudioSpec* specifier) :
+AudioClip::AudioClip(AudioClipData const* data) :
     state_(STOPPED),
-    buffer_(buffer),
-    bufferLen_(bufferLen),
-    specifier_(specifier),
+    data_(data),
     stream_(nullptr),
     mixer_(nullptr),
     device_(0),
     localVolume_(1.0f),
-    volume_(1.0f) {
+    volume_(1.0f),
+    loop_(false) {
 }
 
 AudioClip::~AudioClip() {
     reset();
-    SDL_free(buffer_);
-    delete specifier_;
 }
 
 bool AudioClip::play() {
@@ -35,7 +42,7 @@ bool AudioClip::play() {
         return false;
     if (!stream_)
         return false;
-    if (!SDL_PutAudioStreamData(stream_, buffer_, bufferLen_))
+    if (!SDL_PutAudioStreamData(stream_, data_->buffer, data_->bufferLen))
         return false;
     if (!resume())
         return false;
@@ -72,6 +79,10 @@ bool AudioClip::isPlaying() const {
     return state_ == PLAYING;
 }
 
+bool AudioClip::isPaused() const {
+    return state_ == PAUSED;
+}
+
 float AudioClip::getVolume() const {
     return localVolume_;
 }
@@ -79,6 +90,14 @@ float AudioClip::getVolume() const {
 void AudioClip::setVolume(float volume) {
     localVolume_ = volume;
     updateVolume();
+}
+
+bool AudioClip::isLooped() const {
+    return loop_;
+}
+
+void AudioClip::setLoop(bool loop) {
+    loop_ = loop;
 }
 
 void AudioClip::updateVolume() {
@@ -101,7 +120,8 @@ void AudioClip::assignDevice(AudioDevice device) {
     device_ = device;
     SDL_AudioSpec dstSpec;
     SDL_GetAudioDeviceFormat(device_, &dstSpec, NULL);
-    if (!stream_) stream_ = SDL_CreateAudioStream(specifier_, &dstSpec);
-    else SDL_SetAudioStreamFormat(stream_, specifier_, &dstSpec);
+    if (!stream_) stream_ = SDL_CreateAudioStream(data_->specifier, &dstSpec);
+    else SDL_SetAudioStreamFormat(stream_, data_->specifier, &dstSpec);
+    SDL_SetAudioStreamGetCallback(stream_, AudioClip::Update, this);
     resume();
 }

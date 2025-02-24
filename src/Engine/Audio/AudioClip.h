@@ -4,9 +4,8 @@
 
 typedef uint32_t AudioDevice;
 typedef struct SDL_AudioStream AudioStream;
-typedef struct SDL_AudioSpec AudioSpec;
+struct AudioClipData;
 class AudioMixer;
-typedef uint8_t AudioData;
 
 class AudioClip {
 private:
@@ -15,25 +14,28 @@ private:
         PAUSED,
         STOPPED
     } state_;
-    AudioData* buffer_;
-    uint32_t bufferLen_;
-    AudioSpec* specifier_;
+    AudioClipData const* data_;
     AudioStream* stream_;
     AudioMixer* mixer_;
     AudioDevice device_;
     float localVolume_, volume_;
+    bool loop_;
 
+    static void Update(void* userdata, AudioStream* stream, int additional_amount, int total_amount);
     void reset();
 public:
-    AudioClip(AudioData* buffer, uint32_t bufferLen, AudioSpec* specifier);
+    explicit AudioClip(AudioClipData const* data);
     ~AudioClip();
     bool play();
     bool stop();
     void pause();
     bool resume();
     bool isPlaying() const;
+    bool isPaused() const;
     float getVolume() const;
     void setVolume(float volume);
+    bool isLooped() const;
+    void setLoop(bool loop);
     void updateVolume();
     void assignMixer(AudioMixer* mixer);
     void assignDevice(AudioDevice device);
