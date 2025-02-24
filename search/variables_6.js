@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['speed_0',['speed',['../structSquare.html#ae63bb534933b1a7581512eff3de9adda',1,'Square']]]
+  ['inputs_0',['inputs',['../structAudioMixerData.html#aaf31c716c988bb36350a1ced23385a4e',1,'AudioMixerData']]]
 ];

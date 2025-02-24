@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['time_0',['Time',['../structTime.html',1,'']]],
-  ['time_1',['time',['../structTime.html#ae6e5999c159026f5c59502ef623e3a98',1,'Time']]],
-  ['time_2ecpp_2',['Time.cpp',['../Time_8cpp.html',1,'']]],
-  ['time_2eh_3',['Time.h',['../Time_8h.html',1,'']]],
-  ['timemanager_4',['TimeManager',['../classTimeManager.html',1,'']]],
-  ['timemanager_2ecpp_5',['TimeManager.cpp',['../TimeManager_8cpp.html',1,'']]],
-  ['timemanager_2eh_6',['TimeManager.h',['../TimeManager_8h.html',1,'']]]
+  ['pause_0',['pause',['../classAudioClip.html#a87bee9c63ed4a536c990e99e310f0e24',1,'AudioClip']]],
+  ['play_1',['play',['../classAudioClip.html#a02cfd676c62b18c5eed4823b9a6cff21',1,'AudioClip']]],
+  ['present_2',['present',['../classRenderManager.html#a7832456be71858b8b230039a5a5525af',1,'RenderManager']]]
 ];

@@ -1,5 +1,14 @@
 var searchData=
 [
-  ['update_0',['update',['../classAudioManager.html#af342d01281d35deac6df2f5fa729c0ef',1,'AudioManager::update()'],['../classInputManager.html#a136d6afa55ee74eeda5eb72e78e3ee97',1,'InputManager::update()'],['../classTimeManager.html#a97d902b19861efc099141eeb846671a3',1,'TimeManager::update()']]],
-  ['updatevolume_1',['updateVolume',['../classAudioClip.html#a9506500cffe41b27fdfd3561f9060a9f',1,'AudioClip::updateVolume()'],['../classAudioMixer.html#a159bb07dedb3b206979802426fc9b145',1,'AudioMixer::updateVolume()']]]
+  ['readfile_0',['readFile',['../classAssetManager.html#a1c7630a9d35a09034aad6edf3a16859c',1,'AssetManager']]],
+  ['rect_1',['Rect',['../Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08',1,'Rect.h']]],
+  ['rect_2eh_2',['Rect.h',['../Rect_8h.html',1,'']]],
+  ['registeraudiomixer_3',['registerAudioMixer',['../classAudioManager.html#afee8dd0bff21859e62748a2bf81c8ded',1,'AudioManager']]],
+  ['rendermanager_4',['RenderManager',['../classRenderManager.html',1,'RenderManager'],['../classRenderManager.html#aa52d38e61976b5b9438a9eabd2031cfa',1,'RenderManager::RenderManager()']]],
+  ['rendermanager_2ecpp_5',['RenderManager.cpp',['../RenderManager_8cpp.html',1,'']]],
+  ['rendermanager_2eh_6',['RenderManager.h',['../RenderManager_8h.html',1,'']]],
+  ['resume_7',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]],
+  ['rpgerror_8',['RPGError',['../classRPGError.html',1,'']]],
+  ['rpgerror_2ecpp_9',['RPGError.cpp',['../RPGError_8cpp.html',1,'']]],
+  ['rpgerror_2eh_10',['RPGError.h',['../RPGError_8h.html',1,'']]]
 ];
