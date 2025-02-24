@@ -1,6 +1,7 @@
-#include "Editor.h"
+#include "common/Editor.h"
 
 int main(int argc, char** argv) {
-    Editor::Init();
+    if(editor::Editor::Init())
+        editor::Editor::GetInstance().mainLoop();
     return 0;
 }
