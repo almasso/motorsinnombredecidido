@@ -97,28 +97,47 @@ $(document).ready(function(){initNavTree('classAudioMixer.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
+<p>Class made to englobe changes wanted to be applied to multiple <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> s. <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> instances may be connected to each other to chain its effects.  
+ <a href="classAudioMixer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="AudioMixer_8h_source.html">AudioMixer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaff2ce84f3b16a3b368469a5753c5f82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#aaff2ce84f3b16a3b368469a5753c5f82">AudioMixer</a> ()</td></tr>
+<tr class="memdesc:aaff2ce84f3b16a3b368469a5753c5f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new mixer.  <br /></td></tr>
 <tr class="separator:aaff2ce84f3b16a3b368469a5753c5f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54dd5cd7614bb83c1ccb508232c92770"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a54dd5cd7614bb83c1ccb508232c92770">connect</a> (<a class="el" href="classAudioClip.html">AudioClip</a> *clip)</td></tr>
+<tr class="memdesc:a54dd5cd7614bb83c1ccb508232c92770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects an <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> to this mixer. Every change made to this mixer will now affect the connected <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code>.  <br /></td></tr>
 <tr class="separator:a54dd5cd7614bb83c1ccb508232c92770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40afff1140c36506b0f99e48a6aca2f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a40afff1140c36506b0f99e48a6aca2f9">disconnect</a> (<a class="el" href="classAudioClip.html">AudioClip</a> *clip)</td></tr>
+<tr class="memdesc:a40afff1140c36506b0f99e48a6aca2f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects an <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> from this mixer. All changes from this mixer applied to this <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> will be undone.  <br /></td></tr>
+<tr class="separator:a40afff1140c36506b0f99e48a6aca2f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4ca5f6cd7ae1381579b8f0006b1058b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#af4ca5f6cd7ae1381579b8f0006b1058b">connect</a> (<a class="el" href="classAudioMixer.html">AudioMixer</a> *mixer)</td></tr>
+<tr class="memdesc:af4ca5f6cd7ae1381579b8f0006b1058b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects another <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> to this mixer. Every change made to this mixer will now affect the connected <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code>.  <br /></td></tr>
 <tr class="separator:af4ca5f6cd7ae1381579b8f0006b1058b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ced2e17b2b5cc6f40abd660d1998b9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a7ced2e17b2b5cc6f40abd660d1998b9a">disconnect</a> (<a class="el" href="classAudioMixer.html">AudioMixer</a> *mixer)</td></tr>
+<tr class="memdesc:a7ced2e17b2b5cc6f40abd660d1998b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects an <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> from this mixer. All changes from this mixer applied to that <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> will be undone.  <br /></td></tr>
+<tr class="separator:a7ced2e17b2b5cc6f40abd660d1998b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9a37fe7abe2825159f29eac8e14e5de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de">setVolume</a> (float volume)</td></tr>
+<tr class="memdesc:ac9a37fe7abe2825159f29eac8e14e5de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the mixer's current volume.  <br /></td></tr>
 <tr class="separator:ac9a37fe7abe2825159f29eac8e14e5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d52efe0d9ef8c2faf65b115db7bf240"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a3d52efe0d9ef8c2faf65b115db7bf240">getGlobalVolume</a> () const</td></tr>
+<tr class="memdesc:a3d52efe0d9ef8c2faf65b115db7bf240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the volume the mixer outputs.  <br /></td></tr>
 <tr class="separator:a3d52efe0d9ef8c2faf65b115db7bf240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a159bb07dedb3b206979802426fc9b145"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a159bb07dedb3b206979802426fc9b145">updateVolume</a> ()</td></tr>
+<tr class="memdesc:a159bb07dedb3b206979802426fc9b145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the mixer's global playing volume depending on the mixer's volume and on it's output <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> 's if it has any assigned.  <br /></td></tr>
 <tr class="separator:a159bb07dedb3b206979802426fc9b145"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23dcce71bc882cef8cdf5052ac889406"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a23dcce71bc882cef8cdf5052ac889406">assignDevice</a> (<a class="el" href="AudioMixer_8h.html#aa02973a61153caab8e7dc1504ce7cd5a">AudioDevice</a> device)</td></tr>
+<tr class="memdesc:a23dcce71bc882cef8cdf5052ac889406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an <code>AudioDevice</code> through which this mixer's connected clips will play.  <br /></td></tr>
 <tr class="separator:a23dcce71bc882cef8cdf5052ac889406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9da6c57e2610a218c8eef939add20556"><td class="memItemLeft" align="right" valign="top"><a class="el" href="AudioMixer_8h.html#aa02973a61153caab8e7dc1504ce7cd5a">AudioDevice</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioMixer.html#a9da6c57e2610a218c8eef939add20556">getDevice</a> () const</td></tr>
+<tr class="memdesc:a9da6c57e2610a218c8eef939add20556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <code>AudioDevice</code> previously assigned to this mixer.  <br /></td></tr>
 <tr class="separator:a9da6c57e2610a218c8eef939add20556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class made to englobe changes wanted to be applied to multiple <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> s. <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> instances may be connected to each other to chain its effects. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaff2ce84f3b16a3b368469a5753c5f82" name="aaff2ce84f3b16a3b368469a5753c5f82"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaff2ce84f3b16a3b368469a5753c5f82">&#9670;&#160;</a></span>AudioMixer()</h2>
 
@@ -133,6 +152,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a new mixer. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>The mixer created will have no <code>AudioDevice</code> assigned, the volume set to \1.0f . </dd></dl>
 
 </div>
 </div>
@@ -153,6 +175,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Assigns an <code>AudioDevice</code> through which this mixer's connected clips will play. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>If this mixer was connected to another <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code>, that <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> 's assigned <code>AudioDevice</code> will also be assigned to this mixer. Programmer cannot override a mixer's <code>AudioDevice</code> if that mixer is connected to another <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> ; to do that the mixer should be disconnected from it's output <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> . </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td><code>AudioDevice</code> where the clip is desired to play. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a54dd5cd7614bb83c1ccb508232c92770" name="a54dd5cd7614bb83c1ccb508232c92770"></a>
@@ -170,6 +201,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Connects an <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> to this mixer. Every change made to this mixer will now affect the connected <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clip</td><td><code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> to be connected to this mixer. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -189,6 +228,66 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Connects another <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> to this mixer. Every change made to this mixer will now affect the connected <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mixer</td><td><code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> to be connected to this mixer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a40afff1140c36506b0f99e48a6aca2f9" name="a40afff1140c36506b0f99e48a6aca2f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40afff1140c36506b0f99e48a6aca2f9">&#9670;&#160;</a></span>disconnect() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioMixer::disconnect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAudioClip.html">AudioClip</a> *&#160;</td>
+          <td class="paramname"><em>clip</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnects an <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> from this mixer. All changes from this mixer applied to this <code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> will be undone. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clip</td><td><code><a class="el" href="classAudioClip.html" title="Data structure used to manage a single instance of an audio clip.">AudioClip</a></code> to be disconnected from this mixer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7ced2e17b2b5cc6f40abd660d1998b9a" name="a7ced2e17b2b5cc6f40abd660d1998b9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ced2e17b2b5cc6f40abd660d1998b9a">&#9670;&#160;</a></span>disconnect() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioMixer::disconnect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAudioMixer.html">AudioMixer</a> *&#160;</td>
+          <td class="paramname"><em>mixer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnects an <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> from this mixer. All changes from this mixer applied to that <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> will be undone. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mixer</td><td><code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> to be disconnected from this mixer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a9da6c57e2610a218c8eef939add20556" name="a9da6c57e2610a218c8eef939add20556"></a>
@@ -206,6 +305,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the <code>AudioDevice</code> previously assigned to this mixer. </p>
+<dl class="section return"><dt>Returns</dt><dd>The <code>AudioDevice</code> assigned to this mixer. <code>0</code> if there wasn't any. </dd></dl>
+
 </div>
 </div>
 <a id="a3d52efe0d9ef8c2faf65b115db7bf240" name="a3d52efe0d9ef8c2faf65b115db7bf240"></a>
@@ -222,6 +324,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets the volume the mixer outputs. </p>
+<dl class="section return"><dt>Returns</dt><dd>Value between <code>0.0f</code> and <code>1.0f</code> representing the volume the mixer outputs. </dd></dl>
 
 </div>
 </div>
@@ -241,6 +346,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sets the mixer's current volume. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">volume</td><td>Value between <code>0.0f</code> and <code>1.0f</code> representing the volume assigned to the mixer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a159bb07dedb3b206979802426fc9b145" name="a159bb07dedb3b206979802426fc9b145"></a>
@@ -257,6 +370,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Updates the mixer's global playing volume depending on the mixer's volume and on it's output <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> 's if it has any assigned. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This method is called automatically every time the mixer's volume changes or every time it's output <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> 's global volume changes if it has any assigned. Programmer doesn't need to call this method at any given point. </dd></dl>
 
 </div>
 </div>
