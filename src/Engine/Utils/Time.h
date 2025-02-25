@@ -2,6 +2,11 @@
 #define TIME_H
 
 class TimeManager;
+
+/// @~english
+/// @brief Static structure containing the updated time values
+/// @~spanish
+/// @brief Estructura estática que contiene los valores de tiempo actualizados
 struct Time {
 private:
 	friend TimeManager;
@@ -9,11 +14,22 @@ private:
 	static double deltaTime_;
 	static double time_;
 public:
-	/// @brief Tiempo en segundos que ha pasado desde la anterior actualizacion
+	/// @~english
+	/// @brief Time in seconds passed since last update
+	/// @~spanish
+	/// @brief Tiempo en segundos que ha pasado desde la anterior actualización
 	static constexpr double const& deltaTime = deltaTime_;
-	/// @brief Tiempo en segundos que ha pasado desde el comienzo de la ejecucion
+
+	/// @~english
+	/// @brief Time in seconds passed since the start of the program
+	/// @~spanish
+	/// @brief Tiempo en segundos que ha pasado desde el comienzo del programa
 	static constexpr double const& time = time_;
-	/// @brief Tiempo en segundos cada el que se evaluan las operaciones fisicas
+
+	/// @~english
+	/// @brief Time in seconds between every physic's operations' update
+	/// @~spanish
+	/// @brief Tiempo en segundos cada el que se evalúan las operaciones físicas
 	static constexpr double fixedDeltaTime = 0.02;
 };
 

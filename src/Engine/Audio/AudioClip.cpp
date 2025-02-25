@@ -53,6 +53,8 @@ bool AudioClip::stop() {
     pause();
     if (state_ == STOPPED)
         return true;
+    if (!stream_)
+        return false;
     if (!SDL_ClearAudioStream(stream_))
         return false;
     state_ = STOPPED;
@@ -69,6 +71,8 @@ void AudioClip::pause() {
 bool AudioClip::resume() {
     if (state_ == PLAYING)
         return true;
+    if (!stream_)
+        return false;
     if (!SDL_BindAudioStream(device_, stream_))
         return false;
     state_ = PLAYING;
@@ -108,14 +112,16 @@ void AudioClip::updateVolume() {
 }
 
 void AudioClip::assignMixer(AudioMixer* mixer) {
+    mixer_ = mixer;
+    updateVolume();
     if (!mixer)
         return reset();
-
-    mixer_ = mixer;
     assignDevice(mixer_->getDevice());
 }
 
 void AudioClip::assignDevice(AudioDevice device) {
+    if (mixer_ && device != mixer_->getDevice())
+        return;
     pause();
     device_ = device;
     SDL_AudioSpec dstSpec;
