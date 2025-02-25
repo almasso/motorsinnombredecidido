@@ -4,6 +4,6 @@ var searchData=
   ['getglobalvolume_1',['getGlobalVolume',['../classAudioMixer.html#a3d52efe0d9ef8c2faf65b115db7bf240',1,'AudioMixer']]],
   ['getmixer_2',['getMixer',['../classAudioManager.html#a4c708c61fcffb861708d59aad169979f',1,'AudioManager']]],
   ['getstate_3',['getState',['../classInputManager.html#a220c456bb3b3080a23d497e6c8ffaf37',1,'InputManager']]],
-  ['getvolume_4',['getVolume',['../classAudioClip.html#a843857c557093c5c5f40be63f812cf7c',1,'AudioClip']]],
+  ['getvolume_4',['getVolume',['../classAudioClip.html#a843857c557093c5c5f40be63f812cf7c',1,'AudioClip::getVolume()'],['../classAudioMixer.html#ac2db944ffb8bb73b252dc62ab0117c4c',1,'AudioMixer::getVolume()']]],
   ['getwindowsize_5',['getWindowSize',['../classRenderManager.html#a6e88c1af19abcd9d3e86e9cc2a4f6205',1,'RenderManager']]]
 ];

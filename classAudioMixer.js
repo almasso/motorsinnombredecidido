@@ -8,6 +8,7 @@ var classAudioMixer =
     [ "disconnect", "classAudioMixer.html#a7ced2e17b2b5cc6f40abd660d1998b9a", null ],
     [ "getDevice", "classAudioMixer.html#a9da6c57e2610a218c8eef939add20556", null ],
     [ "getGlobalVolume", "classAudioMixer.html#a3d52efe0d9ef8c2faf65b115db7bf240", null ],
+    [ "getVolume", "classAudioMixer.html#ac2db944ffb8bb73b252dc62ab0117c4c", null ],
     [ "setVolume", "classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de", null ],
     [ "updateVolume", "classAudioMixer.html#a159bb07dedb3b206979802426fc9b145", null ]
 ];
