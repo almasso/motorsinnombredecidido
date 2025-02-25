@@ -40,6 +40,10 @@ void AudioMixer::setVolume(float volume) {
     updateVolume();
 }
 
+float AudioMixer::getVolume() const {
+    return localVolume_;
+}
+
 float AudioMixer::getGlobalVolume() const {
     return volume_;
 }

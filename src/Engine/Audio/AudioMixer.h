@@ -68,6 +68,14 @@ public:
     void setVolume(float volume);
 
     /// @~english
+    /// @brief Gets the local volume assigned to the mixer.
+    /// @return Value between \c 0.0f and \c 1.0f representing the volume assigned to the mixer.
+    /// @~spanish
+    /// @brief Accede al volumen local asignado al mezclador.
+    /// @return Valor entre \c 0.0f y \c 1.0f representando el volumen local asignado al mezclador.
+    float getVolume() const;
+
+    /// @~english
     /// @brief Gets the volume the mixer outputs.
     /// @return Value between \c 0.0f and \c 1.0f representing the volume the mixer outputs.
     /// @~spanish
