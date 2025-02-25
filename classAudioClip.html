@@ -97,42 +97,62 @@ $(document).ready(function(){initNavTree('classAudioClip.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 
+<p>Data structure used to manage a single instance of an audio clip.  
+ <a href="classAudioClip.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="AudioClip_8h_source.html">AudioClip.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12a87fce8661ccd71bff18d84777995f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a12a87fce8661ccd71bff18d84777995f">AudioClip</a> (<a class="el" href="structAudioClipData.html">AudioClipData</a> const *data)</td></tr>
+<tr class="memdesc:a12a87fce8661ccd71bff18d84777995f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new clip with de data provided.  <br /></td></tr>
 <tr class="separator:a12a87fce8661ccd71bff18d84777995f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab929796e463c51c50f2ad4e9acec35da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#ab929796e463c51c50f2ad4e9acec35da">~AudioClip</a> ()</td></tr>
+<tr class="memdesc:ab929796e463c51c50f2ad4e9acec35da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the clip and unassigns the <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> and the <code>AudioDevice</code>.  <br /></td></tr>
 <tr class="separator:ab929796e463c51c50f2ad4e9acec35da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02cfd676c62b18c5eed4823b9a6cff21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a02cfd676c62b18c5eed4823b9a6cff21">play</a> ()</td></tr>
+<tr class="memdesc:a02cfd676c62b18c5eed4823b9a6cff21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plays the clip from the start.  <br /></td></tr>
 <tr class="separator:a02cfd676c62b18c5eed4823b9a6cff21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82b64c4ed725e2ba0a1b78cc2ae5b67f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f">stop</a> ()</td></tr>
+<tr class="memdesc:a82b64c4ed725e2ba0a1b78cc2ae5b67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the clip completely.  <br /></td></tr>
 <tr class="separator:a82b64c4ed725e2ba0a1b78cc2ae5b67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87bee9c63ed4a536c990e99e310f0e24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a87bee9c63ed4a536c990e99e310f0e24">pause</a> ()</td></tr>
+<tr class="memdesc:a87bee9c63ed4a536c990e99e310f0e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pauses the clip.  <br /></td></tr>
 <tr class="separator:a87bee9c63ed4a536c990e99e310f0e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1666c4f9c62917ff7ddf43ff25d128d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d">resume</a> ()</td></tr>
+<tr class="memdesc:ad1666c4f9c62917ff7ddf43ff25d128d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resumes the clip at the point it was paused.  <br /></td></tr>
 <tr class="separator:ad1666c4f9c62917ff7ddf43ff25d128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05131ca54e22e0034734b43916cb5836"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a05131ca54e22e0034734b43916cb5836">isPlaying</a> () const</td></tr>
+<tr class="memdesc:a05131ca54e22e0034734b43916cb5836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the clip is currently playing.  <br /></td></tr>
 <tr class="separator:a05131ca54e22e0034734b43916cb5836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac80fcffa0ae8687f9ff09543f01a9d8d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#ac80fcffa0ae8687f9ff09543f01a9d8d">isPaused</a> () const</td></tr>
+<tr class="memdesc:ac80fcffa0ae8687f9ff09543f01a9d8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the clip is currently paused.  <br /></td></tr>
 <tr class="separator:ac80fcffa0ae8687f9ff09543f01a9d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a843857c557093c5c5f40be63f812cf7c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a843857c557093c5c5f40be63f812cf7c">getVolume</a> () const</td></tr>
+<tr class="memdesc:a843857c557093c5c5f40be63f812cf7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the clip's current volume.  <br /></td></tr>
 <tr class="separator:a843857c557093c5c5f40be63f812cf7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a273cef875717c3a58fbea06acd7e4000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a273cef875717c3a58fbea06acd7e4000">setVolume</a> (float volume)</td></tr>
+<tr class="memdesc:a273cef875717c3a58fbea06acd7e4000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the clip's current volume.  <br /></td></tr>
 <tr class="separator:a273cef875717c3a58fbea06acd7e4000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ccd23d803851e1d7c38de4d4a76e0de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a5ccd23d803851e1d7c38de4d4a76e0de">isLooped</a> () const</td></tr>
+<tr class="memdesc:a5ccd23d803851e1d7c38de4d4a76e0de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the clip has the loop option active.  <br /></td></tr>
 <tr class="separator:a5ccd23d803851e1d7c38de4d4a76e0de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23648dfcb61d75b4d2d829f6a9c8edb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a23648dfcb61d75b4d2d829f6a9c8edb5">setLoop</a> (bool loop)</td></tr>
+<tr class="memdesc:a23648dfcb61d75b4d2d829f6a9c8edb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current loop state of the clip.  <br /></td></tr>
 <tr class="separator:a23648dfcb61d75b4d2d829f6a9c8edb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9506500cffe41b27fdfd3561f9060a9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a9506500cffe41b27fdfd3561f9060a9f">updateVolume</a> ()</td></tr>
+<tr class="memdesc:a9506500cffe41b27fdfd3561f9060a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the clip's global playing volume depending on the clip's volume and on it's <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> 's if it has any assigned.  <br /></td></tr>
 <tr class="separator:a9506500cffe41b27fdfd3561f9060a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77a333aa7991cde41a70e541125bd5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a77a333aa7991cde41a70e541125bd5b1">assignMixer</a> (<a class="el" href="classAudioMixer.html">AudioMixer</a> *mixer)</td></tr>
+<tr class="memdesc:a77a333aa7991cde41a70e541125bd5b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> to this clip.  <br /></td></tr>
 <tr class="separator:a77a333aa7991cde41a70e541125bd5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0788e256c44cdd7cefb31b25a08fd787"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a0788e256c44cdd7cefb31b25a08fd787">assignDevice</a> (<a class="el" href="AudioClip_8h.html#aa02973a61153caab8e7dc1504ce7cd5a">AudioDevice</a> device)</td></tr>
+<tr class="memdesc:a0788e256c44cdd7cefb31b25a08fd787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an <code>AudioDevice</code> through which this clip will play.  <br /></td></tr>
 <tr class="separator:a0788e256c44cdd7cefb31b25a08fd787"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data structure used to manage a single instance of an audio clip. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a12a87fce8661ccd71bff18d84777995f" name="a12a87fce8661ccd71bff18d84777995f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a12a87fce8661ccd71bff18d84777995f">&#9670;&#160;</a></span>AudioClip()</h2>
 
@@ -157,6 +177,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Creates a new clip with de data provided. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>The clip is created stopped, with no <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> or <code>AudioDevice</code>, with its volume set to <code>1.0f</code> and without loop state. </dd></dl>
+
 </div>
 </div>
 <a id="ab929796e463c51c50f2ad4e9acec35da" name="ab929796e463c51c50f2ad4e9acec35da"></a>
@@ -173,6 +196,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Stops the clip and unassigns the <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> and the <code>AudioDevice</code>. </p>
 
 </div>
 </div>
@@ -193,6 +218,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Assigns an <code>AudioDevice</code> through which this clip will play. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>If an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> was assigned to this clip, that <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> 's assigned <code>AudioDevice</code> will also be assigned to this clip. Programmer cannot override a clip's <code>AudioDevice</code> if that clip is connected to an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> ; to do that the clip's <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> should be assigned to <code>nullptr</code> . </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td><code>AudioDevice</code> where the clip is desired to play. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a77a333aa7991cde41a70e541125bd5b1" name="a77a333aa7991cde41a70e541125bd5b1"></a>
@@ -211,6 +245,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Assigns an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> to this clip. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>Every change made to the <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> will now affect this clip. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mixer</td><td><code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> to assign to the clip. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a843857c557093c5c5f40be63f812cf7c" name="a843857c557093c5c5f40be63f812cf7c"></a>
@@ -227,6 +270,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets the clip's current volume. </p>
+<dl class="section return"><dt>Returns</dt><dd>Value between <code>0.0f</code> and <code>1.0f</code> representing the volume assigned to the clip </dd></dl>
 
 </div>
 </div>
@@ -245,6 +291,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether the clip has the loop option active. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the loop is active, <code>false</code> otherwise </dd></dl>
+
 </div>
 </div>
 <a id="ac80fcffa0ae8687f9ff09543f01a9d8d" name="ac80fcffa0ae8687f9ff09543f01a9d8d"></a>
@@ -261,6 +310,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks whether the clip is currently paused. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the clip is currently paused, <code>false</code> otherwise </dd></dl>
 
 </div>
 </div>
@@ -279,6 +331,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether the clip is currently playing. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the clip is currently playing, <code>false</code> otherwise </dd></dl>
+
 </div>
 </div>
 <a id="a87bee9c63ed4a536c990e99e310f0e24" name="a87bee9c63ed4a536c990e99e310f0e24"></a>
@@ -295,6 +350,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Pauses the clip. </p>
 
 </div>
 </div>
@@ -313,6 +370,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Plays the clip from the start. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>If the clip was already playing or paused it will be restarted. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the clip played correctly; <code>false</code> otherwise, programmer must make sure that an <code>AudioDevice</code> or an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> have been assigned to the clip. </dd></dl>
+
 </div>
 </div>
 <a id="ad1666c4f9c62917ff7ddf43ff25d128d" name="ad1666c4f9c62917ff7ddf43ff25d128d"></a>
@@ -329,6 +390,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Resumes the clip at the point it was paused. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the clip resumed correctly or if it was already playing; <code>false</code> otherwise, programmer must make sure that an <code>AudioDevice</code> or an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> have been assigned to the clip. </dd></dl>
 
 </div>
 </div>
@@ -348,6 +412,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sets the current loop state of the clip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loop</td><td><code>true</code> to activate the loop state, <code>false</code> to deactivate it </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a273cef875717c3a58fbea06acd7e4000" name="a273cef875717c3a58fbea06acd7e4000"></a>
@@ -366,6 +438,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sets the clip's current volume. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">volume</td><td>Value between <code>0.0f</code> and <code>1.0f</code> representing the volume to be assigned to the clip </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a82b64c4ed725e2ba0a1b78cc2ae5b67f" name="a82b64c4ed725e2ba0a1b78cc2ae5b67f"></a>
@@ -383,6 +463,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Stops the clip completely. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the clip stopped correctly; <code>false</code> otherwise, programmer must make sure that an <code>AudioDevice</code> or an <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> have been assigned to the clip. </dd></dl>
+
 </div>
 </div>
 <a id="a9506500cffe41b27fdfd3561f9060a9f" name="a9506500cffe41b27fdfd3561f9060a9f"></a>
@@ -399,6 +482,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Updates the clip's global playing volume depending on the clip's volume and on it's <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> 's if it has any assigned. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This method is called automatically every time the clip's volume changes or every time it's <code><a class="el" href="classAudioMixer.html">AudioMixer</a></code> 's global volume if it has any assigned. Programmer doesn't need to call this method at any given point. </dd></dl>
 
 </div>
 </div>
