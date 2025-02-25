@@ -17,6 +17,8 @@ void AudioClip::reset() {
     stop();
     SDL_DestroyAudioStream(stream_);
     stream_ = nullptr;
+    if (mixer_)
+        mixer_->disconnect(this);
     mixer_ = nullptr;
     device_ = 0;
     state_ = STOPPED;
@@ -112,6 +114,8 @@ void AudioClip::updateVolume() {
 }
 
 void AudioClip::assignMixer(AudioMixer* mixer) {
+    if (mixer_)
+        mixer_->disconnect(this);
     mixer_ = mixer;
     updateVolume();
     if (!mixer)

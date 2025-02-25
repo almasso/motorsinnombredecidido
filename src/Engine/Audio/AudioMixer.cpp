@@ -11,14 +11,28 @@ AudioMixer::AudioMixer() :
 }
 
 void AudioMixer::connect(AudioClip* clip) {
-    clips_.push_back(clip);
+    clips_.insert(clip);
     clip->assignMixer(this);
 }
 
+void AudioMixer::disconnect(AudioClip* clip) {
+    if (clips_.erase(clip) == 0)
+        return;
+    clip->assignMixer(nullptr);
+}
+
 void AudioMixer::connect(AudioMixer* mixer) {
-    mixers_.push_back(mixer);
+    mixers_.insert(mixer);
     mixer->output_ = this;
+    mixer->updateVolume();
     assignDevice(audioDevice_);
+}
+
+void AudioMixer::disconnect(AudioMixer* mixer) {
+    if (mixers_.erase(mixer) == 0)
+        return;
+    mixer->output_ = nullptr;
+    mixer->updateVolume();
 }
 
 void AudioMixer::setVolume(float volume) {
@@ -41,6 +55,8 @@ void AudioMixer::updateVolume() {
 }
 
 void AudioMixer::assignDevice(AudioDevice device) {
+    if (output_ && device != output_->getDevice())
+        return;
     audioDevice_ = device;
     for (auto& mixer : mixers_) {
         mixer->assignDevice(device);

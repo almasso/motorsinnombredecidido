@@ -73,70 +73,70 @@ public:
     bool play();
 
     /// @~english
-    /// @brief Stops the clip completely
+    /// @brief Stops the clip completely.
     /// @return \c true if the clip stopped correctly; \c false otherwise, programmer must make sure that an \c AudioDevice or an \c AudioMixer have been assigned to the clip.
     /// @~spanish
-    /// @brief Detiene la pista por completo
+    /// @brief Detiene la pista por completo.
     /// @return \c true si la pista se detuvo correctamente; \c false si no, el programador debe asegurarse de que la pista tiene un \c AudioDevice o un \c AudioMixer asignado.
     bool stop();
 
     /// @~english
-    /// @brief Pauses the clip
+    /// @brief Pauses the clip.
     /// @~spanish
-    /// @brief Pausa la pista
+    /// @brief Pausa la pista.
     void pause();
 
     /// @~english
-    /// @brief Resumes the clip at the point it was paused
+    /// @brief Resumes the clip at the point it was paused.
     /// @return \c true if the clip resumed correctly or if it was already playing; \c false otherwise, programmer must make sure that an \c AudioDevice or an \c AudioMixer have been assigned to the clip.
     bool resume();
 
     /// @~english
-    /// @brief Checks whether the clip is currently playing
-    /// @return \c true if the clip is currently playing, \c false otherwise
+    /// @brief Checks whether the clip is currently playing.
+    /// @return \c true if the clip is currently playing, \c false otherwise.
     /// @~spanish
-    /// @brief Comprueba si la pista se está reproduciendo actualmente
-    /// @return \c true si la pista se está reproduciendo actualmente, \c false si no
+    /// @brief Comprueba si la pista se está reproduciendo actualmente.
+    /// @return \c true si la pista se está reproduciendo actualmente, \c false si no.
     bool isPlaying() const;
 
     /// @~english
-    /// @brief Checks whether the clip is currently paused
-    /// @return \c true if the clip is currently paused, \c false otherwise
+    /// @brief Checks whether the clip is currently paused.
+    /// @return \c true if the clip is currently paused, \c false otherwise.
     /// @~spanish
-    /// @brief Comprueba si la pista está en pausa actualmente
-    /// @return \c true si la pista está en pausa actualmente, \c false si no
+    /// @brief Comprueba si la pista está en pausa actualmente.
+    /// @return \c true si la pista está en pausa actualmente, \c false si no.
     bool isPaused() const;
 
     /// @~english
-    /// @brief Gets the clip's current volume
-    /// @return Value between \c 0.0f and \c 1.0f representing the volume assigned to the clip
+    /// @brief Gets the clip's current volume.
+    /// @return Value between \c 0.0f and \c 1.0f representing the volume assigned to the clip.
     /// @~spanish
-    /// @brief Accede al volumen actual de la pista
-    /// @return Valor entre \c 0.0f y \c 1.0f representando el volumen asignado a la pista
+    /// @brief Accede al volumen actual de la pista.
+    /// @return Valor entre \c 0.0f y \c 1.0f representando el volumen asignado a la pista.
     float getVolume() const;
 
     /// @~english
-    /// @brief Sets the clip's current volume
-    /// @param volume Value between \c 0.0f and \c 1.0f representing the volume to be assigned to the clip
+    /// @brief Sets the clip's current volume.
+    /// @param volume Value between \c 0.0f and \c 1.0f representing the volume to be assigned to the clip.
     /// @~spanish
-    /// @brief Establece el volumen actual de la pista
-    /// @param volume Valor entre \c 0.0f y \c 1.0f representando el volumen a asignar a la pista
+    /// @brief Establece el volumen actual de la pista.
+    /// @param volume Valor entre \c 0.0f y \c 1.0f representando el volumen a asignar a la pista.
     void setVolume(float volume);
 
     /// @~english
-    /// @brief Checks whether the clip has the loop option active
-    /// @return \c true if the loop is active, \c false otherwise
+    /// @brief Checks whether the clip has the loop option active.
+    /// @return \c true if the loop is active, \c false otherwise.
     /// @~spanish
-    /// @brief Comprueba si la pista tiene la opción de ciclado activa
-    /// @return \c true si el ciclado está activado, \c false si no
+    /// @brief Comprueba si la pista tiene la opción de ciclado activa.
+    /// @return \c true si el ciclado está activado, \c false si no.
     bool isLooped() const;
 
     /// @~english
-    /// @brief Sets the current loop state of the clip
-    /// @param loop \c true to activate the loop state, \c false to deactivate it
+    /// @brief Sets the current loop state of the clip.
+    /// @param loop \c true to activate the loop state, \c false to deactivate it.
     /// @~spanish
-    /// @brief Establece el estado de ciclado de la pista
-    /// @param loop \c true para activar el estado de ciclado, \c false para desactivarlo
+    /// @brief Establece el estado de ciclado de la pista.
+    /// @param loop \c true para activar el estado de ciclado, \c false para desactivarlo.
     void setLoop(bool loop);
 
     /// @~english
@@ -149,11 +149,11 @@ public:
 
     /// @~english
     /// @brief Assigns an \c AudioMixer to this clip.
-    /// @remark Every change made to the \c AudioMixer will now affect this clip.
+    /// @remark Every change made to the \c AudioMixer will now affect this clip. If the clip was already assigned to another \c AudioMixer the changes will be overwritten by the new ones.
     /// @param mixer \c AudioMixer to assign to the clip.
     /// @~spanish
     /// @brief Asigna un \c AudioMixer a esta pista.
-    /// @remark Cada cambio hecho al \c AudioMixer afectará a partir de ahora a esta pista.
+    /// @remark Cada cambio hecho al \c AudioMixer afectará a partir de ahora a esta pista. Si la pista ya estaba asignada a otro \c AudioMixer los cambios se sobreescribirán por los nuevos.
     /// @param mixer \c AudioMixer a asignar a la pista.
     void assignMixer(AudioMixer* mixer);
 
