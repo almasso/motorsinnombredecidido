@@ -11,6 +11,7 @@ private:
   	static RenderManager* render;
   	static AudioManager* audio;
   	static TimeManager* time;
+  	static InputManager* input;
 
 	static bool Init();
     static void Shutdown();

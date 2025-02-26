@@ -10,24 +10,26 @@
 RenderManager* Main::render = nullptr;
 AudioManager* Main::audio = nullptr;
 TimeManager* Main::time = nullptr;
+InputManager* Main::input = nullptr;
 
 bool Main::Init() {
     render = new RenderManager();
-    audio = new AudioManager();
-    time = new TimeManager();
     if (!render->init(1280, 720))
         return false;
-    if (!InputManager::init())
+    input = InputManager::Init();
+    if (!input)
         return false;
+    audio = new AudioManager();
     if (!audio->init())
         return false;
+    time = new TimeManager();
     time->init();
     return true;
 }
 void Main::Shutdown() {
     audio->shutdown();
     render->shutdown();
-    InputManager::shutdown();
+    input->shutdown();
     delete time;
     delete audio;
     delete render;
@@ -42,9 +44,9 @@ int Main::Loop() {
     int w, h;
     render->getWindowSize(&w, &h);
     float dirX = -0.1f, dirY = 0.1f;
-    while(!InputManager::getState().exit) {
+    while(!InputManager::GetState().exit) {
         time->update();
-        InputManager::update();
+        input->update();
         audio->update();
         render->clear();
         render->drawRect(rect, color);

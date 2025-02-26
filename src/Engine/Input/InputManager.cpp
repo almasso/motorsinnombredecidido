@@ -3,16 +3,22 @@
 #include <SDL3/SDL_init.h>
 #include <Utils/RPGError.h>
 
-InputState InputManager::input_state = InputState();
+InputManager* InputManager::instance = nullptr;
 
-bool InputManager::init() {
-    if (!SDL_InitSubSystem(SDL_INIT_EVENTS)) {
-        {
-            RPGError::ShowError("Error al inicializar SDL_EVENTS", SDL_GetError());
-            return false;
+InputManager::InputManager() = default;
+
+InputManager* InputManager::Init() {
+    if (instance == nullptr) {
+        if (!SDL_InitSubSystem(SDL_INIT_EVENTS)) {
+            {
+                RPGError::ShowError("Error al inicializar SDL_EVENTS", SDL_GetError());
+                return instance;
+            }
         }
+        return instance = new InputManager();
     }
-    return true;
+    RPGError::ShowError("Error al inicializar InputManager", "Ya existia una instancia de InputManager");
+    return nullptr;
 }
 
 void InputManager::update() {
@@ -27,11 +33,11 @@ void InputManager::update() {
     }
 }
 
-void InputManager::shutdown() {
+void InputManager::shutdown() const {
     SDL_QuitSubSystem(SDL_INIT_EVENTS);
+    delete this;
 }
 
-const InputState & InputManager::getState() {
-    return input_state;
+const InputState & InputManager::GetState() {
+    return instance->input_state;
 }
-

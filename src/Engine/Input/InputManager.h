@@ -11,12 +11,14 @@ struct InputState {
 };
 
 class InputManager {
-    static InputState input_state;
+    InputState input_state;
+    static InputManager* instance;
+    InputManager();
     public:
-    static bool init();
-    static void update();
-    static void shutdown();
-    static const InputState& getState();
+    static InputManager* Init();
+    void update();
+    void shutdown() const;
+    static const InputState& GetState();
 };
 
 #endif //INPUTMANAGER_H
