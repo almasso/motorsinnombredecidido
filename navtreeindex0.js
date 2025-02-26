@@ -93,6 +93,8 @@ var NAVTREEINDEX0 =
 "classAudioMixer.html#af4ca5f6cd7ae1381579b8f0006b1058b":[0,0,4,3],
 "classCollisionManager.html":[0,0,6],
 "classInputManager.html":[0,0,7],
+"classInputManager.html#a136d6afa55ee74eeda5eb72e78e3ee97":[0,0,7,1],
+"classInputManager.html#a494bf6a46febf231174a938584c08b33":[0,0,7,0],
 "classLuaManager.html":[0,0,9],
 "classMain.html":[0,0,10],
 "classRPGError.html":[0,0,12],
