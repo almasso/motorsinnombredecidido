@@ -4,3 +4,8 @@
 //
 
 #include "Window.h"
+
+
+const std::string & editor::render::ui_element::Window::getName() const {
+    return _windowName;
+}

@@ -11,19 +11,19 @@
 
 namespace editor::render::ui_element {
 
-    class WindowComponent;
-
     class Window {
     public:
         Window(const std::string& windowName);
 
         virtual void render() = 0;
 
-        void addComponent(WindowComponent* component);
+        void addWindow(Window* subwindow);
+
+        const std::string& getName() const;
     protected:
         std::string _windowName;
 
-        std::list<WindowComponent*> _components;
+        std::list<Window*> _subwindows;
 
     };
 }
