@@ -7,6 +7,8 @@ project(LuaCompilation LANGUAGES C)
 
 set(LUA_INCLUDE_DIRS "${FETCHCONTENT_BASE_DIR}/lualib-src" "${ROOT_DIR}/src/lua/")
 
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build Lua as a static library" FORCE)
+
 list(GET LUA_INCLUDE_DIRS 0 MAIN_LUA_FILES)
 
 # Incluimos todos los archivos .cpp que estén en la ruta de lua a la compilación

@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.16)
 # We include all .cpp files inside ROOT/src/Engine/ to compilation
 file(GLOB_RECURSE ENGINE_SOURCES "${ROOT_DIR}/src/Engine/*.cpp")
 
+set(BUILD_SHARED_LIBS ON CACHE BOOL "Build Engine as a shared library | Compilar Engine como una librería dinámica" FORCE)
+
 # Definimos la librería
 # We define the library
 add_library(Engine SHARED ${ENGINE_SOURCES})

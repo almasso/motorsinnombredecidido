@@ -9,6 +9,8 @@ project(DearImGuiCompilation LANGUAGES CXX)
 # We include all .cpp files inside DearImGui route to compilation
 file(GLOB IMGUI_SOURCES "${IMGUI_INCLUDE_DIRS}/*.cpp")
 
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build DearImGui as a static library | Compilar DearImGui como una librería estática" FORCE)
+
 list(APPEND IMGUI_SOURCES "${IMGUI_BACKENDS_DIRS}/imgui_impl_sdl3.cpp")
 list(APPEND IMGUI_SOURCES "${IMGUI_BACKENDS_DIRS}/imgui_impl_sdlrenderer3.cpp")
 
@@ -18,8 +20,7 @@ add_library(DearImGui STATIC ${IMGUI_SOURCES})
 
 # Directorios de inclusión
 # Include directories
-target_link_libraries(DearImGui PRIVATE SDL3-shared)
-target_include_directories(DearImGui PUBLIC ${IMGUI_INCLUDE_DIRS})
+target_include_directories(DearImGui PUBLIC ${IMGUI_INCLUDE_DIRS} ${SDL3_INCLUDE_DIRS})
 
 # Establecemos las propiedades para la salida de la librería
 # We set the properties for the library output

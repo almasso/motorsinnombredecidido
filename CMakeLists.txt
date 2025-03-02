@@ -15,11 +15,6 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(NOT ANDROID AND NOT APPLE)
-    add_compile_options(-static -static-libgcc -static-libstdc++)
-    add_link_options(-static -static-libgcc -static-libstdc++)
-endif()
-
 # Habilitamos FetchContent para la descarga de las dependencias
 # We enable FetchContent for dependencies download
 include(FetchContent)
@@ -93,7 +88,95 @@ if(ANDROID)
     add_subdirectory(${ROOT_DIR}/projects/APK/app)
 endif()
 
-
 if(NOT ANDROID AND ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     set_target_properties(SDL3-shared PROPERTIES OUTPUT_NAME "SDL3_d")
+endif()
+
+
+# Búsqueda de libgcc_s_seh-1.dll y de libstdc++-6.dll en Windows, Mac y Linux
+# Search of libgcc_s_seh-1.dll and libstdc++-6.dll on Windows, Mac and Linux
+if(WIN32)
+    # Windows
+    find_path(MINGW_BIN_DIR
+            NAMES
+            libgcc_s_seh-1.dll
+            libstdc++-6.dll
+            libatomic-1.dll
+            libgomp-1.dll
+            libssp-0.dll
+            libwinpthread-1.dll
+            PATHS
+            "C:/MinGW/bin"
+            "C:/Jetbrains/CLion/bin/mingw/bin"
+            "E:/Jetbrains/CLion/bin/mingw/bin"
+            "$ENV{PATH}"
+    )
+
+    if(MINGW_BIN_DIR)
+        set(REQUIRED_DLLS
+                "${MINGW_BIN_DIR}/libgcc_s_seh-1.dll"
+                "${MINGW_BIN_DIR}/libstdc++-6.dll"
+                "${MINGW_BIN_DIR}/libatomic-1.dll"
+                "${MINGW_BIN_DIR}/libgomp-1.dll"
+                "${MINGW_BIN_DIR}/libssp-0.dll"
+                "${MINGW_BIN_DIR}/libwinpthread-1.dll"
+        )
+
+        file(COPY ${REQUIRED_DLLS} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    else()
+        message(WARNING "[EN] Could not find MinGW bin directory. Required DLLs will not be copied.
+                        [ES] No se ha podido encontrar el directorio bin de MinGW. Las DLL requeridas no se copiarán.")
+    endif()
+elseif(APPLE)
+    # Mac
+    set(REQUIRED_LIBS
+            libgcc_s.1.dylib
+            libstdc++.6.dylib
+            libatomic.1.dylib
+            libgomp.1.dylib
+            libssp.0.dylib
+            libpthread.dylib
+    )
+
+    foreach(LIB ${REQUIRED_LIBS})
+        find_library(LIB_PATH ${LIB}
+                PATHS
+                /usr/lib
+                /usr/local/lib
+                /opt/homebrew/lib
+        )
+
+        if(LIB_PATH)
+            file(COPY ${LIB} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+        else()
+            message(WARNING "[EN] Could not find ${LIB}. Required library will not be copied.
+                            [ES] No se ha podido encontrar ${LIB}. Las librerías requeridas no se copiarán.")
+        endif()
+    endforeach()
+elseif(UNIX)
+    # Linux
+    set(REQUIRED_LIBS
+            libgcc_s.so.1
+            libstdc++.so.6
+            libatomic.so.1
+            libgomp.so.1
+            libssp.so.0
+            libpthread.so.0
+    )
+
+    foreach(LIB ${REQUIRED_LIBS})
+        find_library(LIB_PATH ${LIB}
+                PATHS
+                /usr/lib
+                /usr/lib/x86_64-linux-gnu
+                /lib/x86_64-linux-gnu
+        )
+
+        if(LIB_PATH)
+            file(COPY ${LIB} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+        else()
+            message(WARNING "[EN] Could not find ${LIB}. Required library will not be copied.
+                            [ES] No se ha podido encontrar ${LIB}. Las librerías requeridas no se copiarán.")
+        endif()
+    endforeach()
 endif()

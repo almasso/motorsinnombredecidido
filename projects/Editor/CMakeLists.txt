@@ -8,14 +8,10 @@ file(GLOB_RECURSE EDITOR_SOURCES "${ROOT_DIR}/src/Editor/*.cpp")
 # We define the executable
 add_executable(Editor ${EDITOR_SOURCES})
 
-# Vinculamos el proyecto Engine al Editor
-# We link Engine project to the Editor project
-target_link_libraries(Editor PRIVATE Engine)
-
 # Incluimos y enlazamos SDL3 para utilizar con DearImGui
 # We include and link SDL3 to use with DearImGui
-target_link_libraries(Editor PRIVATE SDL3-shared DearImGui lua)
-target_include_directories(Editor PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/Editor/ ${ROOT_DIR}/src/Engine/ ${LUA_INCLUDE_DIRS} ${IMGUI_INCLUDE_DIRS} ${IMGUI_BACKENDS_DIRS})
+target_link_libraries(Editor PRIVATE SDL3-shared Engine lua DearImGui)
+target_include_directories(Editor PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/Editor/ ${LUA_INCLUDE_DIRS} ${IMGUI_INCLUDE_DIRS} ${IMGUI_BACKENDS_DIRS})
 
 # Hacemos que el ejecutable tenga un _d cuando se compile en debug
 # We make so that the executable has a _d whenever it's compiled on debug
