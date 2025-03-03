@@ -11,6 +11,7 @@ var annotated_dup =
     [ "InputState", "structInputState.html", "structInputState" ],
     [ "LuaManager", "classLuaManager.html", null ],
     [ "Main", "classMain.html", null ],
+    [ "Random", "classRandom.html", null ],
     [ "RenderManager", "classRenderManager.html", "classRenderManager" ],
     [ "RPGError", "classRPGError.html", null ],
     [ "SceneManager", "classSceneManager.html", null ],
