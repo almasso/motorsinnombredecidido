@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['init_0',['Init',['../classInputManager.html#ac5c3688737c75fb92824ff8b7f53a264',1,'InputManager']]],
-  ['init_1',['init',['../classAudioManager.html#af5b889c6fa18bed65044d42a946e4596',1,'AudioManager::init()'],['../classRenderManager.html#a1205d52fc12124339bd64d916c9c8237',1,'RenderManager::init()'],['../classTimeManager.html#a741d9249948f4cb8bbf96895c593ced4',1,'TimeManager::init()']]],
+  ['init_0',['init',['../classAudioManager.html#af5b889c6fa18bed65044d42a946e4596',1,'AudioManager::init()'],['../classRenderManager.html#a1205d52fc12124339bd64d916c9c8237',1,'RenderManager::init()'],['../classTimeManager.html#a741d9249948f4cb8bbf96895c593ced4',1,'TimeManager::init()']]],
+  ['init_1',['Init',['../classInputManager.html#ac5c3688737c75fb92824ff8b7f53a264',1,'InputManager']]],
   ['inputmanager_2',['InputManager',['../classInputManager.html',1,'']]],
   ['inputmanager_2ecpp_3',['InputManager.cpp',['../InputManager_8cpp.html',1,'']]],
   ['inputmanager_2eh_4',['InputManager.h',['../InputManager_8h.html',1,'']]],

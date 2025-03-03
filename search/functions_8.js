@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['setloop_0',['setLoop',['../classAudioClip.html#a23648dfcb61d75b4d2d829f6a9c8edb5',1,'AudioClip']]],
-  ['setvolume_1',['setVolume',['../classAudioClip.html#a273cef875717c3a58fbea06acd7e4000',1,'AudioClip::setVolume()'],['../classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de',1,'AudioMixer::setVolume()']]],
-  ['showerror_2',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
-  ['shutdown_3',['shutdown',['../classAudioManager.html#a818d01488098f6620c59b713137da0ad',1,'AudioManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['stop_4',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
+  ['operator_21_3d_0',['operator!=',['../classVector2.html#a805e8fa742bba45aea6af187069f2c96',1,'Vector2']]],
+  ['operator_2a_1',['operator*',['../classVector2.html#abed281edb08c34e61ec8642d1da98a62',1,'Vector2::operator*(float e) const'],['../classVector2.html#a5df1be7a5a17b2be54b33655a48cebe6',1,'Vector2::operator*(const Vector2 &amp;v) const']]],
+  ['operator_2a_3d_2',['operator*=',['../classVector2.html#a335a23efb2e30031b2cec91010ba5c77',1,'Vector2::operator*=(const Vector2 &amp;v)'],['../classVector2.html#a5960fe3eeaa6410ae11efd1a97b89e02',1,'Vector2::operator*=(float e)']]],
+  ['operator_2b_3',['operator+',['../classVector2.html#a18759ffa878ab208dbe092ae07e70b6f',1,'Vector2']]],
+  ['operator_2b_3d_4',['operator+=',['../classVector2.html#a858536d6abd59cbb49dde713f69d4666',1,'Vector2']]],
+  ['operator_2d_5',['operator-',['../classVector2.html#a37653598d7dd2e823c7af55bc50b92bb',1,'Vector2']]],
+  ['operator_2f_6',['operator/',['../classVector2.html#a09df3031274ae221664f1505a8ec17fc',1,'Vector2::operator/(float e) const'],['../classVector2.html#af5d1a81a538e162c52378a5199cadd20',1,'Vector2::operator/(Vector2 const &amp;v) const']]],
+  ['operator_3d_3d_7',['operator==',['../classVector2.html#a77b638de6b16a80d4c4be0c21fe2b481',1,'Vector2']]]
 ];

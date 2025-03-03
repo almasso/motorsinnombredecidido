@@ -16,5 +16,6 @@ var annotated_dup =
     [ "SceneManager", "classSceneManager.html", null ],
     [ "Square", "structSquare.html", "structSquare" ],
     [ "Time", "structTime.html", null ],
-    [ "TimeManager", "classTimeManager.html", "classTimeManager" ]
+    [ "TimeManager", "classTimeManager.html", "classTimeManager" ],
+    [ "Vector2", "classVector2.html", "classVector2" ]
 ];

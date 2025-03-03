@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['width_0',['width',['../structSquare.html#af8a168864d5a5d6fae924c61cba73bc1',1,'Square']]]
+  ['specifier_0',['specifier',['../structAudioClipData.html#a18467fbcbb33c44c0c92dafd545c750e',1,'AudioClipData']]],
+  ['speed_1',['speed',['../structSquare.html#ae63bb534933b1a7581512eff3de9adda',1,'Square']]]
 ];

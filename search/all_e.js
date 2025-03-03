@@ -8,7 +8,8 @@ var searchData=
   ['rendermanager_2ecpp_5',['RenderManager.cpp',['../RenderManager_8cpp.html',1,'']]],
   ['rendermanager_2eh_6',['RenderManager.h',['../RenderManager_8h.html',1,'']]],
   ['resume_7',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]],
-  ['rpgerror_8',['RPGError',['../classRPGError.html',1,'']]],
-  ['rpgerror_2ecpp_9',['RPGError.cpp',['../RPGError_8cpp.html',1,'']]],
-  ['rpgerror_2eh_10',['RPGError.h',['../RPGError_8h.html',1,'']]]
+  ['right_8',['RIGHT',['../classVector2.html#a2762eb466fac352811f35b17363cbd93',1,'Vector2']]],
+  ['rpgerror_9',['RPGError',['../classRPGError.html',1,'']]],
+  ['rpgerror_2ecpp_10',['RPGError.cpp',['../RPGError_8cpp.html',1,'']]],
+  ['rpgerror_2eh_11',['RPGError.h',['../RPGError_8h.html',1,'']]]
 ];
