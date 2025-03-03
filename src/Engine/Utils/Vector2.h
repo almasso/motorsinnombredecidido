@@ -213,7 +213,7 @@ public:
 
 	/// @~english
 	/// @brief Sets the Y coordinate value.
-	/// @paramyx New Y value.
+	/// @param y New Y value.
 	/// @~spanish
 	/// @brief Asigna el valor de la coordenada Y.
 	/// @param y Nuevo valor de Y.
