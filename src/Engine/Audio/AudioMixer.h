@@ -21,7 +21,7 @@ private:
 public:
     /// @~english
     /// @brief Creates a new mixer.
-    /// @remark The mixer created will have no \c AudioDevice assigned, the volume set to \1.0f .
+    /// @remark The mixer created will have no \c AudioDevice assigned, the volume set to \c 1.0f .
     /// @~spanish
     /// @brief Crea un nuevo mezclador.
     /// @remark El mezclador creado no tendrá asignado ningún \c AudioDevice y el volumen estará asignado a \c 1.0f .

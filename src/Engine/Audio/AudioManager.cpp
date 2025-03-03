@@ -56,7 +56,6 @@ bool AudioManager::init() {
         return false;
     }
 
-    // TODO: open devices dynamically depending on mixers
     audioDeviceId = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
     if (audioDeviceId == 0) {
         RPGError::ShowError("Audio Device initialization failed", SDL_GetError());
@@ -85,7 +84,7 @@ bool AudioManager::registerAudioMixer(AudioMixerData const& data) {
     if (!inserted)
         return false;
     it->second = new AudioMixer();
-    it->second->assignDevice(audioDeviceId); // TODO: manage connected devices
+    it->second->assignDevice(audioDeviceId);
     if (AudioMixer* output = getMixer(data.output))
         output->connect(it->second);
     for (auto& in : data.inputs) {

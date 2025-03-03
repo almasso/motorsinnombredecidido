@@ -6,7 +6,6 @@
 
 struct AudioMixerData {
     std::string name;
-    std::string device;
     std::string output;
     std::vector<std::string> inputs;
 };
