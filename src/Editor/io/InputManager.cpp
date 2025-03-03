@@ -12,6 +12,9 @@ bool editor::io::InputManager::init() {
         SDL_GetError();
         return false;
     }
+    _io = &ImGui::GetIO();
+    _io->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    _io->ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
     return true;
 }
 
@@ -25,6 +28,7 @@ void editor::io::InputManager::handleInput() {
 }
 
 editor::io::InputManager::~InputManager() {
+    _io = nullptr;
     SDL_QuitSubSystem(SDL_INIT_GAMEPAD);
     SDL_Quit();
 }

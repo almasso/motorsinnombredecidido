@@ -10,9 +10,8 @@
 #include "utils/SearchableList.h"
 
 namespace editor::render {
-    namespace ui_element {
-        class Window;
-    }
+
+    class Window;
 
     /**
      * @~english
@@ -34,7 +33,7 @@ namespace editor::render {
          *
          * @param window Ventana a añadir.
          */
-        static void addWindowToStack(ui_element::Window* window);
+        static void addWindowToStack(Window* window);
 
         /**
          * @~english
@@ -47,7 +46,7 @@ namespace editor::render {
          *
          * @param window Ventana a eliminar.
          */
-        static void removeWindowFromStack(ui_element::Window* window);
+        static void removeWindowFromStack(Window* window);
 
         /**
          * @~english
@@ -73,7 +72,16 @@ namespace editor::render {
          *
          * @return Ventana que tiene ese nombre, o, \c nullptr en caso de que no esté en la pila.
          */
-        static ui_element::Window* getWindowByName(const std::string& name);
+        static Window* getWindowByName(const std::string& name);
+
+        /**
+         * @~english
+         * @brief Renders all windows in the stack from bottom (first one inserted) to top (last one inserted).
+         *
+         * @~spanish
+         * @brief \c Renderiza todas las ventanas de la pila desde abajo (primera insertada) hasta arriba (última insertada).
+         */
+        static void renderWindows();
     private:
         /**
          * @~english
@@ -82,7 +90,7 @@ namespace editor::render {
          * @~spanish
          * @brief SearchableList que se va a usar como pila.
          */
-        static SearchableList<ui_element::Window*> _windowStack;
+        static SearchableList<Window*> _windowStack;
 
         /**
          * @~english

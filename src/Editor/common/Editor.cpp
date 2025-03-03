@@ -9,6 +9,8 @@
 #include "io/InputManager.h"
 #include "io/ResourceManager.h"
 #include "io/LocalizationManager.h"
+#include "render/Windows/WelcomeWindow.h"
+#include "render/WindowStack.h"
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
@@ -31,7 +33,7 @@ bool editor::Editor::Init() {
 
 bool editor::Editor::init() {
     _renderManager = new render::RenderManager();
-    if(!_renderManager->init()) return false;
+    if(!_renderManager->init(1010, 650)) return false;
     _inputManager = new io::InputManager();
     if(!_inputManager->init()) return false;
     if(!io::ResourceManager::Init()) return false;
@@ -46,6 +48,7 @@ editor::Editor& editor::Editor::GetInstance() {
 }
 
 void editor::Editor::mainLoop() {
+    render::WindowStack::addWindowToStack(new render::windows::WelcomeWindow());
     while(!_inputManager->quit()) {
         _inputManager->handleInput();
         _renderManager->render();

@@ -10,7 +10,12 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include "WindowStack.h"
 
-bool editor::render::RenderManager::init() {
+uint32_t editor::render::RenderManager::_width = 0;
+uint32_t editor::render::RenderManager::_height = 0;
+
+bool editor::render::RenderManager::init(uint32_t width, uint32_t height) {
+    _width = width;
+    _height = height;
     bool initialized = true;
     initialized &= initSDL();
     // If SDL has not been initialized, we discard the initialization of DearImGui, as it needs SDL to work.
@@ -21,12 +26,11 @@ bool editor::render::RenderManager::init() {
 }
 
 void editor::render::RenderManager::render() {
+    SDL_SetWindowSize(_window, _width, _height);
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
-
-    // Llamadas a WindowStack
-
+    WindowStack::renderWindows();
     ImGui::Render();
     SDL_SetRenderDrawColorFloat(_renderer, 0.45f, 0.55f, 0.60f, 1.00f);
     SDL_RenderClear(_renderer);
@@ -62,7 +66,7 @@ bool editor::render::RenderManager::initSDL() {
         return false;
     }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::SDL_INIT_CORRECT;
-    _window = SDL_CreateWindow("Ngin Editor", 120, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN);
+    _window = SDL_CreateWindow("", _width, _height, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
     if(_window == nullptr) {
         SDL_GetError();
         return false;
@@ -85,7 +89,7 @@ bool editor::render::RenderManager::initDearImGui() {
     if(_context == nullptr)
         return false;
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_CONTEXT_CREATED;
-    ImGui::StyleColorsLight();
+    ImGui::StyleColorsDark();
      if(!ImGui_ImplSDL3_InitForSDLRenderer(_window, _renderer))
          return false;
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_SDL3_INIT_CORRECT;
@@ -94,3 +98,4 @@ bool editor::render::RenderManager::initDearImGui() {
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_SDLRENDERER3_INIT_CORRECT;
      return true;
 }
+

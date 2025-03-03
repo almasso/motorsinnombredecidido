@@ -43,6 +43,9 @@ namespace editor::render {
          * If the initialization is successful, the programmer can use the \c render() function; else, the programmer must delete the instance of the
          * render manager using \c delete.
          *
+         * @param width Width of the window the render manager creates
+         * @param height Height of the window the render manager creates
+         *
          * @return \c true if the initialization was sucessful, \c false if the initialization failed.
          *
          * @~spanish Inicializa el gestor de \a renderizado.
@@ -51,9 +54,12 @@ namespace editor::render {
          * mientras esta se hace. Si la inicialización fue correcta, el programador puede usar la función \c render(); de lo contrario, el programador debe
          * borrar la instancia del gestor de \a renderizado utilizando \c delete.
          *
+         * @param width Anchura de la ventana que crea el gestor de \a render
+         * @param height Altura de la ventana que crea el gestor de \a render
+         *
          * @return \c true si la inicialización fue correcta; \c false si la inicialización falló.
          */
-        bool init();
+        bool init(uint32_t width, uint32_t height);
 
         /**
          * @~english
@@ -62,15 +68,11 @@ namespace editor::render {
          * Renders all windows, from the bottom to the top one, making the appropiate calls to API renders from DearImGui and SDL,
          * clears the render buffer and then presents it.
          *
-         * @attention This function calls functions from \c WindowStack, so its instance must be initialized previously.
-         *
          * @~spanish
          * @brief \a Renderiza todo el contenido del \a Editor (ventanas, ventanas modales, etc...).
          *
          * \a Renderiza todas las ventanas, de abajo hacia arriba, haciendo las llamadas apropiadas a la API de \a renderizado de DearImGui
          * y de SDL, vacía el \a buffer de \a renderizado, y posteriormente lo presenta.
-         *
-         * @attention Esta función llama a funciones de \c WindowStack, así que su instancia debe ser inicializada previamente.
          */
         void render();
 
@@ -82,6 +84,58 @@ namespace editor::render {
          * @brief Desturctora del gestor de \a renderizado
          */
         ~RenderManager();
+
+        /**
+         * @~english
+         * @brief Returns the render manager window width.
+         *
+         * @return Render manager window width.
+         *
+         * @~spanish
+         * @brief Devuelve la anchura de la ventana del gestor de \a render.
+         *
+         * @return Anchura de la ventana del gestor de \a render.
+         */
+        inline uint32_t getWidth() { return _width; }
+
+        /**
+         * @~english
+         * @brief Returns the render manager's window height.
+         *
+         * @return Render manager's window height.
+         *
+         * @~spanish
+         * @brief Devuelve la altura de la ventana del gestor de \a render.
+         *
+         * @return Altura de la ventana del gestor de \a render.
+         */
+        inline uint32_t getHeight() {return _height;}
+
+        /**
+         * @~english
+         * @brief Sets render manager's window width.
+         *
+         * @param width Width of the window.
+         *
+         * @~spanish
+         * @brief Establece la anchura de la ventana del gestor de \a render.
+         *
+         * @param width Anchura de la ventana.
+         */
+        inline void setWidth(uint32_t width) {_width = width;}
+
+        /**
+         * @~english
+         * @brief Sets render manager's window height.
+         *
+         * @param height Height of the window.
+         *
+         * @~spanish
+         * @brief Establece la altura de la ventana del gestor de \a render.
+         *
+         * @param height altura de la ventana.
+         */
+        inline void setHeight(uint32_t height) {_height = height;}
     private:
         /**
          * @~english
@@ -147,6 +201,24 @@ namespace editor::render {
          * se han iniciado correctamente todos los subsistemas.
          */
         uint8_t _initializationSteps = 0;
+
+        /**
+         * @~english
+         * @brief Width of the window created by the render manager.
+         *
+         * @~spanish
+         * @brief Anchura de la ventana creada por el gestor de \a render.
+         */
+        uint32_t _width;
+
+        /**
+         * @~english
+         * @brief Height of the window created by the render manager.
+         *
+         * @~spanish
+         * @brief Altura de la ventana creada por el gestor de \a render.
+         */
+        uint32_t _height;
 
         /**
          * @~english

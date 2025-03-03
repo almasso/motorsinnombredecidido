@@ -6,6 +6,8 @@
 #ifndef MOTORSINNOMBREDECIDIDO_INPUTMANAGER_H
 #define MOTORSINNOMBREDECIDIDO_INPUTMANAGER_H
 
+#include <imgui.h>
+
 namespace editor::io {
     class InputManager {
     public:
@@ -16,6 +18,7 @@ namespace editor::io {
         ~InputManager();
     private:
         bool _quitSignal = false;
+        ImGuiIO* _io = nullptr;
     };
 }
 
