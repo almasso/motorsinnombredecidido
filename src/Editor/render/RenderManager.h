@@ -7,6 +7,7 @@
 #define MOTORSINNOMBREDECIDIDO_RENDERMANAGER_H
 
 #include <cstdint>
+#include <memory>
 
 typedef struct SDL_Window SDL_Window;
 typedef struct SDL_Renderer SDL_Renderer;
@@ -22,19 +23,6 @@ namespace editor::render {
      */
     class RenderManager {
     public:
-        /**
-         * @~english
-         * @brief Default constructor for the render manager.
-         *
-         * @warning <b>Nothing is initialized in the constructor</b> and the programmer needs to call RenderManager::init() to initialize the instance.
-         *
-         * @~spanish
-         * @brief Constructora por defecto para el gestor de \a renderizado.
-         *
-         * @warning <b>Nada se inicializa en la constructora</b> y el programador necesita llamar a RenderManager::init() para inicializar la instancia.
-         */
-        RenderManager() = default;
-
         /**
          * @~english
          * @brief Initializes the render manager.
@@ -59,7 +47,9 @@ namespace editor::render {
          *
          * @return \c true si la inicialización fue correcta; \c false si la inicialización falló.
          */
-        bool init(uint32_t width, uint32_t height);
+        static bool Init(uint32_t width, uint32_t height);
+
+        static RenderManager& GetInstance();
 
         /**
          * @~english
@@ -78,15 +68,6 @@ namespace editor::render {
 
         /**
          * @~english
-         * @brief Destructor for the render manager.
-         *
-         * @~spanish
-         * @brief Desturctora del gestor de \a renderizado
-         */
-        ~RenderManager();
-
-        /**
-         * @~english
          * @brief Returns the render manager window width.
          *
          * @return Render manager window width.
@@ -96,7 +77,7 @@ namespace editor::render {
          *
          * @return Anchura de la ventana del gestor de \a render.
          */
-        inline uint32_t getWidth() { return _width; }
+        [[nodiscard]] inline uint32_t getWidth() const { return _width; }
 
         /**
          * @~english
@@ -109,7 +90,7 @@ namespace editor::render {
          *
          * @return Altura de la ventana del gestor de \a render.
          */
-        inline uint32_t getHeight() {return _height;}
+        [[nodiscard]] inline uint32_t getHeight() const {return _height;}
 
         /**
          * @~english
@@ -136,6 +117,18 @@ namespace editor::render {
          * @param height altura de la ventana.
          */
         inline void setHeight(uint32_t height) {_height = height;}
+
+        RenderManager(const RenderManager &) = delete;
+        RenderManager &operator=(const RenderManager &) = delete;
+
+        /**
+         * @~english
+         * @brief Destructor for the render manager.
+         *
+         * @~spanish
+         * @brief Desturctora del gestor de \a renderizado
+         */
+        ~RenderManager();
     private:
         /**
          * @~english
@@ -154,6 +147,8 @@ namespace editor::render {
             IMGUI_SDL3_INIT_CORRECT = 0b10000, ///< @~english DearImGui-SDL3 link was successfully created. @~spanish El enlace entre SDL3 y DearImGui se ha hecho correctamente.
             IMGUI_SDLRENDERER3_INIT_CORRECT = 0b100000 ///< @~english DearImGui-SDL3 Renderer link was successfully created. @~spanish El enlace entre DearImGui y el \a renderer de SDL3 se ha hecho correctamente.
         };
+
+        static std::unique_ptr<RenderManager> _instance;
 
         /**
          * @~english
@@ -219,6 +214,17 @@ namespace editor::render {
          * @brief Altura de la ventana creada por el gestor de \a render.
          */
         uint32_t _height;
+
+        /**
+         * @~english
+         * @brief Default constructor for the render manager.
+         *
+         * @~spanish
+         * @brief Constructora por defecto para el gestor de \a renderizado.
+         */
+        RenderManager() = default;
+
+        bool init(uint32_t width, uint32_t height);
 
         /**
          * @~english

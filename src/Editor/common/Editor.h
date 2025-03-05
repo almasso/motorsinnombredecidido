@@ -153,24 +153,6 @@ namespace editor {
 
         /**
          * @~english
-         * @brief Pointer that stores the render manager.
-         *
-         * @~spanish
-         * @brief Puntero que almacena el gestor de \a renderizado.
-         */
-        render::RenderManager* _renderManager = nullptr;
-
-        /**
-         * @~english
-         * @brief Pointer that stores the user input manager.
-         *
-         * @~spanish
-         * @brief Puntero que almacena el gestor de la entrada del usuario.
-         */
-        io::InputManager* _inputManager = nullptr;
-
-        /**
-         * @~english
          * @brief Boolean that stores whether the main loop should run or not.
          *
          * @~spanish

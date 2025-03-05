@@ -14,7 +14,7 @@ namespace editor::render::windows {
         WelcomeWindow();
     private:
         static void setFullScreen();
-        static void set
+        //static void set
         static void drawButton();
     };
 }
