@@ -22,8 +22,5 @@ editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow"
 void editor::render::windows::WelcomeWindow::setFullScreen() {
     ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth(), RenderManager::GetInstance().getHeight()), ImGuiCond_Always);
     ImGui::SetWindowPos(ImVec2(0,0), ImGuiCond_Always);
-}
-
-void editor::render::windows::WelcomeWindow::drawButton() {
-
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.searchbar").c_str());
 }

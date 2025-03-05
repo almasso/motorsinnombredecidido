@@ -9,6 +9,7 @@
 #include <iostream>
 #include <SDL3/SDL_locale.h>
 #include <SDL3/SDL_filesystem.h>
+#include <lua.hpp>
 
 std::unique_ptr<editor::io::LocalizationManager> editor::io::LocalizationManager::_instance = nullptr;
 
@@ -89,4 +90,5 @@ editor::io::LocalizationManager::~LocalizationManager() {
     SDL_free(_currentDirectory);
     _currentDirectory = nullptr;
 }
+
 

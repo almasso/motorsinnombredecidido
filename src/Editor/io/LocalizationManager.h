@@ -22,9 +22,10 @@ namespace editor::io {
         static LocalizationManager &GetInstance();
 
         template <std::convertible_to<std::string> T>
-        const std::string& getString(T&& name) {
-            std::string n = std::forward<T>(name);
-            return _stringsTable[n];
+        const std::string& getString(T&& name) const {
+            auto elem = _stringsTable.find(std::string(name));
+            if(elem == _stringsTable.end()) return _stringsTable.at("error.missingstring");
+            return elem->second;
         }
 
         LocalizationManager(const LocalizationManager &) = delete;
@@ -35,11 +36,11 @@ namespace editor::io {
     private:
         static std::unique_ptr<LocalizationManager> _instance;
 
-        SDL_Locale** _locales;
+        SDL_Locale** _locales = nullptr;
 
-        int _totalUserLocales;
+        int _totalUserLocales = 0;
 
-        char* _currentDirectory;
+        char* _currentDirectory = nullptr;
 
         std::string _preferredLocale;
 

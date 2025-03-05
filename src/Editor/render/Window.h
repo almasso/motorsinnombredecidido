@@ -15,7 +15,7 @@ typedef int ImGuiWindowFlags;
 namespace editor::render {
     class Window {
     public:
-        template<std::convertible_to<std::string> T>
+        template <std::convertible_to<std::string> T>
         explicit Window(T&& windowName) : _windowName(std::forward<T>(windowName)){}
 
         void render();

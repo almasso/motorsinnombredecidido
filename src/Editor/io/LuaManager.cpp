@@ -5,7 +5,6 @@
 
 #include "LuaManager.h"
 #include <cassert>
-#include <lua.hpp>
 
 std::unique_ptr<editor::io::LuaManager> editor::io::LuaManager::_instance = nullptr;
 

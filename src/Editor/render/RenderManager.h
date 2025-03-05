@@ -118,6 +118,11 @@ namespace editor::render {
          */
         inline void setHeight(uint32_t height) {_height = height;}
 
+        template <std::convertible_to<std::string> T>
+        void setWindowName(T&& name) {
+
+        }
+
         RenderManager(const RenderManager &) = delete;
         RenderManager &operator=(const RenderManager &) = delete;
 

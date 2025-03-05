@@ -9,7 +9,7 @@
 #include <memory>
 #include <lua.hpp>
 
-//typedef struct lua_State lua_State;
+typedef struct lua_State lua_State;
 
 namespace editor::io {
     class LuaManager {
@@ -20,8 +20,8 @@ namespace editor::io {
 
         template <std::convertible_to<std::string> T>
         bool loadFile(T&& filename) {
-            std::string fn = std::forward<T>(filename);
-            if(luaL_dofile(_luaState, fn.c_str())) {
+            std::string tmp = std::forward<T>(filename);
+            if(luaL_dofile(_luaState, tmp.c_str())) {
                 // Error con lua_tostring(_luaState, -1)
                 lua_pop(_luaState, 1);
                 return false;
@@ -29,7 +29,7 @@ namespace editor::io {
             return true;
         }
 
-        lua_State* getLuaState() const;
+        [[nodiscard]] lua_State* getLuaState() const;
 
         LuaManager(const LuaManager &) = delete;
 
