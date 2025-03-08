@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['readfile_0',['readFile',['../classAssetManager.html#a1c7630a9d35a09034aad6edf3a16859c',1,'AssetManager']]],
-  ['registeraudiomixer_1',['registerAudioMixer',['../classAudioManager.html#afee8dd0bff21859e62748a2bf81c8ded',1,'AudioManager']]],
-  ['rendermanager_2',['RenderManager',['../classRenderManager.html#aa52d38e61976b5b9438a9eabd2031cfa',1,'RenderManager']]],
-  ['resume_3',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]]
+  ['pause_0',['pause',['../classAudioClip.html#a87bee9c63ed4a536c990e99e310f0e24',1,'AudioClip']]],
+  ['play_1',['play',['../classAudioClip.html#a02cfd676c62b18c5eed4823b9a6cff21',1,'AudioClip']]],
+  ['present_2',['present',['../classRenderManager.html#a7832456be71858b8b230039a5a5525af',1,'RenderManager']]]
 ];

@@ -115,8 +115,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afee8dd0bff21859e62748a2bf81c8ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c708c61fcffb861708d59aad169979f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioMixer.html">AudioMixer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a4c708c61fcffb861708d59aad169979f">getMixer</a> (std::string const &amp;mixer)</td></tr>
 <tr class="separator:a4c708c61fcffb861708d59aad169979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdd2e1be142d9652c5b668785f5193c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioClip.html">AudioClip</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#acdd2e1be142d9652c5b668785f5193c4">createAudioClip</a> (<a class="el" href="structAudioClipData.html">AudioClipData</a> const *data) const</td></tr>
-<tr class="separator:acdd2e1be142d9652c5b668785f5193c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9707938c0db28c4e8389f457df7d798"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioClip.html">AudioClip</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#aa9707938c0db28c4e8389f457df7d798">createAudioClip</a> (std::string const &amp;key)</td></tr>
+<tr class="separator:aa9707938c0db28c4e8389f457df7d798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add5bf387de3258378d4a9903e77446e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#add5bf387de3258378d4a9903e77446e3">releaseAudioClip</a> (<a class="el" href="classAudioClip.html">AudioClip</a> *clip)</td></tr>
+<tr class="separator:add5bf387de3258378d4a9903e77446e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae59d8605c1d706e7bab47d4e8f900d09" name="ae59d8605c1d706e7bab47d4e8f900d09"></a>
@@ -141,6 +143,9 @@ Public Member Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">AudioManager::~AudioManager </td>
@@ -149,13 +154,18 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acdd2e1be142d9652c5b668785f5193c4" name="acdd2e1be142d9652c5b668785f5193c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdd2e1be142d9652c5b668785f5193c4">&#9670;&#160;</a></span>createAudioClip()</h2>
+<a id="aa9707938c0db28c4e8389f457df7d798" name="aa9707938c0db28c4e8389f457df7d798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9707938c0db28c4e8389f457df7d798">&#9670;&#160;</a></span>createAudioClip()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,9 +173,9 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classAudioClip.html">AudioClip</a> * AudioManager::createAudioClip </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structAudioClipData.html">AudioClipData</a> const *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -218,6 +228,24 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structAudioMixerData.html">AudioMixerData</a> const &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add5bf387de3258378d4a9903e77446e3" name="add5bf387de3258378d4a9903e77446e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add5bf387de3258378d4a9903e77446e3">&#9670;&#160;</a></span>releaseAudioClip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioManager::releaseAudioClip </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAudioClip.html">AudioClip</a> *&#160;</td>
+          <td class="paramname"><em>clip</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

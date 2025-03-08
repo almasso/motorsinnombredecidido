@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['loadsquare_0',['loadSquare',['../classLuaManager.html#a0f978a57fda480d59ae8d6ab514044f4',1,'LuaManager']]],
-  ['loadstate_1',['loadState',['../classLuaManager.html#a4ca2e57c75953cb2ca1f09be4f0d7414',1,'LuaManager']]],
-  ['loop_2',['Loop',['../classMain.html#abec170a6abce832cb9dba205bb59a6cc',1,'Main']]]
+  ['init_0',['Init',['../classInputManager.html#ac5c3688737c75fb92824ff8b7f53a264',1,'InputManager']]],
+  ['init_1',['init',['../classAudioManager.html#af5b889c6fa18bed65044d42a946e4596',1,'AudioManager::init()'],['../classRenderManager.html#a1205d52fc12124339bd64d916c9c8237',1,'RenderManager::init()'],['../classTimeManager.html#a741d9249948f4cb8bbf96895c593ced4',1,'TimeManager::init()']]],
+  ['islooped_2',['isLooped',['../classAudioClip.html#a5ccd23d803851e1d7c38de4d4a76e0de',1,'AudioClip']]],
+  ['ispaused_3',['isPaused',['../classAudioClip.html#ac80fcffa0ae8687f9ff09543f01a9d8d',1,'AudioClip']]],
+  ['isplaying_4',['isPlaying',['../classAudioClip.html#a05131ca54e22e0034734b43916cb5836',1,'AudioClip']]]
 ];

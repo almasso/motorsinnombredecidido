@@ -13,6 +13,7 @@ var annotated_dup =
     [ "Main", "classMain.html", null ],
     [ "Random", "classRandom.html", null ],
     [ "RenderManager", "classRenderManager.html", "classRenderManager" ],
+    [ "ResourceHandler", "classResourceHandler.html", "classResourceHandler" ],
     [ "RPGError", "classRPGError.html", null ],
     [ "SceneManager", "classSceneManager.html", null ],
     [ "Square", "structSquare.html", "structSquare" ],
