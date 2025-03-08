@@ -9,6 +9,7 @@ struct AudioClipData {
     AudioBuffer buffer;
     uint32_t bufferLen;
     AudioSpec* specifier;
+    ~AudioClipData();
 };
 
 #endif //AUDIOCLIPDATA_H

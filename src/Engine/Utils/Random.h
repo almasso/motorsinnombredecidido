@@ -18,7 +18,7 @@ public:
 	/// @return Número aleatorio en coma flotante.
 	static float generate(float t);
 
-	/// @~spanish
+	/// @~english
 	/// @brief Generates an integer number in the interval [0, t].
 	/// @param t Interval superior limit.
 	/// @return Random integer number.
@@ -28,7 +28,7 @@ public:
 	/// @return Número entero aleatorio.
 	static int generate(int t);
 
-	/// @~spanish
+	/// @~english
 	/// @brief Generates a random floating point number in the interval [a, b).
 	/// @param a Interval inferior limit.
 	/// @param b Interval superior limit.
@@ -40,7 +40,7 @@ public:
 	/// @return Número aleatorio en coma flotante.
 	static float generateRange(float a, float b);
 
-	/// @~spanish
+	/// @~english
 	/// @brief Genera un número entero aleatorio en el intervalo [a, b].
 	/// @param a Interval inferior limit.
 	/// @param b Interval superior limit.

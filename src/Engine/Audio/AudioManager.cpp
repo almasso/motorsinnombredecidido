@@ -14,22 +14,23 @@ AudioManager::AudioManager() :
     audioDeviceId(0) {
 }
 
-AudioManager::~AudioManager() {
-}
+AudioManager::~AudioManager() = default;
 
 bool AudioManager::initTest() {
     AudioMixerData mixerData;
     mixerData.name = "Master";
     registerAudioMixer(mixerData);
 
-    testClipData_ = new AudioClipData();
-    testClipData_->specifier = new SDL_AudioSpec();
-    if (!SDL_LoadWAV("assets/SodaLoop.wav", testClipData_->specifier, &testClipData_->buffer, &testClipData_->bufferLen)) {
+    AudioClipData* data = new AudioClipData();
+    data->specifier = new SDL_AudioSpec();
+    if (!SDL_LoadWAV("assets/SodaLoop.wav", data->specifier, &data->buffer, &data->bufferLen)) {
         RPGError::ShowError(std::string("Failed to load") + "assets/audio.wav", SDL_GetError());
         return false;
     }
 
-    testClip_ = createAudioClip(testClipData_);
+    clipDataHandler_.add("sonido", data->buffer, data->bufferLen, data->specifier);
+    clipDataHandler_.addReady("sonido", data);
+    testClip_ = createAudioClip("sonido");
     mixers_["Master"]->connect(testClip_);
 
     testClip_->play();
@@ -44,10 +45,8 @@ void AudioManager::updateTest() {
 }
 
 void AudioManager::shutdownTest() {
-    delete testClip_;
-    delete testClipData_->specifier;
-    SDL_free(testClipData_->buffer);
-    delete testClipData_;
+    releaseAudioClip(testClip_);
+    clipDataHandler_.flush();
 }
 
 bool AudioManager::init() {
@@ -100,6 +99,22 @@ AudioMixer* AudioManager::getMixer(std::string const& mixer) {
     return mix->second;
 }
 
-AudioClip* AudioManager::createAudioClip(AudioClipData const* data) const {
-    return new AudioClip(data);
+AudioClip* AudioManager::createAudioClip(std::string const& key) {
+    auto const* data = clipDataHandler_.get(key);
+    if (!data)
+        return nullptr;
+    auto* clip = new AudioClip(data);
+    clipNames_.insert({clip, key});
+    return clip;
+}
+
+void AudioManager::releaseAudioClip(AudioClip* clip) {
+    if (!clip)
+        return;
+    auto it = clipNames_.find(clip);
+    if (it == clipNames_.end())
+        return;
+    clipDataHandler_.dereference(it->second);
+    clipNames_.erase(it);
+    delete clip;
 }
