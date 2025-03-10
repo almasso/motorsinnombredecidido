@@ -7,7 +7,7 @@
 #define MOTORSINNOMBREDECIDIDO_LUAMANAGER_H
 
 #include <memory>
-#include <lua.hpp>
+#include <string>
 
 typedef struct lua_State lua_State;
 
@@ -20,13 +20,7 @@ namespace editor::io {
 
         template <std::convertible_to<std::string> T>
         bool loadFile(T&& filename) {
-            std::string tmp = std::forward<T>(filename);
-            if(luaL_dofile(_luaState, tmp.c_str())) {
-                // Error con lua_tostring(_luaState, -1)
-                lua_pop(_luaState, 1);
-                return false;
-            }
-            return true;
+            return _loadFile(std::forward<T>(filename));
         }
 
         [[nodiscard]] lua_State* getLuaState() const;
@@ -44,6 +38,8 @@ namespace editor::io {
         LuaManager() = default;
 
         bool init();
+
+        bool _loadFile(const std::string& filename);
     };
 }
 

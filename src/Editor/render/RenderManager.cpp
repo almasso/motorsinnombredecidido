@@ -71,6 +71,12 @@ bool editor::render::RenderManager::initDearImGui() {
     if(!ImGui_ImplSDLRenderer3_Init(_renderer))
         return false;
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_SDLRENDERER3_INIT_CORRECT;
+
+    _io = &ImGui::GetIO();
+
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.AntiAliasedLines = true;
+    style.AntiAliasedFill = true;
     return true;
 }
 
@@ -80,6 +86,9 @@ editor::render::RenderManager &editor::render::RenderManager::GetInstance() {
 }
 
 editor::render::RenderManager::~RenderManager() {
+    _io->Fonts->ClearFonts();
+    _fonts.clear();
+    _io = nullptr;
     if(_initializationSteps & (uint8_t)RenderManager_InitializationSteps::IMGUI_SDLRENDERER3_INIT_CORRECT)
         ImGui_ImplSDLRenderer3_Shutdown();
     if(_initializationSteps & (uint8_t)RenderManager_InitializationSteps::IMGUI_SDL3_INIT_CORRECT)
@@ -112,6 +121,18 @@ void editor::render::RenderManager::render() {
     SDL_RenderClear(_renderer);
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), _renderer);
     SDL_RenderPresent(_renderer);
+}
+
+void editor::render::RenderManager::_loadFont(const std::string& name, const std::filesystem::path &file, float size, const ImFontConfig* config, const ImWchar* ranges) {
+    _fonts[name] = _io->Fonts->AddFontFromFileTTF(file.string().c_str(), size, config, _io->Fonts->GetGlyphRangesDefault());
+}
+
+void editor::render::RenderManager::_setWindowName(const std::string &name) {
+    SDL_SetWindowTitle(_window, name.c_str());
+}
+
+void editor::render::RenderManager::setDefaultFont(ImFont *font) {
+    _io->FontDefault = font;
 }
 
 

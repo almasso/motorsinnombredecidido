@@ -26,7 +26,9 @@ namespace editor::render {
 
         ImGuiWindowFlags _windowFlags = 0;
 
-        std::list<std::function<void()>> _elements;
+        virtual void onRender() = 0;
+
+        virtual void beforeRender() = 0;
 
     };
 }

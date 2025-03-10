@@ -118,6 +118,10 @@ public:
         return true;
     }
 
+    [[nodiscard]] uint32_t size() const {
+        return _list.size();
+    }
+
     /**
      * @~english
      * @brief Returns whether the list is empty or not.
@@ -144,6 +148,9 @@ public:
      *
      * @return Iterador al primer elemento de la lista.
      */
+    typename std::list<T>::const_iterator begin() const {
+        return _list.begin();
+    }
     typename std::list<T>::iterator begin() {
         return _list.begin();
     }
@@ -159,7 +166,10 @@ public:
      *
      * @return Iterador al elemento anterior al final de la lista.
      */
-    typename std::list<T>::iterator end() {
+    typename std::list<T>::const_iterator end() const {
+        return _list.end();
+    }
+    typename std::list<T>::iterator end()  {
         return _list.end();
     }
 
@@ -178,6 +188,11 @@ public:
      *
      * @return Iterador a \c element
      */
+    typename std::list<T>::const_iterator find(T element) const {
+        typename std::unordered_map<T, typename std::list<T>::iterator>::iterator it = _lookup.find(element);
+        if(it == _lookup.end()) return _list.end();
+        return it->second;
+    }
     typename std::list<T>::iterator find(T element) {
         typename std::unordered_map<T, typename std::list<T>::iterator>::iterator it = _lookup.find(element);
         if(it == _lookup.end()) return _list.end();

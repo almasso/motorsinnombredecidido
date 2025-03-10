@@ -5,6 +5,7 @@
 
 #include "LuaManager.h"
 #include <cassert>
+#include <lua.hpp>
 
 std::unique_ptr<editor::io::LuaManager> editor::io::LuaManager::_instance = nullptr;
 
@@ -37,4 +38,13 @@ editor::io::LuaManager::~LuaManager() {
 
 lua_State* editor::io::LuaManager::getLuaState() const {
     return _luaState;
+}
+
+bool editor::io::LuaManager::_loadFile(const std::string &filename) {
+    if(luaL_dofile(_luaState, filename.c_str())) {
+        // Error con lua_tostring(_luaState, -1)
+        lua_pop(_luaState, 1);
+        return false;
+    }
+    return true;
 }

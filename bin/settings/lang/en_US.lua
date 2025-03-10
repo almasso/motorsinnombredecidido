@@ -2,6 +2,7 @@ localization = {
 	["window.welcomewindow.title"] = "Ngin Editor",
 	["window.welcomewindow.currentversion"] = "v.0.0.1",
 	["window.welcomewindow.searchbar"] = "Search project...",
+	["window.welcomewindow.lastmodified"] = "Last modified",
 	["action.settings"] = "Settings",
 	["action.newproject"] = "New project",
 	["action.openproject"] = "Open project",

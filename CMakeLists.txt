@@ -68,7 +68,7 @@ if(NOT ANDROID)
     FetchContent_Declare(
             DearImGUI
             GIT_REPOSITORY https://github.com/ocornut/imgui.git
-            GIT_TAG v1.91.8
+            GIT_TAG docking
     )
     FetchContent_MakeAvailable(DearImGUI)
     set(IMGUI_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src)

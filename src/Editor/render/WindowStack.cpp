@@ -22,7 +22,7 @@ void editor::render::WindowStack::removeAllWindowsFromStack() {
     }
 }
 
-editor::render::Window* editor::render::WindowStack::getWindowByName(const std::string& name) {
+editor::render::Window* editor::render::WindowStack::_getWindowByName(const std::string& name) {
     for (Window* window : _windowStack) {
         if(window->getName() == name) return window;
     }

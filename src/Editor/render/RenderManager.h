@@ -8,10 +8,17 @@
 
 #include <cstdint>
 #include <memory>
+#include <unordered_map>
+#include <filesystem>
 
 typedef struct SDL_Window SDL_Window;
 typedef struct SDL_Renderer SDL_Renderer;
 struct ImGuiContext;
+struct ImGuiIO;
+struct ImFont;
+struct ImFontConfig;
+typedef unsigned short ImWchar16;
+typedef ImWchar16 ImWchar;
 
 namespace editor::render {
     /**
@@ -118,9 +125,24 @@ namespace editor::render {
          */
         inline void setHeight(uint32_t height) {_height = height;}
 
+        template <std::convertible_to<std::string> T, std::convertible_to<std::filesystem::path> P>
+        void loadFont(T&& name, P&& file, float size, const ImFontConfig* config = nullptr, const ImWchar* ranges = nullptr) {
+            _loadFont(std::forward<T>(name), std::forward<P>(file), size, config, ranges);
+        }
+
+        template <std::convertible_to<std::string> T>
+        ImFont* getFont(T&& name) {
+            std::string tmp = std::forward<T>(name);
+            auto it = _fonts.find(tmp);
+            if(it == _fonts.end()) return nullptr;
+            return it->second;
+        }
+
+        void setDefaultFont(ImFont* font);
+
         template <std::convertible_to<std::string> T>
         void setWindowName(T&& name) {
-
+            _setWindowName(std::forward<T>(name));
         }
 
         RenderManager(const RenderManager &) = delete;
@@ -220,6 +242,10 @@ namespace editor::render {
          */
         uint32_t _height;
 
+        ImGuiIO* _io = nullptr;
+
+        std::unordered_map<std::string, ImFont*> _fonts;
+
         /**
          * @~english
          * @brief Default constructor for the render manager.
@@ -256,6 +282,10 @@ namespace editor::render {
          * @return \c true si la inicialización fue correcta, \c false si la inicialización falló.
          */
         bool initDearImGui();
+
+        void _loadFont(const std::string& name, const std::filesystem::path& path, float size, const ImFontConfig* config, const ImWchar* ranges);
+
+        void _setWindowName(const std::string& name);
     };
 }
 

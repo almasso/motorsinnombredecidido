@@ -9,6 +9,7 @@
 #include "io/InputManager.h"
 #include "io/LocalizationManager.h"
 #include "io/LuaManager.h"
+#include "io/ProjectManager.h"
 #include "render/Windows/WelcomeWindow.h"
 #include "render/WindowStack.h"
 
@@ -29,6 +30,7 @@ bool editor::Editor::init() {
     if(!io::InputManager::Init()) return false;
     if(!io::LuaManager::Init()) return false;
     if(!io::LocalizationManager::Init()) return false;
+    if(!io::ProjectManager::Init()) return false;
 
     return true;
 }

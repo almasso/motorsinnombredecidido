@@ -25,9 +25,10 @@ bool editor::io::InputManager::init() {
         SDL_GetError();
         return false;
     }
-    _io = &ImGui::GetIO();
-    _io->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    _io->ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     return true;
 }
 
@@ -37,7 +38,6 @@ editor::io::InputManager &editor::io::InputManager::GetInstance() {
 }
 
 editor::io::InputManager::~InputManager() {
-    _io = nullptr;
     SDL_QuitSubSystem(SDL_INIT_GAMEPAD);
     SDL_Quit();
 }

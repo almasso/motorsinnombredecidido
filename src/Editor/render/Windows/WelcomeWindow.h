@@ -6,16 +6,25 @@
 #ifndef MOTORSINNOMBREDECIDIDO_WELCOMEWINDOW_H
 #define MOTORSINNOMBREDECIDIDO_WELCOMEWINDOW_H
 
+#include <ctime>
 #include "render/Window.h"
+
+struct ImVec2;
 
 namespace editor::render::windows {
     class WelcomeWindow : public Window {
     public:
         WelcomeWindow();
     private:
-        static void setFullScreen();
-        //static void set
-        static void drawButton();
+        void onRender() override;
+
+        void beforeRender() override;
+
+        void setFullscreen();
+
+        void splitWindowInHalf();
+
+        void drawProjectButton(const std::string& projectName, const std::string& projectRoute, const std::tm& lastModified);
     };
 }
 

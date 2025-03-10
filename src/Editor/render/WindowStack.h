@@ -72,7 +72,10 @@ namespace editor::render {
          *
          * @return Ventana que tiene ese nombre, o, \c nullptr en caso de que no esté en la pila.
          */
-        static Window* getWindowByName(const std::string& name);
+         template <std::convertible_to<std::string> T>
+        static Window* getWindowByName(T&& name) {
+            return _getWindowByName(std::forward<T>(name));
+        }
 
         /**
          * @~english
@@ -109,6 +112,8 @@ namespace editor::render {
          * @brief Destructora por defecto de WindowStack.
          */
         ~WindowStack() = default;
+
+        static Window* _getWindowByName(const std::string& name);
     };
 }
 

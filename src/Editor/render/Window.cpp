@@ -11,7 +11,8 @@ const std::string & editor::render::Window::getName() const {
 }
 
 void editor::render::Window::render() {
+    beforeRender();
     ImGui::Begin(_windowName.c_str(), nullptr, _windowFlags);
-    for(const std::function<void()>& f : _elements) f();
+    onRender();
     ImGui::End();
 }
