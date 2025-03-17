@@ -1,4 +1,4 @@
 var SceneManager_8h =
 [
-    [ "SceneManager", "classSceneManager.html", null ]
+    [ "SceneManager", "classSceneManager.html", "classSceneManager" ]
 ];

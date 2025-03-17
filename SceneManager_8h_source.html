@@ -95,13 +95,53 @@ $(document).ready(function(){initNavTree('SceneManager_8h_source.html',''); init
 <div class="contents">
 <a href="SceneManager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SCENEMANAGER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SCENEMANAGER_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="classSceneManager.html">    4</a></span><span class="keyword">class </span><a class="code hl_class" href="classSceneManager.html">SceneManager</a> {</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>};</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#endif </span><span class="comment">//SCENEMANAGER_H</span></div>
-<div class="ttc" id="aclassSceneManager_html"><div class="ttname"><a href="classSceneManager.html">SceneManager</a></div><div class="ttdef"><b>Definition:</b> SceneManager.h:4</div></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span><a class="code hl_class" href="classRenderManager.html">RenderManager</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span>Entity;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span><a class="code hl_class" href="classScene.html">Scene</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">class </span><a class="code hl_class" href="classSceneAPI.html">SceneAPI</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span>PrefabBlueprint;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">class </span>SceneBlueprint;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classSceneManager.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classSceneManager.html">SceneManager</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">static</span> <a class="code hl_class" href="classSceneManager.html">SceneManager</a>* instance;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::list&lt;Scene*&gt; scenes;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_class" href="classSceneAPI.html">SceneAPI</a>* api;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_class" href="classSceneManager.html">SceneManager</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="classSceneManager.html">~SceneManager</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    Entity* createPrefab(std::string handler);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="classScene.html">Scene</a>* createScene(std::string handler);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">static</span> <a class="code hl_class" href="classSceneManager.html">SceneManager</a>* <a class="code hl_function" href="classSceneManager.html#a1d1dd9702cfae741d8f2c653c1259394">Init</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSceneManager.html#aa027e7f37930bfcea190e3d22c96cc7e">update</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSceneManager.html#ada622d05eeeae2245f0f82ab36b8e1a9">fixedUpdate</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSceneManager.html#a2f3425b5acdf38a9442cb85ff5c91a90">render</a>(<a class="code hl_class" href="classRenderManager.html">RenderManager</a>* <a class="code hl_function" href="classSceneManager.html#a2f3425b5acdf38a9442cb85ff5c91a90">render</a>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneManager.html#a9fbf77a314bbc4bab25897630bb57a7b">refresh</a>();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneManager.html#a30463a48ea5b8db21cd7e7b07bba9a6f">shutdown</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    Entity* <a class="code hl_function" href="classSceneManager.html#a5e2f32d3d80def02a275de73a07ac854">instanciatePrefab</a>(std::string handler);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_class" href="classScene.html">Scene</a>* <a class="code hl_function" href="classSceneManager.html#a8f6eeec58f8f2763746a370ad3857711">addScene</a>(std::string handler);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneManager.html#a800dfd04ef1cbd1cee0373e02bcf95e0">popScene</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif </span><span class="comment">//SCENEMANAGER_H</span></div>
+<div class="ttc" id="aclassRenderManager_html"><div class="ttname"><a href="classRenderManager.html">RenderManager</a></div><div class="ttdef"><b>Definition:</b> RenderManager.h:8</div></div>
+<div class="ttc" id="aclassSceneAPI_html"><div class="ttname"><a href="classSceneAPI.html">SceneAPI</a></div><div class="ttdef"><b>Definition:</b> SceneAPI.h:6</div></div>
+<div class="ttc" id="aclassSceneManager_html"><div class="ttname"><a href="classSceneManager.html">SceneManager</a></div><div class="ttdef"><b>Definition:</b> SceneManager.h:14</div></div>
+<div class="ttc" id="aclassSceneManager_html_a1d1dd9702cfae741d8f2c653c1259394"><div class="ttname"><a href="classSceneManager.html#a1d1dd9702cfae741d8f2c653c1259394">SceneManager::Init</a></div><div class="ttdeci">static SceneManager * Init()</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:27</div></div>
+<div class="ttc" id="aclassSceneManager_html_a2f3425b5acdf38a9442cb85ff5c91a90"><div class="ttname"><a href="classSceneManager.html#a2f3425b5acdf38a9442cb85ff5c91a90">SceneManager::render</a></div><div class="ttdeci">bool render(RenderManager *render)</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:46</div></div>
+<div class="ttc" id="aclassSceneManager_html_a30463a48ea5b8db21cd7e7b07bba9a6f"><div class="ttname"><a href="classSceneManager.html#a30463a48ea5b8db21cd7e7b07bba9a6f">SceneManager::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:61</div></div>
+<div class="ttc" id="aclassSceneManager_html_a5e2f32d3d80def02a275de73a07ac854"><div class="ttname"><a href="classSceneManager.html#a5e2f32d3d80def02a275de73a07ac854">SceneManager::instanciatePrefab</a></div><div class="ttdeci">Entity * instanciatePrefab(std::string handler)</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:66</div></div>
+<div class="ttc" id="aclassSceneManager_html_a800dfd04ef1cbd1cee0373e02bcf95e0"><div class="ttname"><a href="classSceneManager.html#a800dfd04ef1cbd1cee0373e02bcf95e0">SceneManager::popScene</a></div><div class="ttdeci">void popScene()</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:78</div></div>
+<div class="ttc" id="aclassSceneManager_html_a8f6eeec58f8f2763746a370ad3857711"><div class="ttname"><a href="classSceneManager.html#a8f6eeec58f8f2763746a370ad3857711">SceneManager::addScene</a></div><div class="ttdeci">Scene * addScene(std::string handler)</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:71</div></div>
+<div class="ttc" id="aclassSceneManager_html_a9fbf77a314bbc4bab25897630bb57a7b"><div class="ttname"><a href="classSceneManager.html#a9fbf77a314bbc4bab25897630bb57a7b">SceneManager::refresh</a></div><div class="ttdeci">void refresh()</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:56</div></div>
+<div class="ttc" id="aclassSceneManager_html_aa027e7f37930bfcea190e3d22c96cc7e"><div class="ttname"><a href="classSceneManager.html#aa027e7f37930bfcea190e3d22c96cc7e">SceneManager::update</a></div><div class="ttdeci">bool update()</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:36</div></div>
+<div class="ttc" id="aclassSceneManager_html_ada622d05eeeae2245f0f82ab36b8e1a9"><div class="ttname"><a href="classSceneManager.html#ada622d05eeeae2245f0f82ab36b8e1a9">SceneManager::fixedUpdate</a></div><div class="ttdeci">bool fixedUpdate()</div><div class="ttdef"><b>Definition:</b> SceneManager.cpp:41</div></div>
+<div class="ttc" id="aclassScene_html"><div class="ttname"><a href="classScene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
