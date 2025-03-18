@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['scene_0',['Scene',['../classScene.html#ad10176d75a9cc0da56626f682d083507',1,'Scene']]],
-  ['sceneapi_1',['SceneAPI',['../classSceneAPI.html#a131b74b6347da8c73973f53a09592596',1,'SceneAPI']]],
-  ['set_2',['set',['../classVector2.html#a8aa2ef4b348f8628fd14f44f15a8a6e3',1,'Vector2::set(const Vector2 &amp;v)'],['../classVector2.html#a2968854ceaef9413954a7aa381f6facf',1,'Vector2::set(float x, float y)']]],
-  ['setloop_3',['setLoop',['../classAudioClip.html#a23648dfcb61d75b4d2d829f6a9c8edb5',1,'AudioClip']]],
-  ['setvolume_4',['setVolume',['../classAudioClip.html#a273cef875717c3a58fbea06acd7e4000',1,'AudioClip::setVolume()'],['../classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de',1,'AudioMixer::setVolume()']]],
-  ['setx_5',['setX',['../classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8',1,'Vector2']]],
-  ['sety_6',['setY',['../classVector2.html#a9a2d336722ae0f62324c18c784f7738e',1,'Vector2']]],
-  ['showerror_7',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
-  ['shutdown_8',['shutdown',['../classAudioManager.html#a818d01488098f6620c59b713137da0ad',1,'AudioManager::shutdown()'],['../classSceneManager.html#a30463a48ea5b8db21cd7e7b07bba9a6f',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['stop_9',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
+  ['readfile_0',['readFile',['../classAssetManager.html#a1c7630a9d35a09034aad6edf3a16859c',1,'AssetManager']]],
+  ['refresh_1',['refresh',['../classScene.html#aa03deb4fb845c655cdaff3d968e3dbf8',1,'Scene::refresh()'],['../classSceneManager.html#a9fbf77a314bbc4bab25897630bb57a7b',1,'SceneManager::refresh()']]],
+  ['registeraudiomixer_2',['registerAudioMixer',['../classAudioManager.html#afee8dd0bff21859e62748a2bf81c8ded',1,'AudioManager']]],
+  ['registerrendercomponent_3',['registerRenderComponent',['../classScene.html#a2731ff1b1a29ddf9bad35d6476a05c7f',1,'Scene']]],
+  ['releaseaudioclip_4',['releaseAudioClip',['../classAudioManager.html#add5bf387de3258378d4a9903e77446e3',1,'AudioManager']]],
+  ['render_5',['render',['../classEntity.html#aefe9ebbf5aca0946c2020c025ec9128e',1,'Entity::render()'],['../classScene.html#a49163c0131ea7209f4ac08394642662f',1,'Scene::render()'],['../classSceneManager.html#a2f3425b5acdf38a9442cb85ff5c91a90',1,'SceneManager::render()']]],
+  ['rendermanager_6',['RenderManager',['../classRenderManager.html#aa52d38e61976b5b9438a9eabd2031cfa',1,'RenderManager']]],
+  ['resourcehandler_7',['ResourceHandler',['../classResourceHandler.html#a8e49c8d98f07f20ed602a07de0d04b4c',1,'ResourceHandler']]],
+  ['resume_8',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]]
 ];

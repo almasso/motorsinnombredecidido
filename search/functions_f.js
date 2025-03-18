@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['_7eaudioclip_0',['~AudioClip',['../classAudioClip.html#ab929796e463c51c50f2ad4e9acec35da',1,'AudioClip']]],
-  ['_7eaudioclipdata_1',['~AudioClipData',['../structAudioClipData.html#a52b564dde848694b3461662e1687cbd0',1,'AudioClipData']]],
-  ['_7eaudiomanager_2',['~AudioManager',['../classAudioManager.html#ad94dc46723c6d7cf8c81fc3772a842aa',1,'AudioManager']]],
-  ['_7eresourcehandler_3',['~ResourceHandler',['../classResourceHandler.html#a87b3133d0f578e810b15d337f07ae495',1,'ResourceHandler']]],
-  ['_7evector2_4',['~Vector2',['../classVector2.html#ada03f5433d3ca4841d5ebb90b167202e',1,'Vector2']]]
+  ['vector2_0',['Vector2',['../classVector2.html#a22104d1809be26a419ef1f959e3761bf',1,'Vector2::Vector2()'],['../classVector2.html#a061ab58a0e216c759d64e3746d712b12',1,'Vector2::Vector2(float x, float y)'],['../classVector2.html#a299d9e1cd67d3fb587f57170afab9741',1,'Vector2::Vector2(const Vector2 &amp;v)'],['../classVector2.html#a20066daf634c300041d3555eedf27ba5',1,'Vector2::Vector2(float e)']]]
 ];

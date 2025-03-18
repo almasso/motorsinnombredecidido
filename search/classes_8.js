@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vector2_0',['Vector2',['../classVector2.html',1,'']]]
+  ['time_0',['Time',['../structTime.html',1,'']]],
+  ['timemanager_1',['TimeManager',['../classTimeManager.html',1,'']]]
 ];

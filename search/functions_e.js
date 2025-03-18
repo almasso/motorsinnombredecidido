@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['vector2_0',['Vector2',['../classVector2.html#a22104d1809be26a419ef1f959e3761bf',1,'Vector2::Vector2()'],['../classVector2.html#a061ab58a0e216c759d64e3746d712b12',1,'Vector2::Vector2(float x, float y)'],['../classVector2.html#a299d9e1cd67d3fb587f57170afab9741',1,'Vector2::Vector2(const Vector2 &amp;v)'],['../classVector2.html#a20066daf634c300041d3555eedf27ba5',1,'Vector2::Vector2(float e)']]]
+  ['unregisterrendercomponent_0',['unregisterRenderComponent',['../classScene.html#a1122cff66186b080e9e9d1ebfbdca5b3',1,'Scene']]],
+  ['update_1',['update',['../classAudioManager.html#af342d01281d35deac6df2f5fa729c0ef',1,'AudioManager::update()'],['../classEntity.html#a0b763dec09f1314d6cddb4d774eb6db7',1,'Entity::update()'],['../classScene.html#a6692184ee4903a478a7ef4b7969daef3',1,'Scene::update()'],['../classSceneManager.html#aa027e7f37930bfcea190e3d22c96cc7e',1,'SceneManager::update()'],['../classInputManager.html#a136d6afa55ee74eeda5eb72e78e3ee97',1,'InputManager::update()'],['../classTimeManager.html#a97d902b19861efc099141eeb846671a3',1,'TimeManager::update()']]],
+  ['updatevolume_2',['updateVolume',['../classAudioClip.html#a9506500cffe41b27fdfd3561f9060a9f',1,'AudioClip::updateVolume()'],['../classAudioMixer.html#a159bb07dedb3b206979802426fc9b145',1,'AudioMixer::updateVolume()']]]
 ];
