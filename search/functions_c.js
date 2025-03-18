@@ -8,6 +8,8 @@ var searchData=
   ['removecomponent_5',['removeComponent',['../classEntity.html#a77be5c73fd314054d727d8f699fbcf39',1,'Entity']]],
   ['render_6',['render',['../classEntity.html#aefe9ebbf5aca0946c2020c025ec9128e',1,'Entity::render()'],['../classScene.html#a49163c0131ea7209f4ac08394642662f',1,'Scene::render()'],['../classSceneManager.html#a2f3425b5acdf38a9442cb85ff5c91a90',1,'SceneManager::render()'],['../classRenderComponent.html#a7ca8368399b68f4447fad9c0568691f7',1,'RenderComponent::render()']]],
   ['rendermanager_7',['RenderManager',['../classRenderManager.html#aa52d38e61976b5b9438a9eabd2031cfa',1,'RenderManager']]],
-  ['resourcehandler_8',['ResourceHandler',['../classResourceHandler.html#a8e49c8d98f07f20ed602a07de0d04b4c',1,'ResourceHandler']]],
-  ['resume_9',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]]
+  ['resource_8',['Resource',['../classResource.html#a26732c5251dbdfd37399574910307081',1,'Resource']]],
+  ['resourcehandler_9',['ResourceHandler',['../classResourceHandler.html#a31a91c62ac1bdce368255d6b9536e39d',1,'ResourceHandler']]],
+  ['resourcememorymanager_10',['ResourceMemoryManager',['../classResourceMemoryManager.html#a1ec6176b1bc50af606a685f45d90b44e',1,'ResourceMemoryManager']]],
+  ['resume_11',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['clear_0',['clear',['../classResourceHandler.html#a17e022bc268cb34e1c2bc8205ceef436',1,'ResourceHandler::clear()'],['../classRenderManager.html#ae3d038fb205f7a905fc4a1b8b72f7d50',1,'RenderManager::clear()']]],
+  ['clear_0',['clear',['../classResourceHandler.html#a79347fd3e55219c891f672c3f6c32172',1,'ResourceHandler::clear()'],['../classRenderManager.html#ae3d038fb205f7a905fc4a1b8b72f7d50',1,'RenderManager::clear()']]],
   ['collisionmanager_1',['CollisionManager',['../classCollisionManager.html',1,'']]],
   ['collisionmanager_2ecpp_2',['CollisionManager.cpp',['../CollisionManager_8cpp.html',1,'']]],
   ['collisionmanager_2eh_3',['CollisionManager.h',['../CollisionManager_8h.html',1,'']]],
@@ -9,5 +9,5 @@ var searchData=
   ['component_2ecpp_6',['Component.cpp',['../Component_8cpp.html',1,'']]],
   ['component_2eh_7',['Component.h',['../Component_8h.html',1,'']]],
   ['connect_8',['connect',['../classAudioMixer.html#a54dd5cd7614bb83c1ccb508232c92770',1,'AudioMixer::connect(AudioClip *clip)'],['../classAudioMixer.html#af4ca5f6cd7ae1381579b8f0006b1058b',1,'AudioMixer::connect(AudioMixer *mixer)']]],
-  ['createaudioclip_9',['createAudioClip',['../classAudioManager.html#aa9707938c0db28c4e8389f457df7d798',1,'AudioManager']]]
+  ['createaudioclip_9',['createAudioClip',['../classAudioManager.html#a74e303c346dd747376f933ae3b79a52a',1,'AudioManager']]]
 ];

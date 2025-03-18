@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('classAudioClip.html',''); initResizabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a12a87fce8661ccd71bff18d84777995f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a12a87fce8661ccd71bff18d84777995f">AudioClip</a> (<a class="el" href="structAudioClipData.html">AudioClipData</a> const *data)</td></tr>
-<tr class="memdesc:a12a87fce8661ccd71bff18d84777995f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new clip with de data provided.  <br /></td></tr>
-<tr class="separator:a12a87fce8661ccd71bff18d84777995f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace56cae9546c4769e9e7e433715fce20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#ace56cae9546c4769e9e7e433715fce20">AudioClip</a> (<a class="el" href="AudioClipKey_8h.html#a526db38c9948ba01a309e047842fc845">AudioClipKey</a> const &amp;key)</td></tr>
+<tr class="memdesc:ace56cae9546c4769e9e7e433715fce20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new clip with de data provided.  <br /></td></tr>
+<tr class="separator:ace56cae9546c4769e9e7e433715fce20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab929796e463c51c50f2ad4e9acec35da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#ab929796e463c51c50f2ad4e9acec35da">~AudioClip</a> ()</td></tr>
 <tr class="memdesc:ab929796e463c51c50f2ad4e9acec35da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the clip and unassigns the <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> and the <code>AudioDevice</code>.  <br /></td></tr>
 <tr class="separator:ab929796e463c51c50f2ad4e9acec35da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,15 +146,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a77a333aa7991cde41a70e541125bd5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a77a333aa7991cde41a70e541125bd5b1">assignMixer</a> (<a class="el" href="classAudioMixer.html">AudioMixer</a> *mixer)</td></tr>
 <tr class="memdesc:a77a333aa7991cde41a70e541125bd5b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> to this clip.  <br /></td></tr>
 <tr class="separator:a77a333aa7991cde41a70e541125bd5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0788e256c44cdd7cefb31b25a08fd787"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#a0788e256c44cdd7cefb31b25a08fd787">assignDevice</a> (<a class="el" href="AudioClip_8h.html#aa02973a61153caab8e7dc1504ce7cd5a">AudioDevice</a> device)</td></tr>
-<tr class="memdesc:a0788e256c44cdd7cefb31b25a08fd787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an <code>AudioDevice</code> through which this clip will play.  <br /></td></tr>
-<tr class="separator:a0788e256c44cdd7cefb31b25a08fd787"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa487b881950435998dce75c4d84fc674"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioClip.html#aa487b881950435998dce75c4d84fc674">assignDevice</a> (<a class="el" href="AudioClip_8h.html#aa02973a61153caab8e7dc1504ce7cd5a">AudioDevice</a> device)</td></tr>
+<tr class="memdesc:aa487b881950435998dce75c4d84fc674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns an <code>AudioDevice</code> through which this clip will play.  <br /></td></tr>
+<tr class="separator:aa487b881950435998dce75c4d84fc674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Data structure used to manage a single instance of an audio clip. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a12a87fce8661ccd71bff18d84777995f" name="a12a87fce8661ccd71bff18d84777995f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12a87fce8661ccd71bff18d84777995f">&#9670;&#160;</a></span>AudioClip()</h2>
+<a id="ace56cae9546c4769e9e7e433715fce20" name="ace56cae9546c4769e9e7e433715fce20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace56cae9546c4769e9e7e433715fce20">&#9670;&#160;</a></span>AudioClip()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,8 +165,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">AudioClip::AudioClip </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structAudioClipData.html">AudioClipData</a> const *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="AudioClipKey_8h.html#a526db38c9948ba01a309e047842fc845">AudioClipKey</a> const &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -202,14 +202,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0788e256c44cdd7cefb31b25a08fd787" name="a0788e256c44cdd7cefb31b25a08fd787"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0788e256c44cdd7cefb31b25a08fd787">&#9670;&#160;</a></span>assignDevice()</h2>
+<a id="aa487b881950435998dce75c4d84fc674" name="aa487b881950435998dce75c4d84fc674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa487b881950435998dce75c4d84fc674">&#9670;&#160;</a></span>assignDevice()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void AudioClip::assignDevice </td>
+          <td class="memname">bool AudioClip::assignDevice </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="AudioClip_8h.html#aa02973a61153caab8e7dc1504ce7cd5a">AudioDevice</a>&#160;</td>
           <td class="paramname"><em>device</em></td><td>)</td>
@@ -226,6 +226,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the <code>AudioDevice</code> was assigned properly. <code>false</code> otherwise. </dd></dl>
 
 </div>
 </div>

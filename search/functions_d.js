@@ -9,6 +9,7 @@ var searchData=
   ['setx_6',['setX',['../classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8',1,'Vector2']]],
   ['sety_7',['setY',['../classVector2.html#a9a2d336722ae0f62324c18c784f7738e',1,'Vector2']]],
   ['showerror_8',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
-  ['shutdown_9',['shutdown',['../classAudioManager.html#a818d01488098f6620c59b713137da0ad',1,'AudioManager::shutdown()'],['../classSceneManager.html#a30463a48ea5b8db21cd7e7b07bba9a6f',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['stop_10',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
+  ['shutdown_9',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager']]],
+  ['shutdown_10',['shutdown',['../classSceneManager.html#a30463a48ea5b8db21cd7e7b07bba9a6f',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
+  ['stop_11',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
 ];

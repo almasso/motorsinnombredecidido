@@ -4,6 +4,7 @@ var dir_f379be214ac3ab501d342456492bfadc =
     [ "AudioClip.h", "AudioClip_8h.html", "AudioClip_8h" ],
     [ "AudioClipData.cpp", "AudioClipData_8cpp.html", null ],
     [ "AudioClipData.h", "AudioClipData_8h.html", "AudioClipData_8h" ],
+    [ "AudioClipKey.h", "AudioClipKey_8h.html", "AudioClipKey_8h" ],
     [ "AudioManager.cpp", "AudioManager_8cpp.html", null ],
     [ "AudioManager.h", "AudioManager_8h.html", "AudioManager_8h" ],
     [ "AudioMixer.cpp", "AudioMixer_8cpp.html", null ],

@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "motorsinnombredefinido", "index.html", [
+    [ "Concepts", "concepts.html", "concepts" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -48,7 +49,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AssetManager_8cpp.html",
-"structSquare.html#aafbe2e711940729c85016959f82d0cc8"
+"pages.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

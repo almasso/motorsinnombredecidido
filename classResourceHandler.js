@@ -1,12 +1,10 @@
 var classResourceHandler =
 [
-    [ "ResourceHandler", "classResourceHandler.html#a8e49c8d98f07f20ed602a07de0d04b4c", null ],
-    [ "~ResourceHandler", "classResourceHandler.html#a87b3133d0f578e810b15d337f07ae495", null ],
-    [ "add", "classResourceHandler.html#ab2a5b1cbab004b640c992de82eaa1f38", null ],
-    [ "addReady", "classResourceHandler.html#ad6a8e8b48f5e8670f1ea61785fb2dd27", null ],
-    [ "clear", "classResourceHandler.html#a17e022bc268cb34e1c2bc8205ceef436", null ],
-    [ "dereference", "classResourceHandler.html#afd0a22f89a8a9efaea5974b30f530f92", null ],
-    [ "flush", "classResourceHandler.html#a7b232c6223177d0a507d831e90944029", null ],
-    [ "get", "classResourceHandler.html#a1be7493bedad5a7857dc7c20203e6a16", null ],
-    [ "getReferenceCount", "classResourceHandler.html#ad1155189d41ba299306230164b5d6270", null ]
+    [ "ResourceHandler", "classResourceHandler.html#a31a91c62ac1bdce368255d6b9536e39d", null ],
+    [ "~ResourceHandler", "classResourceHandler.html#aeb3e6bd6ac83f6b5c8267bfc71ca75e7", null ],
+    [ "add", "classResourceHandler.html#a958c987f5ca69365a96414dbefcf80d7", null ],
+    [ "addReady", "classResourceHandler.html#ade5415f9a70998114831e063fa77f141", null ],
+    [ "clear", "classResourceHandler.html#a79347fd3e55219c891f672c3f6c32172", null ],
+    [ "flush", "classResourceHandler.html#a6569f7edccc5a672821d9d4301a5c691", null ],
+    [ "get", "classResourceHandler.html#a94c0df586f08b934b01a381400276ca5", null ]
 ];

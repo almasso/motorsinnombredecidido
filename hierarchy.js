@@ -2,7 +2,6 @@ var hierarchy =
 [
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", null ],
-    [ "AudioClipData", "structAudioClipData.html", null ],
     [ "AudioManager", "classAudioManager.html", null ],
     [ "AudioMixer", "classAudioMixer.html", null ],
     [ "AudioMixerData", "structAudioMixerData.html", null ],
@@ -17,8 +16,12 @@ var hierarchy =
     [ "Main", "classMain.html", null ],
     [ "Random", "classRandom.html", null ],
     [ "RenderManager", "classRenderManager.html", null ],
-    [ "ResourceHandler< Key, Resource >", "classResourceHandler.html", null ],
-    [ "ResourceHandler< std::string, AudioClipData >", "classResourceHandler.html", null ],
+    [ "Resource", "classResource.html", [
+      [ "AudioClipData", "structAudioClipData.html", null ]
+    ] ],
+    [ "ResourceHandler< Key, ResourceType >", "classResourceHandler.html", null ],
+    [ "ResourceHandler< AudioClipKey, AudioClipData >", "classResourceHandler.html", null ],
+    [ "ResourceMemoryManager", "classResourceMemoryManager.html", null ],
     [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", null ],
     [ "SceneAPI", "classSceneAPI.html", null ],
