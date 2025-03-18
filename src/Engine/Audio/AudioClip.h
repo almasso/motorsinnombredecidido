@@ -1,10 +1,10 @@
 #ifndef AUDIOCLIP_H
 #define AUDIOCLIP_H
 #include <cstdint>
+#include "AudioClipKey.h"
 
 typedef uint32_t AudioDevice;
 typedef struct SDL_AudioStream AudioStream;
-struct AudioClipData;
 class AudioMixer;
 
 /// @~english
@@ -18,7 +18,7 @@ private:
         PAUSED,
         STOPPED
     } state_;
-    AudioClipData const* data_;
+    AudioClipKey key_;
     AudioStream* stream_;
     AudioMixer* mixer_;
     AudioDevice device_;
@@ -54,7 +54,7 @@ public:
     /// @~spanish
     /// @brief Crea una nueva pista con la información dada.
     /// @remark La pista se crea detenida, sin \c AudioMixer o \c AudioDevice, con el volumen asignado a \c 1.0f y sin el estado de ciclado.
-    explicit AudioClip(AudioClipData const* data);
+    explicit AudioClip(AudioClipKey const& key);
 
     /// @~english
     /// @brief Stops the clip and unassigns the \c AudioMixer and the \c AudioDevice.
@@ -161,11 +161,13 @@ public:
     /// @brief Assigns an \c AudioDevice through which this clip will play.
     /// @remark If an \c AudioMixer was assigned to this clip, that \c AudioMixer 's assigned \c AudioDevice will also be assigned to this clip. Programmer cannot override a clip's \c AudioDevice if that clip is connected to an \c AudioMixer ; to do that the clip's \c AudioMixer should be assigned to \c nullptr .
     /// @param device \c AudioDevice where the clip is desired to play.
+    /// @return \c true if the \c AudioDevice was assigned properly. \c false otherwise.
     /// @~spanish
     /// @brief Asigna un \c AudioDevice a través del cual esta pista se reproducirá.
     /// @remark Si esta pista tiene un \c AudioMixer asignado, el \c AudioDevice asignado a ese \c AudioMixer será también asignado a esta pista. El programador no puede sobreescribir el \c AudioDevice de una pista si esa pista está conectada a un \c AudioMixer ; para hacerlo el \c AudioMixer de la pista debería estar asignado a \c nullptr .
     /// @param device \c AudioDevice donde se desea que se reproduzca la pista.
-    void assignDevice(AudioDevice device);
+    /// @return \c true si el \c AudioDevice se asignó correctamente. \c false si no.
+    bool assignDevice(AudioDevice device);
 };
 
 

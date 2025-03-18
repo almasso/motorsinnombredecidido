@@ -5,6 +5,7 @@ class RenderManager;
 class AudioManager;
 class InputManager;
 class TimeManager;
+class ResourceMemoryManager;
 
 class Main {
 private:
@@ -12,6 +13,7 @@ private:
   	static AudioManager* audio;
   	static TimeManager* time;
   	static InputManager* input;
+  	static ResourceMemoryManager* resourceMemory;
 
 	static bool Init();
     static void Shutdown();

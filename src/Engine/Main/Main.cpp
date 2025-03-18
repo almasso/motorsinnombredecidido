@@ -6,11 +6,13 @@
 #include <Render/RenderManager.h>
 #include <Utils/Rect.h>
 #include <Utils/TimeManager.h>
+#include <Load/ResourceMemoryManager.h>
 
 RenderManager* Main::render = nullptr;
 AudioManager* Main::audio = nullptr;
 TimeManager* Main::time = nullptr;
 InputManager* Main::input = nullptr;
+ResourceMemoryManager* Main::resourceMemory = nullptr;
 
 bool Main::Init() {
     render = new RenderManager();
@@ -19,19 +21,21 @@ bool Main::Init() {
     input = InputManager::Init();
     if (!input)
         return false;
-    audio = new AudioManager();
-    if (!audio->init())
+    resourceMemory = new ResourceMemoryManager(1024*1024*1024);
+    if (!AudioManager::Init(resourceMemory))
         return false;
+    audio = AudioManager::Instance();
     time = new TimeManager();
     time->init();
     return true;
 }
 void Main::Shutdown() {
-    audio->shutdown();
+    AudioManager::Shutdown();
     render->shutdown();
     input->shutdown();
     delete time;
     delete audio;
+    delete resourceMemory;
     delete render;
 }
 

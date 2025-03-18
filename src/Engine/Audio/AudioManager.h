@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <Load/ResourceHandler.h>
+#include "AudioClipKey.h"
 #include "AudioClipData.h"
 
 typedef uint32_t AudioDevice;
@@ -11,14 +12,15 @@ class AudioMixer;
 class AudioClip;
 struct AudioMixerData;
 
-
 class AudioManager {
 private:
-    AudioDevice audioDeviceId;
+    static AudioManager* instance;
+
+    AudioDevice audioDeviceId_;
     std::unordered_map<std::string, AudioMixer*> mixers_;
 
-    ResourceHandler<std::string, AudioClipData> clipDataHandler_;
-    std::unordered_map<AudioClip*, std::string> clipNames_;
+    ResourceHandler<AudioClipKey, AudioClipData> clipDataHandler_;
+    std::unordered_map<AudioClip*, AudioClipKey> clipNames_;
 
     AudioClipData* testClipData_;
     AudioClip* testClip_;
@@ -28,16 +30,21 @@ private:
     bool initTest();
     void updateTest();
     void shutdownTest();
-public:
-    AudioManager();
-    ~AudioManager();
+    explicit AudioManager(ResourceMemoryManager* resourceMemoryManager);
     bool init();
-    void update();
     void shutdown();
+
+public:
+    static bool Init(ResourceMemoryManager* resourceMemoryManager);
+    static AudioManager* Instance();
+    static void Shutdown();
+    ~AudioManager();
+    void update();
 
     bool registerAudioMixer(AudioMixerData const& data);
     AudioMixer* getMixer(std::string const& mixer);
-    AudioClip* createAudioClip(std::string const& key);
+    AudioClipData const* getAudioClipData(AudioClipKey const& key);
+    AudioClip* createAudioClip(AudioClipKey const& key);
     void releaseAudioClip(AudioClip* clip);
 };
 
