@@ -1,12 +1,13 @@
 #include "Scene.h"
+#include "Entity.h"
+#include "Render/RenderComponent.h"
 
 Scene::Scene()
-{
-}
+= default;
 
 bool Scene::update()
 {
-	for (const auto& [handler, entity] : entities) {
+	for (Entity* entity : entities) {
 		if (!entity->update()) {
 			return false;
 		}
@@ -16,7 +17,7 @@ bool Scene::update()
 
 bool Scene::fixedUpdate()
 {
-	for (const auto& [handler, entity] : entities) {
+	for (Entity* entity : entities) {
 		if (!entity->fixedUpdate()) {
 			return false;
 		}
@@ -42,14 +43,14 @@ void Scene::refresh()
 
 void Scene::addEntity(Entity* entity, const std::string& handler)
 {
-	entities.insert({handler,entity});
+	entities.insert(entity);
 }
 
 Entity* Scene::getEntityByHandler(const std::string& handler)
 {
-	auto entityFinder = entities.find(handler);
-	if (entityFinder == entities.end()) return nullptr;
-	else return entityFinder->second;
+	auto entityFinder = handlers.find(handler);
+	if (entityFinder == handlers.end()) return nullptr;
+	return entityFinder->second;
 }
 
 void Scene::registerRenderComponent(RenderComponent* component, int layer)

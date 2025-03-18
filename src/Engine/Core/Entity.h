@@ -1,9 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
+
 #include <string>
-#include <map>
 #include <unordered_map>
-#include <unordered_set>
 
 class RenderManager;
 class Component;
@@ -20,7 +19,9 @@ public:
     bool isEnabled();
     void setEnabled();
     Component* getComponent();
-};
+    Component* addComponent(Component* component);
+    void removeComponent(Component* component);
 
+};
 
 #endif //ENTITY_H

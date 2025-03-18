@@ -11,8 +11,8 @@ class RenderManager;
 
 class Scene {
 private:
-private:
-    std::unordered_map<std::string, Entity*> entities;
+    std::unordered_map<std::string, Entity*> handlers;
+    std::unordered_set<Entity*> entities;
     std::map<int, std::unordered_set<RenderComponent*>> renderComponents;
 public:
     Scene();

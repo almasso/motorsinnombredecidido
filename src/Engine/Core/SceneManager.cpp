@@ -3,6 +3,8 @@
 #include "Scene.h"
 #include <Utils/RPGError.h>
 
+SceneManager* SceneManager::instance = nullptr;
+
 SceneManager::SceneManager() : scenes()
 {
 	api = new SceneAPI(this);

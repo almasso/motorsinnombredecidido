@@ -3,8 +3,6 @@
 #include <SDL3/SDL_init.h>
 #include <Utils/RPGError.h>
 
-
-
 RenderManager::RenderManager() : window(nullptr), renderer(nullptr) {}
 
 bool RenderManager::init(const int& width, const int& height) {
