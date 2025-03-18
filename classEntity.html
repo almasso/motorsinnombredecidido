@@ -113,8 +113,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ace9109ed140472396b544f4809c1dc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2ed30a1aaa56402e2832ab719c43c5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ad2ed30a1aaa56402e2832ab719c43c5b">setEnabled</a> ()</td></tr>
 <tr class="separator:ad2ed30a1aaa56402e2832ab719c43c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75223143cdec7de607d51e7053fbb22f"><td class="memItemLeft" align="right" valign="top">Component *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a75223143cdec7de607d51e7053fbb22f">getComponent</a> ()</td></tr>
+<tr class="memitem:a75223143cdec7de607d51e7053fbb22f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classComponent.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a75223143cdec7de607d51e7053fbb22f">getComponent</a> ()</td></tr>
 <tr class="separator:a75223143cdec7de607d51e7053fbb22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada991ae4b520d45163afe90818caf186"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classComponent.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ada991ae4b520d45163afe90818caf186">addComponent</a> (<a class="el" href="classComponent.html">Component</a> *component)</td></tr>
+<tr class="separator:ada991ae4b520d45163afe90818caf186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77be5c73fd314054d727d8f699fbcf39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a77be5c73fd314054d727d8f699fbcf39">removeComponent</a> (<a class="el" href="classComponent.html">Component</a> *component)</td></tr>
+<tr class="separator:a77be5c73fd314054d727d8f699fbcf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a980f368aa07ce358583982821533a54a" name="a980f368aa07ce358583982821533a54a"></a>
@@ -135,6 +139,24 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada991ae4b520d45163afe90818caf186" name="ada991ae4b520d45163afe90818caf186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada991ae4b520d45163afe90818caf186">&#9670;&#160;</a></span>addComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classComponent.html">Component</a> * Entity::addComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classComponent.html">Component</a> *&#160;</td>
+          <td class="paramname"><em>component</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5e8287a1ae6bd5572be15ef180285b70" name="a5e8287a1ae6bd5572be15ef180285b70"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e8287a1ae6bd5572be15ef180285b70">&#9670;&#160;</a></span>fixedUpdate()</h2>
 
@@ -159,7 +181,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Component * Entity::getComponent </td>
+          <td class="memname"><a class="el" href="classComponent.html">Component</a> * Entity::getComponent </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -179,6 +201,24 @@ Public Member Functions</h2></td></tr>
           <td class="memname">bool Entity::isEnabled </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a77be5c73fd314054d727d8f699fbcf39" name="a77be5c73fd314054d727d8f699fbcf39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77be5c73fd314054d727d8f699fbcf39">&#9670;&#160;</a></span>removeComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Entity::removeComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classComponent.html">Component</a> *&#160;</td>
+          <td class="paramname"><em>component</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -238,8 +278,9 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Engine/Core/<a class="el" href="Entity_8h_source.html">Entity.h</a></li>
+<li>src/Engine/Core/<a class="el" href="Entity_8cpp.html">Entity.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
