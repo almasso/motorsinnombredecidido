@@ -1,7 +1,10 @@
 #ifndef SCENEAPI_H
 #define SCENEAPI_H
+#include <string>
 
 class SceneManager;
+class Scene;
+class Entity;
 
 class SceneAPI {
 private:

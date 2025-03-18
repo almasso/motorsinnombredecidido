@@ -49,7 +49,7 @@ Entity* Scene::getEntityByHandler(const std::string& handler)
 {
 	auto entityFinder = entities.find(handler);
 	if (entityFinder == entities.end()) return nullptr;
-	else return *entityFinder;
+	else return entityFinder->second;
 }
 
 void Scene::registerRenderComponent(RenderComponent* component, int layer)

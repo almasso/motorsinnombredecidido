@@ -7,6 +7,7 @@
 
 class Entity;
 class RenderComponent;
+class RenderManager;
 
 class Scene {
 private:
