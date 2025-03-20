@@ -17,13 +17,13 @@ private:
         PLAYING,
         PAUSED,
         STOPPED
-    } state_;
-    AudioClipKey key_;
-    AudioStream* stream_;
-    AudioMixer* mixer_;
-    AudioDevice device_;
-    float localVolume_, volume_;
-    bool loop_;
+    } _state;
+    AudioClipKey _key;
+    AudioStream* _stream;
+    AudioMixer* _mixer;
+    AudioDevice _device;
+    float _localVolume, _volume;
+    bool _loop;
 
     /// @~english
     /// @brief Static method used as a callback to be called every time data is requested from an \c AudioStream.

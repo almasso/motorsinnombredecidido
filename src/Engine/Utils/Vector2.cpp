@@ -2,81 +2,81 @@
 #include <cmath>
 
 Vector2::Vector2() :
-	x_(0.0f),
-	y_(0.0f) {
+	_x(0.0f),
+	_y(0.0f) {
 }
 
 Vector2::Vector2(float x, float y) :
-	x_(x),
-	y_(y) {
+	_x(x),
+	_y(y) {
 }
 
 Vector2::Vector2(const Vector2& v) = default;
 
 Vector2::Vector2(float e) :
-	x_(e),
-	y_(e) {
+	_x(e),
+	_y(e) {
 }
 
 Vector2::~Vector2() = default;
 
 Vector2 Vector2::operator+(const Vector2& v) const {
-	return {x_ + v.x_, y_ + v.y_};
+	return {_x + v._x, _y + v._y};
 }
 
 Vector2 Vector2::operator-(const Vector2& v) const {
-	return {x_ - v.x_, y_ - v.y_};
+	return {_x - v._x, _y - v._y};
 }
 
 Vector2 Vector2::operator*(float e) const {
-	return {x_ * e, y_ * e};
+	return {_x * e, _y * e};
 }
 
 Vector2 Vector2::operator/(float e) const {
-	return {x_ / e, y_ / e};
+	return {_x / e, _y / e};
 }
 
 Vector2 Vector2::operator/(Vector2 const& v) const {
-	return {x_ / v.x_, y_ / v.y_};
+	return {_x / v._x, _y / v._y};
 }
 
 Vector2 Vector2::operator*(const Vector2& v) const {
-	return Vector2(x_ * v.x_, y_ * v.y_);
+	return Vector2(_x * v._x, _y * v._y);
 }
 
 bool Vector2::operator==(const Vector2& v) const {
-	return (x_ == v.x_ && y_ == v.y_);
+	return (_x == v._x && _y == v._y);
 }
 
 bool Vector2::operator!=(const Vector2& v) const {
-	return (x_ != v.x_ || y_ != v.y_);
+	return (_x != v._x || _y != v._y);
 }
 
 Vector2 Vector2::operator+=(const Vector2& v) {
-	x_ += v.x_;
-	y_ += v.y_;
+	_x += v._x;
+	_y += v._y;
 	return *this;
 }
 
 Vector2 Vector2::operator*=(const Vector2& v) {
-	x_ *= v.x_;
-	y_ *= v.y_;
+	_x *= v._x;
+	_y *= v._y;
 	return *this;
 }
 
 Vector2 Vector2::operator*=(float e) {
-	x_ *= e;
-	y_ *= e;
+	_x *= e;
+	_y *= e;
 	return *this;
 }
 
 float Vector2::magnitude() const {
-	return sqrtf(x_ * x_ + y_ * y_);
+	return sqrtf(_x * _x + _y * _y);
 }
 
 Vector2& Vector2::normalize() {
-	x_ = x_ / magnitude();
-	y_ = y_ / magnitude();
+	_x = _x / magnitude();
+	_y = _y / magnitude();
 	return *this;
 }
 
@@ -85,29 +85,29 @@ Vector2 Vector2::normalized() const {
 }
 
 float Vector2::getX() const {
-	return x_;
+	return _x;
 }
 
 float Vector2::getY() const {
-	return y_;
+	return _y;
 }
 
 void Vector2::setX(float x) {
-	x_ = x;
+	_x = x;
 }
 
 void Vector2::setY(float y) {
-	y_ = y;
+	_y = y;
 }
 
 void Vector2::set(const Vector2& v) {
-	x_ = v.x_;
-	y_ = v.y_;
+	_x = v._x;
+	_y = v._y;
 }
 
 void Vector2::set(float x, float y) {
-	x_ = x;
-	y_ = y;
+	_x = x;
+	_y = y;
 }
 
 const Vector2 Vector2::ZERO(0.0f, 0.0f);

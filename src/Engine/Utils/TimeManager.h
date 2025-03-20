@@ -9,7 +9,7 @@
 /// @brief Gestiona y actualiza la estructura estática \c Time
 class TimeManager {
 private:
-	std::chrono::system_clock::time_point previous;
+	std::chrono::system_clock::time_point _previous;
 
 public:
 	/// @~english

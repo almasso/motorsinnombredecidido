@@ -3,15 +3,15 @@
 
 class Vector2 {
 private:
-	float x_;
-	float y_;
+	float _x;
+	float _y;
 
 public:
 	/// @~english
 	/// @brief \c Vector2 's default constructor.
 	/// @remark Values X and Y are assigned to \c 0.0f .
 	/// @~spanish
-	/// @brief Constructora por defecto de la clase \c Vector2 .
+	/// @brief Constructora por defecto de la clase <c>Vector2</c>.
 	/// @remark Los valores de X e Y se asignan a \c 0.0f .
 	Vector2();
 
@@ -46,7 +46,7 @@ public:
 	/// @~english
 	/// @brief \c Vector2 's default destructor.
 	/// @~spanish
-	/// @brief Destructora por defecto de la clase \c Vector2 .
+	/// @brief Destructora por defecto de la clase <c>Vector2</c>.
 	~Vector2();
 
 	/// @~english
@@ -173,7 +173,7 @@ public:
 	/// @return Normalized vector.
 	/// @~spanish
 	/// @brief Normaliza un vector.
-	/// @remark Este vector se modificará para tener un módulo de valor |c 1.0f .
+	/// @remark Este vector se modificará para tener un módulo de valor <c>1.0f</c>.
 	/// @return Vector normalizado.
 	Vector2& normalize();
 

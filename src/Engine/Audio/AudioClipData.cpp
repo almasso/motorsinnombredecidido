@@ -17,11 +17,11 @@ AudioClipData::~AudioClipData() {
 
 bool AudioClipData::load() {
     specifier = new SDL_AudioSpec();
-    if (!SDL_LoadWAV(path_.c_str(), specifier, &buffer, &bufferLen)) {
-        RPGError::ShowError(std::string("Failed to load") + path_, SDL_GetError());
+    if (!SDL_LoadWAV(_path.c_str(), specifier, &buffer, &bufferLen)) {
+        RPGError::ShowError(std::string("Failed to load") + _path, SDL_GetError());
         return false;
     }
-    size_ = bufferLen;
+    _size = bufferLen;
     return true;
 }
 
@@ -31,5 +31,5 @@ void AudioClipData::unload() {
     specifier = nullptr;
     buffer = nullptr;
     bufferLen = -1;
-    size_ = -1;
+    _size = -1;
 }

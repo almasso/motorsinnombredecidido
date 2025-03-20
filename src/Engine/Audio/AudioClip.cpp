@@ -10,8 +10,8 @@
 void AudioClip::Update(void* userdata, SDL_AudioStream* stream, int additional_amount, int total_amount) {
     auto* instance = static_cast<AudioClip*>(userdata);
     if (additional_amount > 0) {
-        if (AudioClipData const* audioData = AudioManager::Instance()->getAudioClipData(instance->key_);
-            instance->loop_ && audioData != nullptr) {
+        if (AudioClipData const* audioData = AudioManager::Instance()->getAudioClipData(instance->_key);
+            instance->_loop && audioData != nullptr) {
             SDL_PutAudioStreamData(stream, audioData->buffer, audioData->bufferLen);
         }
         else if (additional_amount == total_amount)
@@ -21,24 +21,24 @@ void AudioClip::Update(void* userdata, SDL_AudioStream* stream, int additional_a
 
 void AudioClip::reset() {
     stop();
-    SDL_DestroyAudioStream(stream_);
-    stream_ = nullptr;
-    if (mixer_)
-        mixer_->disconnect(this);
-    mixer_ = nullptr;
-    device_ = 0;
-    state_ = STOPPED;
+    SDL_DestroyAudioStream(_stream);
+    _stream = nullptr;
+    if (_mixer)
+        _mixer->disconnect(this);
+    _mixer = nullptr;
+    _device = 0;
+    _state = STOPPED;
 }
 
 AudioClip::AudioClip(AudioClipKey const& key) :
-    state_(STOPPED),
-    key_(key),
-    stream_(nullptr),
-    mixer_(nullptr),
-    device_(0),
-    localVolume_(1.0f),
-    volume_(1.0f),
-    loop_(false) {
+    _state(STOPPED),
+    _key(key),
+    _stream(nullptr),
+    _mixer(nullptr),
+    _device(0),
+    _localVolume(1.0f),
+    _volume(1.0f),
+    _loop(false) {
 }
 
 AudioClip::~AudioClip() {
@@ -48,10 +48,10 @@ AudioClip::~AudioClip() {
 bool AudioClip::play() {
     if (!stop())
         return false;
-    if (!stream_)
+    if (!_stream)
         return false;
-    if (auto data = AudioManager::Instance()->getAudioClipData(key_);
-        data == nullptr || !SDL_PutAudioStreamData(stream_, data->buffer, data->bufferLen))
+    if (auto data = AudioManager::Instance()->getAudioClipData(_key);
+        data == nullptr || !SDL_PutAudioStreamData(_stream, data->buffer, data->bufferLen))
         return false;
     if (!resume())
         return false;
@@ -60,91 +60,91 @@ bool AudioClip::play() {
 
 bool AudioClip::stop() {
     pause();
-    if (state_ == STOPPED)
+    if (_state == STOPPED)
         return true;
-    if (!stream_)
+    if (!_stream)
         return false;
-    if (!SDL_ClearAudioStream(stream_))
+    if (!SDL_ClearAudioStream(_stream))
         return false;
-    state_ = STOPPED;
+    _state = STOPPED;
     return true;
 }
 
 void AudioClip::pause() {
-    if (state_ != PLAYING)
+    if (_state != PLAYING)
         return;
-    SDL_UnbindAudioStream(stream_);
-    state_ = PAUSED;
+    SDL_UnbindAudioStream(_stream);
+    _state = PAUSED;
 }
 
 bool AudioClip::resume() {
-    if (state_ == PLAYING)
+    if (_state == PLAYING)
         return true;
-    if (!stream_)
+    if (!_stream)
         return false;
-    if (!SDL_BindAudioStream(device_, stream_))
+    if (!SDL_BindAudioStream(_device, _stream))
         return false;
-    state_ = PLAYING;
+    _state = PLAYING;
     return true;
 }
 
 bool AudioClip::isPlaying() const {
-    return state_ == PLAYING;
+    return _state == PLAYING;
 }
 
 bool AudioClip::isPaused() const {
-    return state_ == PAUSED;
+    return _state == PAUSED;
 }
 
 float AudioClip::getVolume() const {
-    return localVolume_;
+    return _localVolume;
 }
 
 void AudioClip::setVolume(float volume) {
-    localVolume_ = volume;
+    _localVolume = volume;
     updateVolume();
 }
 
 bool AudioClip::isLooped() const {
-    return loop_;
+    return _loop;
 }
 
 void AudioClip::setLoop(bool loop) {
-    loop_ = loop;
+    _loop = loop;
 }
 
 void AudioClip::updateVolume() {
-    if (!stream_)
+    if (!_stream)
         return;
-    volume_ = localVolume_ * mixer_->getGlobalVolume();
-    SDL_SetAudioStreamGain(stream_, volume_);
+    _volume = _localVolume * _mixer->getGlobalVolume();
+    SDL_SetAudioStreamGain(_stream, _volume);
 }
 
 void AudioClip::assignMixer(AudioMixer* mixer) {
-    if (mixer_)
-        mixer_->disconnect(this);
-    mixer_ = mixer;
+    if (_mixer)
+        _mixer->disconnect(this);
+    _mixer = mixer;
     updateVolume();
     if (!mixer)
         return reset();
-    assignDevice(mixer_->getDevice());
+    assignDevice(_mixer->getDevice());
 }
 
 bool AudioClip::assignDevice(AudioDevice device) {
-    if (mixer_ && device != mixer_->getDevice())
+    if (_mixer && device != _mixer->getDevice())
         return false;
 
-    auto data = AudioManager::Instance()->getAudioClipData(key_);
+    auto data = AudioManager::Instance()->getAudioClipData(_key);
     if (data == nullptr)
         return false;
 
     pause();
-    device_ = device;
+    _device = device;
     SDL_AudioSpec dstSpec;
-    SDL_GetAudioDeviceFormat(device_, &dstSpec, NULL);
-    if (!stream_) stream_ = SDL_CreateAudioStream(data->specifier, &dstSpec);
-    else SDL_SetAudioStreamFormat(stream_, data->specifier, &dstSpec);
-    SDL_SetAudioStreamGetCallback(stream_, AudioClip::Update, this);
+    SDL_GetAudioDeviceFormat(_device, &dstSpec, NULL);
+    if (!_stream) _stream = SDL_CreateAudioStream(data->specifier, &dstSpec);
+    else SDL_SetAudioStreamFormat(_stream, data->specifier, &dstSpec);
+    SDL_SetAudioStreamGetCallback(_stream, AudioClip::Update, this);
     resume();
     return true;
 }

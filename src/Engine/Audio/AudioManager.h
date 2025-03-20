@@ -14,13 +14,13 @@ struct AudioMixerData;
 
 class AudioManager {
 private:
-    static AudioManager* instance;
+    static AudioManager* _instance;
 
-    AudioDevice audioDeviceId_;
-    std::unordered_map<std::string, AudioMixer*> mixers_;
+    AudioDevice _audioDeviceId;
+    std::unordered_map<std::string, AudioMixer*> _mixers;
 
-    ResourceHandler<AudioClipKey, AudioClipData> clipDataHandler_;
-    std::unordered_map<AudioClip*, AudioClipKey> clipNames_;
+    ResourceHandler<AudioClipKey, AudioClipData> _clipDataHandler;
+    std::unordered_map<AudioClip*, AudioClipKey> _clipNames;
 
     AudioClipData* testClipData_;
     AudioClip* testClip_;

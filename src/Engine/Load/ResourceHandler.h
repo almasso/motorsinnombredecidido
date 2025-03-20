@@ -21,15 +21,15 @@ concept resourceDerived = std::is_base_of_v<Resource, T>;
 template <typename Key, resourceDerived ResourceType>
 class ResourceHandler {
 private:
-    std::unordered_map<Key, ResourceType*> resources_;
-    ResourceMemoryManager* resourceMemoryManager_;
+    std::unordered_map<Key, ResourceType*> _resources;
+    ResourceMemoryManager* _resourceMemoryManager;
 public:
     /// @~english
     /// Creates an empty handler.
     /// @~spanish
     /// Crea un gestor vacío.
     inline explicit ResourceHandler(ResourceMemoryManager* resourceMemoryManager) :
-        resourceMemoryManager_(resourceMemoryManager) {
+        _resourceMemoryManager(resourceMemoryManager) {
     }
 
     /// @~english
@@ -54,7 +54,7 @@ public:
     /// @return Si la creación y la adición del recurso ocurrieron. \c true si así fue, \c false si no.
     template <typename ...Args>
     inline bool add(Key const& key, Args&& ...args) {
-        auto [it, inserted] = resources_.insert({key, nullptr});
+        auto [it, inserted] = _resources.insert({key, nullptr});
         if (!inserted)
             return false;
         it->second = new ResourceType(std::forward<Args>(args)...);
@@ -74,7 +74,7 @@ public:
     /// @param resource Un puntero a un \c Resource ya creado y localizado en el \a heap.
     /// @return Si la adición del recurso ocurrió. \c true si así fue; \c false si no, en ese caso la memoria de ese recurso no será liberada por el \c ResourceHandler .
     inline bool addReady(Key const& key, ResourceType* resource) {
-        return resources_.insert({key, resource}).second;
+        return _resources.insert({key, resource}).second;
     }
 
     /// @~english
@@ -86,10 +86,10 @@ public:
     /// @param key Clave previamente usada para añadir un recurso.
     /// @return Un puntero al recurso solicitado. \c nullptr si no hay ningún recurso guardado con esa clave o si no se pudo cargar el recurso.
     inline ResourceType const* get(Key const& key) {
-        auto it = resources_.find(key);
-        if (it == resources_.end())
+        auto it = _resources.find(key);
+        if (it == _resources.end())
             return nullptr;
-        if (!resourceMemoryManager_->activateResource(it->second))
+        if (!_resourceMemoryManager->activateResource(it->second))
             return nullptr;
         return it->second;
     }
@@ -99,8 +99,8 @@ public:
     /// @~spanish
     /// @brief Descarga todos los recursos cargados contenidos en el \c ResourceHandler .
     inline void flush() {
-        for (auto it = resources_.begin(); it != resources_.end(); ++it) {
-            resourceMemoryManager_->deactivateResource(it->second);
+        for (auto it = _resources.begin(); it != _resources.end(); ++it) {
+            _resourceMemoryManager->deactivateResource(it->second);
         }
     }
 
@@ -109,8 +109,8 @@ public:
     /// @~spanish
     /// @brief Libera la memoria de todos los recursos y los borra del gestor.
     inline void clear() {
-        for (auto it = resources_.begin(); it != resources_.end(); it = resources_.erase(it)) {
-            resourceMemoryManager_->deactivateResource(it->second);
+        for (auto it = _resources.begin(); it != _resources.end(); it = _resources.erase(it)) {
+            _resourceMemoryManager->deactivateResource(it->second);
             delete it->second;
         }
     }

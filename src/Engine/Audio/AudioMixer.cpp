@@ -2,71 +2,71 @@
 #include "AudioClip.h"
 
 AudioMixer::AudioMixer() :
-    audioDevice_(0),
-    output_(nullptr),
-    mixers_(),
-    clips_(),
-    localVolume_(1.0f),
-    volume_(1.0f) {
+    _audioDevice(0),
+    _output(nullptr),
+    _mixers(),
+    _clips(),
+    _localVolume(1.0f),
+    _volume(1.0f) {
 }
 
 void AudioMixer::connect(AudioClip* clip) {
-    clips_.insert(clip);
+    _clips.insert(clip);
     clip->assignMixer(this);
 }
 
 void AudioMixer::disconnect(AudioClip* clip) {
-    if (clips_.erase(clip) == 0)
+    if (_clips.erase(clip) == 0)
         return;
     clip->assignMixer(nullptr);
 }
 
 void AudioMixer::connect(AudioMixer* mixer) {
-    mixers_.insert(mixer);
-    mixer->output_ = this;
+    _mixers.insert(mixer);
+    mixer->_output = this;
     mixer->updateVolume();
-    assignDevice(audioDevice_);
+    assignDevice(_audioDevice);
 }
 
 void AudioMixer::disconnect(AudioMixer* mixer) {
-    if (mixers_.erase(mixer) == 0)
+    if (_mixers.erase(mixer) == 0)
         return;
-    mixer->output_ = nullptr;
+    mixer->_output = nullptr;
     mixer->updateVolume();
 }
 
 void AudioMixer::setVolume(float volume) {
-    localVolume_ = volume;
+    _localVolume = volume;
     updateVolume();
 }
 
 float AudioMixer::getVolume() const {
-    return localVolume_;
+    return _localVolume;
 }
 
 float AudioMixer::getGlobalVolume() const {
-    return volume_;
+    return _volume;
 }
 
 void AudioMixer::updateVolume() {
-    volume_ = localVolume_ * (output_ ? output_->volume_ : 1.0f);
-    for (auto& mixer : mixers_) {
+    _volume = _localVolume * (_output ? _output->_volume : 1.0f);
+    for (auto& mixer : _mixers) {
         mixer->updateVolume();
     }
-    for (auto& clip : clips_) {
+    for (auto& clip : _clips) {
         clip->updateVolume();
     }
 }
 
 void AudioMixer::assignDevice(AudioDevice device) {
-    if (output_ && device != output_->getDevice())
+    if (_output && device != _output->getDevice())
         return;
-    audioDevice_ = device;
-    for (auto& mixer : mixers_) {
+    _audioDevice = device;
+    for (auto& mixer : _mixers) {
         mixer->assignDevice(device);
     }
 }
 
 AudioDevice AudioMixer::getDevice() const {
-    return audioDevice_;
+    return _audioDevice;
 }

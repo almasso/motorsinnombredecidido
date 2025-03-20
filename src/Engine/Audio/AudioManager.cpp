@@ -11,11 +11,11 @@
 #include "AudioMixer.h"
 #include "AudioMixerData.h"
 
-AudioManager* AudioManager::instance = nullptr;
+AudioManager* AudioManager::_instance = nullptr;
 
 AudioManager::AudioManager(ResourceMemoryManager* resourceMemoryManager) :
-    audioDeviceId_(0),
-    clipDataHandler_(resourceMemoryManager){
+    _audioDeviceId(0),
+    _clipDataHandler(resourceMemoryManager){
 }
 
 AudioManager::~AudioManager() = default;
@@ -29,9 +29,9 @@ bool AudioManager::initTest() {
     if (!data->load())
         return false;
 
-    clipDataHandler_.add("sonido", "assets/SodaLoop.wav");
+    _clipDataHandler.add("sonido", "assets/SodaLoop.wav");
     testClip_ = createAudioClip("sonido");
-    mixers_["Master"]->connect(testClip_);
+    _mixers["Master"]->connect(testClip_);
 
     testClip_->play();
     return true;
@@ -46,7 +46,7 @@ void AudioManager::updateTest() {
 
 void AudioManager::shutdownTest() {
     releaseAudioClip(testClip_);
-    clipDataHandler_.flush();
+    _clipDataHandler.flush();
 }
 
 bool AudioManager::init() {
@@ -55,8 +55,8 @@ bool AudioManager::init() {
         return false;
     }
 
-    audioDeviceId_ = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
-    if (audioDeviceId_ == 0) {
+    _audioDeviceId = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
+    if (_audioDeviceId == 0) {
         RPGError::ShowError("Audio Device initialization failed", SDL_GetError());
         return false;
     }
@@ -71,37 +71,37 @@ void AudioManager::update() {
 void AudioManager::shutdown() {
     shutdownTest();
 
-    for (auto& mixer : mixers_) {
+    for (auto& mixer : _mixers) {
         delete mixer.second;
     }
-    SDL_CloseAudioDevice(audioDeviceId_);
+    SDL_CloseAudioDevice(_audioDeviceId);
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
 bool AudioManager::Init(ResourceMemoryManager* resourceMemoryManager) {
-    assert(instance == nullptr);
-    instance = new AudioManager(resourceMemoryManager);
-    if (instance->init())
+    assert(_instance == nullptr);
+    _instance = new AudioManager(resourceMemoryManager);
+    if (_instance->init())
         return true;
     Shutdown();
     return false;
 }
 
 AudioManager* AudioManager::Instance() {
-    return instance;
+    return _instance;
 }
 
 void AudioManager::Shutdown() {
-    instance->shutdown();
-    delete instance;
+    _instance->shutdown();
+    delete _instance;
 }
 
 bool AudioManager::registerAudioMixer(AudioMixerData const& data) {
-    auto [it, inserted] = mixers_.insert({data.name, nullptr});
+    auto [it, inserted] = _mixers.insert({data.name, nullptr});
     if (!inserted)
         return false;
     it->second = new AudioMixer();
-    it->second->assignDevice(audioDeviceId_);
+    it->second->assignDevice(_audioDeviceId);
     if (AudioMixer* output = getMixer(data.output))
         output->connect(it->second);
     for (auto& in : data.inputs) {
@@ -112,27 +112,27 @@ bool AudioManager::registerAudioMixer(AudioMixerData const& data) {
 }
 
 AudioMixer* AudioManager::getMixer(std::string const& mixer) {
-    auto mix = mixers_.find(mixer);
-    if (mix == mixers_.end()) return nullptr;
+    auto mix = _mixers.find(mixer);
+    if (mix == _mixers.end()) return nullptr;
     return mix->second;
 }
 
 AudioClipData const* AudioManager::getAudioClipData(AudioClipKey const& key) {
-    return clipDataHandler_.get(key);
+    return _clipDataHandler.get(key);
 }
 
 AudioClip* AudioManager::createAudioClip(AudioClipKey const& key) {
     auto* clip = new AudioClip(key);
-    clipNames_.insert({clip, key});
+    _clipNames.insert({clip, key});
     return clip;
 }
 
 void AudioManager::releaseAudioClip(AudioClip* clip) {
     if (!clip)
         return;
-    auto it = clipNames_.find(clip);
-    if (it == clipNames_.end())
+    auto it = _clipNames.find(clip);
+    if (it == _clipNames.end())
         return;
-    clipNames_.erase(it);
+    _clipNames.erase(it);
     delete clip;
 }

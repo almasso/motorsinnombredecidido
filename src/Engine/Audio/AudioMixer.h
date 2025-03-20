@@ -12,12 +12,12 @@ typedef uint32_t AudioDevice;
 /// @brief Clase creada para englobar cambios que se quieren aplicar a múltiples \c AudioClip s. Las instancias de \c AudioMixer pueden conectarse entre sí para encadenar sus efectos.
 class AudioMixer {
 private:
-    AudioDevice audioDevice_;
-    AudioMixer* output_;
-    std::unordered_set<AudioMixer*> mixers_;
-    std::unordered_set<AudioClip*> clips_;
+    AudioDevice _audioDevice;
+    AudioMixer* _output;
+    std::unordered_set<AudioMixer*> _mixers;
+    std::unordered_set<AudioClip*> _clips;
 
-    float localVolume_, volume_;
+    float _localVolume, _volume;
 public:
     /// @~english
     /// @brief Creates a new mixer.

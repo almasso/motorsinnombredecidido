@@ -1,8 +1,8 @@
 #include "Resource.h"
 
 Resource::Resource(std::string const& path) :
-    size_(-1),
-    path_(path){
+    _size(-1),
+    _path(path){
 }
 
 Resource::~Resource() = default;

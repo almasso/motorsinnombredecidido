@@ -5,7 +5,7 @@
 
 class Random {
 private:
-	static std::default_random_engine generator;
+	static std::default_random_engine _generator;
 
 public:
 	/// @~english

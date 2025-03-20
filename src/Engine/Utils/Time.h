@@ -11,20 +11,20 @@ struct Time {
 private:
 	friend TimeManager;
 
-	static double deltaTime_;
-	static double time_;
+	static double _deltaTime;
+	static double _time;
 public:
 	/// @~english
 	/// @brief Time in seconds passed since last update
 	/// @~spanish
 	/// @brief Tiempo en segundos que ha pasado desde la anterior actualización
-	static constexpr double const& deltaTime = deltaTime_;
+	static constexpr double const& deltaTime = _deltaTime;
 
 	/// @~english
 	/// @brief Time in seconds passed since the start of the program
 	/// @~spanish
 	/// @brief Tiempo en segundos que ha pasado desde el comienzo del programa
-	static constexpr double const& time = time_;
+	static constexpr double const& time = _time;
 
 	/// @~english
 	/// @brief Time in seconds between every physic's operations' update
