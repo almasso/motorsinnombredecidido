@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fixeddeltatime_0',['fixedDeltaTime',['../structTime.html#a678ffc02a1f94c2b57cebcd9fda75a1f',1,'Time']]]
+  ['deltatime_0',['deltaTime',['../structTime.html#a3059b39e712122a29eb9ccfa2308b6c9',1,'Time']]],
+  ['down_1',['DOWN',['../classVector2.html#a080cfc88021b52fff01150f6d011c5e3',1,'Vector2']]]
 ];

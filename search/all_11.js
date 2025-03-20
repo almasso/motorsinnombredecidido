@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['unit_0',['UNIT',['../classVector2.html#a9a1a09c32435b334af2576907785aefb',1,'Vector2']]],
-  ['unload_1',['unload',['../structAudioClipData.html#a1f46a709f45195545fbf86686ce917ea',1,'AudioClipData::unload()'],['../classResource.html#a0cc6e217e6740ddd925483eebce74640',1,'Resource::unload()']]],
-  ['unregisterrendercomponent_2',['unregisterRenderComponent',['../classScene.html#a1122cff66186b080e9e9d1ebfbdca5b3',1,'Scene']]],
-  ['up_3',['UP',['../classVector2.html#a51b5f3d8a7cd9602fd796b65d57673e1',1,'Vector2']]],
-  ['update_4',['update',['../classAudioManager.html#af342d01281d35deac6df2f5fa729c0ef',1,'AudioManager::update()'],['../classComponent.html#a9e4a1c1e5fa7e4a4427259487f97b8d0',1,'Component::update()'],['../classEntity.html#a0b763dec09f1314d6cddb4d774eb6db7',1,'Entity::update()'],['../classScene.html#a6692184ee4903a478a7ef4b7969daef3',1,'Scene::update()'],['../classSceneManager.html#aa027e7f37930bfcea190e3d22c96cc7e',1,'SceneManager::update()'],['../classInputManager.html#a136d6afa55ee74eeda5eb72e78e3ee97',1,'InputManager::update()'],['../classTimeManager.html#a97d902b19861efc099141eeb846671a3',1,'TimeManager::update()']]],
-  ['updatevolume_5',['updateVolume',['../classAudioClip.html#a9506500cffe41b27fdfd3561f9060a9f',1,'AudioClip::updateVolume()'],['../classAudioMixer.html#a159bb07dedb3b206979802426fc9b145',1,'AudioMixer::updateVolume()']]]
+  ['time_0',['Time',['../structTime.html',1,'']]],
+  ['time_1',['time',['../structTime.html#ae6e5999c159026f5c59502ef623e3a98',1,'Time']]],
+  ['time_2ecpp_2',['Time.cpp',['../Time_8cpp.html',1,'']]],
+  ['time_2eh_3',['Time.h',['../Time_8h.html',1,'']]],
+  ['timemanager_4',['TimeManager',['../classTimeManager.html',1,'']]],
+  ['timemanager_2ecpp_5',['TimeManager.cpp',['../TimeManager_8cpp.html',1,'']]],
+  ['timemanager_2eh_6',['TimeManager.h',['../TimeManager_8h.html',1,'']]],
+  ['transform_7',['Transform',['../classTransform.html',1,'Transform'],['../classTransform.html#aa08ca4266efabc768973cdeea51945ab',1,'Transform::Transform()']]],
+  ['transform_2ecpp_8',['Transform.cpp',['../Transform_8cpp.html',1,'']]],
+  ['transform_2eh_9',['Transform.h',['../Transform_8h.html',1,'']]]
 ];

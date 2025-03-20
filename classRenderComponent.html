@@ -105,6 +105,7 @@ Inheritance diagram for RenderComponent:</div>
   <img src="classRenderComponent.png" usemap="#RenderComponent_map" alt=""/>
   <map id="RenderComponent_map" name="RenderComponent_map">
 <area href="classComponent.html" alt="Component" shape="rect" coords="0,0,116,24"/>
+<area href="classRectangle.html" alt="Rectangle" shape="rect" coords="0,112,116,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -112,17 +113,70 @@ Inheritance diagram for RenderComponent:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7ca8368399b68f4447fad9c0568691f7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderComponent.html#a7ca8368399b68f4447fad9c0568691f7">render</a> (<a class="el" href="classRenderManager.html">RenderManager</a> *manager)=0</td></tr>
 <tr class="separator:a7ca8368399b68f4447fad9c0568691f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a497fb88ff04c57c3e5f532548304bc5b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderComponent.html#a497fb88ff04c57c3e5f532548304bc5b">init</a> () override</td></tr>
+<tr class="separator:a497fb88ff04c57c3e5f532548304bc5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classComponent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
 <tr class="memitem:ad82d7393e339c1b19cc17a0d55b5674d inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ad82d7393e339c1b19cc17a0d55b5674d">~Component</a> ()=default</td></tr>
 <tr class="separator:ad82d7393e339c1b19cc17a0d55b5674d inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8775db6d1a2c1afc2e77cd3c8f39da6f inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a8775db6d1a2c1afc2e77cd3c8f39da6f">Component</a> ()</td></tr>
 <tr class="separator:a8775db6d1a2c1afc2e77cd3c8f39da6f inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e4a1c1e5fa7e4a4427259487f97b8d0 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a9e4a1c1e5fa7e4a4427259487f97b8d0">update</a> ()</td></tr>
-<tr class="separator:a9e4a1c1e5fa7e4a4427259487f97b8d0 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11fffc465a0f002d53fed7e36a8e06c1 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a11fffc465a0f002d53fed7e36a8e06c1">fixedUpdate</a> ()</td></tr>
-<tr class="separator:a11fffc465a0f002d53fed7e36a8e06c1 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9dcc3b3d21302a0dfcc02019452c414 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ac9dcc3b3d21302a0dfcc02019452c414">setContext</a> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classScene.html">Scene</a> *scene, <a class="el" href="classSceneAPI.html">SceneAPI</a> *sceneManager, bool enabled)</td></tr>
+<tr class="separator:ac9dcc3b3d21302a0dfcc02019452c414 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e30d558da3030875bcc808dd405f71c inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a9e30d558da3030875bcc808dd405f71c">init</a> ()=0</td></tr>
+<tr class="separator:a9e30d558da3030875bcc808dd405f71c inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6dde4e113b18e155b15cbd88aafb50f inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ae6dde4e113b18e155b15cbd88aafb50f">update</a> ()=0</td></tr>
+<tr class="separator:ae6dde4e113b18e155b15cbd88aafb50f inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d0736d2d92e926ad91f9383d536101 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a71d0736d2d92e926ad91f9383d536101">fixedUpdate</a> ()=0</td></tr>
+<tr class="separator:a71d0736d2d92e926ad91f9383d536101 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99f2ecbb29756381b95a0fc5389a439 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ab99f2ecbb29756381b95a0fc5389a439">onEnable</a> ()=0</td></tr>
+<tr class="separator:ab99f2ecbb29756381b95a0fc5389a439 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca56a14cb3f79b138884c94322dd526 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#afca56a14cb3f79b138884c94322dd526">onDisable</a> ()=0</td></tr>
+<tr class="separator:afca56a14cb3f79b138884c94322dd526 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553dae3822f2c4a41808f64e27715878 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a553dae3822f2c4a41808f64e27715878">isEnabled</a> () const</td></tr>
+<tr class="separator:a553dae3822f2c4a41808f64e27715878 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76e51f86dcc7375738d337d72f06b25 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#aa76e51f86dcc7375738d337d72f06b25">setEnabled</a> (bool enabled)</td></tr>
+<tr class="separator:aa76e51f86dcc7375738d337d72f06b25 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classComponent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classComponent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
+<tr class="memitem:abece985590c7196141a2fe29d9303c65 inherit pro_attribs_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#abece985590c7196141a2fe29d9303c65">_enabled</a></td></tr>
+<tr class="separator:abece985590c7196141a2fe29d9303c65 inherit pro_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bab1013efdca3125c3895017bac8f1a inherit pro_attribs_classComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a3bab1013efdca3125c3895017bac8f1a">_entity</a></td></tr>
+<tr class="separator:a3bab1013efdca3125c3895017bac8f1a inherit pro_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa7d6c962936ecd6421f235730bbafcd inherit pro_attribs_classComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScene.html">Scene</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#aaa7d6c962936ecd6421f235730bbafcd">_scene</a></td></tr>
+<tr class="separator:aaa7d6c962936ecd6421f235730bbafcd inherit pro_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbb688395ddbd423e31c50d66735cb8 inherit pro_attribs_classComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSceneAPI.html">SceneAPI</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a7cbb688395ddbd423e31c50d66735cb8">_sceneManager</a></td></tr>
+<tr class="separator:a7cbb688395ddbd423e31c50d66735cb8 inherit pro_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a497fb88ff04c57c3e5f532548304bc5b" name="a497fb88ff04c57c3e5f532548304bc5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a497fb88ff04c57c3e5f532548304bc5b">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RenderComponent::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classComponent.html#a9e30d558da3030875bcc808dd405f71c">Component</a>.</p>
+
+</div>
+</div>
 <a id="a7ca8368399b68f4447fad9c0568691f7" name="a7ca8368399b68f4447fad9c0568691f7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ca8368399b68f4447fad9c0568691f7">&#9670;&#160;</a></span>render()</h2>
 
@@ -147,10 +201,13 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implemented in <a class="el" href="classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c">Rectangle</a>.</p>
+
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Engine/Render/<a class="el" href="RenderComponent_8h_source.html">RenderComponent.h</a></li>
+<li>src/Engine/Render/<a class="el" href="RenderComponent_8cpp.html">RenderComponent.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

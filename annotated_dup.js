@@ -7,6 +7,7 @@ var annotated_dup =
     [ "AudioMixer", "classAudioMixer.html", "classAudioMixer" ],
     [ "AudioMixerData", "structAudioMixerData.html", "structAudioMixerData" ],
     [ "CollisionManager", "classCollisionManager.html", null ],
+    [ "Color", "structColor.html", "structColor" ],
     [ "Component", "classComponent.html", "classComponent" ],
     [ "Entity", "classEntity.html", "classEntity" ],
     [ "InputManager", "classInputManager.html", "classInputManager" ],
@@ -14,6 +15,7 @@ var annotated_dup =
     [ "LuaManager", "classLuaManager.html", null ],
     [ "Main", "classMain.html", null ],
     [ "Random", "classRandom.html", null ],
+    [ "Rectangle", "classRectangle.html", "classRectangle" ],
     [ "RenderComponent", "classRenderComponent.html", "classRenderComponent" ],
     [ "RenderManager", "classRenderManager.html", "classRenderManager" ],
     [ "Resource", "classResource.html", "classResource" ],
@@ -26,5 +28,6 @@ var annotated_dup =
     [ "Square", "structSquare.html", "structSquare" ],
     [ "Time", "structTime.html", null ],
     [ "TimeManager", "classTimeManager.html", "classTimeManager" ],
+    [ "Transform", "classTransform.html", "classTransform" ],
     [ "Vector2", "classVector2.html", "classVector2" ]
 ];

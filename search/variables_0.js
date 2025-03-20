@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['buffer_0',['buffer',['../structAudioClipData.html#a0e3a6d5d359d0ab1d8e55bd360ab879f',1,'AudioClipData']]],
-  ['bufferlen_1',['bufferLen',['../structAudioClipData.html#a37ce7ad98afede78d4236e4d0e202d9b',1,'AudioClipData']]]
+  ['_5fenabled_0',['_enabled',['../classComponent.html#abece985590c7196141a2fe29d9303c65',1,'Component']]],
+  ['_5fentity_1',['_entity',['../classComponent.html#a3bab1013efdca3125c3895017bac8f1a',1,'Component']]],
+  ['_5fscene_2',['_scene',['../classComponent.html#aaa7d6c962936ecd6421f235730bbafcd',1,'Component']]],
+  ['_5fscenemanager_3',['_sceneManager',['../classComponent.html#a7cbb688395ddbd423e31c50d66735cb8',1,'Component']]]
 ];

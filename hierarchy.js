@@ -6,8 +6,12 @@ var hierarchy =
     [ "AudioMixer", "classAudioMixer.html", null ],
     [ "AudioMixerData", "structAudioMixerData.html", null ],
     [ "CollisionManager", "classCollisionManager.html", null ],
+    [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
-      [ "RenderComponent", "classRenderComponent.html", null ]
+      [ "RenderComponent", "classRenderComponent.html", [
+        [ "Rectangle", "classRectangle.html", null ]
+      ] ],
+      [ "Transform", "classTransform.html", null ]
     ] ],
     [ "Entity", "classEntity.html", null ],
     [ "InputManager", "classInputManager.html", null ],

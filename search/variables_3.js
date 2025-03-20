@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exit_0',['exit',['../structInputState.html#af54efa09291c1bc9066f90dcd10d780a',1,'InputState']]]
+  ['color_0',['color',['../structSquare.html#a405722a853f3fc504fb0f3bc0d6c259b',1,'Square']]]
 ];

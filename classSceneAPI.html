@@ -103,12 +103,12 @@ $(document).ready(function(){initNavTree('classSceneAPI.html',''); initResizable
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a131b74b6347da8c73973f53a09592596"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#a131b74b6347da8c73973f53a09592596">SceneAPI</a> (<a class="el" href="classSceneManager.html">SceneManager</a> *manager)</td></tr>
 <tr class="separator:a131b74b6347da8c73973f53a09592596"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b130493194b94710fbfcd6bdf6fe7b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#a8b130493194b94710fbfcd6bdf6fe7b5">instanciatePrefab</a> (std::string handler)</td></tr>
-<tr class="separator:a8b130493194b94710fbfcd6bdf6fe7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a600fecab6d288b3fc4b5b1301bd7882c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScene.html">Scene</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#a600fecab6d288b3fc4b5b1301bd7882c">addScene</a> (std::string handler)</td></tr>
-<tr class="separator:a600fecab6d288b3fc4b5b1301bd7882c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade6776f2b94086da2821e745e91fed29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#ade6776f2b94086da2821e745e91fed29">popScene</a> ()</td></tr>
-<tr class="separator:ade6776f2b94086da2821e745e91fed29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f5ccc1ebf1160666e177d0c90d679ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#a1f5ccc1ebf1160666e177d0c90d679ea">instantiatePrefab</a> (const std::string &amp;handler) const</td></tr>
+<tr class="separator:a1f5ccc1ebf1160666e177d0c90d679ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ad9f44cdf27170f104902028e8bae50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScene.html">Scene</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#a1ad9f44cdf27170f104902028e8bae50">addScene</a> (std::string handler) const</td></tr>
+<tr class="separator:a1ad9f44cdf27170f104902028e8bae50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1c1b76b9df4b199e86cdc195f703a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneAPI.html#afb1c1b76b9df4b199e86cdc195f703a7">popScene</a> () const</td></tr>
+<tr class="separator:afb1c1b76b9df4b199e86cdc195f703a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a131b74b6347da8c73973f53a09592596" name="a131b74b6347da8c73973f53a09592596"></a>
@@ -116,6 +116,9 @@ Public Member Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">SceneAPI::SceneAPI </td>
@@ -125,13 +128,18 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a600fecab6d288b3fc4b5b1301bd7882c" name="a600fecab6d288b3fc4b5b1301bd7882c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a600fecab6d288b3fc4b5b1301bd7882c">&#9670;&#160;</a></span>addScene()</h2>
+<a id="a1ad9f44cdf27170f104902028e8bae50" name="a1ad9f44cdf27170f104902028e8bae50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ad9f44cdf27170f104902028e8bae50">&#9670;&#160;</a></span>addScene()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,33 +149,33 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>handler</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a8b130493194b94710fbfcd6bdf6fe7b5" name="a8b130493194b94710fbfcd6bdf6fe7b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b130493194b94710fbfcd6bdf6fe7b5">&#9670;&#160;</a></span>instanciatePrefab()</h2>
+<a id="a1f5ccc1ebf1160666e177d0c90d679ea" name="a1f5ccc1ebf1160666e177d0c90d679ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f5ccc1ebf1160666e177d0c90d679ea">&#9670;&#160;</a></span>instantiatePrefab()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEntity.html">Entity</a> * SceneAPI::instanciatePrefab </td>
+          <td class="memname"><a class="el" href="classEntity.html">Entity</a> * SceneAPI::instantiatePrefab </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>handler</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ade6776f2b94086da2821e745e91fed29" name="ade6776f2b94086da2821e745e91fed29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade6776f2b94086da2821e745e91fed29">&#9670;&#160;</a></span>popScene()</h2>
+<a id="afb1c1b76b9df4b199e86cdc195f703a7" name="afb1c1b76b9df4b199e86cdc195f703a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1c1b76b9df4b199e86cdc195f703a7">&#9670;&#160;</a></span>popScene()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +184,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void SceneAPI::popScene </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['deltatime_0',['deltaTime',['../structTime.html#a3059b39e712122a29eb9ccfa2308b6c9',1,'Time']]],
-  ['down_1',['DOWN',['../classVector2.html#a080cfc88021b52fff01150f6d011c5e3',1,'Vector2']]]
+  ['b_0',['b',['../structColor.html#a78ede410fb277ade36fbb157f0235d6f',1,'Color']]],
+  ['buffer_1',['buffer',['../structAudioClipData.html#a0e3a6d5d359d0ab1d8e55bd360ab879f',1,'AudioClipData']]],
+  ['bufferlen_2',['bufferLen',['../structAudioClipData.html#a37ce7ad98afede78d4236e4d0e202d9b',1,'AudioClipData']]]
 ];
