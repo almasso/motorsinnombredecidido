@@ -29,9 +29,8 @@ void RenderManager::clear() const {
     SDL_RenderClear(renderer);
 }
 
-void RenderManager::drawRect(const Rect &rect, const int &color) const {
-    const int r = color >> 16, g = color >> 8 , b = color;
-    SDL_SetRenderDrawColor(renderer, r, g, b, 255);
+void RenderManager::drawRect(const Rect &rect, const Color& color) const {
+    SDL_SetRenderDrawColor(renderer, color.r, color.r, color.b, color.a);
     SDL_RenderFillRect(renderer, &rect);
 }
 

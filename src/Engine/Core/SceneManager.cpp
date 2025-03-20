@@ -3,24 +3,24 @@
 #include "Scene.h"
 #include <Utils/RPGError.h>
 
-SceneManager* SceneManager::instance = nullptr;
+SceneManager* SceneManager::_instance = nullptr;
 
-SceneManager::SceneManager() : scenes()
+SceneManager::SceneManager() : _scenes()
 {
-	api = new SceneAPI(this);
+	_api = new SceneAPI(this);
 }
 
 SceneManager::~SceneManager()
 {
-	delete api;
+	delete _api;
 }
 
-Entity* SceneManager::createPrefab(std::string handler)
+Entity* SceneManager::createPrefab(const std::string& handler)
 {
 	return nullptr;
 }
 
-Scene* SceneManager::createScene(std::string handler)
+Scene* SceneManager::createScene(const std::string& handler)
 {
 	return nullptr;
 }
@@ -28,26 +28,24 @@ Scene* SceneManager::createScene(std::string handler)
 
 SceneManager* SceneManager::Init()
 {
-	if (instance == nullptr) {
-		return instance = new SceneManager();
+	if (_instance == nullptr) {
+		return _instance = new SceneManager();
 	}
 	RPGError::ShowError("Error al inicializar SceneManager", "Ya existia una instancia de SceneManager");
 	return nullptr;
 }
 
-bool SceneManager::update()
-{
-	return scenes.back()->update();
+bool SceneManager::update() const {
+	return _scenes.back()->update();
 }
 
-bool SceneManager::fixedUpdate()
-{
-	return scenes.back()->fixedUpdate();
+bool SceneManager::fixedUpdate() const {
+	return _scenes.back()->fixedUpdate();
 }
 
 bool SceneManager::render(RenderManager* render)
 {
-	for (Scene* scene : scenes) {
+	for (Scene* scene : _scenes) {
 		if (!scene->render(render)) {
 			return false;
 		}
@@ -55,32 +53,31 @@ bool SceneManager::render(RenderManager* render)
 	return true;
 }
 
-void SceneManager::refresh()
-{
-	scenes.back()->refresh();
+void SceneManager::refresh() const {
+	_scenes.back()->refresh();
 }
 
-void SceneManager::shutdown()
-{
-	delete instance;
+void SceneManager::shutdown() const {
+	delete this;
 }
 
-Entity* SceneManager::instanciatePrefab(std::string handler)
+Entity* SceneManager::instantiatePrefab(const std::string& handler)
 {
 	Entity* prefab = createPrefab(handler);
+	return prefab;
 }
 
-Scene* SceneManager::addScene(std::string handler)
+Scene* SceneManager::addScene(const std::string& handler)
 {
 	Scene* newScene = createScene(handler);
-	scenes.push_back(newScene);
+	_scenes.push_back(newScene);
 	return newScene;
 }
 
 void SceneManager::popScene()
 {
-	if (scenes.size() > 1) {
-		delete scenes.back();
-		scenes.pop_back();
+	if (_scenes.size() > 1) {
+		delete _scenes.back();
+		_scenes.pop_back();
 	}
 }

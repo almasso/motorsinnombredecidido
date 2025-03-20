@@ -8,12 +8,12 @@ class Entity;
 
 class SceneAPI {
 private:
-    SceneManager* manager;
+    SceneManager* _manager;
 public:
-    SceneAPI(SceneManager* manager);
-    Entity* instanciatePrefab(std::string handler);
-    Scene* addScene(std::string handler);
-    void popScene();
+    explicit SceneAPI(SceneManager* manager);
+    Entity* instantiatePrefab(const std::string& handler) const;
+    Scene* addScene(std::string handler) const;
+    void popScene() const;
 };
 
 

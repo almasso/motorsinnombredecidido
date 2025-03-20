@@ -3,25 +3,37 @@
 
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 class RenderManager;
 class Component;
 
 class Entity {
 private:
-    std::unordered_map<std::string, Component*> components;
-    bool enabled;
+    std::unordered_map<std::string, Component*> _components;
+    std::unordered_set<Entity*> _children;
+    Entity* _parent;
+    bool _active;
+    bool _alive;
 public:
     Entity();
     bool update();
     bool fixedUpdate();
-    bool render(RenderManager* manager);
-    bool isEnabled();
-    void setEnabled();
-    Component* getComponent();
-    Component* addComponent(Component* component);
-    void removeComponent(Component* component);
+    bool isActive() const;
+    void setActive(bool active);
+    bool isAlive() const;
+    void destroy();
+    void addChild(Entity* child);
+    void removeChild(Entity* child);
+    Entity* getParent() const;
+    template<class ComponentType>
+    ComponentType* getComponent() {
+        auto finder = _components.find(ComponentType::id);
+        if (finder == _components.end()) {
+            return nullptr;
+        }
+        return static_cast<ComponentType*>(finder->second);
+    }
 
 };
-
 #endif //ENTITY_H

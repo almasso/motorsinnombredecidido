@@ -13,23 +13,23 @@ class SceneBlueprint;
 
 class SceneManager {
     private:
-    static SceneManager* instance;
-    std::list<Scene*> scenes;
-    SceneAPI* api;
+    static SceneManager* _instance;
+    std::list<Scene*> _scenes;
+    SceneAPI* _api;
     SceneManager();
     ~SceneManager();
-    Entity* createPrefab(std::string handler);
-    Scene* createScene(std::string handler);
+    Entity* createPrefab(const std::string& handler);
+    Scene* createScene(const std::string& handler);
     
     public:
     static SceneManager* Init();
-    bool update();
-    bool fixedUpdate();
+    bool update() const;
+    bool fixedUpdate() const;
     bool render(RenderManager* render);
-    void refresh();
-    void shutdown();
-    Entity* instanciatePrefab(std::string handler);
-    Scene* addScene(std::string handler);
+    void refresh() const;
+    void shutdown() const;
+    Entity* instantiatePrefab(const std::string& handler);
+    Scene* addScene(const std::string& handler);
     void popScene();
 };
 

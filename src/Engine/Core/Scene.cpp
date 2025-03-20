@@ -5,31 +5,28 @@
 Scene::Scene()
 = default;
 
-bool Scene::update()
-{
-	for (Entity* entity : entities) {
-		if (!entity->update()) {
+bool Scene::update() const {
+	for (Entity* entity : _entities) {
+		if (entity->isActive() && !entity->update()) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool Scene::fixedUpdate()
-{
-	for (Entity* entity : entities) {
-		if (!entity->fixedUpdate()) {
+bool Scene::fixedUpdate() const {
+	for (Entity* entity : _entities) {
+		if (entity->isActive() && !entity->fixedUpdate()) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool Scene::render(RenderManager* manager)
-{
-	for (const auto& [layer, components] : renderComponents) {
+bool Scene::render(RenderManager* manager) {
+	for (const auto& [layer, components] : _renderComponents) {
 		for (const auto& component : components) {
-			if (!component->render(manager)) {
+			if (component->isEnabled() && !component->render(manager)) {
 				return false;
 			}
 		}
@@ -39,32 +36,48 @@ bool Scene::render(RenderManager* manager)
 
 void Scene::refresh()
 {
+	for (auto entity = _entities.begin(); entity != _entities.end();) {
+		if (!(*entity)->isAlive()) {
+			delete *entity;
+			entity = _entities.erase(entity);
+		}
+		else ++entity;
+	}
+	for (auto entity : _entitiesToAdd) {
+		_entities.insert(entity);
+	}
+	_entitiesToAdd.clear();
 }
 
-void Scene::addEntity(Entity* entity, const std::string& handler)
+void Scene::addEntity(Entity* entity)
 {
-	entities.insert(entity);
+	_entitiesToAdd.insert(entity);
+}
+
+void Scene::addHandler(Entity* entity, const std::string &handler) {
+	if (!_handlers.contains(handler)) {
+		_handlers.insert({handler, entity});
+	}
 }
 
 Entity* Scene::getEntityByHandler(const std::string& handler)
 {
-	auto entityFinder = handlers.find(handler);
-	if (entityFinder == handlers.end()) return nullptr;
+	auto entityFinder = _handlers.find(handler);
+	if (entityFinder == _handlers.end()) return nullptr;
 	return entityFinder->second;
 }
 
 void Scene::registerRenderComponent(RenderComponent* component, int layer)
 {
-	renderComponents[layer].insert(component);
+	_renderComponents[layer].insert(component);
 }
 
-void Scene::unregisterRenderComponent(RenderComponent* component, int layer)
+void Scene::unregisterRenderComponent(RenderComponent* component, const int layer)
 {
-	auto layerFinder = renderComponents.find(layer);
-	if (layerFinder != renderComponents.end()) {
+	if (auto layerFinder = _renderComponents.find(layer); layerFinder != _renderComponents.end()) {
 		layerFinder->second.erase(component);
 		if (layerFinder->second.empty()) {
-			renderComponents.erase(layerFinder);
+			_renderComponents.erase(layerFinder);
 		}
 	}
 }

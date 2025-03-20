@@ -5,8 +5,11 @@
 class RenderManager;
 
 class RenderComponent : public Component {
+    private:
+    int _layer {};
     public:
     virtual bool render(RenderManager* manager) = 0;
+    bool init() override;
 };
 
 

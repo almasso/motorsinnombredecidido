@@ -1,31 +1,50 @@
 #include "Entity.h"
+#include "Component.h"
 
 bool Entity::update() {
-     return false;
+     for (auto [id,component] : _components) {
+          if (component->isEnabled() && !component->update()) {
+               return false;
+          }
+     }
+     for (Entity* child : _children) {
+          if (child->isActive() && !child->update()) {
+               return false;
+          }
+     }
+     return true;
 }
 
 bool Entity::fixedUpdate() {
-     return false;
+     for (auto [id,component] : _components) {
+          if (component->isEnabled() && !component->fixedUpdate()) {
+               return false;
+          }
+     }
+     for (Entity* child : _children) {
+          if (!child->fixedUpdate()) {
+               return false;
+          }
+     }
+     return true;
 }
 
-bool Entity::render(RenderManager *manager) {
-     return false;
+bool Entity::isActive() const {
+     return _active && (_parent == nullptr || _parent->isActive());
 }
 
-bool Entity::isEnabled() {
-     return false;
+void Entity::setActive(const bool active) {
+     _active = active;
 }
 
-void Entity::setEnabled() {
+bool Entity::isAlive() const {
+     return _alive;
 }
 
-Component * Entity::getComponent() {
-  return nullptr;
+void Entity::destroy() {
+     _alive = false;
 }
 
-Component * Entity::addComponent(Component *component) {
-     return nullptr;
-}
-
-void Entity::removeComponent(Component *component) {
+Entity * Entity::getParent() const {
+     return _parent;
 }

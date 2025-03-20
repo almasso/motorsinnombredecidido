@@ -21,23 +21,23 @@ Vector2::Vector2(float e) :
 Vector2::~Vector2() = default;
 
 Vector2 Vector2::operator+(const Vector2& v) const {
-	return Vector2(x_ + v.x_, y_ + v.y_);
+	return {x_ + v.x_, y_ + v.y_};
 }
 
 Vector2 Vector2::operator-(const Vector2& v) const {
-	return Vector2(x_ - v.x_, y_ - v.y_);
+	return {x_ - v.x_, y_ - v.y_};
 }
 
 Vector2 Vector2::operator*(float e) const {
-	return Vector2(x_ * e, y_ * e);
+	return {x_ * e, y_ * e};
 }
 
 Vector2 Vector2::operator/(float e) const {
-	return Vector2(x_ / e, y_ / e);
+	return {x_ / e, y_ / e};
 }
 
 Vector2 Vector2::operator/(Vector2 const& v) const {
-	return Vector2(x_ / v.x_, y_ / v.y_);
+	return {x_ / v.x_, y_ / v.y_};
 }
 
 Vector2 Vector2::operator*(const Vector2& v) const {
