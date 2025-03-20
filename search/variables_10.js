@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['size_5f_0',['size_',['../classResource.html#acff0a51b7a0ec9f64412623f6a940769',1,'Resource']]],
-  ['specifier_1',['specifier',['../structAudioClipData.html#a18467fbcbb33c44c0c92dafd545c750e',1,'AudioClipData']]],
-  ['speed_2',['speed',['../structSquare.html#ae63bb534933b1a7581512eff3de9adda',1,'Square']]]
+  ['time_0',['time',['../structTime.html#ae6e5999c159026f5c59502ef623e3a98',1,'Time']]]
 ];

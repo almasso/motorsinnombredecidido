@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('classResource.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
+<p>Base interface to implement different types of resources.  
+ <a href="classResource.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Resource_8h_source.html">Resource.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Resource:</div>
@@ -112,24 +115,32 @@ Inheritance diagram for Resource:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a26732c5251dbdfd37399574910307081"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a26732c5251dbdfd37399574910307081">Resource</a> (std::string const &amp;path)</td></tr>
+<tr class="memdesc:a26732c5251dbdfd37399574910307081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> with an assigned file path.  <br /></td></tr>
 <tr class="separator:a26732c5251dbdfd37399574910307081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e5ec475e2601bdb33644468e86f6f10"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a0e5ec475e2601bdb33644468e86f6f10">~Resource</a> ()</td></tr>
+<tr class="memdesc:a0e5ec475e2601bdb33644468e86f6f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
 <tr class="separator:a0e5ec475e2601bdb33644468e86f6f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32cb03aeb4ac28011856244ad9c91db1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a32cb03aeb4ac28011856244ad9c91db1">load</a> ()=0</td></tr>
+<tr class="memdesc:a32cb03aeb4ac28011856244ad9c91db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the file in the specified path and store it.  <br /></td></tr>
 <tr class="separator:a32cb03aeb4ac28011856244ad9c91db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cc6e217e6740ddd925483eebce74640"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a0cc6e217e6740ddd925483eebce74640">unload</a> ()=0</td></tr>
+<tr class="memdesc:a0cc6e217e6740ddd925483eebce74640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase the specific memory of the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> stored.  <br /></td></tr>
 <tr class="separator:a0cc6e217e6740ddd925483eebce74640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11bdbfebbbdcb6b832d3a583adf8a4b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a11bdbfebbbdcb6b832d3a583adf8a4b5">getSize</a> () const</td></tr>
+<tr class="memdesc:a11bdbfebbbdcb6b832d3a583adf8a4b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the size of the stored <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> memory.  <br /></td></tr>
 <tr class="separator:a11bdbfebbbdcb6b832d3a583adf8a4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:acff0a51b7a0ec9f64412623f6a940769"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#acff0a51b7a0ec9f64412623f6a940769">size_</a></td></tr>
-<tr class="separator:acff0a51b7a0ec9f64412623f6a940769"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae613412af368cf2ef3dc35ae86e711ea"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#ae613412af368cf2ef3dc35ae86e711ea">path_</a></td></tr>
-<tr class="separator:ae613412af368cf2ef3dc35ae86e711ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ee56efe08564bfb60f971522e288db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a72ee56efe08564bfb60f971522e288db">_size</a></td></tr>
+<tr class="separator:a72ee56efe08564bfb60f971522e288db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18dbc07cf4a554f21c52a629c2471ae"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#ac18dbc07cf4a554f21c52a629c2471ae">_path</a></td></tr>
+<tr class="separator:ac18dbc07cf4a554f21c52a629c2471ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base interface to implement different types of resources. </p>
+<p>Interfaz base para implementar diferentes tipos de recursos. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a26732c5251dbdfd37399574910307081" name="a26732c5251dbdfd37399574910307081"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26732c5251dbdfd37399574910307081">&#9670;&#160;</a></span>Resource()</h2>
 
@@ -153,6 +164,14 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Creates the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> with an assigned file path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Relative path from the executable to the resource file. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -178,6 +197,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default destructor. </p>
 
 </div>
 </div>
@@ -205,6 +226,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets the size of the stored <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> memory. </p>
+<dl class="section return"><dt>Returns</dt><dd>Size in bytes of the stored memory. <code>-1</code> if the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> isn't loaded. </dd></dl>
+
 </div>
 </div>
 <a id="a32cb03aeb4ac28011856244ad9c91db1" name="a32cb03aeb4ac28011856244ad9c91db1"></a>
@@ -229,6 +253,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Read the file in the specified path and store it. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on successful loading. <code>false</code> on failure. </dd></dl>
 
 <p>Implemented in <a class="el" href="structAudioClipData.html#a11fd95a7fdbef1ebfc5fec4f5d4cb57b">AudioClipData</a>.</p>
 
@@ -257,13 +284,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Erase the specific memory of the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> stored. </p>
+
 <p>Implemented in <a class="el" href="structAudioClipData.html#a1f46a709f45195545fbf86686ce917ea">AudioClipData</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae613412af368cf2ef3dc35ae86e711ea" name="ae613412af368cf2ef3dc35ae86e711ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae613412af368cf2ef3dc35ae86e711ea">&#9670;&#160;</a></span>path_</h2>
+<a id="ac18dbc07cf4a554f21c52a629c2471ae" name="ac18dbc07cf4a554f21c52a629c2471ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac18dbc07cf4a554f21c52a629c2471ae">&#9670;&#160;</a></span>_path</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,7 +301,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Resource::path_</td>
+          <td class="memname">std::string Resource::_path</td>
         </tr>
       </table>
   </td>
@@ -284,8 +313,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="acff0a51b7a0ec9f64412623f6a940769" name="acff0a51b7a0ec9f64412623f6a940769"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acff0a51b7a0ec9f64412623f6a940769">&#9670;&#160;</a></span>size_</h2>
+<a id="a72ee56efe08564bfb60f971522e288db" name="a72ee56efe08564bfb60f971522e288db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ee56efe08564bfb60f971522e288db">&#9670;&#160;</a></span>_size</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +323,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Resource::size_</td>
+          <td class="memname">int Resource::_size</td>
         </tr>
       </table>
   </td>

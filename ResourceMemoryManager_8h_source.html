@@ -102,28 +102,32 @@ $(document).ready(function(){initNavTree('ResourceMemoryManager_8h_source.html',
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span><a class="code hl_class" href="classResource.html">Resource</a>;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classResourceMemoryManager.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classResourceMemoryManager.html">ResourceMemoryManager</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    uint64_t maxSize_;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    uint64_t currentSize_;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    std::list&lt;Resource*&gt; resources_;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::unordered_map&lt;Resource*, std::list&lt;Resource*&gt;::iterator&gt; resourcesIterators_;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">bool</span> makeRoomForSize(<span class="keywordtype">int</span> size);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">bool</span> insertResource(<a class="code hl_class" href="classResource.html">Resource</a>* resource);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classResourceMemoryManager.html">ResourceMemoryManager</a>(uint64_t maxSize);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classResourceMemoryManager.html#a344c312cb4289eb7226e13b5de5fa520">activateResource</a>(<a class="code hl_class" href="classResource.html">Resource</a>* resource);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classResourceMemoryManager.html#af58b63f2823605f80fbd0b86ce3d3423">deactivateResource</a>(<a class="code hl_class" href="classResource.html">Resource</a>* resource);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">//RESOURCEMEMORYMANAGER_H</span></div>
-<div class="ttc" id="aclassResourceMemoryManager_html"><div class="ttname"><a href="classResourceMemoryManager.html">ResourceMemoryManager</a></div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.h:10</div></div>
-<div class="ttc" id="aclassResourceMemoryManager_html_a344c312cb4289eb7226e13b5de5fa520"><div class="ttname"><a href="classResourceMemoryManager.html#a344c312cb4289eb7226e13b5de5fa520">ResourceMemoryManager::activateResource</a></div><div class="ttdeci">bool activateResource(Resource *resource)</div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.cpp:32</div></div>
-<div class="ttc" id="aclassResourceMemoryManager_html_af58b63f2823605f80fbd0b86ce3d3423"><div class="ttname"><a href="classResourceMemoryManager.html#af58b63f2823605f80fbd0b86ce3d3423">ResourceMemoryManager::deactivateResource</a></div><div class="ttdeci">void deactivateResource(Resource *resource)</div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.cpp:51</div></div>
-<div class="ttc" id="aclassResource_html"><div class="ttname"><a href="classResource.html">Resource</a></div><div class="ttdef"><b>Definition:</b> Resource.h:6</div></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classResourceMemoryManager.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classResourceMemoryManager.html">ResourceMemoryManager</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    uint64_t _maxSize;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    uint64_t _currentSize;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::list&lt;Resource*&gt; _resources;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::unordered_map&lt;Resource*, std::list&lt;Resource*&gt;::iterator&gt; _resourcesIterators;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">bool</span> makeRoomForSize(<span class="keywordtype">int</span> size);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">bool</span> insertResource(<a class="code hl_class" href="classResource.html">Resource</a>* resource);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classResourceMemoryManager.html">ResourceMemoryManager</a>(uint64_t maxSize);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classResourceMemoryManager.html#a344c312cb4289eb7226e13b5de5fa520">activateResource</a>(<a class="code hl_class" href="classResource.html">Resource</a>* resource);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classResourceMemoryManager.html#af58b63f2823605f80fbd0b86ce3d3423">deactivateResource</a>(<a class="code hl_class" href="classResource.html">Resource</a>* resource);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif </span><span class="comment">//RESOURCEMEMORYMANAGER_H</span></div>
+<div class="ttc" id="aclassResourceMemoryManager_html"><div class="ttname"><a href="classResourceMemoryManager.html">ResourceMemoryManager</a></div><div class="ttdoc">Data structure responsible for managing the memory occupied by resources. It ensures that there won't...</div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.h:14</div></div>
+<div class="ttc" id="aclassResourceMemoryManager_html_a344c312cb4289eb7226e13b5de5fa520"><div class="ttname"><a href="classResourceMemoryManager.html#a344c312cb4289eb7226e13b5de5fa520">ResourceMemoryManager::activateResource</a></div><div class="ttdeci">bool activateResource(Resource *resource)</div><div class="ttdoc">Makes sure a resource is loaded. If it was already loaded it will do nothing.</div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.cpp:32</div></div>
+<div class="ttc" id="aclassResourceMemoryManager_html_af58b63f2823605f80fbd0b86ce3d3423"><div class="ttname"><a href="classResourceMemoryManager.html#af58b63f2823605f80fbd0b86ce3d3423">ResourceMemoryManager::deactivateResource</a></div><div class="ttdeci">void deactivateResource(Resource *resource)</div><div class="ttdoc">Deactivates a previously activated resource. It becomes unloaded and gets removed from the manager.</div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.cpp:51</div></div>
+<div class="ttc" id="aclassResource_html"><div class="ttname"><a href="classResource.html">Resource</a></div><div class="ttdoc">Base interface to implement different types of resources.</div><div class="ttdef"><b>Definition:</b> Resource.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

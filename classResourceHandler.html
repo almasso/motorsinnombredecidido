@@ -131,7 +131,7 @@ class ResourceHandler&lt; Key, ResourceType &gt;</div><p>Data structure that han
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Key</td><td>Type used to access the resources. </td></tr>
-    <tr><td class="paramname">ResourceType</td><td>Type of the resource to handle, must be a derived class from <code><a class="el" href="classResource.html">Resource</a></code>. </td></tr>
+    <tr><td class="paramname">ResourceType</td><td>Type of the resource to handle, must be a derived class from <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -290,7 +290,7 @@ template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">reso
 <dl class="section remark"><dt>Remarks</dt><dd>Be aware that the <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> will try to <code>delete</code> the object pointed if that resource is unloaded and <code><a class="el" href="classResourceHandler.html#a6569f7edccc5a672821d9d4301a5c691" title="Unloads all the loaded resources contained in the ResourceHandler .">flush()</a></code> is called. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>Key for later access to the newly added <code><a class="el" href="classResource.html">Resource</a></code> . </td></tr>
+    <tr><td class="paramname">key</td><td>Key for later access to the newly added <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> . </td></tr>
     <tr><td class="paramname">resource</td><td>A pointer to an already created <code>ResourceType</code> allocated in the heap. </td></tr>
   </table>
   </dd>

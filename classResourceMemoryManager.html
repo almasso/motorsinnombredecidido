@@ -97,18 +97,26 @@ $(document).ready(function(){initNavTree('classResourceMemoryManager.html',''); 
 </div><!--header-->
 <div class="contents">
 
+<p>Data structure responsible for managing the memory occupied by resources. It ensures that there won't ever be more simultaneous memory used in resources than the assigned maximum size.  
+ <a href="classResourceMemoryManager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ResourceMemoryManager_8h_source.html">ResourceMemoryManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1ec6176b1bc50af606a685f45d90b44e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceMemoryManager.html#a1ec6176b1bc50af606a685f45d90b44e">ResourceMemoryManager</a> (uint64_t maxSize)</td></tr>
+<tr class="memdesc:a1ec6176b1bc50af606a685f45d90b44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <code><a class="el" href="classResourceMemoryManager.html" title="Data structure responsible for managing the memory occupied by resources. It ensures that there won&#39;t...">ResourceMemoryManager</a></code>.  <br /></td></tr>
 <tr class="separator:a1ec6176b1bc50af606a685f45d90b44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a344c312cb4289eb7226e13b5de5fa520"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceMemoryManager.html#a344c312cb4289eb7226e13b5de5fa520">activateResource</a> (<a class="el" href="classResource.html">Resource</a> *resource)</td></tr>
+<tr class="memdesc:a344c312cb4289eb7226e13b5de5fa520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes sure a resource is loaded. If it was already loaded it will do nothing.  <br /></td></tr>
 <tr class="separator:a344c312cb4289eb7226e13b5de5fa520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af58b63f2823605f80fbd0b86ce3d3423"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceMemoryManager.html#af58b63f2823605f80fbd0b86ce3d3423">deactivateResource</a> (<a class="el" href="classResource.html">Resource</a> *resource)</td></tr>
+<tr class="memdesc:af58b63f2823605f80fbd0b86ce3d3423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivates a previously activated resource. It becomes unloaded and gets removed from the manager.  <br /></td></tr>
 <tr class="separator:af58b63f2823605f80fbd0b86ce3d3423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data structure responsible for managing the memory occupied by resources. It ensures that there won't ever be more simultaneous memory used in resources than the assigned maximum size. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1ec6176b1bc50af606a685f45d90b44e" name="a1ec6176b1bc50af606a685f45d90b44e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ec6176b1bc50af606a685f45d90b44e">&#9670;&#160;</a></span>ResourceMemoryManager()</h2>
 
@@ -133,6 +141,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Creates a new <code><a class="el" href="classResourceMemoryManager.html" title="Data structure responsible for managing the memory occupied by resources. It ensures that there won&#39;t...">ResourceMemoryManager</a></code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxSize</td><td>Maximum size in bytes to be simultaneously used by resources. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -152,6 +168,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Makes sure a resource is loaded. If it was already loaded it will do nothing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a> to activate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on successful activation. <code>false</code> if the load failed or the resource can't fit within the maximum size. </dd></dl>
+
 </div>
 </div>
 <a id="af58b63f2823605f80fbd0b86ce3d3423" name="af58b63f2823605f80fbd0b86ce3d3423"></a>
@@ -169,6 +194,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Deactivates a previously activated resource. It becomes unloaded and gets removed from the manager. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This function won't do anything if the resource wasn't activated before. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a> to deactivate. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
