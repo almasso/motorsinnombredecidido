@@ -19,7 +19,7 @@ private:
     AudioDevice _audioDeviceId;
     std::unordered_map<std::string, AudioMixer*> _mixers;
 
-    ResourceHandler<AudioClipKey, AudioClipData> _clipDataHandler;
+    ResourceHandler<AudioClipData> _clipDataHandler;
     std::unordered_map<AudioClip*, AudioClipKey> _clipNames;
 
     AudioClipData* testClipData_;

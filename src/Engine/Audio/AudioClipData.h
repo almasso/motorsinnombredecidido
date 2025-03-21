@@ -7,7 +7,8 @@
 typedef struct SDL_AudioSpec AudioSpec;
 typedef uint8_t* AudioBuffer;
 
-struct AudioClipData final : public Resource {
+class AudioClipData final : public Resource {
+public:
     AudioBuffer buffer;
     uint32_t bufferLen;
     AudioSpec* specifier;

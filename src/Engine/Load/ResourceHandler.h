@@ -12,69 +12,61 @@ concept resourceDerived = std::is_base_of_v<Resource, T>;
 
 /// @~english
 /// @brief Data structure that handles the references to a specific type of resource and its memory.
-/// @tparam Key Type used to access the resources.
 /// @tparam ResourceType Type of the resource to handle, must be a derived class from \c Resource.
 /// @~spanish
 /// @brief Estructura de datos que gestiona las referencias a un tipo específico de recursos y su memoria.
-/// @tparam Key Tipo usado para acceder a los recursos.
 /// @tparam ResourceType Tipo de los recursos a gestionar, debe ser una clase heredada de \c Resource.
-template <typename Key, resourceDerived ResourceType>
+template <resourceDerived ResourceType>
 class ResourceHandler {
 private:
-    std::unordered_map<Key, ResourceType*> _resources;
+    std::unordered_map<std::string, ResourceType*> _resources;
     ResourceMemoryManager* _resourceMemoryManager;
+
+    /// @~english
+    /// @brief Creates and adds to this \c ResourceHandler a new instance of \c ResourceType if a resource with the given key didn't already exist.
+    /// @param key Key for later access to the resource.
+    /// @return A pointer the resource assigned to the key provided. It will not create a new instance if a resource with the given key already existed.
+    /// @~spanish
+    /// @brief Crea y añade a este \c ResourceHandler una nueva instancia de \c ResourceType si un recurso con la clave dada no existía ya.
+    /// @param key Clave para acceder posteriormente al recurso.
+    /// @return Un puntero al recurso asignado a la clave dada. No se creará una nueva instancia si el recurso con la clave dada ya existía.
+    inline ResourceType* add(std::string const& key) {
+        auto [it, inserted] = _resources.insert({key, nullptr});
+        if (inserted)
+            it->second = new ResourceType(key);
+        return it->second;
+    }
+
+    /// @~english
+    /// @brief Deletes the resources assigned to the given key and removes it from the handler.
+    /// @remarks If there's no resource assigned to the given key this method will do nothing.
+    /// @param key Key previously used to add a resource.
+    /// @~spanish
+    /// @brief Elimina (<c>delete</c>) el recurso asignado a la clave dada y lo borra del gestor.
+    /// @remarks Si no hay un recurso asignado a la clave dada este método no hará nada.
+    /// @param key Clave previamente usada para añadir un recurso.
+    inline void remove(std::string const& key) {
+        auto it = _resources.find(key);
+        if (it == _resources.end())
+            return;
+        delete it->second;
+        _resources.erase(key);
+    }
 public:
     /// @~english
-    /// Creates an empty handler.
+    /// @brief Creates an empty handler.
     /// @~spanish
-    /// Crea un gestor vacío.
+    /// @brief Crea un gestor vacío.
     inline explicit ResourceHandler(ResourceMemoryManager* resourceMemoryManager) :
         _resourceMemoryManager(resourceMemoryManager) {
     }
 
     /// @~english
-    /// Clears all the resources in the handler.
+    /// @brief Clears all the resources in the handler.
     /// @~spanish
-    /// Elimina todas los recursos del gestor.
+    /// @brief Elimina todos los recursos del gestor.
     inline ~ResourceHandler() {
         clear();
-    }
-
-    /// @~english
-    /// @brief Creates and adds to this \c ResourceHandler a new instance of \c ResourceType calling its constructor with the arguments provided.
-    /// @tparam Args Types of arguments needed to call the \c ResourceType 's constructor.
-    /// @param key Key for later access to the newly added resource.
-    /// @param args Arguments needed to call the \c ResourceType 's constructor.
-    /// @return Whether the resource creation and addition took place. \c true if it did, \c false if it didn't.
-    /// @~spanish
-    /// @brief Crea y añade a este \c ResourceHandler una nueva instancia de \c ResourceType llamando a su constructor con los argumentos proporcionados.
-    /// @tparam Args Tipos de los argumentos necesarios para llamar al constructor de \c ResourceType .
-    /// @param key Clave para acceder posteriormente al nuevo recurso añadido.
-    /// @param args Argumentos necesarios para llamar al constructor de \c ResourceType .
-    /// @return Si la creación y la adición del recurso ocurrieron. \c true si así fue, \c false si no.
-    template <typename ...Args>
-    inline bool add(Key const& key, Args&& ...args) {
-        auto [it, inserted] = _resources.insert({key, nullptr});
-        if (!inserted)
-            return false;
-        it->second = new ResourceType(std::forward<Args>(args)...);
-        return true;
-    }
-
-    /// @~english
-    /// @brief Adds to this \c ResourceHandler a provided instance of \c ResourceType .
-    /// @remarks Be aware that the \c ResourceHandler will try to \c delete the object pointed if that resource is unloaded and \c flush() is called.
-    /// @param key Key for later access to the newly added \c Resource .
-    /// @param resource A pointer to an already created \c ResourceType allocated in the heap.
-    /// @return Whether the resource addition took place. \c true if it did; \c false if it didn't, in that case that resource's memory won't be freed by the \c ResourceHandler .
-    /// @~spanish
-    /// @brief Añade a este \c ResourceHandler una instancia de \c ResourceType dada.
-    /// @remarks A tener en cuenta que el \c ResourceHandler intentará eliminar (\c delete) el objeto apuntado si a ese recurso está descargado y se llama a \c flush() .
-    /// @param key Clave para acceder posteriormente al nuevo \c Resource añadido.
-    /// @param resource Un puntero a un \c Resource ya creado y localizado en el \a heap.
-    /// @return Si la adición del recurso ocurrió. \c true si así fue; \c false si no, en ese caso la memoria de ese recurso no será liberada por el \c ResourceHandler .
-    inline bool addReady(Key const& key, ResourceType* resource) {
-        return _resources.insert({key, resource}).second;
     }
 
     /// @~english
@@ -85,13 +77,13 @@ public:
     /// @brief Accede al recurso asignado a una clave. Lo carga si no lo estaba.
     /// @param key Clave previamente usada para añadir un recurso.
     /// @return Un puntero al recurso solicitado. \c nullptr si no hay ningún recurso guardado con esa clave o si no se pudo cargar el recurso.
-    inline ResourceType const* get(Key const& key) {
-        auto it = _resources.find(key);
-        if (it == _resources.end())
+    inline ResourceType const* get(std::string const& key) {
+        ResourceType* resource = add(key);
+        if (!_resourceMemoryManager->activateResource(resource)) {
+            remove(key);
             return nullptr;
-        if (!_resourceMemoryManager->activateResource(it->second))
-            return nullptr;
-        return it->second;
+        }
+        return resource;
     }
 
     /// @~english

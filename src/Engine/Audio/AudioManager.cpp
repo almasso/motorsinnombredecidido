@@ -29,7 +29,6 @@ bool AudioManager::initTest() {
     if (!data->load())
         return false;
 
-    _clipDataHandler.add("sonido", "assets/SodaLoop.wav");
     testClip_ = createAudioClip("sonido");
     _mixers["Master"]->connect(testClip_);
 
