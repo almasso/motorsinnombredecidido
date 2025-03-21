@@ -2,6 +2,7 @@
 #include "Color.h"
 #include <Utils/RPGError.h>
 
+SDL_Renderer* TextureLoader::_renderer = nullptr;
 
 bool TextureLoader::Init(SDL_Renderer* renderer)
 {

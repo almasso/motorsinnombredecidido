@@ -13,6 +13,8 @@ class RenderComponent : public Component {
     public:
     virtual bool render(RenderManager* manager) = 0;
     bool init() override;
+    void onEnable() override;
+    void onDisable() override;
 };
 
 
