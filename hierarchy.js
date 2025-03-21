@@ -42,7 +42,7 @@ var hierarchy =
       [ "AudioClipData", "classAudioClipData.html", null ]
     ] ],
     [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ],
-    [ "ResourceHandler< AudioClipKey, AudioClipData >", "classResourceHandler.html", null ],
+    [ "ResourceHandler< AudioClipData >", "classResourceHandler.html", null ],
     [ "ResourceMemoryManager", "classResourceMemoryManager.html", null ],
     [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", null ],
