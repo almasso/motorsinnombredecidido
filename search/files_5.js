@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_2ecpp_0',['Main.cpp',['../Main_8cpp.html',1,'']]],
-  ['main_2eh_1',['Main.h',['../Main_8h.html',1,'']]]
+  ['luamanager_2ecpp_0',['LuaManager.cpp',['../LuaManager_8cpp.html',1,'']]],
+  ['luamanager_2eh_1',['LuaManager.h',['../LuaManager_8h.html',1,'']]]
 ];

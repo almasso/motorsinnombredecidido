@@ -1,6 +1,6 @@
 var annotated_dup =
 [
-    [ "Animation", "structAnimation.html", "structAnimation" ],
+    [ "Animation", "classAnimation.html", "classAnimation" ],
     [ "Animator", "classAnimator.html", "classAnimator" ],
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", "classAudioClip" ],
@@ -30,10 +30,11 @@ var annotated_dup =
     [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", "classScene" ],
     [ "SceneManager", "classSceneManager.html", "classSceneManager" ],
-    [ "Sprite", "structSprite.html", "structSprite" ],
+    [ "Sprite", "classSprite.html", "classSprite" ],
     [ "SpriteRenderer", "classSpriteRenderer.html", "classSpriteRenderer" ],
     [ "Square", "structSquare.html", "structSquare" ],
     [ "string_literal", "structstring__literal.html", "structstring__literal" ],
+    [ "Texture", "classTexture.html", "classTexture" ],
     [ "TextureLoader", "classTextureLoader.html", null ],
     [ "Time", "structTime.html", null ],
     [ "TimeManager", "classTimeManager.html", "classTimeManager" ],

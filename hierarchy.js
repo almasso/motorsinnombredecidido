@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "Animation", "structAnimation.html", null ],
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", null ],
     [ "AudioManager", "classAudioManager.html", null ],
@@ -39,7 +38,10 @@ var hierarchy =
     [ "Random", "classRandom.html", null ],
     [ "RenderManager", "classRenderManager.html", null ],
     [ "Resource", "classResource.html", [
-      [ "AudioClipData", "classAudioClipData.html", null ]
+      [ "Animation", "classAnimation.html", null ],
+      [ "AudioClipData", "classAudioClipData.html", null ],
+      [ "Sprite", "classSprite.html", null ],
+      [ "Texture", "classTexture.html", null ]
     ] ],
     [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ],
     [ "ResourceHandler< AudioClipData >", "classResourceHandler.html", null ],
@@ -47,7 +49,6 @@ var hierarchy =
     [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", null ],
     [ "SceneManager", "classSceneManager.html", null ],
-    [ "Sprite", "structSprite.html", null ],
     [ "Square", "structSquare.html", null ],
     [ "string_literal< N >", "structstring__literal.html", null ],
     [ "TextureLoader", "classTextureLoader.html", null ],

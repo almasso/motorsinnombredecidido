@@ -93,26 +93,35 @@ $(document).ready(function(){initNavTree('Sprite_8h_source.html',''); initResiza
   <div class="headertitle"><div class="title">Sprite.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="Sprite_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by Usuario on 21/03/2025.</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef SPRITE_H</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define SPRITE_H</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Texture_8h.html">Texture.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="Rect_8h.html">Utils/Rect.h</a>&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="structSprite.html">    9</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structSprite.html">Sprite</a>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="structSprite.html#a3d42412fa0ae1138f7f7bcf4e8d85110">   10</a></span>    <a class="code hl_typedef" href="Texture_8h.html#a755679213196fa4f99e3aff6d0c67621">Texture</a>* <a class="code hl_variable" href="structSprite.html#a3d42412fa0ae1138f7f7bcf4e8d85110">texture</a>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structSprite.html#a481e8bd840504d92d3bbe4ca99de845f">   11</a></span>    <a class="code hl_typedef" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a> <a class="code hl_variable" href="structSprite.html#a481e8bd840504d92d3bbe4ca99de845f">rect</a>;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>};</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#endif </span><span class="comment">//SPRITE_H</span></div>
+<a href="Sprite_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SPRITE_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SPRITE_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="Rect_8h.html">Utils/Rect.h</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="Resource_8h.html">Load/Resource.h</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classTexture.html">Texture</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classSprite.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classSprite.html">Sprite</a> : <span class="keyword">public</span> <a class="code hl_class" href="classResource.html">Resource</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    std::string _texturePath;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_typedef" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a> _rect;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classSprite.html">Sprite</a>(std::string <span class="keyword">const</span> &amp;path);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSprite.html#a27e59691ddad74d8a8350a77e1f32539">load</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSprite.html#aa52034ec770c1338f259e85aa42a9977">unload</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classTexture.html">Texture</a>* <a class="code hl_function" href="classSprite.html#ae38c6ed16fa02a6a951054b3bb34900f">getTexture</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a>&amp; <a class="code hl_function" href="classSprite.html#adb2e072f0b2a6f750da5c562ad9aeafa">getRect</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif </span><span class="comment">//SPRITE_H</span></div>
 <div class="ttc" id="aRect_8h_html"><div class="ttname"><a href="Rect_8h.html">Rect.h</a></div></div>
 <div class="ttc" id="aRect_8h_html_a7395957cffd7983a847ddfb2dd254b08"><div class="ttname"><a href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a></div><div class="ttdeci">SDL_FRect Rect</div><div class="ttdef"><b>Definition:</b> Rect.h:6</div></div>
-<div class="ttc" id="aTexture_8h_html"><div class="ttname"><a href="Texture_8h.html">Texture.h</a></div></div>
-<div class="ttc" id="aTexture_8h_html_a755679213196fa4f99e3aff6d0c67621"><div class="ttname"><a href="Texture_8h.html#a755679213196fa4f99e3aff6d0c67621">Texture</a></div><div class="ttdeci">SDL_Texture Texture</div><div class="ttdef"><b>Definition:</b> Texture.h:4</div></div>
-<div class="ttc" id="astructSprite_html"><div class="ttname"><a href="structSprite.html">Sprite</a></div><div class="ttdef"><b>Definition:</b> Sprite.h:9</div></div>
-<div class="ttc" id="astructSprite_html_a3d42412fa0ae1138f7f7bcf4e8d85110"><div class="ttname"><a href="structSprite.html#a3d42412fa0ae1138f7f7bcf4e8d85110">Sprite::texture</a></div><div class="ttdeci">Texture * texture</div><div class="ttdef"><b>Definition:</b> Sprite.h:10</div></div>
-<div class="ttc" id="astructSprite_html_a481e8bd840504d92d3bbe4ca99de845f"><div class="ttname"><a href="structSprite.html#a481e8bd840504d92d3bbe4ca99de845f">Sprite::rect</a></div><div class="ttdeci">Rect rect</div><div class="ttdef"><b>Definition:</b> Sprite.h:11</div></div>
+<div class="ttc" id="aResource_8h_html"><div class="ttname"><a href="Resource_8h.html">Resource.h</a></div></div>
+<div class="ttc" id="aclassResource_html"><div class="ttname"><a href="classResource.html">Resource</a></div><div class="ttdoc">Base interface to implement different types of resources.</div><div class="ttdef"><b>Definition:</b> Resource.h:10</div></div>
+<div class="ttc" id="aclassSprite_html"><div class="ttname"><a href="classSprite.html">Sprite</a></div><div class="ttdef"><b>Definition:</b> Sprite.h:9</div></div>
+<div class="ttc" id="aclassSprite_html_a27e59691ddad74d8a8350a77e1f32539"><div class="ttname"><a href="classSprite.html#a27e59691ddad74d8a8350a77e1f32539">Sprite::load</a></div><div class="ttdeci">bool load() override</div><div class="ttdoc">Read the file in the specified path and store it.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:7</div></div>
+<div class="ttc" id="aclassSprite_html_aa52034ec770c1338f259e85aa42a9977"><div class="ttname"><a href="classSprite.html#aa52034ec770c1338f259e85aa42a9977">Sprite::unload</a></div><div class="ttdeci">void unload() override</div><div class="ttdoc">Erase the specific memory of the Resource stored.</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:11</div></div>
+<div class="ttc" id="aclassSprite_html_adb2e072f0b2a6f750da5c562ad9aeafa"><div class="ttname"><a href="classSprite.html#adb2e072f0b2a6f750da5c562ad9aeafa">Sprite::getRect</a></div><div class="ttdeci">const Rect &amp; getRect() const</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:18</div></div>
+<div class="ttc" id="aclassSprite_html_ae38c6ed16fa02a6a951054b3bb34900f"><div class="ttname"><a href="classSprite.html#ae38c6ed16fa02a6a951054b3bb34900f">Sprite::getTexture</a></div><div class="ttdeci">Texture * getTexture() const</div><div class="ttdef"><b>Definition:</b> Sprite.cpp:14</div></div>
+<div class="ttc" id="aclassTexture_html"><div class="ttname"><a href="classTexture.html">Texture</a></div><div class="ttdef"><b>Definition:</b> Texture.h:8</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

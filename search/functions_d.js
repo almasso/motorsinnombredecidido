@@ -13,7 +13,7 @@ var searchData=
   ['setscale_10',['setScale',['../classTransform.html#a3e60b36b24081cb8c9f565855c97dcbc',1,'Transform::setScale(const Vector2 &amp;scale)'],['../classTransform.html#a95b51a84a2a28fa2982b9351dd5612f7',1,'Transform::setScale(float x, float y)']]],
   ['setscalex_11',['setScaleX',['../classTransform.html#a784c0b1177e74b2851b0fc44bf2712d1',1,'Transform']]],
   ['setscaley_12',['setScaleY',['../classTransform.html#a8f1c839ea3255a4088e93e3a685dc9ba',1,'Transform']]],
-  ['setsprite_13',['setSprite',['../classSpriteRenderer.html#a6d651564a2c0a84aac9138d08f727ab4',1,'SpriteRenderer']]],
+  ['setsprite_13',['setSprite',['../classSpriteRenderer.html#af0ed0062c4de1167823283b2a500f60f',1,'SpriteRenderer']]],
   ['setviewrect_14',['setViewRect',['../classRenderManager.html#a7b51db55a47ab831c8e6984970e45238',1,'RenderManager']]],
   ['setvolume_15',['setVolume',['../classAudioClip.html#a273cef875717c3a58fbea06acd7e4000',1,'AudioClip::setVolume()'],['../classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de',1,'AudioMixer::setVolume()']]],
   ['setx_16',['setX',['../classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8',1,'Vector2']]],
@@ -21,6 +21,7 @@ var searchData=
   ['showerror_18',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
   ['shutdown_19',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager']]],
   ['shutdown_20',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['stop_21',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]],
-  ['string_5fliteral_22',['string_literal',['../structstring__literal.html#a8e765fee6593387219953eed801a7e64',1,'string_literal']]]
+  ['sprite_21',['Sprite',['../classSprite.html#acfbf511f78e8ebb1372a0e3d061bdc91',1,'Sprite']]],
+  ['stop_22',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]],
+  ['string_5fliteral_23',['string_literal',['../structstring__literal.html#a8e765fee6593387219953eed801a7e64',1,'string_literal']]]
 ];

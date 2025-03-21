@@ -2,6 +2,7 @@ var classEntity =
 [
     [ "Entity", "classEntity.html#a980f368aa07ce358583982821533a54a", null ],
     [ "addChild", "classEntity.html#a445e5c82020eae36a145a692ff8482bc", null ],
+    [ "addComponent", "classEntity.html#aabf7202d0dd44d4a4dc2adea6f53786b", null ],
     [ "destroy", "classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e", null ],
     [ "fixedUpdate", "classEntity.html#a5e8287a1ae6bd5572be15ef180285b70", null ],
     [ "getComponent", "classEntity.html#a85a624661c6792bfe08aa39bdc24ca89", null ],

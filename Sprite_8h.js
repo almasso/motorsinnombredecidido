@@ -1,4 +1,4 @@
 var Sprite_8h =
 [
-    [ "Sprite", "structSprite.html", "structSprite" ]
+    [ "Sprite", "classSprite.html", "classSprite" ]
 ];
