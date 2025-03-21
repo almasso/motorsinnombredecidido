@@ -1,8 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <string>
-#include <unordered_map>
+#include <map>
 #include <unordered_set>
 
 class RenderManager;
@@ -10,7 +9,7 @@ class Component;
 
 class Entity {
 private:
-    std::unordered_map<std::string, Component*> _components;
+    std::map<int, Component*> _components;
     std::unordered_set<Entity*> _children;
     Entity* _parent;
     bool _active;
@@ -28,7 +27,7 @@ public:
     Entity* getParent() const;
     template<class ComponentType>
     ComponentType* getComponent() {
-        auto finder = _components.find(ComponentType::id);
+        auto finder = _components.find(ComponentType::order);
         if (finder == _components.end()) {
             return nullptr;
         }

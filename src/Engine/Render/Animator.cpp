@@ -1,8 +1,6 @@
 #include "Animator.h"
 #include <Utils/Time.h>
 
-const std::string Animator::id = "Animator";
-
 bool Animator::update() {
   if(!_animationEnded) {
     _frameTimer += Time::deltaTime;

@@ -1,6 +1,6 @@
 #ifndef RENDERCOMPONENT_H
 #define RENDERCOMPONENT_H
-#include "Core/Component.h"
+#include "Core/ComponentTemplate.h"
 
 class RenderManager;
 class Transform;

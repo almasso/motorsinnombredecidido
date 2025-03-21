@@ -1,7 +1,5 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
-#include <string>
-
 #include "Entity.h"
 #include "Scene.h"
 #include "SceneAPI.h"
@@ -13,14 +11,14 @@ protected:
     Scene* _scene;
     Game* _game;
 public:
-    virtual ~Component() = default;
     Component();
+    virtual ~Component() = default;
     void setContext(Entity* entity, Scene* scene, Game* game);
-    virtual bool init() = 0;
-    virtual bool update() = 0;
-    virtual bool fixedUpdate() = 0;
-    virtual void onEnable() = 0;
-    virtual void onDisable() = 0;
+    virtual bool init();
+    virtual bool update();
+    virtual bool fixedUpdate();
+    virtual void onEnable();
+    virtual void onDisable();
     bool isEnabled() const;
     bool isEntityActive() const;
     void setEnabled(bool enabled);

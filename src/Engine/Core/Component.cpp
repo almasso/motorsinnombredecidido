@@ -9,6 +9,25 @@ void Component::setContext(Entity *entity, Scene *scene, Game *game) {
     _game = game;
 }
 
+bool Component::init() {
+    return true;
+}
+
+bool Component::update() {
+    return true;
+}
+
+bool Component::fixedUpdate() {
+    return true;
+}
+
+void Component::onEnable() {
+
+}
+
+void Component::onDisable() {
+}
+
 bool Component::isEnabled() const {
     return _enabled;
 }

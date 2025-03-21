@@ -2,8 +2,6 @@
 #include "RenderManager.h"
 #include "Transform.h"
 
-const std::string SpriteRenderer::id = "SpriteRenderer";
-
 bool SpriteRenderer::render(RenderManager *manager) {
     Vector2 position = _transform->getGlobalPosition();
     Vector2 size = _transform->getGlobalScale() * _size;

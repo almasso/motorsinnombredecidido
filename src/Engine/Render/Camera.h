@@ -3,11 +3,10 @@
 #include "RenderComponent.h"
 #include <Utils/Vector2.h>
 
-class Camera : public RenderComponent{
+class Camera : public ComponentTemplate<"Camera",RenderComponent>{
 private:
     Vector2 _size = {1,1};
 public:
-    static const std::string id;
     Camera() = default;
     bool render(RenderManager* manager) override;
 };

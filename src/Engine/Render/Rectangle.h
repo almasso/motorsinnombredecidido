@@ -4,13 +4,11 @@
 #include "Utils/Vector2.h"
 #include "Color.h"
 
-
-class Rectangle : public RenderComponent {
+class Rectangle : public ComponentTemplate<"Rectangle",RenderComponent> {
     private:
     Vector2 _size = {1,1};
     Color _color = {0};
     public:
-    static const std::string id;
     bool render(RenderManager* manager) override;
 };
 

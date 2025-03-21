@@ -1,15 +1,16 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
-#include <Core/Component.h>
+#include <Core/ComponentTemplate.h>
 #include <Utils/Vector2.h>
-class Transform : public Component {
+
+class Transform : public ComponentTemplate<"Transform"> {
     private:
     Vector2 _position;
     Vector2 _scale;
     float _rotation;
     public:
-    static const std::string id;
     Transform();
+    bool init() override;
     const Vector2& getPosition() const;
     Vector2 getGlobalPosition() const;
     void setPosition(const Vector2& position);

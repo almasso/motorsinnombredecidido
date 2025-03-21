@@ -1,6 +1,11 @@
 #include "Transform.h"
 
-const std::string Transform::id = "Transform";
+Transform::Transform(): _rotation(0) {
+}
+
+bool Transform::init() {
+    return true;
+}
 
 const Vector2& Transform::getPosition() const {
     return _position;
