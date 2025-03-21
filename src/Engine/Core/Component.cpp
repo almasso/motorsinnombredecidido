@@ -1,17 +1,20 @@
 #include "Component.h"
 
-Component::Component() : _enabled(false),  _entity(nullptr), _scene(nullptr), _sceneManager(nullptr) {
+Component::Component() : _enabled(false),  _entity(nullptr), _scene(nullptr), _game(nullptr) {
 }
 
-void Component::setContext(Entity *entity, Scene *scene, SceneAPI *sceneManager, const bool enabled) {
+void Component::setContext(Entity *entity, Scene *scene, Game *game) {
     _entity = entity;
     _scene = scene;
-    _sceneManager = sceneManager;
-    setEnabled(enabled);
+    _game = game;
 }
 
 bool Component::isEnabled() const {
-    return _entity->isActive() && _enabled;
+    return _enabled;
+}
+
+bool Component::isEntityActive() const {
+    return _entity->isActive();
 }
 
 void Component::setEnabled(const bool enabled) {

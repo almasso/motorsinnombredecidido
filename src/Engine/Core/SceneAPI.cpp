@@ -3,18 +3,18 @@
 #include "SceneAPI.h"
 #include "SceneManager.h"
 
-SceneAPI::SceneAPI(SceneManager* manager) : _manager(manager)
+Game::Game(SceneManager* manager) : _manager(manager)
 {
 }
 
-Entity* SceneAPI::instantiatePrefab(const std::string& handler) const {
+Entity* Game::instantiatePrefab(const std::string& handler) const {
 	return _manager->instantiatePrefab(handler);
 }
 
-Scene* SceneAPI::addScene(std::string handler) const {
+Scene* Game::addScene(std::string handler) const {
 	return _manager->addScene(handler);
 }
 
-void SceneAPI::popScene() const {
+void Game::popScene() const {
 	_manager->popScene();
 }

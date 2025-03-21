@@ -7,7 +7,7 @@ SceneManager* SceneManager::_instance = nullptr;
 
 SceneManager::SceneManager() : _scenes()
 {
-	_api = new SceneAPI(this);
+	_api = new Game(this);
 }
 
 SceneManager::~SceneManager()
@@ -15,7 +15,7 @@ SceneManager::~SceneManager()
 	delete _api;
 }
 
-Entity* SceneManager::createPrefab(const std::string& handler)
+Entity* SceneManager::createEntity(const std::string& handler)
 {
 	return nullptr;
 }
@@ -43,8 +43,7 @@ bool SceneManager::fixedUpdate() const {
 	return _scenes.back()->fixedUpdate();
 }
 
-bool SceneManager::render(RenderManager* render)
-{
+bool SceneManager::render(RenderManager* render) const {
 	for (Scene* scene : _scenes) {
 		if (!scene->render(render)) {
 			return false;
@@ -63,7 +62,8 @@ void SceneManager::shutdown() const {
 
 Entity* SceneManager::instantiatePrefab(const std::string& handler)
 {
-	Entity* prefab = createPrefab(handler);
+	Entity* prefab = createEntity(handler);
+	_scenes.back()->addEntity(prefab);
 	return prefab;
 }
 

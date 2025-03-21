@@ -3,10 +3,10 @@
 #include <Utils/Vector2.h>
 #include <Utils/Rect.h>
 #include "Color.h"
+#include "Sprite.h"
 
 class SDL_Window;
 class SDL_Renderer;
-class Camera;
 
 class RenderManager {
     public:
@@ -14,8 +14,8 @@ class RenderManager {
     bool init(const int& width, const int& height);
     void present() const;
     void clear() const;
-    void drawRect(const Rect &rect, const Color& color) const;
-    void drawImage(const Rect &rect, const Color& color) const;
+    bool drawRect(const Rect &rect, const Color& color) const;
+    bool drawSprite(const Rect &rect, const Sprite *sprite, float rotation) const;
     void getWindowSize(int *width, int *height) const;
     void shutdown() const;
     void setViewRect(const Vector2& viewPosition, const Vector2& viewSize);

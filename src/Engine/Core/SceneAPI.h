@@ -6,11 +6,11 @@ class SceneManager;
 class Scene;
 class Entity;
 
-class SceneAPI {
+class Game {
 private:
     SceneManager* _manager;
 public:
-    explicit SceneAPI(SceneManager* manager);
+    explicit Game(SceneManager* manager);
     Entity* instantiatePrefab(const std::string& handler) const;
     Scene* addScene(std::string handler) const;
     void popScene() const;

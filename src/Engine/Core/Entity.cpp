@@ -34,7 +34,25 @@ bool Entity::isActive() const {
 }
 
 void Entity::setActive(const bool active) {
-     _active = active;
+     if (active != _active) {
+          _active = active;
+          for (auto [id,component] : _components) {
+               if (component->isEnabled()) {
+                    if(active) component->onEnable();
+                    else component->onDisable();
+               }
+          }
+          for (Entity* child : _children) {
+               if (child->isActive()) {
+                    for (auto [id,component] : child->_components) {
+                         if (component->isEnabled()) {
+                              if(active) component->onEnable();
+                              else component->onDisable();
+                         }
+                    }
+               }
+          }
+     }
 }
 
 bool Entity::isAlive() const {

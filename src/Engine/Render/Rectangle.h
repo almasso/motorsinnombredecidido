@@ -11,7 +11,6 @@ class Rectangle : public RenderComponent {
     Color _color = {0};
     public:
     static const std::string id;
-    Rectangle() = default;
     bool render(RenderManager* manager) override;
 };
 

@@ -6,26 +6,29 @@
 class RenderManager;
 class Entity;
 class Scene;
-class SceneAPI;
+class Game;
+class ComponentFactory;
 
-class PrefabBlueprint;
+class ComponentData;
+class EntityBlueprint;
 class SceneBlueprint;
 
 class SceneManager {
     private:
     static SceneManager* _instance;
     std::list<Scene*> _scenes;
-    SceneAPI* _api;
+    Game* _api;
+    ComponentFactory* _factory;
     SceneManager();
     ~SceneManager();
-    Entity* createPrefab(const std::string& handler);
+    Entity* createEntity(const std::string& handler);
     Scene* createScene(const std::string& handler);
     
     public:
     static SceneManager* Init();
     bool update() const;
     bool fixedUpdate() const;
-    bool render(RenderManager* render);
+    bool render(RenderManager* render) const;
     void refresh() const;
     void shutdown() const;
     Entity* instantiatePrefab(const std::string& handler);

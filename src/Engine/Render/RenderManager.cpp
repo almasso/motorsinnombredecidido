@@ -34,9 +34,17 @@ void RenderManager::clear() const {
     SDL_RenderClear(_renderer);
 }
 
-void RenderManager::drawRect(const Rect &rect, const Color& color) const {
+bool RenderManager::drawRect(const Rect &rect, const Color& color) const {
     SDL_SetRenderDrawColor(_renderer, color.r, color.r, color.b, color.a);
-    SDL_RenderFillRect(_renderer, &rect);
+    return SDL_RenderFillRect(_renderer, &rect);
+}
+
+bool RenderManager::drawSprite(const Rect &rect, const Sprite *sprite, float rotation) const {
+    Rect drawRect = convertRect(rect);
+    if (drawRect.w == 0 || drawRect.h == 0) {
+        return true;
+    }
+    return SDL_RenderTextureRotated(_renderer, sprite->texture, &sprite->rect, &drawRect, rotation, nullptr, SDL_FLIP_NONE);
 }
 
 void RenderManager::getWindowSize(int *width, int *height) const {

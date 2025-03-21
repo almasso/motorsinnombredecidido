@@ -5,12 +5,11 @@
 
 class TextureLoader {
     private:
-    static TextureLoader* _instance;
-    SDL_Renderer* _renderer;
-    explicit TextureLoader(SDL_Renderer* renderer);
+    static SDL_Renderer* _renderer;
     public:
-    static TextureLoader* Init(SDL_Renderer* renderer);
+    static bool Init(SDL_Renderer* renderer);
     static Texture* GetTexture(const Color& color);
+    static Texture* GetTexture(const char* filePath);
 };
 
 

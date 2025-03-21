@@ -2,12 +2,12 @@
 
 const std::string Transform::id = "Transform";
 
-const Vector2 & Transform::getPosition() const {
+const Vector2& Transform::getPosition() const {
     return _position;
 }
 
 Vector2 Transform::getGlobalPosition() const {
-    if (Transform* parent = getParent(); parent != nullptr) {
+    if (Transform* parent = getParent()) {
         return _position + parent->getGlobalPosition();
     }
     return _position;
@@ -45,12 +45,12 @@ void Transform::moveY(const float movX) {
     _position.setY(_position.getY() + movX);
 }
 
-const Vector2 & Transform::getScale() const {
+const Vector2& Transform::getScale() const {
     return _scale;
 }
 
 Vector2 Transform::getGlobalScale() const {
-    if (Transform* parent = getParent(); parent != nullptr) {
+    if (Transform* parent = getParent()) {
         return _scale + parent->getGlobalScale();
     }
     return _scale;
@@ -88,12 +88,12 @@ void Transform::doScaleY(const float scaleY) {
     _scale.setX(_scale.getX() * scaleY);
 }
 
-const float & Transform::getRotation() const {
+const float& Transform::getRotation() const {
     return _rotation;
 }
 
 float Transform::getGlobalRotation() const {
-    if (Transform* parent = getParent(); parent != nullptr) {
+    if (Transform* parent = getParent()) {
         return _rotation + parent->getGlobalRotation();
     }
     return _rotation;
@@ -107,12 +107,9 @@ void Transform::rotate(const float rotation) {
     _rotation += rotation;
 }
 
-Transform * Transform::getParent() const {
-    if (Entity* parent = _entity->getParent(); parent != nullptr) {
-        if (Transform* transform = parent->getComponent<Transform>(); transform != nullptr) {
-            return transform;
-        }
-        return nullptr;
+Transform* Transform::getParent() const {
+    if (Entity* parent = _entity->getParent()) {
+        return parent->getComponent<Transform>();
     }
     return nullptr;
 }

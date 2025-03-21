@@ -3,19 +3,15 @@
 #include "Sprite.h"
 #include <vector>
 
-class Animation {
-  private:
-  std::vector<Sprite*> _frames;
-  float _frameTime;
-  bool _loop;
-  int _numFrames;
-  float _frameTimer;
-  int _currentFrame;
-  public:
-  Animation(const std::vector<Sprite*>& frames, float frameTime, bool loop);
-  void update(float deltaTime);
-  void reset();
-  Sprite* getCurrentFrame() const;
+struct Animation {
+  std::vector<const Sprite*> frames;
+  float frameTime;
+  bool loop;
+  int numFrames;
+  Animation(std::vector<const Sprite*> frms = {}, float frmTime = 0.0f, bool lp = false)
+      : frames(std::move(frms)), frameTime(frmTime), loop(lp) {
+    numFrames = static_cast<int>(frames.size());
+  }
 };
 
 #endif //ANIMATION_H
