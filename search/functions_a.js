@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['ondisable_0',['onDisable',['../classComponent.html#afca56a14cb3f79b138884c94322dd526',1,'Component']]],
-  ['onenable_1',['onEnable',['../classComponent.html#ab99f2ecbb29756381b95a0fc5389a439',1,'Component']]],
+  ['ondisable_0',['onDisable',['../classComponent.html#afca56a14cb3f79b138884c94322dd526',1,'Component::onDisable()'],['../classRenderComponent.html#acf313f05c83d276b591c391d28a1caf4',1,'RenderComponent::onDisable()']]],
+  ['onenable_1',['onEnable',['../classComponent.html#ab99f2ecbb29756381b95a0fc5389a439',1,'Component::onEnable()'],['../classRenderComponent.html#a3ea278c5f13d3e1340baa45f3e68618f',1,'RenderComponent::onEnable()']]],
   ['operator_20sdl_5fcolor_2',['operator SDL_Color',['../structColor.html#a6548b7bed403f19122c3c9c6d5d15c23',1,'Color']]],
   ['operator_21_3d_3',['operator!=',['../classVector2.html#a805e8fa742bba45aea6af187069f2c96',1,'Vector2']]],
   ['operator_2a_4',['operator*',['../classVector2.html#abed281edb08c34e61ec8642d1da98a62',1,'Vector2::operator*(float e) const'],['../classVector2.html#a5df1be7a5a17b2be54b33655a48cebe6',1,'Vector2::operator*(const Vector2 &amp;v) const']]],

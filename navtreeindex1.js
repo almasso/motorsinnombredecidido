@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classScene.html#ab00a8df9393d0d078bba172be7dc1ccb":[1,0,27,3],
+"classScene.html#ab4bd06a9af64934a38bf75e8b6f1435e":[1,0,27,1],
 "classScene.html#ac994e1af3924f80706d42c8142775899":[1,0,27,4],
 "classScene.html#ad10176d75a9cc0da56626f682d083507":[1,0,27,0],
 "classSceneManager.html":[1,0,28],
@@ -85,8 +87,8 @@ var NAVTREEINDEX1 =
 "dir_d81d5bffecd3d85b20ebeae9a3b58ba1.html":[2,0,0,0,7],
 "dir_f379be214ac3ab501d342456492bfadc.html":[2,0,0,0,0],
 "files.html":[2,0],
-"functions.html":[1,3,0],
 "functions.html":[1,3,0,0],
+"functions.html":[1,3,0],
 "functions_a.html":[1,3,0,1],
 "functions_b.html":[1,3,0,2],
 "functions_c.html":[1,3,0,3],
