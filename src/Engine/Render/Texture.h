@@ -1,6 +1,17 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
-#include <SDL3/SDL_render.h>
-using Texture = SDL_Texture;
+#include <string>
+#include <Load/Resource.h>
+
+class SDL_Texture;
+
+class Texture : public Resource {
+    public:
+    SDL_Texture* texture;
+    Texture(std::string const &path);
+    bool load() override;
+    void unload() override;
+};
+
 
 #endif //TEXTURE_H

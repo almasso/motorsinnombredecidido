@@ -1,5 +1,5 @@
-#ifndef SCENEAPI_H
-#define SCENEAPI_H
+#ifndef GAME_H
+#define GAME_H
 #include <string>
 
 class SceneManager;
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //SCENEAPI_H
+#endif //GAME_H

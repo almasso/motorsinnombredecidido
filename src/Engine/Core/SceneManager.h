@@ -3,7 +3,9 @@
 #include <list>
 #include <string>
 
+
 class RenderManager;
+class Component;
 class Entity;
 class Scene;
 class Game;
@@ -17,10 +19,11 @@ class SceneManager {
     private:
     static SceneManager* _instance;
     std::list<Scene*> _scenes;
-    Game* _api;
+    Game* _game;
     ComponentFactory* _factory;
     SceneManager();
     ~SceneManager();
+    Component* createComponent(const std::string& handler);
     Entity* createEntity(const std::string& handler);
     Scene* createScene(const std::string& handler);
     

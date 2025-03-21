@@ -1,17 +1,16 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
-#include "Sprite.h"
 #include <vector>
+#include <Load/Resource.h>
 
-struct Animation {
-  std::vector<const Sprite*> frames;
+class Animation : public Resource {
+public:
+  std::vector<std::string> frames;
   float frameTime;
   bool loop;
   int numFrames;
-  Animation(std::vector<const Sprite*> frms = {}, float frmTime = 0.0f, bool lp = false)
-      : frames(std::move(frms)), frameTime(frmTime), loop(lp) {
-    numFrames = static_cast<int>(frames.size());
-  }
+  Animation(std::string const &path);
+  bool load() override;
+  void unload() override;
 };
-
 #endif //ANIMATION_H

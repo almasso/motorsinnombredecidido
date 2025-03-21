@@ -1,22 +1,24 @@
 #include "Animator.h"
+#include "Animation.h"
 #include <Utils/Time.h>
 
 bool Animator::update() {
   if(!_animationEnded) {
     _frameTimer += Time::deltaTime;
-    while (_frameTimer >= _animation->frameTime) {
-        _frameTimer -= _animation->frameTime;
+    Animation* anim = new Animation(_animation);
+    while (_frameTimer >= anim->frameTime) {
+        _frameTimer -= anim->frameTime;
         _currentFrame++;
-        if (_currentFrame >= _animation->numFrames) {
-          if(_animation->loop) {
-            _currentFrame %= _animation->numFrames;
+        if (_currentFrame >= anim->numFrames) {
+          if(anim->loop) {
+            _currentFrame %= anim->numFrames;
           }
           else {
-              _currentFrame = _animation->numFrames - 1;
+              _currentFrame = anim->numFrames - 1;
               _animationEnded = true;
           }
         }
-        setSprite(_animation->frames[_currentFrame]);
+        setSprite(anim->frames[_currentFrame]);
     }
   }
   return true;
@@ -28,7 +30,7 @@ void Animator::reset() {
   _frameTimer = 0;
 }
 
-void Animator::changeAnimation(const Animation *animation) {
+void Animator::changeAnimation(const std::string& animation) {
   _animation = animation;
   reset();
 }

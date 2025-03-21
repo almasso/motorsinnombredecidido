@@ -1,5 +1,6 @@
 #include "SceneManager.h"
-#include "SceneAPI.h"
+#include "ComponentFactory.h"
+#include "Game.h"
 #include "Scene.h"
 #include <Utils/RPGError.h>
 
@@ -7,18 +8,26 @@ SceneManager* SceneManager::_instance = nullptr;
 
 SceneManager::SceneManager() : _scenes()
 {
-	_api = new Game(this);
+	_game = new Game(this);
+	_factory = new ComponentFactory();
 }
 
 SceneManager::~SceneManager()
 {
-	delete _api;
+	delete _game;
+	delete _factory;
+}
+
+Component *SceneManager::createComponent(const std::string &handler)
+{
+	return nullptr;
 }
 
 Entity* SceneManager::createEntity(const std::string& handler)
 {
 	return nullptr;
 }
+
 
 Scene* SceneManager::createScene(const std::string& handler)
 {

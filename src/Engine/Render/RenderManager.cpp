@@ -1,4 +1,5 @@
 #include "RenderManager.h"
+#include "Texture.h"
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_init.h>
 #include <Utils/RPGError.h>
@@ -44,7 +45,7 @@ bool RenderManager::drawSprite(const Rect &rect, const Sprite *sprite, float rot
     if (drawRect.w == 0 || drawRect.h == 0) {
         return true;
     }
-    return SDL_RenderTextureRotated(_renderer, sprite->texture, &sprite->rect, &drawRect, rotation, nullptr, SDL_FLIP_NONE);
+    return SDL_RenderTextureRotated(_renderer, sprite->getTexture()->texture, &sprite->getRect(), &drawRect, rotation, nullptr, SDL_FLIP_NONE);
 }
 
 void RenderManager::getWindowSize(int *width, int *height) const {

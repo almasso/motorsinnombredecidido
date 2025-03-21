@@ -1,5 +1,7 @@
 #include "RenderComponent.h"
 #include "Transform.h"
+#include <Core/Entity.h>
+#include <Core/Scene.h>
 #include <Utils/RPGError.h>
 
 bool RenderComponent::init() {

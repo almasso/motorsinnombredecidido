@@ -1,6 +1,4 @@
-#include "SceneAPI.h"
-#include "SceneAPI.h"
-#include "SceneAPI.h"
+#include "Game.h"
 #include "SceneManager.h"
 
 Game::Game(SceneManager* manager) : _manager(manager)

@@ -1,8 +1,9 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
-#include "Entity.h"
-#include "Scene.h"
-#include "SceneAPI.h"
+
+class Entity;
+class Scene;
+class Game;
 
 class Component {
 protected:

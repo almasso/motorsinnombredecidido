@@ -1,6 +1,5 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-
 #include <map>
 #include <unordered_set>
 
@@ -25,6 +24,15 @@ public:
     void addChild(Entity* child);
     void removeChild(Entity* child);
     Entity* getParent() const;
+
+    template<class ComponentType>
+    bool addComponent(Component* component) {
+        if (_components.insert({ComponentType::order, component}).second) {
+            return true;
+        }
+        return false;
+    }
+
     template<class ComponentType>
     ComponentType* getComponent() {
         auto finder = _components.find(ComponentType::order);

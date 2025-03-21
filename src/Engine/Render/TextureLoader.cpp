@@ -1,6 +1,7 @@
 #include "TextureLoader.h"
 #include "Color.h"
 #include <Utils/RPGError.h>
+#include <SDL3/SDL_render.h>
 
 SDL_Renderer* TextureLoader::_renderer = nullptr;
 
@@ -13,7 +14,7 @@ bool TextureLoader::Init(SDL_Renderer* renderer)
     return false;
 }
 
-Texture* TextureLoader::GetTexture(const Color& color) {
+SDL_Texture* TextureLoader::GetTexture(const Color& color) {
     if (!_renderer) {
         return nullptr;
     }
@@ -25,7 +26,7 @@ Texture* TextureLoader::GetTexture(const Color& color) {
     return texture;
 }
 
-Texture* TextureLoader::GetTexture(const char *filePath) {
+SDL_Texture* TextureLoader::GetTexture(const std::string& filePath) {
     if (!_renderer) {
         return nullptr;
     }

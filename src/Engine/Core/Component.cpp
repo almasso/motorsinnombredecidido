@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "Entity.h"
 
 Component::Component() : _enabled(false),  _entity(nullptr), _scene(nullptr), _game(nullptr) {
 }

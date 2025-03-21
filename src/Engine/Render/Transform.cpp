@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include <Core/Entity.h>
 
 Transform::Transform(): _rotation(0) {
 }

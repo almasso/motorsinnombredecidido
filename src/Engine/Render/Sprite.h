@@ -1,13 +1,19 @@
-//
-// Created by Usuario on 21/03/2025.
-//
-
 #ifndef SPRITE_H
 #define SPRITE_H
-#include "Texture.h"
 #include <Utils/Rect.h>
-struct Sprite{
-    Texture* texture;
-    Rect rect;
+#include <string>
+#include <Load/Resource.h>
+
+class Texture;
+
+class Sprite : public Resource {
+    std::string _texturePath;
+    Rect _rect;
+    public:
+    Sprite(std::string const &path);
+    bool load() override;
+    void unload() override;
+    Texture* getTexture() const;
+    const Rect& getRect() const;
 };
 #endif //SPRITE_H
