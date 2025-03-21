@@ -1,5 +1,5 @@
 var classRectangle =
 [
-    [ "Rectangle", "classRectangle.html#a8a933e0ebd9e80ce91e61ffe87fd577e", null ],
+    [ "Rectangle", "classRectangle.html#ab74337363dcb42ccb4b030b0970085f8", null ],
     [ "render", "classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c", null ]
 ];

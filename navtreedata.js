@@ -48,8 +48,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AssetManager_8cpp.html",
-"classTransform.html#acd40a11d03b89b69d8395f03dafd5f1e"
+"Animation_8cpp.html",
+"classTextureLoader.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

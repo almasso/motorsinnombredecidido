@@ -8,5 +8,6 @@ var searchData=
   ['doscalex_5',['doScaleX',['../classTransform.html#a7c0e6cc7abe3721fdb6013f953afc055',1,'Transform']]],
   ['doscaley_6',['doScaleY',['../classTransform.html#aee8407079b35e80bb719eaf69b0bedca',1,'Transform']]],
   ['down_7',['DOWN',['../classVector2.html#a080cfc88021b52fff01150f6d011c5e3',1,'Vector2']]],
-  ['drawrect_8',['drawRect',['../classRenderManager.html#a8883b8cc8bf48e9d3b3c3a52553da547',1,'RenderManager']]]
+  ['drawimage_8',['drawImage',['../classRenderManager.html#a4ea63cbf0e4173298e38dc8b05b27772',1,'RenderManager']]],
+  ['drawrect_9',['drawRect',['../classRenderManager.html#a8883b8cc8bf48e9d3b3c3a52553da547',1,'RenderManager']]]
 ];

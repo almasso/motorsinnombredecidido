@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "Animation", "classAnimation.html", null ],
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", null ],
     [ "AudioManager", "classAudioManager.html", null ],
@@ -9,6 +10,7 @@ var hierarchy =
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
       [ "RenderComponent", "classRenderComponent.html", [
+        [ "Camera", "classCamera.html", null ],
         [ "Rectangle", "classRectangle.html", null ]
       ] ],
       [ "Transform", "classTransform.html", null ]
@@ -30,7 +32,9 @@ var hierarchy =
     [ "Scene", "classScene.html", null ],
     [ "SceneAPI", "classSceneAPI.html", null ],
     [ "SceneManager", "classSceneManager.html", null ],
+    [ "Sprite", "structSprite.html", null ],
     [ "Square", "structSquare.html", null ],
+    [ "TextureLoader", "classTextureLoader.html", null ],
     [ "Time", "structTime.html", null ],
     [ "TimeManager", "classTimeManager.html", null ],
     [ "Vector2", "classVector2.html", null ]

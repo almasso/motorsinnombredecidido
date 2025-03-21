@@ -11,14 +11,15 @@ var searchData=
   ['setpositionx_8',['setPositionX',['../classTransform.html#ad1c8f601867b2038afd5b488ba3de9fe',1,'Transform']]],
   ['setpositiony_9',['setPositionY',['../classTransform.html#ab564bad8550ac40f7c8da451575c144f',1,'Transform']]],
   ['setrotation_10',['setRotation',['../classTransform.html#aef821c00885810e430f61b274a6089db',1,'Transform']]],
-  ['setscale_11',['setScale',['../classTransform.html#a3e60b36b24081cb8c9f565855c97dcbc',1,'Transform::setScale(const Vector2 &amp;scale)'],['../classTransform.html#a95b51a84a2a28fa2982b9351dd5612f7',1,'Transform::setScale(float x, float y)']]],
+  ['setscale_11',['setScale',['../classTransform.html#a95b51a84a2a28fa2982b9351dd5612f7',1,'Transform::setScale(float x, float y)'],['../classTransform.html#a3e60b36b24081cb8c9f565855c97dcbc',1,'Transform::setScale(const Vector2 &amp;scale)']]],
   ['setscalex_12',['setScaleX',['../classTransform.html#a784c0b1177e74b2851b0fc44bf2712d1',1,'Transform']]],
   ['setscaley_13',['setScaleY',['../classTransform.html#a8f1c839ea3255a4088e93e3a685dc9ba',1,'Transform']]],
-  ['setvolume_14',['setVolume',['../classAudioClip.html#a273cef875717c3a58fbea06acd7e4000',1,'AudioClip::setVolume()'],['../classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de',1,'AudioMixer::setVolume()']]],
-  ['setx_15',['setX',['../classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8',1,'Vector2']]],
-  ['sety_16',['setY',['../classVector2.html#a9a2d336722ae0f62324c18c784f7738e',1,'Vector2']]],
-  ['showerror_17',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
-  ['shutdown_18',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager']]],
-  ['shutdown_19',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['stop_20',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
+  ['setviewrect_14',['setViewRect',['../classRenderManager.html#a7b51db55a47ab831c8e6984970e45238',1,'RenderManager']]],
+  ['setvolume_15',['setVolume',['../classAudioClip.html#a273cef875717c3a58fbea06acd7e4000',1,'AudioClip::setVolume()'],['../classAudioMixer.html#ac9a37fe7abe2825159f29eac8e14e5de',1,'AudioMixer::setVolume()']]],
+  ['setx_16',['setX',['../classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8',1,'Vector2']]],
+  ['sety_17',['setY',['../classVector2.html#a9a2d336722ae0f62324c18c784f7738e',1,'Vector2']]],
+  ['showerror_18',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
+  ['shutdown_19',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager']]],
+  ['shutdown_20',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
+  ['stop_21',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
 ];

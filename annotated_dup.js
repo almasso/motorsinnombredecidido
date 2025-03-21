@@ -1,11 +1,13 @@
 var annotated_dup =
 [
+    [ "Animation", "classAnimation.html", "classAnimation" ],
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", "classAudioClip" ],
     [ "AudioClipData", "structAudioClipData.html", "structAudioClipData" ],
     [ "AudioManager", "classAudioManager.html", "classAudioManager" ],
     [ "AudioMixer", "classAudioMixer.html", "classAudioMixer" ],
     [ "AudioMixerData", "structAudioMixerData.html", "structAudioMixerData" ],
+    [ "Camera", "classCamera.html", "classCamera" ],
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", "structColor" ],
     [ "Component", "classComponent.html", "classComponent" ],
@@ -25,7 +27,9 @@ var annotated_dup =
     [ "Scene", "classScene.html", "classScene" ],
     [ "SceneAPI", "classSceneAPI.html", "classSceneAPI" ],
     [ "SceneManager", "classSceneManager.html", "classSceneManager" ],
+    [ "Sprite", "structSprite.html", "structSprite" ],
     [ "Square", "structSquare.html", "structSquare" ],
+    [ "TextureLoader", "classTextureLoader.html", null ],
     [ "Time", "structTime.html", null ],
     [ "TimeManager", "classTimeManager.html", "classTimeManager" ],
     [ "Transform", "classTransform.html", "classTransform" ],

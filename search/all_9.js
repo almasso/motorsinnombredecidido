@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['id_0',['id',['../classRectangle.html#abd4893a945c592228ba38f777c590ff0',1,'Rectangle::id()'],['../classTransform.html#a3b0b19926c71ae1c907ddb2d7c2242a3',1,'Transform::id()']]],
-  ['init_1',['Init',['../classAudioManager.html#aead5a8c264d6420767ee016b2ca3a1eb',1,'AudioManager::Init()'],['../classSceneManager.html#a1d1dd9702cfae741d8f2c653c1259394',1,'SceneManager::Init()'],['../classInputManager.html#ac5c3688737c75fb92824ff8b7f53a264',1,'InputManager::Init()']]],
-  ['init_2',['init',['../classComponent.html#a9e30d558da3030875bcc808dd405f71c',1,'Component::init()'],['../classRenderComponent.html#a497fb88ff04c57c3e5f532548304bc5b',1,'RenderComponent::init()'],['../classRenderManager.html#a1205d52fc12124339bd64d916c9c8237',1,'RenderManager::init()'],['../classTimeManager.html#a741d9249948f4cb8bbf96895c593ced4',1,'TimeManager::init()']]],
+  ['id_0',['id',['../classCamera.html#a57fc7dcb21473529c50e2d418d386aa7',1,'Camera::id()'],['../classRectangle.html#abd4893a945c592228ba38f777c590ff0',1,'Rectangle::id()'],['../classTransform.html#a3b0b19926c71ae1c907ddb2d7c2242a3',1,'Transform::id()']]],
+  ['init_1',['init',['../classComponent.html#a9e30d558da3030875bcc808dd405f71c',1,'Component::init()'],['../classRenderComponent.html#a497fb88ff04c57c3e5f532548304bc5b',1,'RenderComponent::init()'],['../classRenderManager.html#a1205d52fc12124339bd64d916c9c8237',1,'RenderManager::init()'],['../classTimeManager.html#a741d9249948f4cb8bbf96895c593ced4',1,'TimeManager::init()']]],
+  ['init_2',['Init',['../classAudioManager.html#aead5a8c264d6420767ee016b2ca3a1eb',1,'AudioManager::Init()'],['../classSceneManager.html#a1d1dd9702cfae741d8f2c653c1259394',1,'SceneManager::Init()'],['../classInputManager.html#ac5c3688737c75fb92824ff8b7f53a264',1,'InputManager::Init()'],['../classTextureLoader.html#adcffe4061821c1c6d4c504e37d3c6fc7',1,'TextureLoader::Init()']]],
   ['inputmanager_3',['InputManager',['../classInputManager.html',1,'']]],
   ['inputmanager_2ecpp_4',['InputManager.cpp',['../InputManager_8cpp.html',1,'']]],
   ['inputmanager_2eh_5',['InputManager.h',['../InputManager_8h.html',1,'']]],

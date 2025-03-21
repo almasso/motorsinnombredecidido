@@ -6,5 +6,6 @@ var searchData=
   ['doscale_3',['doScale',['../classTransform.html#a8ab75487db25fca8bb17b1fad3bcbc69',1,'Transform::doScale(const Vector2 &amp;scaleFactor)'],['../classTransform.html#a11374532549f9708bc0a27270ba38648',1,'Transform::doScale(float scaleX, float scaleY)']]],
   ['doscalex_4',['doScaleX',['../classTransform.html#a7c0e6cc7abe3721fdb6013f953afc055',1,'Transform']]],
   ['doscaley_5',['doScaleY',['../classTransform.html#aee8407079b35e80bb719eaf69b0bedca',1,'Transform']]],
-  ['drawrect_6',['drawRect',['../classRenderManager.html#a8883b8cc8bf48e9d3b3c3a52553da547',1,'RenderManager']]]
+  ['drawimage_6',['drawImage',['../classRenderManager.html#a4ea63cbf0e4173298e38dc8b05b27772',1,'RenderManager']]],
+  ['drawrect_7',['drawRect',['../classRenderManager.html#a8883b8cc8bf48e9d3b3c3a52553da547',1,'RenderManager']]]
 ];
