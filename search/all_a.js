@@ -8,5 +8,7 @@ var searchData=
   ['loop_5',['loop',['../classAnimation.html#a951ff207e048c16b7c5dde293eb5419b',1,'Animation']]],
   ['luamanager_6',['LuaManager',['../classLuaManager.html',1,'']]],
   ['luamanager_2ecpp_7',['LuaManager.cpp',['../LuaManager_8cpp.html',1,'']]],
-  ['luamanager_2eh_8',['LuaManager.h',['../LuaManager_8h.html',1,'']]]
+  ['luamanager_2eh_8',['LuaManager.h',['../LuaManager_8h.html',1,'']]],
+  ['luareader_2ecpp_9',['LuaReader.cpp',['../LuaReader_8cpp.html',1,'']]],
+  ['luareader_2eh_10',['LuaReader.h',['../LuaReader_8h.html',1,'']]]
 ];
