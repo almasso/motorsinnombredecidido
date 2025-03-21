@@ -1,10 +1,12 @@
 #ifndef RENDERMANAGER_H
 #define RENDERMANAGER_H
+#include <Utils/Vector2.h>
 #include <Utils/Rect.h>
 #include "Color.h"
 
 class SDL_Window;
 class SDL_Renderer;
+class Camera;
 
 class RenderManager {
     public:
@@ -13,11 +15,18 @@ class RenderManager {
     void present() const;
     void clear() const;
     void drawRect(const Rect &rect, const Color& color) const;
+    void drawImage(const Rect &rect, const Color& color) const;
     void getWindowSize(int *width, int *height) const;
     void shutdown() const;
+    void setViewRect(const Vector2& viewPosition, const Vector2& viewSize);
+    Rect convertRect(const Rect& rect) const;
     private:
-    SDL_Window* window;
-    SDL_Renderer* renderer;
+    Vector2 _viewOffset;
+    Vector2 _screenOffset;
+    float _screenScale;
+    SDL_Window* _window;
+    SDL_Renderer* _renderer;
+    float _width, _height;
 };
 
 #endif //RENDERMANAGER_H

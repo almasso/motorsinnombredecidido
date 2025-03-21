@@ -1,7 +1,7 @@
 #include "Rectangle.h"
 #include "RenderManager.h"
 #include "Transform.h"
-
+#include "Utils/RPGError.h"
 const std::string Rectangle::id = "Rectangle";
 
 bool Rectangle::render(RenderManager *manager) {
@@ -12,5 +12,6 @@ bool Rectangle::render(RenderManager *manager) {
         manager->drawRect(rectangle, _color);
         return true;
     }
+    RPGError::ShowError("Render object sin transform", "El RenderObject de tipo Rectangle no tenía Transform");
     return false;
 }

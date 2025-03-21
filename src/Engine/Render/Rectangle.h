@@ -7,11 +7,11 @@
 
 class Rectangle : public RenderComponent {
     private:
-    Vector2 _size = {};
+    Vector2 _size = {1,1};
     Color _color = {0};
     public:
     static const std::string id;
-    Rectangle();
+    Rectangle() = default;
     bool render(RenderManager* manager) override;
 };
 
