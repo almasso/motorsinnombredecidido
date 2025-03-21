@@ -29,7 +29,7 @@ var searchData=
   ['resource_2ecpp_26',['Resource.cpp',['../Resource_8cpp.html',1,'']]],
   ['resource_2eh_27',['Resource.h',['../Resource_8h.html',1,'']]],
   ['resourcederived_28',['resourceDerived',['../conceptresourceDerived.html',1,'']]],
-  ['resourcehandler_29',['ResourceHandler',['../classResourceHandler.html',1,'ResourceHandler&lt; Key, ResourceType &gt;'],['../classResourceHandler.html#a31a91c62ac1bdce368255d6b9536e39d',1,'ResourceHandler::ResourceHandler()']]],
+  ['resourcehandler_29',['ResourceHandler',['../classResourceHandler.html',1,'ResourceHandler&lt; ResourceType &gt;'],['../classResourceHandler.html#a533b0f71707f169915ee88804c364535',1,'ResourceHandler::ResourceHandler()']]],
   ['resourcehandler_2eh_30',['ResourceHandler.h',['../ResourceHandler_8h.html',1,'']]],
   ['resourcehandler_3c_20audioclipkey_2c_20audioclipdata_20_3e_31',['ResourceHandler&lt; AudioClipKey, AudioClipData &gt;',['../classResourceHandler.html',1,'']]],
   ['resourcememorymanager_32',['ResourceMemoryManager',['../classResourceMemoryManager.html',1,'ResourceMemoryManager'],['../classResourceMemoryManager.html#a1ec6176b1bc50af606a685f45d90b44e',1,'ResourceMemoryManager::ResourceMemoryManager()']]],

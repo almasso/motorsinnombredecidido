@@ -11,7 +11,7 @@ var searchData=
   ['rendermanager_8',['RenderManager',['../classRenderManager.html#aa52d38e61976b5b9438a9eabd2031cfa',1,'RenderManager']]],
   ['reset_9',['reset',['../classAnimator.html#a2d63cba9e9f75b5ba813ec1e619fa328',1,'Animator']]],
   ['resource_10',['Resource',['../classResource.html#a26732c5251dbdfd37399574910307081',1,'Resource']]],
-  ['resourcehandler_11',['ResourceHandler',['../classResourceHandler.html#a31a91c62ac1bdce368255d6b9536e39d',1,'ResourceHandler']]],
+  ['resourcehandler_11',['ResourceHandler',['../classResourceHandler.html#a533b0f71707f169915ee88804c364535',1,'ResourceHandler']]],
   ['resourcememorymanager_12',['ResourceMemoryManager',['../classResourceMemoryManager.html#a1ec6176b1bc50af606a685f45d90b44e',1,'ResourceMemoryManager']]],
   ['resume_13',['resume',['../classAudioClip.html#ad1666c4f9c62917ff7ddf43ff25d128d',1,'AudioClip']]],
   ['rotate_14',['rotate',['../classTransform.html#a613840be6222b2e53dc0e59a625112cf',1,'Transform']]]

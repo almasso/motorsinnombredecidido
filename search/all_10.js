@@ -28,7 +28,7 @@ var searchData=
   ['showerror_25',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
   ['shutdown_26',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager']]],
   ['shutdown_27',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['specifier_28',['specifier',['../structAudioClipData.html#a18467fbcbb33c44c0c92dafd545c750e',1,'AudioClipData']]],
+  ['specifier_28',['specifier',['../classAudioClipData.html#a18467fbcbb33c44c0c92dafd545c750e',1,'AudioClipData']]],
   ['speed_29',['speed',['../structSquare.html#ae63bb534933b1a7581512eff3de9adda',1,'Square']]],
   ['sprite_30',['Sprite',['../structSprite.html',1,'']]],
   ['sprite_2eh_31',['Sprite.h',['../Sprite_8h.html',1,'']]],

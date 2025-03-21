@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>motorsinnombredefinido: ResourceHandler&lt; Key, ResourceType &gt; Class Template Reference</title>
+<title>motorsinnombredefinido: ResourceHandler&lt; ResourceType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classResourceHandler.html',''); initRe
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classResourceHandler-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ResourceHandler&lt; Key, ResourceType &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">ResourceHandler&lt; ResourceType &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -104,51 +104,45 @@ $(document).ready(function(){initNavTree('classResourceHandler.html',''); initRe
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a31a91c62ac1bdce368255d6b9536e39d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a31a91c62ac1bdce368255d6b9536e39d">ResourceHandler</a> (<a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *resourceMemoryManager)</td></tr>
-<tr class="separator:a31a91c62ac1bdce368255d6b9536e39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb3e6bd6ac83f6b5c8267bfc71ca75e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#aeb3e6bd6ac83f6b5c8267bfc71ca75e7">~ResourceHandler</a> ()</td></tr>
-<tr class="separator:aeb3e6bd6ac83f6b5c8267bfc71ca75e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a958c987f5ca69365a96414dbefcf80d7"><td class="memTemplParams" colspan="2">template&lt;typename ... Args&gt; </td></tr>
-<tr class="memitem:a958c987f5ca69365a96414dbefcf80d7"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a958c987f5ca69365a96414dbefcf80d7">add</a> (Key const &amp;key, Args &amp;&amp;...args)</td></tr>
-<tr class="memdesc:a958c987f5ca69365a96414dbefcf80d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and adds to this <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> a new instance of <code>ResourceType</code> calling its constructor with the arguments provided.  <br /></td></tr>
-<tr class="separator:a958c987f5ca69365a96414dbefcf80d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade5415f9a70998114831e063fa77f141"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#ade5415f9a70998114831e063fa77f141">addReady</a> (Key const &amp;key, ResourceType *resource)</td></tr>
-<tr class="memdesc:ade5415f9a70998114831e063fa77f141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds to this <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> a provided instance of <code>ResourceType</code> .  <br /></td></tr>
-<tr class="separator:ade5415f9a70998114831e063fa77f141"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94c0df586f08b934b01a381400276ca5"><td class="memItemLeft" align="right" valign="top">ResourceType const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a94c0df586f08b934b01a381400276ca5">get</a> (Key const &amp;key)</td></tr>
-<tr class="memdesc:a94c0df586f08b934b01a381400276ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resource linked to a key. Loads it if it wasn't.  <br /></td></tr>
-<tr class="separator:a94c0df586f08b934b01a381400276ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6569f7edccc5a672821d9d4301a5c691"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a6569f7edccc5a672821d9d4301a5c691">flush</a> ()</td></tr>
-<tr class="memdesc:a6569f7edccc5a672821d9d4301a5c691"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads all the loaded resources contained in the <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> .  <br /></td></tr>
-<tr class="separator:a6569f7edccc5a672821d9d4301a5c691"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79347fd3e55219c891f672c3f6c32172"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a79347fd3e55219c891f672c3f6c32172">clear</a> ()</td></tr>
-<tr class="memdesc:a79347fd3e55219c891f672c3f6c32172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory of every resource and erases them from the handler.  <br /></td></tr>
-<tr class="separator:a79347fd3e55219c891f672c3f6c32172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a533b0f71707f169915ee88804c364535"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a533b0f71707f169915ee88804c364535">ResourceHandler</a> (<a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *resourceMemoryManager)</td></tr>
+<tr class="memdesc:a533b0f71707f169915ee88804c364535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty handler.  <br /></td></tr>
+<tr class="separator:a533b0f71707f169915ee88804c364535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb16ba2d8ddf073fad9c06a41dc3dd15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#adb16ba2d8ddf073fad9c06a41dc3dd15">~ResourceHandler</a> ()</td></tr>
+<tr class="memdesc:adb16ba2d8ddf073fad9c06a41dc3dd15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the resources in the handler.  <br /></td></tr>
+<tr class="separator:adb16ba2d8ddf073fad9c06a41dc3dd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664cbb98fa9bcfb18aa7ec09eac81a32"><td class="memItemLeft" align="right" valign="top">ResourceType const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a664cbb98fa9bcfb18aa7ec09eac81a32">get</a> (std::string const &amp;key)</td></tr>
+<tr class="memdesc:a664cbb98fa9bcfb18aa7ec09eac81a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resource linked to a key. Loads it if it wasn't.  <br /></td></tr>
+<tr class="separator:a664cbb98fa9bcfb18aa7ec09eac81a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7827695ae7d998e976bd9d657998a57e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a7827695ae7d998e976bd9d657998a57e">flush</a> ()</td></tr>
+<tr class="memdesc:a7827695ae7d998e976bd9d657998a57e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads all the loaded resources contained in the <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> .  <br /></td></tr>
+<tr class="separator:a7827695ae7d998e976bd9d657998a57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6731097027901d1723ab9d0cbf57c3af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a6731097027901d1723ab9d0cbf57c3af">clear</a> ()</td></tr>
+<tr class="memdesc:a6731097027901d1723ab9d0cbf57c3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory of every resource and erases them from the handler.  <br /></td></tr>
+<tr class="separator:a6731097027901d1723ab9d0cbf57c3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt;<br />
-class ResourceHandler&lt; Key, ResourceType &gt;</div><p>Data structure that handles the references to a specific type of resource and its memory. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt;<br />
+class ResourceHandler&lt; ResourceType &gt;</div><p>Data structure that handles the references to a specific type of resource and its memory. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Key</td><td>Type used to access the resources. </td></tr>
     <tr><td class="paramname">ResourceType</td><td>Type of the resource to handle, must be a derived class from <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code>. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a31a91c62ac1bdce368255d6b9536e39d" name="a31a91c62ac1bdce368255d6b9536e39d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31a91c62ac1bdce368255d6b9536e39d">&#9670;&#160;</a></span>ResourceHandler()</h2>
+<a id="a533b0f71707f169915ee88804c364535" name="a533b0f71707f169915ee88804c364535"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a533b0f71707f169915ee88804c364535">&#9670;&#160;</a></span>ResourceHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;<a class="el" href="classResourceHandler.html">::ResourceHandler</a> </td>
+          <td class="memname"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;<a class="el" href="classResourceHandler.html">::ResourceHandler</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *&#160;</td>
           <td class="paramname"><em>resourceMemoryManager</em></td><td>)</td>
@@ -161,23 +155,24 @@ template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">reso
   </tr>
 </table>
 </div><div class="memdoc">
+
 <p>Creates an empty handler. </p>
 
 </div>
 </div>
-<a id="aeb3e6bd6ac83f6b5c8267bfc71ca75e7" name="aeb3e6bd6ac83f6b5c8267bfc71ca75e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb3e6bd6ac83f6b5c8267bfc71ca75e7">&#9670;&#160;</a></span>~ResourceHandler()</h2>
+<a id="adb16ba2d8ddf073fad9c06a41dc3dd15" name="adb16ba2d8ddf073fad9c06a41dc3dd15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb16ba2d8ddf073fad9c06a41dc3dd15">&#9670;&#160;</a></span>~ResourceHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;::~<a class="el" href="classResourceHandler.html">ResourceHandler</a> </td>
+          <td class="memname"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;::~<a class="el" href="classResourceHandler.html">ResourceHandler</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -189,129 +184,25 @@ template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">reso
   </tr>
 </table>
 </div><div class="memdoc">
+
 <p>Clears all the resources in the handler. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a958c987f5ca69365a96414dbefcf80d7" name="a958c987f5ca69365a96414dbefcf80d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a958c987f5ca69365a96414dbefcf80d7">&#9670;&#160;</a></span>add()</h2>
+<a id="a6731097027901d1723ab9d0cbf57c3af" name="a6731097027901d1723ab9d0cbf57c3af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6731097027901d1723ab9d0cbf57c3af">&#9670;&#160;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
-<div class="memtemplate">
-template&lt;typename ... Args&gt; </div>
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;::add </td>
-          <td>(</td>
-          <td class="paramtype">Key const &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Creates and adds to this <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> a new instance of <code>ResourceType</code> calling its constructor with the arguments provided. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Args</td><td>Types of arguments needed to call the <code>ResourceType</code> 's constructor. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>Key for later access to the newly added resource. </td></tr>
-    <tr><td class="paramname">args</td><td>Arguments needed to call the <code>ResourceType</code> 's constructor. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether the resource creation and addition took place. <code>true</code> if it did, <code>false</code> if it didn't. </dd></dl>
-
-</div>
-</div>
-<a id="ade5415f9a70998114831e063fa77f141" name="ade5415f9a70998114831e063fa77f141"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade5415f9a70998114831e063fa77f141">&#9670;&#160;</a></span>addReady()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;::addReady </td>
-          <td>(</td>
-          <td class="paramtype">Key const &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ResourceType *&#160;</td>
-          <td class="paramname"><em>resource</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Adds to this <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> a provided instance of <code>ResourceType</code> . </p>
-<dl class="section remark"><dt>Remarks</dt><dd>Be aware that the <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> will try to <code>delete</code> the object pointed if that resource is unloaded and <code><a class="el" href="classResourceHandler.html#a6569f7edccc5a672821d9d4301a5c691" title="Unloads all the loaded resources contained in the ResourceHandler .">flush()</a></code> is called. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>Key for later access to the newly added <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> . </td></tr>
-    <tr><td class="paramname">resource</td><td>A pointer to an already created <code>ResourceType</code> allocated in the heap. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether the resource addition took place. <code>true</code> if it did; <code>false</code> if it didn't, in that case that resource's memory won't be freed by the <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> . </dd></dl>
-
-</div>
-</div>
-<a id="a79347fd3e55219c891f672c3f6c32172" name="a79347fd3e55219c891f672c3f6c32172"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79347fd3e55219c891f672c3f6c32172">&#9670;&#160;</a></span>clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;::clear </td>
+          <td class="memname">void <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;::clear </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -328,19 +219,19 @@ template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">reso
 
 </div>
 </div>
-<a id="a6569f7edccc5a672821d9d4301a5c691" name="a6569f7edccc5a672821d9d4301a5c691"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6569f7edccc5a672821d9d4301a5c691">&#9670;&#160;</a></span>flush()</h2>
+<a id="a7827695ae7d998e976bd9d657998a57e" name="a7827695ae7d998e976bd9d657998a57e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7827695ae7d998e976bd9d657998a57e">&#9670;&#160;</a></span>flush()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;::flush </td>
+          <td class="memname">void <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;::flush </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -357,21 +248,21 @@ template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">reso
 
 </div>
 </div>
-<a id="a94c0df586f08b934b01a381400276ca5" name="a94c0df586f08b934b01a381400276ca5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94c0df586f08b934b01a381400276ca5">&#9670;&#160;</a></span>get()</h2>
+<a id="a664cbb98fa9bcfb18aa7ec09eac81a32" name="a664cbb98fa9bcfb18aa7ec09eac81a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664cbb98fa9bcfb18aa7ec09eac81a32">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Key , <a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ResourceType const  * <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; Key, ResourceType &gt;::get </td>
+          <td class="memname">ResourceType const  * <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;::get </td>
           <td>(</td>
-          <td class="paramtype">Key const &amp;&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>key</em></td><td>)</td>
           <td></td>
         </tr>

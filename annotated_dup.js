@@ -4,7 +4,7 @@ var annotated_dup =
     [ "Animator", "classAnimator.html", "classAnimator" ],
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", "classAudioClip" ],
-    [ "AudioClipData", "structAudioClipData.html", "structAudioClipData" ],
+    [ "AudioClipData", "classAudioClipData.html", "classAudioClipData" ],
     [ "AudioManager", "classAudioManager.html", "classAudioManager" ],
     [ "AudioMixer", "classAudioMixer.html", "classAudioMixer" ],
     [ "AudioMixerData", "structAudioMixerData.html", "structAudioMixerData" ],

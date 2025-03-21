@@ -39,9 +39,9 @@ var hierarchy =
     [ "Random", "classRandom.html", null ],
     [ "RenderManager", "classRenderManager.html", null ],
     [ "Resource", "classResource.html", [
-      [ "AudioClipData", "structAudioClipData.html", null ]
+      [ "AudioClipData", "classAudioClipData.html", null ]
     ] ],
-    [ "ResourceHandler< Key, ResourceType >", "classResourceHandler.html", null ],
+    [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ],
     [ "ResourceHandler< AudioClipKey, AudioClipData >", "classResourceHandler.html", null ],
     [ "ResourceMemoryManager", "classResourceMemoryManager.html", null ],
     [ "RPGError", "classRPGError.html", null ],
