@@ -21,5 +21,6 @@ var searchData=
   ['showerror_18',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
   ['shutdown_19',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager']]],
   ['shutdown_20',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['stop_21',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]]
+  ['stop_21',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip']]],
+  ['string_5fliteral_22',['string_literal',['../structstring__literal.html#a8e765fee6593387219953eed801a7e64',1,'string_literal']]]
 ];

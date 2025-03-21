@@ -12,6 +12,7 @@ var classTransform =
     [ "getPosition", "classTransform.html#a51174ddddc596f9e971a2a347d9086c8", null ],
     [ "getRotation", "classTransform.html#a64f4d2c6b540ebae54bfc451488cb18b", null ],
     [ "getScale", "classTransform.html#a1e6d381ef86f295dac07d85fa1054fc2", null ],
+    [ "init", "classTransform.html#aeb32baba14e361891175f99a6ba071ca", null ],
     [ "move", "classTransform.html#a4d05eb88bee352450d463f791d2217a7", null ],
     [ "move", "classTransform.html#a661b7f68737b26ec61445d75051b7877", null ],
     [ "moveX", "classTransform.html#abdeb4f046c67627819b4924cb0d86eb4", null ],

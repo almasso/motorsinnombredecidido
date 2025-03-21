@@ -9,14 +9,25 @@ var hierarchy =
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
-      [ "RenderComponent", "classRenderComponent.html", [
-        [ "Camera", "classCamera.html", null ],
-        [ "Rectangle", "classRectangle.html", null ],
-        [ "SpriteRenderer", "classSpriteRenderer.html", [
-          [ "Animator", "classAnimator.html", null ]
-        ] ]
+      [ "ComponentTemplate<\"Transform\">", "classComponentTemplate.html", [
+        [ "Transform", "classTransform.html", null ]
       ] ],
-      [ "Transform", "classTransform.html", null ]
+      [ "ComponentTemplate< componentName, ComponentBase >", "classComponentTemplate.html", null ],
+      [ "RenderComponent", "classRenderComponent.html", null ]
+    ] ],
+    [ "ComponentBase", null, [
+      [ "ComponentTemplate<\"Animator\", SpriteRenderer >", "classComponentTemplate.html", [
+        [ "Animator", "classAnimator.html", null ]
+      ] ],
+      [ "ComponentTemplate<\"Camera\", RenderComponent >", "classComponentTemplate.html", [
+        [ "Camera", "classCamera.html", null ]
+      ] ],
+      [ "ComponentTemplate<\"Rectangle\", RenderComponent >", "classComponentTemplate.html", [
+        [ "Rectangle", "classRectangle.html", null ]
+      ] ],
+      [ "ComponentTemplate<\"SpriteRenderer\", RenderComponent >", "classComponentTemplate.html", [
+        [ "SpriteRenderer", "classSpriteRenderer.html", null ]
+      ] ]
     ] ],
     [ "ComponentFactory", "classComponentFactory.html", null ],
     [ "Entity", "classEntity.html", null ],
@@ -38,6 +49,7 @@ var hierarchy =
     [ "SceneManager", "classSceneManager.html", null ],
     [ "Sprite", "structSprite.html", null ],
     [ "Square", "structSquare.html", null ],
+    [ "string_literal< N >", "structstring__literal.html", null ],
     [ "TextureLoader", "classTextureLoader.html", null ],
     [ "Time", "structTime.html", null ],
     [ "TimeManager", "classTimeManager.html", null ],

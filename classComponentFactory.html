@@ -103,8 +103,13 @@ $(document).ready(function(){initNavTree('classComponentFactory.html',''); initR
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaaaa1c4d580adeed012971d37b5494c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentFactory.html#aaaaa1c4d580adeed012971d37b5494c5">ComponentFactory</a> ()</td></tr>
 <tr class="separator:aaaaa1c4d580adeed012971d37b5494c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c665f9b8dd032c9205f0ef363a0bfc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classComponent.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentFactory.html#a0c665f9b8dd032c9205f0ef363a0bfc9">createComponent</a> (const std::string &amp;name, const ComponentData &amp;data)</td></tr>
-<tr class="separator:a0c665f9b8dd032c9205f0ef363a0bfc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af47c59f75ffefcf11d2aadff0103fb11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classComponent.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentFactory.html#af47c59f75ffefcf11d2aadff0103fb11">createComponent</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:af47c59f75ffefcf11d2aadff0103fb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac108dbd80442a73b7531f1e19ad433"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentFactory.html#a0ac108dbd80442a73b7531f1e19ad433">getOrder</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a0ac108dbd80442a73b7531f1e19ad433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57716ffcad706571a43bda7e8140a173"><td class="memTemplParams" colspan="2">template&lt;typename ComponentType &gt; </td></tr>
+<tr class="memitem:a57716ffcad706571a43bda7e8140a173"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classComponentFactory.html#a57716ffcad706571a43bda7e8140a173">registerComponent</a> ()</td></tr>
+<tr class="separator:a57716ffcad706571a43bda7e8140a173"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaaaa1c4d580adeed012971d37b5494c5" name="aaaaa1c4d580adeed012971d37b5494c5"></a>
@@ -125,8 +130,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0c665f9b8dd032c9205f0ef363a0bfc9" name="a0c665f9b8dd032c9205f0ef363a0bfc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c665f9b8dd032c9205f0ef363a0bfc9">&#9670;&#160;</a></span>createComponent()</h2>
+<a id="af47c59f75ffefcf11d2aadff0103fb11" name="af47c59f75ffefcf11d2aadff0103fb11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af47c59f75ffefcf11d2aadff0103fb11">&#9670;&#160;</a></span>createComponent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -135,26 +140,62 @@ Public Member Functions</h2></td></tr>
           <td class="memname"><a class="el" href="classComponent.html">Component</a> * ComponentFactory::createComponent </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const ComponentData &amp;&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a0ac108dbd80442a73b7531f1e19ad433" name="a0ac108dbd80442a73b7531f1e19ad433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac108dbd80442a73b7531f1e19ad433">&#9670;&#160;</a></span>getOrder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ComponentFactory::getOrder </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57716ffcad706571a43bda7e8140a173" name="a57716ffcad706571a43bda7e8140a173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57716ffcad706571a43bda7e8140a173">&#9670;&#160;</a></span>registerComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ComponentType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ComponentFactory::registerComponent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Engine/Core/<a class="el" href="ComponentFactory_8h_source.html">ComponentFactory.h</a></li>
+<li>src/Engine/Core/<a class="el" href="ComponentFactory_8cpp.html">ComponentFactory.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

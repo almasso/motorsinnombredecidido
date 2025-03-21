@@ -4,6 +4,7 @@ var dir_a9a739f348362e2900b2e729cba7fae5 =
     [ "Component.h", "Component_8h.html", "Component_8h" ],
     [ "ComponentFactory.cpp", "ComponentFactory_8cpp.html", null ],
     [ "ComponentFactory.h", "ComponentFactory_8h.html", "ComponentFactory_8h" ],
+    [ "ComponentTemplate.h", "ComponentTemplate_8h.html", "ComponentTemplate_8h" ],
     [ "Entity.cpp", "Entity_8cpp.html", null ],
     [ "Entity.h", "Entity_8h.html", "Entity_8h" ],
     [ "Scene.cpp", "Scene_8cpp.html", null ],

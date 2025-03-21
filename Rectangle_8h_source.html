@@ -99,26 +99,23 @@ $(document).ready(function(){initNavTree('Rectangle_8h_source.html',''); initRes
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Vector2_8h.html">Utils/Vector2.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Color_8h.html">Color.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classRectangle.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classRectangle.html">Rectangle</a> : <span class="keyword">public</span> <a class="code hl_class" href="classRenderComponent.html">RenderComponent</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="classVector2.html">Vector2</a> _size = {1,1};</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_struct" href="structColor.html">Color</a> _color = {0};</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classRectangle.html#abd4893a945c592228ba38f777c590ff0">   13</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> std::string <a class="code hl_variable" href="classRectangle.html#abd4893a945c592228ba38f777c590ff0">id</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c">render</a>(<a class="code hl_class" href="classRenderManager.html">RenderManager</a>* manager) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classRectangle.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="classRectangle.html">Rectangle</a> : <span class="keyword">public</span> <a class="code hl_class" href="classComponentTemplate.html">ComponentTemplate</a>&lt;&quot;Rectangle&quot;,RenderComponent&gt; {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_class" href="classVector2.html">Vector2</a> _size = {1,1};</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_struct" href="structColor.html">Color</a> _color = {0};</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c">render</a>(<a class="code hl_class" href="classRenderManager.html">RenderManager</a>* manager) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>};</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif </span><span class="comment">//RECTANGLE_H</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif </span><span class="comment">//RECTANGLE_H</span></div>
 <div class="ttc" id="aColor_8h_html"><div class="ttname"><a href="Color_8h.html">Color.h</a></div></div>
 <div class="ttc" id="aRenderComponent_8h_html"><div class="ttname"><a href="RenderComponent_8h.html">RenderComponent.h</a></div></div>
 <div class="ttc" id="aVector2_8h_html"><div class="ttname"><a href="Vector2_8h.html">Vector2.h</a></div></div>
-<div class="ttc" id="aclassRectangle_html"><div class="ttname"><a href="classRectangle.html">Rectangle</a></div><div class="ttdef"><b>Definition:</b> Rectangle.h:8</div></div>
-<div class="ttc" id="aclassRectangle_html_abd4893a945c592228ba38f777c590ff0"><div class="ttname"><a href="classRectangle.html#abd4893a945c592228ba38f777c590ff0">Rectangle::id</a></div><div class="ttdeci">static const std::string id</div><div class="ttdef"><b>Definition:</b> Rectangle.h:13</div></div>
-<div class="ttc" id="aclassRectangle_html_adbc2f5c50cb96343fad3393068f51a3c"><div class="ttname"><a href="classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c">Rectangle::render</a></div><div class="ttdeci">bool render(RenderManager *manager) override</div><div class="ttdef"><b>Definition:</b> Rectangle.cpp:8</div></div>
-<div class="ttc" id="aclassRenderComponent_html"><div class="ttname"><a href="classRenderComponent.html">RenderComponent</a></div><div class="ttdef"><b>Definition:</b> RenderComponent.h:8</div></div>
+<div class="ttc" id="aclassComponentTemplate_html"><div class="ttname"><a href="classComponentTemplate.html">ComponentTemplate</a></div><div class="ttdef"><b>Definition:</b> ComponentTemplate.h:19</div></div>
+<div class="ttc" id="aclassRectangle_html"><div class="ttname"><a href="classRectangle.html">Rectangle</a></div><div class="ttdef"><b>Definition:</b> Rectangle.h:7</div></div>
+<div class="ttc" id="aclassRectangle_html_adbc2f5c50cb96343fad3393068f51a3c"><div class="ttname"><a href="classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c">Rectangle::render</a></div><div class="ttdeci">bool render(RenderManager *manager) override</div><div class="ttdef"><b>Definition:</b> Rectangle.cpp:6</div></div>
 <div class="ttc" id="aclassRenderManager_html"><div class="ttname"><a href="classRenderManager.html">RenderManager</a></div><div class="ttdef"><b>Definition:</b> RenderManager.h:11</div></div>
 <div class="ttc" id="aclassVector2_html"><div class="ttname"><a href="classVector2.html">Vector2</a></div><div class="ttdef"><b>Definition:</b> Vector2.h:4</div></div>
 <div class="ttc" id="astructColor_html"><div class="ttname"><a href="structColor.html">Color</a></div><div class="ttdef"><b>Definition:</b> Color.h:5</div></div>

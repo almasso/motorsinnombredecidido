@@ -92,7 +92,6 @@ $(document).ready(function(){initNavTree('classTransform.html',''); initResizabl
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classTransform-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Transform Class Reference</div></div>
 </div><!--header-->
@@ -105,7 +104,8 @@ Inheritance diagram for Transform:</div>
  <div class="center">
   <img src="classTransform.png" usemap="#Transform_map" alt=""/>
   <map id="Transform_map" name="Transform_map">
-<area href="classComponent.html" alt="Component" shape="rect" coords="0,0,75,24"/>
+<area href="classComponentTemplate.html" alt="ComponentTemplate&lt;&quot;Transform&quot;&gt;" shape="rect" coords="0,56,206,80"/>
+<area href="classComponent.html" alt="Component" shape="rect" coords="0,0,206,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -113,6 +113,8 @@ Inheritance diagram for Transform:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa08ca4266efabc768973cdeea51945ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransform.html#aa08ca4266efabc768973cdeea51945ab">Transform</a> ()</td></tr>
 <tr class="separator:aa08ca4266efabc768973cdeea51945ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb32baba14e361891175f99a6ba071ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransform.html#aeb32baba14e361891175f99a6ba071ca">init</a> () override</td></tr>
+<tr class="separator:aeb32baba14e361891175f99a6ba071ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51174ddddc596f9e971a2a347d9086c8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classVector2.html">Vector2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransform.html#a51174ddddc596f9e971a2a347d9086c8">getPosition</a> () const</td></tr>
 <tr class="separator:a51174ddddc596f9e971a2a347d9086c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1afb3de9c96e9685b765d80d216e70f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransform.html#a1afb3de9c96e9685b765d80d216e70f9">getGlobalPosition</a> () const</td></tr>
@@ -164,22 +166,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9cecf52e05b2e518790d75fb2c6c844"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransform.html">Transform</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransform.html#aa9cecf52e05b2e518790d75fb2c6c844">getParent</a> () const</td></tr>
 <tr class="separator:aa9cecf52e05b2e518790d75fb2c6c844"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classComponent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
-<tr class="memitem:ad82d7393e339c1b19cc17a0d55b5674d inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ad82d7393e339c1b19cc17a0d55b5674d">~Component</a> ()=default</td></tr>
-<tr class="separator:ad82d7393e339c1b19cc17a0d55b5674d inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8775db6d1a2c1afc2e77cd3c8f39da6f inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a8775db6d1a2c1afc2e77cd3c8f39da6f">Component</a> ()</td></tr>
 <tr class="separator:a8775db6d1a2c1afc2e77cd3c8f39da6f inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad82d7393e339c1b19cc17a0d55b5674d inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ad82d7393e339c1b19cc17a0d55b5674d">~Component</a> ()=default</td></tr>
+<tr class="separator:ad82d7393e339c1b19cc17a0d55b5674d inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3725d03298aeeafb655a51de6a4bad7b inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a3725d03298aeeafb655a51de6a4bad7b">setContext</a> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classScene.html">Scene</a> *scene, <a class="el" href="classGame.html">Game</a> *game)</td></tr>
 <tr class="separator:a3725d03298aeeafb655a51de6a4bad7b inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e30d558da3030875bcc808dd405f71c inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a9e30d558da3030875bcc808dd405f71c">init</a> ()=0</td></tr>
-<tr class="separator:a9e30d558da3030875bcc808dd405f71c inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6dde4e113b18e155b15cbd88aafb50f inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ae6dde4e113b18e155b15cbd88aafb50f">update</a> ()=0</td></tr>
-<tr class="separator:ae6dde4e113b18e155b15cbd88aafb50f inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71d0736d2d92e926ad91f9383d536101 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a71d0736d2d92e926ad91f9383d536101">fixedUpdate</a> ()=0</td></tr>
-<tr class="separator:a71d0736d2d92e926ad91f9383d536101 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab99f2ecbb29756381b95a0fc5389a439 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ab99f2ecbb29756381b95a0fc5389a439">onEnable</a> ()=0</td></tr>
-<tr class="separator:ab99f2ecbb29756381b95a0fc5389a439 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afca56a14cb3f79b138884c94322dd526 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#afca56a14cb3f79b138884c94322dd526">onDisable</a> ()=0</td></tr>
-<tr class="separator:afca56a14cb3f79b138884c94322dd526 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ba734c9c157fe8c445f0b02904043a inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#af4ba734c9c157fe8c445f0b02904043a">init</a> ()</td></tr>
+<tr class="separator:af4ba734c9c157fe8c445f0b02904043a inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4a1c1e5fa7e4a4427259487f97b8d0 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a9e4a1c1e5fa7e4a4427259487f97b8d0">update</a> ()</td></tr>
+<tr class="separator:a9e4a1c1e5fa7e4a4427259487f97b8d0 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11fffc465a0f002d53fed7e36a8e06c1 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a11fffc465a0f002d53fed7e36a8e06c1">fixedUpdate</a> ()</td></tr>
+<tr class="separator:a11fffc465a0f002d53fed7e36a8e06c1 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6355bc0588301fed0d486511845a14 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a2f6355bc0588301fed0d486511845a14">onEnable</a> ()</td></tr>
+<tr class="separator:a2f6355bc0588301fed0d486511845a14 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1d66c8e02640a8b0d1d383076e141c inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a1d1d66c8e02640a8b0d1d383076e141c">onDisable</a> ()</td></tr>
+<tr class="separator:a1d1d66c8e02640a8b0d1d383076e141c inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a553dae3822f2c4a41808f64e27715878 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a553dae3822f2c4a41808f64e27715878">isEnabled</a> () const</td></tr>
 <tr class="separator:a553dae3822f2c4a41808f64e27715878 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc5860a44b4bf0a5471a5d00b80c18bc inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#acc5860a44b4bf0a5471a5d00b80c18bc">isEntityActive</a> () const</td></tr>
@@ -187,13 +189,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa76e51f86dcc7375738d337d72f06b25 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#aa76e51f86dcc7375738d337d72f06b25">setEnabled</a> (bool enabled)</td></tr>
 <tr class="separator:aa76e51f86dcc7375738d337d72f06b25 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a3b0b19926c71ae1c907ddb2d7c2242a3"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransform.html#a3b0b19926c71ae1c907ddb2d7c2242a3">id</a> = &quot;Transform&quot;</td></tr>
-<tr class="separator:a3b0b19926c71ae1c907ddb2d7c2242a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_attribs_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt;&quot;Transform&quot;&gt;</a></td></tr>
+<tr class="memitem:a2fe08e960beac12119356f91e5c95f71 inherit pub_static_attribs_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a2fe08e960beac12119356f91e5c95f71">order</a></td></tr>
+<tr class="separator:a2fe08e960beac12119356f91e5c95f71 inherit pub_static_attribs_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5feffe0e03527753c74228d8521c489 inherit pub_static_attribs_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#ac5feffe0e03527753c74228d8521c489">id</a></td></tr>
+<tr class="separator:ac5feffe0e03527753c74228d8521c489 inherit pub_static_attribs_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classComponent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classComponent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
 <tr class="memitem:abece985590c7196141a2fe29d9303c65 inherit pro_attribs_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#abece985590c7196141a2fe29d9303c65">_enabled</a></td></tr>
 <tr class="separator:abece985590c7196141a2fe29d9303c65 inherit pro_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -421,6 +423,33 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb32baba14e361891175f99a6ba071ca" name="aeb32baba14e361891175f99a6ba071ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb32baba14e361891175f99a6ba071ca">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Transform::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classComponent.html#af4ba734c9c157fe8c445f0b02904043a">Component</a>.</p>
 
 </div>
 </div>
@@ -702,29 +731,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a3b0b19926c71ae1c907ddb2d7c2242a3" name="a3b0b19926c71ae1c907ddb2d7c2242a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b0b19926c71ae1c907ddb2d7c2242a3">&#9670;&#160;</a></span>id</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::string Transform::id = &quot;Transform&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
