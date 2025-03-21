@@ -1,4 +1,4 @@
 var SceneAPI_8h =
 [
-    [ "SceneAPI", "classSceneAPI.html", "classSceneAPI" ]
+    [ "Game", "classGame.html", "classGame" ]
 ];

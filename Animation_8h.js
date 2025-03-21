@@ -1,4 +1,4 @@
 var Animation_8h =
 [
-    [ "Animation", "classAnimation.html", "classAnimation" ]
+    [ "Animation", "structAnimation.html", "structAnimation" ]
 ];

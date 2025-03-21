@@ -6,5 +6,7 @@ var searchData=
   ['collisionmanager_2eh_3',['CollisionManager.h',['../CollisionManager_8h.html',1,'']]],
   ['color_2eh_4',['Color.h',['../Color_8h.html',1,'']]],
   ['component_2ecpp_5',['Component.cpp',['../Component_8cpp.html',1,'']]],
-  ['component_2eh_6',['Component.h',['../Component_8h.html',1,'']]]
+  ['component_2eh_6',['Component.h',['../Component_8h.html',1,'']]],
+  ['componentfactory_2ecpp_7',['ComponentFactory.cpp',['../ComponentFactory_8cpp.html',1,'']]],
+  ['componentfactory_2eh_8',['ComponentFactory.h',['../ComponentFactory_8h.html',1,'']]]
 ];

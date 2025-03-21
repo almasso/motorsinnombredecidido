@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "Animation", "classAnimation.html", null ],
+    [ "Animation", "structAnimation.html", null ],
     [ "AssetManager", "classAssetManager.html", null ],
     [ "AudioClip", "classAudioClip.html", null ],
     [ "AudioManager", "classAudioManager.html", null ],
@@ -11,11 +11,16 @@ var hierarchy =
     [ "Component", "classComponent.html", [
       [ "RenderComponent", "classRenderComponent.html", [
         [ "Camera", "classCamera.html", null ],
-        [ "Rectangle", "classRectangle.html", null ]
+        [ "Rectangle", "classRectangle.html", null ],
+        [ "SpriteRenderer", "classSpriteRenderer.html", [
+          [ "Animator", "classAnimator.html", null ]
+        ] ]
       ] ],
       [ "Transform", "classTransform.html", null ]
     ] ],
+    [ "ComponentFactory", "classComponentFactory.html", null ],
     [ "Entity", "classEntity.html", null ],
+    [ "Game", "classGame.html", null ],
     [ "InputManager", "classInputManager.html", null ],
     [ "InputState", "structInputState.html", null ],
     [ "LuaManager", "classLuaManager.html", null ],
@@ -30,7 +35,6 @@ var hierarchy =
     [ "ResourceMemoryManager", "classResourceMemoryManager.html", null ],
     [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", null ],
-    [ "SceneAPI", "classSceneAPI.html", null ],
     [ "SceneManager", "classSceneManager.html", null ],
     [ "Sprite", "structSprite.html", null ],
     [ "Square", "structSquare.html", null ],
