@@ -14,7 +14,7 @@ AudioSource::~AudioSource() {
 
 bool AudioSource::init() {
     _clip = AudioManager::Instance()->createAudioClip("");
-    _mixer = AudioManager::Instance()->getMixer("");
+    _mixer = AudioManager::Instance()->getMixer("Master");
     _clip->assignMixer(_mixer);
     return true;
 }

@@ -1,4 +1,7 @@
 #include "ResourceMemoryManager.h"
+
+#include <Utils/RPGError.h>
+
 #include "Resource.h"
 
 
@@ -36,6 +39,12 @@ bool ResourceMemoryManager::activateResource(Resource* resource) {
     }
     if (!resource->load())
         return false;
+    if (resource->getSize() < 0) {
+        resource->unload();
+        RPGError::ShowError("Invalid resource size.", "Tried to insert a resource with size " + std::to_string(resource->getSize()) + ".");
+        return false;
+    }
+
     if (_currentSize + resource->getSize() >= _maxSize &&
         !makeRoomForSize(resource->getSize())) {
         resource->unload();

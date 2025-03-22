@@ -23,6 +23,7 @@ bool AudioMixerData::load() {
         if (input.is<std::string>())
             inputs.push_back(input.as<std::string>());
     }*/
+    _size = 0;
     return true;
 }
 

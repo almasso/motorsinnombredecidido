@@ -1,6 +1,7 @@
 #include "Main.h"
 
 #include <Audio/AudioManager.h>
+#include <Collisions/CollisionManager.h>
 #include <Input/InputManager.h>
 #include <Load/LuaManager.h>
 #include <Render/RenderManager.h>
@@ -12,6 +13,7 @@ RenderManager* Main::render = nullptr;
 AudioManager* Main::audio = nullptr;
 TimeManager* Main::time = nullptr;
 InputManager* Main::input = nullptr;
+CollisionManager* Main::collisions = nullptr;
 
 bool Main::Init() {
     ResourceManager::Init(1024*1024*1024);
@@ -24,12 +26,15 @@ bool Main::Init() {
     if (!AudioManager::Init())
         return false;
     audio = AudioManager::Instance();
+    CollisionManager::Init();
+    collisions = CollisionManager::Instance();
     time = new TimeManager();
     time->init();
     return true;
 }
 void Main::Shutdown() {
     delete time;
+    CollisionManager::Shutdown();
     AudioManager::Shutdown();
     input->shutdown();
     render->shutdown();
@@ -50,6 +55,7 @@ int Main::Loop() {
         time->update();
         input->update();
         audio->update();
+        collisions->fixedUpdate();
         render->clear();
         render->drawRect(rect, color);
         render->present();

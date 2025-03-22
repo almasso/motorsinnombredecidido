@@ -8,7 +8,6 @@
 #include <Utils/RPGError.h>
 #include <Utils/Time.h>
 #include "AudioClip.h"
-#include "AudioClipData.h"
 #include "AudioMixer.h"
 #include "AudioMixerData.h"
 
@@ -103,6 +102,8 @@ AudioMixer* AudioManager::registerAudioMixer(AudioMixerData const* data) {
 }
 
 AudioMixer* AudioManager::getMixer(std::string const& mixer) {
+    if (mixer == "")
+        return nullptr;
     return registerAudioMixer(ResourceHandler<AudioMixerData>::Instance()->get(mixer));
 }
 

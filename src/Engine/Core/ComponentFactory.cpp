@@ -1,6 +1,7 @@
 #include "ComponentFactory.h"
 
 #include <Audio/AudioSource.h>
+#include <Collisions/Collider.h>
 #include <Render/Transform.h>
 #include <Render/Rectangle.h>
 #include <Render/Animator.h>
@@ -14,6 +15,7 @@ ComponentFactory::ComponentFactory() : _numComponents(0) {
     registerComponent<SpriteRenderer>();
     registerComponent<Camera>();
     registerComponent<AudioSource>();
+    registerComponent<Collider>();
 }
 
 Component * ComponentFactory::createComponent(const std::string &name) {

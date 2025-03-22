@@ -1,6 +1,7 @@
 #ifndef ENGINE_LIBRARY_H
 #define ENGINE_LIBRARY_H
 
+class CollisionManager;
 class RenderManager;
 class AudioManager;
 class InputManager;
@@ -13,6 +14,7 @@ private:
   	static AudioManager* audio;
   	static TimeManager* time;
   	static InputManager* input;
+  	static CollisionManager* collisions;
 
 	static bool Init();
     static void Shutdown();
