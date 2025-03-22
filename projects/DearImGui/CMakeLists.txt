@@ -21,10 +21,3 @@ add_library(DearImGui STATIC ${IMGUI_SOURCES})
 # Directorios de inclusión
 # Include directories
 target_include_directories(DearImGui PUBLIC ${IMGUI_INCLUDE_DIRS} ${SDL3_INCLUDE_DIRS})
-
-# Establecemos las propiedades para la salida de la librería
-# We set the properties for the library output
-set_target_properties(DearImGui PROPERTIES
-        PREFIX ""
-        OUTPUT_NAME "DearImGui$<$<CONFIG:Debug>:_d>"
-)

@@ -40,6 +40,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_SYSTEM_NAME}/${CMAKE
 if(ANDROID)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${ANDROID_ABI})
 endif()
+if(NOT ANDROID AND ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    set(CMAKE_DEBUG_POSTFIX "_d")
+endif()
 
 # Obtenemos SDL 3.2.2 (última versión estable release a la fecha)
 # We fetch SDL 3.2.2 (last stable release version to date)
@@ -48,10 +51,52 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
         GIT_TAG release-3.2.2
 )
-set(BUILD_SHARED_LIBS ON CACHE BOOL "Build SDL3 as a shared library")
+set(SDL_ATOMIC OFF CACHE BOOL "" FORCE)
+set(SDL_THREADS OFF CACHE BOOL "" FORCE)
+set(SDL_PTHREADS OFF CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(SDL3)
 FetchContent_GetProperties(SDL3)
 set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
+
+# Obtenemos también todas las librerías extra de SDL, en este caso, SDL_ttf y SDL_image
+# We also fetch all extra SDL libraries, in this case, SDL_ttf and SDL_image
+
+FetchContent_Declare(
+        freetype
+        GIT_REPOSITORY https://github.com/freetype/freetype.git
+        GIT_TAG VER-2-13-2
+        CMAKE_ARGS -DBUILD_SHARED_LIBS=ON
+)
+FetchContent_MakeAvailable(freetype)
+set(FREETYPE_INCLUDE_DIR "${freetype_SOURCE_DIR}/include")
+set(FREETYPE_INCLUDE_DIRS "${FREETYPE_INCLUDE_DIR}")
+add_custom_target(BuildFreetype ALL DEPENDS Freetype::Freetype)
+set(FREETYPE_LIBRARY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libfreetyped.dll)
+
+FetchContent_Declare(
+        SDL3_ttf
+        GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
+        GIT_TAG release-3.2.0
+)
+FetchContent_MakeAvailable(SDL3_ttf)
+set(SDL3_TTF_INCLUDE_DIRS ${SDL3_TTF_SOURCE_DIR}/include)
+FetchContent_GetProperties(SDL3_ttf)
+if(SDL3_ttf_POPULATED)
+    if(TARGET SDL3_ttf-shared)
+        add_dependencies(SDL3_ttf-shared BuildFreetype)
+    endif()
+endif()
+
+FetchContent_Declare(
+        SDL3_image
+        GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
+        GIT_TAG release-3.2.4
+)
+FetchContent_MakeAvailable(SDL3_image)
+FetchContent_GetProperties(SDL3_image)
+set(SDL3_IMAGE_INCLUDE_DIRS ${SDL3_IMAGE_SOURCE_DIR}/include)
+
 
 # Hacemos lo mismo con LUA v5.4.7
 # We do the same with LUA v5.4.7
@@ -61,6 +106,16 @@ FetchContent_Declare(
         GIT_TAG v5.4.7
 )
 FetchContent_MakeAvailable(lualib)
+
+# Y con sol2, una librería de bindings de lua
+# And with sol2, a binding library for lua
+FetchContent_Declare(
+        sol2
+        GIT_REPOSITORY https://github.com/ThePhD/sol2.git
+        GIT_TAG v3.3.0
+)
+FetchContent_MakeAvailable(sol2)
+set(SOL2_INCLUDE_DIRS ${sol2_SOURCE_DIR}/include)
 
 # Y con DearImGUI
 # And with DearImGUI
@@ -86,10 +141,6 @@ add_subdirectory(${ROOT_DIR}/projects/Executable)
 endif()
 if(ANDROID)
     add_subdirectory(${ROOT_DIR}/projects/APK/app)
-endif()
-
-if(NOT ANDROID AND ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-    set_target_properties(SDL3-shared PROPERTIES OUTPUT_NAME "SDL3_d")
 endif()
 
 

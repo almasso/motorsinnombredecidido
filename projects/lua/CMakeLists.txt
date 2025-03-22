@@ -28,12 +28,3 @@ add_library(lua STATIC ${LUA_SOURCES})
 # Directorios de inclusión
 # Include directories
 target_include_directories(lua PUBLIC ${LUA_INCLUDE_DIRS})
-
-# Establecemos las propiedades para la salida de la librería
-# We set the properties for the library output
-if(NOT ANDROID)
-    set_target_properties(lua PROPERTIES
-            PREFIX ""
-            OUTPUT_NAME "lua$<$<CONFIG:Debug>:_d>"
-    )
-endif()

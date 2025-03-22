@@ -12,15 +12,5 @@ add_library(Engine SHARED ${ENGINE_SOURCES})
 
 # Incluimos y enlazamos SDL3
 # We include and link SDL3
-target_link_libraries(Engine PRIVATE SDL3-shared lua)
-target_include_directories(Engine PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/Engine/ ${LUA_INCLUDE_DIRS})
-
-
-# Hacemos que la librería dinámica tenga un _d cuando se compile en debug
-# We make so that the dynamic library has a _d whenever it's compiled on debug
-if(NOT ANDROID)
-    set_target_properties(Engine PROPERTIES
-            PREFIX ""
-            OUTPUT_NAME "Engine$<$<CONFIG:Debug>:_d>"
-    )
-endif()
+target_link_libraries(Engine PRIVATE SDL3-shared lua sol2::sol2 SDL3_ttf::SDL3_ttf-shared SDL3_image::SDL3_image-shared)
+target_include_directories(Engine PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/Engine/ ${LUA_INCLUDE_DIRS} ${SDL3_TTF_INCLUDE_DIRS} ${SDL3_IMAGE_INCLUDE_DIRS} ${SOL2_INCLUDE_DIRS})
