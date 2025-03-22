@@ -6,7 +6,7 @@
 #include <Render/RenderManager.h>
 #include <Utils/Rect.h>
 #include <Utils/TimeManager.h>
-#include <Load/ResourceMemoryManager.h>
+#include <Load/ResourceManager.h>
 
 RenderManager* Main::render = nullptr;
 AudioManager* Main::audio = nullptr;

@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <cstdio>
+#include <Load/ResourceHandler.h>
 #include <SDL3/SDL.h>
 
 #include <Utils/RPGError.h>
@@ -28,9 +29,9 @@ AudioManager::~AudioManager() {
 }
 
 bool AudioManager::initTest() {
-    AudioMixerData mixerData;
+    AudioMixerData mixerData("");
     mixerData.name = "Master";
-    registerAudioMixer(mixerData);
+    registerAudioMixer(&mixerData);
 
     testClip_ = createAudioClip("assets/SodaLoop.wav");
     _mixers["Master"]->connect(testClip_);
@@ -86,25 +87,23 @@ void AudioManager::Shutdown() {
     delete _instance;
 }
 
-bool AudioManager::registerAudioMixer(AudioMixerData const& data) {
-    auto [it, inserted] = _mixers.insert({data.name, nullptr});
+AudioMixer* AudioManager::registerAudioMixer(AudioMixerData const* data) {
+    auto [it, inserted] = _mixers.insert({data->name, nullptr});
     if (!inserted)
-        return false;
+        return it->second;
     it->second = new AudioMixer();
     it->second->assignDevice(_audioDeviceId);
-    if (AudioMixer* output = getMixer(data.output))
+    if (AudioMixer* output = getMixer(data->output))
         output->connect(it->second);
-    for (auto& in : data.inputs) {
+    for (auto& in : data->inputs) {
         if (AudioMixer* input = getMixer(in))
             it->second->connect(input);
     }
-    return true;
+    return it->second;
 }
 
 AudioMixer* AudioManager::getMixer(std::string const& mixer) {
-    auto mix = _mixers.find(mixer);
-    if (mix == _mixers.end()) return nullptr;
-    return mix->second;
+    return registerAudioMixer(ResourceHandler<AudioMixerData>::Instance()->get(mixer));
 }
 
 AudioClip* AudioManager::createAudioClip(AudioClipKey const& key) {

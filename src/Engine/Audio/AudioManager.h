@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <string>
 #include <unordered_map>
-#include <Load/ResourceHandler.h>
 #include "AudioClipKey.h"
 #include "AudioClipData.h"
 
@@ -31,6 +30,7 @@ private:
     void shutdownTest();
     explicit AudioManager();
     bool init();
+    AudioMixer* registerAudioMixer(AudioMixerData const* data);
 
 public:
     static bool Init();
@@ -39,7 +39,6 @@ public:
     ~AudioManager();
     void update();
 
-    bool registerAudioMixer(AudioMixerData const& data);
     AudioMixer* getMixer(std::string const& mixer);
     AudioClip* createAudioClip(AudioClipKey const& key);
     void releaseAudioClip(AudioClip* clip);

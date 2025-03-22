@@ -59,7 +59,7 @@ public:
     ResourceHandler(ResourceHandler const&) = delete;
     void operator=(ResourceHandler const&) = delete;
 
-    static ResourceHandler* Instance() {
+    static inline ResourceHandler* Instance() {
         if (_instance != nullptr)
             return _instance;
         _instance = new ResourceHandler();

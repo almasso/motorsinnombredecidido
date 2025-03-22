@@ -6,6 +6,7 @@
 #include "AudioClipData.h"
 
 #include <iostream>
+#include <Load/ResourceHandler.h>
 
 void AudioClip::Update(void* userdata, SDL_AudioStream* stream, int additional_amount, int total_amount) {
     auto* instance = static_cast<AudioClip*>(userdata);
