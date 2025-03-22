@@ -15,5 +15,8 @@ var searchData=
   ['audiomanager_2eh_12',['AudioManager.h',['../AudioManager_8h.html',1,'']]],
   ['audiomixer_2ecpp_13',['AudioMixer.cpp',['../AudioMixer_8cpp.html',1,'']]],
   ['audiomixer_2eh_14',['AudioMixer.h',['../AudioMixer_8h.html',1,'']]],
-  ['audiomixerdata_2eh_15',['AudioMixerData.h',['../AudioMixerData_8h.html',1,'']]]
+  ['audiomixerdata_2ecpp_15',['AudioMixerData.cpp',['../AudioMixerData_8cpp.html',1,'']]],
+  ['audiomixerdata_2eh_16',['AudioMixerData.h',['../AudioMixerData_8h.html',1,'']]],
+  ['audiosource_2ecpp_17',['AudioSource.cpp',['../AudioSource_8cpp.html',1,'']]],
+  ['audiosource_2eh_18',['AudioSource.h',['../AudioSource_8h.html',1,'']]]
 ];

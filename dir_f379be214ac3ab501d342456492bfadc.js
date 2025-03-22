@@ -9,5 +9,8 @@ var dir_f379be214ac3ab501d342456492bfadc =
     [ "AudioManager.h", "AudioManager_8h.html", "AudioManager_8h" ],
     [ "AudioMixer.cpp", "AudioMixer_8cpp.html", null ],
     [ "AudioMixer.h", "AudioMixer_8h.html", "AudioMixer_8h" ],
-    [ "AudioMixerData.h", "AudioMixerData_8h.html", "AudioMixerData_8h" ]
+    [ "AudioMixerData.cpp", "AudioMixerData_8cpp.html", null ],
+    [ "AudioMixerData.h", "AudioMixerData_8h.html", "AudioMixerData_8h" ],
+    [ "AudioSource.cpp", "AudioSource_8cpp.html", null ],
+    [ "AudioSource.h", "AudioSource_8h.html", "AudioSource_8h" ]
 ];

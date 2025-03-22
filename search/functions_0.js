@@ -11,5 +11,7 @@ var searchData=
   ['assignmixer_8',['assignMixer',['../classAudioClip.html#a77a333aa7991cde41a70e541125bd5b1',1,'AudioClip']]],
   ['audioclip_9',['AudioClip',['../classAudioClip.html#ace56cae9546c4769e9e7e433715fce20',1,'AudioClip']]],
   ['audioclipdata_10',['AudioClipData',['../classAudioClipData.html#a26ac9836e0e23515566ed858de4b7fae',1,'AudioClipData']]],
-  ['audiomixer_11',['AudioMixer',['../classAudioMixer.html#aaff2ce84f3b16a3b368469a5753c5f82',1,'AudioMixer']]]
+  ['audiomixer_11',['AudioMixer',['../classAudioMixer.html#aaff2ce84f3b16a3b368469a5753c5f82',1,'AudioMixer']]],
+  ['audiomixerdata_12',['AudioMixerData',['../classAudioMixerData.html#a5795d2e89167ac77c31a56f720a2f3b8',1,'AudioMixerData']]],
+  ['audiosource_13',['AudioSource',['../classAudioSource.html#a58ad52e32668f022d45fa6239e56a85c',1,'AudioSource']]]
 ];
