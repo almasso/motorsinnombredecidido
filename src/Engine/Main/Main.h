@@ -13,7 +13,6 @@ private:
   	static AudioManager* audio;
   	static TimeManager* time;
   	static InputManager* input;
-  	static ResourceMemoryManager* resourceMemory;
 
 	static bool Init();
     static void Shutdown();

@@ -12,17 +12,16 @@ RenderManager* Main::render = nullptr;
 AudioManager* Main::audio = nullptr;
 TimeManager* Main::time = nullptr;
 InputManager* Main::input = nullptr;
-ResourceMemoryManager* Main::resourceMemory = nullptr;
 
 bool Main::Init() {
+    ResourceManager::Init(1024*1024*1024);
     render = new RenderManager();
     if (!render->init(1280, 720))
         return false;
     input = InputManager::Init();
     if (!input)
         return false;
-    resourceMemory = new ResourceMemoryManager(1024*1024*1024);
-    if (!AudioManager::Init(resourceMemory))
+    if (!AudioManager::Init())
         return false;
     audio = AudioManager::Instance();
     time = new TimeManager();
@@ -30,13 +29,12 @@ bool Main::Init() {
     return true;
 }
 void Main::Shutdown() {
-    AudioManager::Shutdown();
-    render->shutdown();
-    input->shutdown();
     delete time;
-    delete audio;
-    delete resourceMemory;
+    AudioManager::Shutdown();
+    input->shutdown();
+    render->shutdown();
     delete render;
+    ResourceManager::Shutdown();
 }
 
 int Main::Loop() {

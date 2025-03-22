@@ -19,7 +19,6 @@ private:
     AudioDevice _audioDeviceId;
     std::unordered_map<std::string, AudioMixer*> _mixers;
 
-    ResourceHandler<AudioClipData> _clipDataHandler;
     std::unordered_map<AudioClip*, AudioClipKey> _clipNames;
 
     AudioClipData* testClipData_;
@@ -30,12 +29,11 @@ private:
     bool initTest();
     void updateTest();
     void shutdownTest();
-    explicit AudioManager(ResourceMemoryManager* resourceMemoryManager);
+    explicit AudioManager();
     bool init();
-    void shutdown();
 
 public:
-    static bool Init(ResourceMemoryManager* resourceMemoryManager);
+    static bool Init();
     static AudioManager* Instance();
     static void Shutdown();
     ~AudioManager();
@@ -43,7 +41,6 @@ public:
 
     bool registerAudioMixer(AudioMixerData const& data);
     AudioMixer* getMixer(std::string const& mixer);
-    AudioClipData const* getAudioClipData(AudioClipKey const& key);
     AudioClip* createAudioClip(AudioClipKey const& key);
     void releaseAudioClip(AudioClip* clip);
 };

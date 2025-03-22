@@ -10,7 +10,7 @@
 void AudioClip::Update(void* userdata, SDL_AudioStream* stream, int additional_amount, int total_amount) {
     auto* instance = static_cast<AudioClip*>(userdata);
     if (additional_amount > 0) {
-        if (AudioClipData const* audioData = AudioManager::Instance()->getAudioClipData(instance->_key);
+        if (AudioClipData const* audioData = ResourceHandler<AudioClipData>::Instance()->get(instance->_key);
             instance->_loop && audioData != nullptr) {
             SDL_PutAudioStreamData(stream, audioData->buffer, audioData->bufferLen);
         }
@@ -50,7 +50,7 @@ bool AudioClip::play() {
         return false;
     if (!_stream)
         return false;
-    if (auto data = AudioManager::Instance()->getAudioClipData(_key);
+    if (auto data = ResourceHandler<AudioClipData>::Instance()->get(_key);
         data == nullptr || !SDL_PutAudioStreamData(_stream, data->buffer, data->bufferLen))
         return false;
     if (!resume())
@@ -134,7 +134,7 @@ bool AudioClip::assignDevice(AudioDevice device) {
     if (_mixer && device != _mixer->getDevice())
         return false;
 
-    auto data = AudioManager::Instance()->getAudioClipData(_key);
+    auto data = ResourceHandler<AudioClipData>::Instance()->get(_key);
     if (data == nullptr)
         return false;
 

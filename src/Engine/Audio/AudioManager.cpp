@@ -13,12 +13,19 @@
 
 AudioManager* AudioManager::_instance = nullptr;
 
-AudioManager::AudioManager(ResourceMemoryManager* resourceMemoryManager) :
-    _audioDeviceId(0),
-    _clipDataHandler(resourceMemoryManager){
+AudioManager::AudioManager() :
+    _audioDeviceId(0) {
 }
 
-AudioManager::~AudioManager() = default;
+AudioManager::~AudioManager() {
+    shutdownTest();
+
+    for (auto& mixer : _mixers) {
+        delete mixer.second;
+    }
+    SDL_CloseAudioDevice(_audioDeviceId);
+    SDL_QuitSubSystem(SDL_INIT_AUDIO);
+}
 
 bool AudioManager::initTest() {
     AudioMixerData mixerData;
@@ -41,7 +48,6 @@ void AudioManager::updateTest() {
 
 void AudioManager::shutdownTest() {
     releaseAudioClip(testClip_);
-    _clipDataHandler.flush();
 }
 
 bool AudioManager::init() {
@@ -63,19 +69,9 @@ void AudioManager::update() {
     updateTest();
 }
 
-void AudioManager::shutdown() {
-    shutdownTest();
-
-    for (auto& mixer : _mixers) {
-        delete mixer.second;
-    }
-    SDL_CloseAudioDevice(_audioDeviceId);
-    SDL_QuitSubSystem(SDL_INIT_AUDIO);
-}
-
-bool AudioManager::Init(ResourceMemoryManager* resourceMemoryManager) {
+bool AudioManager::Init() {
     assert(_instance == nullptr);
-    _instance = new AudioManager(resourceMemoryManager);
+    _instance = new AudioManager();
     if (_instance->init())
         return true;
     Shutdown();
@@ -87,7 +83,6 @@ AudioManager* AudioManager::Instance() {
 }
 
 void AudioManager::Shutdown() {
-    _instance->shutdown();
     delete _instance;
 }
 
@@ -110,10 +105,6 @@ AudioMixer* AudioManager::getMixer(std::string const& mixer) {
     auto mix = _mixers.find(mixer);
     if (mix == _mixers.end()) return nullptr;
     return mix->second;
-}
-
-AudioClipData const* AudioManager::getAudioClipData(AudioClipKey const& key) {
-    return _clipDataHandler.get(key);
 }
 
 AudioClip* AudioManager::createAudioClip(AudioClipKey const& key) {

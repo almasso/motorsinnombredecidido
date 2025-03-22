@@ -3,6 +3,8 @@
 
 #include <unordered_map>
 
+#include "BaseResourceHandler.h"
+#include "ResourceManager.h"
 #include "ResourceMemoryManager.h"
 
 class Resource;
@@ -17,10 +19,10 @@ concept resourceDerived = std::is_base_of_v<Resource, T>;
 /// @brief Estructura de datos que gestiona las referencias a un tipo específico de recursos y su memoria.
 /// @tparam ResourceType Tipo de los recursos a gestionar, debe ser una clase heredada de \c Resource.
 template <resourceDerived ResourceType>
-class ResourceHandler {
+class ResourceHandler : public BaseResourceHandler {
 private:
     std::unordered_map<std::string, ResourceType*> _resources;
-    ResourceMemoryManager* _resourceMemoryManager;
+    static inline ResourceHandler* _instance = nullptr;
 
     /// @~english
     /// @brief Creates and adds to this \c ResourceHandler a new instance of \c ResourceType if a resource with the given key didn't already exist.
@@ -52,20 +54,26 @@ private:
         delete it->second;
         _resources.erase(key);
     }
+
 public:
-    /// @~english
-    /// @brief Creates an empty handler.
-    /// @~spanish
-    /// @brief Crea un gestor vacío.
-    inline explicit ResourceHandler(ResourceMemoryManager* resourceMemoryManager) :
-        _resourceMemoryManager(resourceMemoryManager) {
+    ResourceHandler(ResourceHandler const&) = delete;
+    void operator=(ResourceHandler const&) = delete;
+
+    static ResourceHandler* Instance() {
+        if (_instance != nullptr)
+            return _instance;
+        _instance = new ResourceHandler();
+        ResourceManager::RegisterResourceHandler(_instance);
+        return _instance;
     }
+
+    inline ResourceHandler() = default;
 
     /// @~english
     /// @brief Clears all the resources in the handler.
     /// @~spanish
     /// @brief Elimina todos los recursos del gestor.
-    inline ~ResourceHandler() {
+    inline ~ResourceHandler() override {
         clear();
     }
 
