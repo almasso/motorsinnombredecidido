@@ -96,29 +96,32 @@ $(document).ready(function(){initNavTree('Main_8h_source.html',''); initResizabl
 <a href="Main_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ENGINE_LIBRARY_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ENGINE_LIBRARY_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">class </span><a class="code hl_class" href="classRenderManager.html">RenderManager</a>;</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">class </span><a class="code hl_class" href="classAudioManager.html">AudioManager</a>;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span><a class="code hl_class" href="classInputManager.html">InputManager</a>;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classTimeManager.html">TimeManager</a>;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span><a class="code hl_class" href="classResourceMemoryManager.html">ResourceMemoryManager</a>;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classMain.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classMain.html">Main</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">static</span> <a class="code hl_class" href="classRenderManager.html">RenderManager</a>* render;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">static</span> <a class="code hl_class" href="classAudioManager.html">AudioManager</a>* audio;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">static</span> <a class="code hl_class" href="classTimeManager.html">TimeManager</a>* time;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">static</span> <a class="code hl_class" href="classInputManager.html">InputManager</a>* input;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> Init();</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> Shutdown();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classMain.html#abec170a6abce832cb9dba205bb59a6cc">Loop</a>();</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif </span><span class="comment">//ENGINE_LIBRARY_H</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">class </span><a class="code hl_class" href="classCollisionManager.html">CollisionManager</a>;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">class </span><a class="code hl_class" href="classRenderManager.html">RenderManager</a>;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span><a class="code hl_class" href="classAudioManager.html">AudioManager</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classInputManager.html">InputManager</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span><a class="code hl_class" href="classTimeManager.html">TimeManager</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">class </span><a class="code hl_class" href="classResourceMemoryManager.html">ResourceMemoryManager</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classMain.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classMain.html">Main</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">static</span> <a class="code hl_class" href="classRenderManager.html">RenderManager</a>* render;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">static</span> <a class="code hl_class" href="classAudioManager.html">AudioManager</a>* audio;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">static</span> <a class="code hl_class" href="classTimeManager.html">TimeManager</a>* time;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">static</span> <a class="code hl_class" href="classInputManager.html">InputManager</a>* input;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <a class="code hl_class" href="classCollisionManager.html">CollisionManager</a>* collisions;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> Init();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> Shutdown();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classMain.html#abec170a6abce832cb9dba205bb59a6cc">Loop</a>();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif </span><span class="comment">//ENGINE_LIBRARY_H</span></div>
 <div class="ttc" id="aclassAudioManager_html"><div class="ttname"><a href="classAudioManager.html">AudioManager</a></div><div class="ttdef"><b>Definition:</b> AudioManager.h:14</div></div>
+<div class="ttc" id="aclassCollisionManager_html"><div class="ttname"><a href="classCollisionManager.html">CollisionManager</a></div><div class="ttdef"><b>Definition:</b> CollisionManager.h:6</div></div>
 <div class="ttc" id="aclassInputManager_html"><div class="ttname"><a href="classInputManager.html">InputManager</a></div><div class="ttdef"><b>Definition:</b> InputManager.h:13</div></div>
-<div class="ttc" id="aclassMain_html"><div class="ttname"><a href="classMain.html">Main</a></div><div class="ttdef"><b>Definition:</b> Main.h:10</div></div>
-<div class="ttc" id="aclassMain_html_abec170a6abce832cb9dba205bb59a6cc"><div class="ttname"><a href="classMain.html#abec170a6abce832cb9dba205bb59a6cc">Main::Loop</a></div><div class="ttdeci">static int Loop()</div><div class="ttdef"><b>Definition:</b> Main.cpp:40</div></div>
+<div class="ttc" id="aclassMain_html"><div class="ttname"><a href="classMain.html">Main</a></div><div class="ttdef"><b>Definition:</b> Main.h:11</div></div>
+<div class="ttc" id="aclassMain_html_abec170a6abce832cb9dba205bb59a6cc"><div class="ttname"><a href="classMain.html#abec170a6abce832cb9dba205bb59a6cc">Main::Loop</a></div><div class="ttdeci">static int Loop()</div><div class="ttdef"><b>Definition:</b> Main.cpp:45</div></div>
 <div class="ttc" id="aclassRenderManager_html"><div class="ttname"><a href="classRenderManager.html">RenderManager</a></div><div class="ttdef"><b>Definition:</b> RenderManager.h:11</div></div>
 <div class="ttc" id="aclassResourceMemoryManager_html"><div class="ttname"><a href="classResourceMemoryManager.html">ResourceMemoryManager</a></div><div class="ttdoc">Data structure responsible for managing the memory occupied by resources. It ensures that there won't...</div><div class="ttdef"><b>Definition:</b> ResourceMemoryManager.h:14</div></div>
 <div class="ttc" id="aclassTimeManager_html"><div class="ttname"><a href="classTimeManager.html">TimeManager</a></div><div class="ttdoc">Manages and updates the static Time structure.</div><div class="ttdef"><b>Definition:</b> TimeManager.h:10</div></div>

@@ -13,6 +13,9 @@ var hierarchy =
       [ "ComponentTemplate<\"AudioSource\">", "classComponentTemplate.html", [
         [ "AudioSource", "classAudioSource.html", null ]
       ] ],
+      [ "ComponentTemplate<\"Collider\">", "classComponentTemplate.html", [
+        [ "Collider", "classCollider.html", null ]
+      ] ],
       [ "ComponentTemplate<\"Transform\">", "classComponentTemplate.html", [
         [ "Transform", "classTransform.html", null ]
       ] ],

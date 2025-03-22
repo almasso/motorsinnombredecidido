@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_0',['ZERO',['../classVector2.html#aa229b967fdb213d19a76e8ea588e53a0',1,'Vector2']]]
+  ['width_0',['width',['../structSquare.html#af8a168864d5a5d6fae924c61cba73bc1',1,'Square']]]
 ];

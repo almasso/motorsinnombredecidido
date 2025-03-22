@@ -1,0 +1,22 @@
+var NAVTREEINDEX2 =
+{
+"structColor.html#a78ede410fb277ade36fbb157f0235d6f":[1,0,13,3],
+"structColor.html#ac190eafa8faf6ad69c1f602dae07ca11":[1,0,13,0],
+"structColor.html#aecbc1a4121c21990512e7c10544d6ece":[1,0,13,5],
+"structInputState.html":[1,0,20],
+"structInputState.html#a0bcd18cb2087f579a6b3d1d875083e43":[1,0,20,5],
+"structInputState.html#a0f73d500fc2f55462eb4d5e62a6b82fe":[1,0,20,1],
+"structInputState.html#a1fe62ee202c4290315aad61a9f1bdad2":[1,0,20,2],
+"structInputState.html#a86a101052f940bb9c8d2fe3b6ceb7428":[1,0,20,3],
+"structInputState.html#abb672accbdd3d154e3fd6848e39461c9":[1,0,20,4],
+"structInputState.html#af54efa09291c1bc9066f90dcd10d780a":[1,0,20,0],
+"structSquare.html":[1,0,36],
+"structSquare.html#a405722a853f3fc504fb0f3bc0d6c259b":[1,0,36,0],
+"structSquare.html#aafbe2e711940729c85016959f82d0cc8":[1,0,36,1],
+"structSquare.html#ae63bb534933b1a7581512eff3de9adda":[1,0,36,2],
+"structSquare.html#af8a168864d5a5d6fae924c61cba73bc1":[1,0,36,3],
+"structTime.html":[1,0,40],
+"structstring__literal.html":[1,0,37],
+"structstring__literal.html#a8e765fee6593387219953eed801a7e64":[1,0,37,0],
+"structstring__literal.html#ab207717f00e9b5d6246ea8b0cc92e0e1":[1,0,37,1]
+};

@@ -18,16 +18,15 @@ var searchData=
   ['getorder_15',['getOrder',['../classComponentFactory.html#a0ac108dbd80442a73b7531f1e19ad433',1,'ComponentFactory']]],
   ['getparent_16',['getParent',['../classTransform.html#aa9cecf52e05b2e518790d75fb2c6c844',1,'Transform::getParent()'],['../classEntity.html#aa79d41e1a85487944d6e5da6f845ac83',1,'Entity::getParent()']]],
   ['getposition_17',['getPosition',['../classTransform.html#a51174ddddc596f9e971a2a347d9086c8',1,'Transform']]],
-  ['getrect_18',['getRect',['../classSprite.html#adb2e072f0b2a6f750da5c562ad9aeafa',1,'Sprite']]],
+  ['getrect_18',['getRect',['../classCollider.html#a788de32090d0ee109827025d3b89325c',1,'Collider::getRect()'],['../classSprite.html#adb2e072f0b2a6f750da5c562ad9aeafa',1,'Sprite::getRect()']]],
   ['getrotation_19',['getRotation',['../classTransform.html#a64f4d2c6b540ebae54bfc451488cb18b',1,'Transform']]],
   ['getscale_20',['getScale',['../classTransform.html#a1e6d381ef86f295dac07d85fa1054fc2',1,'Transform']]],
   ['getsize_21',['getSize',['../classResource.html#a11bdbfebbbdcb6b832d3a583adf8a4b5',1,'Resource']]],
   ['getstate_22',['GetState',['../classInputManager.html#afe7c129265ca90caec331412684ca439',1,'InputManager']]],
-  ['gettexture_23',['GetTexture',['../classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04',1,'TextureLoader']]],
-  ['gettexture_24',['getTexture',['../classSprite.html#ae38c6ed16fa02a6a951054b3bb34900f',1,'Sprite']]],
-  ['gettexture_25',['GetTexture',['../classTextureLoader.html#aa6505a6a5fbfbeec63e6357e6f57ebc5',1,'TextureLoader']]],
-  ['getvolume_26',['getVolume',['../classAudioClip.html#a843857c557093c5c5f40be63f812cf7c',1,'AudioClip::getVolume()'],['../classAudioMixer.html#ac2db944ffb8bb73b252dc62ab0117c4c',1,'AudioMixer::getVolume()'],['../classAudioSource.html#a05f66e26545587ca9e539f54b4244521',1,'AudioSource::getVolume()']]],
-  ['getwindowsize_27',['getWindowSize',['../classRenderManager.html#a6e88c1af19abcd9d3e86e9cc2a4f6205',1,'RenderManager']]],
-  ['getx_28',['getX',['../classVector2.html#a808d02062efcc0c016491c04845e3e34',1,'Vector2']]],
-  ['gety_29',['getY',['../classVector2.html#a59bf838c0fc50305975e1679509fda83',1,'Vector2']]]
+  ['gettexture_23',['getTexture',['../classSprite.html#ae38c6ed16fa02a6a951054b3bb34900f',1,'Sprite']]],
+  ['gettexture_24',['GetTexture',['../classTextureLoader.html#aa6505a6a5fbfbeec63e6357e6f57ebc5',1,'TextureLoader::GetTexture(const std::string &amp;filePath)'],['../classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04',1,'TextureLoader::GetTexture(const Color &amp;color)']]],
+  ['getvolume_25',['getVolume',['../classAudioClip.html#a843857c557093c5c5f40be63f812cf7c',1,'AudioClip::getVolume()'],['../classAudioMixer.html#ac2db944ffb8bb73b252dc62ab0117c4c',1,'AudioMixer::getVolume()'],['../classAudioSource.html#a05f66e26545587ca9e539f54b4244521',1,'AudioSource::getVolume()']]],
+  ['getwindowsize_26',['getWindowSize',['../classRenderManager.html#a6e88c1af19abcd9d3e86e9cc2a4f6205',1,'RenderManager']]],
+  ['getx_27',['getX',['../classVector2.html#a808d02062efcc0c016491c04845e3e34',1,'Vector2']]],
+  ['gety_28',['getY',['../classVector2.html#a59bf838c0fc50305975e1679509fda83',1,'Vector2']]]
 ];
