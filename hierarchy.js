@@ -5,6 +5,9 @@ var hierarchy =
     [ "AudioManager", "classAudioManager.html", null ],
     [ "AudioMixer", "classAudioMixer.html", null ],
     [ "AudioMixerData", "structAudioMixerData.html", null ],
+    [ "BaseResourceHandler", "classBaseResourceHandler.html", [
+      [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ]
+    ] ],
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
@@ -43,8 +46,7 @@ var hierarchy =
       [ "Sprite", "classSprite.html", null ],
       [ "Texture", "classTexture.html", null ]
     ] ],
-    [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ],
-    [ "ResourceHandler< AudioClipData >", "classResourceHandler.html", null ],
+    [ "ResourceManager", "classResourceManager.html", null ],
     [ "ResourceMemoryManager", "classResourceMemoryManager.html", null ],
     [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", null ],

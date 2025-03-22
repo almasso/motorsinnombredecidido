@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['texture_0',['Texture',['../classTexture.html',1,'']]],
-  ['textureloader_1',['TextureLoader',['../classTextureLoader.html',1,'']]],
-  ['time_2',['Time',['../structTime.html',1,'']]],
-  ['timemanager_3',['TimeManager',['../classTimeManager.html',1,'']]],
-  ['transform_4',['Transform',['../classTransform.html',1,'']]]
+  ['scene_0',['Scene',['../classScene.html',1,'']]],
+  ['scenemanager_1',['SceneManager',['../classSceneManager.html',1,'']]],
+  ['sprite_2',['Sprite',['../classSprite.html',1,'']]],
+  ['spriterenderer_3',['SpriteRenderer',['../classSpriteRenderer.html',1,'']]],
+  ['square_4',['Square',['../structSquare.html',1,'']]],
+  ['string_5fliteral_5',['string_literal',['../structstring__literal.html',1,'']]]
 ];

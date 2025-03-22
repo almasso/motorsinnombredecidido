@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('classResourceHandler.html',''); initRe
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classResourceHandler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ResourceHandler&lt; ResourceType &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -101,15 +102,27 @@ $(document).ready(function(){initNavTree('classResourceHandler.html',''); initRe
  <a href="classResourceHandler.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ResourceHandler_8h_source.html">ResourceHandler.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ResourceHandler&lt; ResourceType &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classResourceHandler.png" usemap="#ResourceHandler_3C_20ResourceType_20_3E_map" alt=""/>
+  <map id="ResourceHandler_3C_20ResourceType_20_3E_map" name="ResourceHandler_3C_20ResourceType_20_3E_map">
+<area href="classBaseResourceHandler.html" alt="BaseResourceHandler" shape="rect" coords="0,0,217,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a533b0f71707f169915ee88804c364535"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a533b0f71707f169915ee88804c364535">ResourceHandler</a> (<a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *resourceMemoryManager)</td></tr>
-<tr class="memdesc:a533b0f71707f169915ee88804c364535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty handler.  <br /></td></tr>
-<tr class="separator:a533b0f71707f169915ee88804c364535"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb16ba2d8ddf073fad9c06a41dc3dd15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#adb16ba2d8ddf073fad9c06a41dc3dd15">~ResourceHandler</a> ()</td></tr>
-<tr class="memdesc:adb16ba2d8ddf073fad9c06a41dc3dd15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the resources in the handler.  <br /></td></tr>
-<tr class="separator:adb16ba2d8ddf073fad9c06a41dc3dd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ffffba74d9e4894ed55d8bafa42951"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a80ffffba74d9e4894ed55d8bafa42951">ResourceHandler</a> (<a class="el" href="classResourceHandler.html">ResourceHandler</a> const &amp;)=delete</td></tr>
+<tr class="separator:a80ffffba74d9e4894ed55d8bafa42951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b05b709b718cccf0b2be0bef891b3c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a5b05b709b718cccf0b2be0bef891b3c2">operator=</a> (<a class="el" href="classResourceHandler.html">ResourceHandler</a> const &amp;)=delete</td></tr>
+<tr class="separator:a5b05b709b718cccf0b2be0bef891b3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c1715650029b621392f16ac03306eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a08c1715650029b621392f16ac03306eb">ResourceHandler</a> ()=default</td></tr>
+<tr class="separator:a08c1715650029b621392f16ac03306eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a500283b133ae9b3a3e6e0647a6466bb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a500283b133ae9b3a3e6e0647a6466bb1">~ResourceHandler</a> () override</td></tr>
+<tr class="memdesc:a500283b133ae9b3a3e6e0647a6466bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the resources in the handler.  <br /></td></tr>
+<tr class="separator:a500283b133ae9b3a3e6e0647a6466bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664cbb98fa9bcfb18aa7ec09eac81a32"><td class="memItemLeft" align="right" valign="top">ResourceType const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a664cbb98fa9bcfb18aa7ec09eac81a32">get</a> (std::string const &amp;key)</td></tr>
 <tr class="memdesc:a664cbb98fa9bcfb18aa7ec09eac81a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the resource linked to a key. Loads it if it wasn't.  <br /></td></tr>
 <tr class="separator:a664cbb98fa9bcfb18aa7ec09eac81a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,6 +132,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6731097027901d1723ab9d0cbf57c3af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a6731097027901d1723ab9d0cbf57c3af">clear</a> ()</td></tr>
 <tr class="memdesc:a6731097027901d1723ab9d0cbf57c3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory of every resource and erases them from the handler.  <br /></td></tr>
 <tr class="separator:a6731097027901d1723ab9d0cbf57c3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBaseResourceHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBaseResourceHandler')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBaseResourceHandler.html">BaseResourceHandler</a></td></tr>
+<tr class="memitem:af86c1df55519dc54ab97763b2ac26107 inherit pub_methods_classBaseResourceHandler"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#af86c1df55519dc54ab97763b2ac26107">BaseResourceHandler</a> ()</td></tr>
+<tr class="separator:af86c1df55519dc54ab97763b2ac26107 inherit pub_methods_classBaseResourceHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15fc9340fbf166d4462d887c1732c38 inherit pub_methods_classBaseResourceHandler"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#ac15fc9340fbf166d4462d887c1732c38">~BaseResourceHandler</a> ()</td></tr>
+<tr class="separator:ac15fc9340fbf166d4462d887c1732c38 inherit pub_methods_classBaseResourceHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05ab884352d52277efb114eabf29fd8 inherit pub_methods_classBaseResourceHandler"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#ac05ab884352d52277efb114eabf29fd8">init</a> (<a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *memoryManager)</td></tr>
+<tr class="separator:ac05ab884352d52277efb114eabf29fd8 inherit pub_methods_classBaseResourceHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad80efe0e760c4b666b8ac1b5aeeba3cd inherit pub_methods_classBaseResourceHandler"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#ad80efe0e760c4b666b8ac1b5aeeba3cd">shutdown</a> ()</td></tr>
+<tr class="separator:ad80efe0e760c4b666b8ac1b5aeeba3cd inherit pub_methods_classBaseResourceHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a9d3e06b6f5cb0a2f3677310a26bd41cd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classResourceHandler.html">ResourceHandler</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceHandler.html#a9d3e06b6f5cb0a2f3677310a26bd41cd">Instance</a> ()</td></tr>
+<tr class="separator:a9d3e06b6f5cb0a2f3677310a26bd41cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classBaseResourceHandler"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBaseResourceHandler')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBaseResourceHandler.html">BaseResourceHandler</a></td></tr>
+<tr class="memitem:a728b465af4bab46e635c54f6165bbf4a inherit pro_attribs_classBaseResourceHandler"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#a728b465af4bab46e635c54f6165bbf4a">_resourceMemoryManager</a></td></tr>
+<tr class="separator:a728b465af4bab46e635c54f6165bbf4a inherit pro_attribs_classBaseResourceHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt;<br />
@@ -130,8 +163,8 @@ class ResourceHandler&lt; ResourceType &gt;</div><p>Data structure that handles 
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a533b0f71707f169915ee88804c364535" name="a533b0f71707f169915ee88804c364535"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a533b0f71707f169915ee88804c364535">&#9670;&#160;</a></span>ResourceHandler()</h2>
+<a id="a80ffffba74d9e4894ed55d8bafa42951" name="a80ffffba74d9e4894ed55d8bafa42951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80ffffba74d9e4894ed55d8bafa42951">&#9670;&#160;</a></span>ResourceHandler() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,24 +177,49 @@ template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a>
         <tr>
           <td class="memname"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;<a class="el" href="classResourceHandler.html">::ResourceHandler</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *&#160;</td>
-          <td class="paramname"><em>resourceMemoryManager</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt; const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates an empty handler. </p>
+</div>
+</div>
+<a id="a08c1715650029b621392f16ac03306eb" name="a08c1715650029b621392f16ac03306eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c1715650029b621392f16ac03306eb">&#9670;&#160;</a></span>ResourceHandler() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;<a class="el" href="classResourceHandler.html">::ResourceHandler</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
-<a id="adb16ba2d8ddf073fad9c06a41dc3dd15" name="adb16ba2d8ddf073fad9c06a41dc3dd15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb16ba2d8ddf073fad9c06a41dc3dd15">&#9670;&#160;</a></span>~ResourceHandler()</h2>
+<a id="a500283b133ae9b3a3e6e0647a6466bb1" name="a500283b133ae9b3a3e6e0647a6466bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a500283b133ae9b3a3e6e0647a6466bb1">&#9670;&#160;</a></span>~ResourceHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,7 +238,7 @@ template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -282,6 +340,61 @@ template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the resource requested. <code>nullptr</code> if there isn't any resource saved with that key or if the resource couldn't be loaded. </dd></dl>
+
+</div>
+</div>
+<a id="a9d3e06b6f5cb0a2f3677310a26bd41cd" name="a9d3e06b6f5cb0a2f3677310a26bd41cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d3e06b6f5cb0a2f3677310a26bd41cd">&#9670;&#160;</a></span>Instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classResourceHandler.html">ResourceHandler</a> * <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;::Instance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b05b709b718cccf0b2be0bef891b3c2" name="a5b05b709b718cccf0b2be0bef891b3c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b05b709b718cccf0b2be0bef891b3c2">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptresourceDerived.html">resourceDerived</a> ResourceType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classResourceHandler.html">ResourceHandler</a>&lt; ResourceType &gt; const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

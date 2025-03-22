@@ -110,8 +110,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afee8dd0bff21859e62748a2bf81c8ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c708c61fcffb861708d59aad169979f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioMixer.html">AudioMixer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a4c708c61fcffb861708d59aad169979f">getMixer</a> (std::string const &amp;mixer)</td></tr>
 <tr class="separator:a4c708c61fcffb861708d59aad169979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a695a8e7d672573c1ccdd1ad52a820d16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioClipData.html">AudioClipData</a> const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a695a8e7d672573c1ccdd1ad52a820d16">getAudioClipData</a> (<a class="el" href="AudioClipKey_8h.html#a526db38c9948ba01a309e047842fc845">AudioClipKey</a> const &amp;key)</td></tr>
-<tr class="separator:a695a8e7d672573c1ccdd1ad52a820d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e303c346dd747376f933ae3b79a52a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioClip.html">AudioClip</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a74e303c346dd747376f933ae3b79a52a">createAudioClip</a> (<a class="el" href="AudioClipKey_8h.html#a526db38c9948ba01a309e047842fc845">AudioClipKey</a> const &amp;key)</td></tr>
 <tr class="separator:a74e303c346dd747376f933ae3b79a52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add5bf387de3258378d4a9903e77446e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#add5bf387de3258378d4a9903e77446e3">releaseAudioClip</a> (<a class="el" href="classAudioClip.html">AudioClip</a> *clip)</td></tr>
@@ -119,8 +117,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aead5a8c264d6420767ee016b2ca3a1eb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#aead5a8c264d6420767ee016b2ca3a1eb">Init</a> (<a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *resourceMemoryManager)</td></tr>
-<tr class="separator:aead5a8c264d6420767ee016b2ca3a1eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319f4799d8f642c254d4b2c878e90af9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a319f4799d8f642c254d4b2c878e90af9">Init</a> ()</td></tr>
+<tr class="separator:a319f4799d8f642c254d4b2c878e90af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a014c2ce3fc771812638da4141a6e6cc6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classAudioManager.html">AudioManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a014c2ce3fc771812638da4141a6e6cc6">Instance</a> ()</td></tr>
 <tr class="separator:a014c2ce3fc771812638da4141a6e6cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8956677aeb7abb69b5254c2a89315f9f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f">Shutdown</a> ()</td></tr>
@@ -132,9 +130,6 @@ Static Public Member Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">AudioManager::~AudioManager </td>
@@ -143,11 +138,6 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -161,24 +151,6 @@ Static Public Member Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classAudioClip.html">AudioClip</a> * AudioManager::createAudioClip </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="AudioClipKey_8h.html#a526db38c9948ba01a309e047842fc845">AudioClipKey</a> const &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a695a8e7d672573c1ccdd1ad52a820d16" name="a695a8e7d672573c1ccdd1ad52a820d16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a695a8e7d672573c1ccdd1ad52a820d16">&#9670;&#160;</a></span>getAudioClipData()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classAudioClipData.html">AudioClipData</a> const  * AudioManager::getAudioClipData </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="AudioClipKey_8h.html#a526db38c9948ba01a309e047842fc845">AudioClipKey</a> const &amp;&#160;</td>
           <td class="paramname"><em>key</em></td><td>)</td>
@@ -207,8 +179,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aead5a8c264d6420767ee016b2ca3a1eb" name="aead5a8c264d6420767ee016b2ca3a1eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aead5a8c264d6420767ee016b2ca3a1eb">&#9670;&#160;</a></span>Init()</h2>
+<a id="a319f4799d8f642c254d4b2c878e90af9" name="a319f4799d8f642c254d4b2c878e90af9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319f4799d8f642c254d4b2c878e90af9">&#9670;&#160;</a></span>Init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,8 +191,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool AudioManager::Init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *&#160;</td>
-          <td class="paramname"><em>resourceMemoryManager</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>

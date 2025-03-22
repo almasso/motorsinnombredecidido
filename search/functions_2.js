@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['deactivateresource_0',['deactivateResource',['../classResourceMemoryManager.html#af58b63f2823605f80fbd0b86ce3d3423',1,'ResourceMemoryManager']]],
-  ['destroy_1',['destroy',['../classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e',1,'Entity']]],
-  ['disconnect_2',['disconnect',['../classAudioMixer.html#a40afff1140c36506b0f99e48a6aca2f9',1,'AudioMixer::disconnect(AudioClip *clip)'],['../classAudioMixer.html#a7ced2e17b2b5cc6f40abd660d1998b9a',1,'AudioMixer::disconnect(AudioMixer *mixer)']]],
-  ['doscale_3',['doScale',['../classTransform.html#a8ab75487db25fca8bb17b1fad3bcbc69',1,'Transform::doScale(const Vector2 &amp;scaleFactor)'],['../classTransform.html#a11374532549f9708bc0a27270ba38648',1,'Transform::doScale(float scaleX, float scaleY)']]],
-  ['doscalex_4',['doScaleX',['../classTransform.html#a7c0e6cc7abe3721fdb6013f953afc055',1,'Transform']]],
-  ['doscaley_5',['doScaleY',['../classTransform.html#aee8407079b35e80bb719eaf69b0bedca',1,'Transform']]],
-  ['drawrect_6',['drawRect',['../classRenderManager.html#a447f69801379dc84e73dfc87468d6948',1,'RenderManager']]],
-  ['drawsprite_7',['drawSprite',['../classRenderManager.html#a33d736415e685e570f96265b551189a7',1,'RenderManager']]]
+  ['camera_0',['Camera',['../classCamera.html#ae23af4d7cab430c77d537621cdd16b3f',1,'Camera']]],
+  ['changeanimation_1',['changeAnimation',['../classAnimator.html#ace92495e45ab841b3d8dba3ed723e7b2',1,'Animator']]],
+  ['clear_2',['clear',['../classResourceHandler.html#a6731097027901d1723ab9d0cbf57c3af',1,'ResourceHandler::clear()'],['../classRenderManager.html#ae3d038fb205f7a905fc4a1b8b72f7d50',1,'RenderManager::clear()']]],
+  ['color_3',['Color',['../structColor.html#ac190eafa8faf6ad69c1f602dae07ca11',1,'Color']]],
+  ['component_4',['Component',['../classComponent.html#a8775db6d1a2c1afc2e77cd3c8f39da6f',1,'Component']]],
+  ['componentfactory_5',['ComponentFactory',['../classComponentFactory.html#aaaaa1c4d580adeed012971d37b5494c5',1,'ComponentFactory']]],
+  ['connect_6',['connect',['../classAudioMixer.html#a54dd5cd7614bb83c1ccb508232c92770',1,'AudioMixer::connect(AudioClip *clip)'],['../classAudioMixer.html#af4ca5f6cd7ae1381579b8f0006b1058b',1,'AudioMixer::connect(AudioMixer *mixer)']]],
+  ['convertrect_7',['convertRect',['../classRenderManager.html#a39217a636426426b04a14761f14a1283',1,'RenderManager']]],
+  ['createaudioclip_8',['createAudioClip',['../classAudioManager.html#a74e303c346dd747376f933ae3b79a52a',1,'AudioManager']]],
+  ['createcomponent_9',['createComponent',['../classComponentFactory.html#af47c59f75ffefcf11d2aadff0103fb11',1,'ComponentFactory']]]
 ];

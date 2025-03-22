@@ -1,15 +1,5 @@
 var searchData=
 [
-  ['camera_2ecpp_0',['Camera.cpp',['../Camera_8cpp.html',1,'']]],
-  ['camera_2eh_1',['Camera.h',['../Camera_8h.html',1,'']]],
-  ['collisionmanager_2ecpp_2',['CollisionManager.cpp',['../CollisionManager_8cpp.html',1,'']]],
-  ['collisionmanager_2eh_3',['CollisionManager.h',['../CollisionManager_8h.html',1,'']]],
-  ['color_2eh_4',['Color.h',['../Color_8h.html',1,'']]],
-  ['component_2ecpp_5',['Component.cpp',['../Component_8cpp.html',1,'']]],
-  ['component_2eh_6',['Component.h',['../Component_8h.html',1,'']]],
-  ['componentdata_2ecpp_7',['ComponentData.cpp',['../ComponentData_8cpp.html',1,'']]],
-  ['componentdata_2eh_8',['ComponentData.h',['../ComponentData_8h.html',1,'']]],
-  ['componentfactory_2ecpp_9',['ComponentFactory.cpp',['../ComponentFactory_8cpp.html',1,'']]],
-  ['componentfactory_2eh_10',['ComponentFactory.h',['../ComponentFactory_8h.html',1,'']]],
-  ['componenttemplate_2eh_11',['ComponentTemplate.h',['../ComponentTemplate_8h.html',1,'']]]
+  ['baseresourcehandler_2ecpp_0',['BaseResourceHandler.cpp',['../BaseResourceHandler_8cpp.html',1,'']]],
+  ['baseresourcehandler_2eh_1',['BaseResourceHandler.h',['../BaseResourceHandler_8h.html',1,'']]]
 ];

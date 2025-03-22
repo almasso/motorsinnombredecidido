@@ -10,7 +10,8 @@ var searchData=
   ['operator_2b_3d_7',['operator+=',['../classVector2.html#a858536d6abd59cbb49dde713f69d4666',1,'Vector2']]],
   ['operator_2d_8',['operator-',['../classVector2.html#a37653598d7dd2e823c7af55bc50b92bb',1,'Vector2']]],
   ['operator_2f_9',['operator/',['../classVector2.html#a09df3031274ae221664f1505a8ec17fc',1,'Vector2::operator/(float e) const'],['../classVector2.html#af5d1a81a538e162c52378a5199cadd20',1,'Vector2::operator/(Vector2 const &amp;v) const']]],
-  ['operator_3d_3d_10',['operator==',['../classVector2.html#a77b638de6b16a80d4c4be0c21fe2b481',1,'Vector2']]],
-  ['order_11',['order',['../classComponentTemplate.html#a2fe08e960beac12119356f91e5c95f71',1,'ComponentTemplate']]],
-  ['output_12',['output',['../structAudioMixerData.html#a552220a127558a9d4eb710c925ca16e3',1,'AudioMixerData']]]
+  ['operator_3d_10',['operator=',['../classResourceHandler.html#a5b05b709b718cccf0b2be0bef891b3c2',1,'ResourceHandler']]],
+  ['operator_3d_3d_11',['operator==',['../classVector2.html#a77b638de6b16a80d4c4be0c21fe2b481',1,'Vector2']]],
+  ['order_12',['order',['../classComponentTemplate.html#a2fe08e960beac12119356f91e5c95f71',1,'ComponentTemplate']]],
+  ['output_13',['output',['../structAudioMixerData.html#a552220a127558a9d4eb710c925ca16e3',1,'AudioMixerData']]]
 ];

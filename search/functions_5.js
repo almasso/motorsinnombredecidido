@@ -1,30 +1,5 @@
 var searchData=
 [
-  ['game_0',['Game',['../classGame.html#af8cb3c703ecf91c12bd9708bccc05358',1,'Game']]],
-  ['generate_1',['generate',['../classRandom.html#a6461c53066d9b94fe4311c2a7fe4aa88',1,'Random::generate(float t)'],['../classRandom.html#a8c417871b7a51eb3a294763fd9ec9145',1,'Random::generate(int t)']]],
-  ['generaterange_2',['generateRange',['../classRandom.html#a00386f829561031ddb0722bbbb2257bd',1,'Random::generateRange(float a, float b)'],['../classRandom.html#a02028dfdb38796ef8495a62a0b3d66fe',1,'Random::generateRange(int a, int b)']]],
-  ['get_3',['get',['../classResourceHandler.html#a664cbb98fa9bcfb18aa7ec09eac81a32',1,'ResourceHandler']]],
-  ['getaudioclipdata_4',['getAudioClipData',['../classAudioManager.html#a695a8e7d672573c1ccdd1ad52a820d16',1,'AudioManager']]],
-  ['getcomponent_5',['getComponent',['../classEntity.html#a85a624661c6792bfe08aa39bdc24ca89',1,'Entity']]],
-  ['getdevice_6',['getDevice',['../classAudioMixer.html#a9da6c57e2610a218c8eef939add20556',1,'AudioMixer']]],
-  ['getentitybyhandler_7',['getEntityByHandler',['../classScene.html#ac994e1af3924f80706d42c8142775899',1,'Scene']]],
-  ['getglobalposition_8',['getGlobalPosition',['../classTransform.html#a1afb3de9c96e9685b765d80d216e70f9',1,'Transform']]],
-  ['getglobalrotation_9',['getGlobalRotation',['../classTransform.html#a05dc560659ace5399b2e4ae882d8f15b',1,'Transform']]],
-  ['getglobalscale_10',['getGlobalScale',['../classTransform.html#adf1c76b103cf5d4be0f0834e915656ad',1,'Transform']]],
-  ['getglobalvolume_11',['getGlobalVolume',['../classAudioMixer.html#a3d52efe0d9ef8c2faf65b115db7bf240',1,'AudioMixer']]],
-  ['getmixer_12',['getMixer',['../classAudioManager.html#a4c708c61fcffb861708d59aad169979f',1,'AudioManager']]],
-  ['getorder_13',['getOrder',['../classComponentFactory.html#a0ac108dbd80442a73b7531f1e19ad433',1,'ComponentFactory']]],
-  ['getparent_14',['getParent',['../classEntity.html#aa79d41e1a85487944d6e5da6f845ac83',1,'Entity::getParent()'],['../classTransform.html#aa9cecf52e05b2e518790d75fb2c6c844',1,'Transform::getParent() const']]],
-  ['getposition_15',['getPosition',['../classTransform.html#a51174ddddc596f9e971a2a347d9086c8',1,'Transform']]],
-  ['getrect_16',['getRect',['../classSprite.html#adb2e072f0b2a6f750da5c562ad9aeafa',1,'Sprite']]],
-  ['getrotation_17',['getRotation',['../classTransform.html#a64f4d2c6b540ebae54bfc451488cb18b',1,'Transform']]],
-  ['getscale_18',['getScale',['../classTransform.html#a1e6d381ef86f295dac07d85fa1054fc2',1,'Transform']]],
-  ['getsize_19',['getSize',['../classResource.html#a11bdbfebbbdcb6b832d3a583adf8a4b5',1,'Resource']]],
-  ['getstate_20',['GetState',['../classInputManager.html#afe7c129265ca90caec331412684ca439',1,'InputManager']]],
-  ['gettexture_21',['getTexture',['../classSprite.html#ae38c6ed16fa02a6a951054b3bb34900f',1,'Sprite']]],
-  ['gettexture_22',['GetTexture',['../classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04',1,'TextureLoader::GetTexture(const Color &amp;color)'],['../classTextureLoader.html#aa6505a6a5fbfbeec63e6357e6f57ebc5',1,'TextureLoader::GetTexture(const std::string &amp;filePath)']]],
-  ['getvolume_23',['getVolume',['../classAudioClip.html#a843857c557093c5c5f40be63f812cf7c',1,'AudioClip::getVolume()'],['../classAudioMixer.html#ac2db944ffb8bb73b252dc62ab0117c4c',1,'AudioMixer::getVolume()']]],
-  ['getwindowsize_24',['getWindowSize',['../classRenderManager.html#a6e88c1af19abcd9d3e86e9cc2a4f6205',1,'RenderManager']]],
-  ['getx_25',['getX',['../classVector2.html#a808d02062efcc0c016491c04845e3e34',1,'Vector2']]],
-  ['gety_26',['getY',['../classVector2.html#a59bf838c0fc50305975e1679509fda83',1,'Vector2']]]
+  ['fixedupdate_0',['fixedUpdate',['../classComponent.html#a11fffc465a0f002d53fed7e36a8e06c1',1,'Component::fixedUpdate()'],['../classEntity.html#a5e8287a1ae6bd5572be15ef180285b70',1,'Entity::fixedUpdate()'],['../classScene.html#ab00a8df9393d0d078bba172be7dc1ccb',1,'Scene::fixedUpdate()'],['../classSceneManager.html#a4fd096a29b1aec40e2386411a629102a',1,'SceneManager::fixedUpdate()']]],
+  ['flush_1',['flush',['../classResourceHandler.html#a7827695ae7d998e976bd9d657998a57e',1,'ResourceHandler']]]
 ];
