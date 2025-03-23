@@ -9,11 +9,11 @@ AudioSource::AudioSource() :
 }
 
 AudioSource::~AudioSource() {
-    AudioManager::Instance()->releaseAudioClip(_clip);
+    delete _clip;
 }
 
 bool AudioSource::init() {
-    _clip = AudioManager::Instance()->createAudioClip("");
+    _clip = new AudioClip("");
     _mixer = AudioManager::Instance()->getMixer("Master");
     _clip->assignMixer(_mixer);
     return true;

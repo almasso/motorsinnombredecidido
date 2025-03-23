@@ -1,6 +1,6 @@
 #ifndef ENTITYBLUEPRINT_H
 #define ENTITYBLUEPRINT_H
-/*
+
 #include <vector>
 #include <sol/sol.hpp>
 
@@ -26,6 +26,6 @@ public:
     ~EntityBlueprint();
 };
 
-*/
+
 
 #endif //ENTITYBLUEPRINT_H

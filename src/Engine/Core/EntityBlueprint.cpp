@@ -1,5 +1,5 @@
 #include "EntityBlueprint.h"
-/*
+
 #include <sol/sol.hpp>
 
 #include "ComponentData.h"
@@ -21,11 +21,11 @@ void EntityBlueprint::readComponents(sol::table const& componentBlueprints) {
 
 void EntityBlueprint::read(sol::table const& blueprint) {
     sol::table childrenBlueprints = blueprint.get_or<sol::table>("children", nullptr);
-    if (childrenBlueprints != nullptr)
+    if (childrenBlueprints.valid())
         readChildren(childrenBlueprints);
 
     sol::table componentBlueprints = blueprint.get_or<sol::table>("components", nullptr);
-    if (componentBlueprints != nullptr)
+    if (componentBlueprints.valid())
         readComponents(componentBlueprints);
 
     handler = blueprint.get_or<std::string>("handler", "");
@@ -52,4 +52,3 @@ EntityBlueprint::~EntityBlueprint() {
 EntityBlueprint::EntityBlueprint(sol::table const& blueprint) {
     read(blueprint);
 }
-*/

@@ -1,10 +1,10 @@
 #include "SceneBlueprint.h"
-/*
+
 #include <Load/LuaReader.h>
 
 bool SceneBlueprint::load() {
     sol::table blueprint = LuaReader::GetTable(_path);
-    if (blueprint == nullptr)
+    if (!blueprint.valid())
         return false;
     for (auto&& [key, value] : blueprint) {
         if (value.valid())
@@ -17,4 +17,3 @@ bool SceneBlueprint::load() {
 void SceneBlueprint::unload() {
     _entities.clear();
 }
-*/

@@ -1,5 +1,5 @@
 #include "LuaReader.h"
-/*
+
 LuaReader* LuaReader::_instance = nullptr;
 
 bool LuaReader::init() {
@@ -52,4 +52,3 @@ sol::function LuaReader::GetFunction(std::string const& path) {
 sol::function LuaReader::GetFunction(sol::table const& container, std::string const& name) {
     return container.get_or<sol::function>(name, nullptr);
 }
-*/

@@ -1,8 +1,9 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
-#include <cstdint>
 #include <vector>
+#include <string>
+#include <sol/sol.hpp>
 
 class ResourceMemoryManager;
 class BaseResourceHandler;
@@ -11,8 +12,12 @@ class ResourceManager {
 private:
     static ResourceMemoryManager* _memoryManager;
     static std::vector<BaseResourceHandler*> _handlers;
+
+    static bool initMemoryManager(sol::table const& config);
+    static bool initScenes(sol::table const& config);
+
 public:
-    static void Init(uint64_t maxSize);
+    static bool Init(std::string const& configFile);
     static void Shutdown();
     static void RegisterResourceHandler(BaseResourceHandler* handler);
 };

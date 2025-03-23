@@ -1,6 +1,6 @@
 #ifndef SCENEBLUEPRINT_H
 #define SCENEBLUEPRINT_H
-/*
+
 #include <vector>
 #include <Load/Resource.h>
 #include "EntityBlueprint.h"
@@ -15,5 +15,5 @@ public:
 };
 
 
-*/
+
 #endif //SCENEBLUEPRINT_H

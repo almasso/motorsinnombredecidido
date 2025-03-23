@@ -16,7 +16,6 @@ InputManager* Main::input = nullptr;
 CollisionManager* Main::collisions = nullptr;
 
 bool Main::Init() {
-    ResourceManager::Init(1024*1024*1024);
     render = new RenderManager();
     if (!render->init(1280, 720))
         return false;
@@ -30,16 +29,20 @@ bool Main::Init() {
     collisions = CollisionManager::Instance();
     time = new TimeManager();
     time->init();
+    if (!ResourceManager::Init("assets/config.lua"))
+        return false;
+    audio->initTest();
     return true;
 }
 void Main::Shutdown() {
+    audio->shutdownTest();
+    ResourceManager::Shutdown();
     delete time;
     CollisionManager::Shutdown();
     AudioManager::Shutdown();
     input->shutdown();
     render->shutdown();
     delete render;
-    ResourceManager::Shutdown();
 }
 
 int Main::Loop() {
@@ -54,7 +57,7 @@ int Main::Loop() {
     while(!InputManager::GetState().exit) {
         time->update();
         input->update();
-        audio->update();
+        audio->updateTest();
         collisions->fixedUpdate();
         render->clear();
         render->drawRect(rect, color);

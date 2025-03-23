@@ -18,8 +18,6 @@ AudioManager::AudioManager() :
 }
 
 AudioManager::~AudioManager() {
-    shutdownTest();
-
     for (auto& mixer : _mixers) {
         delete mixer.second;
     }
@@ -32,7 +30,7 @@ bool AudioManager::initTest() {
     mixerData.name = "Master";
     registerAudioMixer(&mixerData);
 
-    testClip_ = createAudioClip("assets/SodaLoop.wav");
+    testClip_ = new AudioClip("assets/audio/SodaLoop.wav");
     _mixers["Master"]->connect(testClip_);
 
     testClip_->play();
@@ -47,7 +45,7 @@ void AudioManager::updateTest() {
 }
 
 void AudioManager::shutdownTest() {
-    releaseAudioClip(testClip_);
+    delete testClip_;
 }
 
 bool AudioManager::init() {
@@ -62,11 +60,7 @@ bool AudioManager::init() {
         return false;
     }
 
-    return initTest();
-}
-
-void AudioManager::update() {
-    updateTest();
+    return true;
 }
 
 bool AudioManager::Init() {
@@ -91,6 +85,7 @@ AudioMixer* AudioManager::registerAudioMixer(AudioMixerData const* data) {
     if (!inserted)
         return it->second;
     it->second = new AudioMixer();
+    it->second->setVolume(data->volume);
     it->second->assignDevice(_audioDeviceId);
     if (AudioMixer* output = getMixer(data->output))
         output->connect(it->second);
@@ -105,20 +100,4 @@ AudioMixer* AudioManager::getMixer(std::string const& mixer) {
     if (mixer == "")
         return nullptr;
     return registerAudioMixer(ResourceHandler<AudioMixerData>::Instance()->get(mixer));
-}
-
-AudioClip* AudioManager::createAudioClip(AudioClipKey const& key) {
-    auto* clip = new AudioClip(key);
-    _clipNames.insert({clip, key});
-    return clip;
-}
-
-void AudioManager::releaseAudioClip(AudioClip* clip) {
-    if (!clip)
-        return;
-    auto it = _clipNames.find(clip);
-    if (it == _clipNames.end())
-        return;
-    _clipNames.erase(it);
-    delete clip;
 }

@@ -1,5 +1,5 @@
 #include "PrefabBlueprint.h"
-/*
+
 #include <Load/LuaReader.h>
 
 PrefabBlueprint::PrefabBlueprint(std::string const& path) :
@@ -8,7 +8,7 @@ PrefabBlueprint::PrefabBlueprint(std::string const& path) :
 
 bool PrefabBlueprint::load() {
     sol::table blueprint = LuaReader::GetTable(_path);
-    if (blueprint == nullptr)
+    if (!blueprint.valid())
         return false;
     EntityBlueprint::read(blueprint);
     return true;
@@ -17,4 +17,3 @@ bool PrefabBlueprint::load() {
 void PrefabBlueprint::unload() {
     EntityBlueprint::clear();
 }
-*/

@@ -10,6 +10,7 @@ public:
     std::string name;
     std::string output;
     std::vector<std::string> inputs;
+    float volume;
     explicit AudioMixerData(std::string const& path);
     bool load() override;
     void unload() override;

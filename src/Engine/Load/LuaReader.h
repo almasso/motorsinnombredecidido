@@ -1,6 +1,6 @@
 #ifndef LUAREADER_H
 #define LUAREADER_H
-/*
+
 #include <string>
 #include <sol/sol.hpp>
 
@@ -19,5 +19,5 @@ public:
     static sol::function GetFunction(sol::table const& container, std::string const& name);
 };
 
-*/
+
 #endif //LUAREADER_H
