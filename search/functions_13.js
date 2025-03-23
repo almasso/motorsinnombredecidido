@@ -8,7 +8,8 @@ var searchData=
   ['_7ecollider_5',['~Collider',['../classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b',1,'Collider']]],
   ['_7ecollisionmanager_6',['~CollisionManager',['../classCollisionManager.html#acdbb3c842f0ef1c7a028d3f080855766',1,'CollisionManager']]],
   ['_7ecomponent_7',['~Component',['../classComponent.html#ad82d7393e339c1b19cc17a0d55b5674d',1,'Component']]],
-  ['_7eresource_8',['~Resource',['../classResource.html#a0e5ec475e2601bdb33644468e86f6f10',1,'Resource']]],
-  ['_7eresourcehandler_9',['~ResourceHandler',['../classResourceHandler.html#a500283b133ae9b3a3e6e0647a6466bb1',1,'ResourceHandler']]],
-  ['_7evector2_10',['~Vector2',['../classVector2.html#ada03f5433d3ca4841d5ebb90b167202e',1,'Vector2']]]
+  ['_7eentityblueprint_8',['~EntityBlueprint',['../classEntityBlueprint.html#a5ca265f72c2c529515c53e0cc092ab1b',1,'EntityBlueprint']]],
+  ['_7eresource_9',['~Resource',['../classResource.html#a0e5ec475e2601bdb33644468e86f6f10',1,'Resource']]],
+  ['_7eresourcehandler_10',['~ResourceHandler',['../classResourceHandler.html#a500283b133ae9b3a3e6e0647a6466bb1',1,'ResourceHandler']]],
+  ['_7evector2_11',['~Vector2',['../classVector2.html#ada03f5433d3ca4841d5ebb90b167202e',1,'Vector2']]]
 ];

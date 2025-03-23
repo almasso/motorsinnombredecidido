@@ -95,23 +95,29 @@ $(document).ready(function(){initNavTree('SceneBlueprint_8h_source.html',''); in
 <div class="contents">
 <a href="SceneBlueprint_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SCENEBLUEPRINT_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SCENEBLUEPRINT_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">#include &lt;Load/Resource.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">#include &quot;EntityBlueprint.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">class SceneBlueprint final : public Resource {</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">private:</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">    std::vector&lt;EntityBlueprint&gt; _entities;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"></span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">public:</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">    bool load() override;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    void unload() override;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">};</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="Resource_8h.html">Load/Resource.h</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="EntityBlueprint_8h.html">EntityBlueprint.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classSceneBlueprint.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classSceneBlueprint.html">SceneBlueprint</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classResource.html">Resource</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    std::vector&lt;EntityBlueprint&gt; _entities;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSceneBlueprint.html#ae87f3d86967670c28e2e7e83958f3835">load</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneBlueprint.html#a191f2ec3a75925be2651c088d8338e41">unload</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif </span><span class="comment">//SCENEBLUEPRINT_H</span></div>
+<div class="ttc" id="aEntityBlueprint_8h_html"><div class="ttname"><a href="EntityBlueprint_8h.html">EntityBlueprint.h</a></div></div>
+<div class="ttc" id="aResource_8h_html"><div class="ttname"><a href="Resource_8h.html">Resource.h</a></div></div>
+<div class="ttc" id="aclassResource_html"><div class="ttname"><a href="classResource.html">Resource</a></div><div class="ttdoc">Base interface to implement different types of resources.</div><div class="ttdef"><b>Definition:</b> Resource.h:10</div></div>
+<div class="ttc" id="aclassSceneBlueprint_html"><div class="ttname"><a href="classSceneBlueprint.html">SceneBlueprint</a></div><div class="ttdef"><b>Definition:</b> SceneBlueprint.h:8</div></div>
+<div class="ttc" id="aclassSceneBlueprint_html_a191f2ec3a75925be2651c088d8338e41"><div class="ttname"><a href="classSceneBlueprint.html#a191f2ec3a75925be2651c088d8338e41">SceneBlueprint::unload</a></div><div class="ttdeci">void unload() override</div><div class="ttdoc">Erase the specific memory of the Resource stored.</div><div class="ttdef"><b>Definition:</b> SceneBlueprint.cpp:17</div></div>
+<div class="ttc" id="aclassSceneBlueprint_html_ae87f3d86967670c28e2e7e83958f3835"><div class="ttname"><a href="classSceneBlueprint.html#ae87f3d86967670c28e2e7e83958f3835">SceneBlueprint::load</a></div><div class="ttdeci">bool load() override</div><div class="ttdoc">Read the file in the specified path and store it.</div><div class="ttdef"><b>Definition:</b> SceneBlueprint.cpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

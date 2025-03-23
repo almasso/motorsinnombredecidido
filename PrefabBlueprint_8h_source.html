@@ -95,20 +95,27 @@ $(document).ready(function(){initNavTree('PrefabBlueprint_8h_source.html',''); i
 <div class="contents">
 <a href="PrefabBlueprint_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PREFABBLUEPRINT_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PREFABBLUEPRINT_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">#include &lt;Load/Resource.h&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">#include &quot;EntityBlueprint.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"></span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">class PrefabBlueprint : public Resource, public EntityBlueprint {</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">public:</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">    PrefabBlueprint(std::string const&amp; path);</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">    bool load() override;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">    void unload() override;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">};</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="Resource_8h.html">Load/Resource.h</a>&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="EntityBlueprint_8h.html">EntityBlueprint.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classPrefabBlueprint.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="classPrefabBlueprint.html">PrefabBlueprint</a> : <span class="keyword">public</span> <a class="code hl_class" href="classResource.html">Resource</a>, <span class="keyword">public</span> <a class="code hl_class" href="classEntityBlueprint.html">EntityBlueprint</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classPrefabBlueprint.html">PrefabBlueprint</a>(std::string <span class="keyword">const</span>&amp; path);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classPrefabBlueprint.html#accb7e413c414b089f094e08595900af7">load</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPrefabBlueprint.html#a0d054b2d0f23fbe8398cca20c1f95fbe">unload</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>};</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#endif </span><span class="comment">//PREFABBLUEPRINT_H</span></div>
+<div class="ttc" id="aEntityBlueprint_8h_html"><div class="ttname"><a href="EntityBlueprint_8h.html">EntityBlueprint.h</a></div></div>
+<div class="ttc" id="aResource_8h_html"><div class="ttname"><a href="Resource_8h.html">Resource.h</a></div></div>
+<div class="ttc" id="aclassEntityBlueprint_html"><div class="ttname"><a href="classEntityBlueprint.html">EntityBlueprint</a></div><div class="ttdef"><b>Definition:</b> EntityBlueprint.h:9</div></div>
+<div class="ttc" id="aclassPrefabBlueprint_html"><div class="ttname"><a href="classPrefabBlueprint.html">PrefabBlueprint</a></div><div class="ttdef"><b>Definition:</b> PrefabBlueprint.h:7</div></div>
+<div class="ttc" id="aclassPrefabBlueprint_html_a0d054b2d0f23fbe8398cca20c1f95fbe"><div class="ttname"><a href="classPrefabBlueprint.html#a0d054b2d0f23fbe8398cca20c1f95fbe">PrefabBlueprint::unload</a></div><div class="ttdeci">void unload() override</div><div class="ttdoc">Erase the specific memory of the Resource stored.</div><div class="ttdef"><b>Definition:</b> PrefabBlueprint.cpp:17</div></div>
+<div class="ttc" id="aclassPrefabBlueprint_html_accb7e413c414b089f094e08595900af7"><div class="ttname"><a href="classPrefabBlueprint.html#accb7e413c414b089f094e08595900af7">PrefabBlueprint::load</a></div><div class="ttdeci">bool load() override</div><div class="ttdoc">Read the file in the specified path and store it.</div><div class="ttdef"><b>Definition:</b> PrefabBlueprint.cpp:9</div></div>
+<div class="ttc" id="aclassResource_html"><div class="ttname"><a href="classResource.html">Resource</a></div><div class="ttdoc">Base interface to implement different types of resources.</div><div class="ttdef"><b>Definition:</b> Resource.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

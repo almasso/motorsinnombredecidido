@@ -186,11 +186,11 @@ var NAVTREEINDEX0 =
 "classAudioClipData.html#a37ce7ad98afede78d4236e4d0e202d9b":[1,0,4,5],
 "classAudioClipData.html#a3f28f38f875e724bafb3f0f0a18822b8":[1,0,4,1],
 "classAudioManager.html":[1,0,5],
-"classAudioManager.html#a4c708c61fcffb861708d59aad169979f":[1,0,5,2],
-"classAudioManager.html#a74e303c346dd747376f933ae3b79a52a":[1,0,5,1],
+"classAudioManager.html#a01d2fb20612b302d4689167aee0f1101":[1,0,5,3],
+"classAudioManager.html#a4c708c61fcffb861708d59aad169979f":[1,0,5,1],
+"classAudioManager.html#a5e72424606ddf16b7d0cf6d8c066ac85":[1,0,5,2],
+"classAudioManager.html#ab731c43555c7bb56e3293be75e4c4093":[1,0,5,4],
 "classAudioManager.html#ad94dc46723c6d7cf8c81fc3772a842aa":[1,0,5,0],
-"classAudioManager.html#add5bf387de3258378d4a9903e77446e3":[1,0,5,3],
-"classAudioManager.html#af342d01281d35deac6df2f5fa729c0ef":[1,0,5,4],
 "classAudioMixer.html":[1,0,6],
 "classAudioMixer.html#a159bb07dedb3b206979802426fc9b145":[1,0,6,10],
 "classAudioMixer.html#a23dcce71bc882cef8cdf5052ac889406":[1,0,6,1],
@@ -206,6 +206,7 @@ var NAVTREEINDEX0 =
 "classAudioMixerData.html":[1,0,7],
 "classAudioMixerData.html#a552220a127558a9d4eb710c925ca16e3":[1,0,7,5],
 "classAudioMixerData.html#a5795d2e89167ac77c31a56f720a2f3b8":[1,0,7,0],
+"classAudioMixerData.html#a9be61a3a909f4b4792f0d01dde4fc77c":[1,0,7,6],
 "classAudioMixerData.html#aaf31c716c988bb36350a1ced23385a4e":[1,0,7,3],
 "classAudioMixerData.html#ab4aeb5c205d030d7cef332dd250aab45":[1,0,7,2],
 "classAudioMixerData.html#acb9693accdc6c1599a24250976305d43":[1,0,7,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classCollisionManager.html":[1,0,12],
 "classCollisionManager.html#a36ff44dede2518f52ddacadb0ee99fbb":[1,0,12,1],
 "classCollisionManager.html#acdbb3c842f0ef1c7a028d3f080855766":[1,0,12,0],
-"classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749":[1,0,12,2],
-"classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c":[1,0,12,3]
+"classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749":[1,0,12,2]
 };

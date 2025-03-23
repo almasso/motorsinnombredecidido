@@ -36,12 +36,17 @@ var hierarchy =
         [ "SpriteRenderer", "classSpriteRenderer.html", null ]
       ] ]
     ] ],
+    [ "ComponentData", "classComponentData.html", null ],
     [ "ComponentFactory", "classComponentFactory.html", null ],
     [ "Entity", "classEntity.html", null ],
+    [ "EntityBlueprint", "classEntityBlueprint.html", [
+      [ "PrefabBlueprint", "classPrefabBlueprint.html", null ]
+    ] ],
     [ "Game", "classGame.html", null ],
     [ "InputManager", "classInputManager.html", null ],
     [ "InputState", "structInputState.html", null ],
     [ "LuaManager", "classLuaManager.html", null ],
+    [ "LuaReader", "classLuaReader.html", null ],
     [ "Main", "classMain.html", null ],
     [ "Random", "classRandom.html", null ],
     [ "RenderManager", "classRenderManager.html", null ],
@@ -49,6 +54,8 @@ var hierarchy =
       [ "Animation", "classAnimation.html", null ],
       [ "AudioClipData", "classAudioClipData.html", null ],
       [ "AudioMixerData", "classAudioMixerData.html", null ],
+      [ "PrefabBlueprint", "classPrefabBlueprint.html", null ],
+      [ "SceneBlueprint", "classSceneBlueprint.html", null ],
       [ "Sprite", "classSprite.html", null ],
       [ "Texture", "classTexture.html", null ]
     ] ],
