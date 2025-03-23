@@ -26,7 +26,7 @@ bool editor::Editor::Init() {
 }
 
 bool editor::Editor::init() {
-    if(!render::RenderManager::Init(1010, 650)) return false;
+    if(!render::RenderManager::Init(1210, 700)) return false;
     if(!io::InputManager::Init()) return false;
     if(!io::LuaManager::Init()) return false;
     if(!io::LocalizationManager::Init()) return false;

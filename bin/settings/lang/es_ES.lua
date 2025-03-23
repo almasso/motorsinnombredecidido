@@ -6,6 +6,7 @@ localization = {
 	["action.settings"] = "Configuración",
 	["action.newproject"] = "Nuevo proyecto",
 	["action.openproject"] = "Abrir proyecto",
+	["author.authors"] = "Autores",
 	["author.almasso"] = "Alejandro Massó Martínez",
 	["author.algonz39"] = "Alejandro González Sánchez",
 	["author.miguelcga"] = "Miguel Curros García",

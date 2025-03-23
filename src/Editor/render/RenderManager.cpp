@@ -124,7 +124,9 @@ void editor::render::RenderManager::render() {
 }
 
 void editor::render::RenderManager::_loadFont(const std::string& name, const std::filesystem::path &file, float size, const ImFontConfig* config, const ImWchar* ranges) {
-    _fonts[name] = _io->Fonts->AddFontFromFileTTF(file.string().c_str(), size, config, _io->Fonts->GetGlyphRangesDefault());
+    if(ranges == nullptr) ranges = _io->Fonts->GetGlyphRangesDefault();
+    _fonts[name] = _io->Fonts->AddFontFromFileTTF(file.string().c_str(), size, config, ranges);
+    _io->Fonts->Build();
 }
 
 void editor::render::RenderManager::_setWindowName(const std::string &name) {

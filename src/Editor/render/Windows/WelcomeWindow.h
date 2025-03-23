@@ -22,7 +22,7 @@ namespace editor::render::windows {
 
         void setFullscreen();
 
-        void splitWindowInHalf();
+        void drawWindow();
 
         void drawProjectButton(const std::string& projectName, const std::string& projectRoute, const std::tm& lastModified);
     };

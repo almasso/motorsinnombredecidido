@@ -10,6 +10,7 @@
 #include "io/LocalizationManager.h"
 #include "io/ProjectManager.h"
 #include "common/Project.h"
+#include "utils/IconsFontAwesome6.h"
 
 editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow") {
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
@@ -32,7 +33,13 @@ editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow"
     RenderManager::GetInstance().loadFont("Raleway 16", "settings/fonts/Raleway-Regular.ttf", 16.0f, &config);
     RenderManager::GetInstance().loadFont("Raleway 20", "settings/fonts/Raleway-Regular.ttf", 20.0f, &config);
     RenderManager::GetInstance().loadFont("Raleway 40", "settings/fonts/Raleway-Regular.ttf", 40.0f, &config);
+    RenderManager::GetInstance().loadFont("Raleway 30", "settings/fonts/Raleway-Regular.ttf", 30.0f, &config);
     RenderManager::GetInstance().loadFont("Raleway 90", "settings/fonts/Raleway-Regular.ttf", 90.0f, &config);
+    ImFontConfig iconConfig;
+    iconConfig.MergeMode = true;
+    iconConfig.PixelSnapH = true;
+    const ImWchar icons[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
+    RenderManager::GetInstance().loadFont("FA 900", "settings/fonts/fa-solid-900.ttf", 48.0f, &iconConfig, icons);
 }
 
 void editor::render::windows::WelcomeWindow::beforeRender() {
@@ -40,7 +47,7 @@ void editor::render::windows::WelcomeWindow::beforeRender() {
 }
 
 void editor::render::windows::WelcomeWindow::onRender() {
-    splitWindowInHalf();
+    drawWindow();
 }
 
 void editor::render::windows::WelcomeWindow::setFullscreen() {
@@ -48,67 +55,130 @@ void editor::render::windows::WelcomeWindow::setFullscreen() {
     ImGui::SetWindowPos(ImVec2(0,0), ImGuiCond_Always);
 }
 
-void editor::render::windows::WelcomeWindow::splitWindowInHalf() {
+void editor::render::windows::WelcomeWindow::drawWindow() {
     float leftPanelWidth = RenderManager::GetInstance().getWidth() / 2 - 90;
     float windowWidth = ImGui::GetContentRegionAvail().x;
     float windowHeight = ImGui::GetContentRegionAvail().y;
-    float rightPanelWidth = windowWidth - leftPanelWidth;
+    float rightPanelWidth = windowWidth - leftPanelWidth - 200;
 
     // Panel izquierdo (texto y botón de ajustes)
     ImGui::BeginChild("LP", ImVec2(leftPanelWidth, windowHeight), false);
-    ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 90"));
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.title").c_str());
-    ImGui::PopFont();
-    ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 40"));
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.currentversion").c_str());
-    ImGui::PopFont();
+    {
+        ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 90"));
+        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.title").c_str());
+        ImGui::PopFont();
+        ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 40"));
+        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.currentversion").c_str());
+        ImGui::PopFont();
 
-    ImGui::SetCursorPosY(windowHeight - 40);
-    if (ImGui::InvisibleButton("SettingsButton", ImVec2(40, 40))) {
-        // Llamada a los ajustes del editor
+        ImGui::SetCursorPosY(windowHeight - 100);
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
+        ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
+        if (ImGui::Button(ICON_FA_GEAR, ImVec2(100, 100))) {
+            // Llamada a los ajustes del editor
+        }
+        ImGui::PopFont();
+        ImGui::PopStyleColor(3);
+
+        ImGui::SameLine(0, 20);
+
+        ImGui::BeginChild("Authors");
+        {
+            ImGui::Text(io::LocalizationManager::GetInstance().getString("author.authors").c_str());
+            ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 20"));
+            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f),
+                               io::LocalizationManager::GetInstance().getString("author.almasso").c_str());
+            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f),
+                               io::LocalizationManager::GetInstance().getString("author.algonz39").c_str());
+            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f),
+                               io::LocalizationManager::GetInstance().getString("author.miguelcga").c_str());
+            ImGui::PopFont();
+        }
+        ImGui::EndChild();
+
     }
-    ImGui::SameLine();
-    ImGui::Text("ICON_FA_COG"); // Usamos FontAwesome
     ImGui::EndChild();
 
     ImGui::SameLine();
 
     // Panel derecho (botones de acceso a los proyectos que haya cargados)
     ImGui::BeginChild("RP", ImVec2(rightPanelWidth, windowHeight), true);
+    {
 
-    ImGui::PushItemWidth(300);
-    // Barra de búsqueda
-    ImGuiTextFilter filter;
+        ImGui::PushItemWidth(300);
+        // Barra de búsqueda
+        ImGuiTextFilter filter;
 
-    char* buf = filter.InputBuf;
-    if (ImGui::InputTextWithHint("##filterProjects", io::LocalizationManager::GetInstance().getString("window.welcomewindow.searchbar").c_str(), buf, IM_ARRAYSIZE(filter.InputBuf))) {
-        filter.Build();
+        char *buf = filter.InputBuf;
+        if (ImGui::InputTextWithHint("##filterProjects", io::LocalizationManager::GetInstance().getString(
+                "window.welcomewindow.searchbar").c_str(), buf, IM_ARRAYSIZE(filter.InputBuf))) {
+            filter.Build();
+        }
+
+        ImGui::SameLine();
+        if (ImGui::Button("X")) {
+            filter.Clear();
+        }
+
+        ImGui::PopItemWidth();
+
+        ImGui::Spacing();
+
+        // Lista de botones con los proyectos
+        ImGui::BeginChild("PL", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
+        {
+            for (Project *pr: io::ProjectManager::GetInstance().getProjects()) {
+                if (filter.PassFilter(pr->getName().c_str()) || filter.PassFilter(pr->getPath().string().c_str())) {
+                    if (pr != *io::ProjectManager::GetInstance().getProjects().begin()) {
+                        ImGui::Spacing();
+                        ImGui::Separator();
+                        ImGui::Spacing();
+                    }
+                    drawProjectButton(pr->getName(), pr->getPath().string(), pr->getLastModificationTime());
+                }
+            }
+        }
+        ImGui::EndChild();
     }
+    ImGui::EndChild();
 
     ImGui::SameLine();
-    if (ImGui::Button("X")) {
-        filter.Clear();
+    ImGui::BeginChild("PCDB");
+    {
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
+        ImGui::SetCursorPosY(windowHeight / 2 - 150);
+
+        ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
+        ImGui::Button("##ButtonCreateProject", ImVec2(200, 150));
+        ImVec2 buttonPos = ImGui::GetItemRectMin();
+        ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
+        ImGui::Text(ICON_FA_FOLDER_PLUS);
+        ImGui::PopFont();
+
+        ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 60, buttonPos.y + 60));
+        ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 30"));
+        ImGui::TextWrapped(io::LocalizationManager::GetInstance().getString("action.newproject").c_str());
+        ImGui::PopFont();
+
+        ImGui::NewLine();
+
+        ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
+        ImGui::Button("##ButtonOpenProject", ImVec2(200, 150));
+        buttonPos = ImGui::GetItemRectMin();
+        ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
+        ImGui::Text(ICON_FA_FOLDER_OPEN);
+        ImGui::PopFont();
+
+        ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 60, buttonPos.y + 60));
+        ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 30"));
+        ImGui::TextWrapped(io::LocalizationManager::GetInstance().getString("action.openproject").c_str());
+        ImGui::PopFont();
+        ImGui::PopStyleColor(3);
     }
-
-    ImGui::PopItemWidth();
-
-    ImGui::Spacing();
-
-    // Lista de botones con los proyectos
-    ImGui::BeginChild("PL", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
-
-    for(Project* pr : io::ProjectManager::GetInstance().getProjects()) {
-        if(filter.PassFilter(pr->getName().c_str()) || filter.PassFilter(pr->getPath().string().c_str())) {
-            if(pr != *io::ProjectManager::GetInstance().getProjects().begin()) {
-                ImGui::Spacing();
-                ImGui::Separator();
-                ImGui::Spacing();
-            }
-            drawProjectButton(pr->getName(), pr->getPath().string(), pr->getLastModificationTime());
-        }
-    }
-
-    ImGui::EndChild();
     ImGui::EndChild();
 }
 
