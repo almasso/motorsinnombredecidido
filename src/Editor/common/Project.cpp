@@ -8,7 +8,7 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
-#include <lua.hpp>
+#include <sol/sol.hpp>
 
 const std::string &editor::Project::getName() const {
     return _name;
@@ -42,32 +42,25 @@ void editor::Project::findProject() {
 }
 
 void editor::Project::loadProject() {
-    lua_State* L = io::LuaManager::GetInstance().getLuaState();
-    lua_getglobal(L, "project");
-    if(lua_istable(L, -1)) {
-        lua_getfield(L, -1, "Name");
-        setName(lua_tostring(L, -1));
-        lua_pop(L, 1);
+    sol::state& L = io::LuaManager::GetInstance().getLuaState();
+    sol::table project = L["project"];
+    if(project.valid()) {
+        if(project["Name"].valid()) {
+            setName(project["Name"].get<std::string>());
+        }
 
-        // Nos saltamos la ruta
-        lua_pop(L, 1);
+        if(project["LastModified"].valid()) {
+            std::istringstream ss(project["LastModified"].get<std::string>());
+            ss >> std::get_time(&_lastModified, "%d/%m/%Y %H:%M:%S");
+        }
 
-        lua_getfield(L, -1, "LastModified");
-        std::istringstream ss(lua_tostring(L, -1));
-        ss >> std::get_time(&_lastModified, "%d/%m/%Y %H:%M:%S");
-        lua_pop(L,1);
-
-        lua_getfield(L, -1, "AdditionalRoutes");
-        if(lua_istable(L, -1)) {
-            lua_pushnil(L);
-            while(lua_next(L, -2)) {
-                if(lua_isstring(L, -1)) {
-                    _extraRoutes.insert(lua_tostring(L, -1));
+        if(project["AdditionalRoutes"].valid()) {
+            sol::table additionalRoutes = project["AdditionalRoutes"];
+            for(const auto& [key, value] : additionalRoutes) {
+                if(value.is<std::string>()) {
+                    _extraRoutes.insert(value.as<std::string>());
                 }
-                lua_pop(L, 1);
             }
         }
-        lua_pop(L, 1);
     }
-    lua_pop(L, 1);
 }

@@ -9,7 +9,9 @@
 #include <memory>
 #include <string>
 
-typedef struct lua_State lua_State;
+namespace sol {
+    class state;
+}
 
 namespace editor::io {
     class LuaManager {
@@ -23,7 +25,7 @@ namespace editor::io {
             return _loadFile(std::forward<T>(filename));
         }
 
-        [[nodiscard]] lua_State* getLuaState() const;
+        [[nodiscard]] sol::state& getLuaState() const;
 
         LuaManager(const LuaManager &) = delete;
 
@@ -33,7 +35,7 @@ namespace editor::io {
     private:
         static std::unique_ptr<LuaManager> _instance;
 
-        lua_State* _luaState;
+        std::unique_ptr<sol::state> _luaState;
 
         LuaManager() = default;
 

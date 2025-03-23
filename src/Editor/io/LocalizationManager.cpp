@@ -9,7 +9,7 @@
 #include <iostream>
 #include <SDL3/SDL_locale.h>
 #include <SDL3/SDL_filesystem.h>
-#include <lua.hpp>
+#include <sol/sol.hpp>
 
 std::unique_ptr<editor::io::LocalizationManager> editor::io::LocalizationManager::_instance = nullptr;
 
@@ -65,18 +65,15 @@ bool editor::io::LocalizationManager::searchForSecondaryLocales() {
 }
 
 void editor::io::LocalizationManager::convertLocalesIntoTable() {
-    lua_State* L = LuaManager::GetInstance().getLuaState();
-    lua_getglobal(L, "localization");
-    if(lua_istable(L, -1)) {
-        lua_pushnil(L);
-        while(lua_next(L, -2) != 0) {
-            if(lua_isstring(L, -2) && lua_isstring(L, -1)) {
-                _stringsTable[lua_tostring(L, -2)] = lua_tostring(L, -1);
+    sol::state& L = LuaManager::GetInstance().getLuaState();
+    sol::table localization = L["localization"];
+    if(localization.valid()) {
+        for(const auto& [key, value] : localization) {
+            if(key.is<std::string>() && value.is<std::string>()) {
+                _stringsTable[key.as<std::string>()] = value.as<std::string>();
             }
-            lua_pop(L, 1);
         }
     }
-    lua_pop(L, 1);
 }
 
 editor::io::LocalizationManager &editor::io::LocalizationManager::GetInstance() {

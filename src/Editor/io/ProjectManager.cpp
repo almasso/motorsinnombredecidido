@@ -9,7 +9,7 @@
 #include <SDL3/SDL_filesystem.h>
 #include <iostream>
 #include "common/Project.h"
-#include <lua.hpp>
+#include <sol/sol.hpp>
 
 std::unique_ptr<editor::io::ProjectManager> editor::io::ProjectManager::_instance = nullptr;
 
@@ -39,18 +39,16 @@ bool editor::io::ProjectManager::openProjectsFile() {
 }
 
 void editor::io::ProjectManager::loadProjects() {
-    lua_State* L = LuaManager::GetInstance().getLuaState();
-    lua_getglobal(L, "projects");
-    if(lua_istable(L, -1)) {
-        int projectsFound = luaL_len(L, -1);
-        for(int i = 1; i <= projectsFound; ++i) {
-            lua_rawgeti(L, -1, i);
-                std::string route = lua_tostring(L, -1);
+    sol::state& L = LuaManager::GetInstance().getLuaState();
+    sol::table projects = L["projects"];
+    if(projects.valid()) {
+        for(const auto& [index, value] : projects) {
+            if(value.is<std::string>()) {
+                std::string route = value.as<std::string>();
                 _projects.push_back(new Project(route));
             }
-            lua_pop(L, 1);
         }
-    lua_pop(L, 1);
+    }
 }
 
 editor::io::ProjectManager &editor::io::ProjectManager::GetInstance() {
