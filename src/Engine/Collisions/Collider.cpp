@@ -6,7 +6,7 @@
 
 #include "CollisionManager.h"
 
-Collider::Collider(ComponentData* data) :
+Collider::Collider(ComponentData const* data) :
     ComponentTemplate(data),
     _transform(nullptr) {
 }

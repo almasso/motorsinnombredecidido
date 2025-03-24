@@ -3,7 +3,7 @@
 #include <Core/ComponentData.h>
 #include <Core/Entity.h>
 
-Transform::Transform(ComponentData *data) : ComponentTemplate(data), _rotation(0) {
+Transform::Transform(ComponentData const*data) : ComponentTemplate(data), _rotation(0) {
 }
 
 bool Transform::init() {

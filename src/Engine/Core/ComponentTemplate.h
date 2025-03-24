@@ -18,7 +18,7 @@ concept componentType  = std::is_base_of_v<Component, ComponentBase>;
 template <string_literal componentName, componentType ComponentBase = Component>
 class ComponentTemplate : public ComponentBase {
 public:
-    ComponentTemplate(ComponentData *data) : ComponentBase(data) {
+    ComponentTemplate(ComponentData const*data) : ComponentBase(data) {
     }
     static inline int order = -1;
     static constexpr const char* id = componentName.value;

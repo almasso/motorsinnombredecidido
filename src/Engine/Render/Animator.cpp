@@ -4,7 +4,7 @@
 #include <Load/ResourceHandler.h>
 #include <Utils/Time.h>
 
-Animator::Animator(ComponentData *data) : ComponentTemplate(data) {
+Animator::Animator(ComponentData const*data) : ComponentTemplate(data) {
 }
 
 bool Animator::init() {

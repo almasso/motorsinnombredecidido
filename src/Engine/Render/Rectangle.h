@@ -9,7 +9,7 @@ class Rectangle : public ComponentTemplate<"Rectangle",RenderComponent> {
     Vector2 _size = {1,1};
     Color _color = {0};
     public:
-    Rectangle(ComponentData *data);
+    Rectangle(ComponentData const*data);
     bool init() override;
     bool render(RenderManager* manager) override;
 };

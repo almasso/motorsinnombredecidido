@@ -20,7 +20,7 @@ ComponentFactory::ComponentFactory() : _numComponents(0) {
     registerComponent<Collider>();
 }
 
-Component* ComponentFactory::createComponent(ComponentData* data) {
+Component* ComponentFactory::createComponent(ComponentData const* data) {
     if (auto finder = _factory.find(data->getId()); finder != _factory.end()) {
         return finder->second(data);
     }

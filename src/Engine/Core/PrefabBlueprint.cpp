@@ -11,6 +11,7 @@ bool PrefabBlueprint::load() {
     if (!blueprint.valid())
         return false;
     EntityBlueprint::read(blueprint);
+    _size = 0;
     return true;
 }
 

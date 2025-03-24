@@ -4,7 +4,7 @@
 #include <Core/ComponentData.h>
 #include <Load/ResourceHandler.h>
 
-SpriteRenderer::SpriteRenderer(ComponentData *data) : ComponentTemplate(data) {
+SpriteRenderer::SpriteRenderer(ComponentData const*data) : ComponentTemplate(data) {
 }
 
 bool SpriteRenderer::init() {

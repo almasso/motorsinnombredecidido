@@ -15,7 +15,7 @@ void EntityBlueprint::readComponents(sol::table const& componentBlueprints) {
     for (auto const& [id,component] : componentBlueprints) {
         if (!id.is<std::string>() || !component.is<sol::table>())
             continue;
-        _components.push_back(new ComponentData(id.as<std::string>(), component.as<sol::table>()));
+        _components.push_back(ComponentData(id.as<std::string>(), component.as<sol::table>()));
     }
 }
 
@@ -35,9 +35,6 @@ void EntityBlueprint::read(sol::table const& blueprint) {
 
 void EntityBlueprint::clear() {
     _children.clear();
-    for (auto const& component : _components) {
-        delete component;
-    }
     _components.clear();
     _active = false;
     _handler = "";
@@ -53,7 +50,7 @@ const std::vector<EntityBlueprint> & EntityBlueprint::getChildren() const{
     return _children;
 }
 
-const std::vector<ComponentData *> & EntityBlueprint::getComponents() const{
+const std::vector<ComponentData> & EntityBlueprint::getComponents() const{
     return _components;
 }
 

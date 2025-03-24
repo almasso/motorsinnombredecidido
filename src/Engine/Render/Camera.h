@@ -7,7 +7,7 @@ class Camera : public ComponentTemplate<"Camera",RenderComponent>{
 private:
     Vector2 _size = {1,1};
 public:
-    Camera(ComponentData* data);
+    Camera(ComponentData const* data);
     bool init() override;
     bool render(RenderManager* manager) override;
 };

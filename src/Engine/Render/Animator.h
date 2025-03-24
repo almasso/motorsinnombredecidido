@@ -9,7 +9,7 @@ class Animator : public ComponentTemplate<"Animator", SpriteRenderer> {
     bool _animationEnded {};
     bool _playing {};
 public:
-    Animator(ComponentData* data);
+    Animator(ComponentData const* data);
     bool init() override;
     bool update() override;
     void reset();

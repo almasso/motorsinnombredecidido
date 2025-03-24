@@ -3,7 +3,7 @@
 #include "Transform.h"
 #include <Core/ComponentData.h>
 
-Rectangle::Rectangle(ComponentData *data) : ComponentTemplate(data){
+Rectangle::Rectangle(ComponentData const*data) : ComponentTemplate(data){
 }
 
 bool Rectangle::init() {

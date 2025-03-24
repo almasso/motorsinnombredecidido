@@ -22,10 +22,7 @@ bool ResourceManager::initMemoryManager(sol::table const& config) {
 
 bool ResourceManager::initScenes(sol::table const& config, std::string& scene) {
     scene = config.get_or<std::string>("initScene", "");
-    if (scene == "")
-        return false;
-    /*TODO: Añadir al scene manager (recibido por parámetro) la escena inicial*/
-    return true;
+    return !scene.empty();
 }
 
 bool ResourceManager::Init(std::string const& configFile, std::string& scene) {

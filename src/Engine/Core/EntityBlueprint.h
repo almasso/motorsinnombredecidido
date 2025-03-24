@@ -4,12 +4,12 @@
 #include <vector>
 #include <sol/sol.hpp>
 
-class ComponentData;
+#include "ComponentData.h"
 
 class EntityBlueprint {
 private:
     std::vector<EntityBlueprint> _children;
-    std::vector<ComponentData*> _components;
+    std::vector<ComponentData> _components;
     bool _active;
     std::string _handler;
 
@@ -25,7 +25,7 @@ public:
     explicit EntityBlueprint(sol::table const& blueprint);
     ~EntityBlueprint();
     const std::vector<EntityBlueprint>& getChildren() const;
-    const std::vector<ComponentData*>& getComponents() const;
+    const std::vector<ComponentData>& getComponents() const;
     bool getActive() const;
     const std::string& getHandler() const;
 

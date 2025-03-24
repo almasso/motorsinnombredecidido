@@ -42,8 +42,8 @@ Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scen
 			return nullptr;
 		}
 	}
-	for (ComponentData* data : blueprint->getComponents()) {
-		Component* component = _factory->createComponent(data);
+	for (ComponentData const& data : blueprint->getComponents()) {
+		Component* component = _factory->createComponent(&data);
 		if (!component) {
 			delete entity;
 			return nullptr;

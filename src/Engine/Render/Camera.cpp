@@ -3,7 +3,7 @@
 #include "Transform.h"
 #include <Core/ComponentData.h>
 
-Camera::Camera(ComponentData *data) : ComponentTemplate(data) {
+Camera::Camera(ComponentData const*data) : ComponentTemplate(data) {
 }
 
 bool Camera::init() {

@@ -12,9 +12,9 @@ protected:
     Entity* _entity;
     Scene* _scene;
     Game* _game;
-    ComponentData* _data;
+    ComponentData const* _data;
 public:
-    Component(ComponentData* data);
+    Component(ComponentData const* data);
     virtual ~Component() = default;
     void setContext(Entity* entity, Scene* scene, Game* game);
     virtual bool init();

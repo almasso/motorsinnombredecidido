@@ -4,7 +4,7 @@
 #include <Core/Scene.h>
 #include <Utils/RPGError.h>
 
-RenderComponent::RenderComponent(ComponentData* data): Component(data) {
+RenderComponent::RenderComponent(ComponentData const* data): Component(data) {
 }
 
 bool RenderComponent::init() {

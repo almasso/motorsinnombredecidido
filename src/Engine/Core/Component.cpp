@@ -2,7 +2,7 @@
 #include "ComponentData.h"
 #include "Entity.h"
 
-Component::Component(ComponentData* data) : _enabled(false) ,_entity(nullptr),  _scene(nullptr), _game(nullptr), _data(data) {
+Component::Component(ComponentData const* data) : _enabled(false) ,_entity(nullptr),  _scene(nullptr), _game(nullptr), _data(data) {
 }
 
 void Component::setContext(Entity *entity, Scene *scene, Game *game) {

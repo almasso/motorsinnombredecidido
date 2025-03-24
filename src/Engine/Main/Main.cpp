@@ -31,7 +31,7 @@ bool Main::Init() {
     _collisions = CollisionManager::Instance();
     _time = new TimeManager();
     _time->init();
-    std::string startScene = "";
+    std::string startScene;
     if (!ResourceManager::Init("assets/config.lua",startScene))
         return false;
     if (!SceneManager::Init(startScene))

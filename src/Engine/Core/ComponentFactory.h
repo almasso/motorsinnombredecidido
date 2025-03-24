@@ -8,15 +8,15 @@ class Component;
 class ComponentData;
 class ComponentFactory {
     private:
-    std::unordered_map<std::string, std::function<Component*(ComponentData*)>> _factory;
+    std::unordered_map<std::string, std::function<Component*(ComponentData const*)>> _factory;
     int _numComponents;
     public:
     ComponentFactory();
-    Component* createComponent(ComponentData* data);
+    Component* createComponent(ComponentData const* data);
     int getOrder(const std::string &name);
     template<typename ComponentType>
     void registerComponent() {
-        if (_factory.insert({ComponentType::id, [] (ComponentData* data) -> Component* {
+        if (_factory.insert({ComponentType::id, [] (ComponentData const* data) -> Component* {
             return new ComponentType(data);
         }}).second) {
             ComponentType::order = _numComponents++;

@@ -5,7 +5,7 @@
 #include "AudioClip.h"
 #include "AudioManager.h"
 
-AudioSource::AudioSource(ComponentData *data) :
+AudioSource::AudioSource(ComponentData const*data) :
     ComponentTemplate(data),
     _clip(nullptr),
     _mixer(nullptr) {
