@@ -189,10 +189,7 @@ var NAVTREEINDEX0 =
 "classAudioClipData.html#a37ce7ad98afede78d4236e4d0e202d9b":[1,0,4,5],
 "classAudioClipData.html#a3f28f38f875e724bafb3f0f0a18822b8":[1,0,4,1],
 "classAudioManager.html":[1,0,5],
-"classAudioManager.html#a01d2fb20612b302d4689167aee0f1101":[1,0,5,3],
 "classAudioManager.html#a4c708c61fcffb861708d59aad169979f":[1,0,5,1],
-"classAudioManager.html#a5e72424606ddf16b7d0cf6d8c066ac85":[1,0,5,2],
-"classAudioManager.html#ab731c43555c7bb56e3293be75e4c4093":[1,0,5,4],
 "classAudioManager.html#ad94dc46723c6d7cf8c81fc3772a842aa":[1,0,5,0],
 "classAudioMixer.html":[1,0,6],
 "classAudioMixer.html#a159bb07dedb3b206979802426fc9b145":[1,0,6,10],
@@ -249,5 +246,8 @@ var NAVTREEINDEX0 =
 "classCollider.html#ab64801d5d16958f7b6df63665c1407f8":[1,0,11,6],
 "classCollider.html#ac2293ca05f9e9cce6be71e3e5e423034":[1,0,11,8],
 "classCollider.html#ac6ed072f57f6029f0d88c57189169d5c":[1,0,11,2],
-"classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b":[1,0,11,1]
+"classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b":[1,0,11,1],
+"classCollisionManager.html":[1,0,12],
+"classCollisionManager.html#a36ff44dede2518f52ddacadb0ee99fbb":[1,0,12,1],
+"classCollisionManager.html#acdbb3c842f0ef1c7a028d3f080855766":[1,0,12,0]
 };

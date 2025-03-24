@@ -1,8 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classCollisionManager.html":[1,0,12],
-"classCollisionManager.html#a36ff44dede2518f52ddacadb0ee99fbb":[1,0,12,1],
-"classCollisionManager.html#acdbb3c842f0ef1c7a028d3f080855766":[1,0,12,0],
 "classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749":[1,0,12,2],
 "classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c":[1,0,12,3],
 "classComponent.html":[1,0,14],
@@ -84,12 +81,13 @@ var NAVTREEINDEX1 =
 "classRectangle.html#a87525a83ab28fe51f3a779be8ee98428":[1,0,28,0],
 "classRectangle.html#adbc2f5c50cb96343fad3393068f51a3c":[1,0,28,2],
 "classRenderComponent.html":[1,0,29],
-"classRenderComponent.html#a0181e8ea423fc04353471e0cc08e1370":[1,0,29,5],
+"classRenderComponent.html#a0181e8ea423fc04353471e0cc08e1370":[1,0,29,6],
 "classRenderComponent.html#a3ea278c5f13d3e1340baa45f3e68618f":[1,0,29,3],
 "classRenderComponent.html#a497fb88ff04c57c3e5f532548304bc5b":[1,0,29,1],
 "classRenderComponent.html#a7ca8368399b68f4447fad9c0568691f7":[1,0,29,4],
 "classRenderComponent.html#ac542aa03ee8524163547aadc9e43cf5e":[1,0,29,0],
 "classRenderComponent.html#acf313f05c83d276b591c391d28a1caf4":[1,0,29,2],
+"classRenderComponent.html#ae5a5f5ebf471e81b5d668f191625cdd8":[1,0,29,5],
 "classRenderManager.html":[1,0,30],
 "classRenderManager.html#a1205d52fc12124339bd64d916c9c8237":[1,0,30,6],
 "classRenderManager.html#a33d736415e685e570f96265b551189a7":[1,0,30,4],
@@ -249,5 +247,7 @@ var NAVTREEINDEX1 =
 "functions_func.html":[1,3,1],
 "functions_func_b.html":[1,3,1,1],
 "functions_func_c.html":[1,3,1,2],
-"functions_func_d.html":[1,3,1,3]
+"functions_func_d.html":[1,3,1,3],
+"functions_func_e.html":[1,3,1,4],
+"functions_func_f.html":[1,3,1,5]
 };
