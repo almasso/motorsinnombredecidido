@@ -37,7 +37,7 @@ var searchData=
   ['sprite_34',['Sprite',['../classSprite.html',1,'Sprite'],['../classSprite.html#acfbf511f78e8ebb1372a0e3d061bdc91',1,'Sprite::Sprite()']]],
   ['sprite_2ecpp_35',['Sprite.cpp',['../Sprite_8cpp.html',1,'']]],
   ['sprite_2eh_36',['Sprite.h',['../Sprite_8h.html',1,'']]],
-  ['spriterenderer_37',['SpriteRenderer',['../classSpriteRenderer.html',1,'SpriteRenderer'],['../classSpriteRenderer.html#a5d286d5004e9c5310e513f4c0b581f49',1,'SpriteRenderer::SpriteRenderer()']]],
+  ['spriterenderer_37',['SpriteRenderer',['../classSpriteRenderer.html',1,'SpriteRenderer'],['../classSpriteRenderer.html#a7842e02857641784ea4dd3ba80694025',1,'SpriteRenderer::SpriteRenderer()']]],
   ['spriterenderer_2ecpp_38',['SpriteRenderer.cpp',['../SpriteRenderer_8cpp.html',1,'']]],
   ['spriterenderer_2eh_39',['SpriteRenderer.h',['../SpriteRenderer_8h.html',1,'']]],
   ['square_40',['Square',['../structSquare.html',1,'']]],

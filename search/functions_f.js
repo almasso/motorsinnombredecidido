@@ -26,7 +26,7 @@ var searchData=
   ['shutdown_23',['shutdown',['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()'],['../classBaseResourceHandler.html#ad80efe0e760c4b666b8ac1b5aeeba3cd',1,'BaseResourceHandler::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()']]],
   ['shutdowntest_24',['shutdownTest',['../classAudioManager.html#a01d2fb20612b302d4689167aee0f1101',1,'AudioManager']]],
   ['sprite_25',['Sprite',['../classSprite.html#acfbf511f78e8ebb1372a0e3d061bdc91',1,'Sprite']]],
-  ['spriterenderer_26',['SpriteRenderer',['../classSpriteRenderer.html#a5d286d5004e9c5310e513f4c0b581f49',1,'SpriteRenderer']]],
+  ['spriterenderer_26',['SpriteRenderer',['../classSpriteRenderer.html#a7842e02857641784ea4dd3ba80694025',1,'SpriteRenderer']]],
   ['stop_27',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip::stop()'],['../classAudioSource.html#ab3449cc8a764c0d15e9453d52610475e',1,'AudioSource::stop()']]],
   ['string_5fliteral_28',['string_literal',['../structstring__literal.html#a8e765fee6593387219953eed801a7e64',1,'string_literal']]]
 ];
