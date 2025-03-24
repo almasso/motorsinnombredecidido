@@ -27,15 +27,17 @@ bool AudioSource::init() {
     _clip->assignMixer(_mixer);
     _clip->setVolume(_data->getData("volume", 1.0f));
     _clip->setLoop(_data->getData("loop", false));
+    if (_data->getData("playOnAwake", false))
+        play();
     return true;
 }
 
 void AudioSource::onEnable() {
-    pause();
+    resume();
 }
 
 void AudioSource::onDisable() {
-    resume();
+    pause();
 }
 
 void AudioSource::play() {

@@ -119,7 +119,8 @@ void Transform::rotate(const float rotation) {
 }
 
 Transform* Transform::getParent() const {
-    if (Entity* parent = _entity->getParent()) {
+    if (Entity* parent = _entity->getParent();
+        parent != nullptr) {
         return parent->getComponent<Transform>();
     }
     return nullptr;

@@ -38,7 +38,7 @@ bool Sprite::load() {
     return false;
   if (!getRectField(_rect.h, "h", rect))
     return false;
-
+  _size = 0;
   return true;
 }
 

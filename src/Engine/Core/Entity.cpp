@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include "Component.h"
 
-Entity::Entity(): _parent(nullptr), _active(false), _alive(false) {
+Entity::Entity(): _parent(nullptr), _active(false), _alive(true) {
 }
 
 bool Entity::init() {

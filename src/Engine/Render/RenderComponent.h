@@ -7,8 +7,8 @@ class Transform;
 
 class RenderComponent : public Component {
     private:
-    int _layer {};
-    protected:
+protected:
+    int _layer;
     Transform* _transform {};
     public:
     RenderComponent(ComponentData const* data);

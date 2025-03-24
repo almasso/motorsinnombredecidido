@@ -34,7 +34,10 @@ sol::table LuaReader::GetTable(std::string const& path) {
 }
 
 sol::table LuaReader::GetTable(sol::table const& container, std::string const& name) {
-    return container.get_or<sol::table>(name, nullptr);
+    sol::optional<sol::table> table = container[name];
+    if (!table)
+        return nullptr;
+    return *table;
 }
 
 sol::function LuaReader::GetFunction(std::string const& path) {

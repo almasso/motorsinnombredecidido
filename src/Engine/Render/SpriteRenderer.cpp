@@ -24,7 +24,8 @@ bool SpriteRenderer::render(RenderManager *manager) {
 
 bool SpriteRenderer::setSprite(const std::string& spritePath) {
     const Sprite* sprite = ResourceHandler<Sprite>::Instance()->get(spritePath);
-    if (!sprite) {return false;}
+    if (!sprite)
+        return false;
     _sprite = spritePath;
     _size = Vector2(sprite->getRect().w, sprite->getRect().h);
     return true;

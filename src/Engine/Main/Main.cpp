@@ -34,13 +34,12 @@ bool Main::Init() {
     std::string startScene;
     if (!ResourceManager::Init("assets/config.lua",startScene))
         return false;
-    if (!SceneManager::Init(startScene))
+    _scenes = SceneManager::Init(startScene);
+    if (!_scenes)
         return false;
-    _audio->initTest();
     return true;
 }
 void Main::Shutdown() {
-    _audio->shutdownTest();
     ResourceManager::Shutdown();
     delete _time;
     CollisionManager::Shutdown();
@@ -54,23 +53,18 @@ int Main::Loop() {
     if (!Init())
         return 1;
 
-    auto [color, width, height, speed] = LuaManager::loadSquare();
-    Rect rect = {250,150,width,height};
     int w, h;
     _render->getWindowSize(&w, &h);
-    float dirX = -0.1f, dirY = 0.1f;
     while(!InputManager::GetState().exit) {
         _time->update();
         _input->update();
-        _audio->updateTest();
         _collisions->fixedUpdate();
+        if (!_scenes->update())
+            return 1;
         _render->clear();
-        _render->drawRect(rect, color);
+        _scenes->render(_render);
         _render->present();
-        rect.x -= dirX * speed;
-        if(rect.x < 0 || rect.x + rect.w > static_cast<float>(w)) dirX *= -1;
-        rect.y += dirY * speed;
-        if(rect.y < 0 || rect.y + rect.h > static_cast<float>(h)) dirY *= -1;
+        _scenes->refresh();
     }
     Shutdown();
     return 0;

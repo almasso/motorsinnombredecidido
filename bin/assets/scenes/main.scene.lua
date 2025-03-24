@@ -7,12 +7,18 @@ return {
                 mixer = "assets/audio/music.mixer.lua",
                 volume = 0.8,
                 loop = true,
+                playOnAwake = true
+            },
+            SpriteRenderer = {
+                sprite = "assets/sprites/test.sprite.lua"
+            },
+            Transform = {
+                pos = {0, 0}
             }
         }
     },
     sfx = {
         children = {},
-
         components = {
             AudioSource = {
                 enabled = false,

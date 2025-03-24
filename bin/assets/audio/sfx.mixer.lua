@@ -1,4 +1,5 @@
 return {
     name = "SFX",
-    ouput = "Master"
+    ouput = "Master",
+    inputs = {}
 }

@@ -4,6 +4,8 @@
 #include <SDL3/SDL_init.h>
 #include <Utils/RPGError.h>
 
+#include "TextureLoader.h"
+
 RenderManager::RenderManager() : _screenScale(0), _window(nullptr), _renderer(nullptr), _width(0), _height(0) {
 }
 
@@ -26,7 +28,7 @@ bool RenderManager::init(const int& width, const int& height) {
     _viewOffset = {0,0};
     _screenOffset = {0,0};
     _screenScale = 1;
-    return true;
+    return TextureLoader::Init(_renderer);
 }
 
 void RenderManager::present() const {

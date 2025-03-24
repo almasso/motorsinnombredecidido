@@ -32,10 +32,6 @@ public:
     static void Shutdown();
     ~AudioManager();
 
-    bool initTest();
-    void updateTest();
-    void shutdownTest();
-
     AudioMixer* getMixer(std::string const& mixer);
 };
 

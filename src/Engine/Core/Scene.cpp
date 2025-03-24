@@ -6,6 +6,7 @@ Scene::Scene()
 = default;
 
 bool Scene::init() {
+	refresh();
 	for (Entity* entity : _entities) {
 		if (!entity->init()) {
 			return false;

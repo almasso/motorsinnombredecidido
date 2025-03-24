@@ -4,12 +4,12 @@
 #include <Core/Scene.h>
 #include <Utils/RPGError.h>
 
-RenderComponent::RenderComponent(ComponentData const* data): Component(data) {
+RenderComponent::RenderComponent(ComponentData const* data): Component(data), _layer(0) {
 }
 
 bool RenderComponent::init() {
     _transform = _entity->getComponent<Transform>();
-    if (Transform* transform = _entity->getComponent<Transform>(); transform != nullptr) {
+    if (_transform == nullptr) {
         RPGError::ShowError("Render object sin transform", "Todos los RenderObjects requieren de un componente Transform para funcionar");
         return false;
     }

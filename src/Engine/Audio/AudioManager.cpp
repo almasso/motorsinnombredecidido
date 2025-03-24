@@ -25,29 +25,6 @@ AudioManager::~AudioManager() {
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
-bool AudioManager::initTest() {
-    AudioMixerData mixerData("");
-    mixerData.name = "Master";
-    registerAudioMixer(&mixerData);
-
-    testClip_ = new AudioClip("assets/audio/SodaLoop.wav");
-    _mixers["Master"]->connect(testClip_);
-
-    testClip_->play();
-    return true;
-}
-
-void AudioManager::updateTest() {
-    if (Time::time > 30)
-        testClip_->resume();
-    else if (Time::time > 20)
-        testClip_->pause();
-}
-
-void AudioManager::shutdownTest() {
-    delete testClip_;
-}
-
 bool AudioManager::init() {
     if (!SDL_InitSubSystem(SDL_INIT_AUDIO)) {
         RPGError::ShowError("Audio Subsystem initialization failed", SDL_GetError());
