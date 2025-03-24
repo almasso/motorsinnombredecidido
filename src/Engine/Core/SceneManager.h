@@ -25,9 +25,10 @@ class SceneManager {
     ~SceneManager();
     Entity* createEntity(const EntityBlueprint *blueprint, Scene *scene);
     Scene* createScene(const SceneBlueprint *blueprint);
-    
+    bool init(const std::string& startScene);
+
     public:
-    static SceneManager* Init();
+    static SceneManager* Init(const std::string& startScene);
     bool update() const;
     bool fixedUpdate() const;
     bool render(RenderManager* render) const;
@@ -36,6 +37,7 @@ class SceneManager {
     Entity* instantiatePrefab(const std::string& handler);
     Scene* addScene(const std::string& handler);
     void popScene();
+
 };
 
 #endif //SCENEMANAGER_H

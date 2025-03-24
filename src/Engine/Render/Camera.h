@@ -8,6 +8,7 @@ private:
     Vector2 _size = {1,1};
 public:
     Camera(ComponentData* data);
+    bool init() override;
     bool render(RenderManager* manager) override;
 };
 

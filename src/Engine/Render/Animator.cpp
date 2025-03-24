@@ -1,17 +1,25 @@
 #include "Animator.h"
-
-#include <Load/ResourceHandler.h>
-
 #include "Animation.h"
+#include <Core/ComponentData.h>
+#include <Load/ResourceHandler.h>
 #include <Utils/Time.h>
 
 Animator::Animator(ComponentData *data) : ComponentTemplate(data) {
 }
 
+bool Animator::init() {
+  _animation = _data->getData<std::string>("animation");
+  const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
+  if (!anim) { return false; }
+  setSprite(anim->frames[_currentFrame]);
+  return RenderComponent::init();
+}
+
 bool Animator::update() {
-  if(!_animationEnded) {
+  if(_playing && !_animationEnded) {
     _frameTimer += Time::deltaTime;
     const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
+    if(!anim) return false;
     while (_frameTimer >= anim->frameTime) {
         _frameTimer -= anim->frameTime;
         _currentFrame++;
@@ -24,7 +32,7 @@ bool Animator::update() {
               _animationEnded = true;
           }
         }
-        setSprite(anim->frames[_currentFrame]);
+        return setSprite(anim->frames[_currentFrame]);
     }
   }
   return true;
@@ -39,4 +47,8 @@ void Animator::reset() {
 void Animator::changeAnimation(const std::string& animation) {
   _animation = animation;
   reset();
+}
+
+void Animator::setPlaying(bool playing) {
+  _playing = playing;
 }

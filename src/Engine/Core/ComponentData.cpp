@@ -7,8 +7,7 @@ const std::string& ComponentData::getId() const {
     return _id;
 }
 
-template<>
-Vector2 ComponentData::getData<Vector2>(std::string const &key, Vector2 const &defaultValue) const {
+Vector2 ComponentData::getVector(std::string const &key, Vector2 const &defaultValue) const {
     sol::optional<sol::table> vector = _data[key];
     if (!vector || vector->size() != 2) {
         return defaultValue;

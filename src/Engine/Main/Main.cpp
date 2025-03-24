@@ -2,6 +2,7 @@
 
 #include <Audio/AudioManager.h>
 #include <Collisions/CollisionManager.h>
+#include <Core/SceneManager.h>
 #include <Input/InputManager.h>
 #include <Load/LuaManager.h>
 #include <Render/RenderManager.h>
@@ -9,40 +10,44 @@
 #include <Utils/TimeManager.h>
 #include <Load/ResourceManager.h>
 
-RenderManager* Main::render = nullptr;
-AudioManager* Main::audio = nullptr;
-TimeManager* Main::time = nullptr;
-InputManager* Main::input = nullptr;
-CollisionManager* Main::collisions = nullptr;
+RenderManager* Main::_render = nullptr;
+AudioManager* Main::_audio = nullptr;
+TimeManager* Main::_time = nullptr;
+InputManager* Main::_input = nullptr;
+CollisionManager* Main::_collisions = nullptr;
+SceneManager* Main::_scenes = nullptr;
 
 bool Main::Init() {
-    render = new RenderManager();
-    if (!render->init(1280, 720))
+    _render = new RenderManager();
+    if (!_render->init(1280, 720))
         return false;
-    input = InputManager::Init();
-    if (!input)
+    _input = InputManager::Init();
+    if (!_input)
         return false;
     if (!AudioManager::Init())
         return false;
-    audio = AudioManager::Instance();
+    _audio = AudioManager::Instance();
     CollisionManager::Init();
-    collisions = CollisionManager::Instance();
-    time = new TimeManager();
-    time->init();
-    if (!ResourceManager::Init("assets/config.lua"))
+    _collisions = CollisionManager::Instance();
+    _time = new TimeManager();
+    _time->init();
+    std::string startScene = "";
+    if (!ResourceManager::Init("assets/config.lua",startScene))
         return false;
-    audio->initTest();
+    if (!SceneManager::Init(startScene))
+        return false;
+    _audio->initTest();
     return true;
 }
 void Main::Shutdown() {
-    audio->shutdownTest();
+    _audio->shutdownTest();
     ResourceManager::Shutdown();
-    delete time;
+    delete _time;
     CollisionManager::Shutdown();
     AudioManager::Shutdown();
-    input->shutdown();
-    render->shutdown();
-    delete render;
+    _input->shutdown();
+    _render->shutdown();
+    delete _render;
 }
 
 int Main::Loop() {
@@ -52,16 +57,16 @@ int Main::Loop() {
     auto [color, width, height, speed] = LuaManager::loadSquare();
     Rect rect = {250,150,width,height};
     int w, h;
-    render->getWindowSize(&w, &h);
+    _render->getWindowSize(&w, &h);
     float dirX = -0.1f, dirY = 0.1f;
     while(!InputManager::GetState().exit) {
-        time->update();
-        input->update();
-        audio->updateTest();
-        collisions->fixedUpdate();
-        render->clear();
-        render->drawRect(rect, color);
-        render->present();
+        _time->update();
+        _input->update();
+        _audio->updateTest();
+        _collisions->fixedUpdate();
+        _render->clear();
+        _render->drawRect(rect, color);
+        _render->present();
         rect.x -= dirX * speed;
         if(rect.x < 0 || rect.x + rect.w > static_cast<float>(w)) dirX *= -1;
         rect.y += dirY * speed;

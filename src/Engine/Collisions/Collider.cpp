@@ -19,8 +19,8 @@ bool Collider::init() {
     _transform = _entity->getComponent<Transform>();
     CollisionManager::Instance()->registerCollider(this);
 
-    _pos = _data->getData<Vector2>("position");
-    _size = _data->getData<Vector2>("size");
+    _pos = _data->getVector("position");
+    _size = _data->getVector("size");
 
     return true;
 }

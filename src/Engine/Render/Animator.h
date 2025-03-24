@@ -7,11 +7,14 @@ class Animator : public ComponentTemplate<"Animator", SpriteRenderer> {
     float _frameTimer {};
     int _currentFrame {};
     bool _animationEnded {};
+    bool _playing {};
 public:
     Animator(ComponentData* data);
+    bool init() override;
     bool update() override;
     void reset();
     void changeAnimation(const std::string& animation);
+    void setPlaying(bool playing);
 };
 
 #endif //ANIMATOR_H

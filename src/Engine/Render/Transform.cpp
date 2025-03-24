@@ -1,10 +1,15 @@
 #include "Transform.h"
+
+#include <Core/ComponentData.h>
 #include <Core/Entity.h>
 
 Transform::Transform(ComponentData *data) : ComponentTemplate(data), _rotation(0) {
 }
 
 bool Transform::init() {
+    _position = _data->getVector("position",{0,0});
+    _rotation = _data->getData<float>("rotation",0);
+    _scale = _data->getVector("scale",{1,1});
     return true;
 }
 

@@ -10,6 +10,7 @@ class Rectangle : public ComponentTemplate<"Rectangle",RenderComponent> {
     Color _color = {0};
     public:
     Rectangle(ComponentData *data);
+    bool init() override;
     bool render(RenderManager* manager) override;
 };
 

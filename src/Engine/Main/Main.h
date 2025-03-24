@@ -6,15 +6,16 @@ class RenderManager;
 class AudioManager;
 class InputManager;
 class TimeManager;
-class ResourceMemoryManager;
+class SceneManager;
 
 class Main {
 private:
-  	static RenderManager* render;
-  	static AudioManager* audio;
-  	static TimeManager* time;
-  	static InputManager* input;
-  	static CollisionManager* collisions;
+  	static RenderManager* _render;
+  	static AudioManager* _audio;
+  	static TimeManager* _time;
+  	static InputManager* _input;
+  	static CollisionManager* _collisions;
+  	static SceneManager* _scenes;
 
 	static bool Init();
     static void Shutdown();

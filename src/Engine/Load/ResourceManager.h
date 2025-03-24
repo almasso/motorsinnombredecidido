@@ -14,10 +14,10 @@ private:
     static std::vector<BaseResourceHandler*> _handlers;
 
     static bool initMemoryManager(sol::table const& config);
-    static bool initScenes(sol::table const& config);
+    static bool initScenes(sol::table const& config, std::string& scene);
 
 public:
-    static bool Init(std::string const& configFile);
+    static bool Init(std::string const& configFile, std::string& scene);
     static void Shutdown();
     static void RegisterResourceHandler(BaseResourceHandler* handler);
 };

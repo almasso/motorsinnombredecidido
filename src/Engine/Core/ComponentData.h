@@ -10,6 +10,7 @@ private:
     sol::table _data;
 public:
     ComponentData(std::string const& id, sol::table const& data);
+    Vector2 getVector(std::string const& key, Vector2 const& defaultValue = {}) const;
     template<typename T>
     T getData(std::string const& key, T const& defaultValue = {}) const {
         return _data.get_or(key, defaultValue);

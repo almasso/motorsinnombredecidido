@@ -20,15 +20,15 @@ bool ResourceManager::initMemoryManager(sol::table const& config) {
     return true;
 }
 
-bool ResourceManager::initScenes(sol::table const& config) {
-    std::string scene = config.get_or<std::string>("initScene", "");
+bool ResourceManager::initScenes(sol::table const& config, std::string& scene) {
+    scene = config.get_or<std::string>("initScene", "");
     if (scene == "")
         return false;
     /*TODO: Añadir al scene manager (recibido por parámetro) la escena inicial*/
     return true;
 }
 
-bool ResourceManager::Init(std::string const& configFile) {
+bool ResourceManager::Init(std::string const& configFile, std::string& scene) {
     assert(_memoryManager == nullptr);
     LuaReader::Init();
     sol::table config = LuaReader::GetTable(configFile);
@@ -36,7 +36,7 @@ bool ResourceManager::Init(std::string const& configFile) {
         return false;
     if (!initMemoryManager(config))
         return false;
-    if (!initScenes(config))
+    if (!initScenes(config,scene))
         return false;
     return true;
 }

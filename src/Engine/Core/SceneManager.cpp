@@ -28,6 +28,7 @@ SceneManager::~SceneManager()
 
 Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scene)
 {
+	if (blueprint == nullptr) return nullptr;
 	Entity* entity = new Entity();
 	for (const EntityBlueprint& childBp : blueprint->getChildren()) {
 		Entity* child = createEntity(&childBp, scene);
@@ -56,6 +57,7 @@ Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scen
 
 Scene* SceneManager::createScene(const SceneBlueprint* blueprint)
 {
+	if (blueprint == nullptr) return nullptr;
 	Scene* scene = new Scene();
 	for (const EntityBlueprint& entityBp : blueprint->getEntities()) {
 		Entity* entity = createEntity(&entityBp, scene);
@@ -72,11 +74,18 @@ Scene* SceneManager::createScene(const SceneBlueprint* blueprint)
 	return scene;
 }
 
+bool SceneManager::init(const std::string &startScene) {
+	Scene* scene = addScene(startScene);
+	return scene != nullptr;
+}
 
-SceneManager* SceneManager::Init()
+
+SceneManager* SceneManager::Init(const std::string& startScene)
 {
 	if (_instance == nullptr) {
-		return _instance = new SceneManager();
+		_instance = new SceneManager();
+		_instance->init(startScene);
+		return _instance;
 	}
 	RPGError::ShowError("Error al inicializar SceneManager", "Ya existia una instancia de SceneManager");
 	return nullptr;

@@ -1,9 +1,15 @@
 #include "Rectangle.h"
 #include "RenderManager.h"
 #include "Transform.h"
-#include "Utils/RPGError.h"
+#include <Core/ComponentData.h>
 
 Rectangle::Rectangle(ComponentData *data) : ComponentTemplate(data){
+}
+
+bool Rectangle::init() {
+    _color = _data->getData<int>("color",0xFF0000FF);
+    _size = _data->getVector("size",{1,1});
+    return RenderComponent::init();
 }
 
 bool Rectangle::render(RenderManager *manager) {
