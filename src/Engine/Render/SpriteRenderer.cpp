@@ -16,8 +16,8 @@ bool SpriteRenderer::init() {
 bool SpriteRenderer::render(RenderManager *manager) {
     const Sprite* sprite  = ResourceHandler<Sprite>::Instance()->get(_sprite);
     if (!sprite) {return false;}
-    Vector2 position = _transform->getGlobalPosition();
     Vector2 size = _transform->getGlobalScale() * _size;
+    Vector2 position = _transform->getGlobalPosition() - size/2.f;
     Rect rectangle = {position.getX(), position.getY(), size.getX(), size.getY()};
     return manager->drawSprite(rectangle, sprite, _transform->getGlobalRotation());
 }

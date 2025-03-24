@@ -51,6 +51,8 @@ Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scen
 		entity->addComponent(component);
 		component->setContext(entity,scene,_game);
 	}
+	entity->setActive(blueprint->getActive());
+	if (blueprint->getHandler() != "") scene->addHandler(entity, blueprint->getHandler());
 	return entity;
 }
 

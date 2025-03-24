@@ -36,7 +36,7 @@ bool Scene::fixedUpdate() const {
 bool Scene::render(RenderManager* manager) {
 	for (const auto& [layer, components] : _renderComponents) {
 		for (const auto& component : components) {
-			if (component->isEnabled() && !component->render(manager)) {
+			if (component->isEnabled() && component->isEntityActive() && !component->render(manager)) {
 				return false;
 			}
 		}

@@ -15,6 +15,9 @@ return {
             },
             Transform = {
                 pos = {0, 0}
+            },
+            Camera = {
+                size = {200 , 200}
             }
         }
     },

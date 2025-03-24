@@ -13,8 +13,8 @@ bool Rectangle::init() {
 }
 
 bool Rectangle::render(RenderManager *manager) {
-    Vector2 position = _transform->getGlobalPosition();
     Vector2 size = _transform->getGlobalScale() * _size;
+    Vector2 position = _transform->getGlobalPosition() - size/2.f;
     Rect rectangle = {position.getX(), position.getY(), size.getX(), size.getY()};
     return manager->drawRect(rectangle, _color);
 }

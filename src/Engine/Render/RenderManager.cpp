@@ -25,7 +25,7 @@ bool RenderManager::init(const int& width, const int& height) {
     getWindowSize(&w, &h);
     _width = static_cast<float>(w);
     _height = static_cast<float>(h);
-    _viewOffset = {0,0};
+    _viewOffset = {w/2.f,h/2.f};
     _screenOffset = {0,0};
     _screenScale = 1;
     return TextureLoader::Init(_renderer);
@@ -68,7 +68,7 @@ void RenderManager::setViewRect(const Vector2& viewPosition, const Vector2& view
     float tempScaleX = _width / viewSize.getX();
     float tempScaleY = _height / viewSize.getY();
     _screenScale = std::min(tempScaleY, tempScaleX);
-    _screenOffset = {_width - viewSize.getX() * _screenScale, _height - viewSize.getY() * _screenScale};
+    _screenOffset = Vector2(_width - viewSize.getX() * _screenScale, _height - viewSize.getY() * _screenScale)/2.f;
 }
 
 Rect RenderManager::convertRect(const Rect &rect) const {
