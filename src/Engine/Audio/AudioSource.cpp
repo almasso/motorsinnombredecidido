@@ -1,5 +1,7 @@
 #include "AudioSource.h"
 
+#include <Core/ComponentData.h>
+
 #include "AudioClip.h"
 #include "AudioManager.h"
 
@@ -14,9 +16,17 @@ AudioSource::~AudioSource() {
 }
 
 bool AudioSource::init() {
-    _clip = new AudioClip("");
-    _mixer = AudioManager::Instance()->getMixer("Master");
+    auto clipKey = _data->getData<std::string>("clip", "");
+    if (clipKey.empty())
+        return false;
+    _clip = new AudioClip(clipKey);
+    auto mixerKey = _data->getData<std::string>("mixer", "");
+    if (mixerKey.empty())
+        return false;
+    _mixer = AudioManager::Instance()->getMixer(mixerKey);
     _clip->assignMixer(_mixer);
+    _clip->setVolume(_data->getData("volume", 1.0f));
+    _clip->setLoop(_data->getData("loop", false));
     return true;
 }
 

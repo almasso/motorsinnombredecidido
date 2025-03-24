@@ -1,5 +1,6 @@
 #include "Collider.h"
 
+#include <Core/ComponentData.h>
 #include <Core/Entity.h>
 #include <Render/Transform.h>
 
@@ -17,6 +18,10 @@ Collider::~Collider() {
 bool Collider::init() {
     _transform = _entity->getComponent<Transform>();
     CollisionManager::Instance()->registerCollider(this);
+
+    _pos = _data->getData<Vector2>("position");
+    _size = _data->getData<Vector2>("size");
+
     return true;
 }
 

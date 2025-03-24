@@ -3,6 +3,7 @@
 LuaReader* LuaReader::_instance = nullptr;
 
 bool LuaReader::init() {
+    _lua.open_libraries(sol::lib::base, sol::lib::package);
     return true;
 }
 
