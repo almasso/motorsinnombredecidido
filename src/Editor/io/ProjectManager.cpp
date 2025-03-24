@@ -28,19 +28,12 @@ bool editor::io::ProjectManager::init() {
     _currentDirectory = SDL_GetCurrentDirectory();
     if(_currentDirectory == nullptr) return false;
 
-    if(!openProjectsFile()) return false;
     loadProjects();
     return true;
 }
 
-bool editor::io::ProjectManager::openProjectsFile() {
-    if(!LuaManager::GetInstance().loadFile(std::filesystem::path(std::string(_currentDirectory) + _projectsPath.string()).lexically_normal().string())) return false;
-    return true;
-}
-
 void editor::io::ProjectManager::loadProjects() {
-    sol::state& L = LuaManager::GetInstance().getLuaState();
-    sol::table projects = L["projects"];
+    sol::table projects = LuaManager::GetInstance().getTable(std::filesystem::path(std::string(_currentDirectory) + _projectsPath.string()).lexically_normal().string());
     if(projects.valid()) {
         for(const auto& [index, value] : projects) {
             if(value.is<std::string>()) {
@@ -66,4 +59,37 @@ uint32_t editor::io::ProjectManager::getProjectCount() const {
 
 const SearchableList<editor::Project*>& editor::io::ProjectManager::getProjects() const {
     return _projects;
+}
+
+void editor::io::ProjectManager::_addProject(const std::string &route) {
+    std::filesystem::path p(route);
+    _projects.push_back(new Project(p.parent_path().string()));
+    saveProjects();
+}
+
+void editor::io::ProjectManager::saveProjects() const {
+    //sol::table serpent = LuaManager::GetInstance().getTableFromScript(std::filesystem::path(std::string(_currentDirectory) + "/settings/serializer/serpent.lua").lexically_normal().string());
+    sol::state& L = LuaManager::GetInstance().getState();
+
+    sol::table projectsTable = L.create_table();
+    int index = 1;
+    for(Project* p : _projects) {
+        std::string s = p->getPath().string();
+        projectsTable[index++] = s;
+    }
+
+    /*if(serpent.valid()) {
+        auto block = serpent["block"];
+        if(block.valid()) {
+            auto result = block(projectsTable);
+            if(result.valid()) {
+                std::cout << result.get<std::string>() << std::endl;
+            } else {
+                sol::error err = result;
+                std::cout << err.what() << std::endl;
+            }
+        }
+    }*/
+
+    std::cout << LuaManager::GetInstance().serializeTable(projectsTable);
 }

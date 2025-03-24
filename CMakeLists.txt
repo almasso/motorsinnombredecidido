@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(motorsinnombredecidido LANGUAGES CXX)
+project(motorsinnombredecidido LANGUAGES C CXX)
 
 # Establecemos el tipo de compilación por defecto a Release
 # We set default build type to Release

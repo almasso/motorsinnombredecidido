@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 # Incluimos todos los archivos .cpp que estén en la ruta RAIZ/src/Editor/ a la compilación
 # We include all .cpp files inside ROOT/src/Editor/ to compilation
-file(GLOB_RECURSE EDITOR_SOURCES "${ROOT_DIR}/src/Editor/*.cpp")
+file(GLOB_RECURSE EDITOR_SOURCES "${ROOT_DIR}/src/Editor/*.cpp" "${ROOT_DIR}/src/Editor/*.c")
 
 # Definimos el ejecutable
 # We define the executable

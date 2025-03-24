@@ -35,15 +35,13 @@ void editor::Project::findProject() {
     if(std::filesystem::exists(_projectPath)) {
         // La carpeta del proyecto existe, vamos a buscar el archivo de configuración del proyecto
         if(std::filesystem::exists(_projectPath / ("ProjectSettings.lua"))) {
-            io::LuaManager::GetInstance().loadFile((_projectPath / ("ProjectSettings.lua")).string());
-            loadProject();
+            sol::table T = io::LuaManager::GetInstance().getTable((_projectPath / ("ProjectSettings.lua")).string());
+            loadProject(T);
         }
     }
 }
 
-void editor::Project::loadProject() {
-    sol::state& L = io::LuaManager::GetInstance().getLuaState();
-    sol::table project = L["project"];
+void editor::Project::loadProject(const sol::table& project) {
     if(project.valid()) {
         if(project["Name"].valid()) {
             setName(project["Name"].get<std::string>());

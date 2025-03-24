@@ -46,7 +46,6 @@ void editor::io::LocalizationManager::loadLocales() {
             // If it doesn't exist, we default to en_US
             _preferredLocale = "en_US";
     }
-    LuaManager::GetInstance().loadFile(std::filesystem::path(std::filesystem::path(std::string(_currentDirectory) + _languageTemplatesRoute.string()).lexically_normal() / (_preferredLocale + ".lua")).string());
 }
 
 bool editor::io::LocalizationManager::searchForSecondaryLocales() {
@@ -65,8 +64,7 @@ bool editor::io::LocalizationManager::searchForSecondaryLocales() {
 }
 
 void editor::io::LocalizationManager::convertLocalesIntoTable() {
-    sol::state& L = LuaManager::GetInstance().getLuaState();
-    sol::table localization = L["localization"];
+    sol::table localization = LuaManager::GetInstance().getTable(std::filesystem::path(std::filesystem::path(std::string(_currentDirectory) + _languageTemplatesRoute.string()).lexically_normal() / (_preferredLocale + ".lua")).string());
     if(localization.valid()) {
         for(const auto& [key, value] : localization) {
             if(key.is<std::string>() && value.is<std::string>()) {

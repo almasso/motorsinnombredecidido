@@ -24,6 +24,10 @@ namespace editor::render::windows {
 
         void drawWindow();
 
+        void newProjectModal();
+
+        void searchProject();
+
         void drawProjectButton(const std::string& projectName, const std::string& projectRoute, const std::tm& lastModified);
     };
 }

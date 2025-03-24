@@ -8,10 +8,7 @@
 
 #include <memory>
 #include <string>
-
-namespace sol {
-    class state;
-}
+#include <sol/sol.hpp>
 
 namespace editor::io {
     class LuaManager {
@@ -21,11 +18,18 @@ namespace editor::io {
         static LuaManager& GetInstance();
 
         template <std::convertible_to<std::string> T>
-        bool loadFile(T&& filename) {
-            return _loadFile(std::forward<T>(filename));
+        sol::table getTable(T&& filename) {
+            return _getTable(std::forward<T>(filename));
         }
 
-        [[nodiscard]] sol::state& getLuaState() const;
+        [[nodiscard]] sol::state& getState() const;
+
+        template <std::convertible_to<std::string> T>
+        sol::table getTableFromScript(T&& filename) {
+            return _getTableFromScript(std::forward<T>(filename));
+        }
+
+        std::string serializeTable(const sol::table& table);
 
         LuaManager(const LuaManager &) = delete;
 
@@ -35,13 +39,15 @@ namespace editor::io {
     private:
         static std::unique_ptr<LuaManager> _instance;
 
-        std::unique_ptr<sol::state> _luaState;
+        std::unique_ptr<sol::state> _state;
 
         LuaManager() = default;
 
         bool init();
 
-        bool _loadFile(const std::string& filename);
+        sol::table _getTable(const std::string& filename);
+
+        sol::table _getTableFromScript(const std::string& filename);
     };
 }
 

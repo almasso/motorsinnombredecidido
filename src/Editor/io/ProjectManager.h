@@ -25,6 +25,11 @@ namespace editor::io {
 
         const SearchableList<Project*>& getProjects() const;
 
+        template <std::convertible_to<std::string> T>
+        void addProject(T&& route) {
+            _addProject(std::forward<std::string>(route));
+        }
+
         ProjectManager(const ProjectManager &) = delete;
 
         ProjectManager &operator=(const ProjectManager &) = delete;
@@ -43,9 +48,11 @@ namespace editor::io {
 
         bool init();
 
-        bool openProjectsFile();
-
         void loadProjects();
+
+        void _addProject(const std::string& route);
+
+        void saveProjects() const;
     };
 }
 

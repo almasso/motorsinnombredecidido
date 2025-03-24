@@ -1,4 +1,2 @@
-projects = {
+return {
 }
-
-return projects

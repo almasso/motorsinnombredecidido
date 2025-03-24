@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <unordered_set>
 #include <ctime>
+#include <sol/sol.hpp>
 
 namespace editor {
     class Project {
@@ -59,7 +60,7 @@ namespace editor {
 
         void findProject();
 
-        void loadProject();
+        void loadProject(const sol::table& project);
     };
 }
 

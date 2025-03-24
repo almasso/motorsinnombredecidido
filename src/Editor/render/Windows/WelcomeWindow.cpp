@@ -11,6 +11,8 @@
 #include "io/ProjectManager.h"
 #include "common/Project.h"
 #include "utils/IconsFontAwesome6.h"
+#include "utils/tinyfiledialogs/tinyfiledialogs.h"
+#include <iostream>
 
 editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow") {
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
@@ -106,7 +108,6 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
     // Panel derecho (botones de acceso a los proyectos que haya cargados)
     ImGui::BeginChild("RP", ImVec2(rightPanelWidth, windowHeight), true);
     {
-
         ImGui::PushItemWidth(300);
         // Barra de búsqueda
         ImGuiTextFilter filter;
@@ -153,7 +154,9 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::SetCursorPosY(windowHeight / 2 - 150);
 
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
-        ImGui::Button("##ButtonCreateProject", ImVec2(200, 150));
+        if(ImGui::Button("##ButtonCreateProject", ImVec2(200, 150))) {
+            newProjectModal();
+        }
         ImVec2 buttonPos = ImGui::GetItemRectMin();
         ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
         ImGui::Text(ICON_FA_FOLDER_PLUS);
@@ -167,7 +170,9 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::NewLine();
 
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
-        ImGui::Button("##ButtonOpenProject", ImVec2(200, 150));
+        if(ImGui::Button("##ButtonOpenProject", ImVec2(200, 150))) {
+            searchProject();
+        }
         buttonPos = ImGui::GetItemRectMin();
         ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
         ImGui::Text(ICON_FA_FOLDER_OPEN);
@@ -213,4 +218,20 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(const std::string
     ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), std::string(io::LocalizationManager::GetInstance().getString("window.welcomewindow.lastmodified") + " "
     + oss.str()).c_str());
     ImGui::PopFont();
+}
+
+void editor::render::windows::WelcomeWindow::newProjectModal() {
+
+}
+
+void editor::render::windows::WelcomeWindow::searchProject() {
+    const char* fileExtension[] = {"*.lua"};
+    const char* filePath = tinyfd_openFileDialog(
+            io::LocalizationManager::GetInstance().getString("action.selectprojectfile").c_str(),
+            "",
+            1,
+            fileExtension,
+            io::LocalizationManager::GetInstance().getString("file.projectfile").c_str(),
+            0);
+    io::ProjectManager::GetInstance().addProject(filePath);
 }
