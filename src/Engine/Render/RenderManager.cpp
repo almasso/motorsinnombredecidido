@@ -23,6 +23,9 @@ bool RenderManager::init(const int& width, const int& height) {
     getWindowSize(&w, &h);
     _width = static_cast<float>(w);
     _height = static_cast<float>(h);
+    _viewOffset = {0,0};
+    _screenOffset = {0,0};
+    _screenScale = 1;
     return true;
 }
 
