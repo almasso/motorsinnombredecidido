@@ -103,14 +103,13 @@ $(document).ready(function(){initNavTree('classComponentData.html',''); initResi
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a09126700c66e03902d81dc2f70aa49d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentData.html#a09126700c66e03902d81dc2f70aa49d9">ComponentData</a> (std::string const &amp;id, sol::table const &amp;data)</td></tr>
 <tr class="separator:a09126700c66e03902d81dc2f70aa49d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae052146ea27a515e30784ccfb3e0c1a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentData.html#ae052146ea27a515e30784ccfb3e0c1a0">getVector</a> (std::string const &amp;key, <a class="el" href="classVector2.html">Vector2</a> const &amp;defaultValue={}) const</td></tr>
+<tr class="separator:ae052146ea27a515e30784ccfb3e0c1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87988c45a319504ac553e2413b46dfc5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a87988c45a319504ac553e2413b46dfc5"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classComponentData.html#a87988c45a319504ac553e2413b46dfc5">getData</a> (std::string const &amp;key, T const &amp;defaultValue={}) const</td></tr>
 <tr class="separator:a87988c45a319504ac553e2413b46dfc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9e3fa1e1339ec25a87992116931e86b"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentData.html#af9e3fa1e1339ec25a87992116931e86b">getId</a> () const</td></tr>
 <tr class="separator:af9e3fa1e1339ec25a87992116931e86b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5561f79591d066e364acfb991eeea456"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a5561f79591d066e364acfb991eeea456"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classVector2.html">Vector2</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classComponentData.html#a5561f79591d066e364acfb991eeea456">getData</a> (std::string const &amp;key, <a class="el" href="classVector2.html">Vector2</a> const &amp;defaultValue) const</td></tr>
-<tr class="separator:a5561f79591d066e364acfb991eeea456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a09126700c66e03902d81dc2f70aa49d9" name="a09126700c66e03902d81dc2f70aa49d9"></a>
@@ -143,7 +142,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a87988c45a319504ac553e2413b46dfc5" name="a87988c45a319504ac553e2413b46dfc5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87988c45a319504ac553e2413b46dfc5">&#9670;&#160;</a></span>getData() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a87988c45a319504ac553e2413b46dfc5">&#9670;&#160;</a></span>getData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,36 +179,6 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a5561f79591d066e364acfb991eeea456" name="a5561f79591d066e364acfb991eeea456"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5561f79591d066e364acfb991eeea456">&#9670;&#160;</a></span>getData() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classVector2.html">Vector2</a> ComponentData::getData </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classVector2.html">Vector2</a> const &amp;&#160;</td>
-          <td class="paramname"><em>defaultValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="af9e3fa1e1339ec25a87992116931e86b" name="af9e3fa1e1339ec25a87992116931e86b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9e3fa1e1339ec25a87992116931e86b">&#9670;&#160;</a></span>getId()</h2>
 
@@ -221,6 +190,34 @@ template&lt;&gt; </div>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae052146ea27a515e30784ccfb3e0c1a0" name="ae052146ea27a515e30784ccfb3e0c1a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae052146ea27a515e30784ccfb3e0c1a0">&#9670;&#160;</a></span>getVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVector2.html">Vector2</a> ComponentData::getVector </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classVector2.html">Vector2</a> const &amp;&#160;</td>
+          <td class="paramname"><em>defaultValue</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">

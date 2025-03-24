@@ -158,8 +158,10 @@ var NAVTREEINDEX0 =
 "classAnimation.html#aa1aa4ae25b5ab7a931c2fd67637adff6":[1,0,0,4],
 "classAnimator.html":[1,0,1],
 "classAnimator.html#a1a194482868d37536665eaf7a3364566":[1,0,1,0],
-"classAnimator.html#a2c4ddf2dcf39796df6cc560301e19c7d":[1,0,1,3],
-"classAnimator.html#a2d63cba9e9f75b5ba813ec1e619fa328":[1,0,1,2],
+"classAnimator.html#a2c4ddf2dcf39796df6cc560301e19c7d":[1,0,1,5],
+"classAnimator.html#a2d63cba9e9f75b5ba813ec1e619fa328":[1,0,1,3],
+"classAnimator.html#a4c2fa8829041012060729290279df835":[1,0,1,2],
+"classAnimator.html#ab9e4a52540d0dd04681983ea658d3433":[1,0,1,4],
 "classAnimator.html#ace92495e45ab841b3d8dba3ed723e7b2":[1,0,1,1],
 "classAssetManager.html":[1,0,2],
 "classAudioClip.html":[1,0,3],
@@ -236,7 +238,8 @@ var NAVTREEINDEX0 =
 "classBaseResourceHandler.html#af86c1df55519dc54ab97763b2ac26107":[1,0,9,0],
 "classCamera.html":[1,0,10],
 "classCamera.html#a24f26eb08e6e6b3dd86464d06c763c26":[1,0,10,0],
-"classCamera.html#ac169612ea2e029d65c4002fb56e0c245":[1,0,10,1],
+"classCamera.html#aa335ed07fa70c8f0c2e1449870e44586":[1,0,10,1],
+"classCamera.html#ac169612ea2e029d65c4002fb56e0c245":[1,0,10,2],
 "classCollider.html":[1,0,11],
 "classCollider.html#a426dde2f95b1717d44ff00b761cecb90":[1,0,11,5],
 "classCollider.html#a6ee5998a31c713010f2546881d061634":[1,0,11,7],
@@ -246,8 +249,5 @@ var NAVTREEINDEX0 =
 "classCollider.html#ac2293ca05f9e9cce6be71e3e5e423034":[1,0,11,8],
 "classCollider.html#ac6ed072f57f6029f0d88c57189169d5c":[1,0,11,2],
 "classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b":[1,0,11,1],
-"classCollider.html#ae261cfd399583fe633376ffd67cc8614":[1,0,11,0],
-"classCollisionManager.html":[1,0,12],
-"classCollisionManager.html#a36ff44dede2518f52ddacadb0ee99fbb":[1,0,12,1],
-"classCollisionManager.html#acdbb3c842f0ef1c7a028d3f080855766":[1,0,12,0]
+"classCollider.html#ae261cfd399583fe633376ffd67cc8614":[1,0,11,0]
 };

@@ -112,12 +112,16 @@ Inheritance diagram for Animator:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a194482868d37536665eaf7a3364566"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnimator.html#a1a194482868d37536665eaf7a3364566">Animator</a> (<a class="el" href="classComponentData.html">ComponentData</a> *data)</td></tr>
 <tr class="separator:a1a194482868d37536665eaf7a3364566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2fa8829041012060729290279df835"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnimator.html#a4c2fa8829041012060729290279df835">init</a> () override</td></tr>
+<tr class="separator:a4c2fa8829041012060729290279df835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c4ddf2dcf39796df6cc560301e19c7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnimator.html#a2c4ddf2dcf39796df6cc560301e19c7d">update</a> () override</td></tr>
 <tr class="separator:a2c4ddf2dcf39796df6cc560301e19c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d63cba9e9f75b5ba813ec1e619fa328"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnimator.html#a2d63cba9e9f75b5ba813ec1e619fa328">reset</a> ()</td></tr>
 <tr class="separator:a2d63cba9e9f75b5ba813ec1e619fa328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace92495e45ab841b3d8dba3ed723e7b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnimator.html#ace92495e45ab841b3d8dba3ed723e7b2">changeAnimation</a> (const std::string &amp;animation)</td></tr>
 <tr class="separator:ace92495e45ab841b3d8dba3ed723e7b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9e4a52540d0dd04681983ea658d3433"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnimator.html#ab9e4a52540d0dd04681983ea658d3433">setPlaying</a> (bool playing)</td></tr>
+<tr class="separator:ab9e4a52540d0dd04681983ea658d3433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt;&quot;Animator&quot;, SpriteRenderer &gt;</a></td></tr>
 <tr class="memitem:a954c63700683b54dfa7f644919c0d7ff inherit pub_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a954c63700683b54dfa7f644919c0d7ff">ComponentTemplate</a> (<a class="el" href="classComponentData.html">ComponentData</a> *data)</td></tr>
 <tr class="separator:a954c63700683b54dfa7f644919c0d7ff inherit pub_methods_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,6 +174,31 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a4c2fa8829041012060729290279df835" name="a4c2fa8829041012060729290279df835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2fa8829041012060729290279df835">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Animator::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2d63cba9e9f75b5ba813ec1e619fa328" name="a2d63cba9e9f75b5ba813ec1e619fa328"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d63cba9e9f75b5ba813ec1e619fa328">&#9670;&#160;</a></span>reset()</h2>
 
@@ -180,6 +209,24 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">void Animator::reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9e4a52540d0dd04681983ea658d3433" name="ab9e4a52540d0dd04681983ea658d3433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9e4a52540d0dd04681983ea658d3433">&#9670;&#160;</a></span>setPlaying()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Animator::setPlaying </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>playing</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
