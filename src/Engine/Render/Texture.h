@@ -8,7 +8,7 @@ class SDL_Texture;
 class Texture : public Resource {
     public:
     SDL_Texture* texture;
-    Texture(std::string const &path);
+    explicit Texture(std::string const &path);
     bool load() override;
     void unload() override;
 };

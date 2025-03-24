@@ -9,7 +9,7 @@ public:
   float frameTime;
   bool loop;
   int numFrames;
-  Animation(std::string const &path);
+  explicit Animation(std::string const &path);
   bool load() override;
   void unload() override;
 };
