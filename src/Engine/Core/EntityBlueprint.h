@@ -10,8 +10,8 @@ class EntityBlueprint {
 private:
     std::vector<EntityBlueprint> _children;
     std::vector<ComponentData*> _components;
-    bool active;
-    std::string handler;
+    bool _active;
+    std::string _handler;
 
     void readChildren(sol::table const& childrenBlueprints);
     void readComponents(sol::table const& componentBlueprints);
@@ -24,6 +24,12 @@ public:
     EntityBlueprint();
     explicit EntityBlueprint(sol::table const& blueprint);
     ~EntityBlueprint();
+    const std::vector<EntityBlueprint>& getChildren() const;
+    const std::vector<ComponentData*>& getComponents() const;
+    bool getActive() const;
+    const std::string& getHandler() const;
+
+
 };
 
 

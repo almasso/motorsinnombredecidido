@@ -9,6 +9,7 @@ class SpriteRenderer : public ComponentTemplate<"SpriteRenderer",RenderComponent
     std::string _sprite {};
     Vector2 _size {};
     public:
+    SpriteRenderer(ComponentData *data);
     bool render(RenderManager* manager) override;
     void setSprite(const std::string& spritePath);
 };

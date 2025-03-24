@@ -12,6 +12,7 @@ return {
     sfx = {
         components = {
             AudioSource = {
+                enabled = false,
                 clip = "assets/audio/SodaLoop.wav",
                 mixer = "assets/audio/sfx.mixer.lua",
                 volume = 1,

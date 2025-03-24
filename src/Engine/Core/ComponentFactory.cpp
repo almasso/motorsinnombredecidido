@@ -8,6 +8,8 @@
 #include <Render/SpriteRenderer.h>
 #include <Render/Camera.h>
 
+#include "ComponentData.h"
+
 ComponentFactory::ComponentFactory() : _numComponents(0) {
     registerComponent<Transform>();
     registerComponent<Rectangle>();
@@ -18,9 +20,9 @@ ComponentFactory::ComponentFactory() : _numComponents(0) {
     registerComponent<Collider>();
 }
 
-Component * ComponentFactory::createComponent(const std::string &name) {
-    if (auto finder = _factory.find(name); finder != _factory.end()) {
-        return finder->second();
+Component* ComponentFactory::createComponent(ComponentData* data) {
+    if (auto finder = _factory.find(data->getId()); finder != _factory.end()) {
+        return finder->second(data);
     }
     return nullptr;
 }

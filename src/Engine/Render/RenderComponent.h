@@ -11,6 +11,7 @@ class RenderComponent : public Component {
     protected:
     Transform* _transform {};
     public:
+    RenderComponent(ComponentData *data);
     virtual bool render(RenderManager* manager) = 0;
     bool init() override;
     void onEnable() override;

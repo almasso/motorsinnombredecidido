@@ -13,7 +13,7 @@ class Sprite : public Resource {
     Sprite(std::string const &path);
     bool load() override;
     void unload() override;
-    Texture* getTexture() const;
+    const Texture* getTexture() const;
     const Rect& getRect() const;
 };
 #endif //SPRITE_H

@@ -2,6 +2,7 @@
 #include "Color.h"
 #include <Utils/RPGError.h>
 #include <SDL3/SDL_render.h>
+#include <SDL3_image/SDL_image.h>
 
 SDL_Renderer* TextureLoader::_renderer = nullptr;
 
@@ -30,8 +31,7 @@ SDL_Texture* TextureLoader::GetTexture(const std::string& filePath) {
     if (!_renderer) {
         return nullptr;
     }
-    //SDL_Surface* surface = IMG_Load(filePath);
-    SDL_Surface* surface = SDL_CreateSurface(1, 1, SDL_PIXELFORMAT_RGBA8888);
+    SDL_Surface* surface = IMG_Load(filePath.c_str());
     if (!surface) {
         RPGError::ShowError("Error al cargar imagen", SDL_GetError());
         return nullptr;

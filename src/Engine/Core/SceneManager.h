@@ -23,9 +23,8 @@ class SceneManager {
     ComponentFactory* _factory;
     SceneManager();
     ~SceneManager();
-    Component* createComponent(const std::string& handler);
-    Entity* createEntity(const std::string& handler);
-    Scene* createScene(const std::string& handler);
+    Entity* createEntity(const EntityBlueprint *blueprint, Scene *scene);
+    Scene* createScene(const SceneBlueprint *blueprint);
     
     public:
     static SceneManager* Init();

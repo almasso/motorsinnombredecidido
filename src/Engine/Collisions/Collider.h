@@ -23,7 +23,7 @@ private:
     std::unordered_set<Collider*> _collisionEnded;
 
 public:
-    Collider();
+    Collider(ComponentData* data);
     ~Collider() override;
     bool init() override;
     void onEnable() override;

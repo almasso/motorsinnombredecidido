@@ -9,6 +9,7 @@ class Rectangle : public ComponentTemplate<"Rectangle",RenderComponent> {
     Vector2 _size = {1,1};
     Color _color = {0};
     public:
+    Rectangle(ComponentData *data);
     bool render(RenderManager* manager) override;
 };
 

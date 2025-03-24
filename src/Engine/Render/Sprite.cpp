@@ -1,7 +1,9 @@
 #include "Sprite.h"
 #include "RenderManager.h"
+#include "Texture.h"
+#include <Load/ResourceHandler.h>
 
-Sprite::Sprite(std::string const &path) : Resource(path) {
+Sprite::Sprite(std::string const &path) : Resource(path), _rect() {
 }
 
 bool Sprite::load() {
@@ -11,8 +13,8 @@ bool Sprite::load() {
 void Sprite::unload() {
 }
 
-Texture* Sprite::getTexture() const{
-  return nullptr;
+const Texture* Sprite::getTexture() const{
+  return ResourceHandler<Texture>::Instance()->get(_texturePath);
 }
 
 const Rect & Sprite::getRect() const{

@@ -1,6 +1,26 @@
 #include "Entity.h"
 #include "Component.h"
 
+Entity::Entity(): _parent(nullptr), _active(false), _alive(false) {
+}
+
+bool Entity::init() {
+     for (auto [id,component] : _components) {
+          if (component->init()) {
+               component->initEnable();
+          }
+          else {
+               return false;
+          }
+     }
+     for (Entity* child : _children) {
+          if (!child->init()) {
+               return false;
+          }
+     }
+     return true;
+}
+
 bool Entity::update() {
      for (auto [id,component] : _components) {
           if (component->isEnabled() && !component->update()) {
@@ -63,6 +83,29 @@ void Entity::destroy() {
      _alive = false;
 }
 
+bool Entity::addChild(Entity* child) {
+     if (_children.insert(child).second) {
+          child->setParent(this);
+          return true;
+     }
+     return false;
+}
+
+void Entity::removeChild(Entity *child) {
+     _children.erase(child);
+}
+
+void Entity::setParent(Entity* parent) {
+     _parent = parent;
+}
+
 Entity * Entity::getParent() const {
      return _parent;
+}
+
+bool Entity::addComponent(Component *component) {
+     if (_components.insert({component->getOrder(), component}).second) {
+          return true;
+     }
+     return false;
 }

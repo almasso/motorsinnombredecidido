@@ -28,9 +28,9 @@ void EntityBlueprint::read(sol::table const& blueprint) {
     if (componentBlueprints.valid())
         readComponents(componentBlueprints);
 
-    handler = blueprint.get_or<std::string>("handler", "");
+    _handler = blueprint.get_or<std::string>("handler", "");
 
-    active = blueprint.get_or<bool, std::string, bool>("active", true);
+    _active = blueprint.get_or<bool, std::string, bool>("active", true);
 }
 
 void EntityBlueprint::clear() {
@@ -39,14 +39,30 @@ void EntityBlueprint::clear() {
         delete component;
     }
     _components.clear();
-    active = false;
-    handler = "";
+    _active = false;
+    _handler = "";
 }
 
 EntityBlueprint::EntityBlueprint() = default;
 
 EntityBlueprint::~EntityBlueprint() {
     clear();
+}
+
+const std::vector<EntityBlueprint> & EntityBlueprint::getChildren() const{
+    return _children;
+}
+
+const std::vector<ComponentData *> & EntityBlueprint::getComponents() const{
+    return _components;
+}
+
+bool EntityBlueprint::getActive() const{
+    return _active;
+}
+
+const std::string & EntityBlueprint::getHandler() const{
+    return _handler;
 }
 
 EntityBlueprint::EntityBlueprint(sol::table const& blueprint) {

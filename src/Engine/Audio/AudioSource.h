@@ -11,7 +11,7 @@ private:
     AudioClip* _clip;
     AudioMixer* _mixer;
 public:
-    AudioSource();
+    AudioSource(ComponentData *data);
     ~AudioSource() override;
     bool init() override;
     void onEnable() override;

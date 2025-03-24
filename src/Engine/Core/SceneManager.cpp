@@ -2,6 +2,10 @@
 #include "ComponentFactory.h"
 #include "Game.h"
 #include "Scene.h"
+#include "Entity.h"
+#include "SceneBlueprint.h"
+#include "PrefabBlueprint.h"
+#include <Load/ResourceHandler.h>
 #include <Utils/RPGError.h>
 
 SceneManager* SceneManager::_instance = nullptr;
@@ -14,24 +18,58 @@ SceneManager::SceneManager() : _scenes()
 
 SceneManager::~SceneManager()
 {
+	for (auto scene : _scenes) {
+		delete scene;
+	}
+	_scenes.clear();
 	delete _game;
 	delete _factory;
 }
 
-Component *SceneManager::createComponent(const std::string &handler)
+Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scene)
 {
-	return nullptr;
+	Entity* entity = new Entity();
+	for (const EntityBlueprint& childBp : blueprint->getChildren()) {
+		Entity* child = createEntity(&childBp, scene);
+		if (!child) {
+			delete entity;
+			return nullptr;
+		}
+		if (!entity->addChild(child)) {
+			delete child;
+			delete entity;
+			return nullptr;
+		}
+	}
+	for (ComponentData* data : blueprint->getComponents()) {
+		Component* component = _factory->createComponent(data);
+		if (!component) {
+			delete entity;
+			return nullptr;
+		}
+		entity->addComponent(component);
+		component->setContext(entity,scene,_game);
+	}
+	return entity;
 }
 
-Entity* SceneManager::createEntity(const std::string& handler)
-{
-	return nullptr;
-}
 
-
-Scene* SceneManager::createScene(const std::string& handler)
+Scene* SceneManager::createScene(const SceneBlueprint* blueprint)
 {
-	return nullptr;
+	Scene* scene = new Scene();
+	for (const EntityBlueprint& entityBp : blueprint->getEntities()) {
+		Entity* entity = createEntity(&entityBp, scene);
+		if (!entity) {
+			delete scene;
+			return nullptr;
+		}
+		scene->addEntity(entity);
+	}
+	if (!scene->init()) {
+		delete scene;
+		return nullptr;
+	}
+	return scene;
 }
 
 
@@ -71,15 +109,23 @@ void SceneManager::shutdown() const {
 
 Entity* SceneManager::instantiatePrefab(const std::string& handler)
 {
-	Entity* prefab = createEntity(handler);
-	_scenes.back()->addEntity(prefab);
+	Entity* prefab = createEntity(ResourceHandler<PrefabBlueprint>::Instance()->get(handler),_scenes.back());
+	if (prefab) {
+		_scenes.back()->addEntity(prefab);
+		if (!prefab->init()) {
+			delete prefab;
+			return nullptr;
+		}
+	}
 	return prefab;
 }
 
 Scene* SceneManager::addScene(const std::string& handler)
 {
-	Scene* newScene = createScene(handler);
-	_scenes.push_back(newScene);
+	Scene* newScene = createScene(ResourceHandler<SceneBlueprint>::Instance()->get(handler));
+	if (newScene) {
+		_scenes.push_back(newScene);
+	}
 	return newScene;
 }
 

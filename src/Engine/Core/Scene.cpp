@@ -5,6 +5,15 @@
 Scene::Scene()
 = default;
 
+bool Scene::init() {
+	for (Entity* entity : _entities) {
+		if (!entity->init()) {
+			return false;
+		}
+	}
+	return true;
+}
+
 bool Scene::update() const {
 	for (Entity* entity : _entities) {
 		if (entity->isActive() && !entity->update()) {

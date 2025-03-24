@@ -2,6 +2,7 @@
 #define ENTITY_H
 #include <map>
 #include <unordered_set>
+#include "Component.h"
 
 class RenderManager;
 class Component;
@@ -15,23 +16,19 @@ private:
     bool _alive;
 public:
     Entity();
+    bool init();
     bool update();
     bool fixedUpdate();
     bool isActive() const;
     void setActive(bool active);
     bool isAlive() const;
     void destroy();
-    void addChild(Entity* child);
+    bool addChild(Entity* child);
     void removeChild(Entity* child);
+    void setParent(Entity* parent);
     Entity* getParent() const;
 
-    template<class ComponentType>
-    bool addComponent(Component* component) {
-        if (_components.insert({ComponentType::order, component}).second) {
-            return true;
-        }
-        return false;
-    }
+    bool addComponent(Component* component);
 
     template<class ComponentType>
     ComponentType* getComponent() {

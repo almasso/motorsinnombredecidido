@@ -1,7 +1,8 @@
 #include "Component.h"
+#include "ComponentData.h"
 #include "Entity.h"
 
-Component::Component() : _enabled(false),  _entity(nullptr), _scene(nullptr), _game(nullptr) {
+Component::Component(ComponentData* data) : _enabled(false) ,_entity(nullptr),  _scene(nullptr), _game(nullptr), _data(data) {
 }
 
 void Component::setContext(Entity *entity, Scene *scene, Game *game) {
@@ -12,6 +13,10 @@ void Component::setContext(Entity *entity, Scene *scene, Game *game) {
 
 bool Component::init() {
     return true;
+}
+
+int Component::getOrder() const{
+    return -1;
 }
 
 bool Component::update() {
@@ -43,4 +48,8 @@ void Component::setEnabled(const bool enabled) {
         if (_enabled) onEnable();
         else onDisable();
     }
+}
+
+void Component::initEnable() {
+    setEnabled(_data->getData("enabled", true));
 }

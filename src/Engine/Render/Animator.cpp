@@ -1,11 +1,17 @@
 #include "Animator.h"
+
+#include <Load/ResourceHandler.h>
+
 #include "Animation.h"
 #include <Utils/Time.h>
+
+Animator::Animator(ComponentData *data) : ComponentTemplate(data) {
+}
 
 bool Animator::update() {
   if(!_animationEnded) {
     _frameTimer += Time::deltaTime;
-    Animation* anim = new Animation(_animation);
+    const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
     while (_frameTimer >= anim->frameTime) {
         _frameTimer -= anim->frameTime;
         _currentFrame++;

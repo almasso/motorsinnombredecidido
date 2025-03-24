@@ -8,6 +8,7 @@ class Animator : public ComponentTemplate<"Animator", SpriteRenderer> {
     int _currentFrame {};
     bool _animationEnded {};
 public:
+    Animator(ComponentData* data);
     bool update() override;
     void reset();
     void changeAnimation(const std::string& animation);

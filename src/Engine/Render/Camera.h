@@ -7,7 +7,7 @@ class Camera : public ComponentTemplate<"Camera",RenderComponent>{
 private:
     Vector2 _size = {1,1};
 public:
-    Camera() = default;
+    Camera(ComponentData* data);
     bool render(RenderManager* manager) override;
 };
 

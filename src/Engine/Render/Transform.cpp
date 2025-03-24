@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include <Core/Entity.h>
 
-Transform::Transform(): _rotation(0) {
+Transform::Transform(ComponentData *data) : ComponentTemplate(data), _rotation(0) {
 }
 
 bool Transform::init() {

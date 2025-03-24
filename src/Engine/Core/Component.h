@@ -4,6 +4,7 @@
 class Entity;
 class Scene;
 class Game;
+class ComponentData;
 
 class Component {
 protected:
@@ -11,11 +12,13 @@ protected:
     Entity* _entity;
     Scene* _scene;
     Game* _game;
+    ComponentData* _data;
 public:
-    Component();
+    Component(ComponentData* data);
     virtual ~Component() = default;
     void setContext(Entity* entity, Scene* scene, Game* game);
     virtual bool init();
+    virtual int getOrder() const;
     virtual bool update();
     virtual bool fixedUpdate();
     virtual void onEnable();
@@ -23,6 +26,7 @@ public:
     bool isEnabled() const;
     bool isEntityActive() const;
     void setEnabled(bool enabled);
+    void initEnable();
 };
 
 #endif //COMPONENT_H

@@ -10,8 +10,10 @@ private:
     std::vector<EntityBlueprint> _entities;
 
 public:
+    SceneBlueprint(std::string const &path);
     bool load() override;
     void unload() override;
+    const std::vector<EntityBlueprint>& getEntities() const;
 };
 
 

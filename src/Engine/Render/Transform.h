@@ -9,7 +9,7 @@ class Transform : public ComponentTemplate<"Transform"> {
     Vector2 _scale;
     float _rotation;
     public:
-    Transform();
+    Transform(ComponentData *data);
     bool init() override;
     const Vector2& getPosition() const;
     Vector2 getGlobalPosition() const;

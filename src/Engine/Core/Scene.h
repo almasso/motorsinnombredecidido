@@ -17,6 +17,7 @@ private:
     std::map<int, std::unordered_set<RenderComponent*>> _renderComponents;
 public:
     Scene();
+    bool init();
     bool update() const;
     bool fixedUpdate() const;
     bool render(RenderManager* manager);

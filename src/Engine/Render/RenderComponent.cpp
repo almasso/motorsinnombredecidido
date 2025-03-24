@@ -4,6 +4,9 @@
 #include <Core/Scene.h>
 #include <Utils/RPGError.h>
 
+RenderComponent::RenderComponent(ComponentData* data): Component(data) {
+}
+
 bool RenderComponent::init() {
     _transform = _entity->getComponent<Transform>();
     if (Transform* transform = _entity->getComponent<Transform>(); transform != nullptr) {
