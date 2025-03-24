@@ -14,7 +14,7 @@ bool Animator::init() {
     return false;
   if (!setSprite(anim->frames[_currentFrame]))
     return false;
-  _playing = _data->getData<bool>("_playing", true);
+  _playing = _data->getData<bool>("playing", true);
 
   return RenderComponent::init();
 }

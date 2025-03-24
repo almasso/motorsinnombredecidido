@@ -25,6 +25,7 @@ bool Animation::load() {
     frameTime = table.get_or("frameTime", 0.5f);
     loop = table.get_or("loop", false);
     numFrames = static_cast<int>(frames.size());
+    _size = 0;
     return true;
 }
 

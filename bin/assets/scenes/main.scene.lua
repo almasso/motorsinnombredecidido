@@ -9,8 +9,9 @@ return {
                 loop = true,
                 playOnAwake = true
             },
-            SpriteRenderer = {
-                sprite = "assets/sprites/test.sprite.lua"
+            Animator = {
+                animation = "assets/sprites/test.animation.lua",
+                playing = true
             },
             Transform = {
                 pos = {0, 0}
