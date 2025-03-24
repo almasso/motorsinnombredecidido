@@ -7,6 +7,7 @@ var hierarchy =
     [ "BaseResourceHandler", "classBaseResourceHandler.html", [
       [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ]
     ] ],
+    [ "Button", "classButton.html", null ],
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [

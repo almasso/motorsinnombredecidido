@@ -10,6 +10,7 @@ var annotated_dup =
     [ "AudioMixerData", "classAudioMixerData.html", "classAudioMixerData" ],
     [ "AudioSource", "classAudioSource.html", "classAudioSource" ],
     [ "BaseResourceHandler", "classBaseResourceHandler.html", "classBaseResourceHandler" ],
+    [ "Button", "classButton.html", null ],
     [ "Camera", "classCamera.html", "classCamera" ],
     [ "Collider", "classCollider.html", "classCollider" ],
     [ "CollisionManager", "classCollisionManager.html", "classCollisionManager" ],
