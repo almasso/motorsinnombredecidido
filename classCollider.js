@@ -1,6 +1,6 @@
 var classCollider =
 [
-    [ "Collider", "classCollider.html#aa7186870221f868bbc74c3ae8609fa66", null ],
+    [ "Collider", "classCollider.html#ae261cfd399583fe633376ffd67cc8614", null ],
     [ "~Collider", "classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b", null ],
     [ "collisionEndedWith", "classCollider.html#ac6ed072f57f6029f0d88c57189169d5c", null ],
     [ "getRect", "classCollider.html#a788de32090d0ee109827025d3b89325c", null ],

@@ -5,6 +5,7 @@ var classScene =
     [ "addHandler", "classScene.html#a5d4871c219d0b1d591bee0f656e24b22", null ],
     [ "fixedUpdate", "classScene.html#ab00a8df9393d0d078bba172be7dc1ccb", null ],
     [ "getEntityByHandler", "classScene.html#ac994e1af3924f80706d42c8142775899", null ],
+    [ "init", "classScene.html#a6b55797f9eeba71682282545feda6539", null ],
     [ "refresh", "classScene.html#aa03deb4fb845c655cdaff3d968e3dbf8", null ],
     [ "registerRenderComponent", "classScene.html#a2731ff1b1a29ddf9bad35d6476a05c7f", null ],
     [ "render", "classScene.html#a49163c0131ea7209f4ac08394642662f", null ],

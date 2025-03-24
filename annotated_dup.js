@@ -17,7 +17,7 @@ var annotated_dup =
     [ "Component", "classComponent.html", "classComponent" ],
     [ "ComponentData", "classComponentData.html", "classComponentData" ],
     [ "ComponentFactory", "classComponentFactory.html", "classComponentFactory" ],
-    [ "ComponentTemplate", "classComponentTemplate.html", null ],
+    [ "ComponentTemplate", "classComponentTemplate.html", "classComponentTemplate" ],
     [ "Entity", "classEntity.html", "classEntity" ],
     [ "EntityBlueprint", "classEntityBlueprint.html", "classEntityBlueprint" ],
     [ "Game", "classGame.html", "classGame" ],

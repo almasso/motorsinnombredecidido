@@ -110,12 +110,16 @@ Inheritance diagram for SceneBlueprint:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8f2a26cdbf21094b87d5da397679a8c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneBlueprint.html#a8f2a26cdbf21094b87d5da397679a8c1">SceneBlueprint</a> (std::string const &amp;path)</td></tr>
+<tr class="separator:a8f2a26cdbf21094b87d5da397679a8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae87f3d86967670c28e2e7e83958f3835"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneBlueprint.html#ae87f3d86967670c28e2e7e83958f3835">load</a> () override</td></tr>
 <tr class="memdesc:ae87f3d86967670c28e2e7e83958f3835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the file in the specified path and store it.  <br /></td></tr>
 <tr class="separator:ae87f3d86967670c28e2e7e83958f3835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a191f2ec3a75925be2651c088d8338e41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneBlueprint.html#a191f2ec3a75925be2651c088d8338e41">unload</a> () override</td></tr>
 <tr class="memdesc:a191f2ec3a75925be2651c088d8338e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase the specific memory of the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> stored.  <br /></td></tr>
 <tr class="separator:a191f2ec3a75925be2651c088d8338e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a039f299c95ea31439b7d20cd626dff76"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="classEntityBlueprint.html">EntityBlueprint</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneBlueprint.html#a039f299c95ea31439b7d20cd626dff76">getEntities</a> () const</td></tr>
+<tr class="separator:a039f299c95ea31439b7d20cd626dff76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classResource"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classResource')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classResource.html">Resource</a></td></tr>
 <tr class="memitem:a26732c5251dbdfd37399574910307081 inherit pub_methods_classResource"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#a26732c5251dbdfd37399574910307081">Resource</a> (std::string const &amp;path)</td></tr>
 <tr class="memdesc:a26732c5251dbdfd37399574910307081 inherit pub_methods_classResource"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the <code><a class="el" href="classResource.html" title="Base interface to implement different types of resources.">Resource</a></code> with an assigned file path.  <br /></td></tr>
@@ -141,7 +145,43 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac18dbc07cf4a554f21c52a629c2471ae inherit pro_attribs_classResource"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResource.html#ac18dbc07cf4a554f21c52a629c2471ae">_path</a></td></tr>
 <tr class="separator:ac18dbc07cf4a554f21c52a629c2471ae inherit pro_attribs_classResource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8f2a26cdbf21094b87d5da397679a8c1" name="a8f2a26cdbf21094b87d5da397679a8c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f2a26cdbf21094b87d5da397679a8c1">&#9670;&#160;</a></span>SceneBlueprint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SceneBlueprint::SceneBlueprint </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a039f299c95ea31439b7d20cd626dff76" name="a039f299c95ea31439b7d20cd626dff76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a039f299c95ea31439b7d20cd626dff76">&#9670;&#160;</a></span>getEntities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; <a class="el" href="classEntityBlueprint.html">EntityBlueprint</a> &gt; &amp; SceneBlueprint::getEntities </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae87f3d86967670c28e2e7e83958f3835" name="ae87f3d86967670c28e2e7e83958f3835"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae87f3d86967670c28e2e7e83958f3835">&#9670;&#160;</a></span>load()</h2>
 

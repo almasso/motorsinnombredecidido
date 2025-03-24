@@ -1,21 +1,21 @@
 var searchData=
 [
-  ['camera_0',['Camera',['../classCamera.html#ae23af4d7cab430c77d537621cdd16b3f',1,'Camera::Camera()'],['../classCamera.html',1,'Camera']]],
+  ['camera_0',['Camera',['../classCamera.html#a24f26eb08e6e6b3dd86464d06c763c26',1,'Camera::Camera()'],['../classCamera.html',1,'Camera']]],
   ['camera_2ecpp_1',['Camera.cpp',['../Camera_8cpp.html',1,'']]],
   ['camera_2eh_2',['Camera.h',['../Camera_8h.html',1,'']]],
   ['changeanimation_3',['changeAnimation',['../classAnimator.html#ace92495e45ab841b3d8dba3ed723e7b2',1,'Animator']]],
   ['clear_4',['clear',['../classEntityBlueprint.html#a81b905a95ce474d6908dda96a2311309',1,'EntityBlueprint::clear()'],['../classResourceHandler.html#a6731097027901d1723ab9d0cbf57c3af',1,'ResourceHandler::clear()'],['../classRenderManager.html#ae3d038fb205f7a905fc4a1b8b72f7d50',1,'RenderManager::clear()']]],
-  ['collider_5',['Collider',['../classCollider.html',1,'Collider'],['../classCollider.html#aa7186870221f868bbc74c3ae8609fa66',1,'Collider::Collider()']]],
+  ['collider_5',['Collider',['../classCollider.html',1,'Collider'],['../classCollider.html#ae261cfd399583fe633376ffd67cc8614',1,'Collider::Collider()']]],
   ['collider_2ecpp_6',['Collider.cpp',['../Collider_8cpp.html',1,'']]],
   ['collider_2eh_7',['Collider.h',['../Collider_8h.html',1,'']]],
   ['collisionendedwith_8',['collisionEndedWith',['../classCollider.html#ac6ed072f57f6029f0d88c57189169d5c',1,'Collider']]],
   ['collisionmanager_9',['CollisionManager',['../classCollisionManager.html',1,'']]],
   ['collisionmanager_2ecpp_10',['CollisionManager.cpp',['../CollisionManager_8cpp.html',1,'']]],
   ['collisionmanager_2eh_11',['CollisionManager.h',['../CollisionManager_8h.html',1,'']]],
-  ['color_12',['Color',['../structColor.html#ac190eafa8faf6ad69c1f602dae07ca11',1,'Color::Color()'],['../structColor.html',1,'Color']]],
-  ['color_13',['color',['../structSquare.html#a405722a853f3fc504fb0f3bc0d6c259b',1,'Square']]],
+  ['color_12',['color',['../structSquare.html#a405722a853f3fc504fb0f3bc0d6c259b',1,'Square']]],
+  ['color_13',['Color',['../structColor.html',1,'Color'],['../structColor.html#ac190eafa8faf6ad69c1f602dae07ca11',1,'Color::Color()']]],
   ['color_2eh_14',['Color.h',['../Color_8h.html',1,'']]],
-  ['component_15',['Component',['../classComponent.html',1,'Component'],['../classComponent.html#a8775db6d1a2c1afc2e77cd3c8f39da6f',1,'Component::Component()']]],
+  ['component_15',['Component',['../classComponent.html',1,'Component'],['../classComponent.html#a712ab773996cdfb8dc8a28a614f39c75',1,'Component::Component()']]],
   ['component_2ecpp_16',['Component.cpp',['../Component_8cpp.html',1,'']]],
   ['component_2eh_17',['Component.h',['../Component_8h.html',1,'']]],
   ['componentdata_18',['ComponentData',['../classComponentData.html',1,'ComponentData'],['../classComponentData.html#a09126700c66e03902d81dc2f70aa49d9',1,'ComponentData::ComponentData()']]],
@@ -24,7 +24,7 @@ var searchData=
   ['componentfactory_21',['ComponentFactory',['../classComponentFactory.html#aaaaa1c4d580adeed012971d37b5494c5',1,'ComponentFactory::ComponentFactory()'],['../classComponentFactory.html',1,'ComponentFactory']]],
   ['componentfactory_2ecpp_22',['ComponentFactory.cpp',['../ComponentFactory_8cpp.html',1,'']]],
   ['componentfactory_2eh_23',['ComponentFactory.h',['../ComponentFactory_8h.html',1,'']]],
-  ['componenttemplate_24',['ComponentTemplate',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_24',['ComponentTemplate',['../classComponentTemplate.html#a954c63700683b54dfa7f644919c0d7ff',1,'ComponentTemplate::ComponentTemplate()'],['../classComponentTemplate.html',1,'ComponentTemplate&lt; componentName, ComponentBase &gt;']]],
   ['componenttemplate_2eh_25',['ComponentTemplate.h',['../ComponentTemplate_8h.html',1,'']]],
   ['componenttemplate_3c_22animator_22_2c_20spriterenderer_20_3e_26',['ComponentTemplate&lt;&quot;Animator&quot;, SpriteRenderer &gt;',['../classComponentTemplate.html',1,'']]],
   ['componenttemplate_3c_22audiosource_22_3e_27',['ComponentTemplate&lt;&quot;AudioSource&quot;&gt;',['../classComponentTemplate.html',1,'']]],
@@ -36,5 +36,5 @@ var searchData=
   ['componenttype_33',['componentType',['../conceptcomponentType.html',1,'']]],
   ['connect_34',['connect',['../classAudioMixer.html#a54dd5cd7614bb83c1ccb508232c92770',1,'AudioMixer::connect(AudioClip *clip)'],['../classAudioMixer.html#af4ca5f6cd7ae1381579b8f0006b1058b',1,'AudioMixer::connect(AudioMixer *mixer)']]],
   ['convertrect_35',['convertRect',['../classRenderManager.html#a39217a636426426b04a14761f14a1283',1,'RenderManager']]],
-  ['createcomponent_36',['createComponent',['../classComponentFactory.html#af47c59f75ffefcf11d2aadff0103fb11',1,'ComponentFactory']]]
+  ['createcomponent_36',['createComponent',['../classComponentFactory.html#ad17c867a10f120d1d45fb563dad34f2c',1,'ComponentFactory']]]
 ];
