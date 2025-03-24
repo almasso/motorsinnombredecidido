@@ -54,15 +54,16 @@ int Main::Loop() {
         return 1;
 
     int w, h;
-    _render->getWindowSize(&w, &h);
     while(!InputManager::GetState().exit) {
+        _render->getWindowSize(&w, &h);
         _time->update();
-        _input->update();
+        _input->update(w,h);
         _collisions->fixedUpdate();
         if (!_scenes->update())
             return 1;
         _render->clear();
-        _scenes->render(_render);
+        if (!_scenes->render(_render))
+            return 1;
         _render->present();
         _scenes->refresh();
     }

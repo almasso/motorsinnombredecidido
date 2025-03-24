@@ -1,6 +1,8 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
+class RenderManager;
+
 struct InputState {
     float mouse_x = 0.0f;
     float mouse_y = 0.0f;
@@ -11,12 +13,12 @@ struct InputState {
 };
 
 class InputManager {
-    InputState input_state;
-    static InputManager* instance;
+    InputState _inputState;
+    static InputManager* _instance;
     InputManager();
     public:
     static InputManager* Init();
-    void update();
+    void update(const int& width, const int& height);
     void shutdown() const;
     static const InputState& GetState();
 };
