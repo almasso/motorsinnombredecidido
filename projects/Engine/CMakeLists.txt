@@ -10,6 +10,8 @@ set(BUILD_SHARED_LIBS ON CACHE BOOL "Build Engine as a shared library | Compilar
 # We define the library
 add_library(Engine SHARED ${ENGINE_SOURCES})
 
+add_dependencies(Engine freetype)
+
 # Incluimos y enlazamos SDL3
 # We include and link SDL3
 target_link_libraries(Engine PRIVATE SDL3-shared lua sol2::sol2 SDL3_ttf::SDL3_ttf-shared SDL3_image::SDL3_image-shared)
