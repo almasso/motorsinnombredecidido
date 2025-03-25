@@ -26,5 +26,5 @@ target_include_directories(DearImGui PUBLIC ${IMGUI_INCLUDE_DIRS} ${SDL3_INCLUDE
 # We set the properties for the library output
 set_target_properties(DearImGui PROPERTIES
         PREFIX ""
-        OUTPUT_NAME "DearImGui$<$<CONFIG:Debug>:_d>"
+        OUTPUT_NAME "DearImGui$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>"
 )

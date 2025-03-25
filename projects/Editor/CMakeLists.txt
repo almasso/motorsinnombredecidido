@@ -16,5 +16,5 @@ target_include_directories(Editor PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/E
 # Hacemos que el ejecutable tenga un _d cuando se compile en debug
 # We make so that the executable has a _d whenever it's compiled on debug
 set_target_properties(Editor PROPERTIES
-        OUTPUT_NAME "Editor$<$<CONFIG:Debug>:_d>"
+        OUTPUT_NAME "Editor$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>"
 )

@@ -36,7 +36,7 @@ set(FETCHCONTENT_BASE_DIR ${DEPENDENCIES_DIR}/${CMAKE_BUILD_TYPE})
 # Directorios de salida / Output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ROOT_DIR}/bin/)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_SYSTEM_NAME}/${CMAKE_BUILD_TYPE})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ROOT_DIR}/libs/${CMAKE_SYSTEM_NAME}/${CMAKE_BUILD_TYPE})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 if(ANDROID)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${ANDROID_ABI})
 endif()
@@ -46,15 +46,12 @@ endif()
 
 # Obtenemos SDL 3.2.2 (última versión estable release a la fecha)
 # We fetch SDL 3.2.2 (last stable release version to date)
+set(BUILD_SHARED_LIBS ON CACHE BOOL "" FORCE)
 FetchContent_Declare(
         SDL3
         GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
         GIT_TAG release-3.2.8
 )
-set(SDL_ATOMIC OFF CACHE BOOL "" FORCE)
-set(SDL_THREADS OFF CACHE BOOL "" FORCE)
-set(SDL_PTHREADS OFF CACHE BOOL "" FORCE)
-set(BUILD_SHARED_LIBS ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(SDL3)
 FetchContent_GetProperties(SDL3)
 set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
@@ -66,13 +63,17 @@ FetchContent_Declare(
         freetype
         GIT_REPOSITORY https://github.com/freetype/freetype.git
         GIT_TAG VER-2-13-2
-        CMAKE_ARGS -DBUILD_SHARED_LIBS=ON
 )
+set(DISABLE_FORCE_DEBUG_POSTFIX ON)
 FetchContent_MakeAvailable(freetype)
 set(FREETYPE_INCLUDE_DIR "${freetype_SOURCE_DIR}/include")
 set(FREETYPE_INCLUDE_DIRS "${FREETYPE_INCLUDE_DIR}")
-add_custom_target(BuildFreetype ALL DEPENDS Freetype::Freetype)
-set(FREETYPE_LIBRARY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libfreetyped.dll)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(FREETYPE_LIBRARY_NAME "libfreetype${CMAKE_DEBUG_POSTFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}")
+else()
+    set(FREETYPE_LIBRARY_NAME "libfreetype${CMAKE_SHARED_LIBRARY_SUFFIX}")
+endif()
+set(FREETYPE_LIBRARY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${FREETYPE_LIBRARY_NAME}")
 
 FetchContent_Declare(
         SDL3_ttf
@@ -82,11 +83,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(SDL3_ttf)
 set(SDL3_TTF_INCLUDE_DIRS ${SDL3_TTF_SOURCE_DIR}/include)
 FetchContent_GetProperties(SDL3_ttf)
-if(SDL3_ttf_POPULATED)
-    if(TARGET SDL3_ttf-shared)
-        add_dependencies(SDL3_ttf-shared BuildFreetype)
-    endif()
-endif()
 
 FetchContent_Declare(
         SDL3_image

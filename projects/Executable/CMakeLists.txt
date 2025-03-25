@@ -20,5 +20,5 @@ target_include_directories(Executable PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/s
 # Hacemos que el ejecutable tenga un _d cuando se compile en debug
 # We make so that the executable has a _d whenever it's compiled on debug
 set_target_properties(Executable PROPERTIES
-        OUTPUT_NAME "Executable$<$<CONFIG:Debug>:_d>"
+        OUTPUT_NAME "Executable$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>"
 )

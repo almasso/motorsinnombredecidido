@@ -233,5 +233,6 @@ void editor::render::windows::WelcomeWindow::searchProject() {
             fileExtension,
             io::LocalizationManager::GetInstance().getString("file.projectfile").c_str(),
             0);
+    if(filePath == nullptr) return;
     io::ProjectManager::GetInstance().addProject(filePath);
 }
