@@ -112,12 +112,10 @@ var NAVTREEINDEX1 =
 "classResource.html#a72ee56efe08564bfb60f971522e288db":[1,0,32,6],
 "classResource.html#ac18dbc07cf4a554f21c52a629c2471ae":[1,0,32,5],
 "classResourceHandler.html":[1,0,33],
-"classResourceHandler.html#a08c1715650029b621392f16ac03306eb":[1,0,33,1],
-"classResourceHandler.html#a500283b133ae9b3a3e6e0647a6466bb1":[1,0,33,2],
-"classResourceHandler.html#a5b05b709b718cccf0b2be0bef891b3c2":[1,0,33,6],
-"classResourceHandler.html#a664cbb98fa9bcfb18aa7ec09eac81a32":[1,0,33,5],
-"classResourceHandler.html#a6731097027901d1723ab9d0cbf57c3af":[1,0,33,3],
-"classResourceHandler.html#a7827695ae7d998e976bd9d657998a57e":[1,0,33,4],
+"classResourceHandler.html#a500283b133ae9b3a3e6e0647a6466bb1":[1,0,33,1],
+"classResourceHandler.html#a5b05b709b718cccf0b2be0bef891b3c2":[1,0,33,4],
+"classResourceHandler.html#a664cbb98fa9bcfb18aa7ec09eac81a32":[1,0,33,3],
+"classResourceHandler.html#a6731097027901d1723ab9d0cbf57c3af":[1,0,33,2],
 "classResourceHandler.html#a80ffffba74d9e4894ed55d8bafa42951":[1,0,33,0],
 "classResourceManager.html":[1,0,34],
 "classResourceMemoryManager.html":[1,0,35],
@@ -249,5 +247,7 @@ var NAVTREEINDEX1 =
 "functions_f.html":[1,3,0,6],
 "functions_func.html":[1,3,1,0],
 "functions_func.html":[1,3,1],
-"functions_func_b.html":[1,3,1,1]
+"functions_func_b.html":[1,3,1,1],
+"functions_func_c.html":[1,3,1,2],
+"functions_func_d.html":[1,3,1,3]
 };

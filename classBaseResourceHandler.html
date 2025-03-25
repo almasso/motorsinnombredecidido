@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('classBaseResourceHandler.html',''); in
 </div><!--header-->
 <div class="contents">
 
+<p>Super class for initialization and shutdown of every <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> from the <code><a class="el" href="classResourceManager.html">ResourceManager</a></code>.  
+ <a href="classBaseResourceHandler.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="BaseResourceHandler_8h_source.html">BaseResourceHandler.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BaseResourceHandler:</div>
@@ -112,12 +115,16 @@ Inheritance diagram for BaseResourceHandler:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af86c1df55519dc54ab97763b2ac26107"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#af86c1df55519dc54ab97763b2ac26107">BaseResourceHandler</a> ()</td></tr>
+<tr class="memdesc:af86c1df55519dc54ab97763b2ac26107"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an uninitialized <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code>.  <br /></td></tr>
 <tr class="separator:af86c1df55519dc54ab97763b2ac26107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac15fc9340fbf166d4462d887c1732c38"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#ac15fc9340fbf166d4462d887c1732c38">~BaseResourceHandler</a> ()</td></tr>
+<tr class="memdesc:ac15fc9340fbf166d4462d887c1732c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code>.  <br /></td></tr>
 <tr class="separator:ac15fc9340fbf166d4462d887c1732c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac05ab884352d52277efb114eabf29fd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#ac05ab884352d52277efb114eabf29fd8">init</a> (<a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *memoryManager)</td></tr>
+<tr class="memdesc:ac05ab884352d52277efb114eabf29fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> with a given <code><a class="el" href="classResourceMemoryManager.html" title="Data structure responsible for managing the memory occupied by resources. It ensures that there won&#39;t...">ResourceMemoryManager</a></code> to handle the loading of the handler's resources.  <br /></td></tr>
 <tr class="separator:ac05ab884352d52277efb114eabf29fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad80efe0e760c4b666b8ac1b5aeeba3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#ad80efe0e760c4b666b8ac1b5aeeba3cd">shutdown</a> ()</td></tr>
+<tr class="memdesc:ad80efe0e760c4b666b8ac1b5aeeba3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> 's work. It becomes invalidated for later use.  <br /></td></tr>
 <tr class="separator:ad80efe0e760c4b666b8ac1b5aeeba3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -125,15 +132,14 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a728b465af4bab46e635c54f6165bbf4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classResourceMemoryManager.html">ResourceMemoryManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseResourceHandler.html#a728b465af4bab46e635c54f6165bbf4a">_resourceMemoryManager</a></td></tr>
 <tr class="separator:a728b465af4bab46e635c54f6165bbf4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Super class for initialization and shutdown of every <code><a class="el" href="classResourceHandler.html" title="Data structure that handles the references to a specific type of resource and its memory.">ResourceHandler</a></code> from the <code><a class="el" href="classResourceManager.html">ResourceManager</a></code>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af86c1df55519dc54ab97763b2ac26107" name="af86c1df55519dc54ab97763b2ac26107"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af86c1df55519dc54ab97763b2ac26107">&#9670;&#160;</a></span>BaseResourceHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">BaseResourceHandler::BaseResourceHandler </td>
@@ -142,12 +148,9 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+
+<p>Creates an uninitialized <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code>. </p>
 
 </div>
 </div>
@@ -174,6 +177,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Destroys the <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code>. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -193,6 +198,14 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes the <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> with a given <code><a class="el" href="classResourceMemoryManager.html" title="Data structure responsible for managing the memory occupied by resources. It ensures that there won&#39;t...">ResourceMemoryManager</a></code> to handle the loading of the handler's resources. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">memoryManager</td><td>Pointer to an instance of a <code><a class="el" href="classResourceMemoryManager.html" title="Data structure responsible for managing the memory occupied by resources. It ensures that there won&#39;t...">ResourceMemoryManager</a></code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ad80efe0e760c4b666b8ac1b5aeeba3cd" name="ad80efe0e760c4b666b8ac1b5aeeba3cd"></a>
@@ -209,6 +222,9 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Stops the <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> 's work. It becomes invalidated for later use. </p>
+<p>Detiene el funcionamiento del <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code>. Queda invalidado para futuro uso. </p>
 
 </div>
 </div>

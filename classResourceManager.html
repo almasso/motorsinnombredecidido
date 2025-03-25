@@ -102,10 +102,13 @@ $(document).ready(function(){initNavTree('classResourceManager.html',''); initRe
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b4c84d3916d8e41e48e2e9e2ea18aa4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceManager.html#a0b4c84d3916d8e41e48e2e9e2ea18aa4">Init</a> (std::string const &amp;configFile, std::string &amp;scene)</td></tr>
+<tr class="memdesc:a0b4c84d3916d8e41e48e2e9e2ea18aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <code><a class="el" href="classResourceManager.html">ResourceManager</a></code> with a given configuration file.  <br /></td></tr>
 <tr class="separator:a0b4c84d3916d8e41e48e2e9e2ea18aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad69916a57c142341802f13585d267851"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceManager.html#ad69916a57c142341802f13585d267851">Shutdown</a> ()</td></tr>
+<tr class="memdesc:ad69916a57c142341802f13585d267851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregisters every registered <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> and stops the <code><a class="el" href="classResourceManager.html">ResourceManager</a></code> 's work.  <br /></td></tr>
 <tr class="separator:ad69916a57c142341802f13585d267851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f214116196a196da77cbdd1431c931c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classResourceManager.html#a6f214116196a196da77cbdd1431c931c">RegisterResourceHandler</a> (<a class="el" href="classBaseResourceHandler.html">BaseResourceHandler</a> *handler)</td></tr>
+<tr class="memdesc:a6f214116196a196da77cbdd1431c931c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> to initialize and store.  <br /></td></tr>
 <tr class="separator:a6f214116196a196da77cbdd1431c931c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -143,6 +146,16 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initializes the <code><a class="el" href="classResourceManager.html">ResourceManager</a></code> with a given configuration file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">configFile</td><td>Path to a configuration file. </td></tr>
+    <tr><td class="paramname">scene</td><td>Out parameter to store the initial scene given in the configuration file. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on successful initialization. <code>false</code> if the configuration file was not okay. </dd></dl>
+
 </div>
 </div>
 <a id="a6f214116196a196da77cbdd1431c931c" name="a6f214116196a196da77cbdd1431c931c"></a>
@@ -169,6 +182,14 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Registers a <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> to initialize and store. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>Pointer to an instance of <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> . </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ad69916a57c142341802f13585d267851" name="ad69916a57c142341802f13585d267851"></a>
@@ -193,6 +214,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Unregisters every registered <code><a class="el" href="classBaseResourceHandler.html" title="Super class for initialization and shutdown of every ResourceHandler from the ResourceManager.">BaseResourceHandler</a></code> and stops the <code><a class="el" href="classResourceManager.html">ResourceManager</a></code> 's work. </p>
 
 </div>
 </div>
