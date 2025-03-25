@@ -25,13 +25,15 @@ private:
     static inline ResourceHandler* _instance = nullptr;
 
     /// @~english
-    /// @brief Creates and adds to this \c ResourceHandler a new instance of \c ResourceType if a resource with the given key didn't already exist.
+    /// @brief Creates and adds to this \c ResourceHandler a new instance of \c ResourceType initialized with the given key.
+    /// @remarks If a resource with the given key already existed a pointer to that \c ResourceType will be returned and none will be created.
     /// @param key Key for later access to the resource.
-    /// @return A pointer the resource assigned to the key provided. It will not create a new instance if a resource with the given key already existed.
+    /// @return A pointer the resource assigned to the key provided.
     /// @~spanish
-    /// @brief Crea y añade a este \c ResourceHandler una nueva instancia de \c ResourceType si un recurso con la clave dada no existía ya.
+    /// @brief Crea y añade a este \c ResourceHandler una nueva instancia de \c ResourceType inicializado con la clave dada.
+    /// @reamrks Si un recurso con la clave dada ya existía se devolverá un puntero a ese \c ResourceType y no se creará uno nuevo.
     /// @param key Clave para acceder posteriormente al recurso.
-    /// @return Un puntero al recurso asignado a la clave dada. No se creará una nueva instancia si el recurso con la clave dada ya existía.
+    /// @return Un puntero al recurso asignado a la clave dada.
     inline ResourceType* add(std::string const& key) {
         auto [it, inserted] = _resources.insert({key, nullptr});
         if (inserted)
@@ -55,10 +57,31 @@ private:
         _resources.erase(key);
     }
 
+    /// @~english
+    /// @brief Creates an empty \c ResourceHandler .
+    /// @~spanish
+    /// @brief Crea un \c ResourceHandler vacío.
+    inline ResourceHandler() = default;
+
 public:
+    /// @~english
+    /// @brief Copy possibility deletion for singleton pattern assurance
+    /// @~spanish
+    /// @brief Eliminación de la posibilidad de copia para asegurar el patrón \a singleton.
     ResourceHandler(ResourceHandler const&) = delete;
+
+    /// @~english
+    /// @brief Copy possibility deletion for singleton pattern assurance
+    /// @~spanish
+    /// @brief Eliminación de la posibilidad de copia para asegurar el patrón \a singleton.
     void operator=(ResourceHandler const&) = delete;
 
+    /// @~english
+    /// @brief Access to the single instance of the \c ResourceHandler.
+    /// @return Pointer to the single instance of the \c ResourceHandler.
+    /// @~spanish
+    /// @brief Accede a la instancia única del \c ResourceHandler.
+    /// @return Puntero a la instancia única del \c ResourceHandler.
     static inline ResourceHandler* Instance() {
         if (_instance != nullptr)
             return _instance;
@@ -66,8 +89,6 @@ public:
         ResourceManager::RegisterResourceHandler(_instance);
         return _instance;
     }
-
-    inline ResourceHandler() = default;
 
     /// @~english
     /// @brief Clears all the resources in the handler.
@@ -79,7 +100,7 @@ public:
 
     /// @~english
     /// @brief Gets the resource linked to a key. Loads it if it wasn't.
-    /// @param key Key previously used to add a resource.
+    /// @param key Key assigned to the wanted \c ResourceType.
     /// @return A pointer to the resource requested. \c nullptr if there isn't any resource saved with that key or if the resource couldn't be loaded.
     /// @~spanish
     /// @brief Accede al recurso asignado a una clave. Lo carga si no lo estaba.
@@ -92,16 +113,6 @@ public:
             return nullptr;
         }
         return resource;
-    }
-
-    /// @~english
-    /// @brief Unloads all the loaded resources contained in the \c ResourceHandler .
-    /// @~spanish
-    /// @brief Descarga todos los recursos cargados contenidos en el \c ResourceHandler .
-    inline void flush() {
-        for (auto it = _resources.begin(); it != _resources.end(); ++it) {
-            _resourceMemoryManager->deactivateResource(it->second);
-        }
     }
 
     /// @~english

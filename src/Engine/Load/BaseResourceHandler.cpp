@@ -1,6 +1,8 @@
 #include "BaseResourceHandler.h"
 
-BaseResourceHandler::BaseResourceHandler() = default;
+BaseResourceHandler::BaseResourceHandler() :
+    _resourceMemoryManager(nullptr) {
+}
 
 BaseResourceHandler::~BaseResourceHandler() = default;
 
