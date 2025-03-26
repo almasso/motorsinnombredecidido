@@ -53,6 +53,8 @@ namespace editor::io {
         void _addProject(const std::string& route);
 
         void saveProjects() const;
+
+        bool projectAlreadyIncluded(const std::string& route) const;
     };
 }
 

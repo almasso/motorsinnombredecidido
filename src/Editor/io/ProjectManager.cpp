@@ -10,6 +10,8 @@
 #include <iostream>
 #include "common/Project.h"
 #include <sol/sol.hpp>
+#include <cctype>
+#include "utils/tinyfiledialogs/tinyfiledialogs.h"
 
 std::unique_ptr<editor::io::ProjectManager> editor::io::ProjectManager::_instance = nullptr;
 
@@ -38,7 +40,7 @@ void editor::io::ProjectManager::loadProjects() {
         for(const auto& [index, value] : projects) {
             if(value.is<std::string>()) {
                 std::string route = value.as<std::string>();
-                _projects.push_back(new Project(route));
+                if(!projectAlreadyIncluded(route)) _projects.push_back(new Project(route));
             }
         }
     }
@@ -63,12 +65,11 @@ const SearchableList<editor::Project*>& editor::io::ProjectManager::getProjects(
 
 void editor::io::ProjectManager::_addProject(const std::string &route) {
     std::filesystem::path p(route);
-    _projects.push_back(new Project(p.parent_path().string()));
+    if(!projectAlreadyIncluded(p.parent_path().string())) _projects.push_back(new Project(p.parent_path().string()));
     saveProjects();
 }
 
 void editor::io::ProjectManager::saveProjects() const {
-    //sol::table serpent = LuaManager::GetInstance().getTableFromScript(std::filesystem::path(std::string(_currentDirectory) + "/settings/serializer/serpent.lua").lexically_normal().string());
     sol::state& L = LuaManager::GetInstance().getState();
 
     sol::table projectsTable = L.create_table();
@@ -78,18 +79,13 @@ void editor::io::ProjectManager::saveProjects() const {
         projectsTable[index++] = s;
     }
 
-    /*if(serpent.valid()) {
-        auto block = serpent["block"];
-        if(block.valid()) {
-            auto result = block(projectsTable);
-            if(result.valid()) {
-                std::cout << result.get<std::string>() << std::endl;
-            } else {
-                sol::error err = result;
-                std::cout << err.what() << std::endl;
-            }
-        }
-    }*/
-
-    std::cout << LuaManager::GetInstance().serializeTable(projectsTable);
+    LuaManager::GetInstance().writeToFile(projectsTable, std::filesystem::path(std::string(_currentDirectory) + _projectsPath.string()).lexically_normal().string());
 }
+
+bool editor::io::ProjectManager::projectAlreadyIncluded(const std::string &route) const {
+    return std::ranges::any_of(_projects, [&](Project* p) {
+        return p->getPath().string() == route;
+    });
+}
+
+
