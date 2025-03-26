@@ -24,6 +24,7 @@ bool editor::io::LuaManager::Init() {
 bool editor::io::LuaManager::init() {
     _state = std::make_unique<sol::state>();
     if(!_state) return false;
+    _currentDirectory = SDL_GetCurrentDirectory();
 
     _state->open_libraries(sol::lib::base, sol::lib::package, sol::lib::math, sol::lib::table, sol::lib::string, sol::lib::io);
     return true;
@@ -35,6 +36,8 @@ editor::io::LuaManager &editor::io::LuaManager::GetInstance() {
 }
 
 editor::io::LuaManager::~LuaManager() {
+    SDL_free(_currentDirectory);
+    _currentDirectory = nullptr;
     _state.reset(nullptr);
 }
 
@@ -61,7 +64,7 @@ sol::table editor::io::LuaManager::_getTableFromScript(const std::string &filena
 }
 
 void editor::io::LuaManager::_writeToFile(const sol::table &table, const std::string &filename) {
-    sol::table serpent = getTableFromScript(std::filesystem::path(std::string(SDL_GetCurrentDirectory()) + "/settings/serializer/serpent.lua").lexically_normal().string());
+    sol::table serpent = getTableFromScript(std::filesystem::path(std::string(_currentDirectory) + "/settings/serializer/serpent.lua").lexically_normal().string());
 
     std::ofstream file(filename);
 

@@ -23,13 +23,13 @@ namespace editor {
         template<std::convertible_to<std::string> T>
         Project(T&& path) {
             updatePath(path);
-            findProject();
         }
         const std::string& getName() const;
 
         template <std::convertible_to<std::string> T>
         void setName(T&& name) {
             _name = std::forward<T>(name);
+            saveProject();
         }
 
         const std::filesystem::path& getPath() const;
@@ -37,30 +37,40 @@ namespace editor {
         template <std::convertible_to<std::string> T>
         void updatePath(T&& path) {
             _projectPath = std::forward<T>(path);
+            findProject();
         }
 
         template <std::convertible_to<std::string> T>
         void addExtraRoute(T&& route) {
             _extraRoutes.insert(std::forward<T>(route));
+            saveProject();
         }
 
         const std::unordered_set<std::filesystem::path>& getExtraRoutes() const;
 
         const std::tm& getLastModificationTime() const;
 
-        void updateLastModified();
+        bool isSetToDelete() const;
 
+        void setToDelete();
+
+        bool isFound() const;
+
+        void updateLastModified();
 
     private:
         std::string _name;
         std::filesystem::path _projectPath;
         std::unordered_set<std::filesystem::path> _extraRoutes;
         std::tm _lastModified;
+        bool _setToDelete = false;
         bool _found = false;
 
         void findProject();
 
         void loadProject(const sol::table& project);
+
+        void saveProject();
     };
 }
 

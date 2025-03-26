@@ -11,11 +11,20 @@
 
 struct ImVec2;
 
+namespace editor {
+    class Project;
+}
+
 namespace editor::render::windows {
     class WelcomeWindow : public Window {
     public:
         WelcomeWindow();
     private:
+        bool _showDeleteConfirmation = false;
+        bool _showRenameProject = false;
+        bool _isRenaming = false;
+        char _nameBuffer[256];
+
         void onRender() override;
 
         void beforeRender() override;
@@ -26,9 +35,9 @@ namespace editor::render::windows {
 
         void newProjectModal();
 
-        void searchProject();
+        std::string searchProject();
 
-        void drawProjectButton(const std::string& projectName, const std::string& projectRoute, const std::tm& lastModified);
+        void drawProjectButton(Project* project);
     };
 }
 

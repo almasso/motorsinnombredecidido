@@ -118,6 +118,11 @@ public:
         return true;
     }
 
+    void clear() {
+        _list.clear();
+        _lookup.clear();
+    }
+
     [[nodiscard]] uint32_t size() const {
         return _list.size();
     }
@@ -193,6 +198,7 @@ public:
         if(it == _lookup.end()) return _list.end();
         return it->second;
     }
+
     typename std::list<T>::iterator find(T element) {
         typename std::unordered_map<T, typename std::list<T>::iterator>::iterator it = _lookup.find(element);
         if(it == _lookup.end()) return _list.end();

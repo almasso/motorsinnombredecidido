@@ -40,7 +40,9 @@ editor::Editor& editor::Editor::GetInstance() {
     return *_instance;
 }
 
-editor::Editor::~Editor() = default;
+editor::Editor::~Editor() {
+    io::ProjectManager::Dump();
+}
 
 void editor::Editor::mainLoop() {
     render::WindowStack::addWindowToStack(new render::windows::WelcomeWindow());

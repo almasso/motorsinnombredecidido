@@ -44,6 +44,8 @@ namespace editor::io {
 
         std::unique_ptr<sol::state> _state;
 
+        char* _currentDirectory = nullptr;
+
         LuaManager() = default;
 
         bool init();

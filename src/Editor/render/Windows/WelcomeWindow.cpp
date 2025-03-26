@@ -23,7 +23,7 @@ editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow"
           ImGuiWindowFlags_NoScrollWithMouse |
           ImGuiWindowFlags_NoDocking;
     _windowFlags |= flags;
-    RenderManager::GetInstance().setWindowName(io::LocalizationManager::GetInstance().getString("window.welcomewindow.title") + " " + io::LocalizationManager::GetInstance().getString("window.welcomewindow.currentversion"));
+    RenderManager::GetInstance().setWindowName(io::LocalizationManager::GetInstance().getString("window.global.editorname") + " " + io::LocalizationManager::GetInstance().getString("window.global.currentversion"));
 
     // Añadimos la fuente Raleway
     ImFontConfig config;
@@ -67,10 +67,10 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
     ImGui::BeginChild("LP", ImVec2(leftPanelWidth, windowHeight), false);
     {
         ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 90"));
-        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.title").c_str());
+        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.global.editorname").c_str());
         ImGui::PopFont();
         ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 40"));
-        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.currentversion").c_str());
+        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.global.currentversion").c_str());
         ImGui::PopFont();
 
         ImGui::SetCursorPosY(windowHeight - 100);
@@ -131,13 +131,15 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::BeginChild("PL", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
         {
             for (Project *pr: io::ProjectManager::GetInstance().getProjects()) {
-                if (filter.PassFilter(pr->getName().c_str()) || filter.PassFilter(pr->getPath().string().c_str())) {
-                    if (pr != *io::ProjectManager::GetInstance().getProjects().begin()) {
-                        ImGui::Spacing();
-                        ImGui::Separator();
-                        ImGui::Spacing();
+                if(!pr->isSetToDelete()) {
+                    if (filter.PassFilter(pr->getName().c_str()) || filter.PassFilter(pr->getPath().string().c_str())) {
+                        if (pr != *io::ProjectManager::GetInstance().getProjects().begin()) {
+                            ImGui::Spacing();
+                            ImGui::Separator();
+                            ImGui::Spacing();
+                        }
+                        drawProjectButton(pr);
                     }
-                    drawProjectButton(pr->getName(), pr->getPath().string(), pr->getLastModificationTime());
                 }
             }
         }
@@ -171,7 +173,8 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
 
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
         if(ImGui::Button("##ButtonOpenProject", ImVec2(200, 150))) {
-            searchProject();
+            std::string route = searchProject();
+            if(route != "") io::ProjectManager::GetInstance().addProject(route);
         }
         buttonPos = ImGui::GetItemRectMin();
         ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
@@ -187,14 +190,31 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
     ImGui::EndChild();
 }
 
-void editor::render::windows::WelcomeWindow::drawProjectButton(const std::string& projectName, const std::string& projectRoute, const std::tm& lastModified) {
+void editor::render::windows::WelcomeWindow::drawProjectButton(Project* project) {
+    const std::string& projectRoute = project->getPath().string();
+    const std::string& projectName = project->getName();
+    const std::tm& lastModified = project->getLastModificationTime();
+
     ImVec2 buttonSize = ImVec2(-1, 120);
 
     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
 
-    ImGui::Button(std::string("##But" + projectRoute).c_str() , buttonSize);
+    ImGui::BeginDisabled(!project->isFound());
+    if(ImGui::Button(std::string("##But" + projectRoute).c_str() , buttonSize)) {
+        // Abrir la ventana principal del editor
+    }
+    ImGui::EndDisabled();
+
+    if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && !project->isFound()) {
+        ImGui::SetTooltip(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.projectnotfound").c_str());
+    }
+
+    if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+        ImGui::OpenPopup((projectRoute + "Options").c_str());
+    }
+
 
     ImGui::PopStyleColor(3);
 
@@ -218,13 +238,86 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(const std::string
     ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), std::string(io::LocalizationManager::GetInstance().getString("window.welcomewindow.lastmodified") + " "
     + oss.str()).c_str());
     ImGui::PopFont();
+
+    if (ImGui::BeginPopupContextItem((projectRoute + "Options").c_str())) {
+        ImGui::BeginDisabled(project->isFound());
+        if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.relocateproject").c_str())) {
+            std::string route = searchProject();
+            std::filesystem::path p(route);
+            if(route != "") project->updatePath(p.parent_path().string());
+        }
+        ImGui::EndDisabled();
+        ImGui::BeginDisabled(!project->isFound());
+        if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.renameproject").c_str())) {
+            _showRenameProject = true;
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::EndDisabled();
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+        if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deleteproject").c_str())) {
+            _showDeleteConfirmation = true;
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::PopStyleColor();
+        ImGui::EndPopup();
+    }
+
+    if(_showDeleteConfirmation) {
+        ImGui::OpenPopup((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.deleteproject.title") + " - " + projectName + "##" + projectRoute).c_str());
+        _showDeleteConfirmation = false;
+    }
+    if(_showRenameProject) {
+        ImGui::OpenPopup((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.renameproject.title") + " - " + projectName + "##" + projectRoute).c_str());
+        _showRenameProject = false;
+    }
+
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+
+    if (ImGui::BeginPopupModal((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.deleteproject.title") + " - " + projectName + "##" + projectRoute).c_str(), NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
+        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.deleteproject.confirmation").c_str());
+        ImGui::Separator();
+
+        if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.yes").c_str(), ImVec2(120, 0))) {
+            io::ProjectManager::GetInstance().removeProject(project);
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.no").c_str(), ImVec2(120, 0))) {
+            ImGui::CloseCurrentPopup();
+        }
+
+        ImGui::EndPopup();
+    }
+
+    ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth() / 2, 150));
+    if (ImGui::BeginPopupModal((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.renameproject.title") + " - " + projectName + "##" + projectRoute).c_str(), NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
+        if(!_isRenaming) strcpy_s(_nameBuffer, projectName.c_str());
+        _isRenaming = true;
+
+        ImGui::InputText(("##Renaming" + projectRoute).c_str(), _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
+
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 30);
+        if (ImGui::IsKeyPressed(ImGuiKey_Enter) || ImGui::Button(io::LocalizationManager::GetInstance().getString("action.renameproject").c_str(), ImVec2(120, 0))) {
+            project->setName(std::string(_nameBuffer));
+            ImGui::CloseCurrentPopup();
+            _isRenaming = false;
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
+            ImGui::CloseCurrentPopup();
+            _isRenaming = false;
+        }
+
+        ImGui::EndPopup();
+    }
 }
 
 void editor::render::windows::WelcomeWindow::newProjectModal() {
 
 }
 
-void editor::render::windows::WelcomeWindow::searchProject() {
+std::string editor::render::windows::WelcomeWindow::searchProject() {
     const char* fileExtension[] = {"*.lua"};
     const char* filePath = tinyfd_openFileDialog(
             io::LocalizationManager::GetInstance().getString("action.selectprojectfile").c_str(),
@@ -233,6 +326,7 @@ void editor::render::windows::WelcomeWindow::searchProject() {
             fileExtension,
             io::LocalizationManager::GetInstance().getString("file.projectfile").c_str(),
             0);
-    if(filePath == nullptr) return;
-    io::ProjectManager::GetInstance().addProject(filePath);
+    if(filePath == nullptr) return "";
+    else return std::string(filePath);
 }
+

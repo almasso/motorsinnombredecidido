@@ -21,6 +21,8 @@ namespace editor::io {
 
         static ProjectManager& GetInstance();
 
+        static void Dump();
+
         uint32_t getProjectCount() const;
 
         const SearchableList<Project*>& getProjects() const;
@@ -29,6 +31,8 @@ namespace editor::io {
         void addProject(T&& route) {
             _addProject(std::forward<std::string>(route));
         }
+
+        void removeProject(Project* project);
 
         ProjectManager(const ProjectManager &) = delete;
 
@@ -41,6 +45,8 @@ namespace editor::io {
         std::filesystem::path _projectsPath;
 
         char* _currentDirectory = nullptr;
+
+        Project* _setToDeleteProject = nullptr;
 
         SearchableList<Project*> _projects;
 
@@ -55,6 +61,8 @@ namespace editor::io {
         void saveProjects() const;
 
         bool projectAlreadyIncluded(const std::string& route) const;
+
+        void deleteOldProjects();
     };
 }
 
