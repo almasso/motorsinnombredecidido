@@ -23,36 +23,36 @@ void LuaReader::Shutdown() {
 sol::table LuaReader::GetTable(std::string const& path) {
     sol::load_result res = _instance->_lua.load_file(path);
     if (!res.valid())
-        return sol::nil;
+        return sol::lua_nil;
     sol::protected_function_result res2 = res();
     if (!res2.valid())
-        return sol::nil;
+        return sol::lua_nil;
     sol::table table = res2.get<sol::table>();
     if (!table.valid())
-        return sol::nil;
+        return sol::lua_nil;
     return table;
 }
 
 sol::table LuaReader::GetTable(sol::table const& container, std::string const& name) {
     sol::optional<sol::table> table = container[name];
     if (!table)
-        return sol::nil;
+        return sol::lua_nil;
     return *table;
 }
 
 sol::function LuaReader::GetFunction(std::string const& path) {
     sol::load_result res = _instance->_lua.load_file(path);
     if (!res.valid())
-        return sol::nil;
+        return sol::lua_nil;
     sol::protected_function_result res2 = res();
     if (!res2.valid())
-        return sol::nil;
+        return sol::lua_nil;
     sol::function function = res2.get<sol::function>();
     if (!function.valid())
-        return sol::nil;
+        return sol::lua_nil;
     return function;
 }
 
 sol::function LuaReader::GetFunction(sol::table const& container, std::string const& name) {
-    return container.get_or<sol::function>(name, sol::nil);
+    return container.get_or<sol::function>(name, sol::lua_nil);
 }

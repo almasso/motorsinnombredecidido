@@ -292,7 +292,8 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(Project* project)
 
     ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth() / 2, 150));
     if (ImGui::BeginPopupModal((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.renameproject.title") + " - " + projectName + "##" + projectRoute).c_str(), NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
-        if(!_isRenaming) strcpy_s(_nameBuffer, projectName.c_str());
+        if(!_isRenaming) strncpy(_nameBuffer, projectName.c_str(), sizeof(_nameBuffer) - 1);
+        _nameBuffer[sizeof(_nameBuffer) - 1] = '\0';
         _isRenaming = true;
 
         ImGui::InputText(("##Renaming" + projectRoute).c_str(), _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
