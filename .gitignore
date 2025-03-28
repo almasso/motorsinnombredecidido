@@ -49,5 +49,7 @@ projects/APK/app/.cxx/*
 .idea/*
 cmake-build-debug/*
 cmake-build-release/*
+.vs/*
+out/*
 
 /projects/APK/build

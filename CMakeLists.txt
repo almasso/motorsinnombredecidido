@@ -60,26 +60,12 @@ set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
 # We also fetch all extra SDL libraries, in this case, SDL_ttf and SDL_image
 
 FetchContent_Declare(
-        freetype
-        GIT_REPOSITORY https://github.com/freetype/freetype.git
-        GIT_TAG VER-2-13-2
-)
-set(DISABLE_FORCE_DEBUG_POSTFIX ON)
-FetchContent_MakeAvailable(freetype)
-set(FREETYPE_INCLUDE_DIR "${freetype_SOURCE_DIR}/include")
-set(FREETYPE_INCLUDE_DIRS "${FREETYPE_INCLUDE_DIR}")
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(FREETYPE_LIBRARY_NAME "libfreetype${CMAKE_DEBUG_POSTFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}")
-else()
-    set(FREETYPE_LIBRARY_NAME "libfreetype${CMAKE_SHARED_LIBRARY_SUFFIX}")
-endif()
-set(FREETYPE_LIBRARY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${FREETYPE_LIBRARY_NAME}")
-
-FetchContent_Declare(
         SDL3_ttf
         GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
         GIT_TAG release-3.2.0
 )
+set(SDLTTF_VENDORED ON CACHE BOOL "" FORCE)
+set(SDLTTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(SDL3_ttf)
 set(SDL3_TTF_INCLUDE_DIRS ${SDL3_TTF_SOURCE_DIR}/include)
 FetchContent_GetProperties(SDL3_ttf)
