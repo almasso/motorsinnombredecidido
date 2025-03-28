@@ -1,6 +1,6 @@
 var classAudioClip =
 [
-    [ "AudioClip", "classAudioClip.html#ace56cae9546c4769e9e7e433715fce20", null ],
+    [ "AudioClip", "classAudioClip.html#a500eb2ab9b3219e76a42f098fc598266", null ],
     [ "~AudioClip", "classAudioClip.html#ab929796e463c51c50f2ad4e9acec35da", null ],
     [ "assignDevice", "classAudioClip.html#aa487b881950435998dce75c4d84fc674", null ],
     [ "assignMixer", "classAudioClip.html#a77a333aa7991cde41a70e541125bd5b1", null ],

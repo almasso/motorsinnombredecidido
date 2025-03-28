@@ -98,25 +98,69 @@ $(document).ready(function(){initNavTree('classAudioManager.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>Class in charge of managing the audio system.  
+ <a href="classAudioManager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="AudioManager_8h_source.html">AudioManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac7054cf693c1b83aa6dfe44dca81ab48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#ac7054cf693c1b83aa6dfe44dca81ab48">AudioManager</a> (<a class="el" href="classAudioManager.html">AudioManager</a> const &amp;)=delete</td></tr>
+<tr class="memdesc:ac7054cf693c1b83aa6dfe44dca81ab48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy possibility deletion for singleton pattern assurance.  <br /></td></tr>
+<tr class="separator:ac7054cf693c1b83aa6dfe44dca81ab48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0202d644c38a4b108597932cfdd5ead2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a0202d644c38a4b108597932cfdd5ead2">operator=</a> (<a class="el" href="classAudioManager.html">AudioManager</a> const &amp;)=delete</td></tr>
+<tr class="memdesc:a0202d644c38a4b108597932cfdd5ead2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy possibility deletion for singleton pattern assurance.  <br /></td></tr>
+<tr class="separator:a0202d644c38a4b108597932cfdd5ead2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad94dc46723c6d7cf8c81fc3772a842aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#ad94dc46723c6d7cf8c81fc3772a842aa">~AudioManager</a> ()</td></tr>
+<tr class="memdesc:ad94dc46723c6d7cf8c81fc3772a842aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the audio system.  <br /></td></tr>
 <tr class="separator:ad94dc46723c6d7cf8c81fc3772a842aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c708c61fcffb861708d59aad169979f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAudioMixer.html">AudioMixer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a4c708c61fcffb861708d59aad169979f">getMixer</a> (std::string const &amp;mixer)</td></tr>
+<tr class="memdesc:a4c708c61fcffb861708d59aad169979f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to an <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> connected to the audio system.  <br /></td></tr>
 <tr class="separator:a4c708c61fcffb861708d59aad169979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a319f4799d8f642c254d4b2c878e90af9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a319f4799d8f642c254d4b2c878e90af9">Init</a> ()</td></tr>
+<tr class="memdesc:a319f4799d8f642c254d4b2c878e90af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the audio system.  <br /></td></tr>
 <tr class="separator:a319f4799d8f642c254d4b2c878e90af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a014c2ce3fc771812638da4141a6e6cc6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classAudioManager.html">AudioManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a014c2ce3fc771812638da4141a6e6cc6">Instance</a> ()</td></tr>
+<tr class="memdesc:a014c2ce3fc771812638da4141a6e6cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the single instance of <code><a class="el" href="classAudioManager.html" title="Class in charge of managing the audio system.">AudioManager</a></code> .  <br /></td></tr>
 <tr class="separator:a014c2ce3fc771812638da4141a6e6cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8956677aeb7abb69b5254c2a89315f9f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f">Shutdown</a> ()</td></tr>
+<tr class="memdesc:a8956677aeb7abb69b5254c2a89315f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the audio system.  <br /></td></tr>
 <tr class="separator:a8956677aeb7abb69b5254c2a89315f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class in charge of managing the audio system. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac7054cf693c1b83aa6dfe44dca81ab48" name="ac7054cf693c1b83aa6dfe44dca81ab48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7054cf693c1b83aa6dfe44dca81ab48">&#9670;&#160;</a></span>AudioManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioManager::AudioManager </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAudioManager.html">AudioManager</a> const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy possibility deletion for singleton pattern assurance. </p>
+
+</div>
+</div>
 <a id="ad94dc46723c6d7cf8c81fc3772a842aa" name="ad94dc46723c6d7cf8c81fc3772a842aa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad94dc46723c6d7cf8c81fc3772a842aa">&#9670;&#160;</a></span>~AudioManager()</h2>
 
@@ -131,6 +175,8 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Stops the audio system. </p>
 
 </div>
 </div>
@@ -150,6 +196,15 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Access to an <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> connected to the audio system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mixer</td><td>Path to the asset representing the wanted mixer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <code><a class="el" href="classAudioMixer.html" title="Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...">AudioMixer</a></code> requested. <code>nullptr</code> if that mixer does not exist. </dd></dl>
 
 </div>
 </div>
@@ -176,6 +231,9 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initializes the audio system. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on successful initialization. <code>false</code> otherwise. </dd></dl>
+
 </div>
 </div>
 <a id="a014c2ce3fc771812638da4141a6e6cc6" name="a014c2ce3fc771812638da4141a6e6cc6"></a>
@@ -201,6 +259,37 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Access to the single instance of <code><a class="el" href="classAudioManager.html" title="Class in charge of managing the audio system.">AudioManager</a></code> . </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the single instance of <code><a class="el" href="classAudioManager.html" title="Class in charge of managing the audio system.">AudioManager</a></code> . </dd></dl>
+
+</div>
+</div>
+<a id="a0202d644c38a4b108597932cfdd5ead2" name="a0202d644c38a4b108597932cfdd5ead2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0202d644c38a4b108597932cfdd5ead2">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioManager::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAudioManager.html">AudioManager</a> const &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy possibility deletion for singleton pattern assurance. </p>
+
 </div>
 </div>
 <a id="a8956677aeb7abb69b5254c2a89315f9f" name="a8956677aeb7abb69b5254c2a89315f9f"></a>
@@ -225,6 +314,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Stops the audio system. </p>
 
 </div>
 </div>
