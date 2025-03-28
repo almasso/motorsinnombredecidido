@@ -1,5 +1,6 @@
 #include "EntityBlueprint.h"
 
+#include <Load/LuaReader.h>
 #include <sol/sol.hpp>
 
 #include "ComponentData.h"
@@ -20,11 +21,11 @@ void EntityBlueprint::readComponents(sol::table const& componentBlueprints) {
 }
 
 void EntityBlueprint::read(sol::table const& blueprint) {
-    sol::table childrenBlueprints = blueprint.get_or<sol::table>("children", nullptr);
+    sol::table childrenBlueprints = LuaReader::GetTable(blueprint, "children");
     if (childrenBlueprints.valid())
         readChildren(childrenBlueprints);
 
-    sol::table componentBlueprints = blueprint.get_or<sol::table>("components", nullptr);
+    sol::table componentBlueprints = LuaReader::GetTable(blueprint,"components");
     if (componentBlueprints.valid())
         readComponents(componentBlueprints);
 

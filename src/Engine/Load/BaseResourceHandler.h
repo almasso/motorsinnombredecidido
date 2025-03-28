@@ -33,7 +33,7 @@ public:
 
     /// @~english
     /// @brief Stops the \c BaseResourceHandler 's work. It becomes invalidated for later use.
-    /// @~english
+    /// @~spanish
     /// @brief Detiene el funcionamiento del \c BaseResourceHandler. Queda invalidado para futuro uso.
     void shutdown();
 };

@@ -30,7 +30,7 @@ void AudioClip::reset() {
     _state = STOPPED;
 }
 
-AudioClip::AudioClip(AudioClipKey const& key) :
+AudioClip::AudioClip(std::string const& key) :
     _state(STOPPED),
     _key(key),
     _stream(nullptr),

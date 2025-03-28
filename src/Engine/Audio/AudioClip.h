@@ -1,7 +1,8 @@
 #ifndef AUDIOCLIP_H
 #define AUDIOCLIP_H
+
 #include <cstdint>
-#include "AudioClipKey.h"
+#include <string>
 
 typedef uint32_t AudioDevice;
 typedef struct SDL_AudioStream AudioStream;
@@ -18,7 +19,7 @@ private:
         PAUSED,
         STOPPED
     } _state;
-    AudioClipKey _key;
+    std::string _key;
     AudioStream* _stream;
     AudioMixer* _mixer;
     AudioDevice _device;
@@ -54,7 +55,7 @@ public:
     /// @~spanish
     /// @brief Crea una nueva pista con la información dada.
     /// @remark La pista se crea detenida, sin \c AudioMixer o \c AudioDevice, con el volumen asignado a \c 1.0f y sin el estado de ciclado.
-    explicit AudioClip(AudioClipKey const& key);
+    explicit AudioClip(std::string const& key);
 
     /// @~english
     /// @brief Stops the clip and unassigns the \c AudioMixer and the \c AudioDevice.
@@ -89,6 +90,9 @@ public:
     /// @~english
     /// @brief Resumes the clip at the point it was paused.
     /// @return \c true if the clip resumed correctly or if it was already playing; \c false otherwise, programmer must make sure that an \c AudioDevice or an \c AudioMixer have been assigned to the clip.
+    /// @~spanish
+    /// @brief Reproduce la pista desde el punto en el que se pausó.
+    /// @return \c true si la pista se reprodujo correctamente o si ya se estaba reproduciendo; \c false si no, el programador debe asegurarse de que un \c AudioDevice o un \c AudioMixer se asignó a esta pista.
     bool resume();
 
     /// @~english

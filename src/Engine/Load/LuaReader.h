@@ -15,7 +15,6 @@ public:
     static void Shutdown();
     static sol::table GetTable(std::string const& path);
     static sol::table GetTable(sol::table const& container, std::string const& name);
-    static sol::function GetFunction(std::string const& path);
     static sol::function GetFunction(sol::table const& container, std::string const& name);
 };
 

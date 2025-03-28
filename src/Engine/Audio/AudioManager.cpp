@@ -1,6 +1,6 @@
 #include "AudioManager.h"
 
-#include <assert.h>
+#include <cassert>
 #include <cstdio>
 #include <Load/ResourceHandler.h>
 #include <SDL3/SDL.h>
@@ -74,7 +74,7 @@ AudioMixer* AudioManager::registerAudioMixer(AudioMixerData const* data) {
 }
 
 AudioMixer* AudioManager::getMixer(std::string const& mixer) {
-    if (mixer == "")
+    if (mixer.empty())
         return nullptr;
     return registerAudioMixer(ResourceHandler<AudioMixerData>::Instance()->get(mixer));
 }

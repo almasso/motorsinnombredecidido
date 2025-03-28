@@ -40,19 +40,9 @@ sol::table LuaReader::GetTable(sol::table const& container, std::string const& n
     return *table;
 }
 
-sol::function LuaReader::GetFunction(std::string const& path) {
-    sol::load_result res = _instance->_lua.load_file(path);
-    if (!res.valid())
-        return sol::lua_nil;
-    sol::protected_function_result res2 = res();
-    if (!res2.valid())
-        return sol::lua_nil;
-    sol::function function = res2.get<sol::function>();
-    if (!function.valid())
-        return sol::lua_nil;
-    return function;
-}
-
 sol::function LuaReader::GetFunction(sol::table const& container, std::string const& name) {
-    return container.get_or<sol::function>(name, sol::lua_nil);
+    sol::optional<sol::function> function = container[name];
+    if (!function)
+        return sol::lua_nil;
+    return *function;
 }

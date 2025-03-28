@@ -1,6 +1,5 @@
 return {
     music = {
-        children = {},
         components = {
             AudioSource = {
                 clip = "assets/audio/audio.wav",
@@ -22,7 +21,6 @@ return {
         }
     },
     sfx = {
-        children = {},
         components = {
             AudioSource = {
                 enabled = false,
