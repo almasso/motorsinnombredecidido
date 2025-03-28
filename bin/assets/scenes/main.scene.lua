@@ -1,3 +1,5 @@
+local Move = require('assets.events.moveEventBehaviour')
+
 return {
     music = {
         components = {
@@ -17,6 +19,29 @@ return {
             },
             Camera = {
                 size = {200 , 200}
+            },
+            EventHandler = {
+                events = {
+                    Evento1 = {
+                        condition = {
+                            type = "Or",
+                            params = {
+                                conditionA = {
+                                    type = "OnStart"
+                                },
+                                conditionB = {
+                                    type = "CollidedWith",
+                                    params = {
+                                        other = "test"
+                                    }
+                                },
+                            }
+                        },
+                        behaviours = {
+                            Move:new()
+                        }
+                    }
+                }
             }
         }
     },

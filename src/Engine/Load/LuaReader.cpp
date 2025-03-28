@@ -7,6 +7,8 @@ bool LuaReader::init() {
     return true;
 }
 
+LuaReader::LuaReader() = default;
+
 bool LuaReader::Init() {
     assert(_instance == nullptr);
     _instance = new LuaReader();

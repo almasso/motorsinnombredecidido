@@ -7,10 +7,12 @@
 #include <Render/Animator.h>
 #include <Render/SpriteRenderer.h>
 #include <Render/Camera.h>
+#include <Gameplay/Events/EventHandler.h>
 
 #include "ComponentData.h"
 
-ComponentFactory::ComponentFactory() : _numComponents(0) {
+ComponentFactory::ComponentFactory() :
+    _numComponents(0) {
     registerComponent<Transform>();
     registerComponent<Rectangle>();
     registerComponent<Animator>();
@@ -18,6 +20,7 @@ ComponentFactory::ComponentFactory() : _numComponents(0) {
     registerComponent<Camera>();
     registerComponent<AudioSource>();
     registerComponent<Collider>();
+    registerComponent<EventHandler>();
 }
 
 Component* ComponentFactory::createComponent(ComponentData const* data) {

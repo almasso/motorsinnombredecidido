@@ -86,8 +86,10 @@ SceneManager* SceneManager::Init(const std::string& startScene)
 {
 	if (_instance == nullptr) {
 		_instance = new SceneManager();
-		_instance->init(startScene);
-		return _instance;
+		if (_instance->init(startScene))
+			return _instance;
+		delete _instance;
+		return nullptr;
 	}
 	RPGError::ShowError("Error al inicializar SceneManager", "Ya existia una instancia de SceneManager");
 	return nullptr;
