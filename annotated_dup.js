@@ -25,7 +25,7 @@ var annotated_dup =
     [ "InputManager", "classInputManager.html", "classInputManager" ],
     [ "InputState", "structInputState.html", "structInputState" ],
     [ "LuaManager", "classLuaManager.html", null ],
-    [ "LuaReader", "classLuaReader.html", null ],
+    [ "LuaReader", "classLuaReader.html", "classLuaReader" ],
     [ "Main", "classMain.html", null ],
     [ "PrefabBlueprint", "classPrefabBlueprint.html", "classPrefabBlueprint" ],
     [ "Random", "classRandom.html", null ],

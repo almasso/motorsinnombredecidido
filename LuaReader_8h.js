@@ -1,4 +1,4 @@
 var LuaReader_8h =
 [
-    [ "LuaReader", "classLuaReader.html", null ]
+    [ "LuaReader", "classLuaReader.html", "classLuaReader" ]
 ];
