@@ -122,12 +122,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ee5998a31c713010f2546881d061634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#a6ee5998a31c713010f2546881d061634">onDisable</a> () override</td></tr>
 <tr class="separator:a6ee5998a31c713010f2546881d061634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a426dde2f95b1717d44ff00b761cecb90"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#a426dde2f95b1717d44ff00b761cecb90">isCollidingWith</a> (<a class="el" href="classCollider.html">Collider</a> *other) const</td></tr>
+<tr class="memdesc:a426dde2f95b1717d44ff00b761cecb90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this <code><a class="el" href="classCollider.html">Collider</a></code> is colliding with another one.  <br /></td></tr>
 <tr class="separator:a426dde2f95b1717d44ff00b761cecb90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab64801d5d16958f7b6df63665c1407f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#ab64801d5d16958f7b6df63665c1407f8">justCollidedWith</a> (<a class="el" href="classCollider.html">Collider</a> *other) const</td></tr>
+<tr class="memdesc:ab64801d5d16958f7b6df63665c1407f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this <code><a class="el" href="classCollider.html">Collider</a></code> started colliding with another one this frame.  <br /></td></tr>
 <tr class="separator:ab64801d5d16958f7b6df63665c1407f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6ed072f57f6029f0d88c57189169d5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#ac6ed072f57f6029f0d88c57189169d5c">collisionEndedWith</a> (<a class="el" href="classCollider.html">Collider</a> *other) const</td></tr>
+<tr class="memdesc:ac6ed072f57f6029f0d88c57189169d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this <code><a class="el" href="classCollider.html">Collider</a></code> stopped with another one this frame.  <br /></td></tr>
 <tr class="separator:ac6ed072f57f6029f0d88c57189169d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a788de32090d0ee109827025d3b89325c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#a788de32090d0ee109827025d3b89325c">getRect</a> () const</td></tr>
+<tr class="memdesc:a788de32090d0ee109827025d3b89325c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the dimensions of the collider with its entity's transform applied.  <br /></td></tr>
 <tr class="separator:a788de32090d0ee109827025d3b89325c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt;&quot;Collider&quot;&gt;</a></td></tr>
 <tr class="memitem:a260432a2c776b2e453dcd3990f826888 inherit pub_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a260432a2c776b2e453dcd3990f826888">ComponentTemplate</a> (<a class="el" href="classComponentData.html">ComponentData</a> const *data)</td></tr>
@@ -187,6 +191,9 @@ Additional Inherited Members</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Collider::Collider </td>
@@ -196,6 +203,11 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -242,6 +254,15 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether this <code><a class="el" href="classCollider.html">Collider</a></code> stopped with another one this frame. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Pointer to other collider. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if they just stopped colliding. <code>false</code> otherwise. </dd></dl>
+
 </div>
 </div>
 <a id="a788de32090d0ee109827025d3b89325c" name="a788de32090d0ee109827025d3b89325c"></a>
@@ -258,6 +279,9 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Access to the dimensions of the collider with its entity's transform applied. </p>
+<dl class="section return"><dt>Returns</dt><dd>Rect within which this collider is contained. </dd></dl>
 
 </div>
 </div>
@@ -304,6 +328,15 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether this <code><a class="el" href="classCollider.html">Collider</a></code> is colliding with another one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Pointer to other collider. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if they are colliding. <code>false</code> otherwise. </dd></dl>
+
 </div>
 </div>
 <a id="ab64801d5d16958f7b6df63665c1407f8" name="ab64801d5d16958f7b6df63665c1407f8"></a>
@@ -321,6 +354,15 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks whether this <code><a class="el" href="classCollider.html">Collider</a></code> started colliding with another one this frame. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Pointer to other collider. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if they just started colliding. <code>false</code> otherwise. </dd></dl>
 
 </div>
 </div>
