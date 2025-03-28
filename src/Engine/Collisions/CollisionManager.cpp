@@ -27,6 +27,8 @@ void CollisionManager::updateCollisions(Collider* collider, Collider* collider2)
         handleCollisionEnd(collider, collider2);
 }
 
+CollisionManager::CollisionManager() = default;
+
 CollisionManager::~CollisionManager() {
     _colliders.clear();
 }
