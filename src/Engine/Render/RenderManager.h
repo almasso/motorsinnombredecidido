@@ -18,7 +18,7 @@ class RenderManager {
     bool drawSprite(const Rect &rect, const Sprite *sprite, float rotation) const;
     void getWindowSize(int *width, int *height) const;
     void shutdown() const;
-    void setViewRect(const Vector2& viewPosition, const Vector2& viewSize);
+    std::pair<float,const Vector2&> setViewRect(const Vector2& viewPosition, const Vector2& viewSize);
     Rect convertRect(const Rect& rect) const;
     private:
     Vector2 _viewOffset;

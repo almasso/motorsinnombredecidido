@@ -84,6 +84,7 @@ bool Entity::isAlive() const {
 
 void Entity::destroy() {
      _alive = false;
+     setActive(false);
 }
 
 bool Entity::addChild(Entity* child) {

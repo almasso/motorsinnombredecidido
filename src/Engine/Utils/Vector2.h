@@ -1,11 +1,11 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
-
+#include <functional>
 class Vector2 {
 private:
 	float _x;
 	float _y;
-
+	friend struct std::hash<Vector2>;
 public:
 	/// @~english
 	/// @brief \c Vector2 's default constructor.
@@ -249,6 +249,14 @@ public:
 	static const Vector2 DOWN;
 	/// (1, 1)
 	static const Vector2 UNIT;
+
+};
+
+template <>
+struct std::hash<Vector2> {
+	std::size_t operator()(const Vector2& v) const noexcept {
+		return std::hash<float>()(v._x) ^ (std::hash<float>()(v._y) << 1);
+	}
 };
 
 #endif

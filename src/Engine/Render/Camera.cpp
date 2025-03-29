@@ -14,6 +14,13 @@ bool Camera::init() {
 
 bool Camera::render(RenderManager *manager) {
     Vector2 position = _transform->getGlobalPosition();
-    manager->setViewRect(position - _size/2.f, _size);
+    auto [screenScale, screenOffset] = manager->setViewRect(position - _size/2.f, _size);
+    _screenScale = screenScale;
+    _screenOffset = screenOffset;
     return true;
+}
+
+Vector2 Camera::screenToWorld(const Vector2& screenPos) const {
+    Vector2 position = _transform->getGlobalPosition();
+    return (screenPos - _screenOffset) / _screenScale + (position - _size / 2.0f);
 }

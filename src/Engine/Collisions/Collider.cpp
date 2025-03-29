@@ -49,9 +49,9 @@ Rect Collider::getRect() const {
     Rect r;
     auto pos = _transform->getGlobalPosition();
     auto scale = _transform->getGlobalScale();
-    r.x = pos.getX() + _pos.getX() * scale.getX();
-    r.y = pos.getY() + _pos.getY() * scale.getY();
     r.w = scale.getX() * _size.getX();
     r.h = scale.getY() * _size.getY();
+    r.x = pos.getX() + _pos.getX() * scale.getX() - r.w / 2.f;
+    r.y = pos.getY() + _pos.getY() * scale.getY() - r.h / 2.f;
     return r;
 }

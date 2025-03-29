@@ -63,12 +63,13 @@ void RenderManager::shutdown() const {
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
 }
 
-void RenderManager::setViewRect(const Vector2& viewPosition, const Vector2& viewSize) {
+std::pair<float, const Vector2&> RenderManager::setViewRect(const Vector2 &viewPosition, const Vector2 &viewSize)  {
     _viewOffset = viewPosition;
     float tempScaleX = _width / viewSize.getX();
     float tempScaleY = _height / viewSize.getY();
     _screenScale = std::min(tempScaleY, tempScaleX);
     _screenOffset = Vector2(_width - viewSize.getX() * _screenScale, _height - viewSize.getY() * _screenScale)/2.f;
+    return std::pair<float, Vector2&>(_screenScale, _screenOffset);
 }
 
 Rect RenderManager::convertRect(const Rect &rect) const {
