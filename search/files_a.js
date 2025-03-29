@@ -9,5 +9,6 @@ var searchData=
   ['sprite_2ecpp_6',['Sprite.cpp',['../Sprite_8cpp.html',1,'']]],
   ['sprite_2eh_7',['Sprite.h',['../Sprite_8h.html',1,'']]],
   ['spriterenderer_2ecpp_8',['SpriteRenderer.cpp',['../SpriteRenderer_8cpp.html',1,'']]],
-  ['spriterenderer_2eh_9',['SpriteRenderer.h',['../SpriteRenderer_8h.html',1,'']]]
+  ['spriterenderer_2eh_9',['SpriteRenderer.h',['../SpriteRenderer_8h.html',1,'']]],
+  ['string_5fliteral_2eh_10',['string_literal.h',['../string__literal_8h.html',1,'']]]
 ];

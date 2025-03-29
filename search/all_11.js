@@ -16,7 +16,7 @@ var searchData=
   ['setloop_13',['setLoop',['../classAudioSource.html#aebdc8fb12f3886bdab38b5687425727f',1,'AudioSource::setLoop()'],['../classAudioClip.html#a23648dfcb61d75b4d2d829f6a9c8edb5',1,'AudioClip::setLoop()']]],
   ['setparent_14',['setParent',['../classEntity.html#a77e62e660f8aa7e2194d416f540feefb',1,'Entity']]],
   ['setplaying_15',['setPlaying',['../classAnimator.html#ab9e4a52540d0dd04681983ea658d3433',1,'Animator']]],
-  ['setposition_16',['setPosition',['../classTransform.html#acd40a11d03b89b69d8395f03dafd5f1e',1,'Transform::setPosition(const Vector2 &amp;position)'],['../classTransform.html#a7e9e7e5291025b63a536aece9cbe2580',1,'Transform::setPosition(float x, float y)']]],
+  ['setposition_16',['setPosition',['../classTransform.html#a7e9e7e5291025b63a536aece9cbe2580',1,'Transform::setPosition(float x, float y)'],['../classTransform.html#acd40a11d03b89b69d8395f03dafd5f1e',1,'Transform::setPosition(const Vector2 &amp;position)']]],
   ['setpositionx_17',['setPositionX',['../classTransform.html#ad1c8f601867b2038afd5b488ba3de9fe',1,'Transform']]],
   ['setpositiony_18',['setPositionY',['../classTransform.html#ab564bad8550ac40f7c8da451575c144f',1,'Transform']]],
   ['setrotation_19',['setRotation',['../classTransform.html#aef821c00885810e430f61b274a6089db',1,'Transform']]],
@@ -29,8 +29,8 @@ var searchData=
   ['setx_26',['setX',['../classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8',1,'Vector2']]],
   ['sety_27',['setY',['../classVector2.html#a9a2d336722ae0f62324c18c784f7738e',1,'Vector2']]],
   ['showerror_28',['ShowError',['../classRPGError.html#ad82b866de061582141be198feb255732',1,'RPGError']]],
-  ['shutdown_29',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classBaseResourceHandler.html#ad80efe0e760c4b666b8ac1b5aeeba3cd',1,'BaseResourceHandler::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
-  ['shutdown_30',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager::Shutdown()'],['../classCollisionManager.html#a937d1716ee2905b64f9cf1372a0cbe95',1,'CollisionManager::Shutdown()'],['../classLuaReader.html#ac3035a58af7bab033216a3518adb13e8',1,'LuaReader::Shutdown()'],['../classResourceManager.html#ad69916a57c142341802f13585d267851',1,'ResourceManager::Shutdown()']]],
+  ['shutdown_29',['Shutdown',['../classAudioManager.html#a8956677aeb7abb69b5254c2a89315f9f',1,'AudioManager::Shutdown()'],['../classCollisionManager.html#a937d1716ee2905b64f9cf1372a0cbe95',1,'CollisionManager::Shutdown()'],['../classLuaReader.html#ac3035a58af7bab033216a3518adb13e8',1,'LuaReader::Shutdown()'],['../classResourceManager.html#ad69916a57c142341802f13585d267851',1,'ResourceManager::Shutdown()']]],
+  ['shutdown_30',['shutdown',['../classSceneManager.html#a6dc2dc39820772f448be6fce63a595bd',1,'SceneManager::shutdown()'],['../classInputManager.html#a494bf6a46febf231174a938584c08b33',1,'InputManager::shutdown()'],['../classBaseResourceHandler.html#ad80efe0e760c4b666b8ac1b5aeeba3cd',1,'BaseResourceHandler::shutdown()'],['../classRenderManager.html#a649573f2344a8ac15ab80950d38aa295',1,'RenderManager::shutdown()']]],
   ['specifier_31',['specifier',['../classAudioClipData.html#a18467fbcbb33c44c0c92dafd545c750e',1,'AudioClipData']]],
   ['speed_32',['speed',['../structSquare.html#ae63bb534933b1a7581512eff3de9adda',1,'Square']]],
   ['sprite_33',['Sprite',['../classSprite.html',1,'Sprite'],['../classSprite.html#acfbf511f78e8ebb1372a0e3d061bdc91',1,'Sprite::Sprite()']]],
@@ -41,5 +41,6 @@ var searchData=
   ['spriterenderer_2eh_38',['SpriteRenderer.h',['../SpriteRenderer_8h.html',1,'']]],
   ['square_39',['Square',['../structSquare.html',1,'']]],
   ['stop_40',['stop',['../classAudioClip.html#a82b64c4ed725e2ba0a1b78cc2ae5b67f',1,'AudioClip::stop()'],['../classAudioSource.html#ab3449cc8a764c0d15e9453d52610475e',1,'AudioSource::stop()']]],
-  ['string_5fliteral_41',['string_literal',['../structstring__literal.html',1,'string_literal&lt; N &gt;'],['../structstring__literal.html#a8e765fee6593387219953eed801a7e64',1,'string_literal::string_literal()']]]
+  ['string_5fliteral_41',['string_literal',['../structstring__literal.html',1,'string_literal&lt; N &gt;'],['../structstring__literal.html#a8e765fee6593387219953eed801a7e64',1,'string_literal::string_literal()']]],
+  ['string_5fliteral_2eh_42',['string_literal.h',['../string__literal_8h.html',1,'']]]
 ];

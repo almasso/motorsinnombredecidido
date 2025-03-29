@@ -42,6 +42,8 @@ var NAVTREEINDEX2 =
 "hierarchy.html":[1,2],
 "index.html":[],
 "pages.html":[],
+"string__literal_8h.html":[2,0,0,0,7,5],
+"string__literal_8h_source.html":[2,0,0,0,7,5],
 "structColor.html":[1,0,14],
 "structColor.html#a12022d435709c08f47937a7361fe8441":[1,0,14,2],
 "structColor.html#a23331f00b02491a901873b5085461d99":[1,0,14,4],
