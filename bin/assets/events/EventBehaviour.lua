@@ -12,6 +12,10 @@ function EventBehaviour:new()
     return obj;
 end
 
+function EventBehaviour:init(entity)
+    return true;
+end
+
 function EventBehaviour:act(game, scene, entity, event)
     return true;
 end
@@ -22,6 +26,9 @@ end
 
 function EventBehaviour:ended()
     return self._ended;
+end
+
+function EventBehaviour:updateEnd(scene, entity, event)
 end
 
 return EventBehaviour

@@ -20,6 +20,7 @@ private:
     sol::function _act;
     sol::function _done;
     sol::function _ended;
+    sol::function _updateEnd;
 
     EventBehaviour(Game* game, Scene* scene, Entity* entity, Event* event);
     bool init(sol::table const& behaviour);
@@ -28,6 +29,7 @@ public:
     bool act();
     bool done() const;
     bool ended() const;
+    void updateEnd();
 };
 
 

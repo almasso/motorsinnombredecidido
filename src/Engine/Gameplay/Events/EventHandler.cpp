@@ -55,3 +55,10 @@ bool EventHandler::update() {
     }
     return true;
 }
+
+Event* EventHandler::getEvent(std::string const& name) {
+    auto it = _events.find(name);
+    if (it == _events.end())
+        return nullptr;
+    return it->second;
+}

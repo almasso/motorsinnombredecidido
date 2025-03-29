@@ -18,6 +18,8 @@ public:
     ~EventHandler() override;
     bool init() override;
     bool update() override;
+
+    Event* getEvent(std::string const& name);
 };
 
 

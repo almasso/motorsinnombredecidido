@@ -56,6 +56,15 @@ bool Event::init(sol::table const& event) {
     return true;
 }
 
+void Event::updateEnd() {
+    for (auto it = _pendingEnd.begin(); it != _pendingEnd.end();) {
+        (*it)->updateEnd();
+        if ((*it)->ended())
+            it = _pendingEnd.erase(it);
+        else ++it;
+    }
+}
+
 Event* Event::Create(Game* game, Scene* scene, Entity* entity, sol::table const& event) {
     auto instance = new Event(game, scene, entity);
 
@@ -103,6 +112,8 @@ bool Event::update() {
         _targetBehaviour = -1;
     }
 
+    updateEnd();
+
     if (_currentBehaviour == _behaviours.size()) {
         if (_condition->met())
             start();
@@ -112,12 +123,16 @@ bool Event::update() {
     if (_isPaused)
         return true;
 
+
     auto behaviour = _behaviours[_currentBehaviour];
     if (!behaviour->act())
         return false;
 
-    if (behaviour->done())
+    if (behaviour->done()) {
         ++_currentBehaviour;
+        if (!behaviour->ended())
+            _pendingEnd.push_back(behaviour);
+    }
     return true;
 }
 

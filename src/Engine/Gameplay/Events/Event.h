@@ -1,6 +1,7 @@
 #ifndef EVENT_H
 #define EVENT_H
 
+#include <list>
 #include <vector>
 #include <sol/forward.hpp>
 
@@ -23,12 +24,16 @@ private:
 
     int _targetBehaviour;
 
+    std::list<EventBehaviour*> _pendingEnd;
+
     bool initCondition(sol::table const& event);
     bool insertBehaviour(sol::table const& behaviour);
     bool initBehaviours(sol::table const& event);
 
     explicit Event(Game* game, Scene* scene, Entity* entity);
     bool init(sol::table const& event);
+
+    void updateEnd();
 
 public:
     static Event* Create(Game* game, Scene* scene, Entity* entity, sol::table const& event);
