@@ -8,6 +8,6 @@ var classRenderManager =
     [ "getWindowSize", "classRenderManager.html#a6e88c1af19abcd9d3e86e9cc2a4f6205", null ],
     [ "init", "classRenderManager.html#a1205d52fc12124339bd64d916c9c8237", null ],
     [ "present", "classRenderManager.html#a7832456be71858b8b230039a5a5525af", null ],
-    [ "setViewRect", "classRenderManager.html#a7b51db55a47ab831c8e6984970e45238", null ],
+    [ "setViewRect", "classRenderManager.html#a7214703fc9f0b8f74e3a175ba8e13efa", null ],
     [ "shutdown", "classRenderManager.html#a649573f2344a8ac15ab80950d38aa295", null ]
 ];

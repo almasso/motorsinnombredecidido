@@ -95,12 +95,12 @@ $(document).ready(function(){initNavTree('Vector2_8h_source.html',''); initResiz
 <div class="contents">
 <a href="Vector2_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VECTOR2_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VECTOR2_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="classVector2.html">    4</a></span><span class="keyword">class </span><a class="code hl_class" href="classVector2.html">Vector2</a> {</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    <span class="keywordtype">float</span> _x;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordtype">float</span> _y;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classVector2.html#a61dab34503cce75961f7fc27e6f73eb5">    7</a></span>    <span class="keywordtype">float</span> _y;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">friend</span> <span class="keyword">struct </span>std::hash&lt;<a class="code hl_class" href="classVector2.html">Vector2</a>&gt;;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_function" href="classVector2.html#a22104d1809be26a419ef1f959e3761bf">Vector2</a>();</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
@@ -158,9 +158,17 @@ $(document).ready(function(){initNavTree('Vector2_8h_source.html',''); initResiz
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="classVector2.html#a51b5f3d8a7cd9602fd796b65d57673e1">  247</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="classVector2.html">Vector2</a> <a class="code hl_variable" href="classVector2.html#a51b5f3d8a7cd9602fd796b65d57673e1">UP</a>;</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="classVector2.html#a080cfc88021b52fff01150f6d011c5e3">  249</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="classVector2.html">Vector2</a> <a class="code hl_variable" href="classVector2.html#a080cfc88021b52fff01150f6d011c5e3">DOWN</a>;</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classVector2.html#a9a1a09c32435b334af2576907785aefb">  251</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="classVector2.html">Vector2</a> <a class="code hl_variable" href="classVector2.html#a9a1a09c32435b334af2576907785aefb">UNIT</a>;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>};</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>};</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01Vector2_01_4.html">  256</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_class" href="classVector2.html">Vector2</a>&gt; {</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01Vector2_01_4.html#a34842595b5eaa79bc2257960ca198740">  257</a></span>    std::size_t <a class="code hl_function" href="structstd_1_1hash_3_01Vector2_01_4.html#a34842595b5eaa79bc2257960ca198740">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classVector2.html">Vector2</a>&amp; v) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">return</span> std::hash&lt;float&gt;()(v._x) ^ (std::hash&lt;float&gt;()(v._y) &lt;&lt; 1);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>};</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassVector2_html"><div class="ttname"><a href="classVector2.html">Vector2</a></div><div class="ttdef"><b>Definition:</b> Vector2.h:4</div></div>
 <div class="ttc" id="aclassVector2_html_a080cfc88021b52fff01150f6d011c5e3"><div class="ttname"><a href="classVector2.html#a080cfc88021b52fff01150f6d011c5e3">Vector2::DOWN</a></div><div class="ttdeci">static const Vector2 DOWN</div><div class="ttdoc">(0, -1)</div><div class="ttdef"><b>Definition:</b> Vector2.h:249</div></div>
 <div class="ttc" id="aclassVector2_html_a09df3031274ae221664f1505a8ec17fc"><div class="ttname"><a href="classVector2.html#a09df3031274ae221664f1505a8ec17fc">Vector2::operator/</a></div><div class="ttdeci">Vector2 operator/(float e) const</div><div class="ttdoc">Divides a vector by a scalar.</div><div class="ttdef"><b>Definition:</b> Vector2.cpp:35</div></div>
@@ -187,6 +195,7 @@ $(document).ready(function(){initNavTree('Vector2_8h_source.html',''); initResiz
 <div class="ttc" id="aclassVector2_html_ab91b776ba585731af241d1c321dd7244"><div class="ttname"><a href="classVector2.html#ab91b776ba585731af241d1c321dd7244">Vector2::LEFT</a></div><div class="ttdeci">static const Vector2 LEFT</div><div class="ttdoc">(-1, 0)</div><div class="ttdef"><b>Definition:</b> Vector2.h:245</div></div>
 <div class="ttc" id="aclassVector2_html_abed281edb08c34e61ec8642d1da98a62"><div class="ttname"><a href="classVector2.html#abed281edb08c34e61ec8642d1da98a62">Vector2::operator*</a></div><div class="ttdeci">Vector2 operator*(float e) const</div><div class="ttdoc">Multiplies a vector by a scalar.</div><div class="ttdef"><b>Definition:</b> Vector2.cpp:31</div></div>
 <div class="ttc" id="aclassVector2_html_ada03f5433d3ca4841d5ebb90b167202e"><div class="ttname"><a href="classVector2.html#ada03f5433d3ca4841d5ebb90b167202e">Vector2::~Vector2</a></div><div class="ttdeci">~Vector2()</div><div class="ttdoc">Vector2 's default destructor.</div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01Vector2_01_4_html_a34842595b5eaa79bc2257960ca198740"><div class="ttname"><a href="structstd_1_1hash_3_01Vector2_01_4.html#a34842595b5eaa79bc2257960ca198740">std::hash&lt; Vector2 &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const Vector2 &amp;v) const noexcept</div><div class="ttdef"><b>Definition:</b> Vector2.h:257</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

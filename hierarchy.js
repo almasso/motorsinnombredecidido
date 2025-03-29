@@ -44,6 +44,7 @@ var hierarchy =
       [ "PrefabBlueprint", "classPrefabBlueprint.html", null ]
     ] ],
     [ "Game", "classGame.html", null ],
+    [ "std::hash< Vector2 >", "structstd_1_1hash_3_01Vector2_01_4.html", null ],
     [ "InputManager", "classInputManager.html", null ],
     [ "InputState", "structInputState.html", null ],
     [ "LuaManager", "classLuaManager.html", null ],

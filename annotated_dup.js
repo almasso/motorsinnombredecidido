@@ -1,5 +1,8 @@
 var annotated_dup =
 [
+    [ "std", null, [
+      [ "hash< Vector2 >", "structstd_1_1hash_3_01Vector2_01_4.html", "structstd_1_1hash_3_01Vector2_01_4" ]
+    ] ],
     [ "Animation", "classAnimation.html", "classAnimation" ],
     [ "Animator", "classAnimator.html", "classAnimator" ],
     [ "AssetManager", "classAssetManager.html", null ],

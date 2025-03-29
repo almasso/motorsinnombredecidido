@@ -24,5 +24,6 @@ var classVector2 =
     [ "set", "classVector2.html#a8aa2ef4b348f8628fd14f44f15a8a6e3", null ],
     [ "set", "classVector2.html#a2968854ceaef9413954a7aa381f6facf", null ],
     [ "setX", "classVector2.html#a1b48b1815ef6c1ee30db95115c7aedd8", null ],
-    [ "setY", "classVector2.html#a9a2d336722ae0f62324c18c784f7738e", null ]
+    [ "setY", "classVector2.html#a9a2d336722ae0f62324c18c784f7738e", null ],
+    [ "std::hash< Vector2 >", "classVector2.html#a61dab34503cce75961f7fc27e6f73eb5", null ]
 ];
