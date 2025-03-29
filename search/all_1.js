@@ -6,7 +6,7 @@ var searchData=
   ['addcomponent_3',['addComponent',['../classEntity.html#ad1d6f63d112c3442ec0483c62a45cd14',1,'Entity']]],
   ['addentity_4',['addEntity',['../classScene.html#ab4bd06a9af64934a38bf75e8b6f1435e',1,'Scene']]],
   ['addhandler_5',['addHandler',['../classScene.html#a5d4871c219d0b1d591bee0f656e24b22',1,'Scene']]],
-  ['addscene_6',['addScene',['../classSceneManager.html#a8ed76ad702aa32c3578f598c3285e20a',1,'SceneManager::addScene()'],['../classGame.html#a6de5d6c48a354a895360cb1e98fcfb18',1,'Game::addScene()']]],
+  ['addscene_6',['addScene',['../classSceneManager.html#a8ed76ad702aa32c3578f598c3285e20a',1,'SceneManager::addScene()'],['../classGame.html#a29d8561a97e14147aeae61df79957ffa',1,'Game::addScene()']]],
   ['animation_7',['Animation',['../classAnimation.html#a311d705d85207a9e82049de67be20ceb',1,'Animation::Animation()'],['../classAnimation.html',1,'Animation']]],
   ['animation_2ecpp_8',['Animation.cpp',['../Animation_8cpp.html',1,'']]],
   ['animation_2eh_9',['Animation.h',['../Animation_8h.html',1,'']]],

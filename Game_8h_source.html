@@ -96,30 +96,34 @@ $(document).ready(function(){initNavTree('Game_8h_source.html',''); initResizabl
 <a href="Game_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef GAME_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define GAME_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">class </span><a class="code hl_class" href="classSceneManager.html">SceneManager</a>;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span><a class="code hl_class" href="classScene.html">Scene</a>;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classEntity.html">Entity</a>;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classGame.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classGame.html">Game</a> {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="classSceneManager.html">SceneManager</a>* _manager;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classGame.html">Game</a>(<a class="code hl_class" href="classSceneManager.html">SceneManager</a>* manager);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_class" href="classEntity.html">Entity</a>* <a class="code hl_function" href="classGame.html#a5a5cb5db6ad16cd19eb7b6df35030f6f">instantiatePrefab</a>(<span class="keyword">const</span> std::string&amp; handler) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classScene.html">Scene</a>* <a class="code hl_function" href="classGame.html#a6de5d6c48a354a895360cb1e98fcfb18">addScene</a>(std::string handler) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classGame.html#a6b09340c0ed44b8c8e2bb4e1d5b1535e">popScene</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;sol/forward.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span><a class="code hl_class" href="classSceneManager.html">SceneManager</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classScene.html">Scene</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span><a class="code hl_class" href="classEntity.html">Entity</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classGame.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classGame.html">Game</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_class" href="classSceneManager.html">SceneManager</a>* _manager;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classGame.html">Game</a>(<a class="code hl_class" href="classSceneManager.html">SceneManager</a>* manager);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classEntity.html">Entity</a>* <a class="code hl_function" href="classGame.html#a5a5cb5db6ad16cd19eb7b6df35030f6f">instantiatePrefab</a>(<span class="keyword">const</span> std::string&amp; handler) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classScene.html">Scene</a>* <a class="code hl_function" href="classGame.html#a29d8561a97e14147aeae61df79957ffa">addScene</a>(<span class="keyword">const</span> std::string&amp; handler) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classGame.html#a6b09340c0ed44b8c8e2bb4e1d5b1535e">popScene</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#endif </span><span class="comment">//GAME_H</span></div>
-<div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:10</div></div>
-<div class="ttc" id="aclassGame_html"><div class="ttname"><a href="classGame.html">Game</a></div><div class="ttdef"><b>Definition:</b> Game.h:9</div></div>
-<div class="ttc" id="aclassGame_html_a5a5cb5db6ad16cd19eb7b6df35030f6f"><div class="ttname"><a href="classGame.html#a5a5cb5db6ad16cd19eb7b6df35030f6f">Game::instantiatePrefab</a></div><div class="ttdeci">Entity * instantiatePrefab(const std::string &amp;handler) const</div><div class="ttdef"><b>Definition:</b> Game.cpp:8</div></div>
-<div class="ttc" id="aclassGame_html_a6b09340c0ed44b8c8e2bb4e1d5b1535e"><div class="ttname"><a href="classGame.html#a6b09340c0ed44b8c8e2bb4e1d5b1535e">Game::popScene</a></div><div class="ttdeci">void popScene() const</div><div class="ttdef"><b>Definition:</b> Game.cpp:16</div></div>
-<div class="ttc" id="aclassGame_html_a6de5d6c48a354a895360cb1e98fcfb18"><div class="ttname"><a href="classGame.html#a6de5d6c48a354a895360cb1e98fcfb18">Game::addScene</a></div><div class="ttdeci">Scene * addScene(std::string handler) const</div><div class="ttdef"><b>Definition:</b> Game.cpp:12</div></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classGame.html#a4bdd83414ef890960750b483ae719fb1">RegisterToLua</a>(sol::state&amp; lua);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif </span><span class="comment">//GAME_H</span></div>
+<div class="ttc" id="aclassEntity_html"><div class="ttname"><a href="classEntity.html">Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:11</div></div>
+<div class="ttc" id="aclassGame_html"><div class="ttname"><a href="classGame.html">Game</a></div><div class="ttdef"><b>Definition:</b> Game.h:10</div></div>
+<div class="ttc" id="aclassGame_html_a29d8561a97e14147aeae61df79957ffa"><div class="ttname"><a href="classGame.html#a29d8561a97e14147aeae61df79957ffa">Game::addScene</a></div><div class="ttdeci">Scene * addScene(const std::string &amp;handler) const</div><div class="ttdef"><b>Definition:</b> Game.cpp:15</div></div>
+<div class="ttc" id="aclassGame_html_a4bdd83414ef890960750b483ae719fb1"><div class="ttname"><a href="classGame.html#a4bdd83414ef890960750b483ae719fb1">Game::RegisterToLua</a></div><div class="ttdeci">static void RegisterToLua(sol::state &amp;lua)</div><div class="ttdef"><b>Definition:</b> Game.cpp:23</div></div>
+<div class="ttc" id="aclassGame_html_a5a5cb5db6ad16cd19eb7b6df35030f6f"><div class="ttname"><a href="classGame.html#a5a5cb5db6ad16cd19eb7b6df35030f6f">Game::instantiatePrefab</a></div><div class="ttdeci">Entity * instantiatePrefab(const std::string &amp;handler) const</div><div class="ttdef"><b>Definition:</b> Game.cpp:11</div></div>
+<div class="ttc" id="aclassGame_html_a6b09340c0ed44b8c8e2bb4e1d5b1535e"><div class="ttname"><a href="classGame.html#a6b09340c0ed44b8c8e2bb4e1d5b1535e">Game::popScene</a></div><div class="ttdeci">void popScene() const</div><div class="ttdef"><b>Definition:</b> Game.cpp:19</div></div>
 <div class="ttc" id="aclassSceneManager_html"><div class="ttname"><a href="classSceneManager.html">SceneManager</a></div><div class="ttdef"><b>Definition:</b> SceneManager.h:18</div></div>
-<div class="ttc" id="aclassScene_html"><div class="ttname"><a href="classScene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:12</div></div>
+<div class="ttc" id="aclassScene_html"><div class="ttname"><a href="classScene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.h:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
