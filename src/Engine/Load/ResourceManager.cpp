@@ -1,6 +1,7 @@
 #include "ResourceManager.h"
 
 #include <cassert>
+#include <Utils/RPGError.h>
 
 #include "ResourceMemoryManager.h"
 #include "BaseResourceHandler.h"
@@ -29,8 +30,10 @@ bool ResourceManager::Init(std::string const& configFile, std::string& scene) {
     assert(_memoryManager == nullptr);
     LuaReader::Init();
     sol::table config = LuaReader::GetTable(configFile);
-    if (!config.valid())
+    if (!config.valid()) {
+        RPGError::ShowError("Resource initialization", "Could not find a valid configuration file at \"" + configFile + "\"");
         return false;
+    }
     if (!initMemoryManager(config))
         return false;
     if (!initScenes(config,scene))

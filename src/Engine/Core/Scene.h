@@ -4,6 +4,7 @@
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
+#include <sol/forward.hpp>
 
 class Entity;
 class RenderComponent;
@@ -27,6 +28,8 @@ public:
     Entity* getEntityByHandler(const std::string & handler);
     void registerRenderComponent(RenderComponent* component , int layer);
     void unregisterRenderComponent(RenderComponent* component, int layer);
+
+    static void RegisterToLua(sol::state& lua);
 };
 
 

@@ -1,4 +1,4 @@
-local Move = require('assets.events.moveEventBehaviour')
+local Move = require('assets.events.MoveBehaviour');
 
 return {
     music = {

@@ -42,7 +42,7 @@ EventBehaviour* EventBehaviour::Create(Game* game, Scene* scene, Entity* entity,
     return nullptr;
 }
 
-int EventBehaviour::act() {
+bool EventBehaviour::act() {
     return _act(_self, _game, _scene, _entity, _event);
 }
 

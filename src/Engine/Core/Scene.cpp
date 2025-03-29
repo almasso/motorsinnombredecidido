@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Render/RenderComponent.h"
+#include <sol/state.hpp>
 
 Scene::Scene()
 = default;
@@ -90,4 +91,9 @@ void Scene::unregisterRenderComponent(RenderComponent* component, const int laye
 			_renderComponents.erase(layerFinder);
 		}
 	}
+}
+
+void Scene::RegisterToLua(sol::state& lua) {
+	sol::usertype<Scene> type = lua.new_usertype<Scene>("Scene");
+	type["getEntity"] = &Scene::getEntityByHandler;
 }

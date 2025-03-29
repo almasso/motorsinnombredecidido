@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <string>
+#include <sol/forward.hpp>
 
 class SceneManager;
 class Scene;
@@ -12,8 +13,10 @@ private:
 public:
     explicit Game(SceneManager* manager);
     Entity* instantiatePrefab(const std::string& handler) const;
-    Scene* addScene(std::string handler) const;
+    Scene* addScene(const std::string& handler) const;
     void popScene() const;
+
+    static void RegisterToLua(sol::state& lua);
 };
 
 

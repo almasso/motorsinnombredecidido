@@ -1,9 +1,22 @@
 #include "LuaReader.h"
 
+#include <Core/Entity.h>
+#include <Core/Game.h>
+#include <Core/Scene.h>
+#include <Gameplay/Events/Event.h>
+
 LuaReader* LuaReader::_instance = nullptr;
+
+void LuaReader::registerUserTypes() {
+    Event::RegisterToLua(_lua);
+    Entity::RegisterToLua(_lua);
+    Scene::RegisterToLua(_lua);
+    Game::RegisterToLua(_lua);
+}
 
 bool LuaReader::init() {
     _lua.open_libraries(sol::lib::base, sol::lib::package);
+    registerUserTypes();
     return true;
 }
 

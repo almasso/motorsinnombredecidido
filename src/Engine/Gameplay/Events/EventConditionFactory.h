@@ -18,7 +18,7 @@ private:
             return new Condition();
         }});
     }
-    
+
     static void Init();
     static bool ReadCondition(sol::table const& condition, std::string& type, sol::table& params);
     static EventCondition* CreateCondition(std::string const& type, sol::table const& params);

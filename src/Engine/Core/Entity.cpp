@@ -1,4 +1,7 @@
 #include "Entity.h"
+
+#include <sol/state.hpp>
+
 #include "Component.h"
 
 Entity::Entity(): _parent(nullptr), _active(false), _alive(true) {
@@ -108,4 +111,9 @@ bool Entity::addComponent(Component *component) {
           return true;
      }
      return false;
+}
+
+void Entity::RegisterToLua(sol::state& lua) {
+     sol::usertype<Entity> type = lua.new_usertype<Entity>("Entity");
+     type["destroy"] = &Entity::destroy;
 }

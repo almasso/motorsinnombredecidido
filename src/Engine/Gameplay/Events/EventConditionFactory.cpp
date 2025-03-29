@@ -2,6 +2,7 @@
 
 #include <Load/LuaReader.h>
 
+#include "Conditions/AlwaysCondition.h"
 #include "Conditions/AndCondition.h"
 #include "Conditions/OnStartCondition.h"
 #include "Conditions/OrCondition.h"
@@ -12,6 +13,7 @@ void EventConditionFactory::Init() {
     RegisterFunction<AndCondition>();
     RegisterFunction<OrCondition>();
     RegisterFunction<OnStartCondition>();
+    RegisterFunction<AlwaysCondition>();
 }
 
 bool EventConditionFactory::ReadCondition(sol::table const& condition, std::string& type, sol::table& params) {

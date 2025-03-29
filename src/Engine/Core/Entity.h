@@ -3,6 +3,7 @@
 #include <map>
 #include <unordered_set>
 #include "Component.h"
+#include <sol/forward.hpp>
 
 class RenderManager;
 class Component;
@@ -39,5 +40,7 @@ public:
         return static_cast<ComponentType*>(finder->second);
     }
 
+
+    static void RegisterToLua(sol::state& lua);
 };
 #endif //ENTITY_H

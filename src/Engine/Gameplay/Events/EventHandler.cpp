@@ -50,7 +50,8 @@ bool EventHandler::init() {
 
 bool EventHandler::update() {
     for (auto& [name, event] : _events) {
-        event->update();
+        if (!event->update())
+            return false;
     }
     return true;
 }

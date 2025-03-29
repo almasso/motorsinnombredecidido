@@ -9,6 +9,7 @@ private:
     static LuaReader* _instance;
     sol::state _lua;
 
+    void registerUserTypes();
     bool init();
     LuaReader();
 public:

@@ -18,14 +18,15 @@ private:
     EventCondition* _condition;
     std::vector<EventBehaviour*> _behaviours;
 
-    std::vector<EventBehaviour*>::iterator _currentBehaviour;
+    int _currentBehaviour;
     bool _isPaused;
+
+    int _targetBehaviour;
 
     bool initCondition(sol::table const& event);
     bool insertBehaviour(sol::table const& behaviour);
     bool initBehaviours(sol::table const& event);
 
-    Event(Event const& other);
     explicit Event(Game* game, Scene* scene, Entity* entity);
     bool init(sol::table const& event);
 
@@ -37,8 +38,11 @@ public:
     void resume();
     void pause();
     void stop();
+    void jump(int index);
 
-    void update();
+    bool update();
+
+    static void RegisterToLua(sol::state& lua);
 };
 
 

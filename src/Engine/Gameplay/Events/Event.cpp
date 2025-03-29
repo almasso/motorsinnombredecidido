@@ -34,7 +34,7 @@ bool Event::initBehaviours(sol::table const& event) {
             return false;
     }
 
-    _currentBehaviour = _behaviours.end();
+    _currentBehaviour = _behaviours.size();
     return true;
 }
 
@@ -43,7 +43,9 @@ Event::Event(Game* game, Scene* scene, Entity* entity) :
     _scene(scene),
     _entity(entity),
     _condition(nullptr),
-    _isPaused(true) {
+    _currentBehaviour(-1),
+    _isPaused(true),
+    _targetBehaviour(-1) {
 }
 
 bool Event::init(sol::table const& event) {
@@ -73,7 +75,7 @@ Event::~Event() {
 }
 
 void Event::start() {
-    _currentBehaviour = _behaviours.begin();
+    _currentBehaviour = 0;
     resume();
 }
 
@@ -81,26 +83,49 @@ void Event::resume() {
     _isPaused = false;
 }
 
-void Event::update() {
-    if (_currentBehaviour == _behaviours.end())
-        if (_condition->met())
-            start();
-        else
-            return;
-
-    if (_isPaused)
-        return;
-    auto behaviour = *_currentBehaviour;
-    behaviour->act();
-    if (behaviour->done())
-        ++_currentBehaviour;
-}
-
 void Event::pause() {
     _isPaused = true;
 }
 
 void Event::stop() {
-    _currentBehaviour = _behaviours.end();
+    _currentBehaviour = _behaviours.size();
     pause();
+}
+
+void Event::jump(int index) {
+    if (index < _behaviours.size())
+        _targetBehaviour = index;
+}
+
+bool Event::update() {
+    if (_targetBehaviour != -1) {
+        _currentBehaviour = _targetBehaviour;
+        _targetBehaviour = -1;
+    }
+
+    if (_currentBehaviour == _behaviours.size()) {
+        if (_condition->met())
+            start();
+        else return true;
+    }
+
+    if (_isPaused)
+        return true;
+
+    auto behaviour = _behaviours[_currentBehaviour];
+    if (!behaviour->act())
+        return false;
+
+    if (behaviour->done())
+        ++_currentBehaviour;
+    return true;
+}
+
+void Event::RegisterToLua(sol::state& lua) {
+    sol::usertype type = lua.new_usertype<Event>("Event");
+    type["start"] = &Event::start;
+    type["resume"] = &Event::resume;
+    type["pause"] = &Event::pause;
+    type["stop"] = &Event::stop;
+    type["jump"] = &Event::jump;
 }
