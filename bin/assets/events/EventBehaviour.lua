@@ -7,7 +7,6 @@ local EventBehaviour = Class:inherit()
 ---@return EventBehaviour object New instance of the EventBehaviour
 function EventBehaviour:new()
     local obj = EventBehaviour:super().new(self)
-    obj._ended = false;
     obj._done = false;
     return obj;
 end
@@ -24,11 +23,8 @@ function EventBehaviour:done()
     return self._done;
 end
 
-function EventBehaviour:ended()
-    return self._ended;
-end
-
-function EventBehaviour:updateEnd(scene, entity, event)
+function EventBehaviour:ended(scene, entity, event)
+    return self._done;
 end
 
 return EventBehaviour

@@ -33,8 +33,6 @@ private:
     explicit Event(Game* game, Scene* scene, Entity* entity);
     bool init(sol::table const& event);
 
-    void updateEnd();
-
 public:
     static Event* Create(Game* game, Scene* scene, Entity* entity, sol::table const& event);
     ~Event();

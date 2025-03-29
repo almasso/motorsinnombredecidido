@@ -28,10 +28,6 @@ bool EventBehaviour::init(sol::table const& behaviour) {
     if (!_ended.valid())
         return false;
 
-    _updateEnd = LuaReader::GetFunction(behaviour, "updateEnd");
-    if (!_updateEnd.valid())
-        return false;
-
     auto init = LuaReader::GetFunction(behaviour, "init");
     if (!init.valid())
         return false;
@@ -61,9 +57,5 @@ bool EventBehaviour::done() const {
 }
 
 bool EventBehaviour::ended() const {
-    return _ended(_self);
-}
-
-void EventBehaviour::updateEnd() {
-    _updateEnd(_self, _scene, _entity, _event);
+    return _ended(_self, _scene, _entity, _event);
 }
