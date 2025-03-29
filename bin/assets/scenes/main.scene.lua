@@ -30,10 +30,7 @@ return {
                                     type = "OnStart"
                                 },
                                 conditionB = {
-                                    type = "CollidedWith",
-                                    params = {
-                                        other = "test"
-                                    }
+                                    type = "OnStart"
                                 },
                             }
                         },

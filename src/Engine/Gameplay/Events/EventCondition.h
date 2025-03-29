@@ -1,27 +1,22 @@
 #ifndef EVENTCONDITION_H
 #define EVENTCONDITION_H
 
-#include "EventConditionType.h"
-#include "EventConditionFunction.h"
+#include <sol/forward.hpp>
 
 class EventCondition {
-private:
-    EventConditionType _type;
-    EventConditionFunction _function;
-
-    bool getType(sol::table const& condition);
-    bool getParams(sol::table const& condition);
-
-    EventCondition();
-    bool init(sol::table const& condition);
-
 public:
-    static EventCondition* Create(sol::table const& condition);
-    ~EventCondition();
-
-    bool met();
+    virtual bool init(sol::table const& params) = 0;
+    virtual bool met() = 0;
+    virtual ~EventCondition();
 };
 
+#include <Utils/string_literal.h>
+
+template<string_literal conditionName>
+class EventConditionTemplate : public EventCondition {
+public:
+    static constexpr const char* id = conditionName.value;
+};
 
 
 #endif //EVENTCONDITION_H

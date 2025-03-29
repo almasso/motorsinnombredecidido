@@ -1,16 +1,8 @@
 #ifndef COMPONENTTEMPLATE_H
 #define COMPONENTTEMPLATE_H
-#include <algorithm>
+
 #include "Component.h"
-
-template <auto N>
-struct string_literal {
-    constexpr string_literal(const char (&str)[N]) {
-        std::copy_n(str, N, value);
-    }
-
-    char value[N];
-};
+#include <Utils/string_literal.h>
 
 template<typename ComponentBase>
 concept componentType  = std::is_base_of_v<Component, ComponentBase>;

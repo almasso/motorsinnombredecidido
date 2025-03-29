@@ -6,7 +6,6 @@
 #include <Core/Entity.h>
 #include "Event.h"
 
-
 EventBehaviour::EventBehaviour(Game* game, Scene* scene, Entity* entity, Event* event) :
     _game(game),
     _scene(scene),

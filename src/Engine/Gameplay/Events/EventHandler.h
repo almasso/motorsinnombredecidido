@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 #include <string>
-#include <Core/ComponentTemplate.h>
 #include <sol/forward.hpp>
+#include <Core/ComponentTemplate.h>
 
 class Event;
 

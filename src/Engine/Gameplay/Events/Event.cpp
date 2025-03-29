@@ -4,12 +4,13 @@
 
 #include "EventBehaviour.h"
 #include "EventCondition.h"
+#include "EventConditionFactory.h"
 
 bool Event::initCondition(sol::table const& event) {
     auto condition = LuaReader::GetTable(event, "condition");
     if (!condition.valid())
         return false;
-    _condition = EventCondition::Create(condition);
+    _condition = EventConditionFactory::Create(condition);
     return _condition != nullptr;
 }
 
