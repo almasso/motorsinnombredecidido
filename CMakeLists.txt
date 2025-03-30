@@ -59,6 +59,8 @@ set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
 # Obtenemos también todas las librerías extra de SDL, en este caso, SDL_ttf y SDL_image
 # We also fetch all extra SDL libraries, in this case, SDL_ttf and SDL_image
 
+
+
 FetchContent_Declare(
         SDL3_ttf
         GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
@@ -75,6 +77,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
         GIT_TAG release-3.2.4
 )
+
 FetchContent_MakeAvailable(SDL3_image)
 FetchContent_GetProperties(SDL3_image)
 set(SDL3_IMAGE_INCLUDE_DIRS ${SDL3_IMAGE_SOURCE_DIR}/include)

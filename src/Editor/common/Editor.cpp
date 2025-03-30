@@ -45,9 +45,11 @@ editor::Editor::~Editor() {
 }
 
 void editor::Editor::mainLoop() {
-    render::WindowStack::addWindowToStack(new render::windows::WelcomeWindow());
+    auto* ww = new render::windows::WelcomeWindow();
+    render::WindowStack::addWindowToStackFront(ww);
     while(!io::InputManager::GetInstance().quit()) {
         io::InputManager::GetInstance().handleInput();
         render::RenderManager::GetInstance().render();
     }
+    delete ww;
 }

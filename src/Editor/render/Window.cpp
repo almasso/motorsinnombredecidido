@@ -6,13 +6,9 @@
 #include "Window.h"
 #include "imgui.h"
 
-const std::string & editor::render::Window::getName() const {
-    return _windowName;
-}
-
 void editor::render::Window::render() {
     beforeRender();
-    ImGui::Begin(_windowName.c_str(), nullptr, _windowFlags);
+    ImGui::Begin(_objectName.c_str(), nullptr, _windowFlags);
     onRender();
     ImGui::End();
 }

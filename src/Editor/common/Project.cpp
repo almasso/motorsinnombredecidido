@@ -78,7 +78,6 @@ bool editor::Project::isFound() const {
 
 void editor::Project::saveProject() {
     if(_found) {
-        updateLastModified();
         sol::state& L = io::LuaManager::GetInstance().getState();
 
         sol::table pr = L.create_table();

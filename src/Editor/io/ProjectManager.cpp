@@ -86,6 +86,11 @@ void editor::io::ProjectManager::_addProject(const std::string &route) {
     saveProjects();
 }
 
+void editor::io::ProjectManager::addProject(editor::Project *project) {
+    if(!projectAlreadyIncluded(project->getPath().string())) _projects.push_back(project);
+    saveProjects();
+}
+
 void editor::io::ProjectManager::saveProjects() const {
     sol::state& L = LuaManager::GetInstance().getState();
 

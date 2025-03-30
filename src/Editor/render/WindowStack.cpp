@@ -4,31 +4,35 @@
 //
 
 #include "WindowStack.h"
-#include "Window.h"
+#include "RenderObject.h"
 
-SearchableList<editor::render::Window*> editor::render::WindowStack::_windowStack;
+SearchableList<editor::render::RenderObject*> editor::render::WindowStack::_windowStack;
 
-void editor::render::WindowStack::addWindowToStack(Window *window) {
+void editor::render::WindowStack::addWindowToStack(RenderObject *window) {
     _windowStack.push_back(window);
 }
 
-void editor::render::WindowStack::removeWindowFromStack(Window *window) {
+void editor::render::WindowStack::addWindowToStackFront(RenderObject *window) {
+    _windowStack.push_front(window);
+}
+
+void editor::render::WindowStack::removeWindowFromStack(RenderObject *window) {
     _windowStack.erase(window);
 }
 
 void editor::render::WindowStack::removeAllWindowsFromStack() {
-    for(Window* window : _windowStack) {
+    for(RenderObject* window : _windowStack) {
         removeWindowFromStack(window);
     }
 }
 
-editor::render::Window* editor::render::WindowStack::_getWindowByName(const std::string& name) {
-    for (Window* window : _windowStack) {
+editor::render::RenderObject* editor::render::WindowStack::_getWindowByName(const std::string& name) {
+    for (RenderObject* window : _windowStack) {
         if(window->getName() == name) return window;
     }
     return nullptr;
 }
 
 void editor::render::WindowStack::renderWindows() {
-    for(Window* window : _windowStack) window->render();
+    for(RenderObject* window : _windowStack) window->render();
 }

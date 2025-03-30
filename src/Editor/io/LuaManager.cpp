@@ -66,6 +66,7 @@ sol::table editor::io::LuaManager::_getTableFromScript(const std::string &filena
 void editor::io::LuaManager::_writeToFile(const sol::table &table, const std::string &filename) {
     sol::table serpent = getTableFromScript(std::filesystem::path(std::string(_currentDirectory) + "/settings/serializer/serpent.lua").lexically_normal().string());
 
+    if(!std::filesystem::exists(filename)) std::filesystem::create_directories(std::filesystem::path(filename).parent_path());
     std::ofstream file(filename);
 
     if(serpent.valid()) {

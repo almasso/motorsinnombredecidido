@@ -8,10 +8,11 @@
 
 #include <memory>
 #include "utils/SearchableList.h"
+#include <string>
 
 namespace editor::render {
 
-    class Window;
+    class RenderObject;
 
     /**
      * @~english
@@ -33,7 +34,9 @@ namespace editor::render {
          *
          * @param window Ventana a añadir.
          */
-        static void addWindowToStack(Window* window);
+        static void addWindowToStack(RenderObject* window);
+
+        static void addWindowToStackFront(RenderObject* window);
 
         /**
          * @~english
@@ -46,7 +49,7 @@ namespace editor::render {
          *
          * @param window Ventana a eliminar.
          */
-        static void removeWindowFromStack(Window* window);
+        static void removeWindowFromStack(RenderObject* window);
 
         /**
          * @~english
@@ -73,7 +76,7 @@ namespace editor::render {
          * @return Ventana que tiene ese nombre, o, \c nullptr en caso de que no esté en la pila.
          */
          template <std::convertible_to<std::string> T>
-        static Window* getWindowByName(T&& name) {
+        static RenderObject* getWindowByName(T&& name) {
             return _getWindowByName(std::forward<T>(name));
         }
 
@@ -93,7 +96,7 @@ namespace editor::render {
          * @~spanish
          * @brief SearchableList que se va a usar como pila.
          */
-        static SearchableList<Window*> _windowStack;
+        static SearchableList<RenderObject*> _windowStack;
 
         /**
          * @~english
@@ -113,7 +116,7 @@ namespace editor::render {
          */
         ~WindowStack() = default;
 
-        static Window* _getWindowByName(const std::string& name);
+        static RenderObject* _getWindowByName(const std::string& name);
     };
 }
 

@@ -51,5 +51,8 @@ cmake-build-debug/*
 cmake-build-release/*
 .vs/*
 out/*
+CMakeFiles/*
+CMakeSettings.json
+CMakeCache.txt
 
 /projects/APK/build

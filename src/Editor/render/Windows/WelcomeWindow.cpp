@@ -12,7 +12,10 @@
 #include "common/Project.h"
 #include "utils/IconsFontAwesome6.h"
 #include "utils/tinyfiledialogs/tinyfiledialogs.h"
-#include <iostream>
+#include "render/Modals/RenameProjectModal.h"
+#include "render/Modals/DeleteProjectModal.h"
+#include "render/Modals/CreateProjectModal.h"
+#include "render/WindowStack.h"
 
 editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow") {
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
@@ -42,6 +45,34 @@ editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow"
     iconConfig.PixelSnapH = true;
     const ImWchar icons[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
     RenderManager::GetInstance().loadFont("FA 900", "settings/fonts/fa-solid-900.ttf", 48.0f, &iconConfig, icons);
+
+    createModals();
+}
+
+editor::render::windows::WelcomeWindow::~WelcomeWindow() noexcept {
+    for(auto _proj : _renameProjects) {
+        delete _proj.second;
+    }
+    _renameProjects.clear();
+    for(auto _proj : _deleteProjects) {
+        delete _proj.second;
+    }
+    _deleteProjects.clear();
+    delete _createProject;
+    _createProject = nullptr;
+}
+
+void editor::render::windows::WelcomeWindow::createModals() {
+    for (Project *pr: io::ProjectManager::GetInstance().getProjects()) {
+        if(!pr->isSetToDelete()) {
+            _renameProjects[pr] = new editor::render::modals::RenameProjectModal(pr);
+            WindowStack::addWindowToStack(_renameProjects[pr]);
+            _deleteProjects[pr] = new editor::render::modals::DeleteProjectModal(pr);
+            WindowStack::addWindowToStack(_deleteProjects[pr]);
+        }
+    }
+    _createProject = new editor::render::modals::CreateProjectModal();
+    WindowStack::addWindowToStack(_createProject);
 }
 
 void editor::render::windows::WelcomeWindow::beforeRender() {
@@ -157,7 +188,7 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
 
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
         if(ImGui::Button("##ButtonCreateProject", ImVec2(200, 150))) {
-            newProjectModal();
+            _showCreateProject = true;
         }
         ImVec2 buttonPos = ImGui::GetItemRectMin();
         ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
@@ -174,7 +205,7 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
         if(ImGui::Button("##ButtonOpenProject", ImVec2(200, 150))) {
             std::string route = searchProject();
-            if(route != "") io::ProjectManager::GetInstance().addProject(route);
+            if(!route.empty()) io::ProjectManager::GetInstance().addProject(route);
         }
         buttonPos = ImGui::GetItemRectMin();
         ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
@@ -244,7 +275,7 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(Project* project)
         if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.relocateproject").c_str())) {
             std::string route = searchProject();
             std::filesystem::path p(route);
-            if(route != "") project->updatePath(p.parent_path().string());
+            if(!route.empty()) project->updatePath(p.parent_path().string());
         }
         ImGui::EndDisabled();
         ImGui::BeginDisabled(!project->isFound());
@@ -263,59 +294,36 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(Project* project)
     }
 
     if(_showDeleteConfirmation) {
-        ImGui::OpenPopup((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.deleteproject.title") + " - " + projectName + "##" + projectRoute).c_str());
-        _showDeleteConfirmation = false;
+        _deleteProjects[project]->show();
+        if(_deleteProjects[project]->hasConfirmedDeletion()) {
+            delete _deleteProjects[project];
+            _deleteProjects.erase(project);
+            delete _renameProjects[project];
+            _renameProjects.erase(project);
+        }
+        if(!_deleteProjects[project]->isOpen()) _showDeleteConfirmation = false;
     }
     if(_showRenameProject) {
-        ImGui::OpenPopup((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.renameproject.title") + " - " + projectName + "##" + projectRoute).c_str());
-        _showRenameProject = false;
+        _renameProjects[project]->show();
+        if(!_renameProjects[project]->isOpen()) _showRenameProject = false;
+    }
+    if(_showCreateProject) {
+        _createProject->show();
+        if(!_createProject->isOpen()) _showCreateProject = false;
+
+    }
+
+    editor::Project* createdProj = _createProject->getCreatedProject();
+    if(createdProj != nullptr) {
+        io::ProjectManager::GetInstance().addProject(createdProj);
+        _renameProjects[createdProj] = new editor::render::modals::RenameProjectModal(createdProj);
+        WindowStack::addWindowToStack(_renameProjects[createdProj]);
+        _deleteProjects[createdProj] = new editor::render::modals::DeleteProjectModal(createdProj);
+        WindowStack::addWindowToStack(_deleteProjects[createdProj]);
     }
 
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
-
-    if (ImGui::BeginPopupModal((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.deleteproject.title") + " - " + projectName + "##" + projectRoute).c_str(), NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
-        ImGui::Text(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.deleteproject.confirmation").c_str());
-        ImGui::Separator();
-
-        if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.yes").c_str(), ImVec2(120, 0))) {
-            io::ProjectManager::GetInstance().removeProject(project);
-            ImGui::CloseCurrentPopup();
-        }
-        ImGui::SameLine();
-        if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.no").c_str(), ImVec2(120, 0))) {
-            ImGui::CloseCurrentPopup();
-        }
-
-        ImGui::EndPopup();
-    }
-
-    ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth() / 2, 150));
-    if (ImGui::BeginPopupModal((io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.renameproject.title") + " - " + projectName + "##" + projectRoute).c_str(), NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
-        if(!_isRenaming) strncpy(_nameBuffer, projectName.c_str(), sizeof(_nameBuffer) - 1);
-        _nameBuffer[sizeof(_nameBuffer) - 1] = '\0';
-        _isRenaming = true;
-
-        ImGui::InputText(("##Renaming" + projectRoute).c_str(), _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
-
-        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 30);
-        if (ImGui::IsKeyPressed(ImGuiKey_Enter) || ImGui::Button(io::LocalizationManager::GetInstance().getString("action.renameproject").c_str(), ImVec2(120, 0))) {
-            project->setName(std::string(_nameBuffer));
-            ImGui::CloseCurrentPopup();
-            _isRenaming = false;
-        }
-        ImGui::SameLine();
-        if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
-            ImGui::CloseCurrentPopup();
-            _isRenaming = false;
-        }
-
-        ImGui::EndPopup();
-    }
-}
-
-void editor::render::windows::WelcomeWindow::newProjectModal() {
-
 }
 
 std::string editor::render::windows::WelcomeWindow::searchProject() {

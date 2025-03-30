@@ -32,7 +32,9 @@ namespace editor::io {
             _addProject(std::forward<std::string>(route));
         }
 
-        void removeProject(Project* project);
+        void addProject(editor::Project* project);
+
+        void removeProject(editor::Project* project);
 
         ProjectManager(const ProjectManager &) = delete;
 

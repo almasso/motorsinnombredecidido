@@ -16,8 +16,10 @@ namespace editor {
     class Project {
     public:
         template<std::convertible_to<std::string> T>
-        Project(T&& name, T&& path) {
-
+        Project(T&& name, T&& path) : _name(std::forward<T>(name)), _projectPath(std::forward<T>(path)) {
+            _found = true;
+            updateLastModified();
+            saveProject();
         }
 
         template<std::convertible_to<std::string> T>
@@ -29,6 +31,12 @@ namespace editor {
         template <std::convertible_to<std::string> T>
         void setName(T&& name) {
             _name = std::forward<T>(name);
+        }
+
+        template <std::convertible_to<std::string> T>
+        void updateName(T&& name) {
+            setName(name);
+            updateLastModified();
             saveProject();
         }
 
