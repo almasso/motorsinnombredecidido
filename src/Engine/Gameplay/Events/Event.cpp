@@ -130,7 +130,7 @@ bool Event::update() {
 }
 
 void Event::RegisterToLua(sol::state& lua) {
-    sol::usertype type = lua.new_usertype<Event>("Event");
+    sol::usertype<Event> type = lua.new_usertype<Event>("Event");
     type["start"] = &Event::start;
     type["resume"] = &Event::resume;
     type["pause"] = &Event::pause;

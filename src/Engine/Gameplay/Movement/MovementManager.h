@@ -3,7 +3,7 @@
 #include <Core/ComponentTemplate.h>
 #include <Utils/Vector2.h>
 #include <unordered_set>
-#include <bits/stl_vector.h>
+#include <vector>
 
 
 class MovementManager : public ComponentTemplate<MovementManager, "MovementManager"> {

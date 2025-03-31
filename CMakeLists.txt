@@ -59,8 +59,6 @@ set(SDL3_INCLUDE_DIRS ${SDL3_SOURCE_DIR}/include)
 # Obtenemos también todas las librerías extra de SDL, en este caso, SDL_ttf y SDL_image
 # We also fetch all extra SDL libraries, in this case, SDL_ttf and SDL_image
 
-
-
 FetchContent_Declare(
         SDL3_ttf
         GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
@@ -97,7 +95,7 @@ FetchContent_MakeAvailable(lualib)
 FetchContent_Declare(
         sol2
         GIT_REPOSITORY https://github.com/ThePhD/sol2.git
-        GIT_TAG v3.3.0
+        GIT_TAG v3.5.0
 )
 FetchContent_MakeAvailable(sol2)
 set(SOL2_INCLUDE_DIRS ${sol2_SOURCE_DIR}/include)
