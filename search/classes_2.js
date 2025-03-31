@@ -8,11 +8,11 @@ var searchData=
   ['componentdata_5',['ComponentData',['../classComponentData.html',1,'']]],
   ['componentfactory_6',['ComponentFactory',['../classComponentFactory.html',1,'']]],
   ['componenttemplate_7',['ComponentTemplate',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22animator_22_2c_20spriterenderer_20_3e_8',['ComponentTemplate&lt;&quot;Animator&quot;, SpriteRenderer &gt;',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22audiosource_22_3e_9',['ComponentTemplate&lt;&quot;AudioSource&quot;&gt;',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22camera_22_2c_20rendercomponent_20_3e_10',['ComponentTemplate&lt;&quot;Camera&quot;, RenderComponent &gt;',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22collider_22_3e_11',['ComponentTemplate&lt;&quot;Collider&quot;&gt;',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22rectangle_22_2c_20rendercomponent_20_3e_12',['ComponentTemplate&lt;&quot;Rectangle&quot;, RenderComponent &gt;',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22spriterenderer_22_2c_20rendercomponent_20_3e_13',['ComponentTemplate&lt;&quot;SpriteRenderer&quot;, RenderComponent &gt;',['../classComponentTemplate.html',1,'']]],
-  ['componenttemplate_3c_22transform_22_3e_14',['ComponentTemplate&lt;&quot;Transform&quot;&gt;',['../classComponentTemplate.html',1,'']]]
+  ['componenttemplate_3c_20animator_2c_20_22animator_22_2c_20spriterenderer_20_3e_8',['ComponentTemplate&lt; Animator, &quot;Animator&quot;, SpriteRenderer &gt;',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_3c_20audiosource_2c_20_22audiosource_22_3e_9',['ComponentTemplate&lt; AudioSource, &quot;AudioSource&quot;&gt;',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_3c_20camera_2c_20_22camera_22_2c_20rendercomponent_20_3e_10',['ComponentTemplate&lt; Camera, &quot;Camera&quot;, RenderComponent &gt;',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_3c_20collider_2c_20_22collider_22_3e_11',['ComponentTemplate&lt; Collider, &quot;Collider&quot;&gt;',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_3c_20rectangle_2c_20_22rectangle_22_2c_20rendercomponent_20_3e_12',['ComponentTemplate&lt; Rectangle, &quot;Rectangle&quot;, RenderComponent &gt;',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_3c_20spriterenderer_2c_20_22spriterenderer_22_2c_20rendercomponent_20_3e_13',['ComponentTemplate&lt; SpriteRenderer, &quot;SpriteRenderer&quot;, RenderComponent &gt;',['../classComponentTemplate.html',1,'']]],
+  ['componenttemplate_3c_20transform_2c_20_22transform_22_3e_14',['ComponentTemplate&lt; Transform, &quot;Transform&quot;&gt;',['../classComponentTemplate.html',1,'']]]
 ];

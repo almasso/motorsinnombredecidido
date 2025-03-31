@@ -1,5 +1,5 @@
 var ComponentTemplate_8h =
 [
-    [ "ComponentTemplate< componentName, ComponentBase >", "classComponentTemplate.html", "classComponentTemplate" ],
+    [ "ComponentTemplate< NewComponent, componentName, ComponentBase >", "classComponentTemplate.html", "classComponentTemplate" ],
     [ "componentType", "conceptcomponentType.html", null ]
 ];

@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('classCollider.html',''); initResizable
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classCollider-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Collider Class Reference</div></div>
 </div><!--header-->
@@ -104,8 +105,8 @@ Inheritance diagram for Collider:</div>
  <div class="center">
   <img src="classCollider.png" usemap="#Collider_map" alt=""/>
   <map id="Collider_map" name="Collider_map">
-<area href="classComponentTemplate.html" alt="ComponentTemplate&lt;&quot;Collider&quot;&gt;" shape="rect" coords="0,56,193,80"/>
-<area href="classComponent.html" alt="Component" shape="rect" coords="0,0,193,24"/>
+<area href="classComponentTemplate.html" alt="ComponentTemplate&lt; Collider, &quot;Collider&quot;&gt;" shape="rect" coords="0,56,251,80"/>
+<area href="classComponent.html" alt="Component" shape="rect" coords="0,0,251,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -133,11 +134,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a788de32090d0ee109827025d3b89325c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#a788de32090d0ee109827025d3b89325c">getRect</a> () const</td></tr>
 <tr class="memdesc:a788de32090d0ee109827025d3b89325c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the dimensions of the collider with its entity's transform applied.  <br /></td></tr>
 <tr class="separator:a788de32090d0ee109827025d3b89325c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt;&quot;Collider&quot;&gt;</a></td></tr>
-<tr class="memitem:a260432a2c776b2e453dcd3990f826888 inherit pub_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a260432a2c776b2e453dcd3990f826888">ComponentTemplate</a> (<a class="el" href="classComponentData.html">ComponentData</a> const *data)</td></tr>
-<tr class="separator:a260432a2c776b2e453dcd3990f826888 inherit pub_methods_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9945ff0318cc867d5b9435d45e41b3a9 inherit pub_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a9945ff0318cc867d5b9435d45e41b3a9">getOrder</a> () const override</td></tr>
-<tr class="separator:a9945ff0318cc867d5b9435d45e41b3a9 inherit pub_methods_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt; Collider, &quot;Collider&quot;&gt;</a></td></tr>
+<tr class="memitem:acb7f01d1a9d076512ac4408e00be09a3 inherit pub_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#acb7f01d1a9d076512ac4408e00be09a3">ComponentTemplate</a> (<a class="el" href="classComponentData.html">ComponentData</a> const *data)</td></tr>
+<tr class="separator:acb7f01d1a9d076512ac4408e00be09a3 inherit pub_methods_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedae6c426cb8ba70810c0a43761eb22 inherit pub_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#adedae6c426cb8ba70810c0a43761eb22">getOrder</a> () const override</td></tr>
+<tr class="separator:adedae6c426cb8ba70810c0a43761eb22 inherit pub_methods_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classComponent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classComponent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
 <tr class="memitem:a9e7cd63d19f47124d6333423d7443579 inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#a9e7cd63d19f47124d6333423d7443579">Component</a> (<a class="el" href="classComponentData.html">ComponentData</a> const *data)</td></tr>
 <tr class="separator:a9e7cd63d19f47124d6333423d7443579 inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,13 +167,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae79aaae49da26f38adfc0458c445a9ee inherit pub_methods_classComponent"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#ae79aaae49da26f38adfc0458c445a9ee">initEnable</a> ()</td></tr>
 <tr class="separator:ae79aaae49da26f38adfc0458c445a9ee inherit pub_methods_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a1e7b8910dd1b231bea4cdf8ebb4f6411"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html#a1e7b8910dd1b231bea4cdf8ebb4f6411">RegisterToLua</a> (sol::state &amp;luaState)</td></tr>
+<tr class="separator:a1e7b8910dd1b231bea4cdf8ebb4f6411"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt; Collider, &quot;Collider&quot;&gt;</a></td></tr>
+<tr class="memitem:ad4d88f389aa6b3ddba49a7ad15978dac inherit pub_static_methods_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classCollider.html">Collider</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#ad4d88f389aa6b3ddba49a7ad15978dac">get</a> (<a class="el" href="classEntity.html">Entity</a> *entity)</td></tr>
+<tr class="separator:ad4d88f389aa6b3ddba49a7ad15978dac inherit pub_static_methods_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_attribs_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt;&quot;Collider&quot;&gt;</a></td></tr>
-<tr class="memitem:a2fe08e960beac12119356f91e5c95f71 inherit pub_static_attribs_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a2fe08e960beac12119356f91e5c95f71">order</a></td></tr>
-<tr class="separator:a2fe08e960beac12119356f91e5c95f71 inherit pub_static_attribs_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5feffe0e03527753c74228d8521c489 inherit pub_static_attribs_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#ac5feffe0e03527753c74228d8521c489">id</a></td></tr>
-<tr class="separator:ac5feffe0e03527753c74228d8521c489 inherit pub_static_attribs_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_classComponentTemplate"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classComponentTemplate')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classComponentTemplate.html">ComponentTemplate&lt; Collider, &quot;Collider&quot;&gt;</a></td></tr>
+<tr class="memitem:af9eb2875386ede8f32dc99db41527706 inherit pub_static_attribs_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#af9eb2875386ede8f32dc99db41527706">order</a></td></tr>
+<tr class="separator:af9eb2875386ede8f32dc99db41527706 inherit pub_static_attribs_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45cfe81b1b00e48e95187461461e7571 inherit pub_static_attribs_classComponentTemplate"><td class="memItemLeft" align="right" valign="top">static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponentTemplate.html#a45cfe81b1b00e48e95187461461e7571">id</a></td></tr>
+<tr class="separator:a45cfe81b1b00e48e95187461461e7571 inherit pub_static_attribs_classComponentTemplate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classComponent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classComponent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
 <tr class="memitem:abece985590c7196141a2fe29d9303c65 inherit pro_attribs_classComponent"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComponent.html#abece985590c7196141a2fe29d9303c65">_enabled</a></td></tr>
 <tr class="separator:abece985590c7196141a2fe29d9303c65 inherit pro_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -417,6 +426,32 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classComponent.html#a2f6355bc0588301fed0d486511845a14">Component</a>.</p>
+
+</div>
+</div>
+<a id="a1e7b8910dd1b231bea4cdf8ebb4f6411" name="a1e7b8910dd1b231bea4cdf8ebb4f6411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e7b8910dd1b231bea4cdf8ebb4f6411">&#9670;&#160;</a></span>RegisterToLua()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Collider::RegisterToLua </td>
+          <td>(</td>
+          <td class="paramtype">sol::state &amp;&#160;</td>
+          <td class="paramname"><em>luaState</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

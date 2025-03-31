@@ -11,29 +11,29 @@ var hierarchy =
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
-      [ "ComponentTemplate<\"AudioSource\">", "classComponentTemplate.html", [
+      [ "ComponentTemplate< AudioSource, \"AudioSource\">", "classComponentTemplate.html", [
         [ "AudioSource", "classAudioSource.html", null ]
       ] ],
-      [ "ComponentTemplate<\"Collider\">", "classComponentTemplate.html", [
+      [ "ComponentTemplate< Collider, \"Collider\">", "classComponentTemplate.html", [
         [ "Collider", "classCollider.html", null ]
       ] ],
-      [ "ComponentTemplate<\"Transform\">", "classComponentTemplate.html", [
+      [ "ComponentTemplate< Transform, \"Transform\">", "classComponentTemplate.html", [
         [ "Transform", "classTransform.html", null ]
       ] ],
-      [ "ComponentTemplate< componentName, ComponentBase >", "classComponentTemplate.html", null ],
+      [ "ComponentTemplate< NewComponent, componentName, ComponentBase >", "classComponentTemplate.html", null ],
       [ "RenderComponent", "classRenderComponent.html", null ]
     ] ],
     [ "ComponentBase", null, [
-      [ "ComponentTemplate<\"Animator\", SpriteRenderer >", "classComponentTemplate.html", [
+      [ "ComponentTemplate< Animator, \"Animator\", SpriteRenderer >", "classComponentTemplate.html", [
         [ "Animator", "classAnimator.html", null ]
       ] ],
-      [ "ComponentTemplate<\"Camera\", RenderComponent >", "classComponentTemplate.html", [
+      [ "ComponentTemplate< Camera, \"Camera\", RenderComponent >", "classComponentTemplate.html", [
         [ "Camera", "classCamera.html", null ]
       ] ],
-      [ "ComponentTemplate<\"Rectangle\", RenderComponent >", "classComponentTemplate.html", [
+      [ "ComponentTemplate< Rectangle, \"Rectangle\", RenderComponent >", "classComponentTemplate.html", [
         [ "Rectangle", "classRectangle.html", null ]
       ] ],
-      [ "ComponentTemplate<\"SpriteRenderer\", RenderComponent >", "classComponentTemplate.html", [
+      [ "ComponentTemplate< SpriteRenderer, \"SpriteRenderer\", RenderComponent >", "classComponentTemplate.html", [
         [ "SpriteRenderer", "classSpriteRenderer.html", null ]
       ] ]
     ] ],
