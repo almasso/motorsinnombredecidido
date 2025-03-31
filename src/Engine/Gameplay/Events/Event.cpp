@@ -1,6 +1,7 @@
 #include "Event.h"
 
 #include <Load/LuaReader.h>
+#include <Utils/RPGError.h>
 
 #include "EventBehaviour.h"
 #include "EventCondition.h"
@@ -11,13 +12,18 @@ bool Event::initCondition(sol::table const& event) {
     if (!condition.valid())
         return false;
     _condition = EventConditionFactory::Create(condition);
-    return _condition != nullptr;
+    if (!_condition)
+        return false;
+    _condition->setContext(_scene, _entity, this);
+    return true;
 }
 
 bool Event::insertBehaviour(sol::table const& behaviour) {
     auto eventBehaviour = EventBehaviour::Create(_game, _scene, _entity, this, behaviour);
-    if (!eventBehaviour)
+    if (!eventBehaviour) {
+        RPGError::ShowError("Failed creating EventBehaviour", "Something went wrong when trying to create an EventBehaviour");
         return false;
+    }
     _behaviours.push_back(eventBehaviour);
     return true;
 }

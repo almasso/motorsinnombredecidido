@@ -11,7 +11,7 @@ function EventBehaviour:new()
     return obj;
 end
 
-function EventBehaviour:init(entity)
+function EventBehaviour:init(scene, entity, event)
     return true;
 end
 

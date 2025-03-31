@@ -9,7 +9,7 @@ function Move:new(x, y)
     return obj;
 end
 
-function Move:init(entity)
+function Move:init(scene, entity, event)
     self._transform = Transform.get(entity);
     self._moveComponent = MovementComponent.get(entity);
     return (not (self._transform == nil)) and (not (self._moveComponent == nil));

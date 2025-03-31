@@ -31,7 +31,7 @@ bool EventBehaviour::init(sol::table const& behaviour) {
     auto init = LuaReader::GetFunction(behaviour, "init");
     if (!init.valid())
         return false;
-    if (!init(_self, _entity))
+    if (!init(_self, _scene, _entity, _event))
         return false;
 
     return true;

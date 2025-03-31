@@ -13,7 +13,7 @@ private:
     static std::unordered_map<std::string, std::function<EventCondition*()>> _factory;
 
     template <typename Condition>
-    static void RegisterFunction() {
+    static void RegisterCondition() {
         _factory.insert({Condition::id, [](){
             return new Condition();
         }});
@@ -26,6 +26,8 @@ private:
 public:
     EventConditionFactory() = delete;
     static EventCondition* Create(sol::table const& condition);
+
+    static void RegisterToLua(sol::state& luaState);
 };
 
 

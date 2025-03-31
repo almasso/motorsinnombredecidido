@@ -1,4 +1,5 @@
 local Move = require('assets.events.MoveBehaviour');
+local WaitFor = require('assets.events.WaitForBehaviour');
 
 return {
     manager = {
@@ -44,6 +45,7 @@ return {
                             }
                         },
                         behaviours = {
+                            WaitFor:new({type = "TimePassed", params = { seconds = 0.5 }}),
                             Move:new(0, 200)
                         }
                     }

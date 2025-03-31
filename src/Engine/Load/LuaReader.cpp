@@ -7,6 +7,8 @@
 #include <Core/Scene.h>
 #include <Gameplay/Events/Event.h>
 #include <Gameplay/Events/EventBehaviour.h>
+#include <Gameplay/Events/EventCondition.h>
+#include <Gameplay/Events/EventConditionFactory.h>
 #include <Gameplay/Events/EventHandler.h>
 #include <Gameplay/Movement/MovementComponent.h>
 #include <Render/Animator.h>
@@ -18,6 +20,8 @@ void LuaReader::registerUserTypes() {
     Vector2::RegisterToLua(_lua);
 
     EventBehaviour::RegisterToLua(_lua);
+    EventCondition::RegisterToLua(_lua);
+    EventConditionFactory::RegisterToLua(_lua);
     Event::RegisterToLua(_lua);
     EventHandler::RegisterToLua(_lua);
 
