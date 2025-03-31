@@ -14,7 +14,7 @@ bool editor::io::InputManager::Init() {
     editorAssert(_instance == nullptr, "Input manager singleton instance is already initialized")
     _instance = std::unique_ptr<InputManager>(new InputManager());
     if(!_instance->init()) {
-        _instance.reset(nullptr);
+        Destroy();
         return false;
     }
     return true;
@@ -22,7 +22,7 @@ bool editor::io::InputManager::Init() {
 
 bool editor::io::InputManager::init() {
     if(!SDL_InitSubSystem(SDL_INIT_GAMEPAD)) {
-        SDL_GetError();
+        showError(SDL_GetError())
         return false;
     }
     ImGuiIO& io = ImGui::GetIO();
@@ -32,6 +32,10 @@ bool editor::io::InputManager::init() {
     return true;
 }
 
+void editor::io::InputManager::Destroy() {
+    _instance.reset(nullptr);
+}
+
 editor::io::InputManager &editor::io::InputManager::GetInstance() {
     editorAssert(_instance != nullptr, "Input manager singleton instance is not initialized")
     return *_instance;
@@ -39,15 +43,15 @@ editor::io::InputManager &editor::io::InputManager::GetInstance() {
 
 editor::io::InputManager::~InputManager() {
     SDL_QuitSubSystem(SDL_INIT_GAMEPAD);
-    SDL_Quit();
 }
 
 void editor::io::InputManager::handleInput() {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
-        ImGui_ImplSDL3_ProcessEvent(&event);
-        if(event.type == SDL_EVENT_QUIT)
-            _quitSignal = true;
+        if(!ImGui_ImplSDL3_ProcessEvent(&event)) {
+            if(event.type == SDL_EVENT_QUIT)
+                _quitSignal = true;
+        }
     }
 }
 

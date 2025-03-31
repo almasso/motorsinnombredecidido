@@ -11,6 +11,8 @@
 #include <cstdlib>
 
 #define editorAssert(condition, message) editor::EditorError::assert_impl(condition, message, __FILE__, __LINE__);
+#define showError(message) editor::EditorError::showError_impl(message, __FILE__, __LINE__);
+#define showWarning(message) editor::EditorError::showWarning_impl(message, __FILE__, __LINE__);
 /**
  * @~english
  * @brief Class that will contain all Editor possible errors, and methods to show them to the programmer or user
@@ -29,7 +31,7 @@ namespace editor {
                 std::string lineStr = std::to_string(line);
                 std::string title = "Assert triggered";
                 std::string msg = "Assert triggered at " + filename + ":" + lineStr + ":\n";
-                msg += std::forward<std::string>(message);
+                msg += std::forward<T>(message);
                 tinyfd_messageBox(
                         title.c_str(),
                         msg.c_str(),
@@ -43,8 +45,35 @@ namespace editor {
         }
 
         template <std::convertible_to<std::string> T>
-        static void showError(T&& message) {
+        static void showError_impl(T&& message, const char* file, int line) {
+            std::string filename = file;
+            std::string lineStr = std::to_string(line);
+            std::string title = "Error detected";
+            std::string msg = "Error detected at " + filename + ":" + lineStr + ":\n";
+            msg += std::forward<T>(message);
+            tinyfd_messageBox(
+                    title.c_str(),
+                    msg.c_str(),
+                    "ok",
+                    "error",
+                    0
+                    );
+        }
 
+        template <std::convertible_to<std::string> T>
+        static void showWarning_impl(T&& message, const char* file, int line) {
+            std::string filename = file;
+            std::string lineStr = std::to_string(line);
+            std::string title = "Warning!";
+            std::string msg = "Warning at " + filename + ":" + lineStr + ":\n";
+            msg += std::forward<T>(message);
+            tinyfd_messageBox(
+                    title.c_str(),
+                    msg.c_str(),
+                    "ok",
+                    "warning",
+                    0
+            );
         }
     };
 }

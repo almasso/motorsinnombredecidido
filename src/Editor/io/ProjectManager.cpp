@@ -16,7 +16,7 @@ bool editor::io::ProjectManager::Init() {
     editorAssert(_instance == nullptr, "Project manager singleton instance is already initialized")
     _instance = std::unique_ptr<ProjectManager>(new ProjectManager());
     if(!_instance->init()) {
-        _instance.reset(nullptr);
+        Destroy();
         return false;
     }
     return true;
@@ -25,7 +25,10 @@ bool editor::io::ProjectManager::Init() {
 bool editor::io::ProjectManager::init() {
     _projectsPath = "/settings/projects/projects.lua";
     _currentDirectory = SDL_GetCurrentDirectory();
-    if(_currentDirectory == nullptr) return false;
+    if(_currentDirectory == nullptr) {
+        showError(SDL_GetError())
+        return false;
+    }
 
     loadProjects();
     return true;
@@ -47,6 +50,10 @@ void editor::io::ProjectManager::loadProjects() {
             }
         }
     }
+}
+
+void editor::io::ProjectManager::Destroy() {
+    _instance.reset(nullptr);
 }
 
 editor::io::ProjectManager &editor::io::ProjectManager::GetInstance() {

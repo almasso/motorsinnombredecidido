@@ -19,6 +19,8 @@ namespace editor::io {
     public:
         static bool Init();
 
+        static void Destroy();
+
         static ProjectManager& GetInstance();
 
         static void Dump();

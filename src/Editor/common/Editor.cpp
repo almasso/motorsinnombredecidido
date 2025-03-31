@@ -13,6 +13,7 @@
 #include "render/WindowStack.h"
 #include "io/PreferencesManager.h"
 #include "EditorError.h"
+#include <SDL3/SDL.h>
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
@@ -27,11 +28,11 @@ bool editor::Editor::Init() {
 }
 
 bool editor::Editor::init() {
-    if(!render::RenderManager::Init(1210, 700)) return false;
-    if(!io::InputManager::Init()) return false;
     if(!io::LuaManager::Init()) return false;
     if(!io::PreferencesManager::Init()) return false;
     if(!io::LocalizationManager::Init()) return false;
+    if(!render::RenderManager::Init(1210, 700)) return false;
+    if(!io::InputManager::Init()) return false;
     if(!io::ProjectManager::Init()) return false;
 
     return true;
@@ -45,14 +46,24 @@ editor::Editor& editor::Editor::GetInstance() {
 editor::Editor::~Editor() {
     io::ProjectManager::Dump();
     io::PreferencesManager::Dump();
+
+    io::ProjectManager::Destroy();
+    io::InputManager::Destroy();
+    render::RenderManager::Destroy();
+    io::LocalizationManager::Destroy();
+    io::PreferencesManager::Destroy();
+    io::LuaManager::Destroy();
+
+    SDL_Quit();
 }
 
 void editor::Editor::mainLoop() {
     auto* ww = new render::windows::WelcomeWindow();
+    bool noError = true;
     render::WindowStack::addWindowToStackFront(ww);
-    while(!io::InputManager::GetInstance().quit()) {
+    while(!io::InputManager::GetInstance().quit() && noError) {
         io::InputManager::GetInstance().handleInput();
-        render::RenderManager::GetInstance().render();
+        noError = render::RenderManager::GetInstance().render();
     }
     delete ww;
 }

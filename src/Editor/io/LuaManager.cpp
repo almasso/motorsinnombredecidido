@@ -15,7 +15,7 @@ bool editor::io::LuaManager::Init() {
     editorAssert(_instance == nullptr, "Lua manager singleton instance is already initialized")
     _instance = std::unique_ptr<LuaManager>(new LuaManager());
     if(!_instance->init()) {
-        _instance.reset(nullptr);
+        Destroy();
         return false;
     }
     return true;
@@ -23,11 +23,23 @@ bool editor::io::LuaManager::Init() {
 
 bool editor::io::LuaManager::init() {
     _state = std::make_unique<sol::state>();
-    if(!_state) return false;
+    if(!_state) {
+        showError("Couldn't create a sol2 state")
+        return false;
+    }
+
     _currentDirectory = SDL_GetCurrentDirectory();
+    if(_currentDirectory == nullptr) {
+        showError(SDL_GetError())
+        return false;
+    }
 
     _state->open_libraries(sol::lib::base, sol::lib::package, sol::lib::math, sol::lib::table, sol::lib::string, sol::lib::io);
     return true;
+}
+
+void editor::io::LuaManager::Destroy() {
+    _instance.reset(nullptr);
 }
 
 editor::io::LuaManager &editor::io::LuaManager::GetInstance() {
@@ -47,19 +59,35 @@ sol::state& editor::io::LuaManager::getState() const {
 
 sol::table editor::io::LuaManager::_getTable(const std::string &filename) {
     sol::load_result res = _state->load_file(filename);
-    if(!res.valid()) return nullptr;
+    if(!res.valid()) {
+        showWarning("Loaded file " + filename + " was not valid")
+        return sol::lua_nil;
+    }
     sol::protected_function_result res2 = res();
-    if(!res2.valid()) return nullptr;
+    if(!res2.valid()) {
+        showWarning("Loaded file " + filename + " was not valid")
+        return sol::lua_nil;
+    }
     sol::table table = res2.get<sol::table>();
-    if(!table.valid()) return nullptr;
+    if(!table.valid()) {
+        showWarning("Couldn't create a sol table from " + filename)
+        return sol::lua_nil;
+    }
     return table;
 }
 
 sol::table editor::io::LuaManager::_getTableFromScript(const std::string &filename) {
     sol::protected_function_result res2 = _state->script_file(filename);
-    if(!res2.valid()) return nullptr;
+    if(!res2.valid()) {
+        sol::error err = res2;
+        showWarning(err.what())
+        return sol::lua_nil;
+    }
     sol::table table = res2.get<sol::table>();
-    if(!table.valid()) return nullptr;
+    if(!table.valid()) {
+        showWarning("Couldn't create a sol table from " + filename)
+        return sol::lua_nil;
+    }
     return table;
 }
 
@@ -69,17 +97,30 @@ void editor::io::LuaManager::_writeToFile(const sol::table &table, const std::st
     if(!std::filesystem::exists(filename)) std::filesystem::create_directories(std::filesystem::path(filename).parent_path());
     std::ofstream file(filename);
 
-    if(serpent.valid()) {
-        auto block = serpent["block"];
-        if(block.valid()) {
-            auto result = block(table);
-            if(result.valid()) {
-                std::string serializedData = result.get<std::string>();
-                if(file.is_open()) {
-                    file << "return " << serializedData;
-                    file.close();
-                }
-            }
-        }
+    if(!serpent.valid()) {
+        showError("Couldn't load file serializer")
+        return;
     }
+
+    auto block = serpent["block"];
+    if(!block.valid()) {
+        sol::error err = block;
+        showError(err.what())
+        return;
+    }
+
+    auto result = block(table);
+    if(!result.valid()) {
+        sol::error err = result;
+        showError(err.what())
+        return;
+    }
+
+    std::string serializedData = result.get<std::string>();
+    if(!file.is_open()) {
+        showError("Couldn't open file: " + filename)
+        return;
+    }
+    file << "return " << serializedData;
+    file.close();
 }

@@ -15,6 +15,8 @@ namespace editor::io {
     public:
         static bool Init();
 
+        static void Destroy();
+
         static LuaManager& GetInstance();
 
         template <std::convertible_to<std::string> T>

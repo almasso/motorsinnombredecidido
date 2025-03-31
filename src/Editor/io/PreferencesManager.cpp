@@ -4,17 +4,17 @@
 //
 
 #include "PreferencesManager.h"
-#include <cassert>
+#include "common/EditorError.h"
 #include <SDL3/SDL_filesystem.h>
 #include "LuaManager.h"
 
 std::unique_ptr<editor::io::PreferencesManager> editor::io::PreferencesManager::_instance = nullptr;
 
 bool editor::io::PreferencesManager::Init() {
-    assert(_instance == nullptr && "Preferences manager singleton instance is already initialized || La instancia del singleton del gestor de preferencias ya está inicializada");
+    editorAssert(_instance == nullptr, "Preferences manager singleton instance is already initialized")
     _instance = std::unique_ptr<PreferencesManager>(new PreferencesManager());
     if(!_instance->init()) {
-        _instance.reset(nullptr);
+        Destroy();
         return false;
     }
     return true;
@@ -23,8 +23,10 @@ bool editor::io::PreferencesManager::Init() {
 bool editor::io::PreferencesManager::init() {
     _preferencesPath = "/settings/preferences/userpreferences.lua";
     _currentDirectory = SDL_GetCurrentDirectory();
-    if(_currentDirectory == nullptr) return false;
-
+    if(_currentDirectory == nullptr) {
+        showError(SDL_GetError())
+        return false;
+    }
     loadPreferences();
     return true;
 }
@@ -36,8 +38,12 @@ void editor::io::PreferencesManager::loadPreferences() {
     }
 }
 
+void editor::io::PreferencesManager::Destroy() {
+    _instance.reset(nullptr);
+}
+
 editor::io::PreferencesManager &editor::io::PreferencesManager::GetInstance() {
-    assert(_instance != nullptr);
+    editorAssert(_instance != nullptr, "Preferences manager singleton instance is not initialized")
     return *_instance;
 }
 

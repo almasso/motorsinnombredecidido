@@ -17,7 +17,7 @@ bool editor::render::RenderManager::Init(uint32_t width, uint32_t height) {
     editorAssert(_instance == nullptr, "Render manager singleton instance is already initialized")
     _instance = std::unique_ptr<RenderManager>(new RenderManager());
     if(!_instance->init(width, height)) {
-        _instance.reset(nullptr);
+        Destroy();
         return false;
     }
     return true;
@@ -37,19 +37,19 @@ bool editor::render::RenderManager::init(uint32_t width, uint32_t height) {
 
 bool editor::render::RenderManager::initSDL() {
     if(!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
-        SDL_GetError();
+        showError(SDL_GetError())
         return false;
     }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::SDL_INIT_CORRECT;
     _window = SDL_CreateWindow("", _width, _height, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
     if(_window == nullptr) {
-        SDL_GetError();
+        showError(SDL_GetError())
         return false;
     }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::SDL_WINDOW_CREATED;
     _renderer = SDL_CreateRenderer(_window, nullptr);
     if(_renderer == nullptr) {
-        SDL_GetError();
+        showError(SDL_GetError())
         return false;
     }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::SDL_RENDERER_CREATED;
@@ -61,15 +61,21 @@ bool editor::render::RenderManager::initSDL() {
 bool editor::render::RenderManager::initDearImGui() {
     IMGUI_CHECKVERSION();
     _context = ImGui::CreateContext();
-    if(_context == nullptr)
+    if(_context == nullptr) {
+        showError("Couldn't create DearImGui context")
         return false;
+    }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_CONTEXT_CREATED;
     ImGui::StyleColorsClassic();
-    if(!ImGui_ImplSDL3_InitForSDLRenderer(_window, _renderer))
+    if(!ImGui_ImplSDL3_InitForSDLRenderer(_window, _renderer)) {
+        showError("Couldn't initialize SDL3 for DearImGui")
         return false;
+    }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_SDL3_INIT_CORRECT;
-    if(!ImGui_ImplSDLRenderer3_Init(_renderer))
+    if(!ImGui_ImplSDLRenderer3_Init(_renderer)) {
+        showError("Couldn't initialize SDL3 renderer for DearImGui")
         return false;
+    }
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_SDLRENDERER3_INIT_CORRECT;
 
     _io = &ImGui::GetIO();
@@ -78,6 +84,10 @@ bool editor::render::RenderManager::initDearImGui() {
     style.AntiAliasedLines = true;
     style.AntiAliasedFill = true;
     return true;
+}
+
+void editor::render::RenderManager::Destroy() {
+    _instance.reset(nullptr);
 }
 
 editor::render::RenderManager &editor::render::RenderManager::GetInstance() {
@@ -110,27 +120,48 @@ editor::render::RenderManager::~RenderManager() {
     _initializationSteps = 0;
 }
 
-void editor::render::RenderManager::render() {
-    SDL_SetWindowSize(_window, _width, _height);
+bool editor::render::RenderManager::render() {
+    if(!SDL_SetWindowSize(_window, _width, _height)) {
+        showError(SDL_GetError())
+        return false;
+    }
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
     WindowStack::renderWindows();
     ImGui::Render();
-    SDL_SetRenderDrawColorFloat(_renderer, 0.45f, 0.55f, 0.60f, 1.00f);
-    SDL_RenderClear(_renderer);
+    if(!SDL_SetRenderDrawColorFloat(_renderer, 0.45f, 0.55f, 0.60f, 1.00f)) {
+        showError(SDL_GetError())
+        return false;
+    }
+    if(!SDL_RenderClear(_renderer)) {
+        showError(SDL_GetError())
+        return false;
+    }
     ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), _renderer);
-    SDL_RenderPresent(_renderer);
+    if(!SDL_RenderPresent(_renderer)) {
+        showError(SDL_GetError())
+        return false;
+    }
+    return true;
 }
 
 void editor::render::RenderManager::_loadFont(const std::string& name, const std::filesystem::path &file, float size, const ImFontConfig* config, const ImWchar* ranges) {
     if(ranges == nullptr) ranges = _io->Fonts->GetGlyphRangesDefault();
     _fonts[name] = _io->Fonts->AddFontFromFileTTF(file.string().c_str(), size, config, ranges);
-    _io->Fonts->Build();
+    if(_fonts[name] == nullptr) {
+        showWarning("Failed to load font: " + file.string())
+        return;
+    }
+    if(!_io->Fonts->Build()) {
+        showWarning("Failed to build font: " + file.string())
+    }
 }
 
 void editor::render::RenderManager::_setWindowName(const std::string &name) {
-    SDL_SetWindowTitle(_window, name.c_str());
+    if(!SDL_SetWindowTitle(_window, name.c_str())) {
+        showError(SDL_GetError())
+    }
 }
 
 void editor::render::RenderManager::setDefaultFont(ImFont *font) {

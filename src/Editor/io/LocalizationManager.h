@@ -21,6 +21,8 @@ namespace editor::io {
 
         static bool Init();
 
+        static void Destroy();
+
         static LocalizationManager &GetInstance();
 
         template <std::convertible_to<std::string> T>

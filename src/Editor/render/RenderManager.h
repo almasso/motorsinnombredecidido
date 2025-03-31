@@ -56,6 +56,8 @@ namespace editor::render {
          */
         static bool Init(uint32_t width, uint32_t height);
 
+        static void Destroy();
+
         static RenderManager& GetInstance();
 
         /**
@@ -71,7 +73,7 @@ namespace editor::render {
          * \a Renderiza todas las ventanas, de abajo hacia arriba, haciendo las llamadas apropiadas a la API de \a renderizado de DearImGui
          * y de SDL, vacía el \a buffer de \a renderizado, y posteriormente lo presenta.
          */
-        void render();
+        bool render();
 
         /**
          * @~english

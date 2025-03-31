@@ -17,6 +17,8 @@ namespace editor::io {
     public:
         static bool Init();
 
+        static void Destroy();
+
         static PreferencesManager& GetInstance();
 
         template <std::convertible_to<std::string> T, typename Value>

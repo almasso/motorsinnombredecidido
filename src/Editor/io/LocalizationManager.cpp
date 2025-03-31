@@ -17,7 +17,7 @@ bool editor::io::LocalizationManager::Init() {
     editorAssert(_instance == nullptr, "Resource manager singleton instance is already initialized")
     _instance = std::unique_ptr<LocalizationManager>(new LocalizationManager());
     if(!_instance->init()) {
-        _instance.reset(nullptr);
+        Destroy();
         return false;
     }
     return true;
@@ -25,9 +25,15 @@ bool editor::io::LocalizationManager::Init() {
 
 bool editor::io::LocalizationManager::init() {
     _locales = SDL_GetPreferredLocales(&_totalUserLocales);
-    if(_locales == nullptr) return false;
+    if(_locales == nullptr) {
+        showError(SDL_GetError());
+        return false;
+    }
     _currentDirectory = SDL_GetCurrentDirectory();
-    if(_currentDirectory == nullptr) return false;
+    if(_currentDirectory == nullptr) {
+        showError(SDL_GetError())
+        return false;
+    }
     _preferredLocale = std::string(_locales[0]->language) + "_" + std::string(_locales[0]->country);
     auto locale = PreferencesManager::GetInstance().getPreference<std::string>("preferredLocale");
     if(locale.has_value()) {
@@ -86,6 +92,10 @@ void editor::io::LocalizationManager::countLocales() {
             _languagesDetected.insert(file.path().stem().string());
         }
     }
+}
+
+void editor::io::LocalizationManager::Destroy() {
+    _instance.reset(nullptr);
 }
 
 editor::io::LocalizationManager &editor::io::LocalizationManager::GetInstance() {
