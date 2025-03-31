@@ -11,7 +11,6 @@ class Component;
 class Entity {
 private:
     std::map<int, Component*> _components;
-    std::map<std::string, Component*> _componentIds;
     std::unordered_set<Entity*> _children;
     Entity* _parent;
     bool _active;
@@ -30,8 +29,7 @@ public:
     void setParent(Entity* parent);
     Entity* getParent() const;
 
-    bool addComponent(Component *component, const std::string& id);
-    Component* getComponent(const std::string& componentID);
+    bool addComponent(Component *component);
 
     template<class ComponentType>
     ComponentType* getComponent() {
