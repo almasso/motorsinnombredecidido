@@ -84,11 +84,16 @@ const SearchableList<editor::Project*>& editor::io::ProjectManager::getProjects(
     return _projects;
 }
 
-void editor::io::ProjectManager::_addProject(const std::string &route) {
+editor::Project* editor::io::ProjectManager::_addProject(const std::string &route) {
     deleteOldProjects();
+    editor::Project* proj = nullptr;
     std::filesystem::path p(route);
-    if(!projectAlreadyIncluded(p.parent_path().string())) _projects.push_back(new Project(p.parent_path().string()));
+    if(!projectAlreadyIncluded(p.parent_path().string())) {
+        proj = new Project(p.parent_path().string());
+        _projects.push_back(proj);
+    }
     saveProjects();
+    return proj;
 }
 
 void editor::io::ProjectManager::addProject(editor::Project *project) {

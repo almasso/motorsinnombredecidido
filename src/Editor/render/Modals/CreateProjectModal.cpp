@@ -44,7 +44,8 @@ void editor::render::modals::CreateProjectModal::onRender() {
                 io::LocalizationManager::GetInstance().getString("action.selectprojectfolder").c_str(),
                 "");
         if(route != nullptr) {
-            std::string fR = std::string(route) + "\\";
+            std::string fR = std::string(route) + std::filesystem::path::preferred_separator;
+            fR = std::filesystem::path(fR).lexically_normal().string();
             strncpy(_routeBuffer, fR.c_str(), sizeof(_routeBuffer) - 1);
             _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
         }

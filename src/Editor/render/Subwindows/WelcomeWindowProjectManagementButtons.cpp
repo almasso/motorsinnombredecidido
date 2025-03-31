@@ -48,7 +48,15 @@ void editor::render::subwindows::WelcomeWindowProjectManagementButtons::onRender
     ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
     if(ImGui::Button("##ButtonOpenProject", ImVec2(200, 150))) {
         std::string route = searchProject();
-        if(!route.empty()) io::ProjectManager::GetInstance().addProject(route);
+        if(!route.empty()) {
+            editor::Project* addedProj = io::ProjectManager::GetInstance().addProject(route);
+            if(addedProj != nullptr) {
+                _renameProjects[addedProj] = new editor::render::modals::RenameProjectModal(addedProj);
+                WindowStack::addWindowToStack(_renameProjects[addedProj]);
+                _deleteProjects[addedProj] = new editor::render::modals::DeleteProjectModal(addedProj);
+                WindowStack::addWindowToStack(_deleteProjects[addedProj]);
+            }
+        }
     }
     buttonPos = ImGui::GetItemRectMin();
     ImGui::SetCursorScreenPos(ImVec2(buttonPos.x + 10, buttonPos.y - 20));
@@ -63,7 +71,6 @@ void editor::render::subwindows::WelcomeWindowProjectManagementButtons::onRender
     if(_showCreateProject) {
         _createProject->show();
         if(!_createProject->isOpen()) _showCreateProject = false;
-
     }
 
     editor::Project* createdProj = _createProject->getCreatedProject();

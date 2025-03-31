@@ -135,8 +135,10 @@ void editor::render::subwindows::WelcomeWindowRightPanel::drawProjectButton(edit
     if(_showDeleteConfirmation) {
         _deleteProjects[project]->show();
         if(_deleteProjects[project]->hasConfirmedDeletion()) {
+            WindowStack::removeWindowFromStack(_deleteProjects[project]);
             delete _deleteProjects[project];
             _deleteProjects.erase(project);
+            WindowStack::removeWindowFromStack(_renameProjects[project]);
             delete _renameProjects[project];
             _renameProjects.erase(project);
         }

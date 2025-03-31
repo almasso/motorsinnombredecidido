@@ -30,8 +30,8 @@ namespace editor::io {
         const SearchableList<Project*>& getProjects() const;
 
         template <std::convertible_to<std::string> T>
-        void addProject(T&& route) {
-            _addProject(std::forward<std::string>(route));
+        Project* addProject(T&& route) {
+            return _addProject(std::forward<std::string>(route));
         }
 
         void addProject(editor::Project* project);
@@ -60,7 +60,7 @@ namespace editor::io {
 
         void loadProjects();
 
-        void _addProject(const std::string& route);
+        Project* _addProject(const std::string& route);
 
         void saveProjects() const;
 

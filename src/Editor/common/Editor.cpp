@@ -14,6 +14,7 @@
 #include "io/PreferencesManager.h"
 #include "EditorError.h"
 #include <SDL3/SDL.h>
+#include <cstdlib>
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
@@ -47,14 +48,16 @@ editor::Editor::~Editor() {
     io::ProjectManager::Dump();
     io::PreferencesManager::Dump();
 
-    io::ProjectManager::Destroy();
-    io::InputManager::Destroy();
-    render::RenderManager::Destroy();
-    io::LocalizationManager::Destroy();
-    io::PreferencesManager::Destroy();
-    io::LuaManager::Destroy();
+    std::atexit([]() {
+        io::ProjectManager::Destroy();
+        io::InputManager::Destroy();
+        render::RenderManager::Destroy();
+        io::LocalizationManager::Destroy();
+        io::PreferencesManager::Destroy();
+        io::LuaManager::Destroy();
 
-    SDL_Quit();
+        SDL_Quit();
+    });
 }
 
 void editor::Editor::mainLoop() {
