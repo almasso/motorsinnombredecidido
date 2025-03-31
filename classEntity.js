@@ -2,11 +2,10 @@ var classEntity =
 [
     [ "Entity", "classEntity.html#a980f368aa07ce358583982821533a54a", null ],
     [ "addChild", "classEntity.html#a3df7c0f18115e6e19806fdcb4bec907b", null ],
-    [ "addComponent", "classEntity.html#aa4d67a8bab89e9ecacf21cc4baad27d0", null ],
+    [ "addComponent", "classEntity.html#ad1d6f63d112c3442ec0483c62a45cd14", null ],
     [ "destroy", "classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e", null ],
     [ "fixedUpdate", "classEntity.html#a5e8287a1ae6bd5572be15ef180285b70", null ],
     [ "getComponent", "classEntity.html#a85a624661c6792bfe08aa39bdc24ca89", null ],
-    [ "getComponent", "classEntity.html#a3dbd20290a066d304c29fdc21db56fe1", null ],
     [ "getParent", "classEntity.html#aa79d41e1a85487944d6e5da6f845ac83", null ],
     [ "init", "classEntity.html#a0fdea22e4ca4e239e3312c506f5857d5", null ],
     [ "isActive", "classEntity.html#aea1c1568b4123d989c5310697030ad77", null ],

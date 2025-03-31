@@ -126,10 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a77e62e660f8aa7e2194d416f540feefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa79d41e1a85487944d6e5da6f845ac83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#aa79d41e1a85487944d6e5da6f845ac83">getParent</a> () const</td></tr>
 <tr class="separator:aa79d41e1a85487944d6e5da6f845ac83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4d67a8bab89e9ecacf21cc4baad27d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#aa4d67a8bab89e9ecacf21cc4baad27d0">addComponent</a> (<a class="el" href="classComponent.html">Component</a> *component, const std::string &amp;id)</td></tr>
-<tr class="separator:aa4d67a8bab89e9ecacf21cc4baad27d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dbd20290a066d304c29fdc21db56fe1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classComponent.html">Component</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a3dbd20290a066d304c29fdc21db56fe1">getComponent</a> (const std::string &amp;componentID)</td></tr>
-<tr class="separator:a3dbd20290a066d304c29fdc21db56fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d6f63d112c3442ec0483c62a45cd14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#ad1d6f63d112c3442ec0483c62a45cd14">addComponent</a> (<a class="el" href="classComponent.html">Component</a> *component)</td></tr>
+<tr class="separator:ad1d6f63d112c3442ec0483c62a45cd14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85a624661c6792bfe08aa39bdc24ca89"><td class="memTemplParams" colspan="2">template&lt;class ComponentType &gt; </td></tr>
 <tr class="memitem:a85a624661c6792bfe08aa39bdc24ca89"><td class="memTemplItemLeft" align="right" valign="top">ComponentType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEntity.html#a85a624661c6792bfe08aa39bdc24ca89">getComponent</a> ()</td></tr>
 <tr class="separator:a85a624661c6792bfe08aa39bdc24ca89"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,8 +174,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa4d67a8bab89e9ecacf21cc4baad27d0" name="aa4d67a8bab89e9ecacf21cc4baad27d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4d67a8bab89e9ecacf21cc4baad27d0">&#9670;&#160;</a></span>addComponent()</h2>
+<a id="ad1d6f63d112c3442ec0483c62a45cd14" name="ad1d6f63d112c3442ec0483c62a45cd14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d6f63d112c3442ec0483c62a45cd14">&#9670;&#160;</a></span>addComponent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,18 +184,8 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">bool Entity::addComponent </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classComponent.html">Component</a> *&#160;</td>
-          <td class="paramname"><em>component</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>component</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -239,7 +227,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a85a624661c6792bfe08aa39bdc24ca89" name="a85a624661c6792bfe08aa39bdc24ca89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85a624661c6792bfe08aa39bdc24ca89">&#9670;&#160;</a></span>getComponent() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a624661c6792bfe08aa39bdc24ca89">&#9670;&#160;</a></span>getComponent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,24 +249,6 @@ template&lt;class ComponentType &gt; </div>
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3dbd20290a066d304c29fdc21db56fe1" name="a3dbd20290a066d304c29fdc21db56fe1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dbd20290a066d304c29fdc21db56fe1">&#9670;&#160;</a></span>getComponent() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classComponent.html">Component</a> * Entity::getComponent </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>componentID</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
 </div><div class="memdoc">
 
 </div>

@@ -6,7 +6,7 @@ var searchData=
   ['get_3',['get',['../classResourceHandler.html#a664cbb98fa9bcfb18aa7ec09eac81a32',1,'ResourceHandler']]],
   ['getactive_4',['getActive',['../classEntityBlueprint.html#aaf0ef6cb7e1c094e831f60a1aa3f1415',1,'EntityBlueprint']]],
   ['getchildren_5',['getChildren',['../classEntityBlueprint.html#ac173e4e255064eb6cb00c5f41fad7808',1,'EntityBlueprint']]],
-  ['getcomponent_6',['getComponent',['../classEntity.html#a3dbd20290a066d304c29fdc21db56fe1',1,'Entity::getComponent(const std::string &amp;componentID)'],['../classEntity.html#a85a624661c6792bfe08aa39bdc24ca89',1,'Entity::getComponent()']]],
+  ['getcomponent_6',['getComponent',['../classEntity.html#a85a624661c6792bfe08aa39bdc24ca89',1,'Entity']]],
   ['getcomponents_7',['getComponents',['../classEntityBlueprint.html#a9ffe7f059fc826221a5f3b9f6c342344',1,'EntityBlueprint']]],
   ['getdata_8',['getData',['../classComponentData.html#a87988c45a319504ac553e2413b46dfc5',1,'ComponentData']]],
   ['getdevice_9',['getDevice',['../classAudioMixer.html#a9da6c57e2610a218c8eef939add20556',1,'AudioMixer']]],
