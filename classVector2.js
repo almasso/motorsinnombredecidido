@@ -5,6 +5,8 @@ var classVector2 =
     [ "Vector2", "classVector2.html#a299d9e1cd67d3fb587f57170afab9741", null ],
     [ "Vector2", "classVector2.html#a20066daf634c300041d3555eedf27ba5", null ],
     [ "~Vector2", "classVector2.html#ada03f5433d3ca4841d5ebb90b167202e", null ],
+    [ "distanceTo", "classVector2.html#a712b268afcc8f2bb61b309188d321500", null ],
+    [ "distanceToManhattan", "classVector2.html#a2d56e77be18b04256c1de8b23dd901ad", null ],
     [ "getX", "classVector2.html#a808d02062efcc0c016491c04845e3e34", null ],
     [ "getY", "classVector2.html#a59bf838c0fc50305975e1679509fda83", null ],
     [ "magnitude", "classVector2.html#ab84b0c3d31e2893df551d259789e80a9", null ],
