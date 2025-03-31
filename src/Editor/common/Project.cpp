@@ -53,6 +53,11 @@ void editor::Project::loadProject(const sol::table& project) {
             ss >> std::get_time(&_lastModified, "%d/%m/%Y %H:%M:%S");
         }
 
+        if(project["Dimensions"].valid()) {
+            _dimensions[0] = project["Dimensions"][1];
+            _dimensions[1] = project["Dimensions"][2];
+        }
+
         if(project["AdditionalRoutes"].valid()) {
             sol::table additionalRoutes = project["AdditionalRoutes"];
             for(const auto& [key, value] : additionalRoutes) {
@@ -88,7 +93,11 @@ void editor::Project::saveProject() {
         pr["Name"] = _name;
         pr["Route"] = "";
         pr["LastModified"] = oss.str();
+        pr["Dimensions"] = L.create_table();
+        pr["Dimensions"][1] = _dimensions[0];
+        pr["Dimensions"][2] = _dimensions[1];
         int index = 1;
+        pr["AdditionalRoutes"] = L.create_table();
         for(auto elem : _extraRoutes) {
             pr["AdditionalRoutes"][index++] = elem.string();
         }

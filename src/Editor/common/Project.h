@@ -16,7 +16,8 @@ namespace editor {
     class Project {
     public:
         template<std::convertible_to<std::string> T>
-        Project(T&& name, T&& path) : _name(std::forward<T>(name)), _projectPath(std::forward<T>(path)) {
+        Project(T&& name, T&& path, int* dimensions) : _name(std::forward<T>(name)), _projectPath(std::forward<T>(path)) {
+            std::copy(dimensions, dimensions + 2, std::begin(_dimensions));
             _found = true;
             updateLastModified();
             saveProject();
@@ -73,6 +74,8 @@ namespace editor {
         std::tm _lastModified;
         bool _setToDelete = false;
         bool _found = false;
+
+        int _dimensions[2];
 
         void findProject();
 

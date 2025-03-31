@@ -31,6 +31,8 @@ namespace editor::render::modals {
 
         char _fullRoute[1280];
 
+        int _dimensions[2];
+
         void onRender() override;
 
         void beforeRender() override;

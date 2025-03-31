@@ -17,6 +17,13 @@ editor::render::modals::CreateProjectModal::~CreateProjectModal() {
     _projectCreated = nullptr;
 }
 
+void editor::render::modals::CreateProjectModal::beforeRender() {
+    ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove;
+    _windowFlags |= flags;
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+}
+
 void editor::render::modals::CreateProjectModal::onRender() {
     if(!_isGivingName) {
         strncpy(_nameBuffer, io::LocalizationManager::GetInstance().getString("project.default").c_str(), sizeof(_nameBuffer) - 1);
@@ -25,6 +32,7 @@ void editor::render::modals::CreateProjectModal::onRender() {
         _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
         strncpy(_fullRoute, "", sizeof(_fullRoute) - 1);
         _fullRoute[sizeof(_fullRoute) - 1] = '\0';
+        _dimensions[0] = _dimensions[1] = 16;
     }
     _isGivingName = true;
 
@@ -45,14 +53,16 @@ void editor::render::modals::CreateProjectModal::onRender() {
     strncpy(_fullRoute, route.c_str(), sizeof(_fullRoute) - 1);
     _fullRoute[sizeof(_fullRoute) - 1] = '\0';
 
-
     ImGui::SameLine();
     ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.field.projectroute").c_str(),
                      _fullRoute, IM_ARRAYSIZE(_fullRoute), ImGuiInputTextFlags_EnterReturnsTrue);
 
+    ImGui::Spacing();
+    ImGui::InputInt2(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.field.tilesetdim").c_str(), _dimensions);
+
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 30);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.createproject").c_str(), ImVec2(120, 0))) {
-        _projectCreated = new Project(std::string(_nameBuffer), std::string(_fullRoute));
+        _projectCreated = new Project(std::string(_nameBuffer), std::string(_fullRoute), _dimensions);
         ImGui::CloseCurrentPopup();
         _isOpen = false;
         _isGivingName = false;
@@ -64,14 +74,6 @@ void editor::render::modals::CreateProjectModal::onRender() {
         _isGivingName = false;
         _projectCreated = nullptr;
     }
-}
-
-void editor::render::modals::CreateProjectModal::beforeRender() {
-    ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove;
-    _windowFlags |= flags;
-    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
-    ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth() / 2 + 50, 180));
 }
 
 editor::Project *editor::render::modals::CreateProjectModal::getCreatedProject() {

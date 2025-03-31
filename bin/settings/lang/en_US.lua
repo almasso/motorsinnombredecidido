@@ -15,6 +15,7 @@ return {
 	["window.welcomewindow.popup.createproject.title"] = "Create new project",
 	["window.welcomewindow.popup.createproject.field.projectname"] = "Project name",
 	["window.welcomewindow.popup.createproject.field.projectroute"] = "Project path",
+    ["window.welcomewindow.popup.createproject.field.tilesetdim"] = "Tileset dimensions (x, y)",
 	["action.settings"] = "Settings",
 	["action.newproject"] = "New project",
 	["action.openproject"] = "Add project",
