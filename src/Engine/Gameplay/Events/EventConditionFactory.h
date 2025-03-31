@@ -6,6 +6,9 @@
 #include <string>
 #include <sol/forward.hpp>
 
+class Scene;
+class Entity;
+class Event;
 class EventCondition;
 
 class EventConditionFactory {
@@ -21,11 +24,11 @@ private:
 
     static void Init();
     static bool ReadCondition(sol::table const& condition, std::string& type, sol::table& params);
-    static EventCondition* CreateCondition(std::string const& type, sol::table const& params);
+    static EventCondition* CreateCondition(std::string const& type, sol::table const& params, Scene* scene, Entity* entity, Event* event);
 
 public:
     EventConditionFactory() = delete;
-    static EventCondition* Create(sol::table const& condition);
+    static EventCondition* Create(sol::table const& condition, Scene* scene, Entity* entity, Event* event);
 
     static void RegisterToLua(sol::state& luaState);
 };

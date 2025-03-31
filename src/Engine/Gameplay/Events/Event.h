@@ -19,6 +19,8 @@ private:
     EventCondition* _condition;
     std::vector<EventBehaviour*> _behaviours;
 
+    bool _loop;
+
     int _currentBehaviour;
     bool _isPaused;
 

@@ -10,12 +10,8 @@ function WaitFor:new(conditionParams)
 end
 
 function WaitFor:init(scene, entity, event)
-    self._condition = EventConditionFactory.Create(self._conditionParams);
-    if (self._condition == nil) then
-        return false;
-    end;
-    self._condition:setContext(scene, entity, event);
-    return true;
+    self._condition = EventConditionFactory.Create(self._conditionParams, scene, entity, event);
+    return not (self._condition == nil);
 end
 
 function WaitFor:act(game, scene, entity, event)

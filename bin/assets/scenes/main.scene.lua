@@ -38,6 +38,7 @@ return {
             EventHandler = {
                 events = {
                     Evento1 = {
+                        loop = true,
                         condition = {
                             type = "Or",
                             params = {
@@ -51,7 +52,13 @@ return {
                         },
                         behaviours = {
                             WaitFor:new({type = "TimePassed", params = { seconds = 0.5 }}),
-                            Move:new(0, 200)
+                            Move:new(0, 200),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 1 }}),
+                            Move:new(200, 200),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 3 }}),
+                            Move:new(200, 0),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 5 }}),
+                            Move:new(0, 0)
                         }
                     }
                 }

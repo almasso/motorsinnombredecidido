@@ -17,7 +17,7 @@ bool AndCondition::init(sol::table const& params) {
     if (!conditionA.valid())
         return false;
 
-    _conditionA = EventConditionFactory::Create(conditionA);
+    _conditionA = EventConditionFactory::Create(conditionA, _scene, _entity, _event);
     if (!_conditionA)
         return false;
 
@@ -25,7 +25,7 @@ bool AndCondition::init(sol::table const& params) {
     if (!conditionB.valid())
         return false;
 
-    _conditionB = EventConditionFactory::Create(conditionB);
+    _conditionB = EventConditionFactory::Create(conditionB, _scene, _entity, _event);
     if (_conditionB)
         return true;
 

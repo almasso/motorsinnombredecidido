@@ -19,5 +19,4 @@ EventCondition::~EventCondition() = default;
 void EventCondition::RegisterToLua(sol::state& luaState) {
     sol::usertype<EventCondition> type = luaState.new_usertype<EventCondition>("EventCondition");
     type["met"] = &EventCondition::met;
-    type["setContext"] = &EventCondition::setContext;
 }

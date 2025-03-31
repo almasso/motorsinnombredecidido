@@ -29,12 +29,13 @@ bool EventConditionFactory::ReadCondition(sol::table const& condition, std::stri
     return true;
 }
 
-EventCondition* EventConditionFactory::CreateCondition(std::string const& type, sol::table const& params) {
+EventCondition* EventConditionFactory::CreateCondition(std::string const& type, sol::table const& params, Scene* scene, Entity* entity, Event* event) {
     auto it = _factory.find(type);
     if (it == _factory.end())
         return nullptr;
 
     auto instance = it->second();
+    instance->setContext(scene, entity, event);
     if (instance->init(params))
         return instance;
 
@@ -42,7 +43,7 @@ EventCondition* EventConditionFactory::CreateCondition(std::string const& type, 
     return nullptr;
 }
 
-EventCondition* EventConditionFactory::Create(sol::table const& condition) {
+EventCondition* EventConditionFactory::Create(sol::table const& condition, Scene* scene, Entity* entity, Event* event) {
     if (_factory.empty())
         Init();
 
@@ -51,7 +52,7 @@ EventCondition* EventConditionFactory::Create(sol::table const& condition) {
     if (!ReadCondition(condition, type, params))
         return nullptr;
 
-    return CreateCondition(type, params);
+    return CreateCondition(type, params, scene, entity, event);
 }
 
 void EventConditionFactory::RegisterToLua(sol::state& luaState) {

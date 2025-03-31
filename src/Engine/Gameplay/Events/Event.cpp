@@ -11,10 +11,9 @@ bool Event::initCondition(sol::table const& event) {
     auto condition = LuaReader::GetTable(event, "condition");
     if (!condition.valid())
         return false;
-    _condition = EventConditionFactory::Create(condition);
+    _condition = EventConditionFactory::Create(condition, _scene, _entity, this);
     if (!_condition)
         return false;
-    _condition->setContext(_scene, _entity, this);
     return true;
 }
 
@@ -55,6 +54,7 @@ Event::Event(Game* game, Scene* scene, Entity* entity) :
 }
 
 bool Event::init(sol::table const& event) {
+    _loop = event.get_or("loop", false);
     if (!initCondition(event))
         return false;
     if (!initBehaviours(event))
@@ -131,6 +131,8 @@ bool Event::update() {
 
     if (behaviour->done()) {
         ++_currentBehaviour;
+        if (_loop && _currentBehaviour == _behaviours.size())
+            _currentBehaviour = 0;
     }
     return true;
 }
