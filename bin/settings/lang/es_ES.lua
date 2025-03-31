@@ -4,6 +4,8 @@ return {
 	["window.global.yes"] = "Sí",
 	["window.global.no"] = "No",
 	["window.global.cancel"] = "Cancelar",
+	["window.global.save"] = "Guardar",
+	["window.global.discard"] = "Descartar",
 	["window.welcomewindow.searchbar"] = "Buscar proyecto...",
 	["window.welcomewindow.lastmodified"] = "Modificado",
 	["window.welcomewindow.popup.deleteproject.title"] = "Eliminar el proyecto",
@@ -28,8 +30,9 @@ return {
 	["author.algonz39"] = "Alejandro González Sánchez",
 	["author.miguelcga"] = "Miguel Curros García",
 	["project.default"] = "Mi nuevo proyecto",
-	["language.en_US"] = "English",
-	["language.es_ES"] = "Español",
+	["language.language"] = "Idioma",
+	["en_US"] = "English",
+	["es_ES"] = "Español",
 	["file.projectfile"] = "Archivo de proyecto (*.lua)",
 	["error.missingstring"] = "No se ha encontrado la cadena de texto"
 }

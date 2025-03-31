@@ -4,6 +4,8 @@ return {
 	["window.global.yes"] = "Yes",
 	["window.global.no"] = "No",
 	["window.global.cancel"] = "Cancel",
+    ["window.global.save"] = "Save",
+    ["window.global.discard"] = "Discard",
 	["window.welcomewindow.searchbar"] = "Search project...",
 	["window.welcomewindow.lastmodified"] = "Last modified",
 	["window.welcomewindow.popup.deleteproject.title"] = "Delete project",
@@ -28,8 +30,9 @@ return {
 	["author.algonz39"] = "Alejandro González Sánchez",
 	["author.miguelcga"] = "Miguel Curros García",
 	["project.default"] = "My new project",
-    ["language.en_US"] = "English",
-    ["language.es_ES"] = "Español",
+    ["language.language"] = "Language",
+    ["en_US"] = "English",
+    ["es_ES"] = "Español",
     ["file.projectfile"] = "Project file (*.lua)",
     ["error.missingstring"] = "Text string was not found"
 }

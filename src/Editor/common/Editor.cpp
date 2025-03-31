@@ -12,6 +12,7 @@
 #include "io/ProjectManager.h"
 #include "render/Windows/WelcomeWindow.h"
 #include "render/WindowStack.h"
+#include "io/PreferencesManager.h"
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
@@ -29,6 +30,7 @@ bool editor::Editor::init() {
     if(!render::RenderManager::Init(1210, 700)) return false;
     if(!io::InputManager::Init()) return false;
     if(!io::LuaManager::Init()) return false;
+    if(!io::PreferencesManager::Init()) return false;
     if(!io::LocalizationManager::Init()) return false;
     if(!io::ProjectManager::Init()) return false;
 
@@ -42,6 +44,7 @@ editor::Editor& editor::Editor::GetInstance() {
 
 editor::Editor::~Editor() {
     io::ProjectManager::Dump();
+    io::PreferencesManager::Dump();
 }
 
 void editor::Editor::mainLoop() {

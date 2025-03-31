@@ -10,6 +10,8 @@
 #include <unordered_map>
 #include <string>
 #include <filesystem>
+#include <unordered_set>
+#include "PreferencesManager.h"
 
 typedef struct SDL_Locale SDL_Locale;
 
@@ -23,10 +25,25 @@ namespace editor::io {
 
         template <std::convertible_to<std::string> T>
         const std::string& getString(T&& name) const {
-            auto elem = _stringsTable.find(std::string(name));
+            auto elem = _stringsTable.find(std::forward<T>(name));
             if(elem == _stringsTable.end()) return _stringsTable.at("error.missingstring");
             return elem->second;
         }
+
+        int totalLanguagesDetected() const;
+
+        const std::string& getCurrentLanguage() const {return _preferredLocale;}
+
+        template <std::convertible_to<std::string> T>
+        void changePreferredLocale(T&& locale) {
+            std::string loc = std::forward<T>(locale);
+            if(loc == _preferredLocale) return;
+            _preferredLocale = loc;
+            PreferencesManager::GetInstance().setPreference("preferredLocale", loc);
+            convertLocalesIntoTable();
+        }
+
+        const std::unordered_set<std::string>& getAllLanguages() const;
 
         LocalizationManager(const LocalizationManager &) = delete;
 
@@ -46,6 +63,8 @@ namespace editor::io {
 
         std::unordered_map<std::string, std::string> _stringsTable;
 
+        std::unordered_set<std::string> _languagesDetected;
+
         std::filesystem::path _languageTemplatesRoute;
 
         LocalizationManager() = default;
@@ -57,6 +76,8 @@ namespace editor::io {
         bool searchForSecondaryLocales();
 
         void convertLocalesIntoTable();
+
+        void countLocales();
     };
 }
 

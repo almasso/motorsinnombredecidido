@@ -29,9 +29,14 @@ bool editor::io::LocalizationManager::init() {
     _currentDirectory = SDL_GetCurrentDirectory();
     if(_currentDirectory == nullptr) return false;
     _preferredLocale = std::string(_locales[0]->language) + "_" + std::string(_locales[0]->country);
+    auto locale = PreferencesManager::GetInstance().getPreference<std::string>("preferredLocale");
+    if(locale.has_value()) {
+        _preferredLocale = locale.value();
+    }
     _languageTemplatesRoute = "/settings/lang";
     loadLocales();
     convertLocalesIntoTable();
+    countLocales();
     return true;
 }
 
@@ -64,12 +69,21 @@ bool editor::io::LocalizationManager::searchForSecondaryLocales() {
 }
 
 void editor::io::LocalizationManager::convertLocalesIntoTable() {
+    _stringsTable.clear();
     sol::table localization = LuaManager::GetInstance().getTable(std::filesystem::path(std::filesystem::path(std::string(_currentDirectory) + _languageTemplatesRoute.string()).lexically_normal() / (_preferredLocale + ".lua")).string());
     if(localization.valid()) {
         for(const auto& [key, value] : localization) {
             if(key.is<std::string>() && value.is<std::string>()) {
                 _stringsTable[key.as<std::string>()] = value.as<std::string>();
             }
+        }
+    }
+}
+
+void editor::io::LocalizationManager::countLocales() {
+    for(const auto& file : std::filesystem::directory_iterator(std::filesystem::path(std::string(_currentDirectory) + _languageTemplatesRoute.string()).lexically_normal())) {
+        if(file.is_regular_file()) {
+            _languagesDetected.insert(file.path().stem().string());
         }
     }
 }
@@ -84,6 +98,14 @@ editor::io::LocalizationManager::~LocalizationManager() {
     _locales = nullptr;
     SDL_free(_currentDirectory);
     _currentDirectory = nullptr;
+}
+
+int editor::io::LocalizationManager::totalLanguagesDetected() const {
+    return _languagesDetected.size();
+}
+
+const std::unordered_set<std::string> &editor::io::LocalizationManager::getAllLanguages() const {
+    return _languagesDetected;
 }
 
 

@@ -20,6 +20,7 @@ namespace editor::render::modals {
     class DeleteProjectModal;
     class RenameProjectModal;
     class CreateProjectModal;
+    class SettingsModal;
 }
 
 namespace editor::render::windows {
@@ -32,6 +33,7 @@ namespace editor::render::windows {
         std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*> _deleteProjects;
         std::unordered_map<Project*, editor::render::modals::RenameProjectModal*> _renameProjects;
         editor::render::modals::CreateProjectModal* _createProject = nullptr;
+        editor::render::modals::SettingsModal* _settings = nullptr;
 
         bool _showDeleteConfirmation = false;
 

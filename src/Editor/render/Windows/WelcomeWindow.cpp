@@ -16,6 +16,7 @@
 #include "render/Modals/DeleteProjectModal.h"
 #include "render/Modals/CreateProjectModal.h"
 #include "render/WindowStack.h"
+#include "render/Modals/SettingsModal.h"
 
 editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow") {
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
@@ -60,6 +61,8 @@ editor::render::windows::WelcomeWindow::~WelcomeWindow() noexcept {
     _deleteProjects.clear();
     delete _createProject;
     _createProject = nullptr;
+    delete _settings;
+    _settings = nullptr;
 }
 
 void editor::render::windows::WelcomeWindow::createModals() {
@@ -73,6 +76,8 @@ void editor::render::windows::WelcomeWindow::createModals() {
     }
     _createProject = new editor::render::modals::CreateProjectModal();
     WindowStack::addWindowToStack(_createProject);
+    _settings = new editor::render::modals::SettingsModal();
+    WindowStack::addWindowToStack(_settings);
 }
 
 void editor::render::windows::WelcomeWindow::beforeRender() {
@@ -110,7 +115,7 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
         if (ImGui::Button(ICON_FA_GEAR, ImVec2(100, 100))) {
-            // Llamada a los ajustes del editor
+            _settings->show();
         }
         ImGui::PopFont();
         ImGui::PopStyleColor(3);
