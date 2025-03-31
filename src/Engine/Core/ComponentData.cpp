@@ -19,3 +19,13 @@ Vector2 ComponentData::getVector(std::string const &key, Vector2 const &defaultV
     }
     return Vector2(*x, *y);
 }
+
+std::unordered_set<std::string> ComponentData::getSet(std::string const &key) const {
+    std::unordered_set<std::string> set;
+    if (sol::optional<sol::table> table = _data[key]; table) {
+        for (auto&[first, second] : *table) {
+            set.insert(second.as<std::string>());
+        }
+    }
+    return set;
+}

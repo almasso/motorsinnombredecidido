@@ -1,8 +1,8 @@
 #ifndef COMPONENTDATA_H
 #define COMPONENTDATA_H
-
-#include <sol/sol.hpp>
 #include <Utils/Vector2.h>
+#include <sol/sol.hpp>
+#include <unordered_set>
 
 class ComponentData {
 private:
@@ -11,6 +11,7 @@ private:
 public:
     ComponentData(std::string const& id, sol::table const& data);
     Vector2 getVector(std::string const& key, Vector2 const& defaultValue = {}) const;
+    std::unordered_set<std::string> getSet(std::string const& key) const;
     template<typename T>
     T getData(std::string const& key, T const& defaultValue = {}) const {
         return _data.get_or(key, defaultValue);
