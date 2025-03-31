@@ -3,31 +3,34 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_WINDOW_H
-#define MOTORSINNOMBREDECIDIDO_WINDOW_H
+#ifndef MOTORSINNOMBREDECIDIDO_SUBWINDOW_H
+#define MOTORSINNOMBREDECIDIDO_SUBWINDOW_H
 
 #include "RenderObject.h"
-
-typedef int ImGuiWindowFlags;
+#include <imgui.h>
 
 namespace editor::render {
-    class Window : public RenderObject {
+    class Subwindow : public RenderObject {
     public:
         template <std::convertible_to<std::string> T>
-        explicit Window(T&& windowName) : RenderObject(windowName) {}
+        explicit Subwindow(T&& windowName) : RenderObject(windowName) {}
 
-        ~Window() override = default;
+        ~Subwindow() override = default;
 
         void render() final;
+
     protected:
         ImGuiWindowFlags _windowFlags = 0;
+
+        ImGuiChildFlags _childFlags = 0;
+
+        ImVec2 _size;
 
         virtual void beforeRender() = 0;
 
         virtual void onRender() = 0;
-
     };
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_WINDOW_H
+#endif //MOTORSINNOMBREDECIDIDO_SUBWINDOW_H

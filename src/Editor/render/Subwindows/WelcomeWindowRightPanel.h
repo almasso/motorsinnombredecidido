@@ -1,0 +1,46 @@
+//
+// MIT License
+// Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
+//
+
+#ifndef MOTORSINNOMBREDECIDIDO_WELCOMEWINDOWRIGHTPANEL_H
+#define MOTORSINNOMBREDECIDIDO_WELCOMEWINDOWRIGHTPANEL_H
+
+#include "render/Subwindow.h"
+#include <unordered_map>
+
+namespace editor {
+    class Project;
+}
+
+namespace editor::render::modals {
+    class DeleteProjectModal;
+    class RenameProjectModal;
+    class CreateProjectModal;
+}
+
+namespace editor::render::subwindows {
+    class WelcomeWindowRightPanel : public Subwindow {
+    public:
+        WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>& deleteProjects,
+                                std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>& renameProjects);
+    private:
+        std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*> _deleteProjects;
+        std::unordered_map<Project*, editor::render::modals::RenameProjectModal*> _renameProjects;
+
+        bool _showDeleteConfirmation = false;
+
+        bool _showRenameProject = false;
+
+        void beforeRender() override;
+
+        void onRender() override;
+
+        void drawProjectButton(editor::Project* project);
+
+        std::string searchProject();
+    };
+}
+
+
+#endif //MOTORSINNOMBREDECIDIDO_WELCOMEWINDOWRIGHTPANEL_H

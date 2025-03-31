@@ -23,6 +23,12 @@ namespace editor::render::modals {
     class SettingsModal;
 }
 
+namespace editor::render::subwindows {
+    class WelcomeWindowLeftPanel;
+    class WelcomeWindowRightPanel;
+    class WelcomeWindowProjectManagementButtons;
+}
+
 namespace editor::render::windows {
     class WelcomeWindow : public Window {
     public:
@@ -34,12 +40,9 @@ namespace editor::render::windows {
         std::unordered_map<Project*, editor::render::modals::RenameProjectModal*> _renameProjects;
         editor::render::modals::CreateProjectModal* _createProject = nullptr;
         editor::render::modals::SettingsModal* _settings = nullptr;
-
-        bool _showDeleteConfirmation = false;
-
-        bool _showRenameProject = false;
-
-        bool _showCreateProject = false;
+        editor::render::subwindows::WelcomeWindowLeftPanel* _leftPanel = nullptr;
+        editor::render::subwindows::WelcomeWindowRightPanel* _rightPanel = nullptr;
+        editor::render::subwindows::WelcomeWindowProjectManagementButtons* _projectManagementButtons = nullptr;
 
         void onRender() override;
 
@@ -51,9 +54,7 @@ namespace editor::render::windows {
 
         void createModals();
 
-        std::string searchProject();
-
-        void drawProjectButton(Project* project);
+        void createSubwindows();
     };
 }
 
