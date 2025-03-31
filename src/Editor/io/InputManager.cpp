@@ -6,12 +6,12 @@
 #include "InputManager.h"
 #include <SDL3/SDL.h>
 #include <imgui_impl_sdl3.h>
-#include <cassert>
+#include "common/EditorError.h"
 
 std::unique_ptr<editor::io::InputManager> editor::io::InputManager::_instance = nullptr;
 
 bool editor::io::InputManager::Init() {
-    assert(_instance == nullptr && "Input manager singleton instance is already initialized || La instancia del singleton del gestor de input ya está inicializada");
+    editorAssert(_instance == nullptr, "Input manager singleton instance is already initialized")
     _instance = std::unique_ptr<InputManager>(new InputManager());
     if(!_instance->init()) {
         _instance.reset(nullptr);
@@ -33,7 +33,7 @@ bool editor::io::InputManager::init() {
 }
 
 editor::io::InputManager &editor::io::InputManager::GetInstance() {
-    assert(_instance != nullptr);
+    editorAssert(_instance != nullptr, "Input manager singleton instance is not initialized")
     return *_instance;
 }
 

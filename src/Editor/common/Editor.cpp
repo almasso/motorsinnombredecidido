@@ -4,7 +4,6 @@
 //
 
 #include "Editor.h"
-#include <cassert>
 #include "render/RenderManager.h"
 #include "io/InputManager.h"
 #include "io/LocalizationManager.h"
@@ -13,11 +12,12 @@
 #include "render/Windows/WelcomeWindow.h"
 #include "render/WindowStack.h"
 #include "io/PreferencesManager.h"
+#include "EditorError.h"
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
 bool editor::Editor::Init() {
-    assert(_instance == nullptr && "Editor singleton instance is already initialized || La instancia del singleton del editor ya está inicializada");
+    editorAssert(_instance == nullptr, "Editor singleton instance is already initialized")
     _instance = std::unique_ptr<Editor>(new Editor());
     if(!_instance->init()) {
         _instance.reset(nullptr);
@@ -38,7 +38,7 @@ bool editor::Editor::init() {
 }
 
 editor::Editor& editor::Editor::GetInstance() {
-    assert(_instance != nullptr);
+    editorAssert(_instance != nullptr, "Editor singleton instance is not initialized")
     return *_instance;
 }
 

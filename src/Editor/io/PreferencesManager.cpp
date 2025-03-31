@@ -48,6 +48,7 @@ void editor::io::PreferencesManager::Dump() {
 editor::io::PreferencesManager::~PreferencesManager() {
     SDL_free(_currentDirectory);
     _currentDirectory = nullptr;
+    _preferences.abandon();
 }
 
 void editor::io::PreferencesManager::savePreferences() {

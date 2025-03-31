@@ -4,7 +4,7 @@
 //
 
 #include "LuaManager.h"
-#include <cassert>
+#include "common/EditorError.h"
 #include <filesystem>
 #include <fstream>
 #include <SDL3/SDL_filesystem.h>
@@ -12,7 +12,7 @@
 std::unique_ptr<editor::io::LuaManager> editor::io::LuaManager::_instance = nullptr;
 
 bool editor::io::LuaManager::Init() {
-    assert(_instance == nullptr && "Lua manager singleton instance is already initialized || La instancia del singleton del gestor de Lua ya está inicializada");
+    editorAssert(_instance == nullptr, "Lua manager singleton instance is already initialized")
     _instance = std::unique_ptr<LuaManager>(new LuaManager());
     if(!_instance->init()) {
         _instance.reset(nullptr);
@@ -31,7 +31,7 @@ bool editor::io::LuaManager::init() {
 }
 
 editor::io::LuaManager &editor::io::LuaManager::GetInstance() {
-    assert(_instance != nullptr);
+    editorAssert(_instance != nullptr, "Lua manager singleton instance is not initialized")
     return *_instance;
 }
 

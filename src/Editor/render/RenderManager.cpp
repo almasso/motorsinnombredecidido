@@ -4,7 +4,7 @@
 //
 
 #include "RenderManager.h"
-#include <cassert>
+#include "common/EditorError.h"
 #include <SDL3/SDL.h>
 #include <imgui.h>
 #include <imgui_impl_sdl3.h>
@@ -14,7 +14,7 @@
 std::unique_ptr<editor::render::RenderManager> editor::render::RenderManager::_instance = nullptr;
 
 bool editor::render::RenderManager::Init(uint32_t width, uint32_t height) {
-    assert(_instance == nullptr && "Render manager singleton instance is already initialized || La instancia del singleton del gestor de render ya está inicializada");
+    editorAssert(_instance == nullptr, "Render manager singleton instance is already initialized")
     _instance = std::unique_ptr<RenderManager>(new RenderManager());
     if(!_instance->init(width, height)) {
         _instance.reset(nullptr);
@@ -64,7 +64,7 @@ bool editor::render::RenderManager::initDearImGui() {
     if(_context == nullptr)
         return false;
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_CONTEXT_CREATED;
-    ImGui::StyleColorsDark();
+    ImGui::StyleColorsClassic();
     if(!ImGui_ImplSDL3_InitForSDLRenderer(_window, _renderer))
         return false;
     _initializationSteps |= (uint8_t)RenderManager_InitializationSteps::IMGUI_SDL3_INIT_CORRECT;
@@ -81,7 +81,7 @@ bool editor::render::RenderManager::initDearImGui() {
 }
 
 editor::render::RenderManager &editor::render::RenderManager::GetInstance() {
-    assert(_instance != nullptr);
+    editorAssert(_instance != nullptr, "Render manager singleton instance is not initialized")
     return *_instance;
 }
 

@@ -110,15 +110,15 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::PopFont();
 
         ImGui::SetCursorPosY(windowHeight - 100);
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
+        //ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
+        //ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
+        //ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
         if (ImGui::Button(ICON_FA_GEAR, ImVec2(100, 100))) {
             _settings->show();
         }
         ImGui::PopFont();
-        ImGui::PopStyleColor(3);
+        //ImGui::PopStyleColor(3);
 
         ImGui::SameLine(0, 20);
 
@@ -186,9 +186,9 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
     ImGui::SameLine();
     ImGui::BeginChild("PCDB");
     {
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
+        //ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
+        //ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
+        //ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
         ImGui::SetCursorPosY(windowHeight / 2 - 150);
 
         ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
@@ -221,7 +221,7 @@ void editor::render::windows::WelcomeWindow::drawWindow() {
         ImGui::PushFont(RenderManager::GetInstance().getFont("Raleway 30"));
         ImGui::TextWrapped(io::LocalizationManager::GetInstance().getString("action.openproject").c_str());
         ImGui::PopFont();
-        ImGui::PopStyleColor(3);
+        //ImGui::PopStyleColor(3);
     }
     ImGui::EndChild();
 }
@@ -233,9 +233,9 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(Project* project)
 
     ImVec2 buttonSize = ImVec2(-1, 120);
 
-    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
+    //ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.1, 0.1, 0.1, 1)); // Fondo del botón
+    //ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.2f, 0.2f, 0.2f, 1)); // Al pasar el ratón por encima
+    //ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1)); // Al pulsar el botón
 
     ImGui::BeginDisabled(!project->isFound());
     if(ImGui::Button(std::string("##But" + projectRoute).c_str() , buttonSize)) {
@@ -252,7 +252,7 @@ void editor::render::windows::WelcomeWindow::drawProjectButton(Project* project)
     }
 
 
-    ImGui::PopStyleColor(3);
+    //ImGui::PopStyleColor(3);
 
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() - buttonSize.y);

@@ -4,7 +4,7 @@
 //
 
 #include "LocalizationManager.h"
-#include <cassert>
+#include "common/EditorError.h"
 #include "LuaManager.h"
 #include <iostream>
 #include <SDL3/SDL_locale.h>
@@ -14,7 +14,7 @@
 std::unique_ptr<editor::io::LocalizationManager> editor::io::LocalizationManager::_instance = nullptr;
 
 bool editor::io::LocalizationManager::Init() {
-    assert(_instance == nullptr && "Resource manager singleton instance is already initialized || La instancia del singleton del gestor de recursos ya está inicializada");
+    editorAssert(_instance == nullptr, "Resource manager singleton instance is already initialized")
     _instance = std::unique_ptr<LocalizationManager>(new LocalizationManager());
     if(!_instance->init()) {
         _instance.reset(nullptr);
@@ -89,7 +89,7 @@ void editor::io::LocalizationManager::countLocales() {
 }
 
 editor::io::LocalizationManager &editor::io::LocalizationManager::GetInstance() {
-    assert(_instance != nullptr);
+    editorAssert(_instance != nullptr, "Localization manager singleton instance is not initialized")
     return *_instance;
 }
 

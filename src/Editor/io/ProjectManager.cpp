@@ -4,19 +4,16 @@
 //
 
 #include "ProjectManager.h"
-#include <cassert>
+#include "common/EditorError.h"
 #include "LuaManager.h"
 #include <SDL3/SDL_filesystem.h>
-#include <iostream>
 #include "common/Project.h"
 #include <sol/sol.hpp>
-#include <cctype>
-#include "utils/tinyfiledialogs/tinyfiledialogs.h"
 
 std::unique_ptr<editor::io::ProjectManager> editor::io::ProjectManager::_instance = nullptr;
 
 bool editor::io::ProjectManager::Init() {
-    assert(_instance == nullptr && "Project manager singleton instance is already initialized || La instancia del singleton del gestor de proyectos ya está inicializada");
+    editorAssert(_instance == nullptr, "Project manager singleton instance is already initialized")
     _instance = std::unique_ptr<ProjectManager>(new ProjectManager());
     if(!_instance->init()) {
         _instance.reset(nullptr);
@@ -53,6 +50,7 @@ void editor::io::ProjectManager::loadProjects() {
 }
 
 editor::io::ProjectManager &editor::io::ProjectManager::GetInstance() {
+    editorAssert(_instance != nullptr, "Project manager singleton instance is not initialized")
     return *_instance;
 }
 
