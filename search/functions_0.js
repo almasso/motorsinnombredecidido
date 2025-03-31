@@ -2,7 +2,7 @@ var searchData=
 [
   ['activateresource_0',['activateResource',['../classResourceMemoryManager.html#a344c312cb4289eb7226e13b5de5fa520',1,'ResourceMemoryManager']]],
   ['addchild_1',['addChild',['../classEntity.html#a3df7c0f18115e6e19806fdcb4bec907b',1,'Entity']]],
-  ['addcomponent_2',['addComponent',['../classEntity.html#ad1d6f63d112c3442ec0483c62a45cd14',1,'Entity']]],
+  ['addcomponent_2',['addComponent',['../classEntity.html#aa4d67a8bab89e9ecacf21cc4baad27d0',1,'Entity']]],
   ['addentity_3',['addEntity',['../classScene.html#ab4bd06a9af64934a38bf75e8b6f1435e',1,'Scene']]],
   ['addhandler_4',['addHandler',['../classScene.html#a5d4871c219d0b1d591bee0f656e24b22',1,'Scene']]],
   ['addscene_5',['addScene',['../classGame.html#a29d8561a97e14147aeae61df79957ffa',1,'Game::addScene()'],['../classSceneManager.html#a8ed76ad702aa32c3578f598c3285e20a',1,'SceneManager::addScene()']]],
