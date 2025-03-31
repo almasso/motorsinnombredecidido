@@ -5,7 +5,14 @@ return {
     manager = {
         handler = "Manager",
         components = {
-            MovementManager = {0}
+            MovementManager = {
+                tileWidth = 200,
+                tileHeight =200
+            },
+            Transform = {0},
+            Camera = {
+                size = {1920,1080}
+            }
         }
     },
     music = {
@@ -24,12 +31,10 @@ return {
             Transform = {
                 pos = {0, 0}
             },
-            Camera = {
-                size = {200 , 200}
-            },
             MovementComponent = {
-                speed = 2
+                speed = 100
             },
+            PlayerInput = {0},
             EventHandler = {
                 events = {
                     Evento1 = {

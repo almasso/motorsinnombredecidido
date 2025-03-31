@@ -111,6 +111,14 @@ void Vector2::set(float x, float y) {
 	_y = y;
 }
 
+float Vector2::distanceTo(const Vector2 &v) const {
+	return ((*this) - v).magnitude();
+}
+
+float Vector2::distanceToManhattan(const Vector2 &v) const {
+    return std::abs(_x - v._x) + std::abs(_y - v._y);
+}
+
 void Vector2::RegisterToLua(sol::state& lua) {
 	sol::usertype<Vector2> type = lua.new_usertype<Vector2>("Vector2",
 		sol::constructors<Vector2(), Vector2(float), Vector2(float, float)>());

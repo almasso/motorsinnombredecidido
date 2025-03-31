@@ -79,7 +79,7 @@ Rect RenderManager::convertRect(const Rect &rect) const {
         rect.w * _screenScale,
         rect.h * _screenScale
     };
-    if (rect.x >= _width || rect.x < -rect.w || rect.y >= _height || rect.y < -rect.h)
+    if (tempRect.x >= _width || tempRect.x < -tempRect.w || tempRect.y >= _height || tempRect.y < -tempRect.h)
         return {0,0,0,0};
     return tempRect;
 }

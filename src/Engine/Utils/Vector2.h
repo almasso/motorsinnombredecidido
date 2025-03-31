@@ -239,6 +239,22 @@ public:
 	/// @param y Nuevo valor de Y.
 	void set(float x, float y);
 
+	/// @~english
+	/// @brief Calculates the distance to another vector.
+	/// @param v Vector to be based off of.
+	/// @~spanish
+	/// @brief Calcula la distancia a otro vector.
+	/// @param v Vector a calcular.
+	float distanceTo(const Vector2& v) const;
+
+	/// @~english
+	/// @brief Calculates the Manhattan distance to another vector.
+	/// @param v Vector to be based off of.
+	/// @~spanish
+	/// @brief Calcula la distancia Manhattan a otro vector.
+	/// @param v Vector a calcular.
+	float distanceToManhattan(const Vector2 &v) const;
+
 	/// (0, 0)
 	static const Vector2 ZERO;
 	/// (1, 0)
