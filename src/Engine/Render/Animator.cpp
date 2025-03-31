@@ -3,6 +3,7 @@
 #include <Core/ComponentData.h>
 #include <Load/ResourceHandler.h>
 #include <Utils/Time.h>
+#include <sol/state.hpp>
 
 Animator::Animator(ComponentData const*data) : ComponentTemplate(data) {
 }
@@ -55,4 +56,12 @@ void Animator::changeAnimation(const std::string& animation) {
 
 void Animator::setPlaying(bool playing) {
   _playing = playing;
+}
+
+void Animator::RegisterToLua(sol::state& lua) {
+    sol::usertype type = lua.new_usertype<Animator>("Animator");
+    type["reset"] = &Animator::reset;
+    type["changeAnimation"] = &Animator::changeAnimation;
+    type["setPlaying"] = &Animator::setPlaying;
+    type["get"] = Animator::get;
 }

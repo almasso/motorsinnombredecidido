@@ -28,6 +28,8 @@ public:
     bool act();
     bool done() const;
     bool ended() const;
+
+    static void RegisterToLua(sol::state& lua);
 };
 
 

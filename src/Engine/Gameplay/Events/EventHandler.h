@@ -8,7 +8,7 @@
 
 class Event;
 
-class EventHandler : public ComponentTemplate<"EventHandler"> {
+class EventHandler : public ComponentTemplate<EventHandler, "EventHandler"> {
 private:
     std::unordered_map<std::string, Event*> _events;
 
@@ -20,6 +20,8 @@ public:
     bool update() override;
 
     Event* getEvent(std::string const& name);
+
+    static void RegisterToLua(sol::state& luaState);
 };
 
 

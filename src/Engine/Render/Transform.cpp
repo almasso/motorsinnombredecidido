@@ -125,3 +125,28 @@ Transform* Transform::getParent() const {
     }
     return nullptr;
 }
+
+void Transform::RegisterToLua(sol::state& lua) {
+    sol::usertype<Transform> type = lua.new_usertype<Transform>("Transform");
+
+    type["position"] = &Transform::_position;
+    type["getGlobalPosition"] = &Transform::getGlobalPosition;
+    type["setPositionX"] = &Transform::setPositionX;
+    type["setPositionY"] = &Transform::setPositionY;
+    type["moveX"] = &Transform::moveX;
+    type["moveY"] = &Transform::moveY;
+
+    type["scale"] = &Transform::_scale;
+    type["getGlobalScale"] = &Transform::getGlobalScale;
+    type["setScaleX"] = &Transform::setScaleX;
+    type["setScaleY"] = &Transform::setScaleY;
+    type["doScaleX"] = &Transform::doScaleX;
+    type["doScaleY"] = &Transform::doScaleY;
+
+    type["rotation"] = sol::property(&Transform::getRotation, &Transform::setRotation);
+    type["getGlobalRotation"] = &Transform::getGlobalRotation;
+    type["rotate"] = &Transform::rotate;
+
+    type["getParent"] = &Transform::getParent;
+    type["get"] = Transform::get;
+}

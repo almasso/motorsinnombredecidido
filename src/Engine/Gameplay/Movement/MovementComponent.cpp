@@ -1,8 +1,10 @@
 #include "MovementComponent.h"
 #include "MovementManager.h"
 #include <Core/ComponentData.h>
+#include <Core/Entity.h>
 #include <Render/Transform.h>
 #include <Utils/Time.h>
+#include <sol/state.hpp>
 
 MovementComponent::MovementComponent(ComponentData const* data) :
     ComponentTemplate(data),
@@ -46,4 +48,10 @@ bool MovementComponent::update() {
         _transform->move(movement);
     }
     return true;
+}
+
+void MovementComponent::RegisterToLua(sol::state& lua) {
+    sol::usertype<MovementComponent> type = lua.new_usertype<MovementComponent>("MovementComponent");
+    type["setTarget"] = &MovementComponent::setTarget;
+    type["get"] = MovementComponent::get;
 }

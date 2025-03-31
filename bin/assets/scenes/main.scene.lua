@@ -1,6 +1,12 @@
 local Move = require('assets.events.MoveBehaviour');
 
 return {
+    manager = {
+        handler = "Manager",
+        components = {
+            MovementManager = {0}
+        }
+    },
     music = {
         components = {
             AudioSource = {
@@ -20,6 +26,9 @@ return {
             Camera = {
                 size = {200 , 200}
             },
+            MovementComponent = {
+                speed = 2
+            },
             EventHandler = {
                 events = {
                     Evento1 = {
@@ -35,7 +44,7 @@ return {
                             }
                         },
                         behaviours = {
-                            Move:new()
+                            Move:new(0, 200)
                         }
                     }
                 }

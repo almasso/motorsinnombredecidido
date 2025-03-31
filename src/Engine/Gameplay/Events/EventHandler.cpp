@@ -62,3 +62,9 @@ Event* EventHandler::getEvent(std::string const& name) {
         return nullptr;
     return it->second;
 }
+
+void EventHandler::RegisterToLua(sol::state& luaState) {
+    sol::usertype<EventHandler> type = luaState.new_usertype<EventHandler>("EventHandler");
+    type["getEvent"] = &EventHandler::getEvent;
+    type["get"] = EventHandler::get;
+}

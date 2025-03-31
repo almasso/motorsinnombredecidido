@@ -1,5 +1,6 @@
 #include "Vector2.h"
 #include <cmath>
+#include <sol/state.hpp>
 
 Vector2::Vector2() :
 	_x(0.0f),
@@ -108,6 +109,16 @@ void Vector2::set(const Vector2& v) {
 void Vector2::set(float x, float y) {
 	_x = x;
 	_y = y;
+}
+
+void Vector2::RegisterToLua(sol::state& lua) {
+	sol::usertype<Vector2> type = lua.new_usertype<Vector2>("Vector2",
+		sol::constructors<Vector2(), Vector2(float), Vector2(float, float)>());
+	type["x"] = sol::property(&Vector2::getX, &Vector2::setX);
+	type["y"] = sol::property(&Vector2::getY, &Vector2::setY);
+	type["magnitude"] = &Vector2::magnitude;
+	type["normalized"] = &Vector2::normalized;
+	type["normalize"] = &Vector2::normalize;
 }
 
 const Vector2 Vector2::ZERO(0.0f, 0.0f);

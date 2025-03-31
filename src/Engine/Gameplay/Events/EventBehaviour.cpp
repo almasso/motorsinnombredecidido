@@ -59,3 +59,9 @@ bool EventBehaviour::done() const {
 bool EventBehaviour::ended() const {
     return _ended(_self, _scene, _entity, _event);
 }
+
+void EventBehaviour::RegisterToLua(sol::state& lua) {
+    sol::usertype type = lua.new_usertype<EventBehaviour>("EventBehaviour");
+    type["done"] = &EventBehaviour::done;
+    type["ended"] = &EventBehaviour::ended;
+}

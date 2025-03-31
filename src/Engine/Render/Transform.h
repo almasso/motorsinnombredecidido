@@ -3,7 +3,7 @@
 #include <Core/ComponentTemplate.h>
 #include <Utils/Vector2.h>
 
-class Transform : public ComponentTemplate<"Transform"> {
+class Transform : public ComponentTemplate<Transform, "Transform"> {
     private:
     Vector2 _position;
     Vector2 _scale;
@@ -36,6 +36,8 @@ class Transform : public ComponentTemplate<"Transform"> {
     void setRotation(float rotation);
     void rotate(float rotation);
     Transform* getParent() const;
+
+    static void RegisterToLua(sol::state& lua);
 };
 
 #endif //TRANSFORM_H

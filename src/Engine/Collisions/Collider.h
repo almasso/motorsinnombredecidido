@@ -5,11 +5,12 @@
 #include <Core/ComponentTemplate.h>
 #include <Utils/Rect.h>
 #include <Utils/Vector2.h>
+#include <sol/forward.hpp>
 
 class CollisionManager;
 class Transform;
 
-class Collider : public ComponentTemplate<"Collider"> {
+class Collider : public ComponentTemplate<Collider, "Collider"> {
 private:
     friend CollisionManager;
 
@@ -66,6 +67,8 @@ public:
     /// @brief Acceso a las dimensiones del colisionador con la transformación de su entidad aplicada.
     /// @return Rectángulo en el que este colisionador está contenido.
     Rect getRect() const;
+
+    static void RegisterToLua(sol::state& luaState);
 };
 
 

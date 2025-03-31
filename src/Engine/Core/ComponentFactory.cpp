@@ -8,6 +8,10 @@
 #include <Render/SpriteRenderer.h>
 #include <Render/Camera.h>
 #include <Gameplay/Events/EventHandler.h>
+#include <Gameplay/Movement/MovementManager.h>
+#include <Gameplay/Movement/MovementObstacle.h>
+#include <Gameplay/Movement/MovementComponent.h>
+#include <Gameplay/Movement/PlayerInput.h>
 
 #include "ComponentData.h"
 
@@ -21,6 +25,10 @@ ComponentFactory::ComponentFactory() :
     registerComponent<AudioSource>();
     registerComponent<Collider>();
     registerComponent<EventHandler>();
+    registerComponent<PlayerInput>();
+    registerComponent<MovementManager>();
+    registerComponent<MovementObstacle>();
+    registerComponent<MovementComponent>();
 }
 
 Component* ComponentFactory::createComponent(ComponentData const* data) {

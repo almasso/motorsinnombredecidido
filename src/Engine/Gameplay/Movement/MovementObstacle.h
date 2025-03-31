@@ -6,7 +6,7 @@
 
 class Transform;
 class MovementManager;
-class MovementObstacle : public ComponentTemplate<"MovementObstacle"> {
+class MovementObstacle : public ComponentTemplate<MovementObstacle, "MovementObstacle"> {
     protected:
         Transform* _transform;
         MovementManager* _manager;

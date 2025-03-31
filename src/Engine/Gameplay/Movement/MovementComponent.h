@@ -2,7 +2,7 @@
 #define MOMEMENTCOMPONENT_H
 #include "MovementObstacle.h"
 
-class MovementComponent : public ComponentTemplate<"MovementComponent",MovementObstacle> {
+class MovementComponent : public ComponentTemplate<MovementComponent, "MovementComponent", MovementObstacle> {
   private:
   std::vector<Vector2> _path;
   float _speed;
@@ -13,6 +13,7 @@ class MovementComponent : public ComponentTemplate<"MovementComponent",MovementO
   bool update() override;
   void setTarget(const Vector2& target);
 
+  static void RegisterToLua(sol::state& lua);
 };
 
 #endif //MOMEMENTCOMPONENT_H

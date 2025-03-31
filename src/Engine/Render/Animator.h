@@ -2,7 +2,9 @@
 #define ANIMATOR_H
 #include "SpriteRenderer.h"
 
-class Animator : public ComponentTemplate<"Animator", SpriteRenderer> {
+#include <sol/forward.hpp>
+
+class Animator : public ComponentTemplate<Animator, "Animator", SpriteRenderer> {
     std::string _animation {};
     float _frameTimer {};
     int _currentFrame {};
@@ -15,6 +17,8 @@ public:
     void reset();
     void changeAnimation(const std::string& animation);
     void setPlaying(bool playing);
+
+    static void RegisterToLua(sol::state& lua);
 };
 
 #endif //ANIMATOR_H

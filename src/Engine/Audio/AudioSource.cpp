@@ -79,3 +79,19 @@ bool AudioSource::isLooped() const {
 void AudioSource::setLoop(bool loop) {
     _clip->setLoop(loop);
 }
+
+void AudioSource::RegisterToLua(sol::state& luaState) {
+    sol::usertype<AudioSource> type = luaState.new_usertype<AudioSource>("AudioSource");
+    type["play"] = &AudioSource::play;
+    type["stop"] = &AudioSource::stop;
+    type["pause"] = &AudioSource::pause;
+    type["resume"] = &AudioSource::resume;
+    type["isPlaying"] = &AudioSource::isPlaying;
+    type["isPaused"] = &AudioSource::isPaused;
+    type["isLooped"] = &AudioSource::isLooped;
+    type["getVolume"] = &AudioSource::getVolume;
+    type["setVolume"] = &AudioSource::setVolume;
+    type["isLooped"] = &AudioSource::isLooped;
+    type["setLoop"] = &AudioSource::setLoop;
+    type["get"] = AudioSource::get;
+}

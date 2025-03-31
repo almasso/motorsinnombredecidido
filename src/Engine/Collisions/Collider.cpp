@@ -3,6 +3,8 @@
 #include <Core/ComponentData.h>
 #include <Core/Entity.h>
 #include <Render/Transform.h>
+#include <sol/state.hpp>
+#include <sol/usertype.hpp>
 
 #include "CollisionManager.h"
 
@@ -54,4 +56,12 @@ Rect Collider::getRect() const {
     r.x = pos.getX() + _pos.getX() * scale.getX() - r.w / 2.f;
     r.y = pos.getY() + _pos.getY() * scale.getY() - r.h / 2.f;
     return r;
+}
+
+void Collider::RegisterToLua(sol::state& luaState) {
+    sol::usertype<Collider> type = luaState.new_usertype<Collider>("Collider");
+    type["isCollidingWith"] = &Collider::isCollidingWith;
+    type["justCollidedWith"] = &Collider::justCollidedWith;
+    type["collisionEndedWith"] = &Collider::collisionEndedWith;
+    type["get"] = Collider::get;
 }

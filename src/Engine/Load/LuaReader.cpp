@@ -1,14 +1,32 @@
 #include "LuaReader.h"
 
+#include <Audio/AudioSource.h>
+#include <Collisions/Collider.h>
 #include <Core/Entity.h>
 #include <Core/Game.h>
 #include <Core/Scene.h>
 #include <Gameplay/Events/Event.h>
+#include <Gameplay/Events/EventBehaviour.h>
+#include <Gameplay/Events/EventHandler.h>
+#include <Gameplay/Movement/MovementComponent.h>
+#include <Render/Animator.h>
+#include <Render/Transform.h>
 
 LuaReader* LuaReader::_instance = nullptr;
 
 void LuaReader::registerUserTypes() {
+    Vector2::RegisterToLua(_lua);
+
+    EventBehaviour::RegisterToLua(_lua);
     Event::RegisterToLua(_lua);
+    EventHandler::RegisterToLua(_lua);
+
+    Transform::RegisterToLua(_lua);
+    AudioSource::RegisterToLua(_lua);
+    Collider::RegisterToLua(_lua);
+    Animator::RegisterToLua(_lua);
+    MovementComponent::RegisterToLua(_lua);
+
     Entity::RegisterToLua(_lua);
     Scene::RegisterToLua(_lua);
     Game::RegisterToLua(_lua);

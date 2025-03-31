@@ -42,6 +42,7 @@ public:
     void pause();
     void stop();
     void jump(int index);
+    EventBehaviour const* getBehaviour(int index) const;
 
     bool update();
 

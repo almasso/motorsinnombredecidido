@@ -1,6 +1,7 @@
 #ifndef AUDIOSOURCE_H
 #define AUDIOSOURCE_H
 
+#include <sol/forward.hpp>
 #include <Core/ComponentTemplate.h>
 
 class AudioClip;
@@ -10,7 +11,7 @@ class AudioMixer;
 /// @brief Component containing a source of audio and allows to play it.
 /// @~spanish
 /// @brief Componente que contienen una fuente de audio y permite reproducirla.
-class AudioSource : public ComponentTemplate<"AudioSource"> {
+class AudioSource : public ComponentTemplate<AudioSource, "AudioSource"> {
 private:
     AudioClip* _clip;
     AudioMixer* _mixer;
@@ -101,6 +102,8 @@ public:
     /// @brief Establece el estado de ciclado de la \c AudioSource .
     /// @param loop \c true para activar el estado de ciclado, \c false para desactivarlo.
     void setLoop(bool loop);
+
+    static void RegisterToLua(sol::state& luaState);
 };
 
 

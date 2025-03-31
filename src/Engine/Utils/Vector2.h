@@ -1,6 +1,8 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 #include <functional>
+#include <sol/forward.hpp>
+
 class Vector2 {
 private:
 	float _x;
@@ -249,6 +251,8 @@ public:
 	static const Vector2 DOWN;
 	/// (1, 1)
 	static const Vector2 UNIT;
+
+	static void RegisterToLua(sol::state& lua);
 
 };
 

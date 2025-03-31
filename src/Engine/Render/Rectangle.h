@@ -4,7 +4,7 @@
 #include "Utils/Vector2.h"
 #include "Color.h"
 
-class Rectangle : public ComponentTemplate<"Rectangle",RenderComponent> {
+class Rectangle : public ComponentTemplate<Rectangle, "Rectangle", RenderComponent> {
     private:
     Vector2 _size = {1,1};
     Color _color = {0};

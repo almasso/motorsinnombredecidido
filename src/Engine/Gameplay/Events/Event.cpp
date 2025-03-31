@@ -97,6 +97,12 @@ void Event::jump(int index) {
         _targetBehaviour = index;
 }
 
+EventBehaviour const* Event::getBehaviour(int index) const {
+    if (index >= _behaviours.size() || index < 0)
+        return nullptr;
+    return _behaviours[index];
+}
+
 bool Event::update() {
     if (_targetBehaviour != -1) {
         _currentBehaviour = _targetBehaviour;
@@ -130,4 +136,5 @@ void Event::RegisterToLua(sol::state& lua) {
     type["pause"] = &Event::pause;
     type["stop"] = &Event::stop;
     type["jump"] = &Event::jump;
+    type["getBehaviour"] = &Event::getBehaviour;
 }

@@ -6,7 +6,7 @@
 #include <bits/stl_vector.h>
 
 
-class MovementManager : public ComponentTemplate<"MovementManager"> {
+class MovementManager : public ComponentTemplate<MovementManager, "MovementManager"> {
     private:
     float _squareW, _squareH;
     std::unordered_set<Vector2> _occupiedPositions;
