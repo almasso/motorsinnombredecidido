@@ -48,7 +48,7 @@ Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scen
 			delete entity;
 			return nullptr;
 		}
-		entity->addComponent(component);
+		entity->addComponent(component, data.getId());
 		component->setContext(entity,scene,_game);
 	}
 	entity->setActive(blueprint->getActive());

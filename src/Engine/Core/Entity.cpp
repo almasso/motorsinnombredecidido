@@ -107,11 +107,21 @@ Entity * Entity::getParent() const {
      return _parent;
 }
 
-bool Entity::addComponent(Component *component) {
+bool Entity::addComponent(Component *component, const std::string& id) {
      if (_components.insert({component->getOrder(), component}).second) {
-          return true;
+          if (_componentIds.insert({id, component}).second) {
+               return true;
+          }
      }
      return false;
+}
+
+Component* Entity::getComponent(const std::string& componentID) {
+     auto finder = _componentIds.find(componentID);
+     if (finder == _componentIds.end()) {
+          return nullptr;
+     }
+     return finder->second;
 }
 
 void Entity::RegisterToLua(sol::state& lua) {
