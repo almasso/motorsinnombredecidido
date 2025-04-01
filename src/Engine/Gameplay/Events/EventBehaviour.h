@@ -17,6 +17,7 @@ private:
     Event* _event;
 
     sol::table _self;
+    sol::function _init;
     sol::function _onStart;
     sol::function _act;
     sol::function _done;
@@ -26,6 +27,7 @@ private:
     bool init(sol::table const& behaviour);
 public:
     static EventBehaviour* Create(Game* game, Scene* scene, Entity* entity, Event* event, sol::table const& behaviour);
+    bool init();
     bool onStart();
     bool act();
     bool done() const;

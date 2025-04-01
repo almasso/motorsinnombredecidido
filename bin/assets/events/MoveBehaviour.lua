@@ -16,7 +16,7 @@ function Move:init(scene, entity, event)
 end
 
 function Move:act(game, scene, entity, event)
-    print("Momement act");
+    print("\nMomement act");
     self._moveComponent:setTarget(self._target);
     self._done = true;
     return true;

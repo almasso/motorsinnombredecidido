@@ -9,6 +9,7 @@ private:
 public:
     OnStartCondition();
     bool init(sol::table const& params) override;
+    void reset() override;
     bool met() override;
     ~OnStartCondition() override;
 };

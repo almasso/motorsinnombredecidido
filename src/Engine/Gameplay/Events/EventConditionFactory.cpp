@@ -4,7 +4,9 @@
 
 #include "Conditions/AlwaysCondition.h"
 #include "Conditions/AndCondition.h"
+#include "Conditions/AreCollidingCondition.h"
 #include "Conditions/BehaviourEndedCondition.h"
+#include "Conditions/NotCondition.h"
 #include "Conditions/OnStartCondition.h"
 #include "Conditions/OrCondition.h"
 #include "Conditions/TimePassedCondition.h"
@@ -18,6 +20,8 @@ void EventConditionFactory::Init() {
     RegisterCondition<AlwaysCondition>();
     RegisterCondition<BehaviourEndedCondition>();
     RegisterCondition<TimePassedCondition>();
+    RegisterCondition<NotCondition>();
+    RegisterCondition<AreCollidingCondition>();
 }
 
 bool EventConditionFactory::ReadCondition(sol::table const& condition, std::string& type, sol::table& params) {

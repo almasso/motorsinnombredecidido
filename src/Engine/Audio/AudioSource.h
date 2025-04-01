@@ -31,7 +31,7 @@ public:
     /// @brief Reproduce la \c AudioSource desde el principio.
     /// @remark Si la fuente ya se estaba reproduciendo o estaba pausada se reiniciará.
     /// @return \c true si la fuente se reprodujo correctamente; \c false si no.
-    void play();
+    bool play();
 
     /// @~english
     /// @brief Stops the \c AudioSource completely.
@@ -39,7 +39,7 @@ public:
     /// @~spanish
     /// @brief Detiene la \c AudioSource por completo.
     /// @return \c true si la fuente se detuvo correctamente; \c false si no.
-    void stop();
+    bool stop();
 
     /// @~english
     /// @brief Pauses the \c AudioSource.
@@ -53,7 +53,7 @@ public:
     /// @~spanish
     /// @brief Reproduce la \c AudioSource desde el punto en el que se pausó.
     /// @return \c true si la fuente se reprodujo correctamente o si ya se estaba reproduciendo; \c false si no.
-    void resume();
+    bool resume();
 
     /// @~english
     /// @brief Checks whether the \c AudioSource is currently playing.
@@ -102,6 +102,8 @@ public:
     /// @brief Establece el estado de ciclado de la \c AudioSource .
     /// @param loop \c true para activar el estado de ciclado, \c false para desactivarlo.
     void setLoop(bool loop);
+
+    void changeClip(std::string const& key);
 
     static void RegisterToLua(sol::state& luaState);
 };

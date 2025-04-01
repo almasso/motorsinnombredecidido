@@ -1,5 +1,9 @@
 local Move = require('assets.events.MoveBehaviour');
 local WaitFor = require('assets.events.WaitForBehaviour');
+local Jump = require('assets.events.JumpBehaviour');
+local JumpIf = require('assets.events.JumpIfBehaviour');
+local PlaySFX = require('assets.events.PlaySFXBehaviour');
+local Music = require('assets.events.MusicBehaviour');
 
 return {
     manager = {
@@ -15,15 +19,21 @@ return {
             }
         }
     },
-    music = {
-        components = {
-            AudioSource = {
-                clip = "assets/audio/audio.wav",
-                mixer = "assets/audio/music.mixer.lua",
-                volume = 0.8,
-                loop = true,
-                playOnAwake = true
+    entity1 = {
+        children = {
+            sfx1 = {
+                handler = "entity1_sfx1",
+                components = {
+                    AudioSource = {
+                        clip = "assets/audio/SodaLoop.wav",
+                        mixer = "assets/audio/sfx.mixer.lua",
+                        volume = 1.0,
+                        loop = false
+                    }
+                },
             },
+        },
+        components = {
             Animator = {
                 animation = "assets/sprites/test.animation.lua",
                 playing = true
@@ -32,7 +42,7 @@ return {
                 pos = {0, 0}
             },
             MovementComponent = {
-                speed = 100
+                speed = 500
             },
             PlayerInput = {0},
             EventHandler = {
@@ -51,29 +61,38 @@ return {
                             }
                         },
                         behaviours = {
+                            Music:new({action = "play"}),
                             WaitFor:new({type = "TimePassed", params = { seconds = 1.0 }}),
                             Move:new(0, 200),
-                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 1 }}),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 2 }}),
                             Move:new(200, 200),
-                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 3 }}),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 4 }}),
                             Move:new(200, 0),
-                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 5 }}),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 6 }}),
                             Move:new(0, 0),
-                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 7 }})
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 8 }}),
+                            JumpIf:new(15, {type = "BehaviourEnded", params = { behaviour = 14 }}),
+                            PlaySFX:new("entity1_sfx1"),
+                            Music:new({action = "stop"}),
+                            Music:new({action = "change", clip="assets/audio/SodaLoop.wav"}),
+                            Jump:new(0),
+                            JumpIf:new(1, {type = "BehaviourEnded", params = { behaviour = 17 }}),
+                            Music:new({action = "change", clip="assets/audio/audio.wav"}),
+                            Music:new({action = "volume", volume = 0.5})
                         }
                     }
                 }
             }
         }
     },
-    sfx = {
+    music = {
+        handler = "Music",
         components = {
             AudioSource = {
-                enabled = false,
-                clip = "assets/audio/SodaLoop.wav",
-                mixer = "assets/audio/sfx.mixer.lua",
+                clip = "assets/audio/audio.wav",
+                mixer = "assets/audio/music.mixer.lua",
                 volume = 1,
-                loop = false
+                loop = true
             }
         }
     }

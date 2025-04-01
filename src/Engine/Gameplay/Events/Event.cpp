@@ -60,6 +60,10 @@ bool Event::init(sol::table const& event) {
         return false;
     if (!initBehaviours(event))
         return false;
+    for (auto& behaviour : _behaviours) {
+        if (!behaviour->init())
+            return false;
+    }
     _condition->reset();
     return true;
 }
@@ -115,6 +119,7 @@ EventBehaviour const* Event::getBehaviour(int index) const {
 bool Event::update() {
     if (_targetBehaviour != -1) {
         _currentBehaviour = _targetBehaviour;
+        _behaviours[_currentBehaviour]->onStart();
         _targetBehaviour = -1;
     }
 

@@ -40,20 +40,20 @@ void AudioSource::onDisable() {
     pause();
 }
 
-void AudioSource::play() {
-    _clip->play();
+bool AudioSource::play() {
+    return _clip->play();
 }
 
-void AudioSource::stop() {
-    _clip->stop();
+bool AudioSource::stop() {
+    return _clip->stop();
 }
 
 void AudioSource::pause() {
     _clip->pause();
 }
 
-void AudioSource::resume() {
-    _clip->resume();
+bool AudioSource::resume() {
+    return _clip->resume();
 }
 
 bool AudioSource::isPlaying() const {
@@ -80,6 +80,10 @@ void AudioSource::setLoop(bool loop) {
     _clip->setLoop(loop);
 }
 
+void AudioSource::changeClip(std::string const& key) {
+    _clip->changeKey(key);
+}
+
 void AudioSource::RegisterToLua(sol::state& luaState) {
     sol::usertype<AudioSource> type = luaState.new_usertype<AudioSource>("AudioSource");
     type["play"] = &AudioSource::play;
@@ -93,5 +97,6 @@ void AudioSource::RegisterToLua(sol::state& luaState) {
     type["setVolume"] = &AudioSource::setVolume;
     type["isLooped"] = &AudioSource::isLooped;
     type["setLoop"] = &AudioSource::setLoop;
+    type["changeClip"] = &AudioSource::changeClip;
     type["get"] = AudioSource::get;
 }

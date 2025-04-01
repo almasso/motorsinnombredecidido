@@ -143,6 +143,8 @@ public:
     /// @param loop \c true para activar el estado de ciclado, \c false para desactivarlo.
     void setLoop(bool loop);
 
+    void changeKey(std::string const& key);
+
     /// @~english
     /// @brief Updates the clip's global playing volume depending on the clip's volume and on it's \c AudioMixer 's if it has any assigned.
     /// @remark This method is called automatically every time the clip's volume changes or every time it's \c AudioMixer 's global volume if it has any assigned. Programmer doesn't need to call this method at any given point.

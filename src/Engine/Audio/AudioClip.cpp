@@ -113,6 +113,26 @@ void AudioClip::setLoop(bool loop) {
     _loop = loop;
 }
 
+void AudioClip::changeKey(std::string const& key) {
+    auto state = _state;
+    _key = key;
+    stop();
+    SDL_AudioSpec dstSpec;
+    SDL_GetAudioDeviceFormat(_device, &dstSpec, NULL);
+    SDL_SetAudioStreamFormat(_stream, ResourceHandler<AudioClipData>::Instance()->get(_key)->specifier, &dstSpec);
+    SDL_SetAudioStreamGetCallback(_stream, AudioClip::Update, this);
+    switch (state) {
+        case PAUSED:
+            play();
+            pause();
+            break;
+        case PLAYING:
+            play();
+            break;
+        default: ;
+    }
+}
+
 void AudioClip::updateVolume() {
     if (!_stream)
         return;

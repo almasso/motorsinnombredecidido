@@ -9,6 +9,10 @@ bool OnStartCondition::init(sol::table const& params) {
     return true;
 }
 
+void OnStartCondition::reset() {
+    alreadyMet = false;
+}
+
 bool OnStartCondition::met() {
     if (alreadyMet)
         return false;
