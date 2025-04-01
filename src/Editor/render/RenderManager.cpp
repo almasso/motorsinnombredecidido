@@ -213,3 +213,7 @@ void editor::render::RenderManager::disableWindowResizing() {
     }
 }
 
+std::string editor::render::RenderManager::getWindowName() const {
+    return SDL_GetWindowTitle(_window);
+}
+

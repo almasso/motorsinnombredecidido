@@ -159,6 +159,8 @@ namespace editor::render {
             _setWindowName(std::forward<T>(name));
         }
 
+        std::string getWindowName() const;
+
         RenderManager(const RenderManager &) = delete;
         RenderManager &operator=(const RenderManager &) = delete;
 

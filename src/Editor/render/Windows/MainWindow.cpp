@@ -14,6 +14,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
     editor::render::RenderManager::GetInstance().setHeight(1080);
     editor::render::RenderManager::GetInstance().enableWindowResizing();
     editor::render::RenderManager::GetInstance().centerWindowInScreen();
+    editor::render::RenderManager::GetInstance().setWindowName(editor::render::RenderManager::GetInstance().getWindowName() + " - " + _project->getName());
     editor::render::WindowStack::removeAllWindowsFromStack();
     editor::render::WindowStack::addWindowToStack(this);
     editor::render::RenderManager::GetInstance().showWindow();
