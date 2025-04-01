@@ -114,13 +114,13 @@ $(document).ready(function(){initNavTree('AudioSource_8h_source.html',''); initR
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> onEnable() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> onDisable() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> play();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> play();</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> stop();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">bool</span> stop();</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> pause();</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> resume();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">bool</span> resume();</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">bool</span> isPlaying() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
@@ -134,12 +134,14 @@ $(document).ready(function(){initNavTree('AudioSource_8h_source.html',''); initR
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">void</span> setLoop(<span class="keywordtype">bool</span> loop);</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> RegisterToLua(sol::state&amp; luaState);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>};</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> changeClip(std::string <span class="keyword">const</span>&amp; key);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> RegisterToLua(sol::state&amp; luaState);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>};</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#endif </span><span class="comment">//AUDIOSOURCE_H</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#endif </span><span class="comment">//AUDIOSOURCE_H</span></div>
 <div class="ttc" id="aComponentTemplate_8h_html"><div class="ttname"><a href="ComponentTemplate_8h.html">ComponentTemplate.h</a></div></div>
 <div class="ttc" id="aclassAudioClip_html"><div class="ttname"><a href="classAudioClip.html">AudioClip</a></div><div class="ttdoc">Data structure used to manage a single instance of an audio clip.</div><div class="ttdef"><b>Definition:</b> AudioClip.h:15</div></div>
 <div class="ttc" id="aclassAudioMixer_html"><div class="ttname"><a href="classAudioMixer.html">AudioMixer</a></div><div class="ttdoc">Class made to englobe changes wanted to be applied to multiple AudioClip s. AudioMixer instances may ...</div><div class="ttdef"><b>Definition:</b> AudioMixer.h:13</div></div>
