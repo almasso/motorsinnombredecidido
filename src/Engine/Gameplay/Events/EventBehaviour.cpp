@@ -28,6 +28,10 @@ bool EventBehaviour::init(sol::table const& behaviour) {
     if (!_ended.valid())
         return false;
 
+    _onStart = LuaReader::GetFunction(behaviour, "onStart");
+    if (!_onStart.valid())
+        return false;
+
     auto init = LuaReader::GetFunction(behaviour, "init");
     if (!init.valid())
         return false;
@@ -46,6 +50,10 @@ EventBehaviour* EventBehaviour::Create(Game* game, Scene* scene, Entity* entity,
 
     delete instance;
     return nullptr;
+}
+
+bool EventBehaviour::onStart() {
+    return _onStart(_self);
 }
 
 bool EventBehaviour::act() {

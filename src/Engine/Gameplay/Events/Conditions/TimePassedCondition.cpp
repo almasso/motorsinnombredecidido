@@ -15,9 +15,11 @@ bool TimePassedCondition::init(sol::table const& params) {
     return true;
 }
 
+void TimePassedCondition::reset() {
+    _startTime = Time::time;
+}
+
 bool TimePassedCondition::met() {
-    if (_startTime < 0.0f)
-        _startTime = Time::time;
     return _timeToPass <= Time::time - _startTime;
 }
 

@@ -10,6 +10,7 @@ private:
 public:
     TimePassedCondition();
     bool init(sol::table const& params) override;
+    void reset() override;
     bool met() override;
     ~TimePassedCondition() override;
 };

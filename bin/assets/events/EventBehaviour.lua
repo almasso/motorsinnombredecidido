@@ -15,6 +15,11 @@ function EventBehaviour:init(scene, entity, event)
     return true;
 end
 
+function EventBehaviour:onStart()
+    self._done = false;
+    return true;
+end
+
 function EventBehaviour:act(game, scene, entity, event)
     return true;
 end

@@ -51,14 +51,15 @@ return {
                             }
                         },
                         behaviours = {
-                            WaitFor:new({type = "TimePassed", params = { seconds = 0.5 }}),
+                            WaitFor:new({type = "TimePassed", params = { seconds = 1.0 }}),
                             Move:new(0, 200),
                             WaitFor:new({type = "BehaviourEnded", params = { behaviour = 1 }}),
                             Move:new(200, 200),
                             WaitFor:new({type = "BehaviourEnded", params = { behaviour = 3 }}),
                             Move:new(200, 0),
                             WaitFor:new({type = "BehaviourEnded", params = { behaviour = 5 }}),
-                            Move:new(0, 0)
+                            Move:new(0, 0),
+                            WaitFor:new({type = "BehaviourEnded", params = { behaviour = 7 }})
                         }
                     }
                 }

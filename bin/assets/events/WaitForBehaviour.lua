@@ -14,6 +14,12 @@ function WaitFor:init(scene, entity, event)
     return not (self._condition == nil);
 end
 
+function WaitFor:onStart()
+    WaitFor:super().onStart(self);
+    self._condition:reset();
+    return true;
+end
+
 function WaitFor:act(game, scene, entity, event)
     print("WaitFor act");
     self._done = self._condition:met();

@@ -49,6 +49,7 @@ Event::Event(Game* game, Scene* scene, Entity* entity) :
     _entity(entity),
     _condition(nullptr),
     _currentBehaviour(-1),
+    _loop(false),
     _isPaused(true),
     _targetBehaviour(-1) {
 }
@@ -59,6 +60,7 @@ bool Event::init(sol::table const& event) {
         return false;
     if (!initBehaviours(event))
         return false;
+    _condition->reset();
     return true;
 }
 
@@ -82,6 +84,7 @@ Event::~Event() {
 
 void Event::start() {
     _currentBehaviour = 0;
+    _behaviours[_currentBehaviour]->onStart();
     resume();
 }
 
@@ -131,8 +134,12 @@ bool Event::update() {
 
     if (behaviour->done()) {
         ++_currentBehaviour;
-        if (_loop && _currentBehaviour == _behaviours.size())
+        if (_currentBehaviour < _behaviours.size())
+            _behaviours[_currentBehaviour]->onStart();
+        else if (_loop) {
             _currentBehaviour = 0;
+            _behaviours[_currentBehaviour]->onStart();
+        }
     }
     return true;
 }

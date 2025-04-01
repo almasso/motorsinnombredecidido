@@ -17,6 +17,7 @@ public:
     EventCondition();
     virtual bool init(sol::table const& params) = 0;
     void setContext(Scene* scene, Entity* entity, Event* event);
+    virtual void reset();
     virtual bool met() = 0;
     virtual ~EventCondition();
 
