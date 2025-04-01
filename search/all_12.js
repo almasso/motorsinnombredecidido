@@ -1,20 +1,10 @@
 var searchData=
 [
-  ['texture_0',['Texture',['../classTexture.html',1,'Texture'],['../classTexture.html#a91e7249df7e53cb7745618d3e819e43f',1,'Texture::Texture(std::string const &amp;path)']]],
-  ['texture_1',['texture',['../classTexture.html#a174cab7a9826412faa6f00236684aaa3',1,'Texture']]],
-  ['texture_2ecpp_2',['Texture.cpp',['../Texture_8cpp.html',1,'']]],
-  ['texture_2eh_3',['Texture.h',['../Texture_8h.html',1,'']]],
-  ['textureloader_4',['TextureLoader',['../classTextureLoader.html',1,'']]],
-  ['textureloader_2ecpp_5',['TextureLoader.cpp',['../TextureLoader_8cpp.html',1,'']]],
-  ['textureloader_2eh_6',['TextureLoader.h',['../TextureLoader_8h.html',1,'']]],
-  ['time_7',['Time',['../structTime.html',1,'']]],
-  ['time_8',['time',['../structTime.html#a6df67324602471b0c0e07559b83b0af4',1,'Time']]],
-  ['time_2ecpp_9',['Time.cpp',['../Time_8cpp.html',1,'']]],
-  ['time_2eh_10',['Time.h',['../Time_8h.html',1,'']]],
-  ['timemanager_11',['TimeManager',['../classTimeManager.html',1,'']]],
-  ['timemanager_2ecpp_12',['TimeManager.cpp',['../TimeManager_8cpp.html',1,'']]],
-  ['timemanager_2eh_13',['TimeManager.h',['../TimeManager_8h.html',1,'']]],
-  ['transform_14',['Transform',['../classTransform.html#ad13a221b67ee1e98eab6949673429b6c',1,'Transform::Transform()'],['../classTransform.html',1,'Transform']]],
-  ['transform_2ecpp_15',['Transform.cpp',['../Transform_8cpp.html',1,'']]],
-  ['transform_2eh_16',['Transform.h',['../Transform_8h.html',1,'']]]
+  ['unit_0',['UNIT',['../classVector2.html#a9a1a09c32435b334af2576907785aefb',1,'Vector2']]],
+  ['unload_1',['unload',['../classAudioClipData.html#a1f46a709f45195545fbf86686ce917ea',1,'AudioClipData::unload()'],['../classAudioMixerData.html#ab4aeb5c205d030d7cef332dd250aab45',1,'AudioMixerData::unload()'],['../classPrefabBlueprint.html#a0d054b2d0f23fbe8398cca20c1f95fbe',1,'PrefabBlueprint::unload()'],['../classSceneBlueprint.html#a191f2ec3a75925be2651c088d8338e41',1,'SceneBlueprint::unload()'],['../classResource.html#a0cc6e217e6740ddd925483eebce74640',1,'Resource::unload()'],['../classAnimation.html#a78521c6badc264683f022a401c49e091',1,'Animation::unload()'],['../classSprite.html#aa52034ec770c1338f259e85aa42a9977',1,'Sprite::unload()'],['../classTexture.html#a6b35197d173df149eac1840868e8c40a',1,'Texture::unload()']]],
+  ['unregistercollider_2',['unregisterCollider',['../classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c',1,'CollisionManager']]],
+  ['unregisterrendercomponent_3',['unregisterRenderComponent',['../classScene.html#a1122cff66186b080e9e9d1ebfbdca5b3',1,'Scene']]],
+  ['up_4',['UP',['../classVector2.html#a51b5f3d8a7cd9602fd796b65d57673e1',1,'Vector2']]],
+  ['update_5',['update',['../classComponent.html#a9e4a1c1e5fa7e4a4427259487f97b8d0',1,'Component::update()'],['../classEntity.html#a0b763dec09f1314d6cddb4d774eb6db7',1,'Entity::update()'],['../classScene.html#a1592fb3d4a7e0a7d0dc2bb761cd853ab',1,'Scene::update()'],['../classSceneManager.html#aa17ae985d1c28b8380b80773f9dcc9d3',1,'SceneManager::update()'],['../classInputManager.html#a54d1175e15788cc779001638b1efd16e',1,'InputManager::update()'],['../classTimeManager.html#a97d902b19861efc099141eeb846671a3',1,'TimeManager::update()']]],
+  ['updatevolume_6',['updateVolume',['../classAudioClip.html#a9506500cffe41b27fdfd3561f9060a9f',1,'AudioClip::updateVolume()'],['../classAudioMixer.html#a159bb07dedb3b206979802426fc9b145',1,'AudioMixer::updateVolume()']]]
 ];

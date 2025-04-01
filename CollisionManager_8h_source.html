@@ -104,11 +104,11 @@ $(document).ready(function(){initNavTree('CollisionManager_8h_source.html',''); 
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">static</span> <a class="code hl_class" href="classCollisionManager.html">CollisionManager</a>* _instance;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> handleCollision(<a class="code hl_class" href="classCollider.html">Collider</a>* collider, <a class="code hl_class" href="classCollider.html">Collider</a>* collider2);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> handleCollision(Collider* collider, Collider* collider2);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> handleCollisionEnd(<a class="code hl_class" href="classCollider.html">Collider</a>* collider, <a class="code hl_class" href="classCollider.html">Collider</a>* collider2);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> handleCollisionEnd(Collider* collider, Collider* collider2);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> updateCollisions(<a class="code hl_class" href="classCollider.html">Collider</a>* collider, <a class="code hl_class" href="classCollider.html">Collider</a>* collider2);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> updateCollisions(Collider* collider, Collider* collider2);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="classCollisionManager.html">CollisionManager</a>();</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
@@ -127,14 +127,13 @@ $(document).ready(function(){initNavTree('CollisionManager_8h_source.html',''); 
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a36ff44dede2518f52ddacadb0ee99fbb">fixedUpdate</a>();</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749">registerCollider</a>(<a class="code hl_class" href="classCollider.html">Collider</a>* collider);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749">registerCollider</a>(Collider* collider);</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c">unregisterCollider</a>(<a class="code hl_class" href="classCollider.html">Collider</a>* collider);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c">unregisterCollider</a>(Collider* collider);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>};</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#endif </span><span class="comment">//COLLISIONMANAGER_H</span></div>
 <div class="ttc" id="aCollider_8h_html"><div class="ttname"><a href="Collider_8h.html">Collider.h</a></div></div>
-<div class="ttc" id="aclassCollider_html"><div class="ttname"><a href="classCollider.html">Collider</a></div><div class="ttdef"><b>Definition:</b> Collider.h:13</div></div>
 <div class="ttc" id="aclassCollisionManager_html"><div class="ttname"><a href="classCollisionManager.html">CollisionManager</a></div><div class="ttdef"><b>Definition:</b> CollisionManager.h:6</div></div>
 <div class="ttc" id="aclassCollisionManager_html_a2c5770b90b7a46a5674df008a7a57145"><div class="ttname"><a href="classCollisionManager.html#a2c5770b90b7a46a5674df008a7a57145">CollisionManager::Init</a></div><div class="ttdeci">static void Init()</div><div class="ttdoc">Initializes the collision system.</div><div class="ttdef"><b>Definition:</b> CollisionManager.cpp:36</div></div>
 <div class="ttc" id="aclassCollisionManager_html_a2f69dc109914167a1fd5953727f14dc8"><div class="ttname"><a href="classCollisionManager.html#a2f69dc109914167a1fd5953727f14dc8">CollisionManager::Instance</a></div><div class="ttdeci">static CollisionManager * Instance()</div><div class="ttdoc">Access to the single instance of CollisionManager .</div><div class="ttdef"><b>Definition:</b> CollisionManager.cpp:41</div></div>

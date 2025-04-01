@@ -1,4 +1,4 @@
 var Rectangle_8h =
 [
-    [ "Rectangle", "classRectangle.html", "classRectangle" ]
+    [ "ComponentDerived", "Rectangle_8h.html#a35ad134a60ed50a3a050ce9438fb2aca", null ]
 ];

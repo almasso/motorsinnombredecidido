@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('Collider_8h_source.html',''); initResi
   <div class="headertitle"><div class="title">Collider.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="Collider_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef COLLIDER_H</span></div>
+<a href="Collider_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="Collider_8h.html#ad5c1532436066872d475da5b686c19fb">    1</a></span><span class="preprocessor">#ifndef COLLIDER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define COLLIDER_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;unordered_set&gt;</span></div>
@@ -103,37 +103,37 @@ $(document).ready(function(){initNavTree('Collider_8h_source.html',''); initResi
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;sol/forward.hpp&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span><a class="code hl_class" href="classCollisionManager.html">CollisionManager</a>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span><a class="code hl_class" href="classTransform.html">Transform</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span>Transform;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classCollider.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="classCollider.html">Collider</a> : <span class="keyword">public</span> <a class="code hl_class" href="classComponentTemplate.html">ComponentTemplate</a>&lt;Collider, &quot;Collider&quot;&gt; {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">class </span>ComponentClass(Collider) {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">friend</span> <a class="code hl_class" href="classCollisionManager.html">CollisionManager</a>;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_class" href="classVector2.html">Vector2</a> _pos;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_class" href="classVector2.html">Vector2</a> _size;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="classTransform.html">Transform</a> <span class="keyword">const</span>* _transform;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    Transform <span class="keyword">const</span>* _transform;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::unordered_set&lt;Collider*&gt; _isColliding;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    std::unordered_set&lt;Collider*&gt; _justCollided;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::unordered_set&lt;Collider*&gt; _collisionEnded;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classCollider.html">Collider</a>(<a class="code hl_class" href="classComponentData.html">ComponentData</a> <span class="keyword">const</span>* data);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b">~Collider</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classCollider.html#ab08f8cf21e05fe9187ec138b8036bff2">init</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollider.html#ac2293ca05f9e9cce6be71e3e5e423034">onEnable</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollider.html#a6ee5998a31c713010f2546881d061634">onDisable</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">explicit</span> Collider(<a class="code hl_class" href="classComponentData.html">ComponentData</a> <span class="keyword">const</span>* data);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    ~Collider() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> init() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> onEnable() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> onDisable() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classCollider.html#a426dde2f95b1717d44ff00b761cecb90">isCollidingWith</a>(<a class="code hl_class" href="classCollider.html">Collider</a>* other) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">bool</span> isCollidingWith(Collider* other) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classCollider.html#ab64801d5d16958f7b6df63665c1407f8">justCollidedWith</a>(<a class="code hl_class" href="classCollider.html">Collider</a>* other) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">bool</span> justCollidedWith(Collider* other) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classCollider.html#ac6ed072f57f6029f0d88c57189169d5c">collisionEndedWith</a>(<a class="code hl_class" href="classCollider.html">Collider</a>* other) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">bool</span> collisionEndedWith(Collider* other) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_typedef" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a> <a class="code hl_function" href="classCollider.html#a788de32090d0ee109827025d3b89325c">getRect</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_typedef" href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a> getRect() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCollider.html#a1e7b8910dd1b231bea4cdf8ebb4f6411">RegisterToLua</a>(sol::state&amp; luaState);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> RegisterToLua(sol::state&amp; luaState);</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
@@ -143,20 +143,8 @@ $(document).ready(function(){initNavTree('Collider_8h_source.html',''); initResi
 <div class="ttc" id="aRect_8h_html"><div class="ttname"><a href="Rect_8h.html">Rect.h</a></div></div>
 <div class="ttc" id="aRect_8h_html_a7395957cffd7983a847ddfb2dd254b08"><div class="ttname"><a href="Rect_8h.html#a7395957cffd7983a847ddfb2dd254b08">Rect</a></div><div class="ttdeci">SDL_FRect Rect</div><div class="ttdef"><b>Definition:</b> Rect.h:6</div></div>
 <div class="ttc" id="aVector2_8h_html"><div class="ttname"><a href="Vector2_8h.html">Vector2.h</a></div></div>
-<div class="ttc" id="aclassCollider_html"><div class="ttname"><a href="classCollider.html">Collider</a></div><div class="ttdef"><b>Definition:</b> Collider.h:13</div></div>
-<div class="ttc" id="aclassCollider_html_a1e7b8910dd1b231bea4cdf8ebb4f6411"><div class="ttname"><a href="classCollider.html#a1e7b8910dd1b231bea4cdf8ebb4f6411">Collider::RegisterToLua</a></div><div class="ttdeci">static void RegisterToLua(sol::state &amp;luaState)</div><div class="ttdef"><b>Definition:</b> Collider.cpp:61</div></div>
-<div class="ttc" id="aclassCollider_html_a426dde2f95b1717d44ff00b761cecb90"><div class="ttname"><a href="classCollider.html#a426dde2f95b1717d44ff00b761cecb90">Collider::isCollidingWith</a></div><div class="ttdeci">bool isCollidingWith(Collider *other) const</div><div class="ttdoc">Checks whether this Collider is colliding with another one.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:38</div></div>
-<div class="ttc" id="aclassCollider_html_a6ee5998a31c713010f2546881d061634"><div class="ttname"><a href="classCollider.html#a6ee5998a31c713010f2546881d061634">Collider::onDisable</a></div><div class="ttdeci">void onDisable() override</div><div class="ttdef"><b>Definition:</b> Collider.cpp:34</div></div>
-<div class="ttc" id="aclassCollider_html_a788de32090d0ee109827025d3b89325c"><div class="ttname"><a href="classCollider.html#a788de32090d0ee109827025d3b89325c">Collider::getRect</a></div><div class="ttdeci">Rect getRect() const</div><div class="ttdoc">Access to the dimensions of the collider with its entity's transform applied.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:50</div></div>
-<div class="ttc" id="aclassCollider_html_ab08f8cf21e05fe9187ec138b8036bff2"><div class="ttname"><a href="classCollider.html#ab08f8cf21e05fe9187ec138b8036bff2">Collider::init</a></div><div class="ttdeci">bool init() override</div><div class="ttdef"><b>Definition:</b> Collider.cpp:20</div></div>
-<div class="ttc" id="aclassCollider_html_ab64801d5d16958f7b6df63665c1407f8"><div class="ttname"><a href="classCollider.html#ab64801d5d16958f7b6df63665c1407f8">Collider::justCollidedWith</a></div><div class="ttdeci">bool justCollidedWith(Collider *other) const</div><div class="ttdoc">Checks whether this Collider started colliding with another one this frame.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:42</div></div>
-<div class="ttc" id="aclassCollider_html_ac2293ca05f9e9cce6be71e3e5e423034"><div class="ttname"><a href="classCollider.html#ac2293ca05f9e9cce6be71e3e5e423034">Collider::onEnable</a></div><div class="ttdeci">void onEnable() override</div><div class="ttdef"><b>Definition:</b> Collider.cpp:30</div></div>
-<div class="ttc" id="aclassCollider_html_ac6ed072f57f6029f0d88c57189169d5c"><div class="ttname"><a href="classCollider.html#ac6ed072f57f6029f0d88c57189169d5c">Collider::collisionEndedWith</a></div><div class="ttdeci">bool collisionEndedWith(Collider *other) const</div><div class="ttdoc">Checks whether this Collider stopped with another one this frame.</div><div class="ttdef"><b>Definition:</b> Collider.cpp:46</div></div>
-<div class="ttc" id="aclassCollider_html_ad06f9eccc0a37702f8cecedc6d1a7c4b"><div class="ttname"><a href="classCollider.html#ad06f9eccc0a37702f8cecedc6d1a7c4b">Collider::~Collider</a></div><div class="ttdeci">~Collider() override</div><div class="ttdef"><b>Definition:</b> Collider.cpp:16</div></div>
 <div class="ttc" id="aclassCollisionManager_html"><div class="ttname"><a href="classCollisionManager.html">CollisionManager</a></div><div class="ttdef"><b>Definition:</b> CollisionManager.h:6</div></div>
 <div class="ttc" id="aclassComponentData_html"><div class="ttname"><a href="classComponentData.html">ComponentData</a></div><div class="ttdef"><b>Definition:</b> ComponentData.h:7</div></div>
-<div class="ttc" id="aclassComponentTemplate_html"><div class="ttname"><a href="classComponentTemplate.html">ComponentTemplate</a></div><div class="ttdef"><b>Definition:</b> ComponentTemplate.h:12</div></div>
-<div class="ttc" id="aclassTransform_html"><div class="ttname"><a href="classTransform.html">Transform</a></div><div class="ttdef"><b>Definition:</b> Transform.h:6</div></div>
 <div class="ttc" id="aclassVector2_html"><div class="ttname"><a href="classVector2.html">Vector2</a></div><div class="ttdef"><b>Definition:</b> Vector2.h:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

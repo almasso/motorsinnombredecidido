@@ -11,31 +11,8 @@ var hierarchy =
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
-      [ "ComponentTemplate< AudioSource, \"AudioSource\">", "classComponentTemplate.html", [
-        [ "AudioSource", "classAudioSource.html", null ]
-      ] ],
-      [ "ComponentTemplate< Collider, \"Collider\">", "classComponentTemplate.html", [
-        [ "Collider", "classCollider.html", null ]
-      ] ],
-      [ "ComponentTemplate< Transform, \"Transform\">", "classComponentTemplate.html", [
-        [ "Transform", "classTransform.html", null ]
-      ] ],
       [ "ComponentTemplate< NewComponent, componentName, ComponentBase >", "classComponentTemplate.html", null ],
       [ "RenderComponent", "classRenderComponent.html", null ]
-    ] ],
-    [ "ComponentBase", null, [
-      [ "ComponentTemplate< Animator, \"Animator\", SpriteRenderer >", "classComponentTemplate.html", [
-        [ "Animator", "classAnimator.html", null ]
-      ] ],
-      [ "ComponentTemplate< Camera, \"Camera\", RenderComponent >", "classComponentTemplate.html", [
-        [ "Camera", "classCamera.html", null ]
-      ] ],
-      [ "ComponentTemplate< Rectangle, \"Rectangle\", RenderComponent >", "classComponentTemplate.html", [
-        [ "Rectangle", "classRectangle.html", null ]
-      ] ],
-      [ "ComponentTemplate< SpriteRenderer, \"SpriteRenderer\", RenderComponent >", "classComponentTemplate.html", [
-        [ "SpriteRenderer", "classSpriteRenderer.html", null ]
-      ] ]
     ] ],
     [ "ComponentData", "classComponentData.html", null ],
     [ "ComponentFactory", "classComponentFactory.html", null ],

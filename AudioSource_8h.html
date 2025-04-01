@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('AudioSource_8h.html',''); initResizabl
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">AudioSource.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -100,12 +100,54 @@ $(document).ready(function(){initNavTree('AudioSource_8h.html',''); initResizabl
 </div>
 <p><a href="AudioSource_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAudioSource.html">AudioSource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classComponent.html">Component</a> containing a source of audio and allows to play it.  <a href="classAudioSource.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a611998adc4a0e6b414b895e64c1b361c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="AudioSource_8h.html#a611998adc4a0e6b414b895e64c1b361c">ComponentClass</a> (AudioSource)</td></tr>
+<tr class="memdesc:a611998adc4a0e6b414b895e64c1b361c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classComponent.html">Component</a> containing a source of audio and allows to play it.  <br /></td></tr>
+<tr class="separator:a611998adc4a0e6b414b895e64c1b361c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a611998adc4a0e6b414b895e64c1b361c" name="a611998adc4a0e6b414b895e64c1b361c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a611998adc4a0e6b414b895e64c1b361c">&#9670;&#160;</a></span>ComponentClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">class ComponentClass </td>
+          <td>(</td>
+          <td class="paramtype">AudioSource&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classComponent.html">Component</a> containing a source of audio and allows to play it. </p>
+<p>Plays the <code>AudioSource</code> from the start. </p><dl class="section remark"><dt>Remarks</dt><dd>If the source was already playing or paused it will be restarted. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the source played correctly; <code>false</code> otherwise.</dd></dl>
+<p>Stops the <code>AudioSource</code> completely. </p><dl class="section return"><dt>Returns</dt><dd><code>true</code> if the source stopped correctly; <code>false</code> otherwise.</dd></dl>
+<p>Pauses the <code>AudioSource</code>.</p>
+<p>Resumes the <code>AudioSource</code> at the point it was paused. </p><dl class="section return"><dt>Returns</dt><dd><code>true</code> if the source resumed correctly or if it was already playing; <code>false</code> otherwise.</dd></dl>
+<p>Checks whether the <code>AudioSource</code> is currently playing. </p><dl class="section return"><dt>Returns</dt><dd><code>true</code> if the <code>AudioSource</code> is currently playing, <code>false</code> otherwise.</dd></dl>
+<p>Checks whether the <code>AudioSource</code> is currently paused. </p><dl class="section return"><dt>Returns</dt><dd><code>true</code> if the <code>AudioSource</code> is currently paused, <code>false</code> otherwise.</dd></dl>
+<p>Gets the <code>AudioSource</code> 's current volume. </p><dl class="section return"><dt>Returns</dt><dd>Value between <code>0.0f</code> and <code>1.0f</code> representing the volume assigned to the source.</dd></dl>
+<p>Sets the <code>AudioSource</code> 's current volume. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">volume</td><td>Value between <code>0.0f</code> and <code>1.0f</code> representing the volume to be assigned to the source.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Checks whether the <code>AudioSource</code> has the loop option active. </p><dl class="section return"><dt>Returns</dt><dd><code>true</code> if the loop is active, <code>false</code> otherwise.</dd></dl>
+<p>Sets the current loop state of the <code>AudioSource</code> . </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loop</td><td><code>true</code> to activate the loop state, <code>false</code> to deactivate it.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

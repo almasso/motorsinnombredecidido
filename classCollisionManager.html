@@ -112,13 +112,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:acdbb3c842f0ef1c7a028d3f080855766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the collision system.  <br /></td></tr>
 <tr class="separator:acdbb3c842f0ef1c7a028d3f080855766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36ff44dede2518f52ddacadb0ee99fbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionManager.html#a36ff44dede2518f52ddacadb0ee99fbb">fixedUpdate</a> ()</td></tr>
-<tr class="memdesc:a36ff44dede2518f52ddacadb0ee99fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collision system updating. Updates the colliding state of every registered <code><a class="el" href="classCollider.html">Collider</a></code> .  <br /></td></tr>
+<tr class="memdesc:a36ff44dede2518f52ddacadb0ee99fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collision system updating. Updates the colliding state of every registered <code>Collider</code> .  <br /></td></tr>
 <tr class="separator:a36ff44dede2518f52ddacadb0ee99fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addbcb13c7c698a2dd7f9b1fc092ed749"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749">registerCollider</a> (<a class="el" href="classCollider.html">Collider</a> *collider)</td></tr>
-<tr class="memdesc:addbcb13c7c698a2dd7f9b1fc092ed749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a <code><a class="el" href="classCollider.html">Collider</a></code> to be updated by the collision system.  <br /></td></tr>
+<tr class="memitem:addbcb13c7c698a2dd7f9b1fc092ed749"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionManager.html#addbcb13c7c698a2dd7f9b1fc092ed749">registerCollider</a> (Collider *collider)</td></tr>
+<tr class="memdesc:addbcb13c7c698a2dd7f9b1fc092ed749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a <code>Collider</code> to be updated by the collision system.  <br /></td></tr>
 <tr class="separator:addbcb13c7c698a2dd7f9b1fc092ed749"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af823cdd669a51d6cb43dd36fc574104c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c">unregisterCollider</a> (<a class="el" href="classCollider.html">Collider</a> *collider)</td></tr>
-<tr class="memdesc:af823cdd669a51d6cb43dd36fc574104c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a <code><a class="el" href="classCollider.html">Collider</a></code> from being updated by the collision system.  <br /></td></tr>
+<tr class="memitem:af823cdd669a51d6cb43dd36fc574104c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollisionManager.html#af823cdd669a51d6cb43dd36fc574104c">unregisterCollider</a> (Collider *collider)</td></tr>
+<tr class="memdesc:af823cdd669a51d6cb43dd36fc574104c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a <code>Collider</code> from being updated by the collision system.  <br /></td></tr>
 <tr class="separator:af823cdd669a51d6cb43dd36fc574104c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -197,7 +197,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Collision system updating. Updates the colliding state of every registered <code><a class="el" href="classCollider.html">Collider</a></code> . </p>
+<p>Collision system updating. Updates the colliding state of every registered <code>Collider</code> . </p>
 
 </div>
 </div>
@@ -293,17 +293,17 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void CollisionManager::registerCollider </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCollider.html">Collider</a> *&#160;</td>
+          <td class="paramtype">Collider *&#160;</td>
           <td class="paramname"><em>collider</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Adds a <code><a class="el" href="classCollider.html">Collider</a></code> to be updated by the collision system. </p>
+<p>Adds a <code>Collider</code> to be updated by the collision system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">collider</td><td>Pointer to the <code><a class="el" href="classCollider.html">Collider</a></code> to register. </td></tr>
+    <tr><td class="paramname">collider</td><td>Pointer to the <code>Collider</code> to register. </td></tr>
   </table>
   </dd>
 </dl>
@@ -346,17 +346,17 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void CollisionManager::unregisterCollider </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classCollider.html">Collider</a> *&#160;</td>
+          <td class="paramtype">Collider *&#160;</td>
           <td class="paramname"><em>collider</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Removes a <code><a class="el" href="classCollider.html">Collider</a></code> from being updated by the collision system. </p>
+<p>Removes a <code>Collider</code> from being updated by the collision system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">collider</td><td>Pointer to the <code><a class="el" href="classCollider.html">Collider</a></code> to unregister. </td></tr>
+    <tr><td class="paramname">collider</td><td>Pointer to the <code>Collider</code> to unregister. </td></tr>
   </table>
   </dd>
 </dl>

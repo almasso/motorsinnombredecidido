@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('Collider_8h.html',''); initResizable()
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Collider.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -103,11 +103,52 @@ $(document).ready(function(){initNavTree('Collider_8h.html',''); initResizable()
 </div>
 <p><a href="Collider_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollider.html">Collider</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad5c1532436066872d475da5b686c19fb"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Collider_8h.html#ad5c1532436066872d475da5b686c19fb">ComponentClass</a> (Collider)</td></tr>
+<tr class="separator:ad5c1532436066872d475da5b686c19fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad5c1532436066872d475da5b686c19fb" name="ad5c1532436066872d475da5b686c19fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c1532436066872d475da5b686c19fb">&#9670;&#160;</a></span>ComponentClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">class ComponentClass </td>
+          <td>(</td>
+          <td class="paramtype">Collider&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks whether this <code>Collider</code> is colliding with another one. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Pointer to other collider. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if they are colliding. <code>false</code> otherwise.</dd></dl>
+<p>Checks whether this <code>Collider</code> started colliding with another one this frame. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Pointer to other collider. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if they just started colliding. <code>false</code> otherwise.</dd></dl>
+<p>Checks whether this <code>Collider</code> stopped with another one this frame. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Pointer to other collider. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if they just stopped colliding. <code>false</code> otherwise.</dd></dl>
+<p>Access to the dimensions of the collider with its entity's transform applied. </p><dl class="section return"><dt>Returns</dt><dd>Rect within which this collider is contained.</dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

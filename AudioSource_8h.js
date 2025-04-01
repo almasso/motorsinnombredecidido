@@ -1,4 +1,4 @@
 var AudioSource_8h =
 [
-    [ "AudioSource", "classAudioSource.html", "classAudioSource" ]
+    [ "ComponentClass", "AudioSource_8h.html#a611998adc4a0e6b414b895e64c1b361c", null ]
 ];
