@@ -5,7 +5,7 @@
 class MovementComponent;
 class Camera;
 
-class PlayerInput : public ComponentTemplate<PlayerInput, "PlayerInput">{
+class ComponentClass(PlayerInput) {
     private:
         Camera* _camera;
         MovementComponent* _movement;

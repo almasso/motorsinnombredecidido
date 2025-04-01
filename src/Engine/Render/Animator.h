@@ -4,7 +4,7 @@
 
 #include <sol/forward.hpp>
 
-class Animator : public ComponentTemplate<Animator, "Animator", SpriteRenderer> {
+class ComponentDerived(Animator, SpriteRenderer) {
     std::string _animation {};
     float _frameTimer {};
     int _currentFrame {};

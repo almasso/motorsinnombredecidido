@@ -2,7 +2,7 @@
 #define MOMEMENTCOMPONENT_H
 #include "MovementObstacle.h"
 
-class MovementComponent : public ComponentTemplate<MovementComponent, "MovementComponent", MovementObstacle> {
+class ComponentDerived(MovementComponent, MovementObstacle) {
   private:
   std::vector<Vector2> _path;
   float _speed;

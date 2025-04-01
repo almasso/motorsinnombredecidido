@@ -1,9 +1,15 @@
 #ifndef COMPONENTTEMPLATE_H
 #define COMPONENTTEMPLATE_H
-
 #include "Component.h"
 #include <Utils/string_literal.h>
 #include "Entity.h"
+
+#define ComponentDerived(ClassName, ComponentBase) \
+ClassName : public ComponentTemplate<ClassName, #ClassName, ComponentBase> \
+
+#define ComponentClass(ClassName) \
+ClassName : public ComponentTemplate<ClassName, #ClassName> \
+
 
 template<typename ComponentBase>
 concept componentType  = std::is_base_of_v<Component, ComponentBase>;
@@ -21,4 +27,5 @@ public:
     }
 
 };
+
 #endif //COMPONENTTEMPLATE_H

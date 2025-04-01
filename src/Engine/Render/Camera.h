@@ -3,7 +3,7 @@
 #include "RenderComponent.h"
 #include <Utils/Vector2.h>
 
-class Camera : public ComponentTemplate<Camera, "Camera", RenderComponent>{
+class ComponentDerived(Camera, RenderComponent) {
 private:
     Vector2 _size = {1,1};
     Vector2 _screenOffset = {0,0};

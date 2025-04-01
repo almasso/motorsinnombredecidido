@@ -7,7 +7,7 @@
 
 class OverworldManager;
 
-class MapComponent : public ComponentTemplate<MapComponent, "MapComponent"> {
+class ComponentClass(MapComponent) {
     private:
         std::unordered_set<std::string> _adjacentMaps;
         OverworldManager* _manager;

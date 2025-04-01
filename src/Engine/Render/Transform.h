@@ -3,7 +3,7 @@
 #include <Core/ComponentTemplate.h>
 #include <Utils/Vector2.h>
 
-class Transform : public ComponentTemplate<Transform, "Transform"> {
+class ComponentClass(Transform) {
     private:
     Vector2 _position;
     Vector2 _scale;

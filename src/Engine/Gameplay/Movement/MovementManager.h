@@ -5,7 +5,7 @@
 #include <unordered_set>
 
 
-class MovementManager : public ComponentTemplate<MovementManager, "MovementManager"> {
+class ComponentClass(MovementManager) {
     private:
     float _tileWidth, _tileHeight;
     std::unordered_set<Vector2> _occupiedPositions;

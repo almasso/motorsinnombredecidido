@@ -4,7 +4,7 @@
 #include <Utils/Vector2.h>
 #include <string>
 
-class SpriteRenderer : public ComponentTemplate<SpriteRenderer, "SpriteRenderer",RenderComponent> {
+class ComponentDerived(SpriteRenderer, RenderComponent) {
     private:
     std::string _sprite {};
     Vector2 _size {};

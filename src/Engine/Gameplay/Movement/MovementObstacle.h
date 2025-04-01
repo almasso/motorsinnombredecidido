@@ -6,7 +6,8 @@
 
 class Transform;
 class MovementManager;
-class MovementObstacle : public ComponentTemplate<MovementObstacle, "MovementObstacle"> {
+
+class ComponentClass(MovementObstacle) {
     protected:
         Transform* _transform;
         MovementManager* _manager;
@@ -16,7 +17,6 @@ class MovementObstacle : public ComponentTemplate<MovementObstacle, "MovementObs
         bool init() override;
         void onEnable() override;
         void onDisable() override;
-
 };
 
 

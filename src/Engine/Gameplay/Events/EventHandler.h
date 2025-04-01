@@ -8,7 +8,7 @@
 
 class Event;
 
-class EventHandler : public ComponentTemplate<EventHandler, "EventHandler"> {
+class ComponentClass(EventHandler) {
 private:
     std::unordered_map<std::string, Event*> _events;
 

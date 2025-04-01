@@ -10,7 +10,7 @@
 class CollisionManager;
 class Transform;
 
-class Collider : public ComponentTemplate<Collider, "Collider"> {
+class ComponentClass(Collider) {
 private:
     friend CollisionManager;
 

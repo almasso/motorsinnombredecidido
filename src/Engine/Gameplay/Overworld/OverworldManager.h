@@ -8,7 +8,7 @@
 class Entity;
 class MapComponent;
 
-class OverworldManager : public ComponentTemplate<OverworldManager, "OverworldManager"> {
+class ComponentClass(OverworldManager) {
 	private:
 		std::unordered_map<std::string, Entity*> _loadedMaps;
 		std::unordered_map<std::string, Entity*> _unloadedMaps;

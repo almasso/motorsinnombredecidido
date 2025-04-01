@@ -11,7 +11,7 @@ class AudioMixer;
 /// @brief Component containing a source of audio and allows to play it.
 /// @~spanish
 /// @brief Componente que contienen una fuente de audio y permite reproducirla.
-class AudioSource : public ComponentTemplate<AudioSource, "AudioSource"> {
+class ComponentClass(AudioSource) {
 private:
     AudioClip* _clip;
     AudioMixer* _mixer;
