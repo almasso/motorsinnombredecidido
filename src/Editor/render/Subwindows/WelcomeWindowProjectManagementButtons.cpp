@@ -14,8 +14,8 @@
 #include "render/Modals/RenameProjectModal.h"
 #include "render/Modals/DeleteProjectModal.h"
 
-editor::render::subwindows::WelcomeWindowProjectManagementButtons::WelcomeWindowProjectManagementButtons(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>& deleteProjects,
-                                                                                                         std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>& renameProjects,
+editor::render::subwindows::WelcomeWindowProjectManagementButtons::WelcomeWindowProjectManagementButtons(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
+                                                                                                         std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects,
                                                                                                          editor::render::modals::CreateProjectModal* createProject) :
 Subwindow("WWPMB"), _deleteProjects(deleteProjects), _renameProjects(renameProjects), _createProject(createProject) {}
 
@@ -51,10 +51,10 @@ void editor::render::subwindows::WelcomeWindowProjectManagementButtons::onRender
         if(!route.empty()) {
             editor::Project* addedProj = io::ProjectManager::GetInstance().addProject(route);
             if(addedProj != nullptr) {
-                _renameProjects[addedProj] = new editor::render::modals::RenameProjectModal(addedProj);
-                WindowStack::addWindowToStack(_renameProjects[addedProj]);
-                _deleteProjects[addedProj] = new editor::render::modals::DeleteProjectModal(addedProj);
-                WindowStack::addWindowToStack(_deleteProjects[addedProj]);
+                (*_renameProjects)[addedProj] = new editor::render::modals::RenameProjectModal(addedProj);
+                WindowStack::addWindowToStack((*_renameProjects)[addedProj]);
+                (*_deleteProjects)[addedProj] = new editor::render::modals::DeleteProjectModal(addedProj);
+                WindowStack::addWindowToStack((*_deleteProjects)[addedProj]);
             }
         }
     }
@@ -76,10 +76,10 @@ void editor::render::subwindows::WelcomeWindowProjectManagementButtons::onRender
     editor::Project* createdProj = _createProject->getCreatedProject();
     if(createdProj != nullptr) {
         io::ProjectManager::GetInstance().addProject(createdProj);
-        _renameProjects[createdProj] = new editor::render::modals::RenameProjectModal(createdProj);
-        WindowStack::addWindowToStack(_renameProjects[createdProj]);
-        _deleteProjects[createdProj] = new editor::render::modals::DeleteProjectModal(createdProj);
-        WindowStack::addWindowToStack(_deleteProjects[createdProj]);
+        (*_renameProjects)[createdProj] = new editor::render::modals::RenameProjectModal(createdProj);
+        WindowStack::addWindowToStack((*_renameProjects)[createdProj]);
+        (*_deleteProjects)[createdProj] = new editor::render::modals::DeleteProjectModal(createdProj);
+        WindowStack::addWindowToStack((*_deleteProjects)[createdProj]);
     }
 }
 

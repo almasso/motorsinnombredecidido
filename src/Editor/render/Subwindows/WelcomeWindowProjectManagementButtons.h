@@ -22,12 +22,12 @@ namespace editor::render::modals {
 namespace editor::render::subwindows {
     class WelcomeWindowProjectManagementButtons : public Subwindow {
     public:
-        WelcomeWindowProjectManagementButtons(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>& deleteProjects,
-                                              std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>& renameProjects,
+        WelcomeWindowProjectManagementButtons(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
+                                              std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects,
                                               editor::render::modals::CreateProjectModal* createProject);
     private:
-        std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*> _deleteProjects;
-        std::unordered_map<Project*, editor::render::modals::RenameProjectModal*> _renameProjects;
+        std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* _deleteProjects = nullptr;
+        std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* _renameProjects = nullptr;
         editor::render::modals::CreateProjectModal* _createProject = nullptr;
 
         bool _showCreateProject = false;

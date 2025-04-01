@@ -22,11 +22,11 @@ namespace editor::render::modals {
 namespace editor::render::subwindows {
     class WelcomeWindowRightPanel : public Subwindow {
     public:
-        WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>& deleteProjects,
-                                std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>& renameProjects);
+        WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
+                                std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects);
     private:
-        std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*> _deleteProjects;
-        std::unordered_map<Project*, editor::render::modals::RenameProjectModal*> _renameProjects;
+        std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* _deleteProjects;
+        std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* _renameProjects;
 
         bool _showDeleteConfirmation = false;
 

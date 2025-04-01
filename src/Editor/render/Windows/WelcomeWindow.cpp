@@ -71,8 +71,8 @@ void editor::render::windows::WelcomeWindow::createModals() {
 
 void editor::render::windows::WelcomeWindow::createSubwindows() {
     _leftPanel = new editor::render::subwindows::WelcomeWindowLeftPanel(_settings);
-    _rightPanel = new editor::render::subwindows::WelcomeWindowRightPanel(_deleteProjects, _renameProjects);
-    _projectManagementButtons = new editor::render::subwindows::WelcomeWindowProjectManagementButtons(_deleteProjects, _renameProjects, _createProject);
+    _rightPanel = new editor::render::subwindows::WelcomeWindowRightPanel(&_deleteProjects, &_renameProjects);
+    _projectManagementButtons = new editor::render::subwindows::WelcomeWindowProjectManagementButtons(&_deleteProjects, &_renameProjects, _createProject);
 }
 
 editor::render::windows::WelcomeWindow::~WelcomeWindow() noexcept {

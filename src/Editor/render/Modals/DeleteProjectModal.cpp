@@ -20,7 +20,6 @@ void editor::render::modals::DeleteProjectModal::onRender() {
     ImGui::Separator();
 
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.yes").c_str(), ImVec2(120, 0))) {
-        io::ProjectManager::GetInstance().removeProject(_project);
         _confirmedDeletion = true;
         ImGui::CloseCurrentPopup();
         _isOpen = false;

@@ -14,8 +14,8 @@
 #include "render/Modals/DeleteProjectModal.h"
 #include "render/Modals/CreateProjectModal.h"
 
-editor::render::subwindows::WelcomeWindowRightPanel::WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>& deleteProjects,
-                                                                             std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>& renameProjects)
+editor::render::subwindows::WelcomeWindowRightPanel::WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
+                                                                             std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects)
                                                                              : Subwindow("WWRP"), _deleteProjects(deleteProjects),
                                                                              _renameProjects(renameProjects) {}
 
@@ -133,24 +133,23 @@ void editor::render::subwindows::WelcomeWindowRightPanel::drawProjectButton(edit
     }
 
     if(_showDeleteConfirmation) {
-        _deleteProjects[project]->show();
-        if(_deleteProjects[project]->hasConfirmedDeletion()) {
-            WindowStack::removeWindowFromStack(_deleteProjects[project]);
-            delete _deleteProjects[project];
-            _deleteProjects.erase(project);
-            WindowStack::removeWindowFromStack(_renameProjects[project]);
-            delete _renameProjects[project];
-            _renameProjects.erase(project);
-        }
-        if(!_deleteProjects[project]->isOpen()) _showDeleteConfirmation = false;
+        (*_deleteProjects)[project]->show();
+        if(!(*_deleteProjects)[project]->isOpen()) _showDeleteConfirmation = false;
     }
     if(_showRenameProject) {
-        _renameProjects[project]->show();
-        if(!_renameProjects[project]->isOpen()) _showRenameProject = false;
+        (*_renameProjects)[project]->show();
+        if(!(*_renameProjects)[project]->isOpen()) _showRenameProject = false;
     }
 
-    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    if((*_deleteProjects)[project] != nullptr && (*_deleteProjects)[project]->hasConfirmedDeletion()) {
+        io::ProjectManager::GetInstance().removeProject(project);
+        WindowStack::removeWindowFromStack((*_deleteProjects)[project]);
+        delete (*_deleteProjects)[project];
+        _deleteProjects->erase(project);
+        WindowStack::removeWindowFromStack((*_renameProjects)[project]);
+        delete (*_renameProjects)[project];
+        _renameProjects->erase(project);
+    }
 }
 
 std::string editor::render::subwindows::WelcomeWindowRightPanel::searchProject() {
