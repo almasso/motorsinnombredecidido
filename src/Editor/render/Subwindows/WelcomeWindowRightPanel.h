@@ -19,11 +19,17 @@ namespace editor::render::modals {
     class CreateProjectModal;
 }
 
+namespace editor::render::windows {
+    class MainWindow;
+}
+
 namespace editor::render::subwindows {
     class WelcomeWindowRightPanel : public Subwindow {
     public:
         WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
                                 std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects);
+
+        ~WelcomeWindowRightPanel() override;
     private:
         std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* _deleteProjects;
         std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* _renameProjects;
@@ -31,6 +37,10 @@ namespace editor::render::subwindows {
         bool _showDeleteConfirmation = false;
 
         bool _showRenameProject = false;
+
+        bool _hasChangedWindow = false;
+
+        editor::render::windows::MainWindow* _mainWindow = nullptr;
 
         void beforeRender() override;
 

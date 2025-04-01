@@ -58,6 +58,8 @@ namespace editor {
          */
         static bool Init();
 
+        static void Destroy();
+
         /**
          * @~english
          * @brief Returns a reference to the singleton instance of the \a Editor.

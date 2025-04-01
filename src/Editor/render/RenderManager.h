@@ -75,6 +75,18 @@ namespace editor::render {
          */
         bool render();
 
+        bool isWindowShown() const;
+
+        void showWindow();
+
+        void hideWindow();
+
+        void centerWindowInScreen();
+
+        void enableWindowResizing();
+
+        void disableWindowResizing();
+
         /**
          * @~english
          * @brief Returns the render manager window width.
@@ -112,7 +124,7 @@ namespace editor::render {
          *
          * @param width Anchura de la ventana.
          */
-        inline void setWidth(uint32_t width) {_width = width;}
+        void setWidth(uint32_t width);
 
         /**
          * @~english
@@ -125,7 +137,7 @@ namespace editor::render {
          *
          * @param height altura de la ventana.
          */
-        inline void setHeight(uint32_t height) {_height = height;}
+         void setHeight(uint32_t height);
 
         template <std::convertible_to<std::string> T, std::convertible_to<std::filesystem::path> P>
         void loadFont(T&& name, P&& file, float size, const ImFontConfig* config = nullptr, const ImWchar* ranges = nullptr) {

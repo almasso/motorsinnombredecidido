@@ -39,6 +39,10 @@ bool editor::Editor::init() {
     return true;
 }
 
+void editor::Editor::Destroy() {
+    _instance.reset(nullptr);
+}
+
 editor::Editor& editor::Editor::GetInstance() {
     editorAssert(_instance != nullptr, "Editor singleton instance is not initialized")
     return *_instance;
@@ -48,16 +52,14 @@ editor::Editor::~Editor() {
     io::ProjectManager::Dump();
     io::PreferencesManager::Dump();
 
-    std::atexit([]() {
-        io::ProjectManager::Destroy();
-        io::InputManager::Destroy();
-        render::RenderManager::Destroy();
-        io::LocalizationManager::Destroy();
-        io::PreferencesManager::Destroy();
-        io::LuaManager::Destroy();
+    io::ProjectManager::Destroy();
+    io::InputManager::Destroy();
+    render::RenderManager::Destroy();
+    io::LocalizationManager::Destroy();
+    io::PreferencesManager::Destroy();
+    io::LuaManager::Destroy();
 
-        SDL_Quit();
-    });
+    SDL_Quit();
 }
 
 void editor::Editor::mainLoop() {
@@ -70,3 +72,4 @@ void editor::Editor::mainLoop() {
     }
     delete ww;
 }
+

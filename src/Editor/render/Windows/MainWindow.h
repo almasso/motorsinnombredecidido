@@ -17,6 +17,9 @@ namespace editor::render::windows {
     public:
         MainWindow(editor::Project* project);
     private:
+
+        editor::Project* _project;
+
         void beforeRender() override;
 
         void onRender() override;

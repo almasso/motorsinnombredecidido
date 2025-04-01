@@ -207,7 +207,7 @@ elseif(UNIX)
         )
 
         if(LIB_PATH)
-            file(COPY ${LIB} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+            #file(COPY ${LIB} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
         else()
             message(WARNING "[EN] Could not find ${LIB}. Required library will not be copied.
                             [ES] No se ha podido encontrar ${LIB}. Las librerías requeridas no se copiarán.")

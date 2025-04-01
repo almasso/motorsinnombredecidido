@@ -13,6 +13,10 @@
 
 # Compiled Dynamic libraries
 *.so
+*.so.0
+*.so.0.2.8
+*.so.0.2.4
+*.so.0.2.0
 *.dylib
 *.dll
 
@@ -49,6 +53,8 @@ projects/APK/app/.cxx/*
 .idea/*
 cmake-build-debug/*
 cmake-build-release/*
+cmake-build-default/*
+cmake-build-wsl_profile/*
 .vs/*
 out/*
 CMakeFiles/*

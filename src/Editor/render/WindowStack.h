@@ -75,7 +75,7 @@ namespace editor::render {
          *
          * @return Ventana que tiene ese nombre, o, \c nullptr en caso de que no esté en la pila.
          */
-         template <std::convertible_to<std::string> T>
+        template <std::convertible_to<std::string> T>
         static RenderObject* getWindowByName(T&& name) {
             return _getWindowByName(std::forward<T>(name));
         }
@@ -97,6 +97,8 @@ namespace editor::render {
          * @brief SearchableList que se va a usar como pila.
          */
         static SearchableList<RenderObject*> _windowStack;
+
+        static bool _stopRendering;
 
         /**
          * @~english

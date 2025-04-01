@@ -13,11 +13,17 @@
 #include "render/Modals/RenameProjectModal.h"
 #include "render/Modals/DeleteProjectModal.h"
 #include "render/Modals/CreateProjectModal.h"
+#include "render/Windows/MainWindow.h"
 
 editor::render::subwindows::WelcomeWindowRightPanel::WelcomeWindowRightPanel(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
                                                                              std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects)
                                                                              : Subwindow("WWRP"), _deleteProjects(deleteProjects),
                                                                              _renameProjects(renameProjects) {}
+
+editor::render::subwindows::WelcomeWindowRightPanel::~WelcomeWindowRightPanel() {
+    delete _mainWindow;
+    _mainWindow = nullptr;
+}
 
 void editor::render::subwindows::WelcomeWindowRightPanel::beforeRender() {
     float leftPanelWidth = RenderManager::GetInstance().getWidth() / 2 - 90;
@@ -51,7 +57,9 @@ void editor::render::subwindows::WelcomeWindowRightPanel::onRender() {
     // Lista de botones con los proyectos
     ImGui::BeginChild("PL", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
     {
-        for (Project *pr: io::ProjectManager::GetInstance().getProjects()) {
+        auto prjs = io::ProjectManager::GetInstance().getProjects();
+        for(auto it = prjs.begin(); it != prjs.end() && !_hasChangedWindow;) {
+            Project* pr = *(it);
             if(!pr->isSetToDelete()) {
                 if (filter.PassFilter(pr->getName().c_str()) || filter.PassFilter(pr->getPath().string().c_str())) {
                     if (pr != *io::ProjectManager::GetInstance().getProjects().begin()) {
@@ -62,9 +70,14 @@ void editor::render::subwindows::WelcomeWindowRightPanel::onRender() {
                     drawProjectButton(pr);
                 }
             }
+            ++it;
         }
+
     }
     ImGui::EndChild();
+    if(_hasChangedWindow) {
+        _hasChangedWindow = false;
+    }
 }
 
 void editor::render::subwindows::WelcomeWindowRightPanel::drawProjectButton(editor::Project *project) {
@@ -77,6 +90,10 @@ void editor::render::subwindows::WelcomeWindowRightPanel::drawProjectButton(edit
     ImGui::BeginDisabled(!project->isFound());
     if(ImGui::Button(std::string("##But" + projectRoute).c_str() , buttonSize)) {
         // Abrir la ventana principal del editor
+        _mainWindow = new editor::render::windows::MainWindow(project);
+        _hasChangedWindow = true;
+        ImGui::EndDisabled();
+        return;
     }
     ImGui::EndDisabled();
 

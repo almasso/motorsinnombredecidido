@@ -121,10 +121,6 @@ editor::render::RenderManager::~RenderManager() {
 }
 
 bool editor::render::RenderManager::render() {
-    if(!SDL_SetWindowSize(_window, _width, _height)) {
-        showError(SDL_GetError())
-        return false;
-    }
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
@@ -168,4 +164,52 @@ void editor::render::RenderManager::setDefaultFont(ImFont *font) {
     _io->FontDefault = font;
 }
 
+void editor::render::RenderManager::setWidth(uint32_t width) {
+    _width = width;
+    if(!SDL_SetWindowSize(_window, _width, _height)) {
+        showError(SDL_GetError())
+    }
+}
+
+void editor::render::RenderManager::setHeight(uint32_t height) {
+    _height = height;
+    if(!SDL_SetWindowSize(_window, _width, _height)) {
+        showError(SDL_GetError())
+    }
+}
+
+bool editor::render::RenderManager::isWindowShown() const {
+    SDL_WindowFlags fl = SDL_GetWindowFlags(_window);
+    return !(fl & SDL_WINDOW_HIDDEN) && !(fl & SDL_WINDOW_MINIMIZED);
+}
+
+void editor::render::RenderManager::showWindow() {
+    if(!SDL_ShowWindow(_window)) {
+        showError(SDL_GetError())
+    }
+}
+
+void editor::render::RenderManager::hideWindow() {
+    if(!SDL_HideWindow(_window)) {
+        showError(SDL_GetError())
+    }
+}
+
+void editor::render::RenderManager::centerWindowInScreen() {
+    if(!SDL_SetWindowPosition(_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED)) {
+        showError(SDL_GetError())
+    }
+}
+
+void editor::render::RenderManager::enableWindowResizing() {
+    if(!SDL_SetWindowResizable(_window, true)) {
+        showError(SDL_GetError())
+    }
+}
+
+void editor::render::RenderManager::disableWindowResizing() {
+    if(!SDL_SetWindowResizable(_window, false)) {
+        showError(SDL_GetError())
+    }
+}
 
