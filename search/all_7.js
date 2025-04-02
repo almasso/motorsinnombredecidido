@@ -11,7 +11,7 @@ var searchData=
   ['getchildren_8',['getChildren',['../classEntityBlueprint.html#ac173e4e255064eb6cb00c5f41fad7808',1,'EntityBlueprint']]],
   ['getcomponent_9',['getComponent',['../classEntity.html#a85a624661c6792bfe08aa39bdc24ca89',1,'Entity']]],
   ['getcomponents_10',['getComponents',['../classEntityBlueprint.html#a9ffe7f059fc826221a5f3b9f6c342344',1,'EntityBlueprint']]],
-  ['getdata_11',['getData',['../classComponentData.html#a87988c45a319504ac553e2413b46dfc5',1,'ComponentData']]],
+  ['getdata_11',['getData',['../classComponentData.html#a87988c45a319504ac553e2413b46dfc5',1,'ComponentData::getData(std::string const &amp;key, T const &amp;defaultValue={}) const'],['../classComponentData.html#a4dcb5ccb3391e267bfd28044e8b204f7',1,'ComponentData::getData() const']]],
   ['getdevice_12',['getDevice',['../classAudioMixer.html#a9da6c57e2610a218c8eef939add20556',1,'AudioMixer']]],
   ['getentities_13',['getEntities',['../classSceneBlueprint.html#a039f299c95ea31439b7d20cd626dff76',1,'SceneBlueprint']]],
   ['getentitybyhandler_14',['getEntityByHandler',['../classScene.html#ac994e1af3924f80706d42c8142775899',1,'Scene']]],
