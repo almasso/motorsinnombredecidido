@@ -17,6 +17,7 @@ public:
         return _data.get_or(key, defaultValue);
     }
     const std::string& getId() const;
+    sol::table const& getData() const;
 };
 
 

@@ -10,6 +10,7 @@
 #include "Conditions/OnStartCondition.h"
 #include "Conditions/OrCondition.h"
 #include "Conditions/TimePassedCondition.h"
+#include "Conditions/ValueEqualsCondition.h"
 
 std::unordered_map<std::string, std::function<EventCondition*()>> EventConditionFactory::_factory;
 
@@ -22,6 +23,7 @@ void EventConditionFactory::Init() {
     RegisterCondition<TimePassedCondition>();
     RegisterCondition<NotCondition>();
     RegisterCondition<AreCollidingCondition>();
+    RegisterCondition<ValueEqualsCondition>();
 }
 
 bool EventConditionFactory::ReadCondition(sol::table const& condition, std::string& type, sol::table& params) {

@@ -2,6 +2,7 @@
 
 #include <Audio/AudioSource.h>
 #include <Collisions/Collider.h>
+#include <Gameplay/LocalVariables.h>
 #include <Render/Transform.h>
 #include <Render/Rectangle.h>
 #include <Render/Animator.h>
@@ -29,6 +30,7 @@ ComponentFactory::ComponentFactory() :
     registerComponent<MovementManager>();
     registerComponent<MovementObstacle>();
     registerComponent<MovementComponent>();
+    registerComponent<LocalVariables>();
 }
 
 Component* ComponentFactory::createComponent(ComponentData const* data) {

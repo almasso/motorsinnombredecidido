@@ -7,6 +7,10 @@ const std::string& ComponentData::getId() const {
     return _id;
 }
 
+sol::table const& ComponentData::getData() const {
+    return _data;
+}
+
 Vector2 ComponentData::getVector(std::string const &key, Vector2 const &defaultValue) const {
     sol::optional<sol::table> vector = _data[key];
     if (!vector || vector->size() != 2) {

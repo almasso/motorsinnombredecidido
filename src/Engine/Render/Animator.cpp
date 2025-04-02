@@ -58,10 +58,15 @@ void Animator::setPlaying(bool playing) {
   _playing = playing;
 }
 
+bool Animator::animationEnded() const {
+    return _animationEnded;
+}
+
 void Animator::RegisterToLua(sol::state& lua) {
     sol::usertype<Animator> type = lua.new_usertype<Animator>("Animator");
     type["reset"] = &Animator::reset;
     type["changeAnimation"] = &Animator::changeAnimation;
     type["setPlaying"] = &Animator::setPlaying;
+    type["animationEnded"] = &Animator::animationEnded;
     type["get"] = Animator::get;
 }

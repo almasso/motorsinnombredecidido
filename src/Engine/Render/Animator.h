@@ -17,6 +17,7 @@ public:
     void reset();
     void changeAnimation(const std::string& animation);
     void setPlaying(bool playing);
+    bool animationEnded() const;
 
     static void RegisterToLua(sol::state& lua);
 };

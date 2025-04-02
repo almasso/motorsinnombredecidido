@@ -5,6 +5,7 @@
 #include <Core/Entity.h>
 #include <Core/Game.h>
 #include <Core/Scene.h>
+#include <Gameplay/LocalVariables.h>
 #include <Gameplay/Events/Event.h>
 #include <Gameplay/Events/EventBehaviour.h>
 #include <Gameplay/Events/EventCondition.h>
@@ -30,6 +31,7 @@ void LuaReader::registerUserTypes() {
     Collider::RegisterToLua(_lua);
     Animator::RegisterToLua(_lua);
     MovementComponent::RegisterToLua(_lua);
+    LocalVariables::RegisterToLua(_lua);
 
     Entity::RegisterToLua(_lua);
     Scene::RegisterToLua(_lua);

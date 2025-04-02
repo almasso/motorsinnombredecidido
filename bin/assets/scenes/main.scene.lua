@@ -4,6 +4,8 @@ local Jump = require('assets.events.JumpBehaviour');
 local JumpIf = require('assets.events.JumpIfBehaviour');
 local PlaySFX = require('assets.events.PlaySFXBehaviour');
 local Music = require('assets.events.MusicBehaviour');
+local Animation = require('assets.events.AnimationBehaviour');
+local ModifyLocalVariable = require('assets.events.ModifyLocalVariableBehaviour');
 
 return {
     manager = {
@@ -45,8 +47,21 @@ return {
                 speed = 500
             },
             PlayerInput = {0},
+            LocalVariables = { counter = 1 },
             EventHandler = {
                 events = {
+                    Evento0 = {
+                        loop = false,
+                        condition = {
+                            type = "OnStart"
+                        },
+                        behaviours = {
+                            Animation:new({action = "play"}),
+                            ModifyLocalVariable:new("counter", 2),
+                            JumpIf:new(0, { type = "ValueEquals", params = { variable = "counter", equals = 1 }}),
+                            Animation:new({action = "change", animation = "assets/sprites/test2.animation.lua"})
+                        }
+                    },
                     Evento1 = {
                         loop = true,
                         condition = {
