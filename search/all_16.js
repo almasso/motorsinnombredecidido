@@ -9,5 +9,6 @@ var searchData=
   ['_7eentityblueprint_6',['~EntityBlueprint',['../classEntityBlueprint.html#a5ca265f72c2c529515c53e0cc092ab1b',1,'EntityBlueprint']]],
   ['_7eresource_7',['~Resource',['../classResource.html#a0e5ec475e2601bdb33644468e86f6f10',1,'Resource']]],
   ['_7eresourcehandler_8',['~ResourceHandler',['../classResourceHandler.html#a500283b133ae9b3a3e6e0647a6466bb1',1,'ResourceHandler']]],
-  ['_7evector2_9',['~Vector2',['../classVector2.html#ada03f5433d3ca4841d5ebb90b167202e',1,'Vector2']]]
+  ['_7etexttexture_9',['~TextTexture',['../classTextTexture.html#a5819c3917f7be6e1fdd1f5d1b617dd2a',1,'TextTexture']]],
+  ['_7evector2_10',['~Vector2',['../classVector2.html#ada03f5433d3ca4841d5ebb90b167202e',1,'Vector2']]]
 ];

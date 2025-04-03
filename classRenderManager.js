@@ -5,6 +5,7 @@ var classRenderManager =
     [ "convertRect", "classRenderManager.html#a39217a636426426b04a14761f14a1283", null ],
     [ "drawRect", "classRenderManager.html#a447f69801379dc84e73dfc87468d6948", null ],
     [ "drawSprite", "classRenderManager.html#a33d736415e685e570f96265b551189a7", null ],
+    [ "drawText", "classRenderManager.html#abde2278e4715970feb483ebf61246517", null ],
     [ "getWindowSize", "classRenderManager.html#a6e88c1af19abcd9d3e86e9cc2a4f6205", null ],
     [ "init", "classRenderManager.html#a1205d52fc12124339bd64d916c9c8237", null ],
     [ "present", "classRenderManager.html#a7832456be71858b8b230039a5a5525af", null ],

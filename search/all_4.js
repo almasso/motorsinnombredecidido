@@ -8,5 +8,6 @@ var searchData=
   ['distancetomanhattan_5',['distanceToManhattan',['../classVector2.html#a2d56e77be18b04256c1de8b23dd901ad',1,'Vector2']]],
   ['down_6',['DOWN',['../classVector2.html#a080cfc88021b52fff01150f6d011c5e3',1,'Vector2']]],
   ['drawrect_7',['drawRect',['../classRenderManager.html#a447f69801379dc84e73dfc87468d6948',1,'RenderManager']]],
-  ['drawsprite_8',['drawSprite',['../classRenderManager.html#a33d736415e685e570f96265b551189a7',1,'RenderManager']]]
+  ['drawsprite_8',['drawSprite',['../classRenderManager.html#a33d736415e685e570f96265b551189a7',1,'RenderManager']]],
+  ['drawtext_9',['drawText',['../classRenderManager.html#abde2278e4715970feb483ebf61246517',1,'RenderManager']]]
 ];

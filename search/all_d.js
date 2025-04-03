@@ -12,7 +12,7 @@ var searchData=
   ['operator_2d_9',['operator-',['../classVector2.html#a37653598d7dd2e823c7af55bc50b92bb',1,'Vector2']]],
   ['operator_2f_10',['operator/',['../classVector2.html#a09df3031274ae221664f1505a8ec17fc',1,'Vector2::operator/(float e) const'],['../classVector2.html#af5d1a81a538e162c52378a5199cadd20',1,'Vector2::operator/(Vector2 const &amp;v) const']]],
   ['operator_3d_11',['operator=',['../classAudioManager.html#a0202d644c38a4b108597932cfdd5ead2',1,'AudioManager::operator=()'],['../classCollisionManager.html#a7cf4a09130de60ad3db3e25f855409be',1,'CollisionManager::operator=()'],['../classLuaReader.html#ab5e21c7ab24c3a71fd6c65f5361a1410',1,'LuaReader::operator=()'],['../classResourceHandler.html#a5b05b709b718cccf0b2be0bef891b3c2',1,'ResourceHandler::operator=()']]],
-  ['operator_3d_3d_12',['operator==',['../classVector2.html#a77b638de6b16a80d4c4be0c21fe2b481',1,'Vector2']]],
+  ['operator_3d_3d_12',['operator==',['../structColor.html#a47af6b06ce3543bb3dfba77711c969e1',1,'Color::operator==()'],['../classVector2.html#a77b638de6b16a80d4c4be0c21fe2b481',1,'Vector2::operator==()']]],
   ['order_13',['order',['../classComponentTemplate.html#af9eb2875386ede8f32dc99db41527706',1,'ComponentTemplate']]],
   ['output_14',['output',['../classAudioMixerData.html#a552220a127558a9d4eb710c925ca16e3',1,'AudioMixerData']]]
 ];

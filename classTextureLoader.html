@@ -107,10 +107,14 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a2828d7545ef3547eec8a8c995abcfa04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6505a6a5fbfbeec63e6357e6f57ebc5"><td class="memItemLeft" align="right" valign="top">static SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureLoader.html#aa6505a6a5fbfbeec63e6357e6f57ebc5">GetTexture</a> (const std::string &amp;filePath)</td></tr>
 <tr class="separator:aa6505a6a5fbfbeec63e6357e6f57ebc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d3503b7b6560d7eacb8458115e8283"><td class="memItemLeft" align="right" valign="top">static SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureLoader.html#ad6d3503b7b6560d7eacb8458115e8283">GetTexture</a> (SDL_Surface *surface)</td></tr>
+<tr class="separator:ad6d3503b7b6560d7eacb8458115e8283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5529c7cb4449a46dccc985cfb4ed9a94"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureLoader.html#a5529c7cb4449a46dccc985cfb4ed9a94">ResizeTexture</a> (SDL_Texture *&amp;texture, int width, int height)</td></tr>
+<tr class="separator:a5529c7cb4449a46dccc985cfb4ed9a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2828d7545ef3547eec8a8c995abcfa04" name="a2828d7545ef3547eec8a8c995abcfa04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2828d7545ef3547eec8a8c995abcfa04">&#9670;&#160;</a></span>GetTexture() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2828d7545ef3547eec8a8c995abcfa04">&#9670;&#160;</a></span>GetTexture() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,7 +140,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="aa6505a6a5fbfbeec63e6357e6f57ebc5" name="aa6505a6a5fbfbeec63e6357e6f57ebc5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6505a6a5fbfbeec63e6357e6f57ebc5">&#9670;&#160;</a></span>GetTexture() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6505a6a5fbfbeec63e6357e6f57ebc5">&#9670;&#160;</a></span>GetTexture() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,6 +153,32 @@ Static Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6d3503b7b6560d7eacb8458115e8283" name="ad6d3503b7b6560d7eacb8458115e8283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6d3503b7b6560d7eacb8458115e8283">&#9670;&#160;</a></span>GetTexture() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture * TextureLoader::GetTexture </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>surface</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -176,6 +206,48 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramtype">SDL_Renderer *&#160;</td>
           <td class="paramname"><em>renderer</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5529c7cb4449a46dccc985cfb4ed9a94" name="a5529c7cb4449a46dccc985cfb4ed9a94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5529c7cb4449a46dccc985cfb4ed9a94">&#9670;&#160;</a></span>ResizeTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TextureLoader::ResizeTexture </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Texture *&amp;&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

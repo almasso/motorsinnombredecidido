@@ -95,28 +95,34 @@ $(document).ready(function(){initNavTree('TextureLoader_8h_source.html',''); ini
 <div class="contents">
 <a href="TextureLoader_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TEXTURELOADER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TEXTURELOADER_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Texture_8h.html">Texture.h</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Color_8h.html">Color.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">class </span>SDL_Renderer;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;SDL3/SDL_render.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Texture_8h.html">Texture.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Color_8h.html">Color.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classTextureLoader.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classTextureLoader.html">TextureLoader</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">static</span> SDL_Renderer* _renderer;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classTextureLoader.html#a92ffdab85aaf6f154a79ab0a652c4695">Init</a>(SDL_Renderer* renderer);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">static</span> SDL_Texture* <a class="code hl_function" href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">GetTexture</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structColor.html">Color</a>&amp; color);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">static</span> SDL_Texture* <a class="code hl_function" href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">GetTexture</a>(<span class="keyword">const</span> std::string&amp; filePath);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif </span><span class="comment">//TEXTURELOADER_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">struct </span>SDL_Surface;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">class </span>SDL_Renderer;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classTextureLoader.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classTextureLoader.html">TextureLoader</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">static</span> SDL_Renderer* _renderer;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classTextureLoader.html#a92ffdab85aaf6f154a79ab0a652c4695">Init</a>(SDL_Renderer* renderer);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">static</span> SDL_Texture* <a class="code hl_function" href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">GetTexture</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structColor.html">Color</a>&amp; color);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> SDL_Texture* <a class="code hl_function" href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">GetTexture</a>(<span class="keyword">const</span> std::string&amp; filePath);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static</span> SDL_Texture* <a class="code hl_function" href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">GetTexture</a>(SDL_Surface* surface);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classTextureLoader.html#a5529c7cb4449a46dccc985cfb4ed9a94">ResizeTexture</a>(SDL_Texture *&amp;texture, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif </span><span class="comment">//TEXTURELOADER_H</span></div>
 <div class="ttc" id="aColor_8h_html"><div class="ttname"><a href="Color_8h.html">Color.h</a></div></div>
 <div class="ttc" id="aTexture_8h_html"><div class="ttname"><a href="Texture_8h.html">Texture.h</a></div></div>
-<div class="ttc" id="aclassTextureLoader_html"><div class="ttname"><a href="classTextureLoader.html">TextureLoader</a></div><div class="ttdef"><b>Definition:</b> TextureLoader.h:8</div></div>
-<div class="ttc" id="aclassTextureLoader_html_a2828d7545ef3547eec8a8c995abcfa04"><div class="ttname"><a href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">TextureLoader::GetTexture</a></div><div class="ttdeci">static SDL_Texture * GetTexture(const Color &amp;color)</div><div class="ttdef"><b>Definition:</b> TextureLoader.cpp:18</div></div>
-<div class="ttc" id="aclassTextureLoader_html_a92ffdab85aaf6f154a79ab0a652c4695"><div class="ttname"><a href="classTextureLoader.html#a92ffdab85aaf6f154a79ab0a652c4695">TextureLoader::Init</a></div><div class="ttdeci">static bool Init(SDL_Renderer *renderer)</div><div class="ttdef"><b>Definition:</b> TextureLoader.cpp:9</div></div>
+<div class="ttc" id="aclassTextureLoader_html"><div class="ttname"><a href="classTextureLoader.html">TextureLoader</a></div><div class="ttdef"><b>Definition:</b> TextureLoader.h:11</div></div>
+<div class="ttc" id="aclassTextureLoader_html_a2828d7545ef3547eec8a8c995abcfa04"><div class="ttname"><a href="classTextureLoader.html#a2828d7545ef3547eec8a8c995abcfa04">TextureLoader::GetTexture</a></div><div class="ttdeci">static SDL_Texture * GetTexture(const Color &amp;color)</div><div class="ttdef"><b>Definition:</b> TextureLoader.cpp:19</div></div>
+<div class="ttc" id="aclassTextureLoader_html_a5529c7cb4449a46dccc985cfb4ed9a94"><div class="ttname"><a href="classTextureLoader.html#a5529c7cb4449a46dccc985cfb4ed9a94">TextureLoader::ResizeTexture</a></div><div class="ttdeci">static void ResizeTexture(SDL_Texture *&amp;texture, int width, int height)</div><div class="ttdef"><b>Definition:</b> TextureLoader.cpp:50</div></div>
+<div class="ttc" id="aclassTextureLoader_html_a92ffdab85aaf6f154a79ab0a652c4695"><div class="ttname"><a href="classTextureLoader.html#a92ffdab85aaf6f154a79ab0a652c4695">TextureLoader::Init</a></div><div class="ttdeci">static bool Init(SDL_Renderer *renderer)</div><div class="ttdef"><b>Definition:</b> TextureLoader.cpp:10</div></div>
 <div class="ttc" id="astructColor_html"><div class="ttname"><a href="structColor.html">Color</a></div><div class="ttdef"><b>Definition:</b> Color.h:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

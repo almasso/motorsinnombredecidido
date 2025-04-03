@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['luamanager_0',['LuaManager',['../classLuaManager.html',1,'']]],
-  ['luareader_1',['LuaReader',['../classLuaReader.html',1,'']]]
+  ['inputmanager_0',['InputManager',['../classInputManager.html',1,'']]],
+  ['inputstate_1',['InputState',['../structInputState.html',1,'']]]
 ];
