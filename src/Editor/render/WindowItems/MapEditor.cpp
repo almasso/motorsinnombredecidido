@@ -66,6 +66,7 @@ void editor::render::subwindows::MapEditor::drawGrid() {
             ImVec2 tileEnd = {tilePos.x + scaledSize, tilePos.y + scaledSize};
 
             if(tilePos.y < 100) continue;
+            if(tilePos.x > 1500) continue;
 
             std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
             ImGui::SetCursorPos(tilePos);

@@ -10,7 +10,7 @@
 
 #ifdef __APPLE__
 #define GetCurrentDir strdup(SDL_GetBasePath())
-#elif
+#else
 #define GetCurrentDir SDL_GetCurrentDirectory()
 #endif
 

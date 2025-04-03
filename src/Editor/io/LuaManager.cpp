@@ -11,7 +11,7 @@
 
 #ifdef __APPLE__
 #define GetCurrentDir strdup(SDL_GetBasePath())
-#elif
+#else
 #define GetCurrentDir SDL_GetCurrentDirectory()
 #endif
 std::unique_ptr<editor::io::LuaManager> editor::io::LuaManager::_instance = nullptr;
