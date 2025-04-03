@@ -11,6 +11,12 @@
 #include <SDL3/SDL_filesystem.h>
 #include <sol/sol.hpp>
 
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#elif
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
+
 std::unique_ptr<editor::io::LocalizationManager> editor::io::LocalizationManager::_instance = nullptr;
 
 bool editor::io::LocalizationManager::Init() {
@@ -29,7 +35,7 @@ bool editor::io::LocalizationManager::init() {
         showError(SDL_GetError());
         return false;
     }
-    _currentDirectory = SDL_GetCurrentDirectory();
+    _currentDirectory = GetCurrentDir;
     if(_currentDirectory == nullptr) {
         showError(SDL_GetError())
         return false;

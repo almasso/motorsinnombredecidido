@@ -9,6 +9,11 @@
 #include <fstream>
 #include <SDL3/SDL_filesystem.h>
 
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#elif
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
 std::unique_ptr<editor::io::LuaManager> editor::io::LuaManager::_instance = nullptr;
 
 bool editor::io::LuaManager::Init() {
@@ -28,7 +33,7 @@ bool editor::io::LuaManager::init() {
         return false;
     }
 
-    _currentDirectory = SDL_GetCurrentDirectory();
+    _currentDirectory = GetCurrentDir;
     if(_currentDirectory == nullptr) {
         showError(SDL_GetError())
         return false;

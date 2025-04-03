@@ -8,6 +8,12 @@
 #include <SDL3/SDL_filesystem.h>
 #include "LuaManager.h"
 
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#elif
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
+
 std::unique_ptr<editor::io::PreferencesManager> editor::io::PreferencesManager::_instance = nullptr;
 
 bool editor::io::PreferencesManager::Init() {
@@ -22,7 +28,7 @@ bool editor::io::PreferencesManager::Init() {
 
 bool editor::io::PreferencesManager::init() {
     _preferencesPath = "/settings/preferences/userpreferences.lua";
-    _currentDirectory = SDL_GetCurrentDirectory();
+    _currentDirectory = GetCurrentDir;
     if(_currentDirectory == nullptr) {
         showError(SDL_GetError())
         return false;

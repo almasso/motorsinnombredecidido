@@ -13,6 +13,12 @@
 #include "WindowStack.h"
 #include <filesystem>
 
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#elif
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
+
 std::unique_ptr<editor::render::RenderManager> editor::render::RenderManager::_instance = nullptr;
 
 bool editor::render::RenderManager::Init(uint32_t width, uint32_t height) {
@@ -85,7 +91,7 @@ bool editor::render::RenderManager::initDearImGui() {
     ImGuiStyle& style = ImGui::GetStyle();
     style.AntiAliasedLines = true;
     style.AntiAliasedFill = true;
-    _currentDirectory = SDL_GetCurrentDirectory();
+    _currentDirectory = GetCurrentDir;
     return true;
 }
 
@@ -149,7 +155,7 @@ bool editor::render::RenderManager::render() {
 
 void editor::render::RenderManager::_loadFont(const std::string& name, const std::filesystem::path &file, float size, const ImFontConfig* config, const ImWchar* ranges) {
     if(ranges == nullptr) ranges = _io->Fonts->GetGlyphRangesDefault();
-    _fonts[name] = _io->Fonts->AddFontFromFileTTF(file.string().c_str(), size, config, ranges);
+    _fonts[name] = _io->Fonts->AddFontFromFileTTF((std::string(_currentDirectory) + file.string()).c_str(), size, config, ranges);
     if(_fonts[name] == nullptr) {
         showWarning("Failed to load font: " + file.string())
         return;

@@ -10,6 +10,12 @@
 #include "common/Project.h"
 #include <sol/sol.hpp>
 
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#elif
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
+
 std::unique_ptr<editor::io::ProjectManager> editor::io::ProjectManager::_instance = nullptr;
 
 bool editor::io::ProjectManager::Init() {
@@ -24,7 +30,7 @@ bool editor::io::ProjectManager::Init() {
 
 bool editor::io::ProjectManager::init() {
     _projectsPath = "/settings/projects/projects.lua";
-    _currentDirectory = SDL_GetCurrentDirectory();
+    _currentDirectory = GetCurrentDir;
     if(_currentDirectory == nullptr) {
         showError(SDL_GetError())
         return false;
