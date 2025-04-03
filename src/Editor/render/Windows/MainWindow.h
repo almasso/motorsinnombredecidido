@@ -12,13 +12,18 @@ namespace editor {
     class Project;
 }
 
+namespace editor::render::subwindows {
+    class MapEditor;
+}
+
 namespace editor::render::windows {
     class MainWindow : public Window {
     public:
         MainWindow(editor::Project* project);
     private:
-
         editor::Project* _project;
+
+        editor::render::subwindows::MapEditor* _mapEditor = nullptr;
 
         void beforeRender() override;
 

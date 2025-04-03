@@ -59,6 +59,8 @@ namespace editor {
 
         const std::tm& getLastModificationTime() const;
 
+        const int* getDimensions() const;
+
         bool isSetToDelete() const;
 
         void setToDelete();

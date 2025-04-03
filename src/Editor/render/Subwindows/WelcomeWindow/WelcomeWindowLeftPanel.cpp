@@ -7,7 +7,7 @@
 #include "render/RenderManager.h"
 #include "io/LocalizationManager.h"
 #include "utils/IconsFontAwesome6.h"
-#include "render/Modals/SettingsModal.h"
+#include "render/Modals/WelcomeWindow/SettingsModal.h"
 
 editor::render::subwindows::WelcomeWindowLeftPanel::WelcomeWindowLeftPanel(editor::render::modals::SettingsModal* settings) :
 Subwindow("WWLP"), _settings(settings) {}

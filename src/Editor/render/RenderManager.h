@@ -19,6 +19,8 @@ struct ImFont;
 struct ImFontConfig;
 typedef unsigned short ImWchar16;
 typedef ImWchar16 ImWchar;
+typedef unsigned long long ImU64;
+typedef ImU64 ImTextureID;
 
 namespace editor::render {
     /**
@@ -86,6 +88,8 @@ namespace editor::render {
         void enableWindowResizing();
 
         void disableWindowResizing();
+
+        void updateDimensions();
 
         /**
          * @~english
@@ -160,6 +164,13 @@ namespace editor::render {
         }
 
         std::string getWindowName() const;
+
+        template <std::convertible_to<std::string> T>
+        ImTextureID loadTexture(T&& filepath) {
+            return _loadTexture(std::forward<T>(filepath));
+        }
+
+        void destroyTexture(ImTextureID textureID);
 
         RenderManager(const RenderManager &) = delete;
         RenderManager &operator=(const RenderManager &) = delete;
@@ -262,6 +273,8 @@ namespace editor::render {
 
         std::unordered_map<std::string, ImFont*> _fonts;
 
+        char* _currentDirectory = nullptr;
+
         /**
          * @~english
          * @brief Default constructor for the render manager.
@@ -302,6 +315,8 @@ namespace editor::render {
         void _loadFont(const std::string& name, const std::filesystem::path& path, float size, const ImFontConfig* config, const ImWchar* ranges);
 
         void _setWindowName(const std::string& name);
+
+        ImTextureID _loadTexture(const std::string& filepath);
     };
 }
 

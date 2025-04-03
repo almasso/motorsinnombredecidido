@@ -12,14 +12,14 @@
 #include "common/Project.h"
 #include "utils/IconsFontAwesome6.h"
 #include "utils/tinyfiledialogs/tinyfiledialogs.h"
-#include "render/Modals/RenameProjectModal.h"
-#include "render/Modals/DeleteProjectModal.h"
-#include "render/Modals/CreateProjectModal.h"
+#include "render/Modals/WelcomeWindow/RenameProjectModal.h"
+#include "render/Modals/WelcomeWindow/DeleteProjectModal.h"
+#include "render/Modals/WelcomeWindow/CreateProjectModal.h"
 #include "render/WindowStack.h"
-#include "render/Modals/SettingsModal.h"
-#include "render/Subwindows/WelcomeWindowLeftPanel.h"
-#include "render/Subwindows/WelcomeWindowRightPanel.h"
-#include "render/Subwindows/WelcomeWindowProjectManagementButtons.h"
+#include "render/Modals/WelcomeWindow/SettingsModal.h"
+#include "render/Subwindows/WelcomeWindow/WelcomeWindowLeftPanel.h"
+#include "render/Subwindows/WelcomeWindow/WelcomeWindowRightPanel.h"
+#include "render/Subwindows/WelcomeWindow/WelcomeWindowProjectManagementButtons.h"
 
 editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow") {
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |

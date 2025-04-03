@@ -14,7 +14,6 @@
 #include "io/PreferencesManager.h"
 #include "EditorError.h"
 #include <SDL3/SDL.h>
-#include <cstdlib>
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
@@ -69,6 +68,7 @@ void editor::Editor::mainLoop() {
     while(!io::InputManager::GetInstance().quit() && noError) {
         io::InputManager::GetInstance().handleInput();
         noError = render::RenderManager::GetInstance().render();
+        render::RenderManager::GetInstance().updateDimensions();
     }
     delete ww;
 }

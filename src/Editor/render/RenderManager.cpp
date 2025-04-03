@@ -6,10 +6,12 @@
 #include "RenderManager.h"
 #include "common/EditorError.h"
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 #include <imgui.h>
 #include <imgui_impl_sdl3.h>
 #include <imgui_impl_sdlrenderer3.h>
 #include "WindowStack.h"
+#include <filesystem>
 
 std::unique_ptr<editor::render::RenderManager> editor::render::RenderManager::_instance = nullptr;
 
@@ -83,6 +85,7 @@ bool editor::render::RenderManager::initDearImGui() {
     ImGuiStyle& style = ImGui::GetStyle();
     style.AntiAliasedLines = true;
     style.AntiAliasedFill = true;
+    _currentDirectory = SDL_GetCurrentDirectory();
     return true;
 }
 
@@ -96,6 +99,8 @@ editor::render::RenderManager &editor::render::RenderManager::GetInstance() {
 }
 
 editor::render::RenderManager::~RenderManager() {
+    SDL_free(_currentDirectory);
+    _currentDirectory = nullptr;
     _io->Fonts->ClearFonts();
     _fonts.clear();
     _io = nullptr;
@@ -215,5 +220,27 @@ void editor::render::RenderManager::disableWindowResizing() {
 
 std::string editor::render::RenderManager::getWindowName() const {
     return SDL_GetWindowTitle(_window);
+}
+
+void editor::render::RenderManager::updateDimensions() {
+    int w, h;
+    if(!SDL_GetWindowSize(_window, &w, &h)) {
+        showError(SDL_GetError())
+    }
+    _width = w;
+    _height = h;
+}
+
+ImTextureID editor::render::RenderManager::_loadTexture(const std::string &filepath) {
+    SDL_Texture* texture = IMG_LoadTexture(_renderer, (std::string(_currentDirectory) + filepath).c_str());
+    if(!texture) {
+        showError(SDL_GetError())
+        return 0;
+    }
+    return (ImTextureID)texture;
+}
+
+void editor::render::RenderManager::destroyTexture(ImTextureID textureID) {
+    SDL_DestroyTexture((SDL_Texture*)textureID);
 }
 

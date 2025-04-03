@@ -105,3 +105,7 @@ void editor::Project::saveProject() {
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
     }
 }
+
+const int *editor::Project::getDimensions() const {
+    return _dimensions;
+}

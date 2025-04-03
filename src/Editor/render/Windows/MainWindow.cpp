@@ -7,6 +7,7 @@
 #include "common/Project.h"
 #include "render/RenderManager.h"
 #include "render/WindowStack.h"
+#include "render/WindowItems/MapEditor.h"
 
 editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Window("mainWindow"), _project(project) {
     editor::render::RenderManager::GetInstance().hideWindow();
@@ -18,12 +19,25 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
     editor::render::WindowStack::removeAllWindowsFromStack();
     editor::render::WindowStack::addWindowToStack(this);
     editor::render::RenderManager::GetInstance().showWindow();
+    _mapEditor = new subwindows::MapEditor(_project);
+
+    ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
+                             ImGuiWindowFlags_NoResize |
+                             ImGuiWindowFlags_NoMove |
+                             ImGuiWindowFlags_NoCollapse |
+                             ImGuiWindowFlags_NoScrollbar |
+                             ImGuiWindowFlags_NoScrollWithMouse |
+                             ImGuiWindowFlags_NoDocking;
+    _windowFlags |= flags;
 }
 
 void editor::render::windows::MainWindow::beforeRender() {
-
+    ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth(), RenderManager::GetInstance().getHeight()), ImGuiCond_Always);
+    ImGui::SetWindowPos(ImVec2(0,0), ImGuiCond_Always);
 }
 
 void editor::render::windows::MainWindow::onRender() {
-
+    ImGui::BeginTabBar("tabBar");
+    _mapEditor->render();
+    ImGui::EndTabBar();
 }

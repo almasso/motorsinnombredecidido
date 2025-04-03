@@ -10,9 +10,9 @@
 #include "io/ProjectManager.h"
 #include "render/WindowStack.h"
 #include "utils/tinyfiledialogs/tinyfiledialogs.h"
-#include "render/Modals/CreateProjectModal.h"
-#include "render/Modals/RenameProjectModal.h"
-#include "render/Modals/DeleteProjectModal.h"
+#include "render/Modals/WelcomeWindow/CreateProjectModal.h"
+#include "render/Modals/WelcomeWindow/RenameProjectModal.h"
+#include "render/Modals/WelcomeWindow/DeleteProjectModal.h"
 
 editor::render::subwindows::WelcomeWindowProjectManagementButtons::WelcomeWindowProjectManagementButtons(std::unordered_map<Project*, editor::render::modals::DeleteProjectModal*>* deleteProjects,
                                                                                                          std::unordered_map<Project*, editor::render::modals::RenameProjectModal*>* renameProjects,
