@@ -21,6 +21,8 @@ return {
     ["window.mainwindow.mapeditor.topandbelowtransparent"] = "Última capa y las de abajo con transparencia",
     ["window.mainwindow.mapeditor.selectedandbelowtransparent"] = "Capa seleccionada y las de abajo con transparencia",
     ["window.mainwindow.mapeditor.alllayers"] = "Todas las capas",
+    ["window.mainwindow.mapeditor.zoomin"] = "Acercar",
+    ["window.mainwindow.mapeditor.zoomout"] = "Alejar",
 	["action.settings"] = "Configuración",
 	["action.newproject"] = "Nuevo proyecto",
 	["action.openproject"] = "Añadir proyecto",

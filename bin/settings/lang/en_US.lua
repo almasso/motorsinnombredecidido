@@ -21,6 +21,8 @@ return {
     ["window.mainwindow.mapeditor.topandbelowtransparent"] = "Top layer and below with transparency",
     ["window.mainwindow.mapeditor.selectedandbelowtransparent"] = "Selected layer and below with transparency",
     ["window.mainwindow.mapeditor.alllayers"] = "All layers",
+    ["window.mainwindow.mapeditor.zoomin"] = "Zoom in",
+    ["window.mainwindow.mapeditor.zoomout"] = "Zoom out",
 	["action.settings"] = "Settings",
 	["action.newproject"] = "New project",
 	["action.openproject"] = "Add project",

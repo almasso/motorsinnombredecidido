@@ -8,6 +8,7 @@
 
 #include "render/WindowItem.h"
 #include <vector>
+#include <list>
 #include <imgui.h>
 
 namespace editor {
@@ -25,10 +26,9 @@ namespace editor::render::subwindows {
 
         std::vector<ImTextureID> _textures;
         std::vector<std::string> _buttonTooltips;
+        //std::list -> Lista con las diferentes layers
 
         float _tileSize = 32.0f;
-        float _offsetX = 0.0f;
-        float _offsetY = 0.0f;
         float _zoom = 1.0f;
         int _selectedMode = 0;
 
