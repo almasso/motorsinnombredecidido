@@ -15,7 +15,5 @@ var searchData=
   ['resourcemanager_2ecpp_12',['ResourceManager.cpp',['../ResourceManager_8cpp.html',1,'']]],
   ['resourcemanager_2eh_13',['ResourceManager.h',['../ResourceManager_8h.html',1,'']]],
   ['resourcememorymanager_2ecpp_14',['ResourceMemoryManager.cpp',['../ResourceMemoryManager_8cpp.html',1,'']]],
-  ['resourcememorymanager_2eh_15',['ResourceMemoryManager.h',['../ResourceMemoryManager_8h.html',1,'']]],
-  ['rpgerror_2ecpp_16',['RPGError.cpp',['../RPGError_8cpp.html',1,'']]],
-  ['rpgerror_2eh_17',['RPGError.h',['../RPGError_8h.html',1,'']]]
+  ['resourcememorymanager_2eh_15',['ResourceMemoryManager.h',['../ResourceMemoryManager_8h.html',1,'']]]
 ];

@@ -6,6 +6,5 @@ var searchData=
   ['resource_3',['Resource',['../classResource.html',1,'']]],
   ['resourcehandler_4',['ResourceHandler',['../classResourceHandler.html',1,'']]],
   ['resourcemanager_5',['ResourceManager',['../classResourceManager.html',1,'']]],
-  ['resourcememorymanager_6',['ResourceMemoryManager',['../classResourceMemoryManager.html',1,'']]],
-  ['rpgerror_7',['RPGError',['../classRPGError.html',1,'']]]
+  ['resourcememorymanager_6',['ResourceMemoryManager',['../classResourceMemoryManager.html',1,'']]]
 ];

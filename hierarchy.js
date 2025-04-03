@@ -7,7 +7,6 @@ var hierarchy =
     [ "BaseResourceHandler", "classBaseResourceHandler.html", [
       [ "ResourceHandler< ResourceType >", "classResourceHandler.html", null ]
     ] ],
-    [ "Button", "classButton.html", null ],
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Color", "structColor.html", null ],
     [ "Component", "classComponent.html", [
@@ -20,6 +19,7 @@ var hierarchy =
     [ "EntityBlueprint", "classEntityBlueprint.html", [
       [ "PrefabBlueprint", "classPrefabBlueprint.html", null ]
     ] ],
+    [ "Error", "classError.html", null ],
     [ "Game", "classGame.html", null ],
     [ "std::hash< Vector2 >", "structstd_1_1hash_3_01Vector2_01_4.html", null ],
     [ "InputManager", "classInputManager.html", null ],
@@ -41,7 +41,6 @@ var hierarchy =
     ] ],
     [ "ResourceManager", "classResourceManager.html", null ],
     [ "ResourceMemoryManager", "classResourceMemoryManager.html", null ],
-    [ "RPGError", "classRPGError.html", null ],
     [ "Scene", "classScene.html", null ],
     [ "SceneManager", "classSceneManager.html", null ],
     [ "Square", "structSquare.html", null ],
