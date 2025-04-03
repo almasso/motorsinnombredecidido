@@ -18,8 +18,10 @@ class ComponentClass(TextBox) {
         TextBox(ComponentData const* data);
         bool init() override;
         bool update() override;
-        bool ended();
+        bool ended() const;
         bool setText(const std::string& fullText);
+
+        static void RegisterToLua(sol::state& lua);
 };
 
 #endif //TEXTBOX_H

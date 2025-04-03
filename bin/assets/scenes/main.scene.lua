@@ -6,6 +6,7 @@ local PlaySFX = require('assets.events.PlaySFXBehaviour');
 local Music = require('assets.events.MusicBehaviour');
 local Animation = require('assets.events.AnimationBehaviour');
 local ModifyLocalVariable = require('assets.events.ModifyLocalVariableBehaviour');
+local Dialogue = require('assets.events.DialogueBehaviour')
 
 return {
     manager = {
@@ -69,7 +70,7 @@ return {
             MovementComponent = {
                 speed = 500
             },
-            PlayerInput = {0},
+            --PlayerInput = {0},
             LocalVariables = { counter = 1 },
             EventHandler = {
                 events = {
@@ -81,8 +82,8 @@ return {
                         behaviours = {
                             Animation:new({action = "play"}),
                             ModifyLocalVariable:new("counter", 2),
-                            JumpIf:new(0, { type = "ValueEquals", params = { variable = "counter", equals = 1 }}),
-                            Animation:new({action = "change", animation = "assets/sprites/test2.animation.lua"})
+                            Animation:new({action = "change", animation = "assets/sprites/test2.animation.lua"}),
+                            Dialogue:new("¡Hola! Bienvenido al mundo de los Pokémon. Mi nombre es Oak. Pero las personas me llaman Profesor Oak. Este es un mundo vasto y fascinante, lleno de criaturas llamadas Pokémon. Los Pokémon son seres extraordinarios que conviven con los seres humanos, y juntos comparten un sinfín de aventuras y desafíos. En este mundo, los Pokémon pueden ser compañeros leales, amigos y aliados, pero también pueden ser poderosos rivales en emocionantes batallas. Es un mundo donde cada Pokémon tiene su propia historia, habilidades únicas y, lo más importante, una relación especial con las personas que los cuidan.\nLos Pokémon no son solo criaturas para luchar. Son compañeros de vida que ayudan en tareas diarias, en la exploración y, en algunos casos, incluso en la protección de las personas. Sin embargo, no todos los Pokémon llevan una vida tranquila. Algunos de ellos están destinados a enfrentarse en épicas batallas para demostrar quién es el más fuerte. Es en estas batallas donde los entrenadores como tú entran en acción. El destino de los Pokémon y los entrenadores está entrelazado, y juntos, pueden alcanzar nuevas alturas.\nEste es el comienzo de tu propia aventura en el mundo Pokémon. Como futuro entrenador, tu misión será recorrer el mundo, capturar Pokémon, entrenarlos y, lo más importante, descubrir qué significa ser un verdadero entrenador. Pero antes de que comiences tu viaje, hay algo muy importante que debes hacer: elegir a tu primer compañero Pokémon. Elige sabiamente, porque este será tu compañero más cercano, y juntos, enfrentarán muchos desafíos. No solo te acompañará en tus batallas, sino que también será tu amigo, tu apoyo y tu guía mientras exploras este vasto mundo.\nCada elección es importante, y no solo por la fuerza que tu Pokémon pueda tener. Los Pokémon tienen características que se ajustan a diferentes estilos de entrenamiento, y tú tendrás que aprender a conocerlos, a cuidarlos y a fortalecerlos. Así que, sin más preámbulo, elige a tu primer compañero Pokémon y prepárate para comenzar una aventura inolvidable. ¡El mundo Pokémon te espera!")
                         }
                     },
                     Evento1 = {

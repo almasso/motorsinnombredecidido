@@ -117,4 +117,6 @@ bool Entity::addComponent(Component *component) {
 void Entity::RegisterToLua(sol::state& lua) {
      sol::usertype<Entity> type = lua.new_usertype<Entity>("Entity");
      type["destroy"] = &Entity::destroy;
+     type["setActive"] = &Entity::setActive;
+     type["isActive"] = &Entity::isActive;
 }

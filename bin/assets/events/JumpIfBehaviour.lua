@@ -11,9 +11,7 @@ function JumpIf:new(target, conditionParams)
 end
 
 function JumpIf:init(scene, entity, event)
-    print("\nJumpIf init:");
     self._condition = EventConditionFactory.Create(self._conditionParams, scene, entity, event);
-    print(self._condition);
     return not (self._condition == nil);
 end
 
