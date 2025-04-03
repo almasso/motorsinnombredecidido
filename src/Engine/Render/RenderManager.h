@@ -5,6 +5,7 @@
 #include "Color.h"
 #include "Sprite.h"
 
+struct TextTexture;
 class SDL_Window;
 class SDL_Renderer;
 
@@ -16,6 +17,7 @@ class RenderManager {
     void clear() const;
     bool drawRect(const Rect &rect, const Color& color) const;
     bool drawSprite(const Rect &rect, const Sprite *sprite, float rotation) const;
+    bool drawText(const Rect &rect, const TextTexture *text, float rotation) const;
     void getWindowSize(int *width, int *height) const;
     void shutdown() const;
     std::pair<float,const Vector2&> setViewRect(const Vector2& viewPosition, const Vector2& viewSize);

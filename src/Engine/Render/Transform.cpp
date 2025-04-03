@@ -62,7 +62,7 @@ const Vector2& Transform::getScale() const {
 
 Vector2 Transform::getGlobalScale() const {
     if (Transform* parent = getParent()) {
-        return _scale + parent->getGlobalScale();
+        return _scale * parent->getGlobalScale();
     }
     return _scale;
 }

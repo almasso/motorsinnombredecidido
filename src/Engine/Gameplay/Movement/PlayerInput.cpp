@@ -9,7 +9,8 @@
 PlayerInput::PlayerInput(ComponentData const *data) :
     ComponentTemplate(data),
     _camera(nullptr),
-    _movement(nullptr) {
+    _movement(nullptr),
+    _active(false){
 }
 
 bool PlayerInput::init() {
@@ -21,15 +22,22 @@ bool PlayerInput::init() {
     if (Entity* ent = _scene->getEntityByHandler("Manager"); ent) {
         _camera = ent->getComponent<Camera>();
     }
+    _active = true;
     return true;
 }
 
 bool PlayerInput::update() {
-    InputState input = InputManager::GetState();
-    if (input.mouse_down) {
-        Vector2 pos = Vector2(input.mouse_x, input.mouse_y);
-        if (_camera) pos = _camera->screenToWorld(pos);
-        _movement->setTarget(pos);
+    if (_active) {
+        InputState input = InputManager::GetState();
+        if (input.mouse_down) {
+            Vector2 pos = Vector2(input.mouse_x, input.mouse_y);
+            if (_camera) pos = _camera->screenToWorld(pos);
+            _movement->setTarget(pos);
+        }
     }
     return true;
+}
+
+void PlayerInput::setActive(bool active) {
+    _active = active;
 }

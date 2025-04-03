@@ -1,5 +1,4 @@
 #include "LocalVariables.h"
-
 #include <Core/ComponentData.h>
 #include <Utils/RPGError.h>
 

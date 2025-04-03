@@ -9,10 +9,13 @@ class ComponentClass(PlayerInput) {
     private:
         Camera* _camera;
         MovementComponent* _movement;
+        bool _active;
     public:
         PlayerInput(ComponentData const* data);
         bool init() override;
         bool update() override;
+
+        void setActive(bool active);
 };
 
 #endif //PLAYERINPUT_H

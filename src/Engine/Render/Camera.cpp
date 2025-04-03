@@ -7,9 +7,10 @@ Camera::Camera(ComponentData const*data) : ComponentTemplate(data) {
 }
 
 bool Camera::init() {
-    _layer = -1;
     _size = _data->getVector("size",{1280 ,720});
-    return RenderComponent::init();
+    if (!RenderComponent::init()) return false;
+    _layer = -1;
+    return true;
 }
 
 bool Camera::render(RenderManager *manager) {

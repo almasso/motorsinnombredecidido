@@ -1,20 +1,21 @@
 #include "ComponentFactory.h"
-
+#include "ComponentData.h"
 #include <Audio/AudioSource.h>
 #include <Collisions/Collider.h>
-#include <Gameplay/LocalVariables.h>
 #include <Render/Transform.h>
 #include <Render/Rectangle.h>
 #include <Render/Animator.h>
 #include <Render/SpriteRenderer.h>
 #include <Render/Camera.h>
+#include <Render/Text.h>
 #include <Gameplay/Events/EventHandler.h>
 #include <Gameplay/Movement/MovementManager.h>
 #include <Gameplay/Movement/MovementObstacle.h>
 #include <Gameplay/Movement/MovementComponent.h>
 #include <Gameplay/Movement/PlayerInput.h>
-
-#include "ComponentData.h"
+#include <Gameplay/Dialog/TextBox.h>
+#include <Gameplay/Events/LocalVariables.h>
+#include <Utils/RPGError.h>
 
 ComponentFactory::ComponentFactory() :
     _numComponents(0) {
@@ -23,6 +24,7 @@ ComponentFactory::ComponentFactory() :
     registerComponent<Animator>();
     registerComponent<SpriteRenderer>();
     registerComponent<Camera>();
+    registerComponent<Text>();
     registerComponent<AudioSource>();
     registerComponent<Collider>();
     registerComponent<EventHandler>();
@@ -31,11 +33,13 @@ ComponentFactory::ComponentFactory() :
     registerComponent<MovementObstacle>();
     registerComponent<MovementComponent>();
     registerComponent<LocalVariables>();
+    registerComponent<TextBox>();
 }
 
 Component* ComponentFactory::createComponent(ComponentData const* data) {
     if (auto finder = _factory.find(data->getId()); finder != _factory.end()) {
         return finder->second(data);
     }
+    RPGError::ShowError("No se encontro el componente " + data->getId(), "Todos los componentes deben delcararse con el metodo RegisterComponent de Component Factory");
     return nullptr;
 }

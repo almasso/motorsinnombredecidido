@@ -1,10 +1,11 @@
 #include "RenderManager.h"
+#include "TextTexture.h"
+#include "TextureLoader.h"
 #include "Texture.h"
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_init.h>
 #include <Utils/RPGError.h>
 
-#include "TextureLoader.h"
 
 RenderManager::RenderManager() : _screenScale(0), _window(nullptr), _renderer(nullptr), _width(0), _height(0) {
 }
@@ -13,6 +14,12 @@ bool RenderManager::init(const int& width, const int& height) {
     if (!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
         {
             RPGError::ShowError("Error al inicializar SDL_VIDEO", SDL_GetError());
+            return false;
+        }
+    }
+    if (!TTF_Init()) {
+        {
+            RPGError::ShowError("Error al inicializar TTF", SDL_GetError());
             return false;
         }
     }
@@ -41,8 +48,9 @@ void RenderManager::clear() const {
 }
 
 bool RenderManager::drawRect(const Rect &rect, const Color& color) const {
-    SDL_SetRenderDrawColor(_renderer, color.r, color.r, color.b, color.a);
-    return SDL_RenderFillRect(_renderer, &rect);
+    Rect drawRect = convertRect(rect);
+    SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
+    return SDL_RenderFillRect(_renderer, &drawRect);
 }
 
 bool RenderManager::drawSprite(const Rect &rect, const Sprite *sprite, float rotation) const {
@@ -51,6 +59,14 @@ bool RenderManager::drawSprite(const Rect &rect, const Sprite *sprite, float rot
         return true;
     }
     return SDL_RenderTextureRotated(_renderer, sprite->getTexture()->texture, &sprite->getRect(), &drawRect, rotation, nullptr, SDL_FLIP_NONE);
+}
+
+bool RenderManager::drawText(const Rect &rect, const TextTexture *text, float rotation) const {
+    Rect drawRect = convertRect(rect);
+    if (drawRect.w == 0 || drawRect.h == 0) {
+        return true;
+    }
+    return SDL_RenderTextureRotated(_renderer, text->getTexture(), nullptr, &drawRect, rotation, nullptr, SDL_FLIP_NONE);
 }
 
 void RenderManager::getWindowSize(int *width, int *height) const {

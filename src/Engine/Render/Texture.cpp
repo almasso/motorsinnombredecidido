@@ -7,7 +7,7 @@ Texture::Texture(std::string const &path) : Resource(path), texture(nullptr){
 
 bool Texture::load() {
   texture = TextureLoader::GetTexture(_path);
-  _size = 0;
+  _size = texture->w * texture->h;
   return texture;
 }
 

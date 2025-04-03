@@ -5,7 +5,7 @@
 #include <Core/Entity.h>
 #include <Core/Game.h>
 #include <Core/Scene.h>
-#include <Gameplay/LocalVariables.h>
+#include <Gameplay/Events/LocalVariables.h>
 #include <Gameplay/Events/Event.h>
 #include <Gameplay/Events/EventBehaviour.h>
 #include <Gameplay/Events/EventCondition.h>

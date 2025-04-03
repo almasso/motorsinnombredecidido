@@ -59,7 +59,6 @@ Entity* SceneManager::createEntity(const EntityBlueprint* blueprint, Scene* scen
 
 Scene* SceneManager::createScene(const SceneBlueprint* blueprint)
 {
-	if (blueprint == nullptr) return nullptr;
 	Scene* scene = new Scene();
 	for (const EntityBlueprint& entityBp : blueprint->getEntities()) {
 		Entity* entity = createEntity(&entityBp, scene);
@@ -135,7 +134,12 @@ Entity* SceneManager::instantiatePrefab(const std::string& handler)
 
 Scene* SceneManager::addScene(const std::string& handler)
 {
-	Scene* newScene = createScene(ResourceHandler<SceneBlueprint>::Instance()->get(handler));
+	const SceneBlueprint* blueprint = ResourceHandler<SceneBlueprint>::Instance()->get(handler);
+	if (blueprint == nullptr) {
+		RPGError::ShowError("Escena inválida", "Fallo al intentar leer la escena " + handler + ".");
+		return nullptr;
+	}
+	Scene* newScene = createScene(blueprint);
 	if (newScene) {
 		_scenes.push_back(newScene);
 	}

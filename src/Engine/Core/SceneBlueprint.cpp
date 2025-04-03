@@ -13,7 +13,6 @@ bool SceneBlueprint::load() {
     for (auto&& [key, value] : blueprint) {
         if (value.valid())
             _entities.emplace_back(value);
-
     }
     _size = 0;
     return true;

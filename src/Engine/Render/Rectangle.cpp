@@ -7,7 +7,7 @@ Rectangle::Rectangle(ComponentData const*data) : ComponentTemplate(data){
 }
 
 bool Rectangle::init() {
-    _color = _data->getData<int>("color",0xFF0000FF);
+    _color = _data->getData<int>("color",0x000000FF);
     _size = _data->getVector("size",{1,1});
     return RenderComponent::init();
 }

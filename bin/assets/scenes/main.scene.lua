@@ -10,6 +10,29 @@ local ModifyLocalVariable = require('assets.events.ModifyLocalVariableBehaviour'
 return {
     manager = {
         handler = "Manager",
+        children = {
+            textbox = {
+                handler = "TextBox",
+                components = {
+                    Transform = {
+                        position = {0, 370}
+                    },
+                    Text = {
+                        font = "assets/fonts/pokemon-emerald.ttf",
+                        fontSize = 64,
+                        color = 0x000000FF,
+                        size = {1580,280},
+                        layer = 2
+                    },
+                    Rectangle = {
+                        layer = 1,
+                        size = {1600,290},
+                        color = 0xFFFFFFFF
+                    },
+                    TextBox = {0}
+                }
+            }
+        },
         components = {
             MovementManager = {
                 tileWidth = 200,

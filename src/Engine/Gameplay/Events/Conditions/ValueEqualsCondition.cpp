@@ -1,7 +1,6 @@
 #include "ValueEqualsCondition.h"
-
+#include <Gameplay/Events/LocalVariables.h>
 #include <Core/Entity.h>
-#include <Gameplay/LocalVariables.h>
 #include <sol/table.hpp>
 
 ValueEqualsCondition::ValueEqualsCondition() :
