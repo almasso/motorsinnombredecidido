@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL_audio.h>
 #include <SDL3/SDL_stdinc.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 AudioClipData::AudioClipData(std::string const& path) :
     Resource(path),
@@ -18,7 +18,7 @@ AudioClipData::~AudioClipData() {
 bool AudioClipData::load() {
     specifier = new SDL_AudioSpec();
     if (!SDL_LoadWAV(_path.c_str(), specifier, &buffer, &bufferLen)) {
-        RPGError::ShowError(std::string("Failed to load") + _path, SDL_GetError());
+        Error::ShowError(std::string("Failed to load") + _path, SDL_GetError());
         return false;
     }
     _size = bufferLen;

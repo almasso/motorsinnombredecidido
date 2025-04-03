@@ -3,7 +3,7 @@
 #include <Render/RenderManager.h>
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_init.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 InputManager* InputManager::_instance = nullptr;
 
@@ -13,13 +13,13 @@ InputManager* InputManager::Init() {
     if (_instance == nullptr) {
         if (!SDL_InitSubSystem(SDL_INIT_EVENTS)) {
             {
-                RPGError::ShowError("Error al inicializar SDL_EVENTS", SDL_GetError());
+                Error::ShowError("Error al inicializar SDL_EVENTS", SDL_GetError());
                 return _instance;
             }
         }
         return _instance = new InputManager();
     }
-    RPGError::ShowError("Error al inicializar InputManager", "Ya existia una instancia de InputManager");
+    Error::ShowError("Error al inicializar InputManager", "Ya existia una instancia de InputManager");
     return nullptr;
 }
 

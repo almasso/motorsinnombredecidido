@@ -3,7 +3,7 @@
 #include <Render/Transform.h>
 #include <Core/Scene.h>
 #include <Core/Entity.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 MovementObstacle::MovementObstacle(ComponentData const* data) :
 ComponentTemplate(data),
@@ -14,12 +14,12 @@ _manager(nullptr) {
 bool MovementObstacle::init() {
     _transform = _entity->getComponent<Transform>();
     if (_transform == nullptr) {
-        RPGError::ShowError("MovementObstacle object sin transform", "Todos los objetos con movimiento requieren de un componente Transform para funcionar");
+        Error::ShowError("MovementObstacle object sin transform", "Todos los objetos con movimiento requieren de un componente Transform para funcionar");
         return false;
     }
     Entity* ent = _scene->getEntityByHandler("Manager");
     if (ent == nullptr || !ent->getComponent<MovementManager>()) {
-        RPGError::ShowError("No hay MovementManager en escena", "Todos los objetos con movimiento requieren de un MovementManager para funcionar");
+        Error::ShowError("No hay MovementManager en escena", "Todos los objetos con movimiento requieren de un MovementManager para funcionar");
         return false;
     }
     _manager = ent->getComponent<MovementManager>();

@@ -12,14 +12,15 @@ class ComponentClass(TextBox) {
         std::vector<std::string> _dialog;
         float _characterDelay {};
         float _timer {};
-        size_t _wordIter {}, _paragraphIter {};
+        size_t _charIter {}, _paragraphIter {};
         void splitText(const std::string& fullText);
     public:
         TextBox(ComponentData const* data);
         bool init() override;
         bool update() override;
         bool ended() const;
-        bool setText(const std::string& fullText);
+
+        void setText(const std::string &fullText);
 
         static void RegisterToLua(sol::state& lua);
 };

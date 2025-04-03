@@ -1,7 +1,7 @@
 #include "Event.h"
 
 #include <Load/LuaReader.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 #include "EventBehaviour.h"
 #include "EventCondition.h"
@@ -20,7 +20,7 @@ bool Event::initCondition(sol::table const& event) {
 bool Event::insertBehaviour(sol::table const& behaviour) {
     auto eventBehaviour = EventBehaviour::Create(_game, _scene, _entity, this, behaviour);
     if (!eventBehaviour) {
-        RPGError::ShowError("Failed creating EventBehaviour", "Something went wrong when trying to create an EventBehaviour");
+        Error::ShowError("Failed creating EventBehaviour", "Something went wrong when trying to create an EventBehaviour");
         return false;
     }
     _behaviours.push_back(eventBehaviour);

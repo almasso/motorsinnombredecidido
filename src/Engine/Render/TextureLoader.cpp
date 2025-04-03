@@ -1,6 +1,6 @@
 #include "TextureLoader.h"
 #include "Color.h"
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 #include <SDL3/SDL_render.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -34,7 +34,7 @@ SDL_Texture* TextureLoader::GetTexture(const std::string& filePath) {
 
 SDL_Texture * TextureLoader::GetTexture(SDL_Surface *surface) {
     if (!_renderer || !surface) {
-        RPGError::ShowError("Error al cargar imagen", SDL_GetError());
+        Error::ShowError("Error al cargar imagen", SDL_GetError());
         return nullptr;
     }
 
@@ -42,7 +42,7 @@ SDL_Texture * TextureLoader::GetTexture(SDL_Surface *surface) {
     SDL_DestroySurface(surface);
 
     if (!texture) {
-        RPGError::ShowError("Error al crear textura", SDL_GetError());
+        Error::ShowError("Error al crear textura", SDL_GetError());
     }
     return texture;
 }
@@ -51,7 +51,7 @@ void TextureLoader::ResizeTexture(SDL_Texture*& texture, int width, int height) 
     if (!_renderer) return;
     SDL_Texture* newTexture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     if (!newTexture) {
-        RPGError::ShowError("Error al crear textura vacía", SDL_GetError());
+        Error::ShowError("Error al crear textura vacía", SDL_GetError());
         return;
     }
     SDL_SetRenderTarget(_renderer, newTexture);

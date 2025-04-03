@@ -1,6 +1,6 @@
 #include "LocalVariables.h"
 #include <Core/ComponentData.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 LocalVariables::LocalVariables(ComponentData const* data) :
     ComponentTemplate(data) {
@@ -10,7 +10,7 @@ bool LocalVariables::init() {
     auto& data = _data->getData();
     for (auto& [key, value] : data) {
         if (!key.is<std::string>()) {
-            RPGError::ShowError("LocalVariables", "key is not a string");
+            Error::ShowError("LocalVariables", "key is not a string");
             return false;
         }
         variables.insert({key.as<std::string>(), value.as<sol::lua_value>()});

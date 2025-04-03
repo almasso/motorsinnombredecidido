@@ -5,7 +5,7 @@
 #include <Load/ResourceHandler.h>
 #include <SDL3/SDL.h>
 
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 #include <Utils/Time.h>
 #include "AudioClip.h"
 #include "AudioMixer.h"
@@ -27,13 +27,13 @@ AudioManager::~AudioManager() {
 
 bool AudioManager::init() {
     if (!SDL_InitSubSystem(SDL_INIT_AUDIO)) {
-        RPGError::ShowError("Audio Subsystem initialization failed", SDL_GetError());
+        Error::ShowError("Audio Subsystem initialization failed", SDL_GetError());
         return false;
     }
 
     _audioDeviceId = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
     if (_audioDeviceId == 0) {
-        RPGError::ShowError("Audio Device initialization failed", SDL_GetError());
+        Error::ShowError("Audio Device initialization failed", SDL_GetError());
         return false;
     }
 

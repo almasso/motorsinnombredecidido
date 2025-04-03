@@ -1,7 +1,7 @@
 #include "EventHandler.h"
 
 #include <Core/ComponentData.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 #include "Event.h"
 
@@ -32,16 +32,16 @@ EventHandler::~EventHandler() {
 bool EventHandler::init() {
     auto events = _data->getData<sol::table>("events", sol::lua_nil);
     if (!events.valid()) {
-        RPGError::ShowError("EventHandler", "Invalid events table");
+        Error::ShowError("EventHandler", "Invalid events table");
         return false;
     }
     for (auto const& [name, event] : events) {
         if (!name.is<std::string>() || !event.is<sol::table>()) {
-            RPGError::ShowError("EventHandler", "Invalid event name or table format");
+            Error::ShowError("EventHandler", "Invalid event name or table format");
             return false;
         }
         if (!addEvent(name.as<std::string>(), event.as<sol::table>())){
-            RPGError::ShowError("EventHandler", "Invalid event table");
+            Error::ShowError("EventHandler", "Invalid event table");
             return false;
         }
     }

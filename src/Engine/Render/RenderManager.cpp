@@ -4,7 +4,7 @@
 #include "Texture.h"
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_init.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 
 RenderManager::RenderManager() : _screenScale(0), _window(nullptr), _renderer(nullptr), _width(0), _height(0) {
@@ -13,19 +13,19 @@ RenderManager::RenderManager() : _screenScale(0), _window(nullptr), _renderer(nu
 bool RenderManager::init(const int& width, const int& height) {
     if (!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
         {
-            RPGError::ShowError("Error al inicializar SDL_VIDEO", SDL_GetError());
+            Error::ShowError("Error al inicializar SDL_VIDEO", SDL_GetError());
             return false;
         }
     }
     if (!TTF_Init()) {
         {
-            RPGError::ShowError("Error al inicializar TTF", SDL_GetError());
+            Error::ShowError("Error al inicializar TTF", SDL_GetError());
             return false;
         }
     }
     if (!SDL_CreateWindowAndRenderer("Game", width, height, SDL_WINDOW_MAXIMIZED, &_window, &_renderer))
     {
-        RPGError::ShowError("Error al crear la ventana", SDL_GetError());
+        Error::ShowError("Error al crear la ventana", SDL_GetError());
         return false;
     }
     int w, h;

@@ -19,7 +19,7 @@ function PlaySFX:init(scene, entity, event)
 end
 
 function PlaySFX:act(game, scene, entity, event)
-    print("\nPlaySFX act:");
+    --print("\nPlaySFX act:");
     self._done = true;
     return self._source:play();
 end

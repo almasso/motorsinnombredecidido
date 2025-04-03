@@ -1,6 +1,6 @@
 #include "LuaManager.h"
 #include "AssetManager.h"
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 #include <iostream>
 #include <lua.hpp>
 
@@ -8,11 +8,11 @@
 lua_State *LuaManager::loadState(char* fileData, int fileLength) {
     lua_State* L = luaL_newstate();
     if (luaL_loadbuffer(L, fileData, fileLength, "filename") != LUA_OK) {
-        RPGError::ShowError("Error al cargar el script Lua",std::string("Error al ejecutar el script Lua: ") + lua_tostring(L, -1));
+        Error::ShowError("Error al cargar el script Lua",std::string("Error al ejecutar el script Lua: ") + lua_tostring(L, -1));
         return L;
     }
     if (lua_pcall(L, 0, 0, 0) != LUA_OK) {
-        RPGError::ShowError("Error al ejecutar el script Lua", std::string("Error al ejecutar el script Lua: ") + lua_tostring(L, -1));
+        Error::ShowError("Error al ejecutar el script Lua", std::string("Error al ejecutar el script Lua: ") + lua_tostring(L, -1));
     }
     return L;
 }
@@ -44,7 +44,7 @@ Square LuaManager::loadSquare() {
 
             lua_close(L);
         } else {
-            RPGError::ShowError("Elemento no encontrado",
+            Error::ShowError("Elemento no encontrado",
                                 "La tabla 'square' no se encontro en el archivo Lua.");
             lua_close(L);
         }

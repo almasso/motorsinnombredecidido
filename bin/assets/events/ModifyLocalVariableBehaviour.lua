@@ -16,9 +16,9 @@ function ModifyLocalVariable:init(scene, entity, event)
 end
 
 function ModifyLocalVariable:act(game, scene, entity, event)
-    print("\nModifyLocalVariable act:");
-    print(self._variable);
-    print(self._newValue);
+    --print("\nModifyLocalVariable act:");
+    --print(self._variable);
+    --print(self._newValue);
     self._done = true;
     return self._localVariables:setVariable(self._variable, self._newValue);
 end

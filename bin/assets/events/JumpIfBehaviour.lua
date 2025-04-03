@@ -16,8 +16,8 @@ function JumpIf:init(scene, entity, event)
 end
 
 function JumpIf:act(game, scene, entity, event)
-    print("\nJumpIf act:");
-    print(self._conditionParams.type);
+    --print("\nJumpIf act:");
+    --print(self._conditionParams.type);
     self._done = true;
     if (self._condition:met()) then
         event:jump(self._target);

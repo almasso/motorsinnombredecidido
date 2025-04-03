@@ -5,7 +5,7 @@
 #include <Load/ResourceHandler.h>
 #include <Core/ComponentData.h>
 #include <Utils/Rect.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 
 bool Text::remakeTexture() {

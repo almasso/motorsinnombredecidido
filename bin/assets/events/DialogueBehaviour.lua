@@ -15,17 +15,17 @@ function Dialogue:init(scene, entity, event)
     if (self._textBoxEntity == nil) then
         return false;
     end
-    print(self._textBoxEntity);
+    --print(self._textBoxEntity);
     self._textBoxComponent = TextBox.get(self._textBoxEntity);
-    print(self._textBoxComponent);
+    --print(self._textBoxComponent);
     return not (self._textBoxComponent == nil);
 end
 
 function Dialogue:act(game, scene, entity, event)
-    print("\nDialogue act");
+    --print("\nDialogue act");
     self._done = true;
-    self._textBoxEntity:setActive(true);
-    return self._textBoxComponent:setText(self._text);
+    self._textBoxComponent:setText(self._text);
+    return true
 end
 
 function Dialogue:ended(scene, entity, event)

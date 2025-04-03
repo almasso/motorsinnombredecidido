@@ -3,7 +3,7 @@
 #include <Core/Scene.h>
 #include <Core/Entity.h>
 #include <Render/Camera.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 #include <Input/InputManager.h>
 
 PlayerInput::PlayerInput(ComponentData const *data) :
@@ -16,7 +16,7 @@ PlayerInput::PlayerInput(ComponentData const *data) :
 bool PlayerInput::init() {
     _movement = _entity->getComponent<MovementComponent>();
     if (_movement == nullptr) {
-        RPGError::ShowError("Player sin MovementComponent", "El player requiere de un componente MovementComponent para funcionar");
+        Error::ShowError("Player sin MovementComponent", "El player requiere de un componente MovementComponent para funcionar");
         return false;
     }
     if (Entity* ent = _scene->getEntityByHandler("Manager"); ent) {

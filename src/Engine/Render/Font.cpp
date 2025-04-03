@@ -1,6 +1,6 @@
 #include "Font.h"
 #include <SDL3_ttf/SDL_ttf.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 Font::Font(std::string const &path) : Resource(path), _font(nullptr) {
 }
@@ -15,7 +15,7 @@ bool Font::load() {
 
     _font = TTF_OpenFont(fontPath.c_str(), fontSize);
     if (_font == nullptr) {
-        RPGError::ShowError("Fallo al cargar la fuente " + fontPath, "Fallo al cargar la fuente " + fontPath + "\n" + SDL_GetError());
+        Error::ShowError("Fallo al cargar la fuente " + fontPath, "Fallo al cargar la fuente " + fontPath + "\n" + SDL_GetError());
         return false;
     }
     int width, height;

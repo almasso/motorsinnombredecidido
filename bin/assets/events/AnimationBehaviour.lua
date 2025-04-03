@@ -15,8 +15,8 @@ function Animation:init(scene, entity, event)
 end
 
 function Animation:act(game, scene, entity, event)
-    print("\nAnimation act:");
-    print(self._actionParams.action);
+    --print("\nAnimation act:");
+    --print(self._actionParams.action);
     self._done = true;
     local action = self._actionParams.action;
     if (action == "reset") then

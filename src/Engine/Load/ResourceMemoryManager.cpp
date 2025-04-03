@@ -1,6 +1,6 @@
 #include "ResourceMemoryManager.h"
 
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 #include "Resource.h"
 
@@ -41,7 +41,7 @@ bool ResourceMemoryManager::activateResource(Resource* resource) {
         return false;
     if (resource->getSize() < 0) {
         resource->unload();
-        RPGError::ShowError("Invalid resource size.", "Tried to insert a resource with size " + std::to_string(resource->getSize()) + ".");
+        Error::ShowError("Invalid resource size.", "Tried to insert a resource with size " + std::to_string(resource->getSize()) + ".");
         return false;
     }
 

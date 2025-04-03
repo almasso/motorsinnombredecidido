@@ -6,7 +6,7 @@
 #include "SceneBlueprint.h"
 #include "PrefabBlueprint.h"
 #include <Load/ResourceHandler.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 SceneManager* SceneManager::_instance = nullptr;
 
@@ -90,7 +90,7 @@ SceneManager* SceneManager::Init(const std::string& startScene)
 		delete _instance;
 		return nullptr;
 	}
-	RPGError::ShowError("Error al inicializar SceneManager", "Ya existia una instancia de SceneManager");
+	Error::ShowError("Error al inicializar SceneManager", "Ya existia una instancia de SceneManager");
 	return nullptr;
 }
 
@@ -136,7 +136,7 @@ Scene* SceneManager::addScene(const std::string& handler)
 {
 	const SceneBlueprint* blueprint = ResourceHandler<SceneBlueprint>::Instance()->get(handler);
 	if (blueprint == nullptr) {
-		RPGError::ShowError("Escena inválida", "Fallo al intentar leer la escena " + handler + ".");
+		Error::ShowError("Escena inválida", "Fallo al intentar leer la escena " + handler + ".");
 		return nullptr;
 	}
 	Scene* newScene = createScene(blueprint);

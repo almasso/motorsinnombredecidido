@@ -10,7 +10,7 @@ function Jump:new(target)
 end
 
 function Jump:act(game, scene, entity, event)
-    print("\nJump act");
+    --print("\nJump act");
     self._done = true;
     event:jump(self._target);
     return true;

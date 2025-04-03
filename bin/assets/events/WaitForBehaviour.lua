@@ -17,8 +17,8 @@ end
 function WaitFor:onStart()
     WaitFor:super().onStart(self);
     self._condition:reset();
-    print("\nWaitFor onStart: ");
-    print(self._conditionParams.type);
+    --print("\nWaitFor onStart: ");
+    --print(self._conditionParams.type);
     return true;
 end
 

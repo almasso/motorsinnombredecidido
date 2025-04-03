@@ -15,7 +15,7 @@
 #include <Gameplay/Movement/PlayerInput.h>
 #include <Gameplay/Dialog/TextBox.h>
 #include <Gameplay/Events/LocalVariables.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 
 ComponentFactory::ComponentFactory() :
     _numComponents(0) {
@@ -40,6 +40,6 @@ Component* ComponentFactory::createComponent(ComponentData const* data) {
     if (auto finder = _factory.find(data->getId()); finder != _factory.end()) {
         return finder->second(data);
     }
-    RPGError::ShowError("No se encontro el componente " + data->getId(), "Todos los componentes deben delcararse con el metodo RegisterComponent de Component Factory");
+    Error::ShowError("No se encontro el componente " + data->getId(), "Todos los componentes deben delcararse con el metodo RegisterComponent de Component Factory");
     return nullptr;
 }

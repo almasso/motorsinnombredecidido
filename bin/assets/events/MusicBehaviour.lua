@@ -20,8 +20,8 @@ function Music:init(scene, entity, event)
 end
 
 function Music:act(game, scene, entity, event)
-    print("\nMusic act:");
-    print(self._actionParams.action);
+    --print("\nMusic act:");
+    --print(self._actionParams.action);
     self._done = true;
     local action = self._actionParams.action;
     if (action == "play") then

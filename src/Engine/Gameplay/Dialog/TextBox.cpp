@@ -4,14 +4,13 @@
 #include <Load/ResourceHandler.h>
 #include <Render/Font.h>
 #include <Render/Text.h>
-#include <Utils/RPGError.h>
+#include <Utils/Error.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <Utils/Time.h>
 #include <Utils/TimeManager.h>
 #include <sol/state.hpp>
 
 void TextBox::splitText(const std::string &fullText) {
-    _dialog.clear();
     const Font* font = ResourceHandler<Font>::Instance()->get(_text->getFont());
     int maxWidth = _text->getSize().getX() * 0.97f;
     int maxHeight = _text->getSize().getY();
@@ -56,7 +55,7 @@ TextBox::TextBox(ComponentData const *data) : ComponentTemplate(data) {
 bool TextBox::init() {
     _text = _entity->getComponent<Text>();
     if (!_text) {
-        RPGError::ShowError("","");
+        Error::ShowError("","");
         return false;
     }
     _text->setText("");
@@ -68,21 +67,29 @@ bool TextBox::init() {
 bool TextBox::update() {
     _timer += Time::deltaTime;
     if (_paragraphIter < _dialog.size()) {
-        if (_wordIter < _dialog[_paragraphIter].size()) {
-            if (_timer >= _characterDelay) {
+        if (_charIter < _dialog[_paragraphIter].size()) {
+            float delay = _characterDelay * (InputManager::GetState().mouse_pressed ? .1f : 1);
+            if (_timer >= delay) {
                 _timer = 0.0f;
-                _text->setText(_text->getText() + _dialog[_paragraphIter][_wordIter]);
-                _wordIter++;
+                std::string current(1,_dialog[_paragraphIter][_charIter]);
+                if (static_cast<unsigned char>(current[0]) > 0xC2 && _charIter+1 < _dialog[_paragraphIter].size()) {
+                    _charIter++;
+                    current += _dialog[_paragraphIter][_charIter];
+                }
+                _text->setText(_text->getText() + current);
+                _charIter++;
             }
         } else {
-            std::cout << "Waiting for input... \n";
-            if (InputManager::GetState().mouse_down) {
+            if (InputManager::GetState().mouse_up) {
                 _timer = 0.0f;
-                _wordIter = 0;
+                _charIter = 0;
                 _paragraphIter++;
                 _text->setText("");
-                if (ended())
+                if (ended()) {
                     _entity->setActive(false);
+                    _charIter = _paragraphIter = 0;
+                    _dialog.clear();
+                }
             }
         }
     }
@@ -93,11 +100,9 @@ bool TextBox::ended() const {
     return _paragraphIter == _dialog.size();
 }
 
-bool TextBox::setText(const std::string &fullText) {
-    if (!ended()) return false;
+void TextBox::setText(const std::string &fullText) {
+    _entity->setActive(true);
     splitText(fullText);
-    _wordIter = _paragraphIter = 0;
-    return true;
 }
 
 void TextBox::RegisterToLua(sol::state& lua) {
