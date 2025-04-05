@@ -8,6 +8,7 @@
 #include "utils/tinyfiledialogs/tinyfiledialogs.h"
 #include "render/RenderManager.h"
 #include <SDL3/SDL.h>
+#include "resources/Tileset.h"
 
 editor::render::modals::TilesetWizard::TilesetWizard(const int* dimensions) :
 ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.title") + "") {
@@ -87,7 +88,6 @@ void editor::render::modals::TilesetWizard::drawControls() {
         ImGui::CloseCurrentPopup();
         _isOpen = false;
         _isGivingName = false;
-        if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
         _loadedTexture = 0;
         _offset[0] = _offset[1] = 0;
     }

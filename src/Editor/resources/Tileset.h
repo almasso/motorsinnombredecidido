@@ -8,7 +8,6 @@
 
 #include "EditorResource.h"
 #include <vector>
-#include <imgui.h>
 #include <filesystem>
 
 namespace editor::resources {
@@ -17,8 +16,10 @@ namespace editor::resources {
     class Tileset : public EditorResource {
     public:
         template <std::convertible_to<std::filesystem::path> T, std::convertible_to<std::string> S>
-        Tileset(T&& filepath, S&& name) : EditorResource("tileset"), _source(std::forward<T>(filepath)),
-        _name(std::forward<S>(name)) {}
+        Tileset(T&& filepath, S&& name, int offsetX = 0, int offsetY = 0) : EditorResource("tileset"), _source(std::forward<T>(filepath)),
+        _name(std::forward<S>(name)), _offsetX(offsetX), _offsetY(offsetY) {
+            generateTileset();
+        }
 
         void writeToLua() final;
 
@@ -35,6 +36,10 @@ namespace editor::resources {
         std::string _name;
         std::filesystem::path _source;
         std::vector<Tile*> _tiles;
+        int _offsetX;
+        int _offsetY;
+
+        void generateTileset();
     };
 }
 

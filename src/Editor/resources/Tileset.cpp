@@ -4,6 +4,12 @@
 //
 
 #include "Tileset.h"
+#include <SDL3/SDL.h>
+#include "render/RenderManager.h"
+
+void editor::resources::Tileset::generateTileset() {
+
+}
 
 void editor::resources::Tileset::readFromLua() {
 

@@ -12,6 +12,11 @@
 #include <ctime>
 #include <sol/sol.hpp>
 
+namespace editor::resources {
+    class Tileset;
+    class Map;
+}
+
 namespace editor {
     class Project {
     public:
@@ -69,6 +74,20 @@ namespace editor {
 
         void updateLastModified();
 
+        template <std::convertible_to<std::string> T>
+        editor::resources::Map* getMap(T&& name) {
+            auto m = _maps.find(std::forward<T>(name));
+            if(m == _maps.end()) return nullptr;
+            else return m->second;
+        }
+
+        template <std::convertible_to<std::string> T>
+        editor::resources::Tileset* getTileset(T&& name) {
+            auto t = _tilesets.find(std::forward<T>(name));
+            if(t == _tilesets.end()) return nullptr;
+            else return t->second;
+        }
+
     private:
         std::string _name;
         std::filesystem::path _projectPath;
@@ -76,6 +95,9 @@ namespace editor {
         std::tm _lastModified;
         bool _setToDelete = false;
         bool _found = false;
+
+        std::unordered_map<std::string, editor::resources::Tileset*> _tilesets;
+        std::unordered_map<std::string, editor::resources::Map*> _maps;
 
         int _dimensions[2];
 
