@@ -7,13 +7,18 @@
 #define MOTORSINNOMBREDECIDIDO_TILESETWIZARD_H
 
 #include "render/ModalWindow.h"
+#include <imgui.h>
 
 namespace editor::render::modals {
     class TilesetWizard : public ModalWindow {
     public:
-        TilesetWizard();
+        TilesetWizard(const int* dimensions);
+
+        ~TilesetWizard();
 
     private:
+        ImTextureID _loadedTexture = 0;
+
         int _dimensions[2];
 
         bool _isGivingName = false;
@@ -22,11 +27,17 @@ namespace editor::render::modals {
 
         char _routeBuffer[1024];
 
-        char _fullRoute[1280];
+        float _color[3];
+
+        int _offset[2];
 
         void beforeRender() override;
 
         void onRender() override;
+
+        void drawControls();
+
+        void drawGrid();
     };
 }
 

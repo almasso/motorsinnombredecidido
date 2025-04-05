@@ -8,37 +8,47 @@
 #include "common/Project.h"
 #include "render/RenderManager.h"
 #include <imgui_internal.h>
-#include <resources/Tile.h>
-
+#include "resources/Tile.h"
 #include "render/Modals/MainWindow/TilesetWizard.h"
 #include "render/WindowStack.h"
 #include "resources/Map.h"
 #include "resources/Tileset.h"
+#include <SDL3/SDL_filesystem.h>
+
+
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#else
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
 
 editor::render::tabs::MapEditor::MapEditor(editor::Project* project) :
 WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor") + ""), _project(project) {
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/toplayer.png"));
+
+    _currentDirectory = GetCurrentDir;
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/toplayer.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.selectedlayer"));
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/currentandbelowtp.png"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/currentandbelowtp.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.selectedandbelowtransparent"));
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/currentandbelow.png"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/currentandbelow.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.selectedandbelowopaque"));
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/alllayers.png"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/alllayers.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.alllayers"));
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/zoomin.png"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/zoomin.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.zoomin"));
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/zoomout.png"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/zoomout.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.zoomout"));
-    _uiTextures.push_back(RenderManager::GetInstance().loadTexture("/settings/assets/map/grid.png"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/grid.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.grid"));
 
-    _tilesetWizard = new render::modals::TilesetWizard();
+    _tilesetWizard = new render::modals::TilesetWizard(project->getDimensions());
     WindowStack::addWindowToStack(_tilesetWizard);
     _maps = std::deque<editor::resources::Map*>(0, nullptr);
     _tilesets = std::deque<editor::resources::Tileset*>(0, nullptr);
 }
 
 editor::render::tabs::MapEditor::~MapEditor() {
+    SDL_free(_currentDirectory);
     for(int i = 0; i < _uiTextures.size(); ++i) {
         RenderManager::GetInstance().destroyTexture(_uiTextures[i]);
     }
@@ -82,7 +92,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 60);
     ImGui::SetNextWindowContentSize(ImVec2(mapWidth * scaledSize, mapHeight * scaledSize));
-    ImGui::BeginChild("##mapGrid", ImVec2(0,0), 0, ImGuiWindowFlags_HorizontalScrollbar);
+    ImGui::BeginChild("##mapGrid", ImVec2(RenderManager::GetInstance().getWidth()/2,0), 0, ImGuiWindowFlags_HorizontalScrollbar);
     {
         float scrollX = ImGui::GetScrollX();
         float scrollY = ImGui::GetScrollY();
@@ -97,7 +107,8 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 };
                 ImVec2 tileEnd = {tilePos.x + scaledSize, tilePos.y + scaledSize};
 
-                if (tilePos.y < 100) continue;
+                if(tilePos.y < 100) continue;
+                if(tileEnd.x > 3 * RenderManager::GetInstance().getWidth()/4) continue;
 
                 std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
                 ImGui::SetCursorPos(tilePos);
@@ -150,7 +161,7 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
 }
 
 void editor::render::tabs::MapEditor::drawToolbar() {
-    ImGui::BeginChild("##mapEditorToolbar", ImVec2(render::RenderManager::GetInstance().getWidth(), 60), 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+    ImGui::BeginChild("##mapEditorToolbar", ImVec2(render::RenderManager::GetInstance().getWidth() / 2, 60), true, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6,6));
 
     // Botones de layers
@@ -168,6 +179,10 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     }
 
     ImGui::SameLine();
+    ImGui::Spacing();
+    ImGui::SameLine();
+    ImGui::Spacing();
+    ImGui::SameLine();
     if(ImGui::ImageButton("butZoomin", _uiTextures[4], ImVec2(32, 32))) {
         _zoom *= 1.1f;
         _zoom = ImClamp(_zoom, 0.5f, 3.0f);
@@ -184,6 +199,10 @@ void editor::render::tabs::MapEditor::drawToolbar() {
         ImGui::SetTooltip(_buttonTooltips[5].c_str());
     }
     ImGui::SameLine();
+    ImGui::Spacing();
+    ImGui::SameLine();
+    ImGui::Spacing();
+    ImGui::SameLine();
     ImVec4 bg = _isGridShown ? ImVec4(1,0,1,1) : ImVec4(0,0,0,0);
     if(ImGui::ImageButton("butGrid", _uiTextures[6], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
         _isGridShown = !_isGridShown;
@@ -193,38 +212,50 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     }
 
     ImGui::SameLine();
-    if (ImGui::BeginCombo("##mapDropdown", _selectedMap >= 0 ? ("Map " + std::to_string(_selectedMap)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
-        for (int i = 0; i < _maps.size(); ++i) {
-            bool isSelected = (i == _selectedMap);
-            if (ImGui::Selectable(("Map " + std::to_string(i)).c_str(), isSelected)) {
-                _selectedMap = i;
-            }
-        }
-        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
-            //_tilesetWizard->show();
-        }
-        ImGui::EndCombo();
-    }
+    ImGui::Spacing();
     ImGui::SameLine();
-    if (ImGui::BeginCombo("##layerDropdown", _selectedLayer >= 0 ? ("Layer " + std::to_string(_selectedLayer)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layerselector").c_str())) {
-        for (int i = 0; i < _maps[_selectedMap]->getLayers(); ++i) {
-            bool isSelected = (i == _selectedLayer);
-            if (ImGui::Selectable(("Layer " + std::to_string(i)).c_str(), isSelected)) {
-                _selectedLayer = i;
+    ImGui::Spacing();
+    ImGui::SameLine();
+    ImGui::BeginChild("##dropdowns");
+    {
+        ImGui::SetNextItemWidth(250);
+        if (ImGui::BeginCombo("##mapDropdown", _selectedMap >= 0 ? _maps[_selectedMap]->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
+            for (int i = 0; i < _maps.size(); ++i) {
+                bool isSelected = (i == _selectedMap);
+                if (ImGui::Selectable(_maps[i]->getName().c_str(), isSelected)) {
+                    _selectedMap = i;
+                }
             }
+            if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
+                //_tilesetWizard->show();
+            }
+            ImGui::EndCombo();
         }
-        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createlayer").c_str())) {
-            //_tilesetWizard->show();
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(250);
+        if (ImGui::BeginCombo("##layerDropdown", _selectedLayer >= 0 ? (io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer") + " " + std::to_string(_selectedLayer)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layerselector").c_str())) {
+            if(_maps.size() > 0) {
+                for (int i = 0; i < _maps[_selectedMap]->getLayers(); ++i) {
+                    bool isSelected = (i == _selectedLayer);
+                    if (ImGui::Selectable((io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer") + " " + std::to_string(i)).c_str(), isSelected)) {
+                        _selectedLayer = i;
+                    }
+                }
+            }
+            if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createlayer").c_str())) {
+                //_tilesetWizard->show();
+            }
+            ImGui::EndCombo();
         }
-        ImGui::EndCombo();
     }
+    ImGui::EndChild();
 
     ImGui::PopStyleVar();
     ImGui::EndChild();
 }
 
 void editor::render::tabs::MapEditor::drawTileSelector() {
-    ImGui::BeginChild("##tileSelector", ImVec2(500, 0), true);
+    ImGui::BeginChild("##tileSelector", ImVec2(RenderManager::GetInstance().getWidth()/4, 0), true);
     {
         if (ImGui::BeginCombo("##tilesetDropdown", _selectedTileset >= 0 ? ("Tileset " + std::to_string(_selectedTileset)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.tilesetselector").c_str())) {
             for (int i = 0; i < _tilesets.size(); ++i) {
@@ -243,12 +274,12 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
 
         ImGui::BeginChild("##tilesetGrid", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysVerticalScrollbar);
         if (_selectedTileset >= 0 && _selectedTileset < _tilesets.size()) {
-            /*for (int i = 0; i < 64; ++i) {
-                if (i % 3 != 0) ImGui::SameLine();
-                if (ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), _tilesets[_selectedTileset], ImVec2(32, 32))) {
-                    _selectedTileID = i;
+            for(int i = 0; i < _tilesets[_selectedTileset]->getTiles().size(); ++i) {
+                if(i % 3 != 0) ImGui::SameLine();
+                if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), _tilesets[_selectedTileset]->getTiles()[i]->texture, ImVec2(32,32))) {
+                    _selectedTile = i;
                 }
-            }*/
+            }
         }
         ImGui::EndChild();
     }
@@ -256,5 +287,6 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
 }
 
 void editor::render::tabs::MapEditor::drawObjectInspector() {
-
+    ImGui::BeginChild("##objectInspector", ImVec2(RenderManager::GetInstance().getWidth()/4, 0), true);
+    ImGui::EndChild();
 }

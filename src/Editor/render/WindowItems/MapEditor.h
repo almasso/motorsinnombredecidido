@@ -45,6 +45,8 @@ namespace editor::render::tabs {
         std::deque<resources::Map*> _maps;
         std::deque<resources::Tileset*> _tilesets;
 
+        char* _currentDirectory;
+
         editor::render::modals::TilesetWizard* _tilesetWizard;
 
         float _zoom = 1.0f;
