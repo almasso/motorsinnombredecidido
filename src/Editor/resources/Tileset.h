@@ -16,8 +16,9 @@ namespace editor::resources {
 
     class Tileset : public EditorResource {
     public:
-        template <std::convertible_to<std::filesystem::path> T>
-        Tileset(T&& filepath) : EditorResource("tileset"), _source(std::forward<T>(filepath)) {}
+        template <std::convertible_to<std::filesystem::path> T, std::convertible_to<std::string> S>
+        Tileset(T&& filepath, S&& name) : EditorResource("tileset"), _source(std::forward<T>(filepath)),
+        _name(std::forward<S>(name)) {}
 
         void writeToLua() final;
 
@@ -28,7 +29,10 @@ namespace editor::resources {
         const std::vector<Tile*>& getTiles() const;
 
         const std::filesystem::path& getSource() const;
+
+        const std::string& getName() const;
     private:
+        std::string _name;
         std::filesystem::path _source;
         std::vector<Tile*> _tiles;
     };

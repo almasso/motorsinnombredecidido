@@ -60,6 +60,8 @@ void editor::render::tabs::MapEditor::onRender() {
     drawToolbar();
     drawGrid();
     ImGui::EndChild();
+    ImGui::SameLine();
+    drawObjectInspector();
 }
 
 void editor::render::tabs::MapEditor::drawGrid() {
@@ -154,8 +156,10 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     // Botones de layers
     for(int i = 0; i < 4; ++i) {
         if(i > 0) ImGui::SameLine();
+        ImVec4 bg = _selectedGridMode == i ? ImVec4(1,0,1,1) : ImVec4(0,0,0,0);
 
-        if(ImGui::ImageButton(std::string("but" + std::to_string(i)).c_str(), _uiTextures[i], ImVec2(32, 32))) {
+
+        if(ImGui::ImageButton(std::string("but" + std::to_string(i)).c_str(), _uiTextures[i], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
             _selectedGridMode = i;
         }
         if(ImGui::IsItemHovered()) {
@@ -180,11 +184,39 @@ void editor::render::tabs::MapEditor::drawToolbar() {
         ImGui::SetTooltip(_buttonTooltips[5].c_str());
     }
     ImGui::SameLine();
-    if(ImGui::ImageButton("butGrid", _uiTextures[6], ImVec2(32, 32))) {
+    ImVec4 bg = _isGridShown ? ImVec4(1,0,1,1) : ImVec4(0,0,0,0);
+    if(ImGui::ImageButton("butGrid", _uiTextures[6], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
         _isGridShown = !_isGridShown;
     }
     if(ImGui::IsItemHovered()) {
         ImGui::SetTooltip(_buttonTooltips[6].c_str());
+    }
+
+    ImGui::SameLine();
+    if (ImGui::BeginCombo("##mapDropdown", _selectedMap >= 0 ? ("Map " + std::to_string(_selectedMap)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
+        for (int i = 0; i < _maps.size(); ++i) {
+            bool isSelected = (i == _selectedMap);
+            if (ImGui::Selectable(("Map " + std::to_string(i)).c_str(), isSelected)) {
+                _selectedMap = i;
+            }
+        }
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
+            //_tilesetWizard->show();
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::SameLine();
+    if (ImGui::BeginCombo("##layerDropdown", _selectedLayer >= 0 ? ("Layer " + std::to_string(_selectedLayer)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layerselector").c_str())) {
+        for (int i = 0; i < _maps[_selectedMap]->getLayers(); ++i) {
+            bool isSelected = (i == _selectedLayer);
+            if (ImGui::Selectable(("Layer " + std::to_string(i)).c_str(), isSelected)) {
+                _selectedLayer = i;
+            }
+        }
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createlayer").c_str())) {
+            //_tilesetWizard->show();
+        }
+        ImGui::EndCombo();
     }
 
     ImGui::PopStyleVar();
@@ -194,18 +226,15 @@ void editor::render::tabs::MapEditor::drawToolbar() {
 void editor::render::tabs::MapEditor::drawTileSelector() {
     ImGui::BeginChild("##tileSelector", ImVec2(500, 0), true);
     {
-        int selectedIndex = -1;
-
-        if (ImGui::BeginCombo("Tileset", selectedIndex >= 0 ? ("Tileset " + std::to_string(selectedIndex)).c_str() : "Select tileset")) {
+        if (ImGui::BeginCombo("##tilesetDropdown", _selectedTileset >= 0 ? ("Tileset " + std::to_string(_selectedTileset)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.tilesetselector").c_str())) {
             for (int i = 0; i < _tilesets.size(); ++i) {
-                bool isSelected = (i == selectedIndex);
+                bool isSelected = (i == _selectedTileset);
                 if (ImGui::Selectable(("Tileset " + std::to_string(i)).c_str(), isSelected)) {
-                    selectedIndex = i;
                     _selectedTileset = i;
                 }
             }
-            if (ImGui::Selectable("+ Create new tileset")) {
-
+            if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createtileset").c_str())) {
+                _tilesetWizard->show();
             }
             ImGui::EndCombo();
         }
@@ -224,4 +253,8 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
         ImGui::EndChild();
     }
     ImGui::EndChild();
+}
+
+void editor::render::tabs::MapEditor::drawObjectInspector() {
+
 }

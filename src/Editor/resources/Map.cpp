@@ -10,16 +10,6 @@
 #include "Object.h"
 #include "Tile.h"
 
-editor::resources::Map::Map(int mapWidth, int mapHeight, int layers) :
-    EditorResource("map"),
-    _mapWidth(mapWidth),
-    _mapHeight(mapHeight),
-    _layers(layers),
-    _tiles(_layers, std::vector<Tile*>(_mapWidth * _mapHeight, nullptr)),
-    _collisions(_mapWidth * _mapHeight, false),
-    _objects() {
-}
-
 void editor::resources::Map::writeToLua() {
     sol::table map;
     map["width"] = _mapWidth;
@@ -100,4 +90,8 @@ bool editor::resources::Map::writeObjects(sol::table& objects) {
         objectTable.add(objectTable);
     }
     return true;
+}
+
+const std::string &editor::resources::Map::getName() const {
+    return _name;
 }

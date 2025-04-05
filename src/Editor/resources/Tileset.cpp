@@ -25,4 +25,8 @@ const std::filesystem::path &editor::resources::Tileset::getSource() const {
     return _source;
 }
 
+const std::string &editor::resources::Tileset::getName() const {
+    return _name;
+}
+
 

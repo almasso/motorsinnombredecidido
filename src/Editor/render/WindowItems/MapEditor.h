@@ -50,11 +50,11 @@ namespace editor::render::tabs {
         float _zoom = 1.0f;
 
         int _selectedGridMode = 0;
-        int _selectedLayer = 0;
+        int _selectedLayer = -1;
 
-        int _selectedTileset = 0;
-        int _selectedTile = 0;
-        int _selectedMap = 0;
+        int _selectedTileset = -1;
+        int _selectedTile = -1;
+        int _selectedMap = -1;
 
         bool _isGridShown = true;
 
@@ -69,6 +69,8 @@ namespace editor::render::tabs {
         void drawToolbar();
 
         void drawTileSelector();
+
+        void drawObjectInspector();
     };
 }
 
