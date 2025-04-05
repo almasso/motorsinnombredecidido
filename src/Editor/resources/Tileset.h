@@ -15,24 +15,23 @@ namespace editor::resources {
 
     class Tileset : public EditorResource {
     public:
-        template <std::convertible_to<std::filesystem::path> T, std::convertible_to<std::string> S>
-        Tileset(T&& filepath, S&& name, int offsetX = 0, int offsetY = 0) : EditorResource("tileset"), _source(std::forward<T>(filepath)),
-        _name(std::forward<S>(name)), _offsetX(offsetX), _offsetY(offsetY) {
-            generateTileset();
-        }
+        Tileset();
+
+        void init(std::string const& name, std::filesystem::path const& source, int offsetX = 0, int offsetY = 0);
+        bool readFromLua(std::string const& name) final;
 
         void writeToLua() final;
-
-        void readFromLua() final;
-
         void writeToEngineLua() final;
 
         const std::vector<Tile*>& getTiles() const;
-
         const std::filesystem::path& getSource() const;
-
         const std::string& getName() const;
+
+        static void SetMapsDirectory(std::filesystem::path const& tilesetsDirectory);
+
     private:
+        static std::filesystem::path _tilesetsDirectory;
+
         std::string _name;
         std::filesystem::path _source;
         std::vector<Tile*> _tiles;
@@ -40,6 +39,8 @@ namespace editor::resources {
         int _offsetY;
 
         void generateTileset();
+
+        static std::string GetFilePath(std::string const& mapName);
     };
 }
 

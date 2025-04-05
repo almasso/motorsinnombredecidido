@@ -18,20 +18,25 @@ namespace editor::resources {
 
     class Object {
     public:
+        Object();
         ~Object();
         bool read(sol::table const& objectTable);
         bool write(sol::table& objectTable);
         bool writeToEngine(sol::table& objectTable);
 
+        int getX() const;
+        int getY() const;
     private:
-        bool readEvents(sol::table const& events);
-        bool writeEvents(sol::table& events);
-        void writeLocalVars(sol::table& localVars);
-
         int _x, _y;
         bool _collidable;
         std::vector<Event*> _events;
         std::unordered_map<std::string, sol::lua_value> _localVariables;
+
+
+        bool readEvents(sol::table const& events);
+        bool readLocalVars(sol::table const& localVars);
+        bool writeEvents(sol::table& events);
+        void writeLocalVars(sol::table& localVars);
     };
 }
 

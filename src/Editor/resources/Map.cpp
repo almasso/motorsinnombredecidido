@@ -9,38 +9,123 @@
 
 #include "Object.h"
 #include "Tile.h"
+#include "common/Project.h"
+#include "Tileset.h"
+
+#define widthKey "width"
+#define heightKey "height"
+#define layersKey "layers"
+#define tilesKey "tiles"
+#define collisionsKey "collisions"
+#define objectsKey "objects"
+
+#define tilesetKey "tileset"
+#define posKey "pos"
+
+std::filesystem::path editor::resources::Map::_mapsDirectory;
+
+editor::resources::Map::Map(Project* project) :
+    EditorResource("map"),
+    _mapWidth(0),
+    _mapHeight(0),
+    _layers(0),
+    _project(project){
+}
+
+editor::resources::Map::~Map() {
+    for (auto& [pos, object] : _objects) {
+        delete object;
+        object = nullptr;
+    }
+    _objects.clear();
+    _collisions.clear();
+    _tiles.clear();
+}
+
+void editor::resources::Map::init(std::string const& name, int mapWidth, int mapHeight, int layers) {
+    _name = name;
+    _mapWidth = mapWidth;
+    _mapHeight = mapHeight;
+    _layers = layers;
+    _name = name;
+    _tiles = std::vector(_layers, std::vector<Tile*>(_mapWidth * _mapHeight, nullptr));
+    _collisions = std::vector(_mapWidth * _mapHeight, false);
+    _objects.clear();
+}
+
+bool editor::resources::Map::readFromLua(std::string const& name) {
+    sol::table mapTable = io::LuaManager::GetInstance().getTable(GetFilePath(name));
+    if (!mapTable.valid())
+        return false;
+
+    sol::optional<int> width = mapTable.get<sol::optional<int>>(widthKey);
+    if (!width.has_value())
+        return false;
+
+    sol::optional<int> height = mapTable.get<sol::optional<int>>(heightKey);
+    if (!height.has_value())
+        return false;
+
+    sol::optional<int> layers = mapTable.get<sol::optional<int>>(layersKey);
+    if (!layers.has_value())
+        return false;
+
+    init(name, width.value(), height.value(), layers.value());
+
+    sol::optional<sol::table> tiles = mapTable.get<sol::optional<sol::table>>(tilesKey);
+    if (!tiles.has_value())
+        return false;
+    if (!readTiles(*tiles))
+        return false;
+
+    sol::optional<sol::table> collisions = mapTable.get<sol::optional<sol::table>>(collisionsKey);
+    if (!collisions.has_value())
+        return false;
+    if (!readCollisions(*collisions))
+        return false;
+
+    sol::optional<sol::table> objects = mapTable.get<sol::optional<sol::table>>(objectsKey);
+    if (!objects.has_value())
+        return false;
+    if (!readObjects(*objects))
+        return false;
+
+    return true;
+}
+
 
 void editor::resources::Map::writeToLua() {
     sol::table map;
-    map["width"] = _mapWidth;
-    map["height"] = _mapHeight;
-    map["layers"] = _layers;
+    map[widthKey] = _mapWidth;
+    map[heightKey] = _mapHeight;
+    map[layersKey] = _layers;
 
     sol::table tiles;
     writeTiles(tiles);
-    map["tiles"] = tiles;
+    map[tilesKey] = tiles;
 
     sol::table collisions;
     writeCollisions(collisions);
-    map["collisions"] = collisions;
+    map[collisionsKey] = collisions;
 
     sol::table objects;
     writeObjects(objects);
-    map["objects"] = objects;
+    map[objectsKey] = objects;
 
-    io::LuaManager::GetInstance().writeToFile(map, filename);
-}
-
-void editor::resources::Map::readFromLua() {
-
+    io::LuaManager::GetInstance().writeToFile(map, GetFilePath(_name));
 }
 
 void editor::resources::Map::writeToEngineLua() {
 
 }
 
+
 std::vector<std::vector<editor::resources::Tile*>> &editor::resources::Map::getTiles() {
     return _tiles;
+}
+
+const std::string &editor::resources::Map::getName() const {
+    return _name;
 }
 
 std::vector<bool> &editor::resources::Map::getCollisions() {
@@ -63,13 +148,21 @@ void editor::resources::Map::setLayers(int layers) {
     _layers = layers;
 }
 
+
+void editor::resources::Map::SetMapsDirectory(std::filesystem::path const& mapsDirectory) {
+    _mapsDirectory = mapsDirectory;
+}
+
+
 void editor::resources::Map::writeTiles(sol::table& tiles) {
     for (auto const& row : _tiles) {
         sol::table rowTable;
         for (auto const& tile : row) {
             sol::table tileTable;
-            tileTable["tileset"] = tile->tileset;
-            tileTable["pos"] = tile->pos;
+            if (tile != nullptr) {
+                tileTable[tilesetKey] = tile->tileset;
+                tileTable[posKey] = tile->pos;
+            }
             rowTable.add(tileTable);
         }
         tiles.add(rowTable);
@@ -92,6 +185,70 @@ bool editor::resources::Map::writeObjects(sol::table& objects) {
     return true;
 }
 
-const std::string &editor::resources::Map::getName() const {
-    return _name;
+
+bool editor::resources::Map::readTiles(sol::table const& tiles) {
+    auto rowIt = _tiles.begin();
+    for (auto const& [key, row] : tiles) {
+        if (rowIt == _tiles.end())
+            return false;
+
+        if (!row.is<sol::table>())
+            return false;
+        sol::table rowTable = row.as<sol::table>();
+
+        auto tileIt = rowIt->begin();
+        for (auto const& [key, tile] : rowTable) {
+            if (tileIt == rowIt->end())
+                return false;
+
+            if (!tile.is<sol::table>())
+                return false;
+            sol::table tileTable = tile.as<sol::table>();
+
+            if (tileTable.empty())
+                continue;
+
+            auto tileset = tileTable.get_or<std::string>(tilesetKey, "");
+            if (tileset.empty())
+                return false;
+
+            auto pos = tileTable.get_or<int, std::string, int>(posKey, -1);
+            if (pos < 0)
+                return false;
+
+            (*tileIt) = _project->getTileset(tileset)->getTiles()[pos];
+
+            ++tileIt;
+        }
+        ++rowIt;
+    }
+    return true;
+}
+
+bool editor::resources::Map::readCollisions(sol::table const& collisions) {
+    auto collisionIt = _collisions.begin();
+    for (const auto& [key, collision] : collisions) {
+        if (collisionIt == _collisions.end())
+            return false;
+        if (!collision.is<bool>())
+            return false;
+        (*collisionIt) = collision.as<bool>();
+        ++collisionIt;
+    }
+    return true;
+}
+
+bool editor::resources::Map::readObjects(sol::table const& objects) {
+    for (const auto& [key, object] : objects) {
+        auto obj = new Object();
+        if (!obj->read(object))
+            return false;
+        _objects.insert({obj->getX() + obj->getY() * _mapWidth, obj});
+    }
+    return true;
+}
+
+
+std::string editor::resources::Map::GetFilePath(std::string const& mapName) {
+    return (_mapsDirectory / (mapName) / (".lua")).string();
 }

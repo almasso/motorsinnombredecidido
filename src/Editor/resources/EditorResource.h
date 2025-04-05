@@ -14,7 +14,7 @@ namespace editor::resources {
         template <std::convertible_to<std::string> T>
         EditorResource(T&& id) : _id(std::forward<T>(id)) {}
 
-        virtual void readFromLua() = 0;
+        virtual bool readFromLua(std::string const& name) = 0;
 
         virtual void writeToLua() = 0;
 

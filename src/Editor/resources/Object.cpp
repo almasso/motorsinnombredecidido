@@ -15,6 +15,12 @@
 #define collidableKey "collidable"
 #define eventsKey "events"
 
+editor::resources::Object::Object() :
+    _x(0),
+    _y(0),
+    _collidable(false) {
+}
+
 editor::resources::Object::~Object() {
     for (auto& event : _events) {
         delete event;
@@ -43,7 +49,14 @@ bool editor::resources::Object::read(sol::table const& objectTable) {
     sol::optional<sol::table> events = objectTable.get<sol::optional<sol::table>>(eventsKey);
     if (!events.has_value())
         return false;
-    return readEvents(*events);
+    if (!readEvents(*events))
+        return false;
+
+    sol::optional<sol::table> localVars = objectTable.get<sol::optional<sol::table>>(localVarsKey);
+    if (!localVars.has_value())
+        return false;
+    if (!readLocalVars(*localVars))
+        return false;
 }
 
 bool editor::resources::Object::write(sol::table& objectTable) {
@@ -67,6 +80,14 @@ bool editor::resources::Object::writeToEngine(sol::table& objectTable) {
     return true;
 }
 
+int editor::resources::Object::getX() const {
+    return _x;
+}
+
+int editor::resources::Object::getY() const {
+    return _y;
+}
+
 bool editor::resources::Object::readEvents(sol::table const& events) {
     for (auto&& [name, event] : events) {
         if (!name.is<std::string>() && !event.is<sol::table>())
@@ -75,6 +96,15 @@ bool editor::resources::Object::readEvents(sol::table const& events) {
         _events.push_back(ev);
         if (!ev->read(name.as<std::string>(), event.as<sol::table>()))
             return false;
+    }
+    return true;
+}
+
+bool editor::resources::Object::readLocalVars(sol::table const& localVars) {
+    for (auto&& [key, value] : localVars) {
+        if (!key.is<std::string>() || !value.is<sol::lua_value>())
+            return false;
+        _localVariables.insert({key.as<std::string>(), value.as<sol::lua_value>()});
     }
     return true;
 }

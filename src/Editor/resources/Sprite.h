@@ -12,9 +12,9 @@ namespace editor::resources {
 
     class Sprite : public EditorResource {
     public:
-        void readFromLua() override;
-        void writeToLua() override;
-        void writeToEngineLua() override;
+        // void readFromLua() override;
+        // void writeToLua() override;
+        // void writeToEngineLua() override;
     };
 
 }

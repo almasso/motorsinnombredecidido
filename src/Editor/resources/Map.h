@@ -8,9 +8,13 @@
 
 #include "EditorResource.h"
 #include <vector>
-#include <imgui.h>
+#include <filesystem>
 #include <unordered_map>
 #include <sol/forward.hpp>
+
+namespace editor {
+    class Project;
+}
 
 namespace editor::resources {
     class Object;
@@ -18,22 +22,14 @@ namespace editor::resources {
 
     class Map : public EditorResource {
     public:
-        template <std::convertible_to<std::string> T>
-        Map(int mapWidth, int mapHeight, int layers, T&& name) :
-                EditorResource("map"),
-                _mapWidth(mapWidth),
-                _mapHeight(mapHeight),
-                _layers(layers),
-                _tiles(_layers, std::vector<Tile*>(_mapWidth * _mapHeight, nullptr)),
-                _collisions(_mapWidth * _mapHeight, false),
-                _objects(),
-                _name(std::forward<T>(name)){
-        }
+
+        Map(Project* project);
+        ~Map();
+
+        void init(std::string const& name, int mapWidth, int mapHeight, int layers);
+        bool readFromLua(std::string const& name) final;
 
         void writeToLua() final;
-
-        void readFromLua() final;
-
         void writeToEngineLua() final;
 
         std::vector<std::vector<Tile*>>& getTiles();
@@ -49,23 +45,36 @@ namespace editor::resources {
         int getLayers() const;
 
         void setLayers(int layers);
-    private:
-        void writeTiles(sol::table& tiles);
-        void writeCollisions(sol::table& collisions);
-        bool writeObjects(sol::table& objects);
 
-        int _mapWidth = 0;
-        int _mapHeight = 0;
-        int _layers = 0;
+        static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
+
+    private:
+        static std::filesystem::path _mapsDirectory;
 
         std::string _name;
+
+        int _mapWidth;
+        int _mapHeight;
+        int _layers;
 
         std::vector<std::vector<Tile*>> _tiles;
         std::vector<bool> _collisions;
         std::unordered_map<int, Object*> _objects;
 
-        std::string filename;
+        Project* _project;
+
+
+        void writeTiles(sol::table& tiles);
+        void writeCollisions(sol::table& collisions);
+        bool writeObjects(sol::table& objects);
+
+        bool readTiles(sol::table const& tiles);
+        bool readCollisions(sol::table const& collisions);
+        bool readObjects(sol::table const& objects);
+
+        static std::string GetFilePath(std::string const& mapName);
     };
+
 }
 
 

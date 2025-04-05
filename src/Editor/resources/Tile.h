@@ -8,6 +8,9 @@
 
 #include <string>
 
+typedef unsigned long long ImU64;
+typedef ImU64 ImTextureID;
+
 namespace editor::resources {
 
 struct Tile {
