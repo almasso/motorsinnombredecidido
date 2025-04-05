@@ -12,7 +12,7 @@ namespace editor {
     class Project;
 }
 
-namespace editor::render::subwindows {
+namespace editor::render::tabs {
     class MapEditor;
 }
 
@@ -23,7 +23,7 @@ namespace editor::render::windows {
     private:
         editor::Project* _project;
 
-        editor::render::subwindows::MapEditor* _mapEditor = nullptr;
+        editor::render::tabs::MapEditor* _mapEditor = nullptr;
 
         void beforeRender() override;
 

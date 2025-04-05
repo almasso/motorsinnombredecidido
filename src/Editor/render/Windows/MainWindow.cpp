@@ -19,7 +19,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
     editor::render::WindowStack::removeAllWindowsFromStack();
     editor::render::WindowStack::addWindowToStack(this);
     editor::render::RenderManager::GetInstance().showWindow();
-    _mapEditor = new subwindows::MapEditor(_project);
+    _mapEditor = new tabs::MapEditor(_project);
 
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
                              ImGuiWindowFlags_NoResize |
@@ -33,7 +33,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
 
 void editor::render::windows::MainWindow::beforeRender() {
     ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth(), RenderManager::GetInstance().getHeight()), ImGuiCond_Always);
-    ImGui::SetWindowPos(ImVec2(0,0), ImGuiCond_Always);
+    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
 }
 
 void editor::render::windows::MainWindow::onRender() {

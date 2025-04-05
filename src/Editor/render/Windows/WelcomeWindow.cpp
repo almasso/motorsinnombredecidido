@@ -106,7 +106,7 @@ void editor::render::windows::WelcomeWindow::onRender() {
 
 void editor::render::windows::WelcomeWindow::setFullscreen() {
     ImGui::SetNextWindowSize(ImVec2(RenderManager::GetInstance().getWidth(), RenderManager::GetInstance().getHeight()), ImGuiCond_Always);
-    ImGui::SetWindowPos(ImVec2(0,0), ImGuiCond_Always);
+    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
 }
 
 void editor::render::windows::WelcomeWindow::drawWindow() {
