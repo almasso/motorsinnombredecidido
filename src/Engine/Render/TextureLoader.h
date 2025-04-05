@@ -16,7 +16,7 @@ class TextureLoader {
     static SDL_Texture* GetTexture(const Color& color);
     static SDL_Texture* GetTexture(const std::string& filePath);
     static SDL_Texture* GetTexture(SDL_Surface* surface);
-    static void ResizeTexture(SDL_Texture *&texture, int width, int height);
+    static void ResizeTexture(SDL_Texture *&texture, int width, int height, bool centered);
 };
 
 

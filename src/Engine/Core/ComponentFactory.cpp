@@ -8,6 +8,7 @@
 #include <Render/SpriteRenderer.h>
 #include <Render/Camera.h>
 #include <Render/Text.h>
+#include <Input/Button.h>
 #include <Gameplay/Events/EventHandler.h>
 #include <Gameplay/Movement/MovementManager.h>
 #include <Gameplay/Movement/MovementObstacle.h>
@@ -25,6 +26,7 @@ ComponentFactory::ComponentFactory() :
     registerComponent<SpriteRenderer>();
     registerComponent<Camera>();
     registerComponent<Text>();
+    registerComponent<Button>();
     registerComponent<AudioSource>();
     registerComponent<Collider>();
     registerComponent<EventHandler>();

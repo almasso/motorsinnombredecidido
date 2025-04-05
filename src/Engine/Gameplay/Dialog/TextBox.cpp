@@ -80,15 +80,15 @@ bool TextBox::update() {
                 _charIter++;
             }
         } else {
-            if (InputManager::GetState().mouse_up) {
+            if (InputManager::GetState().mouse_pressed) {
                 _timer = 0.0f;
                 _charIter = 0;
                 _paragraphIter++;
-                _text->setText("");
                 if (ended()) {
                     _entity->setActive(false);
-                    _charIter = _paragraphIter = 0;
+                    _paragraphIter = 0;
                     _dialog.clear();
+                    _text->setText("");
                 }
             }
         }

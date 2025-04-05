@@ -47,7 +47,7 @@ SDL_Texture * TextureLoader::GetTexture(SDL_Surface *surface) {
     return texture;
 }
 
-void TextureLoader::ResizeTexture(SDL_Texture*& texture, int width, int height) {
+void TextureLoader::ResizeTexture(SDL_Texture*& texture, int width, int height, bool centered) {
     if (!_renderer) return;
     SDL_Texture* newTexture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     if (!newTexture) {
@@ -59,6 +59,10 @@ void TextureLoader::ResizeTexture(SDL_Texture*& texture, int width, int height) 
     SDL_RenderClear(_renderer);
     SDL_FRect srcRect = {0, 0, static_cast<float>(std::min(texture->w, width)), static_cast<float>(std::min(texture->h, height))};
     SDL_FRect dstRect = {0, 0, srcRect.w, srcRect.h};
+    if (centered) {
+        dstRect.x = (width - dstRect.w) / 2.0f;
+        dstRect.y = (height - dstRect.h) / 2.0f;
+    }
     SDL_RenderTexture(_renderer, texture, &srcRect, &dstRect);
     SDL_SetRenderTarget(_renderer, nullptr);
     SDL_DestroyTexture(texture);

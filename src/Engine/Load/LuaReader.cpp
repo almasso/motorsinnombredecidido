@@ -13,7 +13,9 @@
 #include <Gameplay/Events/EventConditionFactory.h>
 #include <Gameplay/Events/EventHandler.h>
 #include <Gameplay/Movement/MovementComponent.h>
+#include <Input/Button.h>
 #include <Render/Animator.h>
+#include <Render/Text.h>
 #include <Render/Transform.h>
 
 LuaReader* LuaReader::_instance = nullptr;
@@ -34,6 +36,8 @@ void LuaReader::registerUserTypes() {
     MovementComponent::RegisterToLua(_lua);
     LocalVariables::RegisterToLua(_lua);
     TextBox::RegisterToLua(_lua);
+    Text::RegisterToLua(_lua);
+    Button::RegisterToLua(_lua);
 
     Entity::RegisterToLua(_lua);
     Scene::RegisterToLua(_lua);
@@ -41,7 +45,7 @@ void LuaReader::registerUserTypes() {
 }
 
 bool LuaReader::init() {
-    _lua.open_libraries(sol::lib::base, sol::lib::package);
+    _lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::table);
     registerUserTypes();
     return true;
 }

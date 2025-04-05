@@ -1,6 +1,8 @@
 #include "Button.h"
 
 #include <Core/ComponentData.h>
+#include <Core/Scene.h>
+#include <Render/Camera.h>
 #include <Render/Transform.h>
 #include <Utils/Error.h>
 
@@ -14,6 +16,9 @@ bool Button::init() {
     if (_transform == nullptr) {
         Error::ShowError("Button object sin transform", "Todos los botones requieren de un componente Transform para funcionar");
         return false;
+    }
+    if (Entity* ent = _scene->getEntityByHandler("Manager"); ent) {
+        _camera = ent->getComponent<Camera>();
     }
     _callback = _data->getData<sol::function>("callback");
     _params = _data->getData<sol::table>("params");
@@ -34,10 +39,21 @@ bool Button::update() {
     if (input.mouse_down) {
         if (clickInside(_transform->getGlobalPosition(),
             _transform->getGlobalScale() * _size,
-            Vector2(input.mouse_x, input.mouse_y))) {
+            _camera->screenToWorld(Vector2(input.mouse_x, input.mouse_y)))) {
             return _callback(_params);
         }
     }
     return true;
 }
+
+void Button::setCallback(const sol::function &callback) {
+    _callback = callback;
+}
+
+void Button::RegisterToLua(sol::state& lua) {
+    sol::usertype<Button> type = lua.new_usertype<Button>("Button");
+    type["setCallback"] = &Button::setCallback;
+    type["get"] = &Button::get;
+}
+
 

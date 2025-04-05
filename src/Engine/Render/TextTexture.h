@@ -13,7 +13,7 @@ class TextTexture {
     public:
         TextTexture();
         ~TextTexture();
-        TextTexture(const Font *font, Color color, std::string text, float maxWidth, float maxHeight);
+        TextTexture(const Font *font, Color color, std::string text, float maxWidth, float maxHeight, bool centerText);
         void free();
         SDL_Texture* getTexture() const;
 };

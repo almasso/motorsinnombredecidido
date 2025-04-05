@@ -12,11 +12,11 @@ TextTexture::~TextTexture() {
     free();
 }
 
-TextTexture::TextTexture(const Font *font, Color color, std::string text, float maxWidth, float maxHeight) {
+TextTexture::TextTexture(const Font *font, Color color, std::string text, float maxWidth, float maxHeight, bool centerText) {
     if (text == "") text = " ";
     _texture = TextureLoader::GetTexture(
         TTF_RenderText_Solid_Wrapped(font->getFont(), text.c_str(), text.size(), color, maxWidth));
-    TextureLoader::ResizeTexture(_texture, maxWidth, maxHeight);
+    TextureLoader::ResizeTexture(_texture, maxWidth, maxHeight, centerText);
 }
 
 void TextTexture::free() {

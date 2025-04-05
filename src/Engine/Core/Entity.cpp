@@ -9,8 +9,8 @@ Entity::Entity(): _parent(nullptr), _active(false), _alive(true) {
 
 bool Entity::init() {
      for (auto [id,component] : _components) {
-          if (component->init() && _active) {
-               component->initEnable();
+          if (component->init()) {
+              component->initEnable();
           }
           else {
                return false;

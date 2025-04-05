@@ -11,6 +11,7 @@ class ComponentDerived(Text, RenderComponent) {
     int _fontSize;
     Color _color;
     Vector2 _size;
+    bool _centerText;
     bool remakeTexture();
     public:
     Text(ComponentData const*data);
@@ -21,9 +22,11 @@ class ComponentDerived(Text, RenderComponent) {
     bool setFontSize(int fontSize);
     bool setColor(const Color& color);
     bool setSize(const Vector2& size);
+    bool setCenterText(bool center);
     const std::string& getText() const;
     std::string getFont() const;
     const Vector2& getSize() const;
 
+    static void RegisterToLua(sol::state &lua);
 };
 #endif //TEXT_H

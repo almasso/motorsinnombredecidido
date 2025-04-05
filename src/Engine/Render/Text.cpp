@@ -15,11 +15,16 @@ bool Text::remakeTexture() {
         _texture = nullptr;
         return false;
     }
-    _texture = new TextTexture(font, _color, _text, _size.getX(), _size.getY());
+    _texture = new TextTexture(font, _color, _text, _size.getX(), _size.getY(), _centerText);
     return _texture->getTexture() != nullptr;
 }
 
-Text::Text(ComponentData const *data) : ComponentTemplate(data), _texture(nullptr), _fontSize(12), _size(1,1) {
+Text::Text(ComponentData const *data) :
+    ComponentTemplate(data),
+    _texture(nullptr),
+    _fontSize(12),
+    _size(1, 1),
+    _centerText(false) {
 }
 
 bool Text::init() {
@@ -27,6 +32,7 @@ bool Text::init() {
     _font = _data->getData<std::string>("font");
     _fontSize = _data->getData<int>("fontSize",12);
     _color = _data->getData<int>("color",0xFFFFFFFF);
+    _centerText = _data->getData<bool>("centerText",false);
     _size = _data->getVector("size",{100,100});
     if (!remakeTexture()) return false;
     return RenderComponent::init();
@@ -69,6 +75,12 @@ bool Text::setSize(const Vector2 &size) {
     return remakeTexture();
 }
 
+bool Text::setCenterText(bool center) {
+    if (_centerText == center) return true;
+    _centerText = center;
+    return remakeTexture();
+}
+
 const std::string& Text::getText() const {
     return _text;
 }
@@ -79,4 +91,10 @@ std::string Text::getFont() const {
 
 const Vector2 & Text::getSize() const {
     return _size;
+}
+
+void Text::RegisterToLua(sol::state &lua) {
+    sol::usertype<Text> type = lua.new_usertype<Text>("Text");
+    type["setText"] = &Text::setText;
+    type["get"] = &Text::get;
 }

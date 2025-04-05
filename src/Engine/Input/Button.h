@@ -7,6 +7,7 @@
 #include <Utils/Vector2.h>
 
 
+class Camera;
 class Transform;
 
 class ComponentClass(Button) {
@@ -15,10 +16,14 @@ class ComponentClass(Button) {
         sol::table _params;
         Vector2 _size;
         Transform* _transform;
+        Camera* _camera;
+
     public:
     Button(ComponentData const* data);
     bool init() override;
     bool update() override;
+    void setCallback(const sol::function &callback);
+    static void RegisterToLua(sol::state &lua);
 };
 
 #endif //BUTTON_H
