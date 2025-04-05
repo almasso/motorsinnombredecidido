@@ -109,8 +109,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:aa6505a6a5fbfbeec63e6357e6f57ebc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6d3503b7b6560d7eacb8458115e8283"><td class="memItemLeft" align="right" valign="top">static SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureLoader.html#ad6d3503b7b6560d7eacb8458115e8283">GetTexture</a> (SDL_Surface *surface)</td></tr>
 <tr class="separator:ad6d3503b7b6560d7eacb8458115e8283"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5529c7cb4449a46dccc985cfb4ed9a94"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureLoader.html#a5529c7cb4449a46dccc985cfb4ed9a94">ResizeTexture</a> (SDL_Texture *&amp;texture, int width, int height)</td></tr>
-<tr class="separator:a5529c7cb4449a46dccc985cfb4ed9a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2135c140d5160759a7e9c363fc6e7611"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureLoader.html#a2135c140d5160759a7e9c363fc6e7611">ResizeTexture</a> (SDL_Texture *&amp;texture, int width, int height, bool centered)</td></tr>
+<tr class="separator:a2135c140d5160759a7e9c363fc6e7611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2828d7545ef3547eec8a8c995abcfa04" name="a2828d7545ef3547eec8a8c995abcfa04"></a>
@@ -217,8 +217,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5529c7cb4449a46dccc985cfb4ed9a94" name="a5529c7cb4449a46dccc985cfb4ed9a94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5529c7cb4449a46dccc985cfb4ed9a94">&#9670;&#160;</a></span>ResizeTexture()</h2>
+<a id="a2135c140d5160759a7e9c363fc6e7611" name="a2135c140d5160759a7e9c363fc6e7611"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2135c140d5160759a7e9c363fc6e7611">&#9670;&#160;</a></span>ResizeTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,7 +242,13 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>centered</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

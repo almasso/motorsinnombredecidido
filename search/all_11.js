@@ -2,7 +2,7 @@ var searchData=
 [
   ['text_2ecpp_0',['Text.cpp',['../Text_8cpp.html',1,'']]],
   ['text_2eh_1',['Text.h',['../Text_8h.html',1,'']]],
-  ['texttexture_2',['TextTexture',['../classTextTexture.html',1,'TextTexture'],['../classTextTexture.html#ae0cd282f4062c8691d75198d66b129ff',1,'TextTexture::TextTexture(const Font *font, Color color, std::string text, float maxWidth, float maxHeight)'],['../classTextTexture.html#a028855c450db4925652071c212cce8c7',1,'TextTexture::TextTexture()']]],
+  ['texttexture_2',['TextTexture',['../classTextTexture.html',1,'TextTexture'],['../classTextTexture.html#af496f222a9ecaee638a54cb9580812a9',1,'TextTexture::TextTexture(const Font *font, Color color, std::string text, float maxWidth, float maxHeight, bool centerText)'],['../classTextTexture.html#a028855c450db4925652071c212cce8c7',1,'TextTexture::TextTexture()']]],
   ['texttexture_2ecpp_3',['TextTexture.cpp',['../TextTexture_8cpp.html',1,'']]],
   ['texttexture_2eh_4',['TextTexture.h',['../TextTexture_8h.html',1,'']]],
   ['texture_5',['Texture',['../classTexture.html',1,'Texture'],['../classTexture.html#a91e7249df7e53cb7745618d3e819e43f',1,'Texture::Texture(std::string const &amp;path)']]],
