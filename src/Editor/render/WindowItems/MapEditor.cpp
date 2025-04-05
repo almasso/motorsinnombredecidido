@@ -52,15 +52,17 @@ void editor::render::tabs::MapEditor::beforeRender() {
 }
 
 void editor::render::tabs::MapEditor::onRender() {
+    drawTileSelector();
+    ImGui::SameLine();
+    ImGui::BeginChild("Toolbar+Grid");
     drawToolbar();
-    //drawTileSelector();
     drawGrid();
+    ImGui::EndChild();
 }
 
 void editor::render::tabs::MapEditor::drawGrid() {
     const int* dimensions = _project->getDimensions();
     float scaledSize = dimensions[0] * _zoom;
-
 
     resources::Map* currentMap = nullptr;
     if(_maps.size() > 0) currentMap = _maps[_selectedMap];
@@ -86,13 +88,12 @@ void editor::render::tabs::MapEditor::drawGrid() {
         for (int j = 0; j < mapHeight; ++j) {
             for (int i = 0; i < mapWidth; ++i) {
                 ImVec2 tilePos = {
-                        cursorStart.x + i * scaledSize - scrollX + 500,
+                        cursorStart.x + i * scaledSize - scrollX,
                         cursorStart.y + j * scaledSize - scrollY
                 };
                 ImVec2 tileEnd = {tilePos.x + scaledSize, tilePos.y + scaledSize};
 
                 if (tilePos.y < 100) continue;
-                if (tilePos.x > 1500) continue;
 
                 std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
                 ImGui::SetCursorPos(tilePos);
@@ -189,9 +190,9 @@ void editor::render::tabs::MapEditor::drawToolbar() {
 }
 
 void editor::render::tabs::MapEditor::drawTileSelector() {
-    ImGui::BeginChild("##tileSelector", ImVec2(100, 0), true);
+    ImGui::BeginChild("##tileSelector", ImVec2(500, 0), true);
     {
-        static int selectedIndex = -1;
+        int selectedIndex = -1;
 
         if (ImGui::BeginCombo("Tileset", selectedIndex >= 0 ? ("Tileset " + std::to_string(selectedIndex)).c_str() : "Select tileset")) {
             for (int i = 0; i < _tilesets.size(); ++i) {
