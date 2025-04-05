@@ -10,9 +10,11 @@
 #include <vector>
 #include <imgui.h>
 #include <unordered_map>
+#include <sol/forward.hpp>
 
 namespace editor::resources {
     class Object;
+    struct Tile;
 
     class Map : public EditorResource {
     public:
@@ -24,7 +26,7 @@ namespace editor::resources {
 
         void writeToEngineLua() final;
 
-        std::vector<std::vector<ImTextureID>>& getTiles();
+        std::vector<std::vector<Tile*>>& getTiles();
 
         std::vector<bool>& getCollisions();
 
@@ -36,13 +38,19 @@ namespace editor::resources {
 
         void setLayers(int layers);
     private:
+        void writeTiles(sol::table& tiles);
+        void writeCollisions(sol::table& collisions);
+        bool writeObjects(sol::table& objects);
+
         int _mapWidth = 0;
         int _mapHeight = 0;
         int _layers = 0;
 
-        std::vector<std::vector<ImTextureID>> _tiles;
+        std::vector<std::vector<Tile*>> _tiles;
         std::vector<bool> _collisions;
         std::unordered_map<int, Object*> _objects;
+
+        std::string filename;
     };
 }
 

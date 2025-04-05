@@ -12,6 +12,8 @@
 #include <filesystem>
 
 namespace editor::resources {
+    struct Tile;
+
     class Tileset : public EditorResource {
     public:
         template <std::convertible_to<std::filesystem::path> T>
@@ -23,12 +25,12 @@ namespace editor::resources {
 
         void writeToEngineLua() final;
 
-        const std::vector<ImTextureID>& getTiles() const;
+        const std::vector<Tile*>& getTiles() const;
 
         const std::filesystem::path& getSource() const;
     private:
         std::filesystem::path _source;
-        std::vector<ImTextureID> _tiles;
+        std::vector<Tile*> _tiles;
     };
 }
 

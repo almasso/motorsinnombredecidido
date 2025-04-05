@@ -17,7 +17,7 @@ void editor::resources::Tileset::writeToEngineLua() {
 
 }
 
-const std::vector<ImTextureID> &editor::resources::Tileset::getTiles() const {
+const std::vector<editor::resources::Tile*> &editor::resources::Tileset::getTiles() const {
     return _tiles;
 }
 

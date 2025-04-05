@@ -8,6 +8,8 @@
 #include "common/Project.h"
 #include "render/RenderManager.h"
 #include <imgui_internal.h>
+#include <resources/Tile.h>
+
 #include "render/Modals/MainWindow/TilesetWizard.h"
 #include "render/WindowStack.h"
 #include "resources/Map.h"
@@ -121,25 +123,25 @@ void editor::render::tabs::MapEditor::drawGrid() {
 void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap, int mapWidth, int i, int j, ImVec2 tilePos, ImVec2 tileEnd, ImDrawList* drawList) {
     switch(_selectedGridMode) {
         case GridDrawingMode::DRAW_SELECTED_LAYER_ONLY: {
-            if(currentMap->getTiles()[_selectedLayer][i + mapWidth * j] != (ImTextureID)nullptr)
-                drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j], tilePos, tileEnd);
+            if(currentMap->getTiles()[_selectedLayer][i + mapWidth * j] != nullptr)
+                drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j]->texture, tilePos, tileEnd);
         } break;
         case GridDrawingMode::DRAW_SELECTED_LAYER_BELOW_TRANSPARENT: {
             for(int x = currentMap->getLayers() - 1; x > _selectedLayer; --x) {
-                drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j], tilePos, tileEnd);
+                drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j]->texture, tilePos, tileEnd);
             }
             drawList->AddRectFilled(ImVec2(0,0), ImVec2(1,1), IM_COL32(73, 61, 67, 100));
-            drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j], tilePos, tileEnd);
+            drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j]->texture, tilePos, tileEnd);
         } break;
         case GridDrawingMode::DRAW_SELECTED_LAYER_BELOW_OPAQUE: {
             for(int x = currentMap->getLayers() - 1; x > _selectedLayer; --x) {
-                drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j], tilePos, tileEnd);
+                drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j]->texture, tilePos, tileEnd);
             }
-            drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j], tilePos, tileEnd);
+            drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j]->texture, tilePos, tileEnd);
         } break;
         case GridDrawingMode::DRAW_ALL: {
             for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
-                drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j], tilePos, tileEnd);
+                drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j]->texture, tilePos, tileEnd);
             }
         } break;
     }
