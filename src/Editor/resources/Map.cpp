@@ -241,8 +241,10 @@ bool editor::resources::Map::readCollisions(sol::table const& collisions) {
 bool editor::resources::Map::readObjects(sol::table const& objects) {
     for (const auto& [key, object] : objects) {
         auto obj = new Object();
-        if (!obj->read(object))
+        if (!obj->read(object)) {
+            delete obj;
             return false;
+        }
         _objects.insert({obj->getX() + obj->getY() * _mapWidth, obj});
     }
     return true;

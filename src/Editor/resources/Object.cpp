@@ -7,7 +7,7 @@
 
 #include <sol/table.hpp>
 
-#include "Event.h"
+#include "events/Event.h"
 
 #define localVarsKey "localVariables"
 #define xKey "x"
@@ -92,7 +92,7 @@ bool editor::resources::Object::readEvents(sol::table const& events) {
     for (auto&& [name, event] : events) {
         if (!name.is<std::string>() && !event.is<sol::table>())
             return false;
-        auto ev = new Event();
+        auto ev = new events::Event();
         _events.push_back(ev);
         if (!ev->read(name.as<std::string>(), event.as<sol::table>()))
             return false;

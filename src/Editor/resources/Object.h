@@ -14,7 +14,9 @@
 
 
 namespace editor::resources {
-    class Event;
+    namespace events {
+        class Event;
+    }
 
     class Object {
     public:
@@ -29,7 +31,7 @@ namespace editor::resources {
     private:
         int _x, _y;
         bool _collidable;
-        std::vector<Event*> _events;
+        std::vector<events::Event*> _events;
         std::unordered_map<std::string, sol::lua_value> _localVariables;
 
 
