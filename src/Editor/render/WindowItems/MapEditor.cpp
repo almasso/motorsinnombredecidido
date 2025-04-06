@@ -13,6 +13,7 @@
 #include "render/WindowStack.h"
 #include "resources/Map.h"
 #include "resources/Tileset.h"
+#include "render/Modals/MainWindow/MapWizard.h"
 #include <SDL3/SDL_filesystem.h>
 
 
@@ -43,6 +44,8 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.m
 
     _tilesetWizard = new render::modals::TilesetWizard(project->getDimensions());
     WindowStack::addWindowToStack(_tilesetWizard);
+    _mapWizard = new render::modals::MapWizard();
+    WindowStack::addWindowToStack(_mapWizard);
     _maps = std::deque<editor::resources::Map*>(0, nullptr);
     _tilesets = std::deque<editor::resources::Tileset*>(0, nullptr);
 }
@@ -54,8 +57,11 @@ editor::render::tabs::MapEditor::~MapEditor() {
     }
     _uiTextures.clear();
     WindowStack::removeWindowFromStack(_tilesetWizard);
+    WindowStack::removeWindowFromStack(_mapWizard);
     delete _tilesetWizard;
     _tilesetWizard = nullptr;
+    delete _mapWizard;
+    _mapWizard = nullptr;
 }
 
 
@@ -227,7 +233,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
                 }
             }
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
-                //_tilesetWizard->show();
+                _mapWizard->show();
             }
             ImGui::EndCombo();
         }

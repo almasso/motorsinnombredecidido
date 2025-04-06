@@ -9,6 +9,7 @@
 #include "utils/tinyfiledialogs/tinyfiledialogs.h"
 #include "render/RenderManager.h"
 #include "common/Project.h"
+#include <imgui_internal.h>
 
 editor::render::modals::CreateProjectModal::CreateProjectModal() : ModalWindow(
         io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.title").c_str()) {}
@@ -60,6 +61,8 @@ void editor::render::modals::CreateProjectModal::onRender() {
 
     ImGui::Spacing();
     ImGui::InputInt2(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.field.tilesetdim").c_str(), _dimensions);
+    _dimensions[0] = ImClamp(_dimensions[0], 16, 256);
+    _dimensions[1] = ImClamp(_dimensions[1], 16, 256);
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 30);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.createproject").c_str(), ImVec2(120, 0))) {

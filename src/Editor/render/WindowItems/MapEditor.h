@@ -17,6 +17,7 @@ namespace editor {
 
 namespace editor::render::modals {
     class TilesetWizard;
+    class MapWizard;
 }
 
 namespace editor::resources {
@@ -48,6 +49,7 @@ namespace editor::render::tabs {
         char* _currentDirectory;
 
         editor::render::modals::TilesetWizard* _tilesetWizard;
+        editor::render::modals::MapWizard* _mapWizard;
 
         float _zoom = 1.0f;
 
