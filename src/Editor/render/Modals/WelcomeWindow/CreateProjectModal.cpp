@@ -65,12 +65,14 @@ void editor::render::modals::CreateProjectModal::onRender() {
     _dimensions[1] = ImClamp(_dimensions[1], 16, 256);
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 30);
+    ImGui::BeginDisabled(std::string(_fullRoute) == "");
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.createproject").c_str(), ImVec2(120, 0))) {
         _projectCreated = new Project(std::string(_nameBuffer), std::string(_fullRoute), _dimensions);
         ImGui::CloseCurrentPopup();
         _isOpen = false;
         _isGivingName = false;
     }
+    ImGui::EndDisabled();
     ImGui::SameLine();
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
         ImGui::CloseCurrentPopup();

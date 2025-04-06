@@ -13,6 +13,7 @@
 #define editorAssert(condition, message) editor::EditorError::assert_impl(condition, message, __FILE__, __LINE__);
 #define showError(message) editor::EditorError::showError_impl(message, __FILE__, __LINE__);
 #define showWarning(message) editor::EditorError::showWarning_impl(message, __FILE__, __LINE__);
+#define showUserWarning(message) editor::EditorError::showWarning_impl(message, nullptr, -1);
 /**
  * @~english
  * @brief Class that will contain all Editor possible errors, and methods to show them to the programmer or user
@@ -62,10 +63,12 @@ namespace editor {
 
         template <std::convertible_to<std::string> T>
         static void showWarning_impl(T&& message, const char* file, int line) {
-            std::string filename = file;
-            std::string lineStr = std::to_string(line);
+            std::string filename, lineStr, msg;
+            if(file != nullptr) filename = file;
+            if(line != -1) lineStr = std::to_string(line);
             std::string title = "Warning!";
-            std::string msg = "Warning at " + filename + ":" + lineStr + ":\n";
+            if(file != nullptr && line != -1) msg = "Warning at " + filename + ":" + lineStr + ":\n";
+            else msg = "Warning! ";
             msg += std::forward<T>(message);
             tinyfd_messageBox(
                     title.c_str(),

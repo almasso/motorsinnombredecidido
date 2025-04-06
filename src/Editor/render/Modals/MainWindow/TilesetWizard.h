@@ -9,15 +9,29 @@
 #include "render/ModalWindow.h"
 #include <imgui.h>
 
+namespace editor {
+    class Project;
+}
+
+namespace editor::resources {
+    class Tileset;
+}
+
 namespace editor::render::modals {
     class TilesetWizard : public ModalWindow {
     public:
-        TilesetWizard(const int* dimensions);
+        TilesetWizard(Project* project);
+
+        void setTilesetToModify(editor::resources::Tileset* tileset);
 
         ~TilesetWizard();
 
     private:
+        Project* _project = nullptr;
+
         ImTextureID _loadedTexture = 0;
+
+        editor::resources::Tileset* _tilesetToModify = nullptr;
 
         int _dimensions[2];
 

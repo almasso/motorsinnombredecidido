@@ -20,6 +20,8 @@ namespace editor::render {
 
         bool isOpen() const {return _isOpen;}
 
+        bool hasBeenCalled() const {return _wantsToShow;}
+
         void render() final;
     protected:
         ImGuiWindowFlags _windowFlags = 0;

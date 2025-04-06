@@ -9,13 +9,14 @@
 #include "render/RenderManager.h"
 #include <SDL3/SDL.h>
 #include "resources/Tileset.h"
+#include "common/Project.h"
+#include "common/EditorError.h"
 
-editor::render::modals::TilesetWizard::TilesetWizard(const int* dimensions) :
-ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.title") + "") {
-    _dimensions[0] = dimensions[0];
-    _dimensions[1] = dimensions[1];
+editor::render::modals::TilesetWizard::TilesetWizard(editor::Project* project) :
+ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.title") + ""), _project(project) {
+    _dimensions[0] = _project->getDimensions()[0];
+    _dimensions[1] = _project->getDimensions()[1];
     _color[0] = _color[1] = _color[2] = 1;
-    _offset[0] = _offset[1] = 0;
 }
 
 editor::render::modals::TilesetWizard::~TilesetWizard() noexcept {
@@ -38,10 +39,16 @@ void editor::render::modals::TilesetWizard::onRender() {
 
 void editor::render::modals::TilesetWizard::drawControls() {
     if(!_isGivingName) {
-        strncpy(_nameBuffer, io::LocalizationManager::GetInstance().getString("tileset.default").c_str(), sizeof(_nameBuffer) - 1);
+        strncpy(_nameBuffer, _tilesetToModify->getName() != "" ? _tilesetToModify->getName().c_str() : io::LocalizationManager::GetInstance().getString("tileset.default").c_str(),
+                sizeof(_nameBuffer) - 1);
         _nameBuffer[sizeof(_nameBuffer) - 1] = '\0';
-        strncpy(_routeBuffer, "", sizeof(_routeBuffer) - 1);
+        strncpy(_routeBuffer, _tilesetToModify->getSource() != "" ? _tilesetToModify->getSource().string().c_str() : "", sizeof(_routeBuffer) - 1);
         _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
+        _offset[0] = _tilesetToModify->getOffsetX();
+        _offset[1] = _tilesetToModify->getOffsetY();
+        if(_tilesetToModify->getSource() != "") {
+            _loadedTexture = RenderManager::GetInstance().loadTexture(_tilesetToModify->getSource().string());
+        }
     }
     _isGivingName = true;
 
@@ -50,19 +57,26 @@ void editor::render::modals::TilesetWizard::drawControls() {
         const char* fileExtension[] = {"*.stb", "*.bmp", "*.gif", "*.jpg", "*.lbm", "*.pcx", "*.png", "*.pnm", "*.qoi", "*.svg", "*.tga", "*.xcf", "*.xpm", "*.xv"};
         const char* route = tinyfd_openFileDialog(
                 io::LocalizationManager::GetInstance().getString("action.selectimage").c_str(),
-                "",
+                (_project->getPath() / "assets/").string().c_str(),
                 14,
                 fileExtension,
                 nullptr,
                 0
         );
         if(route != nullptr) {
-            if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
-            std::string fR = std::string(route);
-            fR = std::filesystem::path(fR).lexically_normal().string();
-            strncpy(_routeBuffer, fR.c_str(), sizeof(_routeBuffer) - 1);
-            _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
-            _loadedTexture = RenderManager::GetInstance().loadTexture(fR);
+            if(std::filesystem::path(route).parent_path() != (_project->getPath() / "assets/")) {
+                showUserWarning(io::LocalizationManager::GetInstance().getString("error.assetlocationnotvalid"))
+                strncpy(_routeBuffer, "", sizeof(_routeBuffer) - 1);
+                _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
+            }
+            else {
+                if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
+                std::string fR = std::string(route);
+                fR = std::filesystem::path(fR).lexically_normal().string();
+                strncpy(_routeBuffer, fR.c_str(), sizeof(_routeBuffer) - 1);
+                _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
+                _loadedTexture = RenderManager::GetInstance().loadTexture(fR);
+            }
         }
     }
     ImGui::SameLine();
@@ -84,16 +98,23 @@ void editor::render::modals::TilesetWizard::drawControls() {
                       _color);
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosX() + 460);
+
+    ImGui::BeginDisabled(std::string(_routeBuffer) == "");
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.addtileset").c_str(), ImVec2(120, 0))) {
+        _tilesetToModify->init(_nameBuffer, _routeBuffer, _offset[0], _offset[1]);
         ImGui::CloseCurrentPopup();
+        _tilesetToModify = nullptr;
         _isOpen = false;
         _isGivingName = false;
+        if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
         _loadedTexture = 0;
         _offset[0] = _offset[1] = 0;
     }
+    ImGui::EndDisabled();
     ImGui::SameLine();
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
         ImGui::CloseCurrentPopup();
+        _tilesetToModify = nullptr;
         _isOpen = false;
         _isGivingName = false;
         if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
@@ -125,4 +146,8 @@ void editor::render::modals::TilesetWizard::drawGrid() {
         }
     }
     ImGui::EndChild();
+}
+
+void editor::render::modals::TilesetWizard::setTilesetToModify(editor::resources::Tileset *tileset) {
+    _tilesetToModify = tileset;
 }

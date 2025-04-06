@@ -64,5 +64,6 @@ return {
 	["en_US"] = "English",
 	["es_ES"] = "Español",
 	["file.projectfile"] = "Archivo de proyecto (*.lua)",
+	["error.assetlocationnotvalid"] = "La ruta del archivo no es válida. El archivo debe estar situado en [RUTA_DEL_PROYECTO]/assets/",
 	["error.missingstring"] = "No se ha encontrado la cadena de texto"
 }

@@ -7,10 +7,11 @@
 #include "io/LocalizationManager.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include "common/Project.h"
+#include "resources/Map.h"
 
-editor::render::modals::MapWizard::MapWizard() : ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.title") + "") {
-    _dimensions[0] = _dimensions[1] = 8;
-}
+editor::render::modals::MapWizard::MapWizard() :
+ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.title") + "") {}
 
 editor::render::modals::MapWizard::~MapWizard() {}
 
@@ -23,8 +24,12 @@ void editor::render::modals::MapWizard::beforeRender() {
 
 void editor::render::modals::MapWizard::onRender() {
     if(!_isGivingName) {
-        strncpy(_nameBuffer, io::LocalizationManager::GetInstance().getString("map.default").c_str(), sizeof(_nameBuffer) - 1);
+        strncpy(_nameBuffer, _mapToModify->getName() != "" ? _mapToModify->getName().c_str() :
+        io::LocalizationManager::GetInstance().getString("map.default").c_str(), sizeof(_nameBuffer) - 1);
         _nameBuffer[sizeof(_nameBuffer) - 1] = '\0';
+        _dimensions[0] = _mapToModify->getMapWidth();
+        _dimensions[1] = _mapToModify->getMapHeight();
+        _layers = _mapToModify->getLayers();
     }
     _isGivingName = true;
 
@@ -38,10 +43,16 @@ void editor::render::modals::MapWizard::onRender() {
     _dimensions[0] = ImClamp(_dimensions[0], 8, 512);
     _dimensions[1] = ImClamp(_dimensions[1], 8, 512);
 
+    ImGui::InputInt(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.layers").c_str(),
+                     &_layers);
+    _layers = ImClamp(_layers, 1, 16);
+
 
     ImGui::Spacing();
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.addmap").c_str(), ImVec2(120, 0))) {
+        _mapToModify->init(_nameBuffer, _dimensions[0], _dimensions[1], _layers);
         ImGui::CloseCurrentPopup();
+        _mapToModify = nullptr;
         _isOpen = false;
         _isGivingName = false;
     }
@@ -49,6 +60,11 @@ void editor::render::modals::MapWizard::onRender() {
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
         ImGui::CloseCurrentPopup();
         _isOpen = false;
+        _mapToModify = nullptr;
         _isGivingName = false;
     }
+}
+
+void editor::render::modals::MapWizard::setMapToModify(editor::resources::Map *map) {
+    _mapToModify = map;
 }

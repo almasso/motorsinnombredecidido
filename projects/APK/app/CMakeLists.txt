@@ -17,8 +17,8 @@ add_library(main SHARED ${APK_SOURCES})
 
 # Incluimos y enlazamos las dependencias necesarias
 # We include and link the necessary dependencies
-target_link_libraries(main PRIVATE SDL3-shared lua Engine)
-target_include_directories(main PRIVATE ${SDL3_INCLUDE_DIRS} ${LUA_INCLUDE_DIRS} ${ROOT_DIR}/src/Engine/ ${ROOT_DIR}/src/APK/)
+target_link_libraries(main PRIVATE SDL3-shared lua sol2::sol2 Engine SDL3_image::SDL3_image-shared SDL3_ttf::SDL3_ttf-shared)
+target_include_directories(main PRIVATE ${SDL3_INCLUDE_DIRS} ${LUA_INCLUDE_DIRS} ${ROOT_DIR}/src/Engine/ ${ROOT_DIR}/src/APK/ ${SDL3_TTF_INCLUDE_DIRS} ${SDL3_IMAGE_INCLUDE_DIRS} ${SOL2_INCLUDE_DIRS})
 
 
 # Especificamos las propiedades de la librería para Android

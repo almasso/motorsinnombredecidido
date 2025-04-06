@@ -44,7 +44,11 @@ namespace editor::resources {
 
         int getLayers() const;
 
-        void setLayers(int layers);
+        void addLayer();
+
+        void removeLayer(int index);
+
+        bool isInitialized() const;
 
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
@@ -56,6 +60,8 @@ namespace editor::resources {
         int _mapWidth;
         int _mapHeight;
         int _layers;
+
+        bool _init = false;
 
         std::vector<std::vector<Tile*>> _tiles;
         std::vector<bool> _collisions;
@@ -71,6 +77,8 @@ namespace editor::resources {
         bool readTiles(sol::table const& tiles);
         bool readCollisions(sol::table const& collisions);
         bool readObjects(sol::table const& objects);
+
+        void handleVectorChanges();
 
         static std::string GetFilePath(std::string const& mapName);
     };

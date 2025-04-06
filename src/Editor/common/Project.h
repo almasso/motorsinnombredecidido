@@ -74,6 +74,12 @@ namespace editor {
 
         void updateLastModified();
 
+        void addMap(editor::resources::Map* map);
+
+        int totalMaps() const;
+
+        const std::unordered_map<std::string, editor::resources::Map*>& getMaps() const;
+
         template <std::convertible_to<std::string> T>
         editor::resources::Map* getMap(T&& name) {
             auto m = _maps.find(std::forward<T>(name));
@@ -82,10 +88,30 @@ namespace editor {
         }
 
         template <std::convertible_to<std::string> T>
+        void removeMap(T&& name) {
+            auto m = _maps.find(std::forward<T>(name));
+            if(m == _maps.end()) return;
+            else _maps.erase(m);
+        }
+
+        void addTileset(editor::resources::Tileset* tileset);
+
+        int totalTilesets() const;
+
+        const std::unordered_map<std::string, editor::resources::Tileset*>& getTilesets() const;
+
+        template <std::convertible_to<std::string> T>
         editor::resources::Tileset* getTileset(T&& name) {
             auto t = _tilesets.find(std::forward<T>(name));
             if(t == _tilesets.end()) return nullptr;
             else return t->second;
+        }
+
+        template <std::convertible_to<std::string> T>
+        void removeTileset(T&& name) {
+            auto t = _tilesets.find(std::forward<T>(name));
+            if(t == _tilesets.end()) return;
+            else _tilesets.erase(t);
         }
 
     private:

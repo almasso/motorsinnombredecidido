@@ -9,6 +9,8 @@
 #include <iomanip>
 #include <iostream>
 #include <sol/sol.hpp>
+#include "resources/Tileset.h"
+#include "resources/Map.h"
 
 const std::string &editor::Project::getName() const {
     return _name;
@@ -102,10 +104,38 @@ void editor::Project::saveProject() {
             pr["AdditionalRoutes"][index++] = elem.string();
         }
 
+        if(!std::filesystem::exists(_projectPath / "assets/")) std::filesystem::create_directories(_projectPath / "assets");
+        if(!std::filesystem::exists(_projectPath / "projectfiles/")) std::filesystem::create_directories(_projectPath / "projectfiles");
+        if(!std::filesystem::exists(_projectPath / "bin/")) std::filesystem::create_directories(_projectPath / "bin");
+
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
     }
 }
 
 const int *editor::Project::getDimensions() const {
     return _dimensions;
+}
+
+void editor::Project::addMap(editor::resources::Map *map) {
+    _maps[map->getName()] = map;
+}
+
+void editor::Project::addTileset(editor::resources::Tileset *tileset) {
+    _tilesets[tileset->getName()] = tileset;
+}
+
+int editor::Project::totalMaps() const {
+    return _maps.size();
+}
+
+int editor::Project::totalTilesets() const {
+    return _tilesets.size();
+}
+
+const std::unordered_map<std::string, editor::resources::Map*>& editor::Project::getMaps() const {
+    return _maps;
+}
+
+const std::unordered_map<std::string, editor::resources::Tileset*>& editor::Project::getTilesets() const {
+    return _tilesets;
 }

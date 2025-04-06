@@ -19,7 +19,9 @@ std::filesystem::path editor::resources::Tileset::_tilesetsDirectory;
 editor::resources::Tileset::Tileset() :
     EditorResource("tileset"),
     _offsetX(0),
-    _offsetY(0) {
+    _offsetY(0),
+    _name(""),
+    _source(""){
 }
 
 void editor::resources::Tileset::init(std::string const& name, std::filesystem::path const& source, int offsetX, int offsetY) {
@@ -28,6 +30,7 @@ void editor::resources::Tileset::init(std::string const& name, std::filesystem::
     _offsetX = offsetX;
     _offsetY = offsetY;
     generateTileset();
+    _init = true;
 }
 
 bool editor::resources::Tileset::readFromLua(std::string const& name) {
@@ -88,6 +91,18 @@ void editor::resources::Tileset::generateTileset() {
 
 std::string editor::resources::Tileset::GetFilePath(std::string const& mapName) {
     return (_tilesetsDirectory / (mapName) / (".lua")).string();
+}
+
+int editor::resources::Tileset::getOffsetX() const {
+    return _offsetX;
+}
+
+int editor::resources::Tileset::getOffsetY() const {
+    return _offsetY;
+}
+
+bool editor::resources::Tileset::isInitialized() const {
+    return _init;
 }
 
 

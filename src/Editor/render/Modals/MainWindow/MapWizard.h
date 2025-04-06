@@ -8,18 +8,27 @@
 
 #include "render/ModalWindow.h"
 
+namespace editor::resources {
+    class Map;
+}
+
 namespace editor::render::modals {
     class MapWizard : public ModalWindow {
     public:
         MapWizard();
 
+        void setMapToModify(editor::resources::Map* map);
+
         ~MapWizard();
     private:
+        editor::resources::Map* _mapToModify = nullptr;
+
         bool _isGivingName = false;
 
         char _nameBuffer[256];
 
         int _dimensions[2];
+        int _layers;
 
         void beforeRender() override;
 

@@ -64,5 +64,6 @@ return {
     ["en_US"] = "English",
     ["es_ES"] = "Español",
     ["file.projectfile"] = "Project file (*.lua)",
+    ["error.assetlocationnotvalid"] = "File route is not valid. File must be located at [PROJECT_ROUTE]/assets/"
     ["error.missingstring"] = "Text string was not found"
 }

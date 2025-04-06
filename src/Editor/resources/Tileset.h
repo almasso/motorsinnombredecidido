@@ -27,11 +27,17 @@ namespace editor::resources {
         const std::filesystem::path& getSource() const;
         const std::string& getName() const;
 
+        bool isInitialized() const;
+
+        int getOffsetX() const;
+        int getOffsetY() const;
+
         static void SetMapsDirectory(std::filesystem::path const& tilesetsDirectory);
 
     private:
         static std::filesystem::path _tilesetsDirectory;
 
+        bool _init = false;
         std::string _name;
         std::filesystem::path _source;
         std::vector<Tile*> _tiles;

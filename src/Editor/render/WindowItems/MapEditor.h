@@ -40,26 +40,21 @@ namespace editor::render::tabs {
         };
 
         editor::Project* _project = nullptr;
-
         std::vector<ImTextureID> _uiTextures;
         std::vector<std::string> _buttonTooltips;
-        std::deque<resources::Map*> _maps;
-        std::deque<resources::Tileset*> _tilesets;
-
+        resources::Map* _createdMap = nullptr;
+        resources::Tileset* _createdTileset = nullptr;
+        bool _tilesetOpened = false;
+        bool _mapOpened = false;
         char* _currentDirectory;
-
-        editor::render::modals::TilesetWizard* _tilesetWizard;
-        editor::render::modals::MapWizard* _mapWizard;
-
+        editor::render::modals::TilesetWizard* _tilesetWizard = nullptr;
+        editor::render::modals::MapWizard* _mapWizard = nullptr;
         float _zoom = 1.0f;
-
         int _selectedGridMode = 0;
         int _selectedLayer = -1;
-
-        int _selectedTileset = -1;
+        editor::resources::Tileset* _selectedTileset = nullptr;
         int _selectedTile = -1;
-        int _selectedMap = -1;
-
+        editor::resources::Map* _selectedMap = nullptr;
         bool _isGridShown = true;
 
         void beforeRender() override;
