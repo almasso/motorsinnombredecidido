@@ -7,9 +7,6 @@
 #include "EventBehaviour.h"
 #include "behaviours/MoveBehaviour.h"
 
-#define idKey "id"
-#define paramsKey "params"
-
 std::unordered_map <std::string, std::function<editor::resources::events::EventBehaviour*()>> editor::resources::events::EventBehaviourFactory::_behaviours;
 
 editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(std::string const& id) {

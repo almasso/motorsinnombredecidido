@@ -57,6 +57,7 @@ bool editor::resources::Object::read(sol::table const& objectTable) {
         return false;
     if (!readLocalVars(*localVars))
         return false;
+    return true;
 }
 
 bool editor::resources::Object::write(sol::table& objectTable) {

@@ -47,6 +47,15 @@ bool editor::resources::events::Event::read(std::string const& name, sol::table 
 }
 
 bool editor::resources::events::Event::write(sol::table& eventTable) {
+    sol::table conditionTable;
+    if (!_condition->write(conditionTable))
+        return false;
+    eventTable[conditionKey] = conditionTable;
+
+    sol::table behavioursTable;
+    if (!writeBehaviours(behavioursTable))
+        return false;
+    eventTable[behavioursKey] = behavioursTable;
 
     return true;
 }
@@ -66,9 +75,19 @@ bool editor::resources::events::Event::readBehaviours(sol::table const& behaviou
         if (!behaviours.is<sol::table>())
             return false;
         auto beh = EventBehaviourFactory::Create(behaviour.as<sol::table>());
-        if (beh == nullptr)
+        if (!beh)
             return false;
         _behaviours.push_back(beh);
+    }
+    return true;
+}
+
+bool editor::resources::events::Event::writeBehaviours(sol::table& behaviours) {
+    for (auto& behaviour : _behaviours) {
+        sol::table behaviourTable;
+        if (!behaviour->write(behaviourTable))
+            return false;
+        behaviours.add(behaviourTable);
     }
     return true;
 }

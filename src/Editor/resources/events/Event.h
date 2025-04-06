@@ -31,6 +31,7 @@ namespace editor::resources::events {
         std::string _name;
 
         bool readBehaviours(sol::table const& behaviours);
+        bool writeBehaviours(sol::table& behaviours);
     };
 }
 

@@ -9,9 +9,6 @@
 
 #include "EventCondition.h"
 
-#define typeKey "type"
-#define paramsKey "params"
-
 std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*()>> editor::resources::events::EventConditionFactory::_conditions;
 
 editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(std::string const& id) {

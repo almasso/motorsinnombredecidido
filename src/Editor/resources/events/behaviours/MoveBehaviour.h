@@ -11,10 +11,15 @@
 namespace editor::resources::events {
 
     class EventBehaviourClass(MoveBehaviour) {
+    public:
+        MoveBehaviour();
         ~MoveBehaviour() override;
-        bool read(sol::table const& condition) override;
-        bool write(sol::table& condition) override;
-        bool writeToEngine(sol::table& condition) override;
+        bool read(sol::table const& params) override;
+        bool writeToEngine(sol::table& behaviour) override;
+    protected:
+        bool writeParams(sol::table& params) override;
+    private:
+        int _xTarget, _yTarget;
     };
 
 }

@@ -9,23 +9,37 @@
 #include <sol/table.hpp>
 #include <Utils/string_literal.h>
 
+#define typeKey "type"
+#define paramsKey "params"
+
 namespace editor::resources::events {
 
     class EventCondition {
     public:
         virtual ~EventCondition();
-        virtual bool read(sol::table const& condition) = 0;
+        virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& condition) = 0;
         virtual bool writeToEngine(sol::table& condition) = 0;
+    protected:
+        virtual bool writeParams(sol::table& params) = 0;
     };
 
     template<string_literal name>
     class EventConditionTemplate : public EventCondition {
     public:
         static constexpr const char* id = name.value;
+
+        bool write(sol::table& condition) final {
+            condition[typeKey] = id;
+            sol::table params;
+            if (!writeParams(params))
+                return false;
+            condition[paramsKey] = params;
+            return true;
+        }
     };
 
-    #define EventConditionClass(ConditionName) ConditionName : public EventConditionTemplate<#ConditionName>
+    #define EventConditionClass(ConditionType, ConditionName) ConditionType : public EventConditionTemplate<ConditionName>
 
 }
 

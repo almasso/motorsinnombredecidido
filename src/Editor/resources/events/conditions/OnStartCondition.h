@@ -10,11 +10,13 @@
 
 namespace editor::resources::events {
 
-    class EventConditionClass(OnStartCondition) {
+    class EventConditionClass(OnStartCondition, "OnStart") {
+    public:
         ~OnStartCondition() override;
-        bool read(sol::table const& condition) override;
-        bool write(sol::table& condition) override;
+        bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& condition) override;
+    protected:
+        bool writeParams(sol::table& params) override;
     };
 
 }
