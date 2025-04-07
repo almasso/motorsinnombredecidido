@@ -64,7 +64,7 @@ void editor::render::modals::TilesetWizard::drawControls() {
                 0
         );
         if(route != nullptr) {
-            if(std::filesystem::path(route).parent_path() != (_project->getPath() / "assets/")) {
+            if(std::filesystem::path(route).parent_path() != (_project->getPath() / "assets")) {
                 showUserWarning(io::LocalizationManager::GetInstance().getString("error.assetlocationnotvalid"))
                 strncpy(_routeBuffer, "", sizeof(_routeBuffer) - 1);
                 _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
