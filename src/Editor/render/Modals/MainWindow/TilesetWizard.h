@@ -37,6 +37,8 @@ namespace editor::render::modals {
 
         bool _isGivingName = false;
 
+        bool _sameName = false;
+
         char _nameBuffer[256];
 
         char _routeBuffer[1024];

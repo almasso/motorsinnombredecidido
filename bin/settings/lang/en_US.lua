@@ -64,6 +64,8 @@ return {
     ["en_US"] = "English",
     ["es_ES"] = "Español",
     ["file.projectfile"] = "Project file (*.lua)",
-    ["error.assetlocationnotvalid"] = "File route is not valid. File must be located at [PROJECT_ROUTE]/assets/"
+    ["error.assetlocationnotvalid"] = "File route is not valid. File must be located at [PROJECT_ROUTE]/assets/",
+    ["error.sametilesetname"] = "A tileset with this name already exists",
+    ["error.samemapname"] = "A map with this name already exists",
     ["error.missingstring"] = "Text string was not found"
 }

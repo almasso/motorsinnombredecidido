@@ -44,7 +44,7 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.m
 
     _tilesetWizard = new render::modals::TilesetWizard(project);
     WindowStack::addWindowToStack(_tilesetWizard);
-    _mapWizard = new render::modals::MapWizard();
+    _mapWizard = new render::modals::MapWizard(project);
     WindowStack::addWindowToStack(_mapWizard);
 }
 

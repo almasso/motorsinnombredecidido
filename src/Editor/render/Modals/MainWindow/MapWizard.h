@@ -8,6 +8,10 @@
 
 #include "render/ModalWindow.h"
 
+namespace editor {
+    class Project;
+}
+
 namespace editor::resources {
     class Map;
 }
@@ -15,15 +19,19 @@ namespace editor::resources {
 namespace editor::render::modals {
     class MapWizard : public ModalWindow {
     public:
-        MapWizard();
+        MapWizard(editor::Project* project);
 
         void setMapToModify(editor::resources::Map* map);
 
         ~MapWizard();
     private:
+        editor::Project* _project = nullptr;
+
         editor::resources::Map* _mapToModify = nullptr;
 
         bool _isGivingName = false;
+
+        bool _sameName = false;
 
         char _nameBuffer[256];
 

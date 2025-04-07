@@ -10,10 +10,11 @@
 #include "common/Project.h"
 #include "resources/Map.h"
 
-editor::render::modals::MapWizard::MapWizard() :
-ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.title") + "") {}
+editor::render::modals::MapWizard::MapWizard(editor::Project* project) :
+    ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.title") + ""),
+    _project(project) {}
 
-editor::render::modals::MapWizard::~MapWizard() {}
+editor::render::modals::MapWizard::~MapWizard() = default;
 
 void editor::render::modals::MapWizard::beforeRender() {
     ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove;
@@ -37,6 +38,13 @@ void editor::render::modals::MapWizard::onRender() {
     ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.mapname").c_str(),
                      _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
+    if(_project->getMap(_nameBuffer) != nullptr) _sameName = true;
+    else _sameName = false;
+
+    if(_sameName) {
+        ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.samemapname").c_str());
+    }
+
     ImGui::Spacing();
     ImGui::InputInt2(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.dimensions").c_str(),
                       _dimensions);
@@ -49,6 +57,7 @@ void editor::render::modals::MapWizard::onRender() {
 
 
     ImGui::Spacing();
+    ImGui::BeginDisabled(_sameName);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.addmap").c_str(), ImVec2(120, 0))) {
         _mapToModify->init(_nameBuffer, _dimensions[0], _dimensions[1], _layers);
         ImGui::CloseCurrentPopup();
@@ -56,6 +65,7 @@ void editor::render::modals::MapWizard::onRender() {
         _isOpen = false;
         _isGivingName = false;
     }
+    ImGui::EndDisabled();
     ImGui::SameLine();
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
         ImGui::CloseCurrentPopup();

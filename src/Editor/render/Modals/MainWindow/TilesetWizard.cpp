@@ -87,6 +87,13 @@ void editor::render::modals::TilesetWizard::drawControls() {
     ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.tilename").c_str(),
                      _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
+    if(_project->getTileset(_nameBuffer) != nullptr) _sameName = true;
+    else _sameName = false;
+
+    if(_sameName) {
+        ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.sametilesetname").c_str());
+    }
+
     ImGui::Spacing();
     ImGui::SliderInt2(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.offset").c_str(),
                       _offset, -_dimensions[0], _dimensions[0]);
@@ -99,7 +106,7 @@ void editor::render::modals::TilesetWizard::drawControls() {
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosX() + 460);
 
-    ImGui::BeginDisabled(std::string(_routeBuffer) == "");
+    ImGui::BeginDisabled(std::string(_routeBuffer) == "" || _sameName);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.addtileset").c_str(), ImVec2(120, 0))) {
         _tilesetToModify->init(_nameBuffer, _routeBuffer, _offset[0], _offset[1]);
         ImGui::CloseCurrentPopup();
