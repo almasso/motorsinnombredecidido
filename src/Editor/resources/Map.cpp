@@ -149,20 +149,21 @@ bool editor::resources::Map::readFromLua(std::string const& name) {
 
 
 void editor::resources::Map::writeToLua() {
-    sol::table map = io::LuaManager::GetInstance().getState().create_table();
+    auto& lua = io::LuaManager::GetInstance().getState();
+    sol::table map = lua.create_table();
     map[widthKey] = _mapWidth;
     map[heightKey] = _mapHeight;
     map[layersKey] = _layers;
 
-    sol::table tiles = io::LuaManager::GetInstance().getState().create_table();
+    sol::table tiles = lua.create_table();
     writeTiles(tiles);
     map[tilesKey] = tiles;
 
-    sol::table collisions = io::LuaManager::GetInstance().getState().create_table();
+    sol::table collisions = lua.create_table();
     writeCollisions(collisions);
     map[collisionsKey] = collisions;
 
-    sol::table objects = io::LuaManager::GetInstance().getState().create_table();
+    sol::table objects = lua.create_table();
     writeObjects(objects);
     map[objectsKey] = objects;
 
@@ -170,9 +171,10 @@ void editor::resources::Map::writeToLua() {
 }
 
 void editor::resources::Map::writeToEngineLua() {
-    sol::table map;
-    sol::table children;
-    sol::table components;
+    auto& lua = io::LuaManager::GetInstance().getState();
+    sol::table map = lua.create_table();
+    sol::table children = lua.create_table();
+    sol::table components = lua.create_table();
     writeComponents(components);
     map["components"] = components;
     writeChildren(children);
@@ -181,19 +183,21 @@ void editor::resources::Map::writeToEngineLua() {
 }
 
 void editor::resources::Map::writeComponents(sol::table &components) {
+    auto& lua = io::LuaManager::GetInstance().getState();
     Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
-    sol::table transform;
+    sol::table transform = lua.create_table();
     transform["position"] = Vector2(_mapX, _mapY) * dimensions;
     components["Transform"] = transform;
-    sol::table collider;
+    sol::table collider = lua.create_table();
     collider["size"] = Vector2(_mapWidth, _mapHeight) * dimensions;
     components["Collider"] = collider;
-    sol::table mapComponent;
+    sol::table mapComponent = lua.create_table();
     mapComponent["adjacentMaps"] = {""};
     components["MapComponent"] = mapComponent;
 }
 
 void editor::resources::Map::writeChildren(sol::table &children) {
+    auto& lua = io::LuaManager::GetInstance().getState();
     Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
     Vector2 center = Vector2(_mapWidth / 2, _mapHeight / 2);
     std::unordered_set<int> collisions;
@@ -205,11 +209,15 @@ void editor::resources::Map::writeChildren(sol::table &children) {
             for (int k = 0; k < _mapHeight; k++) {
                 Tile* tile = _tiles[i][k * _mapWidth + j];
                 if (tile != nullptr || (collisions.contains(k * _mapWidth + j) && i == _layers-1)) {
-                    sol::table child;
-                    sol::table components;
-                    components["Transform"] = auto {"position",(Vector2(j, k) - center) * dimensions};
+                    sol::table child = lua.create_table();
+                    sol::table components = lua.create_table();
+                    sol::table transform = lua.create_table();
+                    transform["position"] = (Vector2(j, k) - center) * dimensions;
+                    components["Transform"] = transform;
                     if (tile != nullptr) {
-                        components["SpriteRenderer"] = auto {"sprite",tile->tileset.c_str() + tile->pos};
+                        sol::table sprite = lua.create_table();
+                        sprite["sprite"] = tile->tileset.c_str() + tile->pos;
+                        components["SpriteRenderer"] = sprite;
                     }
                     if (auto finder = collisions.find(k * _mapWidth + j); finder != collisions.end()) {
                         components["MovementObstacle"] = {0};
