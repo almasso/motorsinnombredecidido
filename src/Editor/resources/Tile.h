@@ -6,6 +6,7 @@
 #ifndef TILE_H
 #define TILE_H
 
+#include <imgui_internal.h>
 #include <string>
 
 typedef unsigned long long ImU64;
@@ -17,6 +18,7 @@ struct Tile {
     std::string tileset;
     int pos;
     ImTextureID texture;
+    ImRect rect;
 };
 
 }

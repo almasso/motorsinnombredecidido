@@ -5,10 +5,13 @@
 
 #include "Tileset.h"
 
+#include <common/Project.h>
 #include <io/LuaManager.h>
 #include <SDL3/SDL.h>
 #include "render/RenderManager.h"
 #include <sol/table.hpp>
+
+#include "Tile.h"
 
 #define sourceKey "source"
 #define offsetXKey "offsetX"
@@ -16,12 +19,21 @@
 
 std::filesystem::path editor::resources::Tileset::_tilesetsDirectory;
 
-editor::resources::Tileset::Tileset() :
+editor::resources::Tileset::Tileset(Project* project) :
     EditorResource("tileset"),
+    _name(),
+    _source(""),
     _offsetX(0),
     _offsetY(0),
-    _name(""),
-    _source(""){
+    _project(project) {
+}
+
+editor::resources::Tileset::~Tileset() {
+    for (auto& tile : _tiles) {
+        delete tile;
+        tile = nullptr;
+    }
+    _tiles.clear();
 }
 
 void editor::resources::Tileset::init(std::string const& name, std::filesystem::path const& source, int offsetX, int offsetY) {
@@ -86,7 +98,21 @@ void editor::resources::Tileset::SetMapsDirectory(std::filesystem::path const& t
 }
 
 void editor::resources::Tileset::generateTileset() {
-
+    int const* dimensions = _project->getDimensions();
+    ImTextureID texture = render::RenderManager::GetInstance().loadTexture(_source.string());
+    SDL_Texture* sdlTexture = (SDL_Texture*)texture;
+    int xTiles = sdlTexture->w / dimensions[0];
+    int yTiles = sdlTexture->h / dimensions[1];
+    for (int i = 0; i < xTiles; i++) {
+        for (int j = 0; j < yTiles; j++) {
+            Tile* tile = new Tile();
+            tile->pos = i + j * yTiles;
+            tile->texture = texture;
+            tile->tileset = _source.string();
+            tile->rect = ImRect(i * dimensions[0], j * dimensions[1], (i + 1) * dimensions[0] - 1, (j + 1) * dimensions[1] - 1);
+            _tiles.push_back(tile);
+        }
+    }
 }
 
 std::string editor::resources::Tileset::GetFilePath(std::string const& mapName) {

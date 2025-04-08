@@ -10,12 +10,18 @@
 #include <vector>
 #include <filesystem>
 
+namespace editor
+{
+    class Project;
+}
+
 namespace editor::resources {
     struct Tile;
 
     class Tileset : public EditorResource {
     public:
-        Tileset();
+        explicit Tileset(Project* project);
+        ~Tileset();
 
         void init(std::string const& name, std::filesystem::path const& source, int offsetX = 0, int offsetY = 0);
         bool readFromLua(std::string const& name) final;
@@ -43,6 +49,7 @@ namespace editor::resources {
         std::vector<Tile*> _tiles;
         int _offsetX;
         int _offsetY;
+        Project* _project;
 
         void generateTileset();
 

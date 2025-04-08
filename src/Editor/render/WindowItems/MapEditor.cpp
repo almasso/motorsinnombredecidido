@@ -287,7 +287,7 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                 }
             }
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createtileset").c_str())) {
-                _createdTileset = new editor::resources::Tileset();
+                _createdTileset = new editor::resources::Tileset(_project);
                 _tilesetWizard->setTilesetToModify(_createdTileset);
                 _tilesetWizard->show();
             }
