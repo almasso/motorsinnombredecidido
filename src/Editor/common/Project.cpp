@@ -119,13 +119,19 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     movement = lua.create_table();
     movement["speed"] = _dimensions[0] * 2.0f;
     components["MovementComponent"] = movement;
-    sol::table camera = lua.create_table();
-    camera["size"] = {1920,1080};
-    components["Camera"] = camera;
     components["Transform"] = 0;
     components["PlayerInput"] = 0;
     player["components"] = components;
     player["handler"] = components;
+    sol::table camera = lua.create_table();
+    sol::table cameraComponent = lua.create_table();
+    components = lua.create_table();
+    cameraComponent["size"] = {1920,1080};
+    components["Camera"] = cameraComponent;
+    camera["components"] = components;
+    camera["handler"] = "Camera";
+    sol::table children = lua.create_table();
+    children["camera"] = camera;
     scene["player"] = "Player";
     io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data/scenes/overworld.scene.lua").string());
 }

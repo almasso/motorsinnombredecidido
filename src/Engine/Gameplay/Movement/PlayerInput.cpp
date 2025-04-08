@@ -19,7 +19,7 @@ bool PlayerInput::init() {
         Error::ShowError("Player sin MovementComponent", "El player requiere de un componente MovementComponent para funcionar");
         return false;
     }
-    if (Entity* ent = _scene->getEntityByHandler("Manager"); ent) {
+    if (Entity* ent = _scene->getEntityByHandler("Camera"); ent) {
         _camera = ent->getComponent<Camera>();
     }
     _active = true;

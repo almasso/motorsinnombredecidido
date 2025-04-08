@@ -17,7 +17,7 @@ bool Button::init() {
         Error::ShowError("Button object sin transform", "Todos los botones requieren de un componente Transform para funcionar");
         return false;
     }
-    if (Entity* ent = _scene->getEntityByHandler("Manager"); ent) {
+    if (Entity* ent = _scene->getEntityByHandler("Camera"); ent) {
         _camera = ent->getComponent<Camera>();
     }
     _callback = _data->getData<sol::function>("callback");

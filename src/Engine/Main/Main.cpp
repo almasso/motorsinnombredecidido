@@ -32,7 +32,7 @@ bool Main::Init() {
     _time = new TimeManager();
     _time->init();
     std::string startScene;
-    if (!ResourceManager::Init("assets/config.lua",startScene))
+    if (!ResourceManager::Init("data/config.lua",startScene))
         return false;
     _scenes = SceneManager::Init(startScene);
     if (!_scenes)
