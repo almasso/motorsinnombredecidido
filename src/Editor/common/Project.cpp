@@ -108,9 +108,12 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     sol::table manager = lua.create_table();
     sol::table components = lua.create_table();
     sol::table movement = lua.create_table();
+    sol::table overworld = lua.create_table();
     movement["tileWidth"] = _dimensions[0];
     movement["tileHeight"] = _dimensions[1];
     components["MovementManager"] = movement;
+    overworld["startingMap"] = _maps.begin()->second->getName();
+    components["OverworldManager"] = overworld;
     manager["handler"] = "Manager";
     manager["components"] = components;
     scene["manager"] = manager;
