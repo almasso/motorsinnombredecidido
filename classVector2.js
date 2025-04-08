@@ -12,6 +12,7 @@ var classVector2 =
     [ "magnitude", "classVector2.html#ab84b0c3d31e2893df551d259789e80a9", null ],
     [ "normalize", "classVector2.html#a32e698ed9337b1d258fe96b5b942015a", null ],
     [ "normalized", "classVector2.html#a1e0be0f2d578e8b5d0b8f95a9f8b6626", null ],
+    [ "operator std::array< float, 2 >", "classVector2.html#a63e023a083608be4837cee5be787ec36", null ],
     [ "operator!=", "classVector2.html#a805e8fa742bba45aea6af187069f2c96", null ],
     [ "operator*", "classVector2.html#a5df1be7a5a17b2be54b33655a48cebe6", null ],
     [ "operator*", "classVector2.html#abed281edb08c34e61ec8642d1da98a62", null ],
