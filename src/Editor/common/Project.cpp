@@ -9,8 +9,16 @@
 #include <iomanip>
 #include <iostream>
 #include <sol/sol.hpp>
+#include "EditorError.h"
 #include "resources/Tileset.h"
 #include "resources/Map.h"
+#include <SDL3/SDL_filesystem.h>
+
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#else
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
 
 void editor::Project::initResources() {
     std::filesystem::path tilesetsPath = (_projectPath / "projectfiles" / "tilesets");
@@ -35,6 +43,93 @@ void editor::Project::initResources() {
             delete map;
     }
 }
+
+bool editor::Project::build(const std::string &platform) {
+    try {
+        if (!exists(getBuildPath("") )) {
+            create_directory(getBuildPath(""));
+        }
+        if (!exists(getBuildPath(platform) )) {
+            create_directory(getBuildPath(platform));
+        }
+        copy(getAssetsPath(),getBuildPath(platform)/"data/assets",
+             std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
+             std::filesystem::copy_options::overwrite_existing);
+        for (const auto& [key,map] : _maps) {
+            map->writeToEngineLua(platform);
+        }
+        for (const auto& [key,tileset] : _tilesets) {
+            tileset->writeToEngineLua(platform);
+        }
+        buildSettings(platform);
+        buildAudioSettings(platform);
+        buildOverworldScene(platform);
+        char* filepath = SDL_GetCurrentDirectory();
+        copy(std::filesystem::path(filepath)/"GameBinaries"/platform,getBuildPath(platform),
+            std::filesystem::copy_options::overwrite_existing);
+        SDL_free(filepath);
+    } catch (std::filesystem::filesystem_error& e) {
+        EditorError::showError_impl(e.what(), "Project",60);
+        return false;
+    }
+    return true;
+}
+
+void editor::Project::buildSettings(const std::string &platform) {
+    auto& lua = io::LuaManager::GetInstance().getState();
+    sol::table config = lua.create_table();
+    sol::table memory = lua.create_table();
+    memory["maxSize"] = 1024*1024*1024;
+    config["memory"] = memory;
+    config["initScene"] = "data/scenes/overworld.scene.lua";
+    io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data/config.lua").string());
+}
+
+void editor::Project::buildAudioSettings(const std::string &platform) {
+    auto& lua = io::LuaManager::GetInstance().getState();
+    sol::table master = lua.create_table();
+    master["inputs"] = {"Music","SFX"};
+    master["name"] = "Master";
+    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data/mixers/master.mixer.lua").string());
+    sol::table music = lua.create_table();
+    music["output"] = "Master";
+    music["name"] = "Music";
+    music["volume"] = 0.5f;
+    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data/mixers/music.mixer.lua").string());
+    sol::table sfx = lua.create_table();
+    sfx["output"] = "Master";
+    sfx["name"] = "SFX";
+    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data/mixers/sfx.mixer.lua").string());
+}
+
+void editor::Project::buildOverworldScene(const std::string &platform) {
+    auto& lua = io::LuaManager::GetInstance().getState();
+    sol::table scene = lua.create_table();
+    sol::table manager = lua.create_table();
+    sol::table components = lua.create_table();
+    sol::table movement = lua.create_table();
+    movement["tileWidth"] = _dimensions[0];
+    movement["tileHeight"] = _dimensions[1];
+    components["MovementManager"] = movement;
+    manager["handler"] = "Manager";
+    manager["components"] = components;
+    scene["manager"] = manager;
+    sol::table player = lua.create_table();
+    components = lua.create_table();
+    movement = lua.create_table();
+    movement["speed"] = _dimensions[0] * 2.0f;
+    components["MovementComponent"] = movement;
+    sol::table camera = lua.create_table();
+    camera["size"] = {1920,1080};
+    components["Camera"] = camera;
+    components["Transform"] = 0;
+    components["PlayerInput"] = 0;
+    player["components"] = components;
+    player["handler"] = components;
+    scene["player"] = "Player";
+    io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data/scenes/overworld.scene.lua").string());
+}
+
 
 const std::string &editor::Project::getName() const {
     return _name;
@@ -179,4 +274,8 @@ std::filesystem::path editor::Project::getAssetsPath() const {
 void editor::Project::saveEverything() {
     updateLastModified();
     saveProject();
+}
+
+std::filesystem::path editor::Project::getBuildPath(const std::string &platform) const {
+    return _projectPath / "build" / platform;
 }

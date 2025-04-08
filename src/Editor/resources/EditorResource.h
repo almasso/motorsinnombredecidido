@@ -18,7 +18,7 @@ namespace editor::resources {
 
         virtual void writeToLua() = 0;
 
-        virtual void writeToEngineLua() = 0;
+        virtual void writeToEngineLua(const std::string &platform) = 0;
     protected:
         std::string _id;
     };

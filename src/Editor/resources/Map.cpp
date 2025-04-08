@@ -172,7 +172,7 @@ void editor::resources::Map::writeToLua() {
     io::LuaManager::GetInstance().writeToFile(map, GetFilePath(_name));
 }
 
-void editor::resources::Map::writeToEngineLua() {
+void editor::resources::Map::writeToEngineLua(const std::string &platform) {
     auto& lua = io::LuaManager::GetInstance().getState();
     sol::table map = lua.create_table();
     sol::table children = lua.create_table();
@@ -181,7 +181,7 @@ void editor::resources::Map::writeToEngineLua() {
     map["components"] = components;
     writeChildren(children);
     map["children"] = children;
-    io::LuaManager::GetInstance().writeToFile(map, (_project->getPath()/"build/desktop/assets/prefabs/"/_name/".lua").string());
+    io::LuaManager::GetInstance().writeToFile(map, (_project->getBuildPath(platform)/"data/prefabs/"/_name/".lua").string());
 }
 
 void editor::resources::Map::writeComponents(sol::table &components) {

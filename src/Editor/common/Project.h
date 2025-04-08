@@ -35,6 +35,14 @@ namespace editor {
 
         void initResources();
 
+        bool build(const std::string &platform);
+
+        void buildSettings(const std::string &platform);
+
+        void buildAudioSettings(const std::string &platform);
+
+        void buildOverworldScene(const std::string &platform);
+
         const std::string& getName() const;
 
         template <std::convertible_to<std::string> T>
@@ -120,6 +128,8 @@ namespace editor {
         }
 
         std::filesystem::path getAssetsPath() const;
+
+        std::filesystem::path getBuildPath(const std::string &platform) const;
 
     private:
         std::string _name;

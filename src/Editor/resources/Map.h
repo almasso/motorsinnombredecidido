@@ -31,7 +31,7 @@ namespace editor::resources {
         bool readFromLua(std::string const& name) final;
 
         void writeToLua() final;
-        void writeToEngineLua() final;
+        void writeToEngineLua(const std::string &platform) final;
 
         std::vector<std::vector<Tile*>>& getTiles();
 
