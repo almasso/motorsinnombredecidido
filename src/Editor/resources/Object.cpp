@@ -5,6 +5,7 @@
 
 #include "Object.h"
 
+#include <io/LuaManager.h>
 #include <sol/table.hpp>
 
 #include "events/Event.h"
@@ -65,12 +66,12 @@ bool editor::resources::Object::write(sol::table& objectTable) {
     objectTable[yKey] = _y;
     objectTable[collidableKey] = _collidable;
 
-    sol::table events;
+    sol::table events = io::LuaManager::GetInstance().getState().create_table();
     if (!writeEvents(events))
         return false;
     objectTable[eventsKey] = events;
 
-    sol::table localVars;
+    sol::table localVars = io::LuaManager::GetInstance().getState().create_table();
     writeLocalVars(localVars);
     objectTable[localVarsKey] = localVars;
 
@@ -112,7 +113,7 @@ bool editor::resources::Object::readLocalVars(sol::table const& localVars) {
 
 bool editor::resources::Object::writeEvents(sol::table& events) {
     for (auto& event : _events) {
-        sol::table eventTable;
+        sol::table eventTable = io::LuaManager::GetInstance().getState().create_table();
         if (!event->write(eventTable))
             return false;
         events[event->getName()] = eventTable;

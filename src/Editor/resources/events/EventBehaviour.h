@@ -6,6 +6,7 @@
 #ifndef EVENTBEHAVIOUR_H
 #define EVENTBEHAVIOUR_H
 
+#include <io/LuaManager.h>
 #include <sol/table.hpp>
 
 #include <Utils/string_literal.h>
@@ -32,7 +33,7 @@ namespace editor::resources::events {
 
         bool write(sol::table& behaviour) final {
             behaviour[idKey] = id;
-            sol::table params;
+            sol::table params = io::LuaManager::GetInstance().getState().create_table();
             if (!writeParams(params))
                 return false;
             behaviour[paramsKey] = params;

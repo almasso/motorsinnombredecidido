@@ -4,6 +4,8 @@
 //
 
 #include "Event.h"
+
+#include <io/LuaManager.h>
 #include <sol/table.hpp>
 #include "EventCondition.h"
 #include "EventBehaviour.h"
@@ -47,12 +49,12 @@ bool editor::resources::events::Event::read(std::string const& name, sol::table 
 }
 
 bool editor::resources::events::Event::write(sol::table& eventTable) {
-    sol::table conditionTable;
+    sol::table conditionTable = io::LuaManager::GetInstance().getState().create_table();
     if (!_condition->write(conditionTable))
         return false;
     eventTable[conditionKey] = conditionTable;
 
-    sol::table behavioursTable;
+    sol::table behavioursTable = io::LuaManager::GetInstance().getState().create_table();
     if (!writeBehaviours(behavioursTable))
         return false;
     eventTable[behavioursKey] = behavioursTable;
@@ -84,7 +86,7 @@ bool editor::resources::events::Event::readBehaviours(sol::table const& behaviou
 
 bool editor::resources::events::Event::writeBehaviours(sol::table& behaviours) {
     for (auto& behaviour : _behaviours) {
-        sol::table behaviourTable;
+        sol::table behaviourTable = io::LuaManager::GetInstance().getState().create_table();
         if (!behaviour->write(behaviourTable))
             return false;
         behaviours.add(behaviourTable);

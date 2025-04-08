@@ -38,7 +38,7 @@ namespace editor::resources {
         int getOffsetX() const;
         int getOffsetY() const;
 
-        static void SetMapsDirectory(std::filesystem::path const& tilesetsDirectory);
+        static void SetTilesetsDirectory(std::filesystem::path const& tilesetsDirectory);
 
     private:
         static std::filesystem::path _tilesetsDirectory;

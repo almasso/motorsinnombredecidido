@@ -12,6 +12,30 @@
 #include "resources/Tileset.h"
 #include "resources/Map.h"
 
+void editor::Project::initResources() {
+    std::filesystem::path mapsPath = (_projectPath / "projectfiles" / "maps");
+    resources::Map::SetMapsDirectory(mapsPath);
+    for (auto const& file : std::filesystem::directory_iterator(mapsPath)) {
+        auto map = new resources::Map(this);
+        auto name = file.path().stem().string();
+        if (map->readFromLua(name))
+            _maps.insert({name, map});
+        else
+            delete map;
+    }
+
+    std::filesystem::path tilesetsPath = (_projectPath / "projectfiles" / "tilesets");
+    resources::Tileset::SetTilesetsDirectory(tilesetsPath);
+    for (auto const& file : std::filesystem::directory_iterator(tilesetsPath)) {
+        auto tileset = new resources::Tileset(this);
+        auto name = file.path().stem().string();
+        if (tileset->readFromLua(name))
+            _tilesets.insert({name, tileset});
+        else
+            delete tileset;
+    }
+}
+
 const std::string &editor::Project::getName() const {
     return _name;
 }
@@ -109,6 +133,10 @@ void editor::Project::saveProject() {
         if(!std::filesystem::exists(_projectPath / "bin/")) std::filesystem::create_directories(_projectPath / "bin");
 
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
+        for (auto& [key, tileset] : _tilesets)
+            tileset->writeToLua();
+        for (auto& [key, map] : _maps)
+            map->writeToLua();
     }
 }
 
@@ -118,10 +146,12 @@ const int *editor::Project::getDimensions() const {
 
 void editor::Project::addMap(editor::resources::Map *map) {
     _maps[map->getName()] = map;
+    map->writeToLua();
 }
 
 void editor::Project::addTileset(editor::resources::Tileset *tileset) {
     _tilesets[tileset->getName()] = tileset;
+    tileset->writeToLua();
 }
 
 int editor::Project::totalMaps() const {
@@ -138,4 +168,8 @@ const std::unordered_map<std::string, editor::resources::Map*>& editor::Project:
 
 const std::unordered_map<std::string, editor::resources::Tileset*>& editor::Project::getTilesets() const {
     return _tilesets;
+}
+
+std::filesystem::path editor::Project::getAssetsPath() const {
+    return _projectPath / "assets";
 }

@@ -32,6 +32,9 @@ namespace editor {
         Project(T&& path) {
             updatePath(path);
         }
+
+        void initResources();
+
         const std::string& getName() const;
 
         template <std::convertible_to<std::string> T>
@@ -113,6 +116,8 @@ namespace editor {
             if(t == _tilesets.end()) return;
             else _tilesets.erase(t);
         }
+
+        std::filesystem::path getAssetsPath() const;
 
     private:
         std::string _name;

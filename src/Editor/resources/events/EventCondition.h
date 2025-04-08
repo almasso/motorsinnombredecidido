@@ -6,6 +6,7 @@
 #ifndef EVENTCONDITION_H
 #define EVENTCONDITION_H
 
+#include <io/LuaManager.h>
 #include <sol/table.hpp>
 #include <Utils/string_literal.h>
 
@@ -31,7 +32,7 @@ namespace editor::resources::events {
 
         bool write(sol::table& condition) final {
             condition[typeKey] = id;
-            sol::table params;
+            sol::table params = io::LuaManager::GetInstance().getState().create_table();
             if (!writeParams(params))
                 return false;
             condition[paramsKey] = params;

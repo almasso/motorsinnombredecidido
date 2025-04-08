@@ -147,20 +147,20 @@ bool editor::resources::Map::readFromLua(std::string const& name) {
 
 
 void editor::resources::Map::writeToLua() {
-    sol::table map;
+    sol::table map = io::LuaManager::GetInstance().getState().create_table();
     map[widthKey] = _mapWidth;
     map[heightKey] = _mapHeight;
     map[layersKey] = _layers;
 
-    sol::table tiles;
+    sol::table tiles = io::LuaManager::GetInstance().getState().create_table();
     writeTiles(tiles);
     map[tilesKey] = tiles;
 
-    sol::table collisions;
+    sol::table collisions = io::LuaManager::GetInstance().getState().create_table();
     writeCollisions(collisions);
     map[collisionsKey] = collisions;
 
-    sol::table objects;
+    sol::table objects = io::LuaManager::GetInstance().getState().create_table();
     writeObjects(objects);
     map[objectsKey] = objects;
 
@@ -214,9 +214,9 @@ void editor::resources::Map::SetMapsDirectory(std::filesystem::path const& mapsD
 
 void editor::resources::Map::writeTiles(sol::table& tiles) {
     for (auto const& row : _tiles) {
-        sol::table rowTable;
+        sol::table rowTable = io::LuaManager::GetInstance().getState().create_table();
         for (auto const& tile : row) {
-            sol::table tileTable;
+            sol::table tileTable = io::LuaManager::GetInstance().getState().create_table();
             if (tile != nullptr) {
                 tileTable[tilesetKey] = tile->tileset;
                 tileTable[posKey] = tile->pos;
@@ -235,7 +235,7 @@ void editor::resources::Map::writeCollisions(sol::table& collisions) {
 
 bool editor::resources::Map::writeObjects(sol::table& objects) {
     for (auto const& [key, object] : _objects) {
-        sol::table objectTable;
+        sol::table objectTable = io::LuaManager::GetInstance().getState().create_table();
         if (!object->write(objectTable))
             return false;
         objects.add(objectTable);
@@ -310,7 +310,7 @@ bool editor::resources::Map::readObjects(sol::table const& objects) {
 
 
 std::string editor::resources::Map::GetFilePath(std::string const& mapName) {
-    return (_mapsDirectory / (mapName) / (".lua")).string();
+    return (_mapsDirectory / (mapName + ".lua")).string();
 }
 
 bool editor::resources::Map::isInitialized() const {

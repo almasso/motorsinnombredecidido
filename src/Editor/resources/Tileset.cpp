@@ -5,6 +5,7 @@
 
 #include "Tileset.h"
 
+#include <common/EditorError.h>
 #include <common/Project.h>
 #include <io/LuaManager.h>
 #include <SDL3/SDL.h>
@@ -62,15 +63,15 @@ bool editor::resources::Tileset::readFromLua(std::string const& name) {
     if (!offsetY.has_value())
         return false;
 
-    init(name, source.value(), offsetX.value(), offsetY.value());
+    init(name, _project->getAssetsPath() / source.value(), offsetX.value(), offsetY.value());
 
     return true;
 }
 
 void editor::resources::Tileset::writeToLua() {
-    sol::table tilesetTable;
+    sol::table tilesetTable = io::LuaManager::GetInstance().getState().create_table();
 
-    tilesetTable[sourceKey] = _source.string();
+    tilesetTable[sourceKey] = _source.lexically_relative(_project->getAssetsPath()).string();
     tilesetTable[offsetXKey] = _offsetX;
     tilesetTable[offsetYKey] = _offsetY;
 
@@ -93,13 +94,17 @@ const std::string &editor::resources::Tileset::getName() const {
     return _name;
 }
 
-void editor::resources::Tileset::SetMapsDirectory(std::filesystem::path const& tilesetsDirectory) {
+void editor::resources::Tileset::SetTilesetsDirectory(std::filesystem::path const& tilesetsDirectory) {
     _tilesetsDirectory = tilesetsDirectory;
 }
 
 void editor::resources::Tileset::generateTileset() {
     int const* dimensions = _project->getDimensions();
     ImTextureID texture = render::RenderManager::GetInstance().loadTexture(_source.string());
+    if (texture == 0) {
+        showError("Tileset image not found.");
+        return;
+    }
     SDL_Texture* sdlTexture = (SDL_Texture*)texture;
     int xTiles = sdlTexture->w / dimensions[0];
     int yTiles = sdlTexture->h / dimensions[1];
@@ -124,7 +129,7 @@ void editor::resources::Tileset::generateTileset() {
 }
 
 std::string editor::resources::Tileset::GetFilePath(std::string const& mapName) {
-    return (_tilesetsDirectory / (mapName) / (".lua")).string();
+    return (_tilesetsDirectory / (mapName + ".lua")).string();
 }
 
 int editor::resources::Tileset::getOffsetX() const {
