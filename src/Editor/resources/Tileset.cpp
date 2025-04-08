@@ -103,13 +103,21 @@ void editor::resources::Tileset::generateTileset() {
     SDL_Texture* sdlTexture = (SDL_Texture*)texture;
     int xTiles = sdlTexture->w / dimensions[0];
     int yTiles = sdlTexture->h / dimensions[1];
-    for (int i = 0; i < xTiles; i++) {
-        for (int j = 0; j < yTiles; j++) {
+    xTiles -= (_offsetX % dimensions[0] == 0) ? 0 : 1;
+    yTiles -= (_offsetY % dimensions[1] == 0) ? 0 : 1;
+    int xOffset = std::abs(_offsetX);
+    int yOffset = std::abs(_offsetY);
+    for (int j = 0; j < yTiles; j++) {
+        for (int i = 0; i < xTiles; i++) {
             Tile* tile = new Tile();
             tile->pos = i + j * yTiles;
             tile->texture = texture;
-            tile->tileset = _source.string();
-            tile->rect = ImRect(i * dimensions[0], j * dimensions[1], (i + 1) * dimensions[0] - 1, (j + 1) * dimensions[1] - 1);
+            tile->tileset = _name;
+            tile->rect = ImRect(
+                static_cast<float>(i * dimensions[0] + xOffset) / sdlTexture->w,
+                static_cast<float>(j * dimensions[1] + yOffset) / sdlTexture->h,
+                static_cast<float>((i + 1) * dimensions[0] - 1 + xOffset) / sdlTexture->w,
+                static_cast<float>((j + 1) * dimensions[1] - 1 + yOffset) / sdlTexture->h);
             _tiles.push_back(tile);
         }
     }

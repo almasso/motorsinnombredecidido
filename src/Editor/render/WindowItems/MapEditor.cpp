@@ -301,7 +301,7 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
             int i = 0;
             for(auto tile : _selectedTileset->getTiles()) {
                 if(i % 3 != 0) ImGui::SameLine();
-                if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), tile->texture, ImVec2(32, 32))) {
+                if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), tile->texture, ImVec2(32, 32), tile->rect.Min, tile->rect.Max)) {
                     _selectedTile = i;
                 }
                 ++i;
