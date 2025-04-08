@@ -10,6 +10,7 @@
 #include "render/RenderManager.h"
 #include "common/Project.h"
 #include <imgui_internal.h>
+#include "io/ProjectManager.h"
 
 editor::render::modals::CreateProjectModal::CreateProjectModal() : ModalWindow(
         io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.title").c_str()) {}
@@ -59,13 +60,20 @@ void editor::render::modals::CreateProjectModal::onRender() {
     ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.field.projectroute").c_str(),
                      _fullRoute, IM_ARRAYSIZE(_fullRoute), ImGuiInputTextFlags_EnterReturnsTrue);
 
+    if(io::ProjectManager::GetInstance().getProject(_fullRoute) != nullptr) _sameName = true;
+    else _sameName = false;
+
+    if(_sameName) {
+        ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.sameprojectroute").c_str());
+    }
+
     ImGui::Spacing();
     ImGui::InputInt2(io::LocalizationManager::GetInstance().getString("window.welcomewindow.popup.createproject.field.tilesetdim").c_str(), _dimensions);
     _dimensions[0] = ImClamp(_dimensions[0], 16, 256);
     _dimensions[1] = ImClamp(_dimensions[1], 16, 256);
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 30);
-    ImGui::BeginDisabled(std::string(_fullRoute) == "");
+    ImGui::BeginDisabled(std::string(_routeBuffer) == "" || _sameName);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.createproject").c_str(), ImVec2(120, 0))) {
         _projectCreated = new Project(std::string(_nameBuffer), std::string(_fullRoute), _dimensions);
         ImGui::CloseCurrentPopup();

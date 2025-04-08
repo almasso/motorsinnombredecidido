@@ -33,6 +33,8 @@ namespace editor::render::modals {
 
         int _dimensions[2];
 
+        bool _sameName = false;
+
         void onRender() override;
 
         void beforeRender() override;

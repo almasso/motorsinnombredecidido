@@ -96,6 +96,8 @@ void editor::render::tabs::MapEditor::drawGrid() {
     {
         float scrollX = ImGui::GetScrollX();
         float scrollY = ImGui::GetScrollY();
+        float mouseX = ImGui::GetMousePos().x;
+        float mouseY = ImGui::GetMousePos().y;
 
         bool isDragging = ImGui::IsMouseDown(ImGuiMouseButton_Left);
 
@@ -113,13 +115,15 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
                 ImGui::SetCursorScreenPos(tilePos);
                 if (ImGui::InvisibleButton(buttonID.c_str(), ImVec2(scaledSize, scaledSize))) {
-                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr) {
+                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
                     }
                 }
 
-                if(isDragging && ImGui::IsItemHovered()) {
-                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr) {
+                bool hovered = mouseX >= tilePos.x && mouseX < tileEnd.x && mouseY >= tilePos.y && mouseY < tileEnd.y;
+
+                if(isDragging && hovered) {
+                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
                     }
                 }

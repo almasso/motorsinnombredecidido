@@ -31,7 +31,12 @@ namespace editor::io {
 
         template <std::convertible_to<std::string> T>
         Project* addProject(T&& route) {
-            return _addProject(std::forward<std::string>(route));
+            return _addProject(std::forward<T>(route));
+        }
+
+        template <std::convertible_to<std::string> T>
+        Project* getProject(T&& route) {
+            return _getProject(std::forward<T>(route));
         }
 
         void addProject(editor::Project* project);
@@ -61,6 +66,8 @@ namespace editor::io {
         void loadProjects();
 
         Project* _addProject(const std::string& route);
+
+        Project* _getProject(const std::string& route);
 
         void saveProjects() const;
 

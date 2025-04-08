@@ -67,5 +67,6 @@ return {
     ["error.assetlocationnotvalid"] = "File route is not valid. File must be located at [PROJECT_ROUTE]/assets/",
     ["error.sametilesetname"] = "A tileset with this name already exists",
     ["error.samemapname"] = "A map with this name already exists",
+    ["error.sameprojectroute"] = "A project in this route with this name already exists",
     ["error.missingstring"] = "Text string was not found"
 }

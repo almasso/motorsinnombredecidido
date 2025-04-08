@@ -51,7 +51,7 @@ void editor::io::ProjectManager::loadProjects() {
                 if(!projectAlreadyIncluded(route)) {
                     Project* nP = new Project(route);
                     if(!nP->isFound()) nP->setName(provName);
-                    nP->initResources();
+                    if(nP->isFound()) nP->initResources();
                     _projects.push_back(nP);
                 }
             }
@@ -104,10 +104,17 @@ editor::Project* editor::io::ProjectManager::_addProject(const std::string &rout
     return proj;
 }
 
+editor::Project *editor::io::ProjectManager::_getProject(const std::string& route) {
+    for(auto project : _projects) {
+        if(project->getPath().string() == std::filesystem::path(route).string()) return project;
+    }
+    return nullptr;
+}
+
 void editor::io::ProjectManager::addProject(editor::Project *project) {
     if(!projectAlreadyIncluded(project->getPath().string())) {
-        project->initResources();
         _projects.push_back(project);
+        project->initResources();
     }
     saveProjects();
 }

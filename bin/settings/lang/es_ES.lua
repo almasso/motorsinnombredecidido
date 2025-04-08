@@ -67,5 +67,6 @@ return {
 	["error.assetlocationnotvalid"] = "La ruta del archivo no es válida. El archivo debe estar situado en [RUTA_DEL_PROYECTO]/assets/",
 	["error.sametilesetname"] = "Ya existe un tileset con este nombre",
 	["error.samemapname"] = "Ya existe un mapa con este nombre",
+	["error.sameprojectroute"] = "Ya existe un proyecto en esta ruta con este nombre",
 	["error.missingstring"] = "No se ha encontrado la cadena de texto"
 }
