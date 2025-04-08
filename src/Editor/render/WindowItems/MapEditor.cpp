@@ -91,7 +91,6 @@ void editor::render::tabs::MapEditor::drawGrid() {
     ImVec2 cursorStart = ImGui::GetCursorScreenPos();
     ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-    ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 60);
     ImGui::SetNextWindowContentSize(ImVec2(mapWidth * scaledSize, mapHeight * scaledSize));
     ImGui::BeginChild("##mapGrid", ImVec2(RenderManager::GetInstance().getWidth()/2,0), 0, ImGuiWindowFlags_HorizontalScrollbar);
     {
@@ -112,7 +111,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 if(tileEnd.x > 3 * RenderManager::GetInstance().getWidth()/4) continue;
 
                 std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
-                ImGui::SetCursorPos(tilePos);
+                ImGui::SetCursorScreenPos(tilePos);
                 if (ImGui::InvisibleButton(buttonID.c_str(), ImVec2(scaledSize, scaledSize))) {
                     if(_project->totalTilesets() > 0 && _selectedTileset != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
@@ -136,30 +135,36 @@ void editor::render::tabs::MapEditor::drawGrid() {
 void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap, int mapWidth, int i, int j, ImVec2 tilePos, ImVec2 tileEnd, ImDrawList* drawList) {
     switch(_selectedGridMode) {
         case GridDrawingMode::DRAW_SELECTED_LAYER_ONLY: {
-            if(currentMap->getTiles()[_selectedLayer][i + mapWidth * j] != nullptr)
-                drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j]->texture, tilePos, tileEnd);
+            resources::Tile* tile = currentMap->getTiles()[_selectedLayer][i + mapWidth * j];
+            if(tile != nullptr)
+                drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
         } break;
         case GridDrawingMode::DRAW_SELECTED_LAYER_BELOW_TRANSPARENT: {
             for(int x = currentMap->getLayers() - 1; x > _selectedLayer; --x) {
-                if(currentMap->getTiles()[x][i + mapWidth * j] != nullptr)
-                    drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j]->texture, tilePos, tileEnd);
+                resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
+                if(tile != nullptr)
+                    drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
             }
-            drawList->AddRectFilled(ImVec2(0,0), ImVec2(1,1), IM_COL32(73, 61, 67, 100));
-            if(currentMap->getTiles()[_selectedLayer][i + mapWidth * j] != nullptr)
-                drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j]->texture, tilePos, tileEnd);
+            drawList->AddRectFilled(tilePos, tileEnd, IM_COL32(0, 0, 0, 100));
+            resources::Tile* tile = currentMap->getTiles()[_selectedLayer][i + mapWidth * j];
+            if(tile != nullptr)
+                drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
         } break;
         case GridDrawingMode::DRAW_SELECTED_LAYER_BELOW_OPAQUE: {
             for(int x = currentMap->getLayers() - 1; x > _selectedLayer; --x) {
-                if(currentMap->getTiles()[x][i + mapWidth * j] != nullptr)
-                    drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j]->texture, tilePos, tileEnd);
+                resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
+                if(tile != nullptr)
+                    drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
             }
-            if(currentMap->getTiles()[_selectedLayer][i + mapWidth * j] != nullptr)
-                drawList->AddImage(currentMap->getTiles()[_selectedLayer][i + mapWidth * j]->texture, tilePos, tileEnd);
+            resources::Tile* tile = currentMap->getTiles()[_selectedLayer][i + mapWidth * j];
+            if(tile != nullptr)
+                drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
         } break;
         case GridDrawingMode::DRAW_ALL: {
             for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
-                if(currentMap->getTiles()[x][i + mapWidth * j] != nullptr)
-                    drawList->AddImage(currentMap->getTiles()[x][i + mapWidth * j]->texture, tilePos, tileEnd);
+                resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
+                if(tile != nullptr)
+                    drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
             }
         } break;
     }
