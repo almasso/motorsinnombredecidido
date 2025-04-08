@@ -30,6 +30,8 @@ editor::resources::Map::Map(Project* project) :
     EditorResource("map"),
     _mapWidth(0),
     _mapHeight(0),
+    _mapX(0),
+    _mapY(0),
     _layers(0),
     _project(project){
 }
@@ -338,8 +340,10 @@ bool editor::resources::Map::readTiles(sol::table const& tiles) {
                 return false;
             sol::table tileTable = tile.as<sol::table>();
 
-            if (tileTable.empty())
+            if (tileTable.empty()) {
+                ++tileIt;
                 continue;
+            }
 
             auto tileset = tileTable.get_or<std::string>(tilesetKey, "");
             if (tileset.empty())
