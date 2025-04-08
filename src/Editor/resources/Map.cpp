@@ -238,7 +238,7 @@ bool editor::resources::Map::writeObjects(sol::table& objects) {
         sol::table objectTable;
         if (!object->write(objectTable))
             return false;
-        objectTable.add(objectTable);
+        objects.add(objectTable);
     }
     return true;
 }
