@@ -81,6 +81,8 @@ namespace editor {
 
         int totalMaps() const;
 
+        void saveEverything();
+
         const std::unordered_map<std::string, editor::resources::Map*>& getMaps() const;
 
         template <std::convertible_to<std::string> T>

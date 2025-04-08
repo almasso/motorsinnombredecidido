@@ -56,6 +56,7 @@ namespace editor::render::tabs {
         int _selectedTile = -1;
         editor::resources::Map* _selectedMap = nullptr;
         bool _isGridShown = true;
+        bool _somethingModified = false;
 
         void beforeRender() override;
 

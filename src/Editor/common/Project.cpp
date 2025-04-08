@@ -13,17 +13,6 @@
 #include "resources/Map.h"
 
 void editor::Project::initResources() {
-    std::filesystem::path mapsPath = (_projectPath / "projectfiles" / "maps");
-    resources::Map::SetMapsDirectory(mapsPath);
-    for (auto const& file : std::filesystem::directory_iterator(mapsPath)) {
-        auto map = new resources::Map(this);
-        auto name = file.path().stem().string();
-        if (map->readFromLua(name))
-            _maps.insert({name, map});
-        else
-            delete map;
-    }
-
     std::filesystem::path tilesetsPath = (_projectPath / "projectfiles" / "tilesets");
     resources::Tileset::SetTilesetsDirectory(tilesetsPath);
     for (auto const& file : std::filesystem::directory_iterator(tilesetsPath)) {
@@ -33,6 +22,17 @@ void editor::Project::initResources() {
             _tilesets.insert({name, tileset});
         else
             delete tileset;
+    }
+
+    std::filesystem::path mapsPath = (_projectPath / "projectfiles" / "maps");
+    resources::Map::SetMapsDirectory(mapsPath);
+    for (auto const& file : std::filesystem::directory_iterator(mapsPath)) {
+        auto map = new resources::Map(this);
+        auto name = file.path().stem().string();
+        if (map->readFromLua(name))
+            _maps.insert({name, map});
+        else
+            delete map;
     }
 }
 
@@ -174,4 +174,9 @@ const std::unordered_map<std::string, editor::resources::Tileset*>& editor::Proj
 
 std::filesystem::path editor::Project::getAssetsPath() const {
     return _projectPath / "assets";
+}
+
+void editor::Project::saveEverything() {
+    updateLastModified();
+    saveProject();
 }

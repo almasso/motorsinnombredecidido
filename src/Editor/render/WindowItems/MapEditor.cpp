@@ -64,7 +64,7 @@ editor::render::tabs::MapEditor::~MapEditor() {
 
 
 void editor::render::tabs::MapEditor::beforeRender() {
-
+    _itemFlags = _somethingModified ? ImGuiTabItemFlags_UnsavedDocument : 0;
 }
 
 void editor::render::tabs::MapEditor::onRender() {
@@ -117,6 +117,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 if (ImGui::InvisibleButton(buttonID.c_str(), ImVec2(scaledSize, scaledSize))) {
                     if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
+                        _somethingModified = true;
                     }
                 }
 
@@ -125,12 +126,18 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 if(isDragging && hovered) {
                     if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
+                        _somethingModified = true;
                     }
                 }
 
                 if(_selectedMap != nullptr) drawTileInGrid(_selectedMap, mapWidth, i, j, tilePos, tileEnd, drawList);
                 if (_isGridShown) drawList->AddRect(tilePos, tileEnd, IM_COL32(255, 255, 255, 50));
             }
+        }
+
+        if(_somethingModified && ImGui::IsKeyDown(ImGuiMod_Ctrl) && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
+            _somethingModified = false;
+            _project->saveEverything();
         }
     }
     ImGui::EndChild();
@@ -261,6 +268,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
             }
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createlayer").c_str())) {
                 _selectedMap->addLayer();
+                _somethingModified = true;
             }
             ImGui::EndCombo();
         }
@@ -274,6 +282,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
         if(_createdMap->isInitialized()) {
             _project->addMap(_createdMap);
             _createdMap = nullptr;
+            _somethingModified = true;
         }
         else {
             delete _createdMap;
@@ -324,6 +333,7 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
         if(_createdTileset->isInitialized()) {
             _project->addTileset(_createdTileset);
             _createdTileset = nullptr;
+            _somethingModified = true;
         }
         else {
             delete _createdTileset;
