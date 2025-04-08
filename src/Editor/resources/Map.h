@@ -11,6 +11,7 @@
 #include <filesystem>
 #include <unordered_map>
 #include <sol/forward.hpp>
+#include <Utils/Vector2.h>
 
 namespace editor {
     class Project;
@@ -42,6 +43,14 @@ namespace editor::resources {
 
         int getMapHeight() const;
 
+        int getMapX() const;
+
+        int getMapY() const;
+
+        void setMapX(int x);
+
+        void setMapY(int y);
+
         int getLayers() const;
 
         void addLayer();
@@ -59,6 +68,8 @@ namespace editor::resources {
 
         int _mapWidth;
         int _mapHeight;
+        int _mapX;
+        int _mapY;
         int _layers;
 
         bool _init = false;
@@ -69,10 +80,12 @@ namespace editor::resources {
 
         Project* _project;
 
-
         void writeTiles(sol::table& tiles);
         void writeCollisions(sol::table& collisions);
         bool writeObjects(sol::table& objects);
+
+        void writeComponents(sol::table &components);
+        void writeChildren(sol::table &children);
 
         bool readTiles(sol::table const& tiles);
         bool readCollisions(sol::table const& collisions);

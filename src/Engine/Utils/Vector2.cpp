@@ -129,6 +129,10 @@ void Vector2::RegisterToLua(sol::state& lua) {
 	type["normalize"] = &Vector2::normalize;
 }
 
+Vector2::operator std::array<float, 2>() {
+	return {_x, _y};
+}
+
 const Vector2 Vector2::ZERO(0.0f, 0.0f);
 const Vector2 Vector2::RIGHT(1.0f, 0.0f);
 const Vector2 Vector2::LEFT(-1.0f, 0.0f);

@@ -79,7 +79,18 @@ void editor::resources::Tileset::writeToLua() {
 }
 
 void editor::resources::Tileset::writeToEngineLua() {
-
+    for (Tile* tile : _tiles) {
+        sol::table tileSprite;
+        tileSprite["texture"] = "assets/textures" + _source.lexically_relative(_project->getAssetsPath()).string();
+        sol::table rect;
+        rect["x"] = tile->rect.GetTL().x;
+        rect["y"] = tile->rect.GetTL().y;
+        rect["w"] = tile->rect.GetWidth();
+        rect["h"] = tile->rect.GetHeight();
+        tileSprite["rect"] = rect;
+        std::string path = (_project->getPath()/"build/desktop/assets/sprites"/_name/std::to_string(tile->pos)/".lua").string();
+        io::LuaManager::GetInstance().writeToFile(tileSprite, path);
+    }
 }
 
 const std::vector<editor::resources::Tile*> &editor::resources::Tileset::getTiles() const {

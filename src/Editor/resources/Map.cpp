@@ -5,13 +5,15 @@
 
 #include "Map.h"
 
+#include <map>
+#include <map>
 #include <io/LuaManager.h>
 
 #include "Object.h"
 #include "Tile.h"
 #include "common/Project.h"
 #include "Tileset.h"
-
+#include <Utils/Vector2.h>
 #define widthKey "width"
 #define heightKey "height"
 #define layersKey "layers"
@@ -168,9 +170,58 @@ void editor::resources::Map::writeToLua() {
 }
 
 void editor::resources::Map::writeToEngineLua() {
-
+    sol::table map;
+    sol::table children;
+    sol::table components;
+    writeComponents(components);
+    map["components"] = components;
+    writeChildren(children);
+    map["children"] = children;
+    io::LuaManager::GetInstance().writeToFile(map, (_project->getPath()/"build/desktop/assets/prefabs/"/_name/".lua").string());
 }
 
+void editor::resources::Map::writeComponents(sol::table &components) {
+    Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
+    sol::table transform;
+    transform["position"] = Vector2(_mapX, _mapY) * dimensions;
+    components["Transform"] = transform;
+    sol::table collider;
+    collider["size"] = Vector2(_mapWidth, _mapHeight) * dimensions;
+    components["Collider"] = collider;
+    sol::table mapComponent;
+    mapComponent["adjacentMaps"] = {""};
+    components["MapComponent"] = mapComponent;
+}
+
+void editor::resources::Map::writeChildren(sol::table &children) {
+    Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
+    Vector2 center = Vector2(_mapWidth / 2, _mapHeight / 2);
+    std::unordered_set<int> collisions;
+    for(int i = 0; i < _collisions.size(); ++i) {
+        if (_collisions[i]) collisions.insert(i);
+    }
+    for (int i = 0; i < _layers; i++) {
+        for (int j = 0; j < _mapWidth; j++) {
+            for (int k = 0; k < _mapHeight; k++) {
+                Tile* tile = _tiles[i][k * _mapWidth + j];
+                if (tile != nullptr || (collisions.contains(k * _mapWidth + j) && i == _layers-1)) {
+                    sol::table child;
+                    sol::table components;
+                    components["Transform"] = auto {"position",(Vector2(j, k) - center) * dimensions};
+                    if (tile != nullptr) {
+                        components["SpriteRenderer"] = auto {"sprite",tile->tileset.c_str() + tile->pos};
+                    }
+                    if (auto finder = collisions.find(k * _mapWidth + j); finder != collisions.end()) {
+                        components["MovementObstacle"] = {0};
+                        collisions.erase(finder);
+                    }
+                    child["components"] = components;
+                    children["tile"+i+j+k] = child;
+                }
+            }
+        }
+    }
+}
 
 std::vector<std::vector<editor::resources::Tile*>> &editor::resources::Map::getTiles() {
     return _tiles;
@@ -190,6 +241,22 @@ int editor::resources::Map::getMapWidth() const {
 
 int editor::resources::Map::getMapHeight() const {
     return _mapHeight;
+}
+
+int editor::resources::Map::getMapX() const {
+    return _mapX;
+}
+
+int editor::resources::Map::getMapY() const {
+    return _mapY;
+}
+
+void editor::resources::Map::setMapX(int x) {
+    _mapX = x;
+}
+
+void editor::resources::Map::setMapY(int y) {
+    _mapY = y;
 }
 
 int editor::resources::Map::getLayers() const {

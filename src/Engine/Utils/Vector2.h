@@ -270,6 +270,8 @@ public:
 
 	static void RegisterToLua(sol::state& lua);
 
+	operator std::array<float, 2>();
+
 };
 
 template <>
