@@ -1,33 +1,54 @@
 \chapter{Estado de la cuestión}
 \label{cap:estadoDeLaCuestion}
 
-En el estado de la cuestión es donde aparecen gran parte de las referencias bibliográficas del trabajo. Una de las formas más cómodas de gestionar la bibliografía en {\LaTeX} es utilizando \textbf{bibtex}. Las entradas bibliográficas deben estar en un fichero con extensión \textit{.bib} (con esta plantilla se proporciona el fichero biblio.bib, donde están las entradas referenciadas más abajo). Cada entrada bibliográfica tiene una clave que permite referenciarla desde cualquier parte del texto con los siguiente comandos:
-
-\begin{itemize}
-\item Referencia bibliografica con cite: \cite{ldesc2e}
-\item Referencia bibliográfica con citep: \citep{notsoshort}
-\item Referencia bibliográfica con citet: \citet{latexAPrimer}
-\end{itemize}
-
-Es posible citar más de una fuente, como por ejemplo \citep{latexCompanion,LaTeXLamport,texKnuth}
-
-Después, \LaTeX se ocupa de rellenar la sección de bibliografía con las entradas \textbf{que hayan sido citadas} (es decir, no con todas las entradas que hay en el .bib, sino sólo con aquellas que se hayan citado en alguna parte del texto).
-
-Bibtex es un programa separado de latex, pdflatex o cualquier otra cosa que se use para compilar los .tex, de manera que para que se rellene correctamente la sección de bibliografía es necesario compilar primero el trabajo (a veces es necesario compilarlo dos veces), compilar después con bibtex, y volver a compilar otra vez el trabajo (de nuevo, puede ser necesario compilarlo dos veces).
+\begin{resumen}
+En este capítulo vamos a hablar sobre los videojuegos de rol, introducir un poco su historia, hablar sobre el desarrollo de videojuegos, qué es un motor, para qué sirve, qué lo compone, qué es un editor, para qué sirve, y cuáles son los editores especializados en el desarrollo de videojuegos de rol.
+\end{resumen}
 
 \section{Sobre los videojuegos de rol}
-Los videojuegos son \textit{juegos} que se \textit{juegan} gracias a un \textit{aparato audiovisual} y que pueden estar basados en una \textit{historia} \citep{EspositoVJ}. Esposito define muy bien qué es el \textit{juego}, qué es \textit{jugar}, qué es el \textit{aparato audiovisual} y qué es la \textit{historia}. De esta definición nos interesa la parte de \textit{juego}, ya que es la que más vinculación tiene con el rol.
+Para poder definir qué es un videojuego de rol necesitaremos primero entender \textit{qué es un videojuego} y \textit{qué es un juego de rol}.
 
 \medskip
 
-Un juego de rol son todos aquellos juegos que permiten a un determinado número de jugadores asumir los roles de personajes imaginarios y operar con cierto grado de libertad en un entorno imaginario (Lortz (1979) citado en \cite{FineRPG}).
+Definir qué es un videojuego es una tarea bastante complicada, sobre todo teniendo en cuenta los matices con los que podemos definirlo (académicos, de diseño, experimentales o tecnológicos), por lo que la definición más certera nos la da \cite{EspositoVJ}, que lo define como \guillemotleft un \textit{juego} que se \textit{juega} gracias a un \textit{aparato audiovisual}, y que puede estar basado en una \textit{historia}\guillemotright. El propio Esposito se encarga de definir qué es el \textit{juego}, qué es \textit{jugar}, qué es el \textit{aparato audiovisual} y qué es la \textit{historia}. La diferencia fundamental de los juegos tradicionales frente a los videojuegos es la existencia de ese \textit{aparato audiovisual} (videoconsolas, ordenador, dispositivos móviles) que pueda ofrecer una interacción \guillemotleft humano-máquina\guillemotright, ya que es esta interacción recíproca la que hace que los videojuegos sean videojuegos y no otro tipo de entretenimiento multimedia.
 
 \medskip
 
-Por tanto, atendiendo a ambas definiciones, definimos un videojuego de rol (\acl{RPG}) como todo aquel programa \textit{software}, con carácter lúdico, que permita a sus usuarios encarnar el rol de uno o varios personajes y, mediante estos, poder interactuar con su entorno o mundo con cierta libertad para conseguir un determinado objetivo.
+Los juegos de rol, al haber nacido desde juegos de mesa tradicionales, han tenido el suficiente tiempo como para poder desarrollarse y poder ajustarse a una definición mucho más precisa. Atendiendo a la definición de Lortz (1979, citado en \cite{FineRPG}), podemos definir los juegos de rol como \guillemotleft todos aquellos juegos que permiten a un determinado número de jugadores asumir los roles de personajes imaginarios y operar con cierto grado de libertad en un entorno imaginario\guillemotright.
+
+\medskip
+
+Ahora que ya sabemos \textit{qué es un videojuego} y \textit{qué es un juego de rol}, podemos definir un videojuego de rol (RPG, \textit{role-playing game}) como todo aquel programa \textit{software}, con carácter lúdico, que permita a sus usuarios encarnar el rol de uno o varios personajes y, mediante estos, poder interactuar con su entorno o mundo con cierta libertad para conseguir un determinado objetivo.
+
+\smallskip
+
+Ahora bien, si pensamos en los videojuegos que se venden cada día en las tiendas, la gran mayoría podrían entrar dentro de la definición anterior sin necesariamente tener que ser un RPG, ya que prácticamente en todos se encarna el rol de un personaje, casi todos permiten una interacción con el entorno y todos tienen un objetivo final. Esto nos lleva a plantearnos si las clasificaciones de videojuegos según su género son demasiado limitadas para los videojuegos actuales.
+
+\subsection{El problema de los géneros de videojuegos}
+Antes de adentrarnos en los RPG, veremos por qué las distintas clasificaciones de videojuegos atendiendo a características similares tienen bastantes lagunas a la hora de categorizar las entregas más modernas.
+
+\smallskip
+
+Los primeros intentos de clasificar los videojuegos mediante características comunes surgen en la década de los 80, principalmente por diseñadores y desarrolladores, como \cite{Crawford84}, quien los categorizó entre aquellos que \textit{requieren de habilidades previas por parte del usuario} (como juegos de combate o de carreras), y \textit{juegos de estrategia} (que engloba al resto de juegos, como los de aventuras, los educativos, y los RPG). Estas categorías son \textit{funcionales}, se centran en las mecánicas de juego y enfatizan cómo los jugadores interactúan con el sistema.
+
+\smallskip
+
+En la actualidad, los distintos géneros vienen dados por una mezcla de mecánicas, temas, elementos narrativos, estética, lugar de origen y plataforma, y están gravemente influenciados por las tendencias del mercado, discursos mediáticos y la propia percepción de los jugadores. También, muchas veces se quiere categorizar a los videojuegos con etiquetas propias de otras modalidades, como el cine o la literatura, que son incapaces de capturar los aspectos únicos que definen a un videojuego.
+
+\smallskip
+
+\cite{FailGeneros} argumentan que las categorías existentes a día de hoy se quedan cortas para satisfacer los propósitos del género en videojuegos (identidad, agrupación, \textit{marketing} y educación), ya que dada la gran diversidad de juegos que tenemos ahora, resulta casi imposible poder agrupar la naturaleza multifacética de estos en etiquetas tan \guillemotleft tradicionales\guillemotright.
+
+\smallskip
+
+Hay muchas formas de evitar el problema, y quizá la mejor solución sea dejar de considerar a los géneros como \guillemotleft cajones estancos\guillemotright{} en los que un videojuego no pueda pertenecer a dos de estas categorías simultáneamente, sino que sean más bien un espectro, sin fronteras establecidas, en el que un videojuego pueda caer entre dos categorías distintas.
 
 \subsection{Historia de los videojuegos de rol}
+Es a mediados de la década de los 70 cuando podemos hablar del nacimiento de los videojuegos de rol. Dadas las limitaciones tecnológicas de la época, los RPG primitivos no eran más que simples adaptaciones de juegos de mesa ya existentes por entonces, como \textit{dnd} (1975), una adaptación de \textit{Dungeons \& Dragons} (1974), quizás el juego de rol más famoso, que mezcla mecánicas de combate con temas fantásticos. Estos primeros juegos contaban con interfaces basadas en texto, y normalmente estaban programados en los grandes ordenadores que se encontraban en campus universitarios como los de Harvard o la Universidad de Illinois.
 
+\smallskip
+
+Es en la década de los 80, y, gracias a los avances tecnológicos, que los RPG comienzan a separase cada vez más de ser meras adaptaciones de juegos ya existentes a desarrollar sus propias historias. A partir de esta época encontramos dos corrientes bastante diferenciadas de RPG, los \guillemotleft occidentales\guillemotright{} (WRPG, \textit{Western role-playing game}), con más libertad de decisión para los jugadores tanto en personalización como en la historia, y con temáticas realistas; y los \guillemotleft orientales\guillemotright{} o \guillemotleft japoneses\guillemotright{} (JRPG, \textit{Japanese role-playing game}, por ser Japón el país que más videojuegos de este tipo produce), centrados en una narrativa lineal con temáticas fantásticas y mecánicas basadas por turnos.
 
 \section{Sobre el desarrollo de videojuegos}
 
