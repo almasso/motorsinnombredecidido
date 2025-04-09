@@ -49,9 +49,17 @@ bool editor::Project::build(const std::string &platform) {
         if (!exists(getBuildPath("") )) {
             create_directory(getBuildPath(""));
         }
+        char* filepath = SDL_GetCurrentDirectory();
+        auto path = std::filesystem::path(filepath)/"GameBinaries"/platform;
+        copy(path,getBuildPath(platform),
+             std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
+            std::filesystem::copy_options::overwrite_existing);
+        SDL_free(filepath);
         if (!exists(getBuildPath(platform) )) {
             create_directory(getBuildPath(platform));
         }
+        if (!exists(getBuildPath(platform)/"data/"))
+            create_directory(getBuildPath(platform)/"data/");
         copy(getAssetsPath(),getBuildPath(platform)/"data"/"assets",
              std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
              std::filesystem::copy_options::overwrite_existing);
@@ -66,10 +74,6 @@ bool editor::Project::build(const std::string &platform) {
         buildSettings(platform);
         buildAudioSettings(platform);
         buildOverworldScene(platform);
-        char* filepath = SDL_GetCurrentDirectory();
-        copy(std::filesystem::path(filepath)/"GameBinaries"/platform,getBuildPath(platform),
-            std::filesystem::copy_options::overwrite_existing);
-        SDL_free(filepath);
     } catch (std::filesystem::filesystem_error& e) {
         EditorError::showError_impl(e.what(), "Project",74);
         return false;
@@ -251,8 +255,8 @@ void editor::Project::saveProject() {
         if(!std::filesystem::exists(_projectPath / "assets/")) std::filesystem::create_directories(_projectPath / "assets");
         if(!std::filesystem::exists(_projectPath / "projectfiles/")) std::filesystem::create_directories(_projectPath / "projectfiles");
         if(!std::filesystem::exists(_projectPath / "bin/")) std::filesystem::create_directories(_projectPath / "bin");
-        if(!std::filesystem::exists(_projectPath / "projectfiles/maps/")) std::filesystem::create_directories(_projectPath / "projectfiles/maps");
-        if(!std::filesystem::exists(_projectPath / "projectfiles/tilesets/")) std::filesystem::create_directories(_projectPath / "projectfiles/tilesets");
+        if(!std::filesystem::exists(_projectPath / "projectfiles"/"maps/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"maps");
+        if(!std::filesystem::exists(_projectPath / "projectfiles"/"tilesets/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"tilesets");
 
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
         for (auto& [key, tileset] : _tilesets)

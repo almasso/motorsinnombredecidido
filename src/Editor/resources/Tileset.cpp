@@ -79,10 +79,11 @@ void editor::resources::Tileset::writeToLua() {
 }
 
 void editor::resources::Tileset::writeToEngineLua(const std::string &platform) {
+    auto& lua = io::LuaManager::GetInstance().getState();
     for (Tile* tile : _tiles) {
-        sol::table tileSprite;
-        tileSprite["texture"] = "assets/imported" + _source.lexically_relative(_project->getAssetsPath()).string();
-        sol::table rect;
+        sol::table tileSprite = lua.create_table();
+        tileSprite["texture"] = (std::filesystem::path("data") / "assets" / _source.lexically_relative(_project->getAssetsPath())).string();
+        sol::table rect = lua.create_table();
         rect["x"] = tile->rect.GetTL().x;
         rect["y"] = tile->rect.GetTL().y;
         rect["w"] = tile->rect.GetWidth();
