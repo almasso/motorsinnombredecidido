@@ -149,7 +149,7 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     sol::table camera = lua.create_table();
     sol::table cameraComponent = lua.create_table();
     components = lua.create_table();
-    cameraComponent["size"] = {1920,1080};
+    cameraComponent["size"] = sol::as_table<std::array<int,2>>({1920,1080});
     components["Camera"] = cameraComponent;
     camera["components"] = components;
     camera["handler"] = "Camera";

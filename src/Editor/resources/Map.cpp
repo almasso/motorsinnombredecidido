@@ -188,13 +188,13 @@ void editor::resources::Map::writeComponents(sol::table &components) {
     auto& lua = io::LuaManager::GetInstance().getState();
     Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
     sol::table transform = lua.create_table();
-    transform["position"] = Vector2(_mapX + _mapWidth/2.0f, _mapY + _mapHeight/2.0f) * dimensions;
+    transform["position"] = sol::as_table<std::array<float,2>>(Vector2(_mapX + _mapWidth/2.0f, _mapY + _mapHeight/2.0f) * dimensions);
     components["Transform"] = transform;
     sol::table collider = lua.create_table();
-    collider["size"] = Vector2(_mapWidth, _mapHeight) * dimensions;
+    collider["size"] = sol::as_table<std::array<float,2>>(Vector2(_mapWidth, _mapHeight) * dimensions);
     components["Collider"] = collider;
     sol::table mapComponent = lua.create_table();
-    mapComponent["adjacentMaps"] = _adjacent;
+    mapComponent["adjacentMaps"] = sol::as_table(_adjacent);
     components["MapComponent"] = mapComponent;
 }
 
@@ -214,7 +214,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                     sol::table child = lua.create_table();
                     sol::table components = lua.create_table();
                     sol::table transform = lua.create_table();
-                    transform["position"] = (Vector2(j, k) - center) * dimensions;
+                    transform["position"] = sol::as_table<std::array<float,2>>((Vector2(j, k) - center) * dimensions);
                     components["Transform"] = transform;
                     if (tile != nullptr) {
                         sol::table sprite = lua.create_table();
@@ -227,7 +227,8 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                         collisions.erase(finder);
                     }
                     child["components"] = components;
-                    children["tile"+i+j+k] = child;
+                    std::string childKey = "tile"+i+j+k;
+                    children[childKey] = child;
                 }
             }
         }
