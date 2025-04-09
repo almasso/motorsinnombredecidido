@@ -16,6 +16,8 @@
 #include <Gameplay/Movement/PlayerInput.h>
 #include <Gameplay/Dialog/TextBox.h>
 #include <Gameplay/Events/LocalVariables.h>
+#include <Gameplay/Overworld/OverworldManager.h>
+#include <Gameplay/Overworld/MapComponent.h>
 #include <Utils/Error.h>
 
 ComponentFactory::ComponentFactory() :
@@ -36,6 +38,8 @@ ComponentFactory::ComponentFactory() :
     registerComponent<MovementComponent>();
     registerComponent<LocalVariables>();
     registerComponent<TextBox>();
+    registerComponent<OverworldManager>();
+    registerComponent<MapComponent>();
 }
 
 Component* ComponentFactory::createComponent(ComponentData const* data) {

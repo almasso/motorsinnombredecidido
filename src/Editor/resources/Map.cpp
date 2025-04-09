@@ -218,7 +218,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                     components["Transform"] = transform;
                     if (tile != nullptr) {
                         sol::table sprite = lua.create_table();
-                        sprite["sprite"] = tile->tileset.c_str() + tile->pos;
+                        sprite["sprite"] = (std::filesystem::path("data") / "sprites"/(tile->tileset+std::to_string(tile->pos)+".lua")).string();
                         sprite["layer"] = i;
                         components["SpriteRenderer"] = sprite;
                     }
@@ -227,7 +227,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                         collisions.erase(finder);
                     }
                     child["components"] = components;
-                    std::string childKey = "tile"+i+j+k;
+                    std::string childKey = "tile"+std::to_string(i)+std::to_string(j)+std::to_string(k);
                     children[childKey] = child;
                 }
             }

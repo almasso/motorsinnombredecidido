@@ -68,10 +68,7 @@ Scene* SceneManager::createScene(const SceneBlueprint* blueprint)
 		}
 		scene->addEntity(entity);
 	}
-	if (!scene->init()) {
-		delete scene;
-		return nullptr;
-	}
+
 	return scene;
 }
 
@@ -142,6 +139,11 @@ Scene* SceneManager::addScene(const std::string& handler)
 	Scene* newScene = createScene(blueprint);
 	if (newScene) {
 		_scenes.push_back(newScene);
+		if (!newScene->init()) {
+			delete newScene;
+			_scenes.pop_back();
+			return nullptr;
+		}
 	}
 	return newScene;
 }

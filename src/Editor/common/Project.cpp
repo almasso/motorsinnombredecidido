@@ -49,7 +49,7 @@ bool editor::Project::build(const std::string &platform) {
         if (!exists(getBuildPath("") )) {
             create_directory(getBuildPath(""));
         }
-        char* filepath = SDL_GetCurrentDirectory();
+        char* filepath = GetCurrentDir;
         auto path = std::filesystem::path(filepath)/"GameBinaries"/platform;
         copy(path,getBuildPath(platform),
              std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
@@ -84,6 +84,7 @@ bool editor::Project::build(const std::string &platform) {
 std::unordered_map<std::string, std::vector<std::string>> editor::Project::getAdjacentMaps() {
     std::unordered_map<std::string, std::vector<std::string>> adjacent;
     for (auto it1 = _maps.begin(); it1 != _maps.end(); ++it1) {
+        adjacent[it1->first].push_back(it1->first);
         for (auto it2 = std::next(it1); it2 != _maps.end(); ++it2) {
             if (it1->second->isAdjacent(it2->second)) {
                 adjacent[it1->first].push_back(it2->first);
@@ -142,20 +143,23 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     movement = lua.create_table();
     movement["speed"] = _dimensions[0] * 2.0f;
     components["MovementComponent"] = movement;
-    components["Transform"] = 0;
-    components["PlayerInput"] = 0;
+    components["Transform"] = sol::as_table<std::array<int,1>>({0});
+    components["PlayerInput"] = sol::as_table<std::array<int,1>>({0});
+    components["Collider"] = sol::as_table<std::array<int,1>>({0});
     player["components"] = components;
-    player["handler"] = components;
+    player["handler"] = "Player";
     sol::table camera = lua.create_table();
     sol::table cameraComponent = lua.create_table();
     components = lua.create_table();
     cameraComponent["size"] = sol::as_table<std::array<int,2>>({1920,1080});
     components["Camera"] = cameraComponent;
+    components["Transform"] = sol::as_table<std::array<int,1>>({0});
     camera["components"] = components;
     camera["handler"] = "Camera";
     sol::table children = lua.create_table();
     children["camera"] = camera;
-    scene["player"] = "Player";
+    player["children"] = children;
+    scene["player"] = player;
     io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
 }
 

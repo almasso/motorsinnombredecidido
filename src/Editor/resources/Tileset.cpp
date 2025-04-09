@@ -84,12 +84,14 @@ void editor::resources::Tileset::writeToEngineLua(const std::string &platform) {
         sol::table tileSprite = lua.create_table();
         tileSprite["texture"] = (std::filesystem::path("data") / "assets" / _source.lexically_relative(_project->getAssetsPath())).string();
         sol::table rect = lua.create_table();
-        rect["x"] = tile->rect.GetTL().x;
-        rect["y"] = tile->rect.GetTL().y;
-        rect["w"] = tile->rect.GetWidth();
-        rect["h"] = tile->rect.GetHeight();
+        SDL_Texture* sdlTexture = (SDL_Texture*)tile->texture;
+
+        rect["x"] = sdlTexture->w * tile->rect.Min.x;
+        rect["y"] = sdlTexture->h * tile->rect.Min.y;
+        rect["w"] = _project->getDimensions()[0];
+        rect["h"] = _project->getDimensions()[1];
         tileSprite["rect"] = rect;
-        std::string path = (_project->getBuildPath(platform)/"assets"/"sprites"/(_name+std::to_string(tile->pos)+".lua")).string();
+        std::string path = (_project->getBuildPath(platform)/ "data" / "sprites"/(_name+std::to_string(tile->pos)+".lua")).string();
         io::LuaManager::GetInstance().writeToFile(tileSprite, path);
     }
 }

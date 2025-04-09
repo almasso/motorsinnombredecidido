@@ -1,4 +1,7 @@
 #include "OverworldManager.h"
+
+#include <filesystem>
+
 #include "MapComponent.h"
 #include <Core/ComponentData.h>
 #include <Core/Entity.h>
@@ -7,7 +10,8 @@
 
 
 Entity* OverworldManager::addMap(const std::string &mapName) {
-    if (Entity* map = _game->instantiatePrefab(mapName)) {
+    std::string path = "data/prefabs/" + mapName + ".lua";
+    if (Entity* map = _game->instantiatePrefab(path)) {
         _loadedMaps.insert({mapName, map});
         return map;
     }
