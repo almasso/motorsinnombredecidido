@@ -37,6 +37,8 @@ namespace editor {
 
         bool build(const std::string &platform);
 
+        std::unordered_map<std::string, std::vector<std::string>> getAdjacentMaps();
+
         void buildSettings(const std::string &platform);
 
         void buildAudioSettings(const std::string &platform);

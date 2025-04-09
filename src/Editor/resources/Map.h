@@ -61,6 +61,9 @@ namespace editor::resources {
 
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
+        bool isAdjacent(const Map *other) const;
+        void setAdjacent(const std::vector<std::string>& adjacent);
+
     private:
         static std::filesystem::path _mapsDirectory;
 
@@ -76,6 +79,7 @@ namespace editor::resources {
 
         std::vector<std::vector<Tile*>> _tiles;
         std::vector<bool> _collisions;
+        std::vector<std::string> _adjacent;
         std::unordered_map<int, Object*> _objects;
 
         Project* _project;

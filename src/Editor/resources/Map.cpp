@@ -188,20 +188,20 @@ void editor::resources::Map::writeComponents(sol::table &components) {
     auto& lua = io::LuaManager::GetInstance().getState();
     Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
     sol::table transform = lua.create_table();
-    transform["position"] = Vector2(_mapX, _mapY) * dimensions;
+    transform["position"] = Vector2(_mapX + _mapWidth/2.0f, _mapY + _mapHeight/2.0f) * dimensions;
     components["Transform"] = transform;
     sol::table collider = lua.create_table();
     collider["size"] = Vector2(_mapWidth, _mapHeight) * dimensions;
     components["Collider"] = collider;
     sol::table mapComponent = lua.create_table();
-    mapComponent["adjacentMaps"] = {""};
+    mapComponent["adjacentMaps"] = _adjacent;
     components["MapComponent"] = mapComponent;
 }
 
 void editor::resources::Map::writeChildren(sol::table &children) {
     auto& lua = io::LuaManager::GetInstance().getState();
     Vector2 dimensions = Vector2(_project->getDimensions()[0], _project->getDimensions()[1]);
-    Vector2 center = Vector2(_mapWidth / 2, _mapHeight / 2);
+    Vector2 center = Vector2(_mapWidth/2.0f, _mapHeight/2.0f);
     std::unordered_set<int> collisions;
     for(int i = 0; i < _collisions.size(); ++i) {
         if (_collisions[i]) collisions.insert(i);
@@ -219,6 +219,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                     if (tile != nullptr) {
                         sol::table sprite = lua.create_table();
                         sprite["sprite"] = tile->tileset.c_str() + tile->pos;
+                        sprite["layer"] = i;
                         components["SpriteRenderer"] = sprite;
                     }
                     if (auto finder = collisions.find(k * _mapWidth + j); finder != collisions.end()) {
@@ -232,6 +233,33 @@ void editor::resources::Map::writeChildren(sol::table &children) {
         }
     }
 }
+
+bool editor::resources::Map::isAdjacent(const Map* other) const {
+    int aLeft   = this->_mapX;
+    int aRight  = this->_mapX + this->_mapWidth;
+    int aTop    = this->_mapY;
+    int aBottom = this->_mapY + this->_mapHeight;
+
+    int bLeft   = other->_mapX;
+    int bRight  = other->_mapX + other->_mapWidth;
+    int bTop    = other->_mapY;
+    int bBottom = other->_mapY + other->_mapHeight;
+
+    if ((aRight == bLeft || aLeft == bRight) &&
+        !(aBottom <= bTop || aTop >= bBottom)) {
+        return true;
+    }
+    if ((aBottom == bTop || aTop == bBottom) &&
+        !(aRight <= bLeft || aLeft >= bRight)) {
+        return true;
+    }
+    return false;
+}
+
+void editor::resources::Map::setAdjacent(const std::vector<std::string> &adjacent) {
+    _adjacent = adjacent;
+}
+
 
 std::vector<std::vector<editor::resources::Tile*>> &editor::resources::Map::getTiles() {
     return _tiles;
