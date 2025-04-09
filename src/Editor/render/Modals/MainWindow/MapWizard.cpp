@@ -38,7 +38,7 @@ void editor::render::modals::MapWizard::onRender() {
     ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.mapname").c_str(),
                      _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
-    if(_project->getMap(_nameBuffer) != nullptr) _sameName = true;
+    if(_project->getMap(_nameBuffer) != nullptr && !_modify) _sameName = true;
     else _sameName = false;
 
     if(_sameName) {
@@ -75,6 +75,7 @@ void editor::render::modals::MapWizard::onRender() {
     }
 }
 
-void editor::render::modals::MapWizard::setMapToModify(editor::resources::Map *map) {
+void editor::render::modals::MapWizard::setMapToModify(editor::resources::Map *map, bool modify) {
+    _modify = modify;
     _mapToModify = map;
 }

@@ -190,7 +190,6 @@ void editor::render::tabs::MapEditor::drawToolbar() {
         if(i > 0) ImGui::SameLine();
         ImVec4 bg = _selectedGridMode == i ? ImVec4(1,0,1,1) : ImVec4(0,0,0,0);
 
-
         if(ImGui::ImageButton(std::string("but" + std::to_string(i)).c_str(), _uiTextures[i], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
             _selectedGridMode = i;
         }
@@ -246,6 +245,22 @@ void editor::render::tabs::MapEditor::drawToolbar() {
                 if(ImGui::Selectable(map.first.c_str(), isSelected)) {
                     _selectedMap = map.second;
                     _selectedLayer = 0;
+                    if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+                        ImGui::OpenPopup((map.first + "mapoptions").c_str());
+                    }
+                }
+                if(ImGui::BeginPopupContextItem((map.first + "mapoptions").c_str())) {
+                    if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.editmap").c_str())) {
+                        //_mapWizard->setMapToModify(map.second, true);
+                        //_mapWizard->show();
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                    if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deletemap").c_str())) {
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::PopStyleColor();
+                    ImGui::EndPopup();
                 }
             }
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
@@ -302,6 +317,22 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                 bool isSelected = (_selectedTileset == tileset.second);
                 if(ImGui::Selectable(tileset.second->getName().c_str(), isSelected)) {
                     _selectedTileset = tileset.second;
+                    if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+                        ImGui::OpenPopup((tileset.second->getName() + "tilesetoptions").c_str());
+                    }
+                }
+                if(ImGui::BeginPopupContextItem((tileset.second->getName() + "tilesetoptions").c_str())) {
+                    if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edittileset").c_str())) {
+                        //_tilesetWizard->setTilesetToModify(tileset.second);
+                        //_tilesetWizard->show();
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                    if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deletetileset").c_str())) {
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::PopStyleColor();
+                    ImGui::EndPopup();
                 }
             }
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createtileset").c_str())) {

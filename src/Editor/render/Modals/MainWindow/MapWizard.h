@@ -21,7 +21,7 @@ namespace editor::render::modals {
     public:
         MapWizard(editor::Project* project);
 
-        void setMapToModify(editor::resources::Map* map);
+        void setMapToModify(editor::resources::Map* map, bool modify = false);
 
         ~MapWizard();
     private:
@@ -30,6 +30,8 @@ namespace editor::render::modals {
         editor::resources::Map* _mapToModify = nullptr;
 
         bool _isGivingName = false;
+
+        bool _modify = false;
 
         bool _sameName = false;
 
