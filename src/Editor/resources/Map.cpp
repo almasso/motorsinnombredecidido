@@ -181,7 +181,7 @@ void editor::resources::Map::writeToEngineLua(const std::string &platform) {
     map["components"] = components;
     writeChildren(children);
     map["children"] = children;
-    io::LuaManager::GetInstance().writeToFile(map, (_project->getBuildPath(platform)/"data/prefabs/"/_name/".lua").string());
+    io::LuaManager::GetInstance().writeToFile(map, (_project->getBuildPath(platform)/"data"/"prefabs"/(_name+".lua")).string());
 }
 
 void editor::resources::Map::writeComponents(sol::table &components) {

@@ -52,7 +52,7 @@ bool editor::Project::build(const std::string &platform) {
         if (!exists(getBuildPath(platform) )) {
             create_directory(getBuildPath(platform));
         }
-        copy(getAssetsPath(),getBuildPath(platform)/"data/assets",
+        copy(getAssetsPath(),getBuildPath(platform)/"data"/"assets",
              std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
              std::filesystem::copy_options::overwrite_existing);
         auto adjacent = getAdjacentMaps();
@@ -98,7 +98,7 @@ void editor::Project::buildSettings(const std::string &platform) {
     memory["maxSize"] = 1024*1024*1024;
     config["memory"] = memory;
     config["initScene"] = "data/scenes/overworld.scene.lua";
-    io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data/config.lua").string());
+    io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data"/"config.lua").string());
 }
 
 void editor::Project::buildAudioSettings(const std::string &platform) {
@@ -106,16 +106,16 @@ void editor::Project::buildAudioSettings(const std::string &platform) {
     sol::table master = lua.create_table();
     master["inputs"] = {"Music","SFX"};
     master["name"] = "Master";
-    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data/mixers/master.mixer.lua").string());
+    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data"/"mixers"/"master.mixer.lua").string());
     sol::table music = lua.create_table();
     music["output"] = "Master";
     music["name"] = "Music";
     music["volume"] = 0.5f;
-    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data/mixers/music.mixer.lua").string());
+    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data"/"mixers"/"music.mixer.lua").string());
     sol::table sfx = lua.create_table();
     sfx["output"] = "Master";
     sfx["name"] = "SFX";
-    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data/mixers/sfx.mixer.lua").string());
+    io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data"/"mixers"/"sfx.mixer.lua").string());
 }
 
 void editor::Project::buildOverworldScene(const std::string &platform) {
@@ -152,7 +152,7 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     sol::table children = lua.create_table();
     children["camera"] = camera;
     scene["player"] = "Player";
-    io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data/scenes/overworld.scene.lua").string());
+    io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
 }
 
 

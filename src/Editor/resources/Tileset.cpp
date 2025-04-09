@@ -88,7 +88,7 @@ void editor::resources::Tileset::writeToEngineLua(const std::string &platform) {
         rect["w"] = tile->rect.GetWidth();
         rect["h"] = tile->rect.GetHeight();
         tileSprite["rect"] = rect;
-        std::string path = (_project->getBuildPath(platform)/"assets/sprites"/_name/std::to_string(tile->pos)/".lua").string();
+        std::string path = (_project->getBuildPath(platform)/"assets"/"sprites"/(_name+std::to_string(tile->pos)+".lua")).string();
         io::LuaManager::GetInstance().writeToFile(tileSprite, path);
     }
 }
