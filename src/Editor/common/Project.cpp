@@ -49,6 +49,9 @@ bool editor::Project::build(const std::string &platform) {
         if (!exists(getBuildPath("") )) {
             create_directory(getBuildPath(""));
         }
+        if (exists(getBuildPath(platform))) {
+            remove_all(getBuildPath(platform));
+        }
         char* filepath = GetCurrentDir;
         auto path = std::filesystem::path(filepath)/"GameBinaries"/platform;
         copy(path,getBuildPath(platform),
