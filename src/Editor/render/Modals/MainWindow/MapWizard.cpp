@@ -38,8 +38,10 @@ void editor::render::modals::MapWizard::onRender() {
     ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.mapwizard.mapname").c_str(),
                      _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
-    if(_project->getMap(_nameBuffer) != nullptr && !_modify) _sameName = true;
+    if(_project->getMap(_nameBuffer) != nullptr) _sameName = true;
     else _sameName = false;
+
+    if(_mapToModify->getName() != "" && _mapToModify->getName() == _nameBuffer) _sameName = false;
 
     if(_sameName) {
         ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.samemapname").c_str());
@@ -58,7 +60,7 @@ void editor::render::modals::MapWizard::onRender() {
 
     ImGui::Spacing();
     ImGui::BeginDisabled(_sameName);
-    if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.addmap").c_str(), ImVec2(120, 0))) {
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.editmap" : "action.addmap").c_str(), ImVec2(120, 0))) {
         _mapToModify->init(_nameBuffer, _dimensions[0], _dimensions[1], _layers);
         ImGui::CloseCurrentPopup();
         _mapToModify = nullptr;

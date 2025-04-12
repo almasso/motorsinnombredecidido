@@ -29,6 +29,9 @@ namespace editor::resources {
         void writeToLua() final;
         void writeToEngineLua(const std::string &platform) final;
 
+        int getXTiles() const;
+        int getYTiles() const;
+
         const std::vector<Tile*>& getTiles() const;
         const std::filesystem::path& getSource() const;
         const std::string& getName() const;
@@ -49,6 +52,8 @@ namespace editor::resources {
         std::vector<Tile*> _tiles;
         int _offsetX;
         int _offsetY;
+        int _xTiles;
+        int _yTiles;
         Project* _project;
 
         void generateTileset();

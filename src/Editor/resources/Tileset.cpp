@@ -120,16 +120,16 @@ void editor::resources::Tileset::generateTileset() {
         return;
     }
     SDL_Texture* sdlTexture = (SDL_Texture*)texture;
-    int xTiles = sdlTexture->w / dimensions[0];
-    int yTiles = sdlTexture->h / dimensions[1];
-    xTiles -= (_offsetX % dimensions[0] == 0) ? 0 : 1;
-    yTiles -= (_offsetY % dimensions[1] == 0) ? 0 : 1;
+    _xTiles = sdlTexture->w / dimensions[0];
+    _yTiles = sdlTexture->h / dimensions[1];
+    _xTiles -= (_offsetX % dimensions[0] == 0) ? 0 : 1;
+    _yTiles -= (_offsetY % dimensions[1] == 0) ? 0 : 1;
     int xOffset = std::abs(_offsetX);
     int yOffset = std::abs(_offsetY);
-    for (int j = 0; j < yTiles; j++) {
-        for (int i = 0; i < xTiles; i++) {
+    for (int j = 0; j < _yTiles; j++) {
+        for (int i = 0; i < _xTiles; i++) {
             Tile* tile = new Tile();
-            tile->pos = i + j * yTiles;
+            tile->pos = i + j * _yTiles;
             tile->texture = texture;
             tile->tileset = _name;
             tile->rect = ImRect(
@@ -157,5 +157,15 @@ int editor::resources::Tileset::getOffsetY() const {
 bool editor::resources::Tileset::isInitialized() const {
     return _init;
 }
+
+int editor::resources::Tileset::getXTiles() const {
+    return _xTiles;
+}
+
+int editor::resources::Tileset::getYTiles() const {
+    return _yTiles;
+}
+
+
 
 

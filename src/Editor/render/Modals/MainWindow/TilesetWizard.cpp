@@ -90,6 +90,8 @@ void editor::render::modals::TilesetWizard::drawControls() {
     if(_project->getTileset(_nameBuffer) != nullptr) _sameName = true;
     else _sameName = false;
 
+    if(_tilesetToModify->getName() != "" && _tilesetToModify->getName() == _nameBuffer) _sameName = false;
+
     if(_sameName) {
         ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.sametilesetname").c_str());
     }
@@ -107,7 +109,7 @@ void editor::render::modals::TilesetWizard::drawControls() {
     ImGui::SetCursorPosY(ImGui::GetCursorPosX() + 460);
 
     ImGui::BeginDisabled(std::string(_routeBuffer) == "" || _sameName);
-    if (ImGui::Button(io::LocalizationManager::GetInstance().getString("action.addtileset").c_str(), ImVec2(120, 0))) {
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edittileset" : "action.addtileset").c_str(), ImVec2(120, 0))) {
         _tilesetToModify->init(_nameBuffer, _routeBuffer, _offset[0], _offset[1]);
         ImGui::CloseCurrentPopup();
         _tilesetToModify = nullptr;
@@ -155,6 +157,7 @@ void editor::render::modals::TilesetWizard::drawGrid() {
     ImGui::EndChild();
 }
 
-void editor::render::modals::TilesetWizard::setTilesetToModify(editor::resources::Tileset *tileset) {
+void editor::render::modals::TilesetWizard::setTilesetToModify(editor::resources::Tileset *tileset, bool modify) {
+    _modify = modify;
     _tilesetToModify = tileset;
 }

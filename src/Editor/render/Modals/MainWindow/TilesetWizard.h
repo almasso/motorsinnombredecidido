@@ -22,7 +22,7 @@ namespace editor::render::modals {
     public:
         TilesetWizard(Project* project);
 
-        void setTilesetToModify(editor::resources::Tileset* tileset);
+        void setTilesetToModify(editor::resources::Tileset* tileset, bool modify = false);
 
         ~TilesetWizard();
 
@@ -36,6 +36,8 @@ namespace editor::render::modals {
         int _dimensions[2];
 
         bool _isGivingName = false;
+
+        bool _modify = false;
 
         bool _sameName = false;
 

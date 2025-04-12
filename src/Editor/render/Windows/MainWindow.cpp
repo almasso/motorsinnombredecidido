@@ -42,6 +42,7 @@ void editor::render::windows::MainWindow::onRender() {
     ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 2 - 30);
     if(ImGui::Button("##BuildButton", {60, 60})) {
+        _mapEditor->save();
         _project->build("Desktop");
     }
     ImVec2 pos = ImGui::GetItemRectMin();

@@ -30,6 +30,8 @@ namespace editor::render::tabs {
     public:
         MapEditor(editor::Project* project);
 
+        void save();
+
         ~MapEditor() override;
     private:
         enum GridDrawingMode {

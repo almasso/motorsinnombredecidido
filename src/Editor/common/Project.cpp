@@ -282,6 +282,29 @@ void editor::Project::addMap(editor::resources::Map *map) {
     map->writeToLua();
 }
 
+void editor::Project::refreshMaps() {
+    for(auto it = _maps.begin(); it != _maps.end();) {
+        if(it->second->getName() != it->first) {
+            resources::Map* mptmp = it->second;
+            it = _maps.erase(it);
+            _maps[mptmp->getName()] = mptmp;
+        }
+        else ++it;
+    }
+}
+
+void editor::Project::refreshTilesets() {
+    for (auto it = _tilesets.begin(); it != _tilesets.end();) {
+        if(it->second->getName() != it->first) {
+            resources::Tileset* tstmp = it->second;
+            it = _tilesets.erase(it);
+            _tilesets[tstmp->getName()] = tstmp;
+        }
+        else ++it;
+    }
+}
+
+
 void editor::Project::addTileset(editor::resources::Tileset *tileset) {
     _tilesets[tileset->getName()] = tileset;
     tileset->writeToLua();

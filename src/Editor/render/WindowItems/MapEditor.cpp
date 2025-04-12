@@ -136,8 +136,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
         }
 
         if(_somethingModified && ImGui::IsKeyDown(ImGuiMod_Ctrl) && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
-            _somethingModified = false;
-            _project->saveEverything();
+            save();
         }
     }
     ImGui::EndChild();
@@ -240,29 +239,36 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     {
         ImGui::SetNextItemWidth(250);
         if (ImGui::BeginCombo("##mapDropdown", _selectedMap != nullptr ? _selectedMap->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
-            for(auto map : _project->getMaps()) {
+            for(auto it = _project->getMaps().begin(); it != _project->getMaps().end(); ++it) {
+                auto map = *it;
                 bool isSelected = (map.second == _selectedMap);
-                if(ImGui::Selectable(map.first.c_str(), isSelected)) {
+                if(ImGui::Selectable(map.second->getName().c_str(), isSelected)) {
                     _selectedMap = map.second;
                     _selectedLayer = 0;
                     if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
-                        ImGui::OpenPopup((map.first + "mapoptions").c_str());
+                        ImGui::OpenPopup((map.second->getName() + "mapoptions").c_str());
                     }
                 }
-                if(ImGui::BeginPopupContextItem((map.first + "mapoptions").c_str())) {
+                if(ImGui::BeginPopupContextItem((map.second->getName() + "mapoptions").c_str())) {
                     if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.editmap").c_str())) {
-                        //_mapWizard->setMapToModify(map.second, true);
-                        //_mapWizard->show();
+                        _mapWizard->setMapToModify(map.second, true);
+                        _mapWizard->show();
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                     if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deletemap").c_str())) {
+                        resources::Map* mapTmp = map.second;
+                        it = _project->removeMap(map.second->getName());
+                        delete mapTmp;
+                        mapTmp = nullptr;
+                        _somethingModified = true;
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PopStyleColor();
                     ImGui::EndPopup();
                 }
             }
+            ImGui::Separator();
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
                 _createdMap = new editor::resources::Map(_project);
                 _mapWizard->setMapToModify(_createdMap);
@@ -281,10 +287,13 @@ void editor::render::tabs::MapEditor::drawToolbar() {
                     }
                 }
             }
+            ImGui::Separator();
+            ImGui::BeginDisabled(_selectedMap == nullptr);
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createlayer").c_str())) {
                 _selectedMap->addLayer();
                 _somethingModified = true;
             }
+            ImGui::EndDisabled();
             ImGui::EndCombo();
         }
     }
@@ -294,16 +303,22 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     ImGui::EndChild();
 
     if(_mapOpened && !_mapWizard->isOpen()) {
-        if(_createdMap->isInitialized()) {
-            _project->addMap(_createdMap);
-            _createdMap = nullptr;
-            _somethingModified = true;
+        if(_createdMap != nullptr) {
+            if(_createdMap->isInitialized()) {
+                _project->addMap(_createdMap);
+                _createdMap = nullptr;
+                _somethingModified = true;
+            }
+            else {
+                delete _createdMap;
+                _createdMap = nullptr;
+            }
+            _mapOpened = false;
         }
         else {
-            delete _createdMap;
-            _createdMap = nullptr;
+            _project->refreshMaps();
+            _somethingModified = true;
         }
-        _mapOpened = false;
     }
 
     if(_mapWizard->hasBeenCalled()) _mapOpened = true;
@@ -313,7 +328,8 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
     ImGui::BeginChild("##tileSelector", ImVec2(RenderManager::GetInstance().getWidth()/4, 0), true);
     {
         if (ImGui::BeginCombo("##tilesetDropdown", _selectedTileset != nullptr ? _selectedTileset->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.tilesetselector").c_str())) {
-            for(auto tileset : _project->getTilesets()) {
+            for(auto it = _project->getTilesets().begin(); it != _project->getTilesets().end(); ++it) {
+                auto tileset = *it;
                 bool isSelected = (_selectedTileset == tileset.second);
                 if(ImGui::Selectable(tileset.second->getName().c_str(), isSelected)) {
                     _selectedTileset = tileset.second;
@@ -323,18 +339,24 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                 }
                 if(ImGui::BeginPopupContextItem((tileset.second->getName() + "tilesetoptions").c_str())) {
                     if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edittileset").c_str())) {
-                        //_tilesetWizard->setTilesetToModify(tileset.second);
-                        //_tilesetWizard->show();
+                        _tilesetWizard->setTilesetToModify(tileset.second, true);
+                        _tilesetWizard->show();
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                     if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deletetileset").c_str())) {
+                        resources::Tileset* tilesetTmp = tileset.second;
+                        it = _project->removeTileset(tileset.second->getName());
+                        delete tilesetTmp;
+                        tilesetTmp = nullptr;
+                        _somethingModified = true;
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PopStyleColor();
                     ImGui::EndPopup();
                 }
             }
+            ImGui::Separator();
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createtileset").c_str())) {
                 _createdTileset = new editor::resources::Tileset(_project);
                 _tilesetWizard->setTilesetToModify(_createdTileset);
@@ -349,7 +371,7 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
         if(_selectedTileset != nullptr) {
             int i = 0;
             for(auto tile : _selectedTileset->getTiles()) {
-                if(i % 3 != 0) ImGui::SameLine();
+                if(i % _selectedTileset->getXTiles() != 0) ImGui::SameLine();
                 if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), tile->texture, ImVec2(32, 32), tile->rect.Min, tile->rect.Max)) {
                     _selectedTile = i;
                 }
@@ -361,19 +383,30 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
     ImGui::EndChild();
 
     if(_tilesetOpened && !_tilesetWizard->isOpen()) {
-        if(_createdTileset->isInitialized()) {
-            _project->addTileset(_createdTileset);
-            _createdTileset = nullptr;
-            _somethingModified = true;
+        if (_createdTileset != nullptr) {
+            if(_createdTileset->isInitialized()) {
+                _project->addTileset(_createdTileset);
+                _createdTileset = nullptr;
+                _somethingModified = true;
+            }
+            else {
+                delete _createdTileset;
+                _createdTileset = nullptr;
+            }
+            _tilesetOpened = false;
         }
         else {
-            delete _createdTileset;
-            _createdTileset = nullptr;
+            _project->refreshTilesets();
+            _somethingModified = true;
         }
-        _tilesetOpened = false;
     }
 
     if(_tilesetWizard->hasBeenCalled()) _tilesetOpened = true;
+}
+
+void editor::render::tabs::MapEditor::save() {
+    _somethingModified = false;
+    _project->saveEverything();
 }
 
 void editor::render::tabs::MapEditor::drawObjectInspector() {

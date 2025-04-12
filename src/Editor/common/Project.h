@@ -89,6 +89,8 @@ namespace editor {
 
         void addMap(editor::resources::Map* map);
 
+        void refreshMaps();
+
         int totalMaps() const;
 
         void saveEverything();
@@ -103,10 +105,10 @@ namespace editor {
         }
 
         template <std::convertible_to<std::string> T>
-        void removeMap(T&& name) {
+        std::unordered_map<std::string, editor::resources::Map*>::iterator removeMap(T&& name) {
             auto m = _maps.find(std::forward<T>(name));
-            if(m == _maps.end()) return;
-            else _maps.erase(m);
+            if(m == _maps.end()) return m;
+            return _maps.erase(m);
         }
 
         void addTileset(editor::resources::Tileset* tileset);
@@ -115,18 +117,20 @@ namespace editor {
 
         const std::unordered_map<std::string, editor::resources::Tileset*>& getTilesets() const;
 
+        void refreshTilesets();
+
         template <std::convertible_to<std::string> T>
         editor::resources::Tileset* getTileset(T&& name) {
             auto t = _tilesets.find(std::forward<T>(name));
             if(t == _tilesets.end()) return nullptr;
-            else return t->second;
+            return t->second;
         }
 
         template <std::convertible_to<std::string> T>
-        void removeTileset(T&& name) {
+        std::unordered_map<std::string, editor::resources::Tileset*>::iterator removeTileset(T&& name) {
             auto t = _tilesets.find(std::forward<T>(name));
-            if(t == _tilesets.end()) return;
-            else _tilesets.erase(t);
+            if(t == _tilesets.end()) return t;
+            return _tilesets.erase(t);
         }
 
         std::filesystem::path getAssetsPath() const;
