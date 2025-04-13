@@ -60,7 +60,7 @@ void editor::render::modals::MapWizard::onRender() {
 
     ImGui::Spacing();
     ImGui::BeginDisabled(_sameName);
-    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.editmap" : "action.addmap").c_str(), ImVec2(120, 0))) {
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
         _mapToModify->init(_nameBuffer, _dimensions[0], _dimensions[1], _layers);
         ImGui::CloseCurrentPopup();
         _mapToModify = nullptr;

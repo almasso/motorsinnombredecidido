@@ -250,13 +250,13 @@ void editor::render::tabs::MapEditor::drawToolbar() {
                     }
                 }
                 if(ImGui::BeginPopupContextItem((map.second->getName() + "mapoptions").c_str())) {
-                    if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.editmap").c_str())) {
+                    if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edit").c_str())) {
                         _mapWizard->setMapToModify(map.second, true);
                         _mapWizard->show();
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
-                    if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deletemap").c_str())) {
+                    if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
                         resources::Map* mapTmp = map.second;
                         it = _project->removeMap(map.second->getName());
                         delete mapTmp;
@@ -339,13 +339,13 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                     }
                 }
                 if(ImGui::BeginPopupContextItem((tileset.second->getName() + "tilesetoptions").c_str())) {
-                    if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edittileset").c_str())) {
+                    if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edit").c_str())) {
                         _tilesetWizard->setTilesetToModify(tileset.second, true);
                         _tilesetWizard->show();
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
-                    if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.deletetileset").c_str())) {
+                    if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
                         resources::Tileset* tilesetTmp = tileset.second;
                         it = _project->removeTileset(tileset.second->getName());
                         delete tilesetTmp;

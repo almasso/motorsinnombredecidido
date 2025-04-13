@@ -3,56 +3,58 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#include "TilesetWizard.h"
+#include "SpriteWizard.h"
 #include "io/LocalizationManager.h"
-#include "utils/tinyfiledialogs/tinyfiledialogs.h"
 #include "render/RenderManager.h"
-#include <SDL3/SDL.h>
-#include "resources/Tileset.h"
+#include "utils/tinyfiledialogs/tinyfiledialogs.h"
+#include "resources/Sprite.h"
 #include "common/Project.h"
 #include "common/EditorError.h"
+#include <SDL3/SDL.h>
 
-editor::render::modals::TilesetWizard::TilesetWizard(editor::Project* project) :
-ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.title") + ""), _project(project) {
-    _dimensions[0] = _project->getDimensions()[0];
-    _dimensions[1] = _project->getDimensions()[1];
-    _color[0] = _color[1] = _color[2] = 1;
-}
+editor::render::modals::SpriteWizard::SpriteWizard() : ModalWindow("##spriteWizard") {}
 
-editor::render::modals::TilesetWizard::~TilesetWizard() noexcept {
-    if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
-    _loadedTexture = 0;
-}
+editor::render::modals::SpriteWizard::~SpriteWizard() = default;
 
-void editor::render::modals::TilesetWizard::beforeRender() {
+void editor::render::modals::SpriteWizard::beforeRender() {
     ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove;
     _windowFlags |= flags;
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
 }
 
-void editor::render::modals::TilesetWizard::onRender() {
+void editor::render::modals::SpriteWizard::onRender() {
     drawControls();
     ImGui::SameLine();
-    drawGrid();
+    drawSprite();
 }
 
-void editor::render::modals::TilesetWizard::drawControls() {
+void editor::render::modals::SpriteWizard::drawControls() {
     if(!_isGivingName) {
-        strncpy(_nameBuffer, _tilesetToModify->getName() != "" ? _tilesetToModify->getName().c_str() : io::LocalizationManager::GetInstance().getString("tileset.default").c_str(),
+        strncpy(_nameBuffer, _spriteToModify->getName() != "" ? _spriteToModify->getName().c_str() : io::LocalizationManager::GetInstance().getString("sprite.default").c_str(),
                 sizeof(_nameBuffer) - 1);
         _nameBuffer[sizeof(_nameBuffer) - 1] = '\0';
-        strncpy(_routeBuffer, _tilesetToModify->getSource() != "" ? _tilesetToModify->getSource().string().c_str() : "", sizeof(_routeBuffer) - 1);
+        strncpy(_routeBuffer, _spriteToModify->getSource() != "" ? _spriteToModify->getSource().string().c_str() : "", sizeof(_routeBuffer) - 1);
         _routeBuffer[sizeof(_routeBuffer) - 1] = '\0';
-        _offset[0] = _tilesetToModify->getOffsetX();
-        _offset[1] = _tilesetToModify->getOffsetY();
-        if(_tilesetToModify->getSource() != "") {
-            _loadedTexture = RenderManager::GetInstance().loadTexture(_tilesetToModify->getSource().string());
+        _coords[0] = _spriteToModify->getX();
+        _coords[1] = _spriteToModify->getY();
+        _dimensions[0] = _spriteToModify->getWidth();
+        _dimensions[1] = _spriteToModify->getHeight();
+        _maxX = INT_MAX;
+        _maxY = INT_MAX;
+        _maxWidth = INT_MAX;
+        _maxHeight = INT_MAX;
+        if(_spriteToModify->getSource() != "") {
+            _loadedTexture = RenderManager::GetInstance().loadTexture(_spriteToModify->getSource().string());
+            _maxX = ((SDL_Texture*)_loadedTexture)->w - 1;
+            _maxY = ((SDL_Texture*)_loadedTexture)->h - 1;
+            _maxWidth = ((SDL_Texture*)_loadedTexture)->w;
+            _maxHeight = ((SDL_Texture*)_loadedTexture)->h;
         }
     }
     _isGivingName = true;
 
-    ImGui::BeginChild("##tilesetControls", ImVec2(600, 512));
+    ImGui::BeginChild("##spriteControls", ImVec2(600, 720));
     if(ImGui::Button(io::LocalizationManager::GetInstance().getString("action.search").c_str())) {
         const char* fileExtension[] = {"*.stb", "*.bmp", "*.gif", "*.jpg", "*.lbm", "*.pcx", "*.png", "*.pnm", "*.qoi", "*.svg", "*.tga", "*.xcf", "*.xpm", "*.xv"};
         const char* route = tinyfd_openFileDialog(
@@ -80,61 +82,71 @@ void editor::render::modals::TilesetWizard::drawControls() {
         }
     }
     ImGui::SameLine();
-    ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.source").c_str(),
+    ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.spritewizard.source").c_str(),
                      _routeBuffer, IM_ARRAYSIZE(_routeBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
     ImGui::Spacing();
-    ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.tilename").c_str(),
+    ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.spritewizard.spritename").c_str(),
                      _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
     if(_project->getTileset(_nameBuffer) != nullptr) _sameName = true;
     else _sameName = false;
 
-    if(_tilesetToModify->getName() != "" && _tilesetToModify->getName() == _nameBuffer) _sameName = false;
+    if(_spriteToModify->getName() != "" && _spriteToModify->getName() == _nameBuffer) _sameName = false;
 
     if(_sameName) {
-        ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.sametilesetname").c_str());
+        ImGui::TextColored(ImColor(255,0,0),io::LocalizationManager::GetInstance().getString("error.samespritename").c_str());
     }
 
     ImGui::Spacing();
-    ImGui::SliderInt2(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.offset").c_str(),
-                      _offset, -_dimensions[0], _dimensions[0]);
+    ImGui::SliderInt(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.dimensionx").c_str(),
+                      &_coords[0], 0, _maxX);
+    ImGui::Spacing();
+    ImGui::SliderInt(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.dimensiony").c_str(),
+                      &_coords[1], 0, _maxY);
+    ImGui::Spacing();
+    ImGui::SliderInt(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.dimensionw").c_str(),
+                      &_dimensions[0], 1, _maxWidth);
+    ImGui::Spacing();
+    ImGui::SliderInt(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.dimensionh").c_str(),
+                      &_dimensions[1], 1, _maxHeight);
+
+    _maxWidth = ((SDL_Texture*)_loadedTexture)->w - _coords[0];
+    _maxHeight = ((SDL_Texture*)_loadedTexture)->h - _coords[1];
 
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosX() + 390);
     ImGui::Spacing();
-    ImGui::ColorEdit3(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.tilesetwizard.gridcolor").c_str(),
+    ImGui::ColorEdit3(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.spritewizard.gridcolor").c_str(),
                       _color);
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosX() + 460);
 
     ImGui::BeginDisabled(std::string(_routeBuffer) == "" || _sameName);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
-        _tilesetToModify->init(_nameBuffer, _routeBuffer, _offset[0], _offset[1]);
+        _spriteToModify->init(_nameBuffer, _routeBuffer, _coords[0], _coords[1], _dimensions[0], _dimensions[1]);
         ImGui::CloseCurrentPopup();
-        _tilesetToModify = nullptr;
+        _spriteToModify = nullptr;
         _isOpen = false;
         _isGivingName = false;
         if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
         _loadedTexture = 0;
-        _offset[0] = _offset[1] = 0;
     }
     ImGui::EndDisabled();
     ImGui::SameLine();
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
         ImGui::CloseCurrentPopup();
-        _tilesetToModify = nullptr;
+        _spriteToModify = nullptr;
         _isOpen = false;
         _isGivingName = false;
         if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
         _loadedTexture = 0;
-        _offset[0] = _offset[1] = 0;
     }
     ImGui::EndChild();
 }
 
-void editor::render::modals::TilesetWizard::drawGrid() {
-    ImGui::BeginChild("##tilesetPreview", ImVec2(512, 512), true, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_AlwaysVerticalScrollbar);
+void editor::render::modals::SpriteWizard::drawSprite() {
+    ImGui::BeginChild("##spritePreview", ImVec2(720, 720), true, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_AlwaysVerticalScrollbar);
     {
         ImVec2 cursorPos = ImGui::GetCursorScreenPos();
         ImDrawList* drawList = ImGui::GetWindowDrawList();
@@ -145,19 +157,14 @@ void editor::render::modals::TilesetWizard::drawGrid() {
         ImVec2 imageSize = ImVec2(imageWidth, imageHeight);
         ImGui::Image(_loadedTexture, imageSize);
 
-        _offset[0] = (_offset[0] % _dimensions[0] + _dimensions[0]) % _dimensions[0];
-        _offset[1] = (_offset[1] % _dimensions[1] + _dimensions[1]) % _dimensions[1];
-        for(int i = _offset[0]; i < imageWidth; i += _dimensions[0]) {
-            drawList->AddLine(ImVec2(cursorPos.x + i, cursorPos.y), ImVec2(cursorPos.x + i, cursorPos.y + imageHeight), IM_COL32(_color[0] * 255, _color[1] * 255, _color[2] * 255, 128));
-        }
-        for(int j = _offset[1]; j < imageHeight; j += _dimensions[1]) {
-            drawList->AddLine(ImVec2(cursorPos.x, cursorPos.y + j), ImVec2(cursorPos.x + imageWidth, cursorPos.y + j), IM_COL32(_color[0] * 255, _color[1] * 255, _color[2] * 255, 128));
-        }
+        drawList->AddRect(ImVec2(_coords[0], _coords[1]), ImVec2(_coords[0] + _dimensions[0], _coords[1] + _dimensions[1]), IM_COL32(_color[0] * 255, _color[1] * 255, _color[2] * 255, 128));
     }
     ImGui::EndChild();
 }
 
-void editor::render::modals::TilesetWizard::setTilesetToModify(editor::resources::Tileset *tileset, bool modify) {
+void editor::render::modals::SpriteWizard::setSpriteToModify(editor::resources::Sprite* sprite, bool modify) {
     _modify = modify;
-    _tilesetToModify = tileset;
+    _spriteToModify = sprite;
 }
+
+
