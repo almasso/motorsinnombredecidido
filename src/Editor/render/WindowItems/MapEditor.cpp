@@ -316,6 +316,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
             _mapOpened = false;
         }
         else {
+            _mapOpened = false;
             _project->refreshMaps();
             _somethingModified = true;
         }
@@ -396,6 +397,7 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
             _tilesetOpened = false;
         }
         else {
+            _tilesetOpened = false;
             _project->refreshTilesets();
             _somethingModified = true;
         }
