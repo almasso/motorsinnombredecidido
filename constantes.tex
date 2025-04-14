@@ -18,8 +18,7 @@
 %
 % Escribe el título del documento.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\titulo{\textsc{TeXiS}: Una plantilla de \LaTeX\
-  para Tesis y otros documentos}
+\def\titulo{Motor y editor de videojuegos en 2D enfocado al desarrollo de juegos RPG}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Comando: 
@@ -30,7 +29,7 @@
 %
 % Escribe el autor del documento.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\autor{Marco Antonio y Pedro Pablo G\'omez Mart\'in}
+\def\autor{Miguel Curros Garc\'ia, Alejandro Gonz\'alez S\'anchez y Alejandro Mass\'o Mart\'inez}
 
 % Variable local para emacs, para  que encuentre el fichero maestro de
 % compilación y funcionen mejor algunas teclas rápidas de AucTeX
@@ -40,3 +39,25 @@
 %%% mode: latex
 %%% TeX-master: "tesis.tex"
 %%% End:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comando: 
+%
+%       \citegame
+%
+% Resultado: 
+%
+% Cita un juego
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\citegame}[2]{\textit{\hyperref[#2]{#1}} \textnormal{(\citeauthor{#2}, \citeyear{#2})}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comando: 
+%
+%       \comillas
+%
+% Resultado: 
+%
+% Entrecomilla un texto usando << y >>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\comillas}[1]{\guillemotleft #1\guillemotright{}}
