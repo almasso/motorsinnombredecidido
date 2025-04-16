@@ -29,7 +29,7 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
         _action = PAUSE;
     else if (action == "change") {
         _action = CHANGE;
-        std::string clip = params.get<std::string>(clipKey, "");
+        std::string clip = params.get_or<std::string>(clipKey, "");
         if (clip.empty())
             return false;
         _param.clip = clip.c_str();

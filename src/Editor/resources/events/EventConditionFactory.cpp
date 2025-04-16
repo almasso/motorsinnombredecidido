@@ -5,9 +5,13 @@
 
 #include "EventConditionFactory.h"
 
-#include "conditions/OnStartCondition.h"
-
 #include "EventCondition.h"
+
+#include "conditions/AlwaysCondition.h"
+#include "conditions/AndCondition.h"
+#include "conditions/OnStartCondition.h"
+#include "conditions/OrCondition.h"
+
 
 std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*()>> editor::resources::events::EventConditionFactory::_conditions;
 bool editor::resources::events::EventConditionFactory::_initialized = false;
@@ -44,5 +48,8 @@ editor::resources::events::EventCondition* editor::resources::events::EventCondi
 
 void editor::resources::events::EventConditionFactory::Init() {
     _initialized = true;
+    RegisterCondition<AlwaysCondition>();
+    RegisterCondition<AndCondition>();
     RegisterCondition<OnStartCondition>();
+    RegisterCondition<OrCondition>();
 }

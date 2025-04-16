@@ -25,7 +25,7 @@ bool editor::resources::events::ChoiceBehaviour::read(sol::table const& params) 
     for (auto& [key, value] : options.value()) {
         if (!key.is<std::string>() || !value.is<sol::lua_value>())
             return false;
-        _options.push_back({key.as<std::string>, value.as<sol::lua_value>()});
+        _options.push_back({key.as<std::string>(), value.as<sol::lua_value>()});
     }
     return true;
 }
