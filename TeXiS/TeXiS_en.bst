@@ -13,7 +13,7 @@
 %% --------------------------------------------------------
 %% *** Estilo de la bibliografia de TeXiS               ***
 %% *** Marco Antonio y Pedro Pablo Gomez Martin         ***
-%% 
+%%
 %% Copyright 1994-2002 Patrick W Daly
  % ===============================================================
  % IMPORTANT NOTICE:
@@ -63,6 +63,7 @@ ENTRY
     author
     booktitle
     chapter
+    developer
     edition
     editor
     howpublished
@@ -78,6 +79,7 @@ ENTRY
     number
     organization
     pages
+    platform
     publisher
     school
     series
@@ -232,7 +234,7 @@ FUNCTION {bbl.and}
 { "and"}
 
 FUNCTION {bbl.etal}
-{ % No rula el ~... :-? "et~al." 
+{ % No rula el ~... :-? "et~al."
 "et\ al."
 }
 
@@ -817,7 +819,7 @@ FUNCTION {format.lastaccess}
 }
 
 FUNCTION {format.webpage}
-{	
+{
 	webpage "webpage" bibinfo.check
 	duplicate$ empty$ 'skip$
 	{ new.block
@@ -1362,6 +1364,18 @@ FUNCTION {booklet}
   fin.entry
 }
 
+FUNCTION {game}
+{
+  output.bibitem
+  developer " " * write$
+  title emphasize "title" output.check
+  platform empty$ { skip$ } { platform write$ "." * newline$ } if$
+  publisher empty$ { skip$ } { publisher write$ "." * newline$ } if$
+  year write$ "." * newline$
+  url empty$ { skip$ } { url write$ "." * newline$ } if$
+  fin.entry
+}
+
 FUNCTION {inbook}
 { output.bibitem
   author empty$
@@ -1870,6 +1884,24 @@ FUNCTION {begin.bib}
 EXECUTE {begin.bib}
 EXECUTE {init.state.consts}
 ITERATE {call.type$}
+
+FUNCTION {cite$}
+{
+  type$ "game" =
+    {
+      title emphasize
+      " (" *
+      developer *
+      ", " *
+      year *
+      ")" *
+    }
+    {
+      cite.label  % fallback for other types
+    }
+  if$
+}
+
 FUNCTION {end.bib}
 { newline$
   "\end{thebibliography}" write$ newline$

@@ -61,3 +61,15 @@
 % Entrecomilla un texto usando << y >>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\comillas}[1]{\guillemotleft #1\guillemotright{}}
+
+\newcommand{\figuratikz}[3]{%
+\begin{figure}[h]%
+\begin{center}%
+\begin{tikzpicture}%
+	#3
+\end{tikzpicture}%
+\caption{#1} \label{#2}%
+\end{center}%
+\end{figure}%
+\vspace{-10pt}%
+}

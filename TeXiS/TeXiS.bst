@@ -13,7 +13,7 @@
 %% --------------------------------------------------------
 %% *** Estilo de la bibliografia de TeXiS               ***
 %% *** Marco Antonio y Pedro Pablo Gomez Martin         ***
-%% 
+%%
 %% Copyright 1994-2002 Patrick W Daly
  % ===============================================================
  % IMPORTANT NOTICE:
@@ -63,6 +63,7 @@ ENTRY
     author
     booktitle
     chapter
+    developer
     edition
     editor
     howpublished
@@ -78,6 +79,7 @@ ENTRY
     number
     organization
     pages
+    platform
     publisher
     school
     series
@@ -233,7 +235,7 @@ FUNCTION {bbl.and}
 { "y"}
 
 FUNCTION {bbl.etal}
-{ % No rula el ~... :-? "et~al." 
+{ % No rula el ~... :-? "et~al."
   "et\ al."
 }
 
@@ -765,6 +767,28 @@ FUNCTION {format.editors}
     }
   if$
 }
+
+FUNCTION {format.developer}
+{ developer empty$
+    { "" }
+    { developer }
+  if$
+}
+
+FUNCTION {format.platform}
+{ platform empty$
+    { "" }
+    { platform }
+  if$
+}
+
+FUNCTION {format.publisher}
+{ publisher empty$
+    { "" }
+    { publisher }
+  if$
+}
+
 FUNCTION {format.isbn}
 { isbn "isbn" bibinfo.check
   duplicate$ empty$ 'skip$
@@ -787,7 +811,7 @@ FUNCTION {format.lastaccess}
 }
 
 FUNCTION {format.webpage}
-{	
+{
 	webpage "webpage" bibinfo.check
 	duplicate$ empty$ 'skip$
 	{ new.block
@@ -1332,6 +1356,30 @@ FUNCTION {booklet}
   fin.entry
 }
 
+FUNCTION {game}
+{ output.bibitem
+  format.developer "developer" output.check
+  new.block
+  format.title "title" output.check
+  new.block
+  format.platform "platform" output.check
+  publisher empty$
+    { skip$ }
+    { new.block
+      format.publisher "publisher" output.check
+    }
+  if$
+  new.block
+  format.date "year" output.check
+  url empty$
+    { skip$ }
+    { new.block
+      format.webpage output
+    }
+  if$
+  fin.entry
+}
+
 FUNCTION {inbook}
 { output.bibitem
   author empty$
@@ -1574,23 +1622,37 @@ FUNCTION {chop.word}
     's
   if$
 }
+
 FUNCTION {format.lab.names}
-{ 's :=
-  "" 't :=
-  s #1 "{vv~}{ll}" format.name$
-  s num.names$ duplicate$
-  #2 >
-    { pop$
-      " " * bbl.etal *
+{
+  type$ "game" =
+    {
+      title empty$ { "" } { title emphasize } if$
+      " (" *
+      developer empty$ { "" } { developer } if$
+      ", " *
+      year empty$ { "" } { year } if$
+      ")" *
     }
-    { #2 <
-        'skip$
-        { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
-            {
-              " " * bbl.etal *
+    {
+      's :=
+      "" 't :=
+      s #1 "{vv~}{ll}" format.name$
+      s num.names$ duplicate$
+      #2 >
+        { pop$
+          " " * bbl.etal *
+        }
+        { #2 <
+            'skip$
+            { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
+                {
+                  " " * bbl.etal *
+                }
+                { bbl.and space.word * s #2 "{vv~}{ll}" format.name$
+                  * }
+              if$
             }
-            { bbl.and space.word * s #2 "{vv~}{ll}" format.name$
-              * }
           if$
         }
       if$

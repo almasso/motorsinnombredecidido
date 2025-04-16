@@ -93,7 +93,7 @@ En el nuevo milenio, que para \citeauthor{barton2008dungeons} es la \comillas{et
 Para entender cómo las empresas o equipos \textit{indies} desarrollan un videojuego desde cero, es imprescindible saber con exactitud cómo funciona el software internamente, y qué formas tienen los programadores o desarrolladores para comunicarse con las entrañas de este durante el proceso de desarrollo. Es por eso que en este apartado veremos lo que es un \textit{motor} y lo que es un \textit{editor}.
 
 \subsection{Motor de videojuegos}
-\cite{gregory2018game} define un motor de videojuegos (\textit{game engine}) como todo aquel \textit{software} extensible que, sin apenas modificaciones, puedan servir de base o cimiento para múltiples videojuegos distintos. Ese \textit{software} al que nos referimos es todo el conjunto de herramientas que hacen que por detrás funcione un juego, como por ejemplo, todas las herramientas que se encarguen del \textit{renderizado} o dibujado en pantalla, bien sea en 2D o en 3D, aquellas que se encarguen de la simulación física y detección de colisiones con el entorno, las que se encarguen del sonido, las del \textit{scripting}, animaciones, inteligencia artificial, etc... A todas estas herramientas también se les denomina \textit{motores} (por ejemplo, \textit{motor de render}, \textit{motor de físicas}...).
+\cite{gregory2018game} define un motor de videojuegos (\textit{game engine}) como todo aquel \textit{software} extensible que, sin apenas modificaciones, puedan servir de base o cimiento para múltiples videojuegos distintos. Ese \textit{software} al que nos referimos es todo el conjunto de herramientas que hacen que por detrás funcione un juego, como por ejemplo, todas las herramientas que se encarguen del \textit{renderizado} o dibujado en pantalla, bien sea en 2D o en 3D, aquellas que se encarguen de la simulación física y detección de colisiones con el entorno, las que se encarguen del sonido, las del \textit{scripting}, animaciones, inteligencia artificial, etc\ldots A todas estas herramientas también se les denomina \textit{motores} (por ejemplo, \textit{motor de render}, \textit{motor de físicas}\ldots).
 
 \smallskip
 
@@ -128,10 +128,10 @@ Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores 
 \begin{itemize}
 \item \textit{Motor de render o de dibujado}: se encarga de gestionar todas las tareas relacionadas con los gráficos que se muestran en pantalla. Para ello, dibuja objetos bidimensionales o tridimensionales, representados generalmente mediante \comillas{mallas}, a través de técnicas de informática gráfica, como pueden ser la \textit{rasterización} o el trazado de rayos. También es el encargado de gestionar la cámara, luces, sombras, materiales y texturas, y puede aplicar diversos efectos de posprocesado al fotograma final. Muchas de estas tareas las puede definir el propio programador haciendo uso de un tipo de \textit{script} especial llamado \textit{shader}, que en lugar de ejecutarse en el procesador de nuestro computador se ejecuta en el procesador de las tarjetas gráficas. Estos motores suelen ser una capa de abstracción sobre especificaciones estándar para gráficos como \textit{OpenGL}, \textit{Vulkan}, \textit{DirectX} o \textit{Metal}.
 \item \textit{Motor de físicas}: se encarga de simular comportamientos físicos realistas. Entre estos comportamientos físicos encontramos las colisiones de objetos con otros objetos o con el entorno, aplicar la fuerza de gravedad a unos determinados objetos, simular las dinámicas de cuerpos rígidos (es decir, el movimiento de cuerpos interconectados bajo la acción de una fuerza externa, como por ejemplo, cajas que se pueden tirar, deslizar o romper), simular dinámicas de cuerpos blandos (similares a los cuerpos rígidos, pero con la posibilidad de que estos se deformen), y, en algunos casos, simulaciones de fluidos y de materiales textiles. Ya que hacer una simulación física es complicado, se suelen utilizar motores de terceros, como por ejemplo \textit{NVIDIA PhysX}, \textit{Havok}, \textit{Bullet} o \textit{Box2D}.
-\item \textit{Motor de sonido}: se encarga de gestionar los efectos de sonido, la música, el audio espacial o posicional en dos o tres dimensiones, y todos los efectos sonoros que se pueden aplicar al sonido (reverberación, eco, tono, barrido, mezclado de pistas, oclusión sonora, efecto Doppler, etc...). Algunas librerías utilizadas son \textit{FMOD}, \textit{OpenAL}, \textit{Wwise} o \textit{irrKlang}.
+\item \textit{Motor de sonido}: se encarga de gestionar los efectos de sonido, la música, el audio espacial o posicional en dos o tres dimensiones, y todos los efectos sonoros que se pueden aplicar al sonido (reverberación, eco, tono, barrido, mezclado de pistas, oclusión sonora, efecto Doppler, etc\ldots). Algunas librerías utilizadas son \textit{FMOD}, \textit{OpenAL}, \textit{Wwise} o \textit{irrKlang}.
 \item \textit{Motor de input o de gestión de la entrada}: se encarga de capturar y procesar eventos de entrada (\textit{input}) del usuario a través de los diversos dispositivos para los que se programe (teclado y ratón, mandos o controladores y pantallas táctiles) y asociarlos a las acciones definidas en el juego.
 \item \textit{Sistema de animación}: gestiona animaciones de \textit{sprites} (los elementos gráficos bidimensionales básicos que representan visualmente objetos dentro del juego) o de esqueletos (\textit{rigging}, usados para personajes tridimensionales). Suelen tener soporte para árboles de mezcla y cinemática inversa.
-\item \textit{Motor de scripting}: permite escribir lógica específica del juego utilizando lenguajes de programación de alto nivel (como por ejemplo JavaScript, Lua, C\# o Python), separando la implementación del \textit{gameplay} (o \comillas{jugabilidad}, es decir, la experiencia interactiva del jugador dentro de un videojuego) del motor. El \textit{scripting} se suele hacer mediante lenguajes de programación interpretados y no compilados, por lo que los cambios más pequeños no requieren de volver a iterar por todo el proceso de compilado del motor o del juego.
+\item \textit{Motor de scripting}: permite escribir lógica específica del juego utilizando lenguajes de programación de alto nivel (como por ejemplo JavaScript, Lua, C\# o Python), separando la implementación del \textit{gameplay} (\comillas{jugabilidad}) del motor. El \textit{scripting} se suele hacer mediante lenguajes de programación interpretados y no compilados, por lo que los cambios más pequeños no requieren de volver a iterar por todo el proceso de compilado del motor o del juego.
 \item \textit{Motor de red}: se encarga de gestionar el soporte multijugador, es decir, la comunicación y sincronización cliente-servidor o cliente-cliente. El motor de red también incluye sistemas de emparejamiento (\textit{matchmaking}) y de predicción o interpolación del juego para una simulación fluida en los juegos multijugador.
 \item \textit{Motor de inteligencia artificial}: ofrece herramientas para poder crear comportamientos inteligentes artificiales, como por ejemplo, algoritmos de búsqueda de caminos (\textit{pathfinding}, como los algoritmos \textit{A*} o el de Dijkstra), árboles de comportamiento y máquinas de estado, o sistemas de toma de decisiones. Este motor suele tener una conexión directa con el motor de \textit{scripting} para poder definir comportamientos mucho más fácilmente.
 \item \textit{Gestor de recursos}: maneja la carga y descarga de recursos como texturas, mallas, sonidos o animaciones, muchas veces bajo demanda del juego mediante gestores de memoria, compresión y de transmisión de datos altamente optimizados.
@@ -139,6 +139,35 @@ Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores 
 \end{itemize}
 
 \subsubsection{Separación entre motor y \textit{gameplay}}
+Para poder reusar nuestro motor en múltiples juegos con el menor número de cambios, es necesario saber \textit{cómo y para qué vamos a desarrollar nuestro motor}, y de acuerdo a la decisión que hayamos tomado, establecer la barrera de separación entre el motor y la jugabilidad o \textit{gameplay} del juego.
+
+\medskip
+
+Definimos jugabilidad o \textit{gameplay} como la experiencia interactiva del jugador dentro de un videojuego. Ni \cite{tekinbas2003rules} ni \cite{schell2019art} dan una definición concreta, pero hablan de cómo la interacción entre el jugador, el sistema de reglas del juego y las mecánicas dan lugar a la jugabilidad. No solo cada juego tiene una jugabilidad distinta que depende de las mecánicas y de las reglas que este tenga, sino que puede haber una mecánica emergente que surge a través de las decisiones de cada jugador.
+
+\smallskip
+
+\figuratikz{Diagrama que muestra la separación entre motor y \textit{gameplay} que suelen tener motores más generales.}{fig:separaciongeneral}{
+\draw (0,0) rectangle (3,6);
+\draw (0,2) -- (3, 2);
+\node at (1.5,4) {\textit{Gameplay}};
+\node at (1.5,1) {Motor};
+}
+
+Los motores más generalistas que encontramos, como los anteriormente mencionados \textit{Unity}, \textit{Unreal Engine} o \textit{Godot}, debido a que están pensados para poder desarrollar todo tipo de juegos, tienen una barrera de separación entre el motor y el \textit{gameplay} suele estar a la mitad o incluso hacia abajo (ver figura \ref{fig:separaciongeneral}), es decir, que la implementación del juego final que tiene el motor es mínima (el motor es puramente un conjunto de motores de tecnología) y es el desarrollador el que se tiene que encargar de ello. Esta es la gran ventaja que tienen los motores generalistas frente a los específicos, la libertad que dejan al desarrollador para poder implementar la jugabilidad a su manera, con las reglas y mecánicas que él mismo establezca.
+
+\figuratikz{Diagrama que muestra la separación entre motor y \textit{gameplay} que suelen tener motores específicos.}{fig:separacionespecificos}{
+\draw (0,0) rectangle (3,6);
+\draw (0,4) -- (3,4);
+\node at (1.5, 5) {\textit{Gameplay}};
+\node at (1.5, 2) {Motor};
+}
+
+Si, como es el caso de este proyecto, nos interesa hacer un motor que fije gran parte de la jugabilidad de los juegos que se puedan hacer con él, y que lo único modificable sea la parte artística y visual, tendremos que introducir elementos propios del juego en nuestro motor, dejando menos libertad en el \textit{gameplay} (ver figura \ref{fig:separacionespecificos}). Por ejemplo, nuestro motor dará a los desarrolladores herramientas para poder personalizar los escenarios de combate típicos en juegos RPG, así como un creador de mapas basado en baldosas o \textit{tiles}. 
+
+\smallskip
+
+Este tipo de motores son mucho más rígidos a la hora de poder implementar nuevas funcionalidades y limitan bastante los juegos que se pueden crear con ellos, pero simplifican bastante el desarrollo, y son especialmente útiles para nuevos programadores, que muchas veces se ven abrumados ante tal cantidad de opciones que ofrecen el resto de motores más flexibles, si bien es cierto que no ofrecen la libertad de estos, y la jugabilidad está fijada por el desarrollador del motor y no el del juego.
 
 \subsubsection{Programación dirigida por datos (\textit{DDP}) en videojuegos}
 
