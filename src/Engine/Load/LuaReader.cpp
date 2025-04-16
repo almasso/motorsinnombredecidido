@@ -17,6 +17,7 @@
 #include <Render/Animator.h>
 #include <Render/Text.h>
 #include <Render/Transform.h>
+#include <Utils/Error.h>
 
 LuaReader* LuaReader::_instance = nullptr;
 
@@ -52,6 +53,36 @@ bool LuaReader::init() {
 
 LuaReader::LuaReader() = default;
 
+bool LuaReader::ReadFile(const std::string& filename, std::string& fileContent) {
+    SDL_IOStream* file = SDL_IOFromFile(filename.c_str(), "r");
+    if (!file) {
+        Error::ShowError("Error al abrir el archivo", "Error al abrir el archivo: " + filename + " - " + SDL_GetError());
+        return false;
+    }
+
+    int fileSize = static_cast<int>(SDL_GetIOSize(file));
+    if (fileSize <= 0) {
+        Error::ShowError("Error al obtener el tamaño del archivo", "Error al obtener el tamaño del archivo: " + filename + " - " + SDL_GetError());
+        SDL_CloseIO(file);
+        return false;
+    }
+
+    char* fileData = new char[fileSize + 1];  // +1 para el null terminator
+    if (SDL_ReadIO(file, fileData, fileSize) != fileSize) {
+        Error::ShowError("Error al leer el archivo", "Error al leer el archivo: " + filename + " - " + SDL_GetError());
+        delete[] fileData;
+        SDL_CloseIO(file);
+        return false;
+    }
+    fileData[fileSize] = '\0';
+
+    fileContent = fileData;
+    delete[] fileData;
+
+    SDL_CloseIO(file);
+    return true;
+}
+
 bool LuaReader::Init() {
     assert(_instance == nullptr);
     _instance = new LuaReader();
@@ -66,12 +97,18 @@ void LuaReader::Shutdown() {
 }
 
 sol::table LuaReader::GetTable(std::string const& path) {
-    sol::load_result res = _instance->_lua.load_file(path);
+    std::string fileContent;
+    if (!ReadFile(path, fileContent))
+        return sol::lua_nil;
+    sol::load_result res = _instance->_lua.load(fileContent);
     if (!res.valid())
         return sol::lua_nil;
     sol::protected_function_result res2 = res();
-    if (!res2.valid())
+    if (!res2.valid()) {
+        sol::error er = res2;
+        Error::ShowError("GetTable", er.what());
         return sol::lua_nil;
+    }
     sol::table table = res2.get<sol::table>();
     if (!table.valid())
         return sol::lua_nil;

@@ -21,8 +21,9 @@ namespace editor::resources::events {
         static EventCondition* Create(sol::table const& condition);
     private:
         static std::unordered_map <std::string, std::function<EventCondition*()>> _conditions;
+        static bool _initialized;
 
-        void init();
+        static void Init();
         template <typename ConditionType>
         static void RegisterCondition() {
             _conditions.insert({ConditionType::id, []() -> EventCondition* {

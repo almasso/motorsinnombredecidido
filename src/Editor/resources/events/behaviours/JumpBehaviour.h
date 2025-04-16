@@ -3,25 +3,25 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOVEBEHAVIOUR_H
-#define MOVEBEHAVIOUR_H
+#ifndef JUMPBEHAVIOUR_H
+#define JUMPBEHAVIOUR_H
 
 #include "../EventBehaviour.h"
 
 namespace editor::resources::events {
 
-    class EventBehaviourClass(MoveBehaviour) {
+    class EventBehaviourClass(JumpBehaviour) {
     public:
-        MoveBehaviour();
-        ~MoveBehaviour() override;
+        JumpBehaviour();
+        ~JumpBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        int _xTarget, _yTarget;
+        int _target;
     };
 
 }
 
-#endif //MOVEBEHAVIOUR_H
+#endif //JUMPBEHAVIOUR_H

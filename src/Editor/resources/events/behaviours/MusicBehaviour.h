@@ -3,25 +3,38 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOVEBEHAVIOUR_H
-#define MOVEBEHAVIOUR_H
+#ifndef MUSICBEHAVIOUR_H
+#define MUSICBEHAVIOUR_H
 
 #include "../EventBehaviour.h"
 
 namespace editor::resources::events {
 
-    class EventBehaviourClass(MoveBehaviour) {
+    class EventBehaviourClass(MusicBehaviour) {
     public:
-        MoveBehaviour();
-        ~MoveBehaviour() override;
+        MusicBehaviour();
+        ~MusicBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        int _xTarget, _yTarget;
+        enum {
+            PLAY,
+            STOP,
+            RESUME,
+            PAUSE,
+            CHANGE,
+            VOLUME,
+            LOOP
+        } _action;
+        union {
+            const char* clip;
+            float volume;
+            bool loop;
+        } _param;
     };
 
 }
 
-#endif //MOVEBEHAVIOUR_H
+#endif //MUSICBEHAVIOUR_H

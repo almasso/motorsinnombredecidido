@@ -5,11 +5,24 @@
 
 #include "EventBehaviourFactory.h"
 #include "EventBehaviour.h"
+#include "behaviours/AnimationBehaviour.h"
+#include "behaviours/ChoiceBehaviour.h"
+#include "behaviours/DialogueBehaviour.h"
+#include "behaviours/JumpBehaviour.h"
+#include "behaviours/JumpIfBehaviour.h"
+#include "behaviours/ModifyLocalVariableBehaviour.h"
 #include "behaviours/MoveBehaviour.h"
+#include "behaviours/MusicBehaviour.h"
+#include "behaviours/PlaySFXBehaviour.h"
+#include "behaviours/WaitForBehaviour.h"
 
 std::unordered_map <std::string, std::function<editor::resources::events::EventBehaviour*()>> editor::resources::events::EventBehaviourFactory::_behaviours;
+bool editor::resources::events::EventBehaviourFactory::_initialized = false;
 
 editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(std::string const& id) {
+    if (!_initialized)
+        Init();
+
     auto it = _behaviours.find(id);
     if (it == _behaviours.end())
         return nullptr;
@@ -36,7 +49,17 @@ editor::resources::events::EventBehaviour* editor::resources::events::EventBehav
     return nullptr;
 }
 
-void editor::resources::events::EventBehaviourFactory::init() {
+void editor::resources::events::EventBehaviourFactory::Init() {
+    _initialized = true;
+    RegisterBehaviour<AnimationBehaviour>();
+    RegisterBehaviour<ChoiceBehaviour>();
+    RegisterBehaviour<DialogueBehaviour>();
+    RegisterBehaviour<JumpBehaviour>();
+    RegisterBehaviour<JumpIfBehaviour>();
+    RegisterBehaviour<ModifyLocalVariableBehaviour>();
     RegisterBehaviour<MoveBehaviour>();
+    RegisterBehaviour<MusicBehaviour>();
+    RegisterBehaviour<PlaySFXBehaviour>();
+    RegisterBehaviour<WaitForBehaviour>();
 }
 

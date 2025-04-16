@@ -21,7 +21,7 @@ namespace editor::resources::events {
         void init(std::string const& name);
         bool read(std::string const& name, sol::table const& eventTable);
         bool write(sol::table& eventTable);
-        bool writeToEngine(sol::table& eventTable);
+        bool writeToEngine(sol::table& eventTable, std::vector<std::string>& componentDependencies);
 
         std::string const& getName() const;
         EventBehaviour* addBehaviour(std::string const& id);

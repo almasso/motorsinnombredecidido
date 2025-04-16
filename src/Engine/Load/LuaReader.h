@@ -12,6 +12,9 @@ private:
     void registerUserTypes();
     bool init();
     LuaReader();
+
+    static bool ReadFile(const std::string& filename, std::string& fileContent);
+
 public:
     /// @~english
     /// @brief Copy possibility deletion for singleton pattern assurance

@@ -10,8 +10,12 @@
 #include "EventCondition.h"
 
 std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*()>> editor::resources::events::EventConditionFactory::_conditions;
+bool editor::resources::events::EventConditionFactory::_initialized = false;
 
 editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(std::string const& id) {
+    if (!_initialized)
+        Init();
+
     auto it = _conditions.find(id);
     if (it == _conditions.end())
         return nullptr;
@@ -38,6 +42,7 @@ editor::resources::events::EventCondition* editor::resources::events::EventCondi
     return nullptr;
 }
 
-void editor::resources::events::EventConditionFactory::init() {
+void editor::resources::events::EventConditionFactory::Init() {
+    _initialized = true;
     RegisterCondition<OnStartCondition>();
 }

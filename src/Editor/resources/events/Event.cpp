@@ -62,6 +62,10 @@ bool editor::resources::events::Event::write(sol::table& eventTable) {
     return true;
 }
 
+bool editor::resources::events::Event::writeToEngine(sol::table& eventTable, std::vector<std::string>& componentDependencies) {
+    return true;
+}
+
 std::string const& editor::resources::events::Event::getName() const {
     return _name;
 }

@@ -13,8 +13,7 @@ editor::resources::events::MoveBehaviour::MoveBehaviour() :
     _yTarget(0) {
 }
 
-editor::resources::events::MoveBehaviour::~MoveBehaviour() {
-}
+editor::resources::events::MoveBehaviour::~MoveBehaviour() = default;
 
 bool editor::resources::events::MoveBehaviour::read(sol::table const& params) {
     sol::optional<int> xTarget = params.get<sol::optional<int>>(xTargetKey);
@@ -30,7 +29,7 @@ bool editor::resources::events::MoveBehaviour::read(sol::table const& params) {
     return true;
 }
 
-bool editor::resources::events::MoveBehaviour::writeToEngine(sol::table& behaviour) {
+bool editor::resources::events::MoveBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
     return true;
 }
 

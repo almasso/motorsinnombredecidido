@@ -3,25 +3,26 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOVEBEHAVIOUR_H
-#define MOVEBEHAVIOUR_H
+#ifndef MODIFYLOCALVARIABLEBEHAVIOUR_H
+#define MODIFYLOCALVARIABLEBEHAVIOUR_H
 
 #include "../EventBehaviour.h"
 
 namespace editor::resources::events {
 
-    class EventBehaviourClass(MoveBehaviour) {
+    class EventBehaviourClass(ModifyLocalVariableBehaviour) {
     public:
-        MoveBehaviour();
-        ~MoveBehaviour() override;
+        ModifyLocalVariableBehaviour();
+        ~ModifyLocalVariableBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        int _xTarget, _yTarget;
+        std::string _variable;
+        sol::lua_value _newValue;
     };
 
 }
 
-#endif //MOVEBEHAVIOUR_H
+#endif //MODIFYLOCALVARIABLEBEHAVIOUR_H

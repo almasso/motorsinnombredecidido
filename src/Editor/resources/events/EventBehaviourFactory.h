@@ -20,8 +20,9 @@ namespace editor::resources::events {
         static EventBehaviour* Create(sol::table const& behaviour);
     private:
         static std::unordered_map <std::string, std::function<EventBehaviour*()>> _behaviours;
+        static bool _initialized;
 
-        void init();
+        static void Init();
         template <typename BehaviourType>
         static void RegisterBehaviour() {
             _behaviours.insert({BehaviourType::id, []() -> EventBehaviour* {

@@ -37,7 +37,7 @@ function Music:act(game, scene, entity, event)
     elseif (action == "volume") then
         self._source:setVolume(self._actionParams.volume);
     elseif (action == "loop") then
-        self._source:setLoop(self._actionParams.volume);
+        self._source:setLoop(self._actionParams.loop);
     end
     return true;
 end
