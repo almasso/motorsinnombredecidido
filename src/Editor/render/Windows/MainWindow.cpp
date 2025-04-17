@@ -8,6 +8,7 @@
 #include "render/RenderManager.h"
 #include "render/WindowStack.h"
 #include "render/WindowItems/MapEditor.h"
+#include "render/WindowItems/EventEditor.h"
 #include "utils/IconsFontAwesome6.h"
 
 editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Window("mainWindow"), _project(project) {
@@ -21,6 +22,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
     editor::render::WindowStack::addWindowToStack(this);
     editor::render::RenderManager::GetInstance().showWindow();
     _mapEditor = new tabs::MapEditor(_project);
+    _eventEditor = new tabs::EventEditor(_project);
 
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
                              ImGuiWindowFlags_NoResize |
@@ -43,6 +45,7 @@ void editor::render::windows::MainWindow::onRender() {
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 2 - 30);
     if(ImGui::Button("##BuildButton", {60, 60})) {
         _mapEditor->save();
+        _eventEditor->save();
         _project->build("Desktop");
     }
     ImVec2 pos = ImGui::GetItemRectMin();
@@ -54,6 +57,7 @@ void editor::render::windows::MainWindow::onRender() {
     ImGui::BeginChild("##mainWindowtabbar");
     ImGui::BeginTabBar("tabBar");
     _mapEditor->render();
+    _eventEditor->render();
     ImGui::EndTabBar();
     ImGui::EndChild();
 }

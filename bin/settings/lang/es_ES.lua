@@ -16,6 +16,7 @@ return {
     ["window.welcomewindow.popup.createproject.field.projectname"] = "Nombre del proyecto",
     ["window.welcomewindow.popup.createproject.field.projectroute"] = "Ruta del proyecto",
     ["window.welcomewindow.popup.createproject.field.tilesetdim"] = "Dimensiones del tileset (x, y)",
+    ["window.mainwindow.eventeditor"] = "Eventos",
     ["window.mainwindow.mapeditor"] = "Mapa",
     ["window.mainwindow.mapeditor.selectedlayer"] = "Capa seleccionada",
     ["window.mainwindow.mapeditor.selectedandbelowtransparent"] = "Capa seleccionada y las de abajo con transparencia",

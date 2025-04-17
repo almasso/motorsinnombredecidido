@@ -16,6 +16,7 @@ return {
 	["window.welcomewindow.popup.createproject.field.projectname"] = "Project name",
 	["window.welcomewindow.popup.createproject.field.projectroute"] = "Project path",
     ["window.welcomewindow.popup.createproject.field.tilesetdim"] = "Tileset dimensions (x, y)",
+    ["window.mainwindow.eventeditor"] = "Events",
     ["window.mainwindow.mapeditor"] = "Map",
     ["window.mainwindow.mapeditor.selectedlayer"] = "Selected layer",
     ["window.mainwindow.mapeditor.selectedandbelowtransparent"] = "Selected layer and below with transparency",

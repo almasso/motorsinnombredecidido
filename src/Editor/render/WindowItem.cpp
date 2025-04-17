@@ -7,7 +7,8 @@
 
 void editor::render::WindowItem::render() {
     beforeRender();
-    ImGui::BeginTabItem(_objectName.c_str(), nullptr, _itemFlags);
+    if (!ImGui::BeginTabItem(_objectName.c_str(), nullptr, _itemFlags))
+        return;
     onRender();
     ImGui::EndTabItem();
 }

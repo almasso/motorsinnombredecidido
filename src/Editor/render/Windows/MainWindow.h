@@ -14,6 +14,7 @@ namespace editor {
 
 namespace editor::render::tabs {
     class MapEditor;
+    class EventEditor;
 }
 
 namespace editor::render::windows {
@@ -24,6 +25,7 @@ namespace editor::render::windows {
         editor::Project* _project;
 
         editor::render::tabs::MapEditor* _mapEditor = nullptr;
+        editor::render::tabs::EventEditor* _eventEditor = nullptr;
 
         void beforeRender() override;
 
