@@ -53,9 +53,10 @@ void editor::resources::events::Event::init(std::string const& name) {
     initialized = true;
 }
 
-void editor::resources::events::Event::init(std::string const& name, EventCondition* condition) {
+void editor::resources::events::Event::init(std::string const& name, std::string const& condition) {
     init(name);
-    _condition = condition;
+    delete _condition;
+    _condition = EventConditionFactory::Create(condition);
 }
 
 bool editor::resources::events::Event::read(std::string const& name, sol::table const& eventTable) {

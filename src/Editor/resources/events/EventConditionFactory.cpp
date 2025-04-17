@@ -9,11 +9,17 @@
 
 #include "conditions/AlwaysCondition.h"
 #include "conditions/AndCondition.h"
+#include "conditions/AreCollidingCondition.h"
+#include "conditions/BehaviourEndedCondition.h"
+#include "conditions/NotCondition.h"
 #include "conditions/OnStartCondition.h"
 #include "conditions/OrCondition.h"
+#include "conditions/TimePassedCondition.h"
+#include "conditions/ValueEqualsCondition.h"
 
 
 std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*()>> editor::resources::events::EventConditionFactory::_conditions;
+std::set<std::string> editor::resources::events::EventConditionFactory::_conditionKeys;
 bool editor::resources::events::EventConditionFactory::_initialized = false;
 
 editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(std::string const& id) {
@@ -46,10 +52,19 @@ editor::resources::events::EventCondition* editor::resources::events::EventCondi
     return nullptr;
 }
 
+std::set<std::string> const& editor::resources::events::EventConditionFactory::GetKeys() {
+    return _conditionKeys;
+}
+
 void editor::resources::events::EventConditionFactory::Init() {
     _initialized = true;
     RegisterCondition<AlwaysCondition>();
     RegisterCondition<AndCondition>();
+    RegisterCondition<AreCollidingCondition>();
+    RegisterCondition<BehaviourEndedCondition>();
+    RegisterCondition<NotCondition>();
     RegisterCondition<OnStartCondition>();
     RegisterCondition<OrCondition>();
+    RegisterCondition<TimePassedCondition>();
+    RegisterCondition<ValueEqualsCondition>();
 }

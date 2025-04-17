@@ -42,6 +42,7 @@ namespace editor::render::modals {
 
         void renderNameSelector();
         void renderConditionSelector();
+        void renderAddCancelButtons();
     };
 
 }

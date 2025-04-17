@@ -10,7 +10,7 @@
 #define conditionKey "condition"
 
 editor::resources::events::NotCondition::NotCondition() :
-    _condition(nullptr) {
+    _condition(EventConditionFactory::Create("Always")) {
 }
 
 editor::resources::events::NotCondition::~NotCondition() {
@@ -21,6 +21,7 @@ bool editor::resources::events::NotCondition::read(sol::table const& params) {
     sol::optional<sol::table> condition = params.get<sol::optional<sol::table>>(conditionKey);
     if (!condition.has_value())
         return false;
+    delete _condition;
     _condition = EventConditionFactory::Create(condition.value());
     if (_condition == nullptr)
         return false;
@@ -37,7 +38,7 @@ bool editor::resources::events::NotCondition::writeParamsToEngine(sol::table& pa
 
 bool editor::resources::events::NotCondition::writeParams(sol::table& params) {
     sol::table condition = io::LuaManager::GetInstance().getState().create_table();
-    if (!_condition->write(condition))
+    if (_condition && !_condition->write(condition))
         return false;
     params[conditionKey] = condition;
     return true;

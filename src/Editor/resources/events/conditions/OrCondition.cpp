@@ -11,8 +11,8 @@
 #define conditionBKey "conditionB"
 
 editor::resources::events::OrCondition::OrCondition() :
-    _conditionA(nullptr),
-    _conditionB(nullptr) {
+    _conditionA(EventConditionFactory::Create("OnStart")),
+    _conditionB(EventConditionFactory::Create("OnStart")) {
 }
 
 editor::resources::events::OrCondition::~OrCondition() {
@@ -24,6 +24,7 @@ bool editor::resources::events::OrCondition::read(sol::table const& params) {
     sol::optional<sol::table> conditionA = params.get<sol::optional<sol::table>>(conditionAKey);
     if (!conditionA.has_value())
         return false;
+    delete _conditionA;
     _conditionA = EventConditionFactory::Create(conditionA.value());
     if (_conditionA == nullptr)
         return false;
@@ -31,6 +32,7 @@ bool editor::resources::events::OrCondition::read(sol::table const& params) {
     sol::optional<sol::table> conditionB = params.get<sol::optional<sol::table>>(conditionBKey);
     if (!conditionB.has_value())
         return false;
+    delete _conditionB;
     _conditionB = EventConditionFactory::Create(conditionB.value());
     if (_conditionB == nullptr)
         return false;

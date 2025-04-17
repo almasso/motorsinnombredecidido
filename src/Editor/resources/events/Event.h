@@ -23,7 +23,7 @@ namespace editor::resources::events {
         bool readFromLua(std::string const& name);
         bool writeToLua();
         void init(std::string const& name);
-        void init(std::string const& name, EventCondition* condition);
+        void init(std::string const& name, std::string const& condition);
         bool read(std::string const& name, sol::table const& eventTable);
         bool write(sol::table& eventTable);
         bool writeToEngine(sol::table& eventTable, std::vector<std::string>& componentDependencies);

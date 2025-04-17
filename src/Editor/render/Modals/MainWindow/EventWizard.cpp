@@ -20,7 +20,8 @@ editor::render::modals::EventWizard::EventWizard(Project* project) :
     _modify(false),
     _isGivingName(false),
     _sameName(false),
-    _nameBuffer{} {
+    _nameBuffer{},
+    _condition("OnStart"){
 }
 
 editor::render::modals::EventWizard::~EventWizard() {
@@ -38,29 +39,11 @@ void editor::render::modals::EventWizard::beforeRender() {
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
 }
 
-
 void editor::render::modals::EventWizard::onRender() {
-
     renderNameSelector();
     renderConditionSelector();
-
     ImGui::Spacing();
-    ImGui::BeginDisabled(_sameName);
-    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
-        _eventToModify->init(_nameBuffer, resources::events::EventConditionFactory::Create(_condition));
-        ImGui::CloseCurrentPopup();
-        _eventToModify = nullptr;
-        _isOpen = false;
-        _isGivingName = false;
-    }
-    ImGui::EndDisabled();
-    ImGui::SameLine();
-    if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
-        ImGui::CloseCurrentPopup();
-        _isOpen = false;
-        _eventToModify = nullptr;
-        _isGivingName = false;
-    }
+    renderAddCancelButtons();
 }
 
 void editor::render::modals::EventWizard::renderNameSelector() {
@@ -89,6 +72,39 @@ void editor::render::modals::EventWizard::renderNameSelector() {
 }
 
 void editor::render::modals::EventWizard::renderConditionSelector() {
-    // TODO: Dropdown para seleccionar el tipo de condición del evento
-    _condition = "Always";
+    if (!ImGui::BeginCombo(
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition").c_str(),
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + _condition).c_str()))
+        return;
+
+    auto const& conditions = resources::events::EventConditionFactory::GetKeys();
+    for (auto const& condition : conditions) {
+        bool isSelected = (condition == _condition);
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + condition).c_str(), isSelected)) {
+            _condition = condition;
+        }
+    }
+
+    ImGui::EndCombo();
+}
+
+
+void editor::render::modals::EventWizard::renderAddCancelButtons() {
+    ImGui::BeginDisabled(_sameName);
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
+        _eventToModify->init(_nameBuffer, _condition);
+        ImGui::CloseCurrentPopup();
+        _eventToModify = nullptr;
+        _isOpen = false;
+        _isGivingName = false;
+    }
+    ImGui::EndDisabled();
+
+    ImGui::SameLine();
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
+        ImGui::CloseCurrentPopup();
+        _isOpen = false;
+        _eventToModify = nullptr;
+        _isGivingName = false;
+    }
 }

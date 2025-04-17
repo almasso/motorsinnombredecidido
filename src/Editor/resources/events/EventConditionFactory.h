@@ -9,6 +9,7 @@
 #include <string>
 #include <functional>
 #include <unordered_map>
+#include <set>
 #include <sol/forward.hpp>
 
 namespace editor::resources::events {
@@ -19,8 +20,10 @@ namespace editor::resources::events {
     public:
         static EventCondition* Create(std::string const& id);
         static EventCondition* Create(sol::table const& condition);
+        static std::set<std::string> const& GetKeys();
     private:
         static std::unordered_map <std::string, std::function<EventCondition*()>> _conditions;
+        static std::set<std::string> _conditionKeys;
         static bool _initialized;
 
         static void Init();
@@ -29,6 +32,7 @@ namespace editor::resources::events {
             _conditions.insert({ConditionType::id, []() -> EventCondition* {
                 return new ConditionType();
             }});
+            _conditionKeys.insert(ConditionType::id);
         }
     };
 

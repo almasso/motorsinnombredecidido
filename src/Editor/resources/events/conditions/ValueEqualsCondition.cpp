@@ -10,7 +10,7 @@
 
 editor::resources::events::ValueEqualsCondition::ValueEqualsCondition() :
     _variable(),
-    _equals(sol::lua_nil) {
+    _equals(0) {
 }
 
 editor::resources::events::ValueEqualsCondition::~ValueEqualsCondition() = default;
