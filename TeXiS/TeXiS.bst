@@ -776,7 +776,6 @@ FUNCTION {format.developer}
     {
       developer num.names$ #1 =
         { developer
-            #1 "{ll}" format.name$  % Extract first developer
              bib.name.font
         }
         {
@@ -1725,7 +1724,11 @@ FUNCTION {calc.label}
     {
         "\emph{" title * "}" *
         "(" *
-        developer format.lab.names *
+        developer num.names$ #1 =
+        {developer}
+        {developer format.lab.names}
+        if$
+        *
         ", " *
         year duplicate$ empty$
         short.list key field.or.null = or
