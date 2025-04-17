@@ -3,22 +3,25 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef ONSTARTCONDITION_H
-#define ONSTARTCONDITION_H
+#ifndef NOTCONDITION_H
+#define NOTCONDITION_H
 
 #include "../EventCondition.h"
 
 namespace editor::resources::events {
 
-    class EventConditionClass(OnStartCondition, "OnStart") {
+    class EventConditionClass(NotCondition, "Not") {
     public:
-        ~OnStartCondition() override;
+        NotCondition();
+        ~NotCondition() override;
         bool read(sol::table const& params) override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
+    private:
+        EventCondition* _condition;
     };
 
 }
 
-#endif //ONSTARTCONDITION_H
+#endif //NOTCONDITION_H

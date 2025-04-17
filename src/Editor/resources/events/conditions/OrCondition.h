@@ -15,8 +15,8 @@ namespace editor::resources::events {
         OrCondition();
         ~OrCondition() override;
         bool read(sol::table const& params) override;
-        bool writeToEngine(sol::table& condition) override;
     protected:
+        bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
     private:
         EventCondition* _conditionA;

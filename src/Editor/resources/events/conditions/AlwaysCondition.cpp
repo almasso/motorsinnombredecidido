@@ -13,7 +13,8 @@ bool editor::resources::events::AlwaysCondition::read(sol::table const& params) 
     return true;
 }
 
-bool editor::resources::events::AlwaysCondition::writeToEngine(sol::table& condition) {
+bool editor::resources::events::AlwaysCondition::writeParamsToEngine(sol::table& params) {
+    params.add(0);
     return true;
 }
 

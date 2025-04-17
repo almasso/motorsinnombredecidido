@@ -3,22 +3,27 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef ONSTARTCONDITION_H
-#define ONSTARTCONDITION_H
+#ifndef BEHAVIOURENDEDCONDITION_H
+#define BEHAVIOURENDEDCONDITION_H
 
 #include "../EventCondition.h"
 
 namespace editor::resources::events {
 
-    class EventConditionClass(OnStartCondition, "OnStart") {
+    class EventConditionClass(BehaviourEndedCondition, "BehaviourEnded") {
     public:
-        ~OnStartCondition() override;
+        BehaviourEndedCondition();
+        ~BehaviourEndedCondition() override;
         bool read(sol::table const& params) override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
+    private:
+        std::string _entity;
+        std::string _event;
+        int _behaviour;
     };
 
 }
 
-#endif //ONSTARTCONDITION_H
+#endif //BEHAVIOURENDEDCONDITION_H

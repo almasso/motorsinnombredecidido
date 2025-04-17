@@ -23,6 +23,7 @@ namespace editor::resources::events {
         virtual bool writeToEngine(sol::table& condition) = 0;
     protected:
         virtual bool writeParams(sol::table& params) = 0;
+        virtual bool writeParamsToEngine(sol::table& params) = 0;
     };
 
     template<string_literal name>
@@ -34,6 +35,14 @@ namespace editor::resources::events {
             condition[typeKey] = id;
             sol::table params = io::LuaManager::GetInstance().getState().create_table();
             if (!writeParams(params))
+                return false;
+            condition[paramsKey] = params;
+            return true;
+        }
+        bool writeToEngine(sol::table& condition) final {
+            condition[typeKey] = id;
+            sol::table params = io::LuaManager::GetInstance().getState().create_table();
+            if (!writeParamsToEngine(params))
                 return false;
             condition[paramsKey] = params;
             return true;

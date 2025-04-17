@@ -3,22 +3,25 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef ONSTARTCONDITION_H
-#define ONSTARTCONDITION_H
+#ifndef TIMEPASSEDCONDITION_H
+#define TIMEPASSEDCONDITION_H
 
 #include "../EventCondition.h"
 
 namespace editor::resources::events {
 
-    class EventConditionClass(OnStartCondition, "OnStart") {
+    class EventConditionClass(TimePassedCondition, "TimePassed") {
     public:
-        ~OnStartCondition() override;
+        TimePassedCondition();
+        ~TimePassedCondition() override;
         bool read(sol::table const& params) override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
+    private:
+        float _seconds;
     };
 
 }
 
-#endif //ONSTARTCONDITION_H
+#endif //TIMEPASSEDCONDITION_H

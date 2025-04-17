@@ -38,7 +38,18 @@ bool editor::resources::events::OrCondition::read(sol::table const& params) {
     return true;
 }
 
-bool editor::resources::events::OrCondition::writeToEngine(sol::table& condition) {
+bool editor::resources::events::OrCondition::writeParamsToEngine(sol::table& params) {
+    auto& l = io::LuaManager::GetInstance().getState();
+    sol::table conditionA = l.create_table();
+    if (!_conditionA->writeToEngine(conditionA))
+        return false;
+    params[conditionAKey] = conditionA;
+
+    sol::table conditionB = l.create_table();
+    if (!_conditionB->writeToEngine(conditionB))
+        return false;
+    params[conditionBKey] = conditionB;
+
     return true;
 }
 
