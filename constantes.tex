@@ -49,7 +49,7 @@
 %
 % Cita un juego
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\citegame}[2]{\textit{\hyperref[#2]{#1}} \textnormal{(\citeauthor{#2}, \citeyear{#2})}}
+\newcommand{\citegame}[2]{\textnormal{\cite{#2}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Comando: 
@@ -63,7 +63,7 @@
 \newcommand{\comillas}[1]{\guillemotleft #1\guillemotright{}}
 
 \newcommand{\figuratikz}[3]{%
-\begin{figure}[h]%
+\begin{figure}[t]%
 \begin{center}%
 \begin{tikzpicture}%
 	#3
@@ -71,5 +71,4 @@
 \caption{#1} \label{#2}%
 \end{center}%
 \end{figure}%
-\vspace{-10pt}%
 }

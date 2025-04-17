@@ -768,24 +768,31 @@ FUNCTION {format.editors}
   if$
 }
 
+
 FUNCTION {format.developer}
-{ developer empty$
+{
+  developer empty$
     { "" }
-    { developer }
+    {
+      developer num.names$ #1 =
+        { developer
+            #1 "{ll}" format.name$  % Extract first developer
+             bib.name.font
+        }
+        {
+          developer "developer" format.names
+        }
+      if$
+    }
   if$
 }
+
+
 
 FUNCTION {format.platform}
 { platform empty$
     { "" }
     { platform }
-  if$
-}
-
-FUNCTION {format.publisher}
-{ publisher empty$
-    { "" }
-    { publisher }
   if$
 }
 
@@ -862,6 +869,16 @@ FUNCTION {format.title}
   if$
   "title" bibinfo.check
 }
+
+FUNCTION {format.gametitle}
+{ title
+  duplicate$ empty$ 'skip$
+    { "t" change.case$ }
+  if$
+  "title" bibinfo.check
+  emphasize  % Italicize game titles
+}
+
 FUNCTION {format.full.names}
 {'s :=
  "" 't :=
@@ -970,18 +987,18 @@ FUNCTION {make.full.names}
 
 FUNCTION {output.bibitem}
 { newline$
-  "\bibitem[{" write$
-  label write$
-  ")" make.full.names duplicate$ short.list =
-     { pop$ }
-     { * }
-   if$
-  "}]{" * write$
-  cite$ write$
-  "}" write$
-  newline$
-  ""
-  before.all 'output.state :=
+"\bibitem[{" write$
+label write$
+")" make.full.names duplicate$ short.list =
+    { pop$ }
+    { * }
+if$
+"}]{" * write$
+cite$ write$
+"}" write$
+newline$
+""
+before.all 'output.state :=
 }
 
 FUNCTION {n.dashify}
@@ -1358,25 +1375,27 @@ FUNCTION {booklet}
 
 FUNCTION {game}
 { output.bibitem
-  format.developer "developer" output.check
+  developer empty$
+    { skip$ }
+    { format.developer output.nonnull }
+  if$
   new.block
-  format.title "title" output.check
+  format.gametitle "title" output.check
   new.block
-  format.platform "platform" output.check
+  platform empty$
+    { skip$ }
+    { format.platform output.nonnull }
+  if$
   publisher empty$
     { skip$ }
     { new.block
-      format.publisher "publisher" output.check
+      publisher output
     }
   if$
   new.block
   format.date "year" output.check
-  url empty$
-    { skip$ }
-    { new.block
-      format.webpage output
-    }
-  if$
+  new.block
+  format.webpage output
   fin.entry
 }
 
@@ -1623,41 +1642,30 @@ FUNCTION {chop.word}
   if$
 }
 
+
 FUNCTION {format.lab.names}
 {
-  type$ "game" =
-    {
-      title empty$ { "" } { title emphasize } if$
-      " (" *
-      developer empty$ { "" } { developer } if$
-      ", " *
-      year empty$ { "" } { year } if$
-      ")" *
+    's :=
+    "" 't :=
+    s #1 "{vv~}{ll}" format.name$
+    s num.names$ duplicate$
+    #2 >
+    { pop$
+        " " * bbl.etal *
     }
-    {
-      's :=
-      "" 't :=
-      s #1 "{vv~}{ll}" format.name$
-      s num.names$ duplicate$
-      #2 >
-        { pop$
-          " " * bbl.etal *
-        }
-        { #2 <
-            'skip$
-            { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
-                {
-                  " " * bbl.etal *
-                }
-                { bbl.and space.word * s #2 "{vv~}{ll}" format.name$
-                  * }
-              if$
+    { #2 <
+        'skip$
+        { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
+            {
+                " " * bbl.etal *
             }
-          if$
+            { bbl.and space.word * s #2 "{vv~}{ll}" format.name$
+                * }
+            if$
         }
-      if$
+        if$
     }
-  if$
+    if$
 }
 
 FUNCTION {author.key.label}
@@ -1712,22 +1720,39 @@ FUNCTION {calc.short.authors}
 }
 
 FUNCTION {calc.label}
-{ calc.short.authors
-  short.list
-  "("
-  *
-% Añadido Marco: el año en las entradas de la Wikipedia
-% NO se corresponde con la entrada year
-  type$ "wikipedia" = not
-  	{ year duplicate$ empty$ }
-   	{ format.wikipedia.year duplicate$ empty$ }
-  if$
-  short.list key field.or.null = or
-     { pop$ "" }
-     'skip$
-  if$
-  *
-  'label :=
+{
+    type$ "game" =
+    {
+        "\emph{" title * "}" *
+        "(" *
+        developer format.lab.names *
+        ", " *
+        year duplicate$ empty$
+        short.list key field.or.null = or
+        {pop$ year }
+        'skip$
+        if$
+        *
+        'label :=
+    }
+    { calc.short.authors
+    short.list
+    "("
+    *
+    % Añadido Marco: el año en las entradas de la Wikipedia
+    % NO se corresponde con la entrada year
+    type$ "wikipedia" = not
+   	{ year duplicate$ empty$ }
+       	{ format.wikipedia.year duplicate$ empty$ }
+    if$
+    short.list key field.or.null = or
+        { pop$ "" }
+        'skip$
+    if$
+    *
+    'label :=
+    }
+    if$
 }
 
 FUNCTION {sort.format.names}
