@@ -21,6 +21,7 @@ namespace editor::resources::events {
         virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& condition) = 0;
         virtual bool writeToEngine(sol::table& condition) = 0;
+        virtual const char* getID() const = 0;
     protected:
         virtual bool writeParams(sol::table& params) = 0;
         virtual bool writeParamsToEngine(sol::table& params) = 0;
@@ -46,6 +47,9 @@ namespace editor::resources::events {
                 return false;
             condition[paramsKey] = params;
             return true;
+        }
+        const char* getID() const final {
+            return id;
         }
     };
 

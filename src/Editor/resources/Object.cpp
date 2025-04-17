@@ -9,6 +9,7 @@
 #include <sol/table.hpp>
 
 #include "events/Event.h"
+#include "common/Project.h"
 
 #define localVarsKey "localVariables"
 #define xKey "x"
@@ -16,7 +17,8 @@
 #define collidableKey "collidable"
 #define eventsKey "events"
 
-editor::resources::Object::Object() :
+editor::resources::Object::Object(Project* project) :
+    _project(project),
     _x(0),
     _y(0),
     _collidable(false) {
@@ -91,13 +93,13 @@ int editor::resources::Object::getY() const {
 }
 
 bool editor::resources::Object::readEvents(sol::table const& events) {
-    for (auto&& [name, event] : events) {
-        if (!name.is<std::string>() && !event.is<sol::table>())
+    for (auto&& [key, event] : events) {
+        if (!event.is<std::string>())
             return false;
-        auto ev = new events::Event();
+        auto ev = _project->getEvent(event.as<std::string>());
+        if (ev == nullptr)
+            return false;
         _events.push_back(ev);
-        if (!ev->read(name.as<std::string>(), event.as<sol::table>()))
-            return false;
     }
     return true;
 }
@@ -113,10 +115,7 @@ bool editor::resources::Object::readLocalVars(sol::table const& localVars) {
 
 bool editor::resources::Object::writeEvents(sol::table& events) {
     for (auto& event : _events) {
-        sol::table eventTable = io::LuaManager::GetInstance().getState().create_table();
-        if (!event->write(eventTable))
-            return false;
-        events[event->getName()] = eventTable;
+        events.add(event->getName());
     }
     return true;
 }

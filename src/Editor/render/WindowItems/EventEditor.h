@@ -10,6 +10,14 @@
 
 namespace editor {
     class Project;
+
+    namespace render::modals {
+        class EventWizard;
+    }
+
+    namespace resources::events {
+        class Event;
+    }
 }
 
 namespace editor::render::tabs {
@@ -23,7 +31,17 @@ namespace editor::render::tabs {
         void beforeRender() override;
         void onRender() override;
     private:
+        void renderEventDropDown();
+
         Project* _project;
+
+        modals::EventWizard* _eventWizard;
+        bool _eventOpened;
+
+        resources::events::Event* _selectedEvent;
+        resources::events::Event* _createdEvent;
+
+        bool _somethingModified;
     };
 
 }

@@ -15,6 +15,13 @@
 #define behavioursKey "behaviours"
 #define conditionKey "condition"
 
+std::filesystem::path editor::resources::events::Event::_eventsDirectory;
+
+editor::resources::events::Event::Event() :
+    _condition(nullptr),
+    initialized(false) {
+}
+
 editor::resources::events::Event::~Event() {
     delete _condition;
     _condition = nullptr;
@@ -25,8 +32,30 @@ editor::resources::events::Event::~Event() {
     _behaviours.clear();
 }
 
+bool editor::resources::events::Event::readFromLua(std::string const& name) {
+    sol::table eventTable = io::LuaManager::GetInstance().getTable(GetFilePath(name));
+    if (!eventTable.valid())
+        return false;
+    return read(name, eventTable);
+}
+
+bool editor::resources::events::Event::writeToLua() {
+    sol::table event = io::LuaManager::GetInstance().getState().create_table();
+    if (!write(event))
+        return false;
+
+    io::LuaManager::GetInstance().writeToFile(event, GetFilePath(_name));
+    return true;
+}
+
 void editor::resources::events::Event::init(std::string const& name) {
     _name = name;
+    initialized = true;
+}
+
+void editor::resources::events::Event::init(std::string const& name, EventCondition* condition) {
+    init(name);
+    _condition = condition;
 }
 
 bool editor::resources::events::Event::read(std::string const& name, sol::table const& eventTable) {
@@ -50,7 +79,7 @@ bool editor::resources::events::Event::read(std::string const& name, sol::table 
 
 bool editor::resources::events::Event::write(sol::table& eventTable) {
     sol::table conditionTable = io::LuaManager::GetInstance().getState().create_table();
-    if (!_condition->write(conditionTable))
+    if (_condition && !_condition->write(conditionTable))
         return false;
     eventTable[conditionKey] = conditionTable;
 
@@ -76,6 +105,14 @@ editor::resources::events::EventBehaviour* editor::resources::events::Event::add
     return behaviour;
 }
 
+bool editor::resources::events::Event::isInitialized() const {
+    return initialized;
+}
+
+void editor::resources::events::Event::SetEventsDirectory(std::filesystem::path const& eventsDirectory) {
+    _eventsDirectory = eventsDirectory;
+}
+
 bool editor::resources::events::Event::readBehaviours(sol::table const& behaviours) {
     for (auto&& [key, behaviour] : behaviours) {
         if (!behaviours.is<sol::table>())
@@ -96,4 +133,8 @@ bool editor::resources::events::Event::writeBehaviours(sol::table& behaviours) {
         behaviours.add(behaviourTable);
     }
     return true;
+}
+
+std::string editor::resources::events::Event::GetFilePath(std::string const& eventName) {
+    return (_eventsDirectory / (eventName + ".lua")).string();
 }

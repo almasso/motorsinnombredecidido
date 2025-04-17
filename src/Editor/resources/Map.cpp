@@ -406,7 +406,7 @@ bool editor::resources::Map::readCollisions(sol::table const& collisions) {
 
 bool editor::resources::Map::readObjects(sol::table const& objects) {
     for (const auto& [key, object] : objects) {
-        auto obj = new Object();
+        auto obj = new Object(_project);
         if (!obj->read(object)) {
             delete obj;
             return false;

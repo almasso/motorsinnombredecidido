@@ -20,7 +20,7 @@ namespace editor::resources {
 
     class Object {
     public:
-        Object();
+        explicit Object(Project* project);
         ~Object();
         bool read(sol::table const& objectTable);
         bool write(sol::table& objectTable);
@@ -29,6 +29,8 @@ namespace editor::resources {
         int getX() const;
         int getY() const;
     private:
+        Project* _project;
+
         int _x, _y;
         bool _collidable;
         std::vector<events::Event*> _events;

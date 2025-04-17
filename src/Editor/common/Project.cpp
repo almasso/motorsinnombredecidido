@@ -13,6 +13,7 @@
 #include "resources/Tileset.h"
 #include "resources/Map.h"
 #include <SDL3/SDL_filesystem.h>
+#include "resources/events/Event.h"
 
 #ifdef __APPLE__
 #define GetCurrentDir strdup(SDL_GetBasePath())
@@ -21,6 +22,10 @@
 #endif
 
 void editor::Project::initResources() {
+    if(!std::filesystem::exists(_projectPath / "projectfiles"/"maps/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"maps");
+    if(!std::filesystem::exists(_projectPath / "projectfiles"/"tilesets/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"tilesets");
+    if(!std::filesystem::exists(_projectPath / "projectfiles"/"events/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"events");
+
     std::filesystem::path tilesetsPath = (_projectPath / "projectfiles" / "tilesets");
     resources::Tileset::SetTilesetsDirectory(tilesetsPath);
     for (auto const& file : std::filesystem::directory_iterator(tilesetsPath)) {
@@ -30,6 +35,17 @@ void editor::Project::initResources() {
             _tilesets.insert({name, tileset});
         else
             delete tileset;
+    }
+
+    std::filesystem::path eventsPath = (_projectPath / "projectfiles" / "events");
+    resources::events::Event::SetEventsDirectory(eventsPath);
+    for (auto const& file : std::filesystem::directory_iterator(eventsPath)) {
+        auto event = new resources::events::Event();
+        auto name = file.path().stem().string();
+        if (event->readFromLua(name))
+            _events.insert({name, event});
+        else
+            delete event;
     }
 
     std::filesystem::path mapsPath = (_projectPath / "projectfiles" / "maps");
@@ -264,6 +280,7 @@ void editor::Project::saveProject() {
         if(!std::filesystem::exists(_projectPath / "bin/")) std::filesystem::create_directories(_projectPath / "bin");
         if(!std::filesystem::exists(_projectPath / "projectfiles"/"maps/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"maps");
         if(!std::filesystem::exists(_projectPath / "projectfiles"/"tilesets/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"tilesets");
+        if(!std::filesystem::exists(_projectPath / "projectfiles"/"events/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"events");
 
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
         for (auto& [key, tileset] : _tilesets)
@@ -316,6 +333,30 @@ int editor::Project::totalMaps() const {
 
 int editor::Project::totalTilesets() const {
     return _tilesets.size();
+}
+
+void editor::Project::addEvent(editor::resources::events::Event* event) {
+    _events[event->getName()] = event;
+    event->writeToLua();
+}
+
+int editor::Project::totalEvents() const {
+    return _events.size();
+}
+
+const std::unordered_map<std::string, editor::resources::events::Event*>& editor::Project::getEvents() const {
+    return _events;
+}
+
+void editor::Project::refreshEvents() {
+    for (auto it = _events.begin(); it != _events.end();) {
+    if(it->second->getName() != it->first) {
+        resources::events::Event* evtmp = it->second;
+        it = _events.erase(it);
+        _events[evtmp->getName()] = evtmp;
+    }
+    else ++it;
+}
 }
 
 const std::unordered_map<std::string, editor::resources::Map*>& editor::Project::getMaps() const {

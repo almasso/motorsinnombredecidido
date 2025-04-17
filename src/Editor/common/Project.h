@@ -10,11 +10,15 @@
 #include <filesystem>
 #include <unordered_set>
 #include <ctime>
+#include <resources/events/conditions/AndCondition.h>
 #include <sol/sol.hpp>
 
 namespace editor::resources {
     class Tileset;
     class Map;
+    namespace events {
+        class Event;
+    }
 }
 
 namespace editor {
@@ -133,6 +137,28 @@ namespace editor {
             return _tilesets.erase(t);
         }
 
+        void addEvent(editor::resources::events::Event* event);
+
+        int totalEvents() const;
+
+        const std::unordered_map<std::string, editor::resources::events::Event*>& getEvents() const;
+
+        void refreshEvents();
+
+        template <std::convertible_to<std::string> T>
+        editor::resources::events::Event* getEvent(T&& name) {
+            auto t = _events.find(std::forward<T>(name));
+            if(t == _events.end()) return nullptr;
+            return t->second;
+        }
+
+        template <std::convertible_to<std::string> T>
+        std::unordered_map<std::string, editor::resources::events::Event*>::iterator removeEvent(T&& name) {
+            auto t = _events.find(std::forward<T>(name));
+            if(t == _events.end()) return t;
+            return _events.erase(t);
+        }
+
         std::filesystem::path getAssetsPath() const;
 
         std::filesystem::path getBuildPath(const std::string &platform) const;
@@ -147,6 +173,7 @@ namespace editor {
 
         std::unordered_map<std::string, editor::resources::Tileset*> _tilesets;
         std::unordered_map<std::string, editor::resources::Map*> _maps;
+        std::unordered_map<std::string, editor::resources::events::Event*> _events;
 
         int _dimensions[2];
 
