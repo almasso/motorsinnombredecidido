@@ -94,7 +94,7 @@ bool editor::Project::build(const std::string &platform) {
         buildAudioSettings(platform);
         buildOverworldScene(platform);
     } catch (std::filesystem::filesystem_error& e) {
-        EditorError::showError_impl(e.what(), "Project",74);
+        EditorError::showError_impl(e.what(), "Project",97);
         return false;
     }
     return true;

@@ -10,6 +10,7 @@
 #include <vector>
 #include <filesystem>
 #include <unordered_map>
+#include <render/WindowItems/MapConnections.h>
 #include <sol/forward.hpp>
 #include <Utils/Vector2.h>
 
@@ -57,7 +58,12 @@ namespace editor::resources {
 
         void removeLayer(int index);
 
+        int getWorld() const;
+
+        void setWorld(int i);
+
         bool isInitialized() const;
+
 
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
@@ -74,6 +80,7 @@ namespace editor::resources {
         int _mapX;
         int _mapY;
         int _layers;
+        int _world;
 
         bool _init = false;
 

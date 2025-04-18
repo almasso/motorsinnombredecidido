@@ -9,6 +9,7 @@
 #include "render/WindowStack.h"
 #include "render/WindowItems/MapEditor.h"
 #include "render/WindowItems/EventEditor.h"
+#include "render/WindowItems/MapConnections.h"
 #include "utils/IconsFontAwesome6.h"
 
 editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Window("mainWindow"), _project(project) {
@@ -23,6 +24,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
     editor::render::RenderManager::GetInstance().showWindow();
     _mapEditor = new tabs::MapEditor(_project);
     _eventEditor = new tabs::EventEditor(_project);
+    _mapConnections = new tabs::MapConnections(_project);
 
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
                              ImGuiWindowFlags_NoResize |
@@ -46,6 +48,7 @@ void editor::render::windows::MainWindow::onRender() {
     if(ImGui::Button("##BuildButton", {60, 60})) {
         _mapEditor->save();
         _eventEditor->save();
+        _mapConnections->save();
         _project->build("Desktop");
     }
     ImVec2 pos = ImGui::GetItemRectMin();
@@ -58,6 +61,7 @@ void editor::render::windows::MainWindow::onRender() {
     ImGui::BeginTabBar("tabBar");
     _mapEditor->render();
     _eventEditor->render();
+    _mapConnections->render();
     ImGui::EndTabBar();
     ImGui::EndChild();
 }

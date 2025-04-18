@@ -54,6 +54,7 @@ void editor::resources::Map::init(std::string const& name, int mapWidth, int map
     _name = name;
     handleVectorChanges();
     _init = true;
+    _world = -1;
 }
 
 void editor::resources::Map::handleVectorChanges() {
@@ -312,6 +313,13 @@ void editor::resources::Map::removeLayer(int index) {
     _layers--;
 }
 
+int editor::resources::Map::getWorld() const {
+    return _world;
+}
+
+void editor::resources::Map::setWorld(int i) {
+    _world = i;
+}
 
 void editor::resources::Map::SetMapsDirectory(std::filesystem::path const& mapsDirectory) {
     _mapsDirectory = mapsDirectory;
