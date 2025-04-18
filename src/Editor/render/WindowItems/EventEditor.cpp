@@ -64,8 +64,11 @@ void editor::render::tabs::EventEditor::renderEventDropDown() {
 
     auto const& events = _project->getEvents();
     for(auto it = events.begin(); it != events.end();) {
+        bool isSelected = _selectedEvent == it->second;
         if (renderSelectableEvent(it))
             ++it;
+        else if (isSelected)
+            _selectedEvent = nullptr;
     }
     ImGui::Separator();
     if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.createevent").c_str())) {
