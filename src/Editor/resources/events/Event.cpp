@@ -48,6 +48,14 @@ bool editor::resources::events::Event::writeToLua() {
     return true;
 }
 
+bool editor::resources::events::Event::eraseFromLua() {
+    return EraseFromLua(_name);
+}
+
+bool editor::resources::events::Event::EraseFromLua(std::string const& name) {
+    return std::filesystem::remove(GetFilePath(name));
+}
+
 void editor::resources::events::Event::init(std::string const& name) {
     _name = name;
     initialized = true;

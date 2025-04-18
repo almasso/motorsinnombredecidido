@@ -155,7 +155,9 @@ namespace editor {
         template <std::convertible_to<std::string> T>
         std::unordered_map<std::string, editor::resources::events::Event*>::iterator removeEvent(T&& name) {
             auto t = _events.find(std::forward<T>(name));
-            if(t == _events.end()) return t;
+            if(t == _events.end())
+                return t;
+            t->second->eraseFromLua();
             return _events.erase(t);
         }
 

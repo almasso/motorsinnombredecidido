@@ -6,6 +6,8 @@
 #ifndef EVENTEDITOR_H
 #define EVENTEDITOR_H
 
+#include <unordered_map>
+
 #include "render/WindowItem.h"
 
 namespace editor {
@@ -24,15 +26,14 @@ namespace editor::render::tabs {
 
     class EventEditor : public WindowItem {
     public:
-        EventEditor(editor::Project* project);
+        explicit EventEditor(editor::Project* project);
         ~EventEditor() override;
         void save();
     protected:
         void beforeRender() override;
         void onRender() override;
-    private:
-        void renderEventDropDown();
 
+    private:
         Project* _project;
 
         modals::EventWizard* _eventWizard;
@@ -42,6 +43,13 @@ namespace editor::render::tabs {
         resources::events::Event* _createdEvent;
 
         bool _somethingModified;
+
+        void renderEventDropDown();
+        bool renderSelectableEvent(std::unordered_map<std::string, resources::events::Event*>::const_iterator& it);
+        bool renderSelectableEventOptions(std::unordered_map<std::string, resources::events::Event*>::const_iterator& it);
+        void handleEventWizard();
+        void renderConditionEditor();
+        void renderBehaviourEditor();
     };
 
 }

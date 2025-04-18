@@ -350,13 +350,15 @@ const std::unordered_map<std::string, editor::resources::events::Event*>& editor
 
 void editor::Project::refreshEvents() {
     for (auto it = _events.begin(); it != _events.end();) {
-    if(it->second->getName() != it->first) {
-        resources::events::Event* evtmp = it->second;
-        it = _events.erase(it);
-        _events[evtmp->getName()] = evtmp;
+        if(it->second->getName() != it->first) {
+            resources::events::Event* evtmp = it->second;
+            resources::events::Event::EraseFromLua(it->first);
+            it = _events.erase(it);
+            _events[evtmp->getName()] = evtmp;
+            evtmp->writeToLua();
+        }
+        else ++it;
     }
-    else ++it;
-}
 }
 
 const std::unordered_map<std::string, editor::resources::Map*>& editor::Project::getMaps() const {

@@ -18,16 +18,18 @@ editor::resources::events::BehaviourEndedCondition::BehaviourEndedCondition() :
 editor::resources::events::BehaviourEndedCondition::~BehaviourEndedCondition() = default;
 
 bool editor::resources::events::BehaviourEndedCondition::read(sol::table const& params) {
-    _entity = params.get_or<std::string>(entityKey, "");
-    if (_entity.empty())
+    sol::optional<std::string> entity = params.get<sol::optional<std::string>>(entityKey);
+    if (!entity.has_value())
         return false;
+    _entity = entity.value();
 
-    _event = params.get_or<std::string>(eventKey, "");
-    if (_event.empty())
+    sol::optional<std::string> event = params.get<sol::optional<std::string>>(eventKey);
+    if (!event.has_value())
         return false;
+    _event = event.value();
 
-    _behaviour = params.get_or<int, std::string, int>(behaviourKey, -1);
-    if (_behaviour == -1)
+    _behaviour = params.get_or<int, std::string, int>(behaviourKey, -2);
+    if (_behaviour == -2)
         return false;
 
     return true;

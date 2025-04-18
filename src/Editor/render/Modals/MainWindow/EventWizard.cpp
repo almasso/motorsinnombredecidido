@@ -41,7 +41,8 @@ void editor::render::modals::EventWizard::beforeRender() {
 
 void editor::render::modals::EventWizard::onRender() {
     renderNameSelector();
-    renderConditionSelector();
+    if (!_modify)
+        renderConditionSelector();
     ImGui::Spacing();
     renderAddCancelButtons();
 }
@@ -92,7 +93,8 @@ void editor::render::modals::EventWizard::renderConditionSelector() {
 void editor::render::modals::EventWizard::renderAddCancelButtons() {
     ImGui::BeginDisabled(_sameName);
     if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
-        _eventToModify->init(_nameBuffer, _condition);
+        if (_modify) _eventToModify->init(_nameBuffer);
+        else _eventToModify->init(_nameBuffer, _condition);
         ImGui::CloseCurrentPopup();
         _eventToModify = nullptr;
         _isOpen = false;

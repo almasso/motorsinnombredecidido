@@ -22,6 +22,8 @@ namespace editor::resources::events {
 
         bool readFromLua(std::string const& name);
         bool writeToLua();
+        bool eraseFromLua();
+        static bool EraseFromLua(std::string const& name);
         void init(std::string const& name);
         void init(std::string const& name, std::string const& condition);
         bool read(std::string const& name, sol::table const& eventTable);
