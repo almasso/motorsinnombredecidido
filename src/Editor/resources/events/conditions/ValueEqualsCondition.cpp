@@ -28,6 +28,10 @@ bool editor::resources::events::ValueEqualsCondition::read(sol::table const& par
     return true;
 }
 
+bool editor::resources::events::ValueEqualsCondition::render() {
+    return false;
+}
+
 bool editor::resources::events::ValueEqualsCondition::writeParamsToEngine(sol::table& params) {
     params[variableKey] = _variable;
     params[equalsKey] = _equals;

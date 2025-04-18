@@ -22,6 +22,10 @@ bool editor::resources::events::PlaySFXBehaviour::writeToEngine(sol::table& beha
     return true;
 }
 
+bool editor::resources::events::PlaySFXBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::PlaySFXBehaviour::writeParams(sol::table& params) {
     params[sfxKey] = _sfxHandler;
     return true;

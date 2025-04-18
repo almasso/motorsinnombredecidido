@@ -30,6 +30,10 @@ bool editor::resources::events::WaitForBehaviour::writeToEngine(sol::table& beha
     return true;
 }
 
+bool editor::resources::events::WaitForBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::WaitForBehaviour::writeParams(sol::table& params) {
     sol::table condition = io::LuaManager::GetInstance().getState().create_table();
     if (!_condition->write(condition))

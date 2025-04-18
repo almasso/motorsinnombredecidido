@@ -5,11 +5,15 @@
 
 #include "EventEditor.h"
 
+#include <render/RenderManager.h>
 #include <render/WindowStack.h>
 
 #include "common/Project.h"
 #include "io/LocalizationManager.h"
 #include <resources/events/Event.h>
+#include <resources/events/EventBehaviour.h>
+#include <resources/events/EventConditionFactory.h>
+
 #include "render/Modals/MainWindow/EventWizard.h"
 
 
@@ -41,14 +45,21 @@ void editor::render::tabs::EventEditor::beforeRender() {
 
 void editor::render::tabs::EventEditor::onRender() {
 
-    ImGui::BeginChild("##eventSelector");
+    ImGui::BeginChild("##event", ImVec2(RenderManager::GetInstance().getWidth()/5, 0));
+
+    ImGui::BeginChild("##eventSelector", ImVec2(0, 75), true);
     renderEventDropDown();
     handleEventWizard();
     ImGui::EndChild();
-    ImGui::BeginChild("##conditionEditor");
+
+    ImGui::BeginChild("##conditionEditor", ImVec2(0, 0), true);
     renderConditionEditor();
     ImGui::EndChild();
-    ImGui::BeginChild("##behaviourEditor");
+
+    ImGui::EndChild();
+
+    ImGui::SameLine();
+    ImGui::BeginChild("##behaviourEditor", ImVec2(0, 0), true);
     renderBehaviourEditor();
     ImGui::EndChild();
 
@@ -58,7 +69,8 @@ void editor::render::tabs::EventEditor::onRender() {
 }
 
 void editor::render::tabs::EventEditor::renderEventDropDown() {
-    ImGui::SetNextItemWidth(250);
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.event").c_str());
+    ImGui::SetNextItemWidth(RenderManager::GetInstance().getWidth() / 5 - 20);
     if (!ImGui::BeginCombo("##eventDropdown", _selectedEvent != nullptr ? _selectedEvent->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.eventselector").c_str()))
         return;
 
@@ -144,9 +156,43 @@ void editor::render::tabs::EventEditor::handleEventWizard() {
 }
 
 void editor::render::tabs::EventEditor::renderConditionEditor() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition").c_str());
+    if (_selectedEvent == nullptr)
+        return;
 
+    renderConditionSelector();
+    if (_selectedEvent->getCondition()->render())
+        _somethingModified = true;
 }
 
 void editor::render::tabs::EventEditor::renderBehaviourEditor() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours").c_str());
+    if (_selectedEvent == nullptr)
+        return;
+    auto& behaviours = _selectedEvent->getBehaviours();
+    for (auto& behaviour : behaviours) {
+        behaviour->render();
+    }
+}
 
+void editor::render::tabs::EventEditor::renderConditionSelector() {
+    std::string selectedCondition(_selectedEvent->getCondition()->getID());
+
+    ImGui::SetNextItemWidth(RenderManager::GetInstance().getWidth() / 5 - 20);
+    if (!ImGui::BeginCombo( "##editorConditionSelector",
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + selectedCondition).c_str()))
+        return;
+
+    auto const& conditions = resources::events::EventConditionFactory::GetKeys();
+    for (auto const& condition : conditions) {
+        bool isSelected = (condition == selectedCondition);
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + condition).c_str(), isSelected)) {
+            if (!isSelected) {
+                _selectedEvent->setCondition(condition);
+                _somethingModified = true;
+            }
+        }
+    }
+
+    ImGui::EndCombo();
 }

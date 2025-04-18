@@ -26,6 +26,10 @@ bool editor::resources::events::AreCollidingCondition::read(sol::table const& pa
     return true;
 }
 
+bool editor::resources::events::AreCollidingCondition::render() {
+    return false;
+}
+
 bool editor::resources::events::AreCollidingCondition::writeParamsToEngine(sol::table& params) {
     params[objectAKey] = _objectA;
     params[objectBKey] = _objectB;

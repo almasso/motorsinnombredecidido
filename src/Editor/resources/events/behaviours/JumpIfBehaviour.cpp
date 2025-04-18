@@ -36,6 +36,10 @@ bool editor::resources::events::JumpIfBehaviour::writeToEngine(sol::table& behav
     return true;
 }
 
+bool editor::resources::events::JumpIfBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::JumpIfBehaviour::writeParams(sol::table& params) {
     params[targetKey] = _target;
     sol::table condition = io::LuaManager::GetInstance().getState().create_table();

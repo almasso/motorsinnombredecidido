@@ -285,6 +285,8 @@ void editor::Project::saveProject() {
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
         for (auto& [key, tileset] : _tilesets)
             tileset->writeToLua();
+        for (auto& [key, event] : _events)
+            event->writeToLua();
         for (auto& [key, map] : _maps)
             map->writeToLua();
     }

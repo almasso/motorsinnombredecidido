@@ -18,6 +18,10 @@ bool editor::resources::events::TimePassedCondition::read(sol::table const& para
     return _seconds >= 0.0f;
 }
 
+bool editor::resources::events::TimePassedCondition::render() {
+    return false;
+}
+
 bool editor::resources::events::TimePassedCondition::writeParamsToEngine(sol::table& params) {
     params[secondsKey] = _seconds;
     return true;

@@ -12,6 +12,10 @@ bool editor::resources::events::OnStartCondition::read(sol::table const& params)
     return true;
 }
 
+bool editor::resources::events::OnStartCondition::render() {
+    return false;
+}
+
 bool editor::resources::events::OnStartCondition::writeParamsToEngine(sol::table& params) {
     return true;
 }

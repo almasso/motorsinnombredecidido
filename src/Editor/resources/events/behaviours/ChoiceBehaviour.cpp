@@ -34,6 +34,10 @@ bool editor::resources::events::ChoiceBehaviour::writeToEngine(sol::table& behav
     return true;
 }
 
+bool editor::resources::events::ChoiceBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::ChoiceBehaviour::writeParams(sol::table& params) {
     params[variableKey] = _variable;
     auto& l = io::LuaManager::GetInstance().getState();

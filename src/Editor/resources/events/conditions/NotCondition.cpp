@@ -5,6 +5,10 @@
 
 #include "NotCondition.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+#include <render/RenderManager.h>
+
 #include "../EventConditionFactory.h"
 
 #define conditionKey "condition"
@@ -28,6 +32,14 @@ bool editor::resources::events::NotCondition::read(sol::table const& params) {
     return true;
 }
 
+bool editor::resources::events::NotCondition::render() {
+    ImGui::BeginChild((std::string("##notCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true);
+    bool edited = renderConditionSelector(_condition);
+    edited != _condition->render();
+    ImGui::EndChild();
+    return edited;
+}
+
 bool editor::resources::events::NotCondition::writeParamsToEngine(sol::table& params) {
     sol::table condition = io::LuaManager::GetInstance().getState().create_table();
     if (!_condition->writeToEngine(condition))
@@ -42,4 +54,27 @@ bool editor::resources::events::NotCondition::writeParams(sol::table& params) {
         return false;
     params[conditionKey] = condition;
     return true;
+}
+
+bool editor::resources::events::NotCondition::renderConditionSelector(EventCondition*& condition) {
+    bool edited = false;
+    std::string conditionID(condition->getID());
+    ImGui::SetNextItemWidth(render::RenderManager::GetInstance().getWidth() / 5 - 20);
+    if (!ImGui::BeginCombo((std::string("###andConditionSelector") + std::to_string(reinterpret_cast<long long>(condition))).c_str(),
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionID).c_str()))
+        return false;
+
+    auto const& conditions = resources::events::EventConditionFactory::GetKeys();
+    for (auto const& conditionName : conditions) {
+        bool isSelected = (conditionName == conditionID);
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionName).c_str(), isSelected)) {
+            if (!isSelected) {
+                delete condition;
+                condition = EventConditionFactory::Create(conditionName);
+                edited = true;
+            }
+        }
+    }
+    ImGui::EndCombo();
+    return edited;
 }

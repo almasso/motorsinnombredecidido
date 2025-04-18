@@ -40,6 +40,10 @@ bool editor::resources::events::AnimationBehaviour::writeToEngine(sol::table& be
     return true;
 }
 
+bool editor::resources::events::AnimationBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::AnimationBehaviour::writeParams(sol::table& params) {
     switch (_action) {
     case PLAY:

@@ -33,6 +33,9 @@ namespace editor::resources::events {
         std::string const& getName() const;
         EventBehaviour* addBehaviour(std::string const& id);
         bool isInitialized() const;
+        EventCondition* getCondition();
+        void setCondition(std::string const& condition);
+        std::vector<EventBehaviour*>& getBehaviours();
 
         static void SetEventsDirectory(std::filesystem::path const& eventsDirectory);
     private:

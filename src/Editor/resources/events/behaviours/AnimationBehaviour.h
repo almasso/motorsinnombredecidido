@@ -15,6 +15,7 @@ namespace editor::resources::events {
         ~AnimationBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
+        bool render() override;
     protected:
         bool writeParams(sol::table& params) override;
 

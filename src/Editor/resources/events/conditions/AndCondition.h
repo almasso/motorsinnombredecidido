@@ -15,14 +15,16 @@ namespace editor::resources::events {
         AndCondition();
         ~AndCondition() override;
         bool read(sol::table const& params) override;
+        bool render() override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
     private:
         EventCondition* _conditionA;
         EventCondition* _conditionB;
-    };
 
+        bool renderConditionSelector(EventCondition*& condition);
+    };
 }
 
 #endif //ANDCONDITION_H

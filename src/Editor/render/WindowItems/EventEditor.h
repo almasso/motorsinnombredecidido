@@ -49,6 +49,7 @@ namespace editor::render::tabs {
         bool renderSelectableEventOptions(std::unordered_map<std::string, resources::events::Event*>::const_iterator& it);
         void handleEventWizard();
         void renderConditionEditor();
+        void renderConditionSelector();
         void renderBehaviourEditor();
     };
 

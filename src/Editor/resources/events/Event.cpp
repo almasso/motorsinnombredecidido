@@ -63,8 +63,7 @@ void editor::resources::events::Event::init(std::string const& name) {
 
 void editor::resources::events::Event::init(std::string const& name, std::string const& condition) {
     init(name);
-    delete _condition;
-    _condition = EventConditionFactory::Create(condition);
+    setCondition(condition);
 }
 
 bool editor::resources::events::Event::read(std::string const& name, sol::table const& eventTable) {
@@ -116,6 +115,19 @@ editor::resources::events::EventBehaviour* editor::resources::events::Event::add
 
 bool editor::resources::events::Event::isInitialized() const {
     return initialized;
+}
+
+editor::resources::events::EventCondition* editor::resources::events::Event::getCondition() {
+    return _condition;
+}
+
+void editor::resources::events::Event::setCondition(std::string const& condition) {
+    delete _condition;
+    _condition = EventConditionFactory::Create(condition);
+}
+
+std::vector<editor::resources::events::EventBehaviour*>& editor::resources::events::Event::getBehaviours() {
+    return _behaviours;
 }
 
 void editor::resources::events::Event::SetEventsDirectory(std::filesystem::path const& eventsDirectory) {

@@ -25,6 +25,10 @@ bool editor::resources::events::JumpBehaviour::writeToEngine(sol::table& behavio
     return true;
 }
 
+bool editor::resources::events::JumpBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::JumpBehaviour::writeParams(sol::table& params) {
     params[targetKey] = _target;
     return true;

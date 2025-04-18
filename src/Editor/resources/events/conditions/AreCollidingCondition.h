@@ -15,6 +15,7 @@ namespace editor::resources::events {
         AreCollidingCondition();
         ~AreCollidingCondition() override;
         bool read(sol::table const& params) override;
+        bool render() override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;

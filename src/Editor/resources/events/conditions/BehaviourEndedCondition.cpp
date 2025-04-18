@@ -35,6 +35,10 @@ bool editor::resources::events::BehaviourEndedCondition::read(sol::table const& 
     return true;
 }
 
+bool editor::resources::events::BehaviourEndedCondition::render() {
+    return false;
+}
+
 bool editor::resources::events::BehaviourEndedCondition::writeParamsToEngine(sol::table& params) {
     params[entityKey] = _entity;
     params[eventKey] = _event;

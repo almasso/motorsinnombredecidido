@@ -15,6 +15,7 @@ namespace editor::resources::events {
         AlwaysCondition();
         ~AlwaysCondition() override;
         bool read(sol::table const& params) override;
+        bool render() override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;

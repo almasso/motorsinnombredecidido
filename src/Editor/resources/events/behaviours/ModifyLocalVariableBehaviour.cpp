@@ -30,6 +30,10 @@ bool editor::resources::events::ModifyLocalVariableBehaviour::writeToEngine(sol:
     return true;
 }
 
+bool editor::resources::events::ModifyLocalVariableBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::ModifyLocalVariableBehaviour::writeParams(sol::table& params) {
     params[variableKey] = _variable;
     params[newValueKey] = _newValue;

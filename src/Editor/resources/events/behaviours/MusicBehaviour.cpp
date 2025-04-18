@@ -56,6 +56,10 @@ bool editor::resources::events::MusicBehaviour::writeToEngine(sol::table& behavi
     return true;
 }
 
+bool editor::resources::events::MusicBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::MusicBehaviour::writeParams(sol::table& params) {
     switch (_action) {
     case PLAY:

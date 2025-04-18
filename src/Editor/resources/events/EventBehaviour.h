@@ -22,6 +22,7 @@ namespace editor::resources::events {
         virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& behaviour) = 0;
         virtual bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) = 0;
+        virtual bool render() = 0;
     protected:
         virtual bool writeParams(sol::table& params) = 0;
     };

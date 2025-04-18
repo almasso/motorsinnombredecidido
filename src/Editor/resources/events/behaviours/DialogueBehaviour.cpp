@@ -22,6 +22,10 @@ bool editor::resources::events::DialogueBehaviour::writeToEngine(sol::table& beh
     return true;
 }
 
+bool editor::resources::events::DialogueBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::DialogueBehaviour::writeParams(sol::table& params) {
     params[textKey] = _text;
     return true;

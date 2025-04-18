@@ -33,6 +33,10 @@ bool editor::resources::events::MoveBehaviour::writeToEngine(sol::table& behavio
     return true;
 }
 
+bool editor::resources::events::MoveBehaviour::render() {
+    return false;
+}
+
 bool editor::resources::events::MoveBehaviour::writeParams(sol::table& params) {
     params[xTargetKey] = _xTarget;
     params[yTargetKey] = _yTarget;
