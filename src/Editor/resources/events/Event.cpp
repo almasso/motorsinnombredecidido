@@ -130,6 +130,16 @@ std::vector<editor::resources::events::EventBehaviour*>& editor::resources::even
     return _behaviours;
 }
 
+void editor::resources::events::Event::changeBehaviour(EventBehaviour* previousBehaviour, std::string const& newBehaviour) {
+    for (auto& behaviour : _behaviours) {
+        if (behaviour == previousBehaviour) {
+            delete behaviour;
+            behaviour = EventBehaviourFactory::Create(newBehaviour);
+            return;
+        }
+    }
+}
+
 void editor::resources::events::Event::SetEventsDirectory(std::filesystem::path const& eventsDirectory) {
     _eventsDirectory = eventsDirectory;
 }

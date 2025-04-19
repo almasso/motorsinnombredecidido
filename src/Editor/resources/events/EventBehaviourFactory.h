@@ -9,6 +9,7 @@
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include <set>
 #include <sol/forward.hpp>
 
 namespace editor::resources::events {
@@ -18,8 +19,10 @@ namespace editor::resources::events {
     public:
         static EventBehaviour* Create(std::string const& id);
         static EventBehaviour* Create(sol::table const& behaviour);
+        static std::set<std::string> const& GetKeys();
     private:
         static std::unordered_map <std::string, std::function<EventBehaviour*()>> _behaviours;
+        static std::set<std::string> _behaviourKeys;
         static bool _initialized;
 
         static void Init();
@@ -28,6 +31,7 @@ namespace editor::resources::events {
             _behaviours.insert({BehaviourType::id, []() -> EventBehaviour* {
                 return new BehaviourType();
             }});
+            _behaviourKeys.insert(BehaviourType::id);
         }
     };
 

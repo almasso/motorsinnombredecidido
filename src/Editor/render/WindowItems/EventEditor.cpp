@@ -12,6 +12,7 @@
 #include "io/LocalizationManager.h"
 #include <resources/events/Event.h>
 #include <resources/events/EventBehaviour.h>
+#include <resources/events/EventBehaviourFactory.h>
 #include <resources/events/EventConditionFactory.h>
 
 #include "render/Modals/MainWindow/EventWizard.h"
@@ -165,16 +166,6 @@ void editor::render::tabs::EventEditor::renderConditionEditor() {
         _somethingModified = true;
 }
 
-void editor::render::tabs::EventEditor::renderBehaviourEditor() {
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours").c_str());
-    if (_selectedEvent == nullptr)
-        return;
-    auto& behaviours = _selectedEvent->getBehaviours();
-    for (auto& behaviour : behaviours) {
-        behaviour->render();
-    }
-}
-
 void editor::render::tabs::EventEditor::renderConditionSelector() {
     std::string selectedCondition(_selectedEvent->getCondition()->getID());
 
@@ -195,4 +186,49 @@ void editor::render::tabs::EventEditor::renderConditionSelector() {
     }
 
     ImGui::EndCombo();
+}
+
+void editor::render::tabs::EventEditor::renderBehaviourEditor() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours").c_str());
+    if (_selectedEvent == nullptr)
+        return;
+    auto& behaviours = _selectedEvent->getBehaviours();
+    for (auto& behaviour : behaviours) {
+        renderBehaviourDropDown(behaviour);
+        if (behaviour->render())
+            _somethingModified = true;
+        ImGui::Separator();
+    }
+    renderAddBehaviourButton();
+}
+
+void editor::render::tabs::EventEditor::renderBehaviourDropDown(resources::events::EventBehaviour*& behaviour) {
+    std::string selectedBehaviour;
+    if (behaviour != nullptr) selectedBehaviour = behaviour->getID();
+    else selectedBehaviour = io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.invalid");
+
+    ImGui::SetNextItemWidth(RenderManager::GetInstance().getWidth() / 5 - 20);
+    if (!ImGui::BeginCombo( (std::string("##editorBehaviourSelector") + std::to_string(reinterpret_cast<long long>(behaviour))).c_str(),
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + selectedBehaviour).c_str()))
+        return;
+
+    auto const& behaviours = resources::events::EventBehaviourFactory::GetKeys();
+    for (auto const& behaviourName : behaviours) {
+        bool isSelected = (behaviourName == selectedBehaviour);
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + behaviourName).c_str(), isSelected)) {
+            if (!isSelected) {
+                _selectedEvent->changeBehaviour(behaviour, behaviourName);
+                _somethingModified = true;
+            }
+        }
+    }
+
+    ImGui::EndCombo();
+}
+
+void editor::render::tabs::EventEditor::renderAddBehaviourButton() {
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.add").c_str(), ImVec2(0, 0))) {
+        _selectedEvent->addBehaviour("MoveBehaviour");
+        _somethingModified = true;
+    }
 }

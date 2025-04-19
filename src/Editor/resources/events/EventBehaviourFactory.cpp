@@ -17,6 +17,7 @@
 #include "behaviours/WaitForBehaviour.h"
 
 std::unordered_map <std::string, std::function<editor::resources::events::EventBehaviour*()>> editor::resources::events::EventBehaviourFactory::_behaviours;
+std::set<std::string> editor::resources::events::EventBehaviourFactory::_behaviourKeys;
 bool editor::resources::events::EventBehaviourFactory::_initialized = false;
 
 editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(std::string const& id) {
@@ -47,6 +48,10 @@ editor::resources::events::EventBehaviour* editor::resources::events::EventBehav
 
     delete instance;
     return nullptr;
+}
+
+std::set<std::string> const& editor::resources::events::EventBehaviourFactory::GetKeys() {
+    return _behaviourKeys;
 }
 
 void editor::resources::events::EventBehaviourFactory::Init() {

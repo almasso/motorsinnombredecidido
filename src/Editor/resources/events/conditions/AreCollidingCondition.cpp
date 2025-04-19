@@ -16,13 +16,16 @@ editor::resources::events::AreCollidingCondition::AreCollidingCondition() :
 editor::resources::events::AreCollidingCondition::~AreCollidingCondition() = default;
 
 bool editor::resources::events::AreCollidingCondition::read(sol::table const& params) {
-    _objectA = params.get_or<std::string>(objectAKey, "");
-    if (_objectA.empty())
+    sol::optional<std::string> objectA = params.get<sol::optional<std::string>>(objectAKey);
+    if (!objectA.has_value())
         return false;
+    _objectA = objectA.value();
 
-    _objectB = params.get_or<std::string>(objectBKey, "");
-    if (_objectB.empty())
+    sol::optional<std::string> objectB = params.get<sol::optional<std::string>>(objectBKey);
+    if (!objectB.has_value())
         return false;
+    _objectB = objectB.value();
+
     return true;
 }
 

@@ -36,6 +36,7 @@ namespace editor::resources::events {
         EventCondition* getCondition();
         void setCondition(std::string const& condition);
         std::vector<EventBehaviour*>& getBehaviours();
+        void changeBehaviour(EventBehaviour* previousBehaviour, std::string const& newBehaviour);
 
         static void SetEventsDirectory(std::filesystem::path const& eventsDirectory);
     private:

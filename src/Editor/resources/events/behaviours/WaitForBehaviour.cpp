@@ -11,7 +11,7 @@
 #define conditionKey "condition"
 
 editor::resources::events::WaitForBehaviour::WaitForBehaviour() :
-    _condition(nullptr) {
+    _condition(EventConditionFactory::Create("OnStart")) {
 }
 
 editor::resources::events::WaitForBehaviour::~WaitForBehaviour() {
@@ -22,6 +22,7 @@ bool editor::resources::events::WaitForBehaviour::read(sol::table const& params)
     sol::optional<sol::table> condition = params.get<sol::optional<sol::table>>(conditionKey);
     if (!condition.has_value())
         return false;
+    delete _condition;
     _condition = EventConditionFactory::Create(condition.value());
     return _condition != nullptr;
 }

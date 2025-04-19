@@ -23,6 +23,7 @@ namespace editor::resources::events {
         virtual bool write(sol::table& behaviour) = 0;
         virtual bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) = 0;
         virtual bool render() = 0;
+        virtual const char* getID() = 0;
     protected:
         virtual bool writeParams(sol::table& params) = 0;
     };
@@ -39,6 +40,9 @@ namespace editor::resources::events {
                 return false;
             behaviour[paramsKey] = params;
             return true;
+        }
+        const char* getID() final {
+            return id;
         }
     };
 

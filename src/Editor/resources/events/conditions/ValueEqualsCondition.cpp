@@ -16,9 +16,10 @@ editor::resources::events::ValueEqualsCondition::ValueEqualsCondition() :
 editor::resources::events::ValueEqualsCondition::~ValueEqualsCondition() = default;
 
 bool editor::resources::events::ValueEqualsCondition::read(sol::table const& params) {
-    _variable = params.get_or<std::string>(variableKey, "");
-    if (_variable.empty())
+    sol::optional<std::string> variable = params.get<sol::optional<std::string>>(variableKey);
+    if (!variable.has_value())
         return false;
+    _variable = variable.value();
 
     sol::optional<sol::lua_value> equals = params.get<sol::optional<sol::lua_value>>(equalsKey);
     if (!equals.has_value())

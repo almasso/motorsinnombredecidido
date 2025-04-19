@@ -10,6 +10,11 @@
 
 #include "render/WindowItem.h"
 
+namespace editor::resources::events
+{
+    class EventBehaviour;
+}
+
 namespace editor {
     class Project;
 
@@ -47,10 +52,15 @@ namespace editor::render::tabs {
         void renderEventDropDown();
         bool renderSelectableEvent(std::unordered_map<std::string, resources::events::Event*>::const_iterator& it);
         bool renderSelectableEventOptions(std::unordered_map<std::string, resources::events::Event*>::const_iterator& it);
+
         void handleEventWizard();
+
         void renderConditionEditor();
         void renderConditionSelector();
+
         void renderBehaviourEditor();
+        void renderBehaviourDropDown(resources::events::EventBehaviour*& behaviour);
+        void renderAddBehaviourButton();
     };
 
 }
