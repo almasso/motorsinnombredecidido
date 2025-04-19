@@ -82,9 +82,7 @@ bool editor::Project::build(const std::string &platform) {
         copy(getAssetsPath(),getBuildPath(platform)/"data"/"assets",
              std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
              std::filesystem::copy_options::overwrite_existing);
-        auto adjacent = getAdjacentMaps();
         for (const auto& [key,map] : _maps) {
-            map->setAdjacent(adjacent[key]);
             map->writeToEngineLua(platform);
         }
         for (const auto& [key,tileset] : _tilesets) {
@@ -99,21 +97,6 @@ bool editor::Project::build(const std::string &platform) {
     }
     return true;
 }
-
-std::unordered_map<std::string, std::vector<std::string>> editor::Project::getAdjacentMaps() {
-    std::unordered_map<std::string, std::vector<std::string>> adjacent;
-    for (auto it1 = _maps.begin(); it1 != _maps.end(); ++it1) {
-        adjacent[it1->first].push_back(it1->first);
-        for (auto it2 = std::next(it1); it2 != _maps.end(); ++it2) {
-            if (it1->second->isAdjacent(it2->second)) {
-                adjacent[it1->first].push_back(it2->first);
-                adjacent[it2->first].push_back(it1->first);
-            }
-        }
-    }
-    return adjacent;
-}
-
 
 void editor::Project::buildSettings(const std::string &platform) {
     auto& lua = io::LuaManager::GetInstance().getState();

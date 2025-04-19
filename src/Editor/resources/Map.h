@@ -68,7 +68,12 @@ namespace editor::resources {
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
         bool isAdjacent(const Map *other) const;
-        void setAdjacent(const std::vector<std::string>& adjacent);
+
+        bool isOverlapping(const Map *other) const;
+
+        void addAdjacent(const std::string &adjacent);
+
+        void clearAdjacent();
 
     private:
         static std::filesystem::path _mapsDirectory;

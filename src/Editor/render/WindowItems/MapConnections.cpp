@@ -16,6 +16,13 @@
 editor::render::tabs::MapConnections::MapConnections(editor::Project* project) :
 WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapconnections") + ""), _project(project) {
     _worlds = {std::vector<resources::Map *>()};
+    for (auto [k,map] : _project->getMaps()) {
+        int world = map->getWorld();
+        if (world >= 0) {
+            if (world >= _worlds.size()) _worlds.resize(world + 1);
+            _worlds[world].push_back(map);
+        }
+    }
     _activeWorld = 0;
 }
 
@@ -141,9 +148,15 @@ void editor::render::tabs::MapConnections::drawSelector() {
                 for (auto [name, map] : _project->getMaps()) {
                     if (map->getWorld() < 0) {
                         if(ImGui::Selectable((name).c_str(), false)) {
-                            _worlds[_activeWorld].push_back(map);
-                            map->setWorld(_activeWorld);
-                            _somethingModified = true;
+                            if (findFreePosition(map)) {
+                                _worlds[_activeWorld].push_back(map);
+                                map->setWorld(_activeWorld);
+                                _somethingModified = true;
+                            }
+                            else {
+                                map->setMapX(0);
+                                map->setMapY(0);
+                            }
                         }
                     }
                 }
@@ -175,22 +188,36 @@ void editor::render::tabs::MapConnections::handleMapDrag(int gridWidth, int grid
                 _draggedMap = map;
                 _dragOffsetX = clickGridX - map->getMapX();
                 _dragOffsetY = clickGridY - map->getMapY();
+                _oldMapX = _draggedMap->getMapX();
+                _oldMapY = _draggedMap->getMapY();
                 break;
             }
         }
     }
 
     else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+        if (_isDragging && _draggedMap) {
+            bool validPosition = true;
+            for (const auto& map : _worlds[_activeWorld]) {
+                if (map != _draggedMap && _draggedMap->isOverlapping(map)) {
+                    validPosition = false;
+                    break;
+                }
+            }
+            if (!validPosition) {
+                _draggedMap->setMapX(_oldMapX);
+                _draggedMap->setMapY(_oldMapY);
+            } else {
+                _somethingModified = true;
+            }
+        }
         _isDragging = false;
         _draggedMap = nullptr;
     }
 
     if (_isDragging && _draggedMap) {
-        int newMapX = clickGridX - _dragOffsetX;
-        int newMapY = clickGridY - _dragOffsetY;
-        _draggedMap->setMapX(newMapX);
-        _draggedMap->setMapY(newMapY);
-        _somethingModified = true;
+        _draggedMap->setMapX(clickGridX - _dragOffsetX);
+        _draggedMap->setMapY(clickGridY - _dragOffsetY);
     }
 }
 
@@ -256,6 +283,54 @@ bool editor::render::tabs::MapConnections::drawTileInGrid(int gridPosX, int grid
         }
     }
     return false;
+}
+
+bool editor::render::tabs::MapConnections::findFreePosition(resources::Map* map, int maxRadius) {
+    for (int dist = 0; dist <= maxRadius; ++dist) {
+        for (int x = -dist; x <= dist; ++x) {
+            int y = dist - std::abs(x);
+            std::pair<int, int> positions[] = {
+                {x, y},
+                {x, -y}
+            };
+            int numPositions = (y == 0) ? 1 : 2;
+            for (int i = 0; i < numPositions; ++i) {
+                int px = positions[i].first;
+                int py = positions[i].second;
+                map->setMapX(px);
+                map->setMapY(py);
+                bool overlaps = false;
+                for (auto& placedMap : _worlds[_activeWorld]) {
+                    if (map->isOverlapping(placedMap)) {
+                        overlaps = true;
+                        break;
+                    }
+                }
+                if (!overlaps) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void editor::render::tabs::MapConnections::getAdjacentMaps() {
+    for (const auto& [key,map] : _project->getMaps()) {
+        map->clearAdjacent();
+    }
+    for (auto& world : _worlds) {
+        for (size_t j = 0; j < world.size(); ++j) {
+            auto* mapA = world[j];
+            for (size_t k = j + 1; k < world.size(); ++k) {
+                auto* mapB = world[k];
+                if (mapA->isAdjacent(mapB)) {
+                    mapA->addAdjacent(mapB->getName());
+                    mapB->addAdjacent(mapA->getName());
+                }
+            }
+        }
+    }
 }
 
 void editor::render::tabs::MapConnections::save() {

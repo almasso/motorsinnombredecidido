@@ -26,6 +26,8 @@ namespace editor::render::tabs {
 
         void save();
 
+        void getAdjacentMaps();
+
         ~MapConnections() override;
     private:
         std::vector<std::vector<resources::Map*>> _worlds;
@@ -40,6 +42,7 @@ namespace editor::render::tabs {
         bool _isDragging = false;
         resources::Map * _draggedMap = nullptr;
         int _dragOffsetX, _dragOffsetY;
+        int _oldMapX, _oldMapY;
 
         void beforeRender() override;
 
@@ -55,6 +58,7 @@ namespace editor::render::tabs {
 
         bool drawTileInGrid(int gridPosX, int gridPosY, ImVec2 tilePos, ImVec2 tileEnd, ImDrawList *drawList);
 
+        bool findFreePosition(resources::Map *map, int maxRadius = 100);
     };
 }
 

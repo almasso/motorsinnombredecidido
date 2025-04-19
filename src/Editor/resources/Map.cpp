@@ -16,6 +16,9 @@
 #include <Utils/Vector2.h>
 #define widthKey "width"
 #define heightKey "height"
+#define xKey "posX"
+#define yKey "posY"
+#define worldKey "world"
 #define layersKey "layers"
 #define tilesKey "tiles"
 #define collisionsKey "collisions"
@@ -53,8 +56,10 @@ void editor::resources::Map::init(std::string const& name, int mapWidth, int map
     _layers = layers;
     _name = name;
     handleVectorChanges();
-    _init = true;
+    _mapX = 0;
+    _mapY = 0;
     _world = -1;
+    _init = true;
 }
 
 void editor::resources::Map::handleVectorChanges() {
@@ -129,6 +134,16 @@ bool editor::resources::Map::readFromLua(std::string const& name) {
 
     init(name, width.value(), height.value(), layers.value());
 
+    sol::optional<int> posX = mapTable.get<sol::optional<int>>(xKey);
+    if (posX.has_value())
+        _mapX = posX.value();
+    sol::optional<int> posY = mapTable.get<sol::optional<int>>(yKey);
+    if (posY.has_value())
+        _mapY = posY.value();
+    sol::optional<int> world = mapTable.get<sol::optional<int>>(worldKey);
+    if (world.has_value())
+        _world = world.value();
+
     sol::optional<sol::table> tiles = mapTable.get<sol::optional<sol::table>>(tilesKey);
     if (!tiles.has_value())
         return false;
@@ -157,6 +172,9 @@ void editor::resources::Map::writeToLua() {
     map[widthKey] = _mapWidth;
     map[heightKey] = _mapHeight;
     map[layersKey] = _layers;
+    map[xKey] = _mapX;
+    map[yKey] = _mapY;
+    map[worldKey] = _world;
 
     sol::table tiles = lua.create_table();
     writeTiles(tiles);
@@ -258,8 +276,30 @@ bool editor::resources::Map::isAdjacent(const Map* other) const {
     return false;
 }
 
-void editor::resources::Map::setAdjacent(const std::vector<std::string> &adjacent) {
-    _adjacent = adjacent;
+bool editor::resources::Map::isOverlapping(const Map* other) const {
+    int aLeft   = this->_mapX;
+    int aRight  = this->_mapX + this->_mapWidth;
+    int aTop    = this->_mapY;
+    int aBottom = this->_mapY + this->_mapHeight;
+    int bLeft   = other->_mapX;
+    int bRight  = other->_mapX + other->_mapWidth;
+    int bTop    = other->_mapY;
+    int bBottom = other->_mapY + other->_mapHeight;
+
+    if (aRight  <= bLeft  || aLeft   >= bRight ||
+        aBottom <= bTop   || aTop    >= bBottom) {
+        return false;
+    }
+    return true;
+}
+
+void editor::resources::Map::addAdjacent(const std::string& adjacent) {
+    _adjacent.push_back(adjacent);
+}
+
+void editor::resources::Map::clearAdjacent() {
+    _adjacent.clear();
+    _adjacent.push_back(_name);
 }
 
 

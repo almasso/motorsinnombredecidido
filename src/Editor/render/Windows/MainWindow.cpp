@@ -49,6 +49,7 @@ void editor::render::windows::MainWindow::onRender() {
         _mapEditor->save();
         _eventEditor->save();
         _mapConnections->save();
+        _mapConnections->getAdjacentMaps();
         _project->build("Desktop");
     }
     ImVec2 pos = ImGui::GetItemRectMin();
