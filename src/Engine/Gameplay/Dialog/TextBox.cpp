@@ -84,11 +84,11 @@ bool TextBox::update() {
                 _timer = 0.0f;
                 _charIter = 0;
                 _paragraphIter++;
+                _text->setText("");
                 if (ended()) {
                     _entity->setActive(false);
                     _paragraphIter = 0;
                     _dialog.clear();
-                    _text->setText("");
                 }
             }
         }

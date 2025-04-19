@@ -8,7 +8,7 @@
 
 #include "InputManager.h"
 
-Button::Button(ComponentData const *data) : ComponentTemplate(data), _transform(nullptr) {
+Button::Button(ComponentData const *data) : ComponentTemplate(data), _transform(nullptr), _camera(nullptr) {
 }
 
 bool Button::init() {
@@ -19,6 +19,10 @@ bool Button::init() {
     }
     if (Entity* ent = _scene->getEntityByHandler("Camera"); ent) {
         _camera = ent->getComponent<Camera>();
+    }
+    if (_camera == nullptr) {
+        Error::ShowError("Button object sin camara en escena", "Todos los botones requieren de un componente Camera en escena");
+        return false;
     }
     _callback = _data->getData<sol::function>("callback");
     _params = _data->getData<sol::table>("params");

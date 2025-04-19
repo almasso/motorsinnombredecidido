@@ -115,16 +115,21 @@ return {
                         params = {3}
                     }
                 }
+            },
+            camera = {
+                handler = "Camera",
+                components = {
+                    Camera = {
+                        size = {1920,1080}
+                    },
+                    Transform = {0}
+                }
             }
         },
         components = {
             MovementManager = {
                 tileWidth = 200,
                 tileHeight =200
-            },
-            Transform = {0},
-            Camera = {
-                size = {1920,1080}
             }
         }
     },
