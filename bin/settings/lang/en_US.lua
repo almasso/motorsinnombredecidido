@@ -34,6 +34,7 @@ return {
     ["window.mainwindow.eventeditor.condition.ValueEquals"] = "Value equals",
     ["window.mainwindow.eventeditor.behaviours"] = "Behaviours",
     ["window.mainwindow.eventeditor.behaviours.add"] = "Add behaviour",
+    ["window.mainwindow.eventeditor.behaviours.remove"] = "Remove",
     ["window.mainwindow.eventeditor.behaviours.AnimationBehaviour"] = "Animation",
     ["window.mainwindow.eventeditor.behaviours.ChoiceBehaviour"] = "Choice",
     ["window.mainwindow.eventeditor.behaviours.DialogueBehaviour"] = "Dialogue",

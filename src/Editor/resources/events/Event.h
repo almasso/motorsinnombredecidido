@@ -8,6 +8,7 @@
 
 #include <filesystem>
 #include <vector>
+#include <list>
 #include <string>
 #include <sol/forward.hpp>
 
@@ -35,14 +36,17 @@ namespace editor::resources::events {
         bool isInitialized() const;
         EventCondition* getCondition();
         void setCondition(std::string const& condition);
-        std::vector<EventBehaviour*>& getBehaviours();
+        std::list<EventBehaviour*>& getBehaviours();
         void changeBehaviour(EventBehaviour* previousBehaviour, std::string const& newBehaviour);
+        void removeBehaviour(std::list<EventBehaviour*>::iterator& behaviour);
+        void moveBehaviourUp(std::list<EventBehaviour*>::iterator& behaviour);
+        void moveBehaviourDown(std::list<EventBehaviour*>::iterator& behaviour);
 
         static void SetEventsDirectory(std::filesystem::path const& eventsDirectory);
     private:
         static std::filesystem::path _eventsDirectory;
 
-        std::vector<EventBehaviour*> _behaviours;
+        std::list<EventBehaviour*> _behaviours;
         EventCondition* _condition;
         std::string _name;
 

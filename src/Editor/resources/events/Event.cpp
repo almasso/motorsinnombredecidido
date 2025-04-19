@@ -126,7 +126,7 @@ void editor::resources::events::Event::setCondition(std::string const& condition
     _condition = EventConditionFactory::Create(condition);
 }
 
-std::vector<editor::resources::events::EventBehaviour*>& editor::resources::events::Event::getBehaviours() {
+std::list<editor::resources::events::EventBehaviour*>& editor::resources::events::Event::getBehaviours() {
     return _behaviours;
 }
 
@@ -138,6 +138,18 @@ void editor::resources::events::Event::changeBehaviour(EventBehaviour* previousB
             return;
         }
     }
+}
+
+void editor::resources::events::Event::removeBehaviour(std::list<resources::events::EventBehaviour*>::iterator& behaviour) {
+    behaviour = _behaviours.erase(behaviour);
+}
+
+void editor::resources::events::Event::moveBehaviourUp(std::list<EventBehaviour*>::iterator& behaviour) {
+    _behaviours.splice(behaviour, _behaviours, behaviour--);
+}
+
+void editor::resources::events::Event::moveBehaviourDown(std::list<EventBehaviour*>::iterator& behaviour) {
+    _behaviours.splice(++behaviour, _behaviours, behaviour++);
 }
 
 void editor::resources::events::Event::SetEventsDirectory(std::filesystem::path const& eventsDirectory) {

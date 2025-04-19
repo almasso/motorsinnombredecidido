@@ -6,6 +6,7 @@
 #ifndef EVENTEDITOR_H
 #define EVENTEDITOR_H
 
+#include <list>
 #include <unordered_map>
 
 #include "render/WindowItem.h"
@@ -60,6 +61,9 @@ namespace editor::render::tabs {
 
         void renderBehaviourEditor();
         void renderBehaviourDropDown(resources::events::EventBehaviour*& behaviour);
+        bool renderBehaviourRemoveButton(std::list<resources::events::EventBehaviour*>::iterator& behaviour);
+        void renderBehaviourMoveUpButton(std::list<resources::events::EventBehaviour*>::iterator& behaviour);
+        void renderBehaviourMoveDownButton(std::list<resources::events::EventBehaviour*>::iterator& behaviour);
         void renderAddBehaviourButton();
     };
 

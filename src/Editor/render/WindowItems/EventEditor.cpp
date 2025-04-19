@@ -53,7 +53,7 @@ void editor::render::tabs::EventEditor::onRender() {
     handleEventWizard();
     ImGui::EndChild();
 
-    ImGui::BeginChild("##conditionEditor", ImVec2(0, 0), true);
+    ImGui::BeginChild("##conditionEditor", ImVec2(0, 0), true | ImGuiChildFlags_AutoResizeY);
     renderConditionEditor();
     ImGui::EndChild();
 
@@ -71,7 +71,7 @@ void editor::render::tabs::EventEditor::onRender() {
 
 void editor::render::tabs::EventEditor::renderEventDropDown() {
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.event").c_str());
-    ImGui::SetNextItemWidth(RenderManager::GetInstance().getWidth() / 5 - 20);
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     if (!ImGui::BeginCombo("##eventDropdown", _selectedEvent != nullptr ? _selectedEvent->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.eventselector").c_str()))
         return;
 
@@ -169,7 +169,7 @@ void editor::render::tabs::EventEditor::renderConditionEditor() {
 void editor::render::tabs::EventEditor::renderConditionSelector() {
     std::string selectedCondition(_selectedEvent->getCondition()->getID());
 
-    ImGui::SetNextItemWidth(RenderManager::GetInstance().getWidth() / 5 - 20);
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     if (!ImGui::BeginCombo( "##editorConditionSelector",
         io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + selectedCondition).c_str()))
         return;
@@ -192,12 +192,31 @@ void editor::render::tabs::EventEditor::renderBehaviourEditor() {
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours").c_str());
     if (_selectedEvent == nullptr)
         return;
+    ImGui::Separator();
     auto& behaviours = _selectedEvent->getBehaviours();
-    for (auto& behaviour : behaviours) {
-        renderBehaviourDropDown(behaviour);
-        if (behaviour->render())
+    for (auto it = behaviours.begin(); it != behaviours.end(); ImGui::EndChild(), ImGui::Separator()) {
+
+        ImGui::BeginChild(("##moveBehaviourButtons" + std::to_string(reinterpret_cast<long long>(*it))).c_str(),
+            ImVec2(70, 0), ImGuiChildFlags_AutoResizeY);
+        renderBehaviourMoveUpButton(it);
+        renderBehaviourMoveDownButton(it);
+        if (it == behaviours.end())
+            continue;
+        ImGui::EndChild();
+
+        ImGui::SameLine();
+
+        ImGui::BeginChild(("##behaviourEditor" + std::to_string(reinterpret_cast<long long>(*it))).c_str(),
+            ImVec2(0, 0), ImGuiChildFlags_AutoResizeY);
+
+        renderBehaviourDropDown(*it);
+        ImGui::SameLine();
+        if (renderBehaviourRemoveButton(it))
+            continue;
+
+        if ((*it)->render())
             _somethingModified = true;
-        ImGui::Separator();
+        ++it;
     }
     renderAddBehaviourButton();
 }
@@ -224,6 +243,35 @@ void editor::render::tabs::EventEditor::renderBehaviourDropDown(resources::event
     }
 
     ImGui::EndCombo();
+}
+
+bool editor::render::tabs::EventEditor::renderBehaviourRemoveButton(std::list<resources::events::EventBehaviour*>::iterator& behaviour) {
+    auto label = io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.remove");
+    label += "##"+std::to_string(reinterpret_cast<long long>(*behaviour));
+    if (ImGui::Button(label.c_str(), ImVec2(0, 0))) {
+        _selectedEvent->removeBehaviour(behaviour);
+        _somethingModified = true;
+        return true;
+    }
+    return false;
+}
+
+void editor::render::tabs::EventEditor::renderBehaviourMoveUpButton(std::list<resources::events::EventBehaviour*>::iterator& behaviour) {
+    std::string label("Up");
+    label += "##"+std::to_string(reinterpret_cast<long long>(*behaviour));
+    if (ImGui::Button(label.c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+        _selectedEvent->moveBehaviourUp(behaviour);
+        _somethingModified = true;
+    }
+}
+
+void editor::render::tabs::EventEditor::renderBehaviourMoveDownButton(std::list<resources::events::EventBehaviour*>::iterator& behaviour) {
+    std::string label("Down");
+    label += "##"+std::to_string(reinterpret_cast<long long>(*behaviour));
+    if (ImGui::Button(label.c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+        _selectedEvent->moveBehaviourDown(behaviour);
+        _somethingModified = true;
+    }
 }
 
 void editor::render::tabs::EventEditor::renderAddBehaviourButton() {

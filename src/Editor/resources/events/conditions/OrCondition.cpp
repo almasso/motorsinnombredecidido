@@ -45,7 +45,7 @@ bool editor::resources::events::OrCondition::read(sol::table const& params) {
 }
 
 bool editor::resources::events::OrCondition::render() {
-    ImGui::BeginChild((std::string("##orCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true);
+    ImGui::BeginChild((std::string("##orCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true | ImGuiChildFlags_AutoResizeY);
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.split.a").c_str());
     bool edited = renderConditionSelector(_conditionA);
     edited != _conditionA->render();
@@ -89,7 +89,7 @@ bool editor::resources::events::OrCondition::writeParams(sol::table& params) {
 bool editor::resources::events::OrCondition::renderConditionSelector(EventCondition*& condition) {
     bool edited = false;
     std::string conditionID(condition->getID());
-    ImGui::SetNextItemWidth(render::RenderManager::GetInstance().getWidth() / 5 - 20);
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     if (!ImGui::BeginCombo((std::string("###andConditionSelector") + std::to_string(reinterpret_cast<long long>(condition))).c_str(),
         io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionID).c_str()))
         return false;

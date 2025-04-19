@@ -33,7 +33,7 @@ bool editor::resources::events::NotCondition::read(sol::table const& params) {
 }
 
 bool editor::resources::events::NotCondition::render() {
-    ImGui::BeginChild((std::string("##notCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true);
+    ImGui::BeginChild((std::string("##notCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true | ImGuiChildFlags_AutoResizeY);
     bool edited = renderConditionSelector(_condition);
     edited != _condition->render();
     ImGui::EndChild();
@@ -59,7 +59,7 @@ bool editor::resources::events::NotCondition::writeParams(sol::table& params) {
 bool editor::resources::events::NotCondition::renderConditionSelector(EventCondition*& condition) {
     bool edited = false;
     std::string conditionID(condition->getID());
-    ImGui::SetNextItemWidth(render::RenderManager::GetInstance().getWidth() / 5 - 20);
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     if (!ImGui::BeginCombo((std::string("###andConditionSelector") + std::to_string(reinterpret_cast<long long>(condition))).c_str(),
         io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionID).c_str()))
         return false;
