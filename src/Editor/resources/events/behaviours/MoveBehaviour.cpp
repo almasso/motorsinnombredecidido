@@ -5,10 +5,14 @@
 
 #include "MoveBehaviour.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+
 #define xTargetKey "xTarget"
 #define yTargetKey "yTarget"
 
-editor::resources::events::MoveBehaviour::MoveBehaviour() :
+editor::resources::events::MoveBehaviour::MoveBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _xTarget(0),
     _yTarget(0) {
 }
@@ -34,7 +38,17 @@ bool editor::resources::events::MoveBehaviour::writeToEngine(sol::table& behavio
 }
 
 bool editor::resources::events::MoveBehaviour::render() {
-    return false;
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + std::string(id) + ".target").c_str());
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + std::string(id) + ".x").c_str());
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(200);
+    bool edited = ImGui::InputInt(std::string("##moveTargetX" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_xTarget);
+    ImGui::SameLine();
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + std::string(id) + ".y").c_str());
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(200);
+    edited |= ImGui::InputInt(std::string("##moveTargetY" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_yTarget);
+    return edited;
 }
 
 bool editor::resources::events::MoveBehaviour::writeParams(sol::table& params) {

@@ -8,7 +8,8 @@
 #define variableKey "variable"
 #define newValueKey "newValue"
 
-editor::resources::events::ModifyLocalVariableBehaviour::ModifyLocalVariableBehaviour() :
+editor::resources::events::ModifyLocalVariableBehaviour::ModifyLocalVariableBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _variable(),
     _newValue(sol::lua_nil) {
 }

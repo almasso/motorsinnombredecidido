@@ -13,13 +13,16 @@ namespace editor::resources::events {
 
     class EventBehaviourClass(WaitForBehaviour) {
     public:
-        WaitForBehaviour();
+        WaitForBehaviour(Event* event);
         ~WaitForBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
         bool render() override;
     protected:
         bool writeParams(sol::table& params) override;
+    private:
+        bool renderConditionSelector(EventCondition*& condition);
+
     private:
         EventCondition* _condition;
     };

@@ -13,23 +13,24 @@
 #include <sol/forward.hpp>
 
 namespace editor::resources::events {
+    class Event;
     class EventBehaviour;
 
     class EventBehaviourFactory {
     public:
-        static EventBehaviour* Create(std::string const& id);
-        static EventBehaviour* Create(sol::table const& behaviour);
+        static EventBehaviour* Create(std::string const& id, Event* event);
+        static EventBehaviour* Create(sol::table const& behaviour, Event* event);
         static std::set<std::string> const& GetKeys();
     private:
-        static std::unordered_map <std::string, std::function<EventBehaviour*()>> _behaviours;
+        static std::unordered_map <std::string, std::function<EventBehaviour*(Event*)>> _behaviours;
         static std::set<std::string> _behaviourKeys;
         static bool _initialized;
 
         static void Init();
         template <typename BehaviourType>
         static void RegisterBehaviour() {
-            _behaviours.insert({BehaviourType::id, []() -> EventBehaviour* {
-                return new BehaviourType();
+            _behaviours.insert({BehaviourType::id, [](Event* event) -> EventBehaviour* {
+                return new BehaviourType(event);
             }});
             _behaviourKeys.insert(BehaviourType::id);
         }

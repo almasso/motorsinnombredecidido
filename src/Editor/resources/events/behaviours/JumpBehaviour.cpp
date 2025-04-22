@@ -5,9 +5,14 @@
 
 #include "JumpBehaviour.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+#include <resources/events/Event.h>
+
 #define targetKey "target"
 
-editor::resources::events::JumpBehaviour::JumpBehaviour() :
+editor::resources::events::JumpBehaviour::JumpBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _target(-1){
 }
 
@@ -25,11 +30,56 @@ bool editor::resources::events::JumpBehaviour::writeToEngine(sol::table& behavio
     return true;
 }
 
+
 bool editor::resources::events::JumpBehaviour::render() {
-    return false;
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.JumpBehaviour.target").c_str());
+    return renderBehaviourSelector();
 }
+
 
 bool editor::resources::events::JumpBehaviour::writeParams(sol::table& params) {
     params[targetKey] = _target;
     return true;
+}
+
+bool editor::resources::events::JumpBehaviour::renderBehaviourSelector() {
+    auto const& behaviours = _event->getBehaviours();
+    std::string selectedBehaviour;
+    if (_target < 0)
+        selectedBehaviour = "invalid";
+    else {
+        auto selected = behaviours.begin();
+        for (int i = 0; i < _target; ++i, ++selected);
+        selectedBehaviour = (*selected)->getID();
+    }
+
+    std::string previewValue;
+    if (_target >= 0) {
+        previewValue += std::to_string(_target);
+        previewValue += " - ";
+    }
+    previewValue += io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + selectedBehaviour);
+
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+    if (!ImGui::BeginCombo((std::string("###jumpBehaviourSelector") + std::to_string(reinterpret_cast<long long>(this))).c_str(),
+                           previewValue.c_str()))
+        return false;
+
+    bool edited = false;
+    int i = 0;
+    for (auto const& behaviour : behaviours) {
+        bool isSelected = (i == _target);
+        std::string label(std::to_string(i));
+        label += " - ";
+        label += io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours." + std::string(behaviour->getID()));
+        if (ImGui::Selectable(label.c_str(), isSelected)) {
+            if (!isSelected) {
+                _target = i;
+                edited = true;
+            }
+        }
+        ++i;
+    }
+    ImGui::EndCombo();
+    return edited;
 }

@@ -6,4 +6,8 @@
 #include "EventBehaviour.h"
 
 
+editor::resources::events::EventBehaviour::EventBehaviour(Event* event) :
+    _event(event) {
+}
+
 editor::resources::events::EventBehaviour::~EventBehaviour() = default;

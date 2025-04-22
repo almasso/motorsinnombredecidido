@@ -48,10 +48,10 @@ bool editor::resources::events::AndCondition::render() {
     ImGui::BeginChild((std::string("##andCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true | ImGuiChildFlags_AutoResizeY);
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.split.a").c_str());
     bool edited = renderConditionSelector(_conditionA);
-    edited != _conditionA->render();
+    edited = _conditionA->render() || edited;
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.split.b").c_str());
-    edited |= renderConditionSelector(_conditionB);
-    edited |= _conditionB->render();
+    edited = renderConditionSelector(_conditionB) || edited;
+    edited = _conditionB->render() || edited;
     ImGui::EndChild();
     return edited;
 }

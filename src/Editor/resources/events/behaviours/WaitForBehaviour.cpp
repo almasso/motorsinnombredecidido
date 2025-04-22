@@ -5,12 +5,16 @@
 
 #include "WaitForBehaviour.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+
 #include "../EventCondition.h"
 #include "../EventConditionFactory.h"
 
 #define conditionKey "condition"
 
-editor::resources::events::WaitForBehaviour::WaitForBehaviour() :
+editor::resources::events::WaitForBehaviour::WaitForBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _condition(EventConditionFactory::Create("OnStart")) {
 }
 
@@ -32,7 +36,10 @@ bool editor::resources::events::WaitForBehaviour::writeToEngine(sol::table& beha
 }
 
 bool editor::resources::events::WaitForBehaviour::render() {
-    return false;
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition").c_str());
+    bool edited = renderConditionSelector(_condition);
+    edited = _condition->render() || edited;
+    return edited;
 }
 
 bool editor::resources::events::WaitForBehaviour::writeParams(sol::table& params) {
@@ -41,4 +48,27 @@ bool editor::resources::events::WaitForBehaviour::writeParams(sol::table& params
         return false;
     params[conditionKey] = condition;
     return true;
+}
+
+bool editor::resources::events::WaitForBehaviour::renderConditionSelector(EventCondition*& condition) {
+    bool edited = false;
+    std::string conditionID(condition->getID());
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+    if (!ImGui::BeginCombo((std::string("###waitForConditionSelector") + std::to_string(reinterpret_cast<long long>(condition))).c_str(),
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionID).c_str()))
+        return false;
+
+    auto const& conditions = resources::events::EventConditionFactory::GetKeys();
+    for (auto const& conditionName : conditions) {
+        bool isSelected = (conditionName == conditionID);
+        if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionName).c_str(), isSelected)) {
+            if (!isSelected) {
+                delete condition;
+                condition = EventConditionFactory::Create(conditionName);
+                edited = true;
+            }
+        }
+    }
+    ImGui::EndCombo();
+    return edited;
 }

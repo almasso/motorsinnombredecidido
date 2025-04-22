@@ -5,17 +5,29 @@
 
 #include "DialogueBehaviour.h"
 
-#define textKey "text"
+#include <imgui.h>
 
-editor::resources::events::DialogueBehaviour::DialogueBehaviour() :
-    _text() {
+#define textKey "text"
+#define MAX_DIALOGUE 256
+
+editor::resources::events::DialogueBehaviour::DialogueBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
+    _text(new char[MAX_DIALOGUE]) {
+    _text[0] = '\0';
+//    strcpy_s(_text, MAX_DIALOGUE, std::string(MAX_DIALOGUE, '\0').c_str());
 }
 
-editor::resources::events::DialogueBehaviour::~DialogueBehaviour() = default;
+editor::resources::events::DialogueBehaviour::~DialogueBehaviour() {
+    delete[] _text;
+}
 
 bool editor::resources::events::DialogueBehaviour::read(sol::table const& params) {
-    _text = params.get_or<std::string>(textKey, "");
-    return !_text.empty();
+    sol::optional<std::string> text = params.get<sol::optional<std::string>>(textKey);
+    if (!text.has_value())
+        return false;
+    text.value().copy(_text, MAX_DIALOGUE);
+    _text[text.value().size()] = '\0';
+    return true;
 }
 
 bool editor::resources::events::DialogueBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
@@ -23,7 +35,9 @@ bool editor::resources::events::DialogueBehaviour::writeToEngine(sol::table& beh
 }
 
 bool editor::resources::events::DialogueBehaviour::render() {
-    return false;
+    bool edited =  ImGui::InputTextMultiline(std::string("##dialogueInput" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
+        _text, MAX_DIALOGUE);
+    return edited;
 }
 
 bool editor::resources::events::DialogueBehaviour::writeParams(sol::table& params) {

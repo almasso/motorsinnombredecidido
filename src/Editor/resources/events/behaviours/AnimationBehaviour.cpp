@@ -8,7 +8,8 @@
 #define actionKey "action"
 #define animationChangeKey "animation"
 
-editor::resources::events::AnimationBehaviour::AnimationBehaviour() :
+editor::resources::events::AnimationBehaviour::AnimationBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _action(PLAY),
     _animationToChange() {
 }

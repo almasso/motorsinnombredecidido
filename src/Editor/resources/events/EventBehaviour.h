@@ -15,9 +15,11 @@
 #define paramsKey "params"
 
 namespace editor::resources::events {
+    class Event;
 
     class EventBehaviour {
     public:
+        EventBehaviour(Event* event);
         virtual ~EventBehaviour();
         virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& behaviour) = 0;
@@ -25,6 +27,8 @@ namespace editor::resources::events {
         virtual bool render() = 0;
         virtual const char* getID() = 0;
     protected:
+        Event* _event;
+
         virtual bool writeParams(sol::table& params) = 0;
     };
 
@@ -32,6 +36,10 @@ namespace editor::resources::events {
     class EventBehaviourTemplate : public EventBehaviour {
     public:
         static constexpr const char* id = name.value;
+
+        EventBehaviourTemplate(Event* event) :
+            EventBehaviour(event) {
+        }
 
         bool write(sol::table& behaviour) final {
             behaviour[idKey] = id;

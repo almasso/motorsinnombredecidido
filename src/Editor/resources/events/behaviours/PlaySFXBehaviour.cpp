@@ -7,7 +7,8 @@
 
 #define sfxKey "sfx"
 
-editor::resources::events::PlaySFXBehaviour::PlaySFXBehaviour() :
+editor::resources::events::PlaySFXBehaviour::PlaySFXBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _sfxHandler() {
 }
 

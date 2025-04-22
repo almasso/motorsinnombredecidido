@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventBehaviourClass(ChoiceBehaviour) {
     public:
-        ChoiceBehaviour();
+        ChoiceBehaviour(Event* event);
         ~ChoiceBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;

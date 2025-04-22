@@ -16,21 +16,21 @@
 #include "behaviours/PlaySFXBehaviour.h"
 #include "behaviours/WaitForBehaviour.h"
 
-std::unordered_map <std::string, std::function<editor::resources::events::EventBehaviour*()>> editor::resources::events::EventBehaviourFactory::_behaviours;
+std::unordered_map <std::string, std::function<editor::resources::events::EventBehaviour*(editor::resources::events::Event* event)>> editor::resources::events::EventBehaviourFactory::_behaviours;
 std::set<std::string> editor::resources::events::EventBehaviourFactory::_behaviourKeys;
 bool editor::resources::events::EventBehaviourFactory::_initialized = false;
 
-editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(std::string const& id) {
+editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(std::string const& id, Event* event) {
     if (!_initialized)
         Init();
 
     auto it = _behaviours.find(id);
     if (it == _behaviours.end())
         return nullptr;
-    return it->second();
+    return it->second(event);
 }
 
-editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(sol::table const& behaviour) {
+editor::resources::events::EventBehaviour* editor::resources::events::EventBehaviourFactory::Create(sol::table const& behaviour, Event* event) {
     std::string id = behaviour.get_or<std::string>(idKey, "");
     if (id.empty())
         return nullptr;
@@ -39,7 +39,7 @@ editor::resources::events::EventBehaviour* editor::resources::events::EventBehav
     if (!params.has_value())
         return nullptr;
 
-    auto instance = Create(id);
+    auto instance = Create(id, event);
     if (!instance)
         return nullptr;
 

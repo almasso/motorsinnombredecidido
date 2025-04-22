@@ -10,7 +10,8 @@
 #define volumeKey "volume"
 #define loopKey "loop"
 
-editor::resources::events::MusicBehaviour::MusicBehaviour() :
+editor::resources::events::MusicBehaviour::MusicBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _action(PLAY),
     _param() {
 }

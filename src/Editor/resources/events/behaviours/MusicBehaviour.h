@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventBehaviourClass(MusicBehaviour) {
     public:
-        MusicBehaviour();
+        MusicBehaviour(Event* event);
         ~MusicBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;

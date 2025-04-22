@@ -35,7 +35,7 @@ bool editor::resources::events::NotCondition::read(sol::table const& params) {
 bool editor::resources::events::NotCondition::render() {
     ImGui::BeginChild((std::string("##notCondition") + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true | ImGuiChildFlags_AutoResizeY);
     bool edited = renderConditionSelector(_condition);
-    edited != _condition->render();
+    edited = _condition->render() || edited;
     ImGui::EndChild();
     return edited;
 }

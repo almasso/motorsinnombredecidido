@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventBehaviourClass(DialogueBehaviour) {
     public:
-        DialogueBehaviour();
+        DialogueBehaviour(Event* event);
         ~DialogueBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
@@ -20,7 +20,7 @@ namespace editor::resources::events {
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        std::string _text;
+        char* _text;
     };
 
 }

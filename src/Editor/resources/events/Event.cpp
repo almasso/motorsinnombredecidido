@@ -108,7 +108,7 @@ std::string const& editor::resources::events::Event::getName() const {
 }
 
 editor::resources::events::EventBehaviour* editor::resources::events::Event::addBehaviour(std::string const& id) {
-    auto behaviour = EventBehaviourFactory::Create(id);
+    auto behaviour = EventBehaviourFactory::Create(id, this);
     _behaviours.push_back(behaviour);
     return behaviour;
 }
@@ -134,7 +134,7 @@ void editor::resources::events::Event::changeBehaviour(EventBehaviour* previousB
     for (auto& behaviour : _behaviours) {
         if (behaviour == previousBehaviour) {
             delete behaviour;
-            behaviour = EventBehaviourFactory::Create(newBehaviour);
+            behaviour = EventBehaviourFactory::Create(newBehaviour, this);
             return;
         }
     }
@@ -160,7 +160,7 @@ bool editor::resources::events::Event::readBehaviours(sol::table const& behaviou
     for (auto&& [key, behaviour] : behaviours) {
         if (!behaviours.is<sol::table>())
             return false;
-        auto beh = EventBehaviourFactory::Create(behaviour.as<sol::table>());
+        auto beh = EventBehaviourFactory::Create(behaviour.as<sol::table>(), this);
         if (!beh)
             return false;
         _behaviours.push_back(beh);

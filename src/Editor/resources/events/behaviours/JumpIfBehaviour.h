@@ -13,7 +13,7 @@ namespace editor::resources::events {
 
     class EventBehaviourClass(JumpIfBehaviour) {
     public:
-        JumpIfBehaviour();
+        JumpIfBehaviour(Event* event);
         ~JumpIfBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
@@ -23,6 +23,9 @@ namespace editor::resources::events {
     private:
         int _target;
         EventCondition* _condition;
+
+        bool renderConditionSelector(EventCondition*& condition);
+        bool renderBehaviourSelector();
     };
 
 }

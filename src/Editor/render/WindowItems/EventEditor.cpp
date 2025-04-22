@@ -14,6 +14,7 @@
 #include <resources/events/EventBehaviour.h>
 #include <resources/events/EventBehaviourFactory.h>
 #include <resources/events/EventConditionFactory.h>
+#include <resources/events/behaviours/DialogueBehaviour.h>
 
 #include "render/Modals/MainWindow/EventWizard.h"
 
@@ -192,9 +193,10 @@ void editor::render::tabs::EventEditor::renderBehaviourEditor() {
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours").c_str());
     if (_selectedEvent == nullptr)
         return;
+
     ImGui::Separator();
     auto& behaviours = _selectedEvent->getBehaviours();
-    for (auto it = behaviours.begin(); it != behaviours.end(); ImGui::EndChild(), ImGui::Separator()) {
+    for (auto it = behaviours.begin(); it != behaviours.end(); ImGui::EndChild(), ImGui::Spacing(), ImGui::Separator(), ImGui::Spacing()) {
 
         ImGui::BeginChild(("##moveBehaviourButtons" + std::to_string(reinterpret_cast<long long>(*it))).c_str(),
             ImVec2(70, 0), ImGuiChildFlags_AutoResizeY);

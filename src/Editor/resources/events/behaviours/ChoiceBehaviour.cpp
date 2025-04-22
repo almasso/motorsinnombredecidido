@@ -8,7 +8,8 @@
 #define variableKey "variable"
 #define optionsKey "options"
 
-editor::resources::events::ChoiceBehaviour::ChoiceBehaviour() :
+editor::resources::events::ChoiceBehaviour::ChoiceBehaviour(Event* event) :
+    EventBehaviourTemplate(event),
     _variable(),
     _options() {
 }
