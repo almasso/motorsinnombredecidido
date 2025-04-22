@@ -45,7 +45,7 @@ bool editor::resources::events::JumpBehaviour::writeParams(sol::table& params) {
 bool editor::resources::events::JumpBehaviour::renderBehaviourSelector() {
     auto const& behaviours = _event->getBehaviours();
     std::string selectedBehaviour;
-    if (_target < 0)
+    if (_target < 0 || _target >= behaviours.size())
         selectedBehaviour = "invalid";
     else {
         auto selected = behaviours.begin();

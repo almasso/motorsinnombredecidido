@@ -87,7 +87,7 @@ bool editor::resources::events::JumpIfBehaviour::renderConditionSelector(EventCo
 bool editor::resources::events::JumpIfBehaviour::renderBehaviourSelector() {
     auto const& behaviours = _event->getBehaviours();
     std::string selectedBehaviour;
-    if (_target < 0)
+    if (_target < 0 || _target >= behaviours.size())
         selectedBehaviour = "invalid";
     else {
         auto selected = behaviours.begin();
