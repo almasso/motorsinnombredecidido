@@ -76,6 +76,7 @@ return {
     ["window.mainwindow.mapeditor.layerselector"] = "Selecciona una capa",
     ["window.mainwindow.mapeditor.createlayer"] = "Crear nueva capa",
     ["window.mainwindow.mapeditor.layer"] = "Capa",
+    ["window.mainwindow.mapeditor.collisions"] = "Mostrar colisiones",
     ["window.mainwindow.mapconnections"] = "Conexiones",
     ["window.mainwindow.mapconnections.world"] = "Mundo",
     ["window.mainwindow.mapconnections.addmap"] = "Añade un mapa",
@@ -100,6 +101,10 @@ return {
     ["window.mainwindow.popup.spritewizard.dimensiony"] = "Posición inicial (y)",
     ["window.mainwindow.popup.spritewizard.source"] = "Fuente",
     ["window.mainwindow.popup.spritewizard.gridcolor"] = "Color de la cuadrícula",
+    ["window.mainwindow.popup.animationwizard.animationame"] = "Nombre de la animación",
+    ["window.mainwindow.popup.animationwizard.timebetweenframes"] = "Tiempo entre fotogramas",
+    ["window.mainwindow.popup.animationwizard.loop"] = "En bucle",
+    ["window.mainwindow.popup.animationwizard.frame"] = "Fotograma",
 	["action.settings"] = "Configuración",
 	["action.newproject"] = "Nuevo proyecto",
 	["action.openproject"] = "Añadir proyecto",
@@ -134,6 +139,7 @@ return {
 	["error.samemapname"] = "Ya existe un mapa con este nombre",
 	["error.sameprojectroute"] = "Ya existe un proyecto en esta ruta con este nombre",
     ["error.samespritename"] = "Ya existe un sprite con este nombre",
-	["error.missingstring"] = "No se ha encontrado la cadena de texto",
-	["error.sameeventname"] = "Ya existe un evento con este nombre"
+    ["error.sameeventname"] = "Ya existe un evento con este nombre",
+    ["error.sameanimationname"] = "Ya existe una animación con este nombre",
+	["error.missingstring"] = "No se ha encontrado la cadena de texto"
 }

@@ -26,7 +26,8 @@ editor::resources::Tileset::Tileset(Project* project) :
     _source(""),
     _offsetX(0),
     _offsetY(0),
-    _project(project) {
+    _project(project),
+    _collisions(std::vector<bool>(project->getDimensions()[0] * project->getDimensions()[1], false)){
 }
 
 editor::resources::Tileset::~Tileset() {
@@ -164,6 +165,10 @@ int editor::resources::Tileset::getXTiles() const {
 
 int editor::resources::Tileset::getYTiles() const {
     return _yTiles;
+}
+
+std::vector<bool>& editor::resources::Tileset::getCollisions() {
+    return _collisions;
 }
 
 

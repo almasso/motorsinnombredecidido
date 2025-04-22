@@ -12,9 +12,12 @@
 #include "common/EditorError.h"
 #include <SDL3/SDL.h>
 
-editor::render::modals::SpriteWizard::SpriteWizard() : ModalWindow("##spriteWizard") {}
+editor::render::modals::SpriteWizard::SpriteWizard(editor::Project* project) : ModalWindow("##spriteWizard"), _project(project) {}
 
-editor::render::modals::SpriteWizard::~SpriteWizard() = default;
+editor::render::modals::SpriteWizard::~SpriteWizard() {
+    if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);
+    _loadedTexture = 0;
+}
 
 void editor::render::modals::SpriteWizard::beforeRender() {
     ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove;

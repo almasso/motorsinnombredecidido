@@ -76,6 +76,7 @@ return {
     ["window.mainwindow.mapeditor.layerselector"] = "Select layer",
     ["window.mainwindow.mapeditor.createlayer"] = "Create new layer",
     ["window.mainwindow.mapeditor.layer"] = "Layer",
+    ["window.mainwindow.mapeditor.collisions"] = "Show collisions",
     ["window.mainwindow.mapconnections"] = "Connections",
     ["window.mainwindow.mapconnections.world"] = "World",
     ["window.mainwindow.mapconnections.addmap"] = "Add a map",
@@ -100,6 +101,10 @@ return {
     ["window.mainwindow.popup.spritewizard.dimensiony"] = "Initial position (y)",
     ["window.mainwindow.popup.spritewizard.source"] = "Source",
     ["window.mainwindow.popup.spritewizard.gridcolor"] = "Grid color",
+    ["window.mainwindow.popup.animationwizard.animationame"] = "Animation name",
+    ["window.mainwindow.popup.animationwizard.timebetweenframes"] = "Time between frames",
+    ["window.mainwindow.popup.animationwizard.loop"] = "Loop",
+    ["window.mainwindow.popup.animationwizard.frame"] = "Frame",
 	["action.settings"] = "Settings",
 	["action.newproject"] = "New project",
 	["action.openproject"] = "Add project",
@@ -134,6 +139,7 @@ return {
     ["error.samemapname"] = "A map with this name already exists",
     ["error.sameprojectroute"] = "A project in this route with this name already exists",
     ["error.samespritename"] = "A sprite with this name already exists",
-    ["error.missingstring"] = "Text string was not found",
-	["error.sameeventname"] = "An event with this name already exists"
+    ["error.sameeventname"] = "An event with this name already exists",
+    ["error.sameanimationname"] = "An animation with this name already exists",
+    ["error.missingstring"] = "Text string was not found"
 }

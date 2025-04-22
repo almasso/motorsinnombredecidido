@@ -64,7 +64,6 @@ namespace editor::resources {
 
         bool isInitialized() const;
 
-
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
         bool isAdjacent(const Map *other) const;

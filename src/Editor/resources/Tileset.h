@@ -35,6 +35,7 @@ namespace editor::resources {
         const std::vector<Tile*>& getTiles() const;
         const std::filesystem::path& getSource() const;
         const std::string& getName() const;
+        std::vector<bool>& getCollisions();
 
         bool isInitialized() const;
 
@@ -50,6 +51,7 @@ namespace editor::resources {
         std::string _name;
         std::filesystem::path _source;
         std::vector<Tile*> _tiles;
+        std::vector<bool> _collisions;
         int _offsetX;
         int _offsetY;
         int _xTiles;

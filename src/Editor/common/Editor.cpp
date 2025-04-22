@@ -14,6 +14,8 @@
 #include "io/PreferencesManager.h"
 #include "EditorError.h"
 #include <SDL3/SDL.h>
+#include <chrono>
+#include <imgui.h>
 
 std::unique_ptr<editor::Editor> editor::Editor::_instance = nullptr;
 
@@ -62,10 +64,18 @@ editor::Editor::~Editor() {
 }
 
 void editor::Editor::mainLoop() {
+    auto previousTime = std::chrono::high_resolution_clock::now();
     auto* ww = new render::windows::WelcomeWindow();
     bool noError = true;
     render::WindowStack::addWindowToStackFront(ww);
     while(!io::InputManager::GetInstance().quit() && noError) {
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> deltaTime = currentTime - previousTime;
+        previousTime = currentTime;
+
+        ImGuiIO& io = ImGui::GetIO();
+        io.DeltaTime = deltaTime.count();
+
         io::InputManager::GetInstance().handleInput();
         noError = render::RenderManager::GetInstance().render();
         render::RenderManager::GetInstance().updateDimensions();

@@ -20,7 +20,7 @@ namespace editor::resources {
 namespace editor::render::modals {
     class SpriteWizard : public ModalWindow {
     public:
-        SpriteWizard();
+        SpriteWizard(editor::Project* project);
 
         void setSpriteToModify(editor::resources::Sprite* sprite, bool modify = false);
 

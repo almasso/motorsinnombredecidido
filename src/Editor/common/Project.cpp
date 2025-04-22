@@ -12,6 +12,8 @@
 #include "EditorError.h"
 #include "resources/Tileset.h"
 #include "resources/Map.h"
+#include "resources/Sprite.h"
+#include "resources/Animation.h"
 #include <SDL3/SDL_filesystem.h>
 #include "resources/events/Event.h"
 
@@ -352,6 +354,54 @@ const std::unordered_map<std::string, editor::resources::Map*>& editor::Project:
 
 const std::unordered_map<std::string, editor::resources::Tileset*>& editor::Project::getTilesets() const {
     return _tilesets;
+}
+
+void editor::Project::addSprite(editor::resources::Sprite *sprite) {
+    _sprites[sprite->getName()] = sprite;
+    sprite->writeToLua();
+}
+
+int editor::Project::totalSprites() const {
+    return _sprites.size();
+}
+
+const std::unordered_map<std::string, editor::resources::Sprite*>& editor::Project::getSprites() const {
+    return _sprites;
+}
+
+void editor::Project::refreshSprites() {
+    for (auto it = _sprites.begin(); it != _sprites.end();) {
+        if(it->second->getName() != it->first) {
+            resources::Sprite* spritetmp = it->second;
+            it = _sprites.erase(it);
+            _sprites[spritetmp->getName()] = spritetmp;
+        }
+        else ++it;
+    }
+}
+
+void editor::Project::addAnimation(editor::resources::Animation *animation) {
+    _animations[animation->getName()] = animation;
+    animation->writeToLua();
+}
+
+int editor::Project::totalAnimations() const {
+    return _animations.size();
+}
+
+const std::unordered_map<std::string, editor::resources::Animation*>& editor::Project::getAnimations() const {
+    return _animations;
+}
+
+void editor::Project::refreshAnimations() {
+    for (auto it = _animations.begin(); it != _animations.end();) {
+        if(it->second->getName() != it->first) {
+            resources::Animation* animtmp = it->second;
+            it = _animations.erase(it);
+            _animations[animtmp->getName()] = animtmp;
+        }
+        else ++it;
+    }
 }
 
 std::filesystem::path editor::Project::getAssetsPath() const {

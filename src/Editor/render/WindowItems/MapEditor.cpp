@@ -41,6 +41,8 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.m
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.zoomout"));
     _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/grid.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.grid"));
+    //TODO: _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/collisions.png"));
+    _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.collisions"));
 
     _tilesetWizard = new render::modals::TilesetWizard(project);
     WindowStack::addWindowToStack(_tilesetWizard);
@@ -115,21 +117,35 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
                 ImGui::SetCursorScreenPos(tilePos);
                 if (ImGui::InvisibleButton(buttonID.c_str(), ImVec2(scaledSize, scaledSize))) {
-                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
-                        _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
+                    if (_selectedMap != nullptr && _collisionsShown) {
+                        _selectedMap->getCollisions()[i + mapWidth * j] = !_selectedMap->getCollisions()[i + mapWidth * j];
                         _somethingModified = true;
+                    }
+                    else {
+                        if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
+                            _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
+                            _somethingModified = true;
+                        }
                     }
                 }
 
                 bool hovered = mouseX >= tilePos.x && mouseX < tileEnd.x && mouseY >= tilePos.y && mouseY < tileEnd.y;
 
-                if(isDragging && hovered) {
+                if(hovered && ImGui::IsMouseDown(ImGuiMouseButton_Right) && !_collisionsShown) {
+                    if(_project->totalTilesets() > 0 && _selectedMap != nullptr) {
+                        _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = nullptr;
+                        _somethingModified = true;
+                    }
+                }
+
+                if(isDragging && hovered && !_collisionsShown) {
                     if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
                         _somethingModified = true;
                     }
                 }
 
+                _selectedGridMode = _collisionsShown ? GridDrawingMode::DRAW_COLLISIONS : _tmpTileMode;
                 if(_selectedMap != nullptr) drawTileInGrid(_selectedMap, mapWidth, i, j, tilePos, tileEnd, drawList);
                 if (_isGridShown) drawList->AddRect(tilePos, tileEnd, IM_COL32(255, 255, 255, 50));
             }
@@ -177,7 +193,23 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
                     drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
             }
         } break;
+        case GridDrawingMode::DRAW_COLLISIONS: {
+            if (_selectedMap != nullptr) {
+                for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
+                    resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
+                    if(tile != nullptr)
+                        drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
+                }
+                drawList->AddRectFilled(tilePos, tileEnd, IM_COL32(0, 0, 0, 100));
+                _selectedMap->getCollisions()[i + mapWidth * j] ? drawX(tilePos, tileEnd, drawList) : drawList->AddCircle(ImVec2((tilePos.x + tileEnd.x) / 2, (tilePos.y + tileEnd.y) / 2),(tileEnd.x - tilePos.x) / 4,IM_COL32(0, 0, 255, 255), 0, 2);
+            }
+        } break;
     }
+}
+
+void editor::render::tabs::MapEditor::drawX(const ImVec2& tilePos, const ImVec2& tileEnd, ImDrawList* drawList) {
+    drawList->AddLine(ImVec2(tilePos.x * 1.015f, tilePos.y * 1.015f), ImVec2(tileEnd.x * 0.985f, tileEnd.y * 0.985f), IM_COL32(255, 0, 0, 255), 3);
+    drawList->AddLine(ImVec2(tileEnd.x * 0.985f, tilePos.y * 1.015f), ImVec2(tilePos.x * 1.015f, tileEnd.y * 0.985f), IM_COL32(255, 0, 0, 255), 3);
 }
 
 void editor::render::tabs::MapEditor::drawToolbar() {
@@ -187,10 +219,10 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     // Botones de layers
     for(int i = 0; i < 4; ++i) {
         if(i > 0) ImGui::SameLine();
-        ImVec4 bg = _selectedGridMode == i ? ImVec4(1,0,1,1) : ImVec4(0,0,0,0);
+        ImVec4 bg = _tmpTileMode == i ? ImVec4(1,0,1,1) : ImVec4(0,0,0,0);
 
         if(ImGui::ImageButton(std::string("but" + std::to_string(i)).c_str(), _uiTextures[i], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
-            _selectedGridMode = i;
+            _tmpTileMode = i;
         }
         if(ImGui::IsItemHovered()) {
             ImGui::SetTooltip(_buttonTooltips[i].c_str());
@@ -228,6 +260,15 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     }
     if(ImGui::IsItemHovered()) {
         ImGui::SetTooltip(_buttonTooltips[6].c_str());
+    }
+
+    ImGui::SameLine();
+    bg = _collisionsShown ? ImVec4(1, 0, 1, 1) : ImVec4(0, 0, 0, 0);
+    if (ImGui::ImageButton("butCollisions", _uiTextures[6], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
+        _collisionsShown = !_collisionsShown;
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip(_buttonTooltips[7].c_str());
     }
 
     ImGui::SameLine();
@@ -374,7 +415,12 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
             for(auto tile : _selectedTileset->getTiles()) {
                 if(i % _selectedTileset->getXTiles() != 0) ImGui::SameLine();
                 if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), tile->texture, ImVec2(32, 32), tile->rect.Min, tile->rect.Max)) {
-                    _selectedTile = i;
+                    if(!_collisionsShown) _selectedTile = i;
+                }
+                if(_collisionsShown) {
+                    ImDrawList* drawList = ImGui::GetWindowDrawList();
+                    ImVec2 initialPos(32 * (i % _selectedTileset->getXTiles()), 32 * (int)(i / _selectedTileset->getXTiles()));
+                    //_selectedTileset->getCollisions()[i] ? drawX(initialPos, ImVec2(), drawList) : drawList->AddCircle();
                 }
                 ++i;
             }

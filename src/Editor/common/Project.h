@@ -16,6 +16,8 @@
 namespace editor::resources {
     class Tileset;
     class Map;
+    class Sprite;
+    class Animation;
     namespace events {
         class Event;
     }
@@ -91,13 +93,13 @@ namespace editor {
 
         void updateLastModified();
 
+        void saveEverything();
+
         void addMap(editor::resources::Map* map);
 
         void refreshMaps();
 
         int totalMaps() const;
-
-        void saveEverything();
 
         const std::unordered_map<std::string, editor::resources::Map*>& getMaps() const;
 
@@ -161,6 +163,50 @@ namespace editor {
             return _events.erase(t);
         }
 
+        void addSprite(editor::resources::Sprite* sprite);
+
+        int totalSprites() const;
+
+        const std::unordered_map<std::string, editor::resources::Sprite*>& getSprites() const;
+
+        void refreshSprites();
+
+        template <std::convertible_to<std::string> T>
+        editor::resources::Sprite* getSprite(T&& name) {
+            auto t = _sprites.find(std::forward<T>(name));
+            if(t == _sprites.end()) return nullptr;
+            return t->second;
+        }
+
+        template <std::convertible_to<std::string> T>
+        std::unordered_map<std::string, editor::resources::Sprite*>::iterator removeSprite(T&& name) {
+            auto t = _sprites.find(std::forward<T>(name));
+            if(t == _sprites.end()) return t;
+            return _sprites.erase(t);
+        }
+
+        void addAnimation(editor::resources::Animation* animation);
+
+        int totalAnimations() const;
+
+        const std::unordered_map<std::string, editor::resources::Animation*>& getAnimations() const;
+
+        void refreshAnimations();
+
+        template <std::convertible_to<std::string> T>
+        editor::resources::Animation* getAnimation(T&& name) {
+            auto t = _animations.find(std::forward<T>(name));
+            if(t == _animations.end()) return nullptr;
+            return t->second;
+        }
+
+        template <std::convertible_to<std::string> T>
+        std::unordered_map<std::string, editor::resources::Animation*>::iterator removeAnimation(T&& name) {
+            auto t = _animations.find(std::forward<T>(name));
+            if(t == _animations.end()) return t;
+            return _animations.erase(t);
+        }
+
         std::filesystem::path getAssetsPath() const;
 
         std::filesystem::path getBuildPath(const std::string &platform) const;
@@ -174,6 +220,8 @@ namespace editor {
         bool _found = false;
 
         std::unordered_map<std::string, editor::resources::Tileset*> _tilesets;
+        std::unordered_map<std::string, editor::resources::Sprite*> _sprites;
+        std::unordered_map<std::string, editor::resources::Animation*> _animations;
         std::unordered_map<std::string, editor::resources::Map*> _maps;
         std::unordered_map<std::string, editor::resources::events::Event*> _events;
 
