@@ -62,12 +62,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\comillas}[1]{\guillemotleft #1\guillemotright{}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comando: 
+%
+%       \figuratikz
+%
+% Resultado: 
+%
+% Genera una figura utilizando el entorno de tikz.
+% Parámetros: Texto con descrpción, etiqueta de referencia, código tikz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\figuratikz}[3]{%
 \begin{figure}[t]%
 \begin{center}%
 \begin{tikzpicture}%
 	#3
 \end{tikzpicture}%
+\caption{#1} \label{#2}%
+\end{center}%
+\end{figure}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comando: 
+%
+%       \figuratikz
+%
+% Resultado: 
+%
+% Genera una figura utilizando el entorno de tikz.
+% Parámetros: Texto con descrpción, etiqueta de referencia, argumentos tikz,
+% código tikz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\figuratikzparametros}[4]{%
+\begin{figure}[t]%
+\begin{center}%
+\begin{tikzpicture}[#3]%
+	#4
+\end{tikzpicture}
 \caption{#1} \label{#2}%
 \end{center}%
 \end{figure}%
