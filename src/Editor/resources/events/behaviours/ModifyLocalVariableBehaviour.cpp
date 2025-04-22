@@ -11,15 +11,16 @@
 editor::resources::events::ModifyLocalVariableBehaviour::ModifyLocalVariableBehaviour(Event* event) :
     EventBehaviourTemplate(event),
     _variable(),
-    _newValue(sol::lua_nil) {
+    _newValue(0) {
 }
 
 editor::resources::events::ModifyLocalVariableBehaviour::~ModifyLocalVariableBehaviour() = default;
 
 bool editor::resources::events::ModifyLocalVariableBehaviour::read(sol::table const& params) {
-    _variable = params.get_or<std::string>(variableKey, "");
-    if (_variable.empty())
+    sol::optional<std::string> variable = params.get<sol::optional<std::string>>(variableKey);
+    if (!variable.has_value())
         return false;
+    _variable = variable.value();
     sol::optional<sol::lua_value> newValue = params.get<sol::optional<sol::lua_value>>(newValueKey);
     if (!newValue.has_value())
         return false;

@@ -86,7 +86,7 @@ void editor::render::tabs::EventEditor::renderEventDropDown() {
     }
     ImGui::Separator();
     if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.createevent").c_str())) {
-        _createdEvent = new editor::resources::events::Event();
+        _createdEvent = new editor::resources::events::Event(_project);
         _eventWizard->setEventToModify(_createdEvent);
         _eventWizard->show();
     }

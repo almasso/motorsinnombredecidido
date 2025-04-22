@@ -5,10 +5,20 @@
 
 #include "MusicBehaviour.h"
 
+#include <imgui.h>
+#include <common/EditorError.h>
+#include <io/LocalizationManager.h>
+#include <resources/events/Event.h>
+#include <utils/tinyfiledialogs/tinyfiledialogs.h>
+#include <common/Project.h>
+#include <render/RenderManager.h>
+
 #define actionKey "action"
 #define clipKey "clip"
 #define volumeKey "volume"
 #define loopKey "loop"
+
+#define MAX_CLIP_BUFFER 1024
 
 editor::resources::events::MusicBehaviour::MusicBehaviour(Event* event) :
     EventBehaviourTemplate(event),
@@ -16,7 +26,10 @@ editor::resources::events::MusicBehaviour::MusicBehaviour(Event* event) :
     _param() {
 }
 
-editor::resources::events::MusicBehaviour::~MusicBehaviour() = default;
+editor::resources::events::MusicBehaviour::~MusicBehaviour() {
+    if (_action == CHANGE)
+        delete[] _param.clip;
+}
 
 bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
     std::string action = params.get_or<std::string>(actionKey, "");
@@ -30,10 +43,11 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
         _action = PAUSE;
     else if (action == "change") {
         _action = CHANGE;
-        std::string clip = params.get_or<std::string>(clipKey, "");
-        if (clip.empty())
+        sol::optional<std::string> clip = params.get<sol::optional<std::string>>(clipKey);
+        if (!clip.has_value())
             return false;
-        _param.clip = clip.c_str();
+        _param.clip = new char[MAX_CLIP_BUFFER];
+        clip.value().copy(_param.clip, MAX_CLIP_BUFFER);
     }
     else if (action == "volume") {
         _action = VOLUME;
@@ -58,7 +72,20 @@ bool editor::resources::events::MusicBehaviour::writeToEngine(sol::table& behavi
 }
 
 bool editor::resources::events::MusicBehaviour::render() {
-    return false;
+    bool edited = renderActionSelector();
+    switch (_action) {
+    case CHANGE:
+        edited = renderChangeAction() || edited;
+        break;
+    case VOLUME:
+        edited = renderVolumeAction() || edited;
+        break;
+    case LOOP:
+        edited = renderLoopAction() || edited;
+        break;
+    default: ;
+    }
+    return edited;
 }
 
 bool editor::resources::events::MusicBehaviour::writeParams(sol::table& params) {
@@ -90,3 +117,98 @@ bool editor::resources::events::MusicBehaviour::writeParams(sol::table& params) 
     }
     return true;
 }
+
+bool editor::resources::events::MusicBehaviour::renderActionSelector() {
+    bool edited = false;
+    std::string actionName = getActionName(_action);
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+    if (!ImGui::BeginCombo((std::string("###musicActionSelector") + std::to_string(reinterpret_cast<long long>(this))).c_str(), actionName.c_str()))
+        return false;
+
+    for (int i = 0; i < MAX_ACTION; ++i) {
+        bool isSelected = (i == _action);
+        if (ImGui::Selectable((getActionName(static_cast<MUSIC_ACTION>(i)) + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
+            if (!isSelected) {
+                if (_action == CHANGE)
+                    delete[] _param.clip;
+                _action = static_cast<MUSIC_ACTION>(i);
+                if (_action == CHANGE) {
+                    _param.clip = new char[MAX_CLIP_BUFFER];
+                    _param.clip[0] = '\0';
+                }
+                else if (_action == VOLUME) {
+                    _param.volume = 1.0f;
+                }
+                else if (_action == LOOP) {
+                    _param.loop = true;
+                }
+                edited = true;
+            }
+        }
+    }
+    ImGui::EndCombo();
+    return edited;
+}
+
+bool editor::resources::events::MusicBehaviour::renderChangeAction() {
+    bool edited = false;
+    auto project = _event->getProject();
+    if(ImGui::Button(io::LocalizationManager::GetInstance().getString("action.search").c_str())) {
+        const char* fileExtension[] = {"*.wav"};
+        const char* route = tinyfd_openFileDialog(
+                io::LocalizationManager::GetInstance().getString("action.selectaudio").c_str(),
+                (project->getPath() / "assets/").string().c_str(),
+                1,
+                fileExtension,
+                nullptr,
+                0
+        );
+        if(route != nullptr) {
+            if(std::filesystem::path(route).parent_path() != (project->getPath() / "assets")) {
+                showUserWarning(io::LocalizationManager::GetInstance().getString("error.assetlocationnotvalid"))
+                strncpy(_param.clip, "", MAX_CLIP_BUFFER - 1);
+                _param.clip[MAX_CLIP_BUFFER - 1] = '\0';
+            }
+            else {
+                std::string fR(std::filesystem::path(route).lexically_normal().string());
+                strncpy(_param.clip, fR.c_str(), MAX_CLIP_BUFFER - 1);
+                _param.clip[MAX_CLIP_BUFFER - 1] = '\0';
+                edited = true;
+            }
+        }
+    }
+    ImGui::SameLine();
+    edited = ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.change.source") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
+                     _param.clip, IM_ARRAYSIZE(_param.clip), ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+    return edited;
+}
+
+bool editor::resources::events::MusicBehaviour::renderVolumeAction() {
+    return ImGui::SliderFloat((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.volume.volume") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_param.volume, 0, 1);
+}
+
+bool editor::resources::events::MusicBehaviour::renderLoopAction() {
+    return ImGui::Checkbox((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.loop.loop") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_param.loop);
+}
+
+std::string editor::resources::events::MusicBehaviour::getActionName(MUSIC_ACTION action) const {
+    switch (action) {
+    case PLAY:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.play");
+    case STOP:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.stop");
+    case RESUME:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.resume");
+    case PAUSE:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.pause");
+    case CHANGE:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.change");
+    case VOLUME:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.volume");
+    case LOOP:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.loop");
+    default:
+        return "";
+    }
+}
+

@@ -40,7 +40,7 @@ void editor::Project::initResources() {
     std::filesystem::path eventsPath = (_projectPath / "projectfiles" / "events");
     resources::events::Event::SetEventsDirectory(eventsPath);
     for (auto const& file : std::filesystem::directory_iterator(eventsPath)) {
-        auto event = new resources::events::Event();
+        auto event = new resources::events::Event(this);
         auto name = file.path().stem().string();
         if (event->readFromLua(name))
             _events.insert({name, event});

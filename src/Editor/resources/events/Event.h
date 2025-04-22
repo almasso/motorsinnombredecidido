@@ -12,13 +12,17 @@
 #include <string>
 #include <sol/forward.hpp>
 
+namespace editor {
+    class Project;
+}
+
 namespace editor::resources::events {
     class EventBehaviour;
     class EventCondition;
 
     class Event {
     public:
-        Event();
+        Event(Project* project);
         ~Event();
 
         bool readFromLua(std::string const& name);
@@ -42,15 +46,19 @@ namespace editor::resources::events {
         void moveBehaviourUp(std::list<EventBehaviour*>::iterator& behaviour);
         void moveBehaviourDown(std::list<EventBehaviour*>::iterator& behaviour);
 
+        Project* getProject();
+
         static void SetEventsDirectory(std::filesystem::path const& eventsDirectory);
     private:
         static std::filesystem::path _eventsDirectory;
+
+        Project* _project;
 
         std::list<EventBehaviour*> _behaviours;
         EventCondition* _condition;
         std::string _name;
 
-        bool initialized;
+        bool _initialized;
 
         bool readBehaviours(sol::table const& behaviours);
         bool writeBehaviours(sol::table& behaviours);

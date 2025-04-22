@@ -17,9 +17,10 @@
 
 std::filesystem::path editor::resources::events::Event::_eventsDirectory;
 
-editor::resources::events::Event::Event() :
+editor::resources::events::Event::Event(Project* project) :
+    _project(project),
     _condition(nullptr),
-    initialized(false) {
+    _initialized(false) {
 }
 
 editor::resources::events::Event::~Event() {
@@ -58,7 +59,7 @@ bool editor::resources::events::Event::EraseFromLua(std::string const& name) {
 
 void editor::resources::events::Event::init(std::string const& name) {
     _name = name;
-    initialized = true;
+    _initialized = true;
 }
 
 void editor::resources::events::Event::init(std::string const& name, std::string const& condition) {
@@ -114,7 +115,7 @@ editor::resources::events::EventBehaviour* editor::resources::events::Event::add
 }
 
 bool editor::resources::events::Event::isInitialized() const {
-    return initialized;
+    return _initialized;
 }
 
 editor::resources::events::EventCondition* editor::resources::events::Event::getCondition() {
@@ -150,6 +151,10 @@ void editor::resources::events::Event::moveBehaviourUp(std::list<EventBehaviour*
 
 void editor::resources::events::Event::moveBehaviourDown(std::list<EventBehaviour*>::iterator& behaviour) {
     _behaviours.splice(++behaviour, _behaviours, behaviour++);
+}
+
+editor::Project* editor::resources::events::Event::getProject() {
+    return _project;
 }
 
 void editor::resources::events::Event::SetEventsDirectory(std::filesystem::path const& eventsDirectory) {

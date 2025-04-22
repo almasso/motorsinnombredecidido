@@ -20,20 +20,27 @@ namespace editor::resources::events {
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        enum {
+        enum MUSIC_ACTION : int {
             PLAY,
             STOP,
             RESUME,
             PAUSE,
             CHANGE,
             VOLUME,
-            LOOP
+            LOOP,
+            MAX_ACTION
         } _action;
         union {
-            const char* clip;
+            char* clip;
             float volume;
             bool loop;
         } _param;
+
+        bool renderActionSelector();
+        bool renderChangeAction();
+        bool renderVolumeAction();
+        bool renderLoopAction();
+        std::string getActionName(MUSIC_ACTION action) const;
     };
 
 }
