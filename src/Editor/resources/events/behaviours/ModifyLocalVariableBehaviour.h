@@ -20,8 +20,11 @@ namespace editor::resources::events {
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        std::string _variable;
-        sol::lua_value _newValue;
+        char* _variable;
+        char* _newValue;
+
+        bool renderVariable();
+        bool renderValue();
     };
 
 }

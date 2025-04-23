@@ -6,6 +6,8 @@
 #ifndef CHOICEBEHAVIOUR_H
 #define CHOICEBEHAVIOUR_H
 
+#include <list>
+
 #include "../EventBehaviour.h"
 
 namespace editor::resources::events {
@@ -20,8 +22,18 @@ namespace editor::resources::events {
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        std::string _variable;
-        std::vector<std::pair<std::string, sol::lua_value>> _options;
+        using optionText = char*;
+        using optionValue = char*;
+        char* _variable;
+        std::list<std::pair<optionText, optionValue>> _options;
+        using optionsIterator = std::list<std::pair<optionText, optionValue>>::iterator;
+
+        bool renderVariableToModify();
+        bool renderOptions();
+        bool renderOptionValue(optionValue value, int i);
+        bool renderOptionText(optionText text, int i);
+        bool renderRemoveOptionButton(std::list<optionsIterator>& optionsToRemove, optionsIterator it, int i);
+        bool renderAddOptionButton();
     };
 
 }
