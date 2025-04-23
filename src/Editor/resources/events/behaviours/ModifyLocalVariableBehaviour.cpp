@@ -5,26 +5,39 @@
 
 #include "ModifyLocalVariableBehaviour.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+
 #define variableKey "variable"
 #define newValueKey "newValue"
 
+#define VARIABLE_MAX_SIZE 128
+#define VALUE_MAX_SIZE 32
+
 editor::resources::events::ModifyLocalVariableBehaviour::ModifyLocalVariableBehaviour(Event* event) :
     EventBehaviourTemplate(event),
-    _variable(),
-    _newValue(0) {
+    _variable(new char[VARIABLE_MAX_SIZE]),
+    _newValue(new char[VALUE_MAX_SIZE]) {
+    _variable[0] = '\0';
+    _newValue[0] = '\0';
 }
 
-editor::resources::events::ModifyLocalVariableBehaviour::~ModifyLocalVariableBehaviour() = default;
+editor::resources::events::ModifyLocalVariableBehaviour::~ModifyLocalVariableBehaviour() {
+    delete[] _variable;
+    delete[] _newValue;
+}
 
 bool editor::resources::events::ModifyLocalVariableBehaviour::read(sol::table const& params) {
     sol::optional<std::string> variable = params.get<sol::optional<std::string>>(variableKey);
     if (!variable.has_value())
         return false;
-    _variable = variable.value();
-    sol::optional<sol::lua_value> newValue = params.get<sol::optional<sol::lua_value>>(newValueKey);
+    variable.value().copy(_variable, VARIABLE_MAX_SIZE);
+    _variable[variable.value().size()] = '\0';
+    sol::optional<std::string> newValue = params.get<sol::optional<std::string>>(newValueKey);
     if (!newValue.has_value())
         return false;
-    _newValue = newValue.value();
+    newValue.value().copy(_newValue, VALUE_MAX_SIZE);
+    _newValue[newValue.value().size()] = '\0';
     return true;
 }
 
@@ -33,12 +46,22 @@ bool editor::resources::events::ModifyLocalVariableBehaviour::writeToEngine(sol:
 }
 
 bool editor::resources::events::ModifyLocalVariableBehaviour::render() {
-    return false;
+    bool edited = renderVariable();
+    edited = renderValue() || edited;
+    return edited;
 }
 
 bool editor::resources::events::ModifyLocalVariableBehaviour::writeParams(sol::table& params) {
     params[variableKey] = _variable;
     params[newValueKey] = _newValue;
     return true;
+}
+
+bool editor::resources::events::ModifyLocalVariableBehaviour::renderVariable() {
+    return ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ModifyLocalVariableBehaviour.variable") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), _variable, VARIABLE_MAX_SIZE);
+}
+
+bool editor::resources::events::ModifyLocalVariableBehaviour::renderValue() {
+    return ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ModifyLocalVariableBehaviour.newValue") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), _newValue, VALUE_MAX_SIZE);
 }
 

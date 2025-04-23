@@ -49,6 +49,8 @@ return {
     ["window.mainwindow.eventeditor.behaviours.JumpBehaviour.target"] = "Comportamiento objetivo",
     ["window.mainwindow.eventeditor.behaviours.JumpIfBehaviour"] = "Salto condicional",
     ["window.mainwindow.eventeditor.behaviours.ModifyLocalVariableBehaviour"] = "Modificar variable local",
+    ["window.mainwindow.eventeditor.behaviours.ModifyLocalVariableBehaviour.variable"] = "Variable",
+    ["window.mainwindow.eventeditor.behaviours.ModifyLocalVariableBehaviour.newValue"] = "Nuevo valor",
     ["window.mainwindow.eventeditor.behaviours.MoveBehaviour"] = "Mover",
     ["window.mainwindow.eventeditor.behaviours.MoveBehaviour.target"] = "Objetivo",
     ["window.mainwindow.eventeditor.behaviours.MoveBehaviour.x"] = "x",
