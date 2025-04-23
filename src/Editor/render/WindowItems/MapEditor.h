@@ -8,7 +8,6 @@
 
 #include "render/WindowItem.h"
 #include <vector>
-#include <deque>
 #include <imgui.h>
 
 namespace editor {
@@ -21,6 +20,7 @@ namespace editor::render::modals {
 }
 
 namespace editor::resources {
+    class Object;
     class Tileset;
     class Map;
 }
@@ -39,7 +39,8 @@ namespace editor::render::tabs {
             DRAW_SELECTED_LAYER_BELOW_TRANSPARENT = 1,
             DRAW_SELECTED_LAYER_BELOW_OPAQUE = 2,
             DRAW_ALL = 3,
-            DRAW_COLLISIONS = 4
+            DRAW_COLLISIONS = 4,
+            DRAW_OBJECTS = 5,
         };
 
         editor::Project* _project = nullptr;
@@ -58,9 +59,11 @@ namespace editor::render::tabs {
         int _selectedLayer = -1;
         editor::resources::Tileset* _selectedTileset = nullptr;
         int _selectedTile = -1;
+        int _selectedObject = 0;
         editor::resources::Map* _selectedMap = nullptr;
         bool _isGridShown = true;
         bool _collisionsShown = false;
+        bool _objectMode = false;
         bool _somethingModified = false;
 
         void beforeRender() override;

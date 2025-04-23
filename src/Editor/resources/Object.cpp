@@ -21,7 +21,18 @@ editor::resources::Object::Object(Project* project) :
     _project(project),
     _x(0),
     _y(0),
-    _collidable(false) {
+    _layer(0),
+    _collides(false),
+    _spriteName("") {
+}
+
+editor::resources::Object::Object(Project* project, int x, int y) :
+    _project(project),
+    _x(x),
+    _y(y),
+    _layer(0),
+    _collides(false),
+    _spriteName("") {
 }
 
 editor::resources::Object::~Object() {
@@ -47,7 +58,7 @@ bool editor::resources::Object::read(sol::table const& objectTable) {
     sol::optional<bool> collidable = objectTable.get<sol::optional<bool>>(collidableKey);
     if (!collidable.has_value())
         return false;
-    _collidable = collidable.value();
+    _collides = collidable.value();
 
     sol::optional<sol::table> events = objectTable.get<sol::optional<sol::table>>(eventsKey);
     if (!events.has_value())
@@ -66,7 +77,7 @@ bool editor::resources::Object::read(sol::table const& objectTable) {
 bool editor::resources::Object::write(sol::table& objectTable) {
     objectTable[xKey] = _x;
     objectTable[yKey] = _y;
-    objectTable[collidableKey] = _collidable;
+    objectTable[collidableKey] = _collides;
 
     sol::table events = io::LuaManager::GetInstance().getState().create_table();
     if (!writeEvents(events))
@@ -84,12 +95,77 @@ bool editor::resources::Object::writeToEngine(sol::table& objectTable) {
     return true;
 }
 
+const std::string & editor::resources::Object::getSprite() const {
+    return _spriteName;
+}
+
+void editor::resources::Object::setSprite(const std::string &sprite) {
+    _spriteName = sprite;
+}
+
 int editor::resources::Object::getX() const {
     return _x;
 }
 
 int editor::resources::Object::getY() const {
     return _y;
+}
+
+int editor::resources::Object::getLayer() const {
+    return _layer;
+}
+
+void editor::resources::Object::setX(int x) {
+    _x = x;
+}
+
+void editor::resources::Object::setY(int y) {
+    _y = y;
+}
+
+void editor::resources::Object::setLayer(int layer) {
+    _layer = layer;
+}
+
+bool editor::resources::Object::getCollide() const {
+    return _collides;
+}
+
+void editor::resources::Object::setCollide(bool collide) {
+    _collides = collide;
+}
+
+void editor::resources::Object::addVariable(const std::string &key) {
+    auto& lua = io::LuaManager::GetInstance().getState();
+    _localVariables.insert({key,make_object(lua,"")});
+}
+
+void editor::resources::Object::setVariable(const std::string &key, const std::string &value) {
+    if (_localVariables.contains(key)) {
+        auto& lua = io::LuaManager::GetInstance().getState();
+        _localVariables[key] = make_object(lua,value);
+    }
+}
+
+void editor::resources::Object::removeVariable(const std::string &key) {
+    _localVariables.erase(key);
+}
+
+const std::unordered_map<std::string, sol::object> & editor::resources::Object::getVariables() const {
+    return _localVariables;
+}
+
+void editor::resources::Object::addEvent(events::Event *event) {
+    _events.push_back(event);
+}
+
+std::vector<editor::resources::events::Event *>::iterator editor::resources::Object::removeEvent(
+    std::vector<events::Event *>::iterator iter) {
+    return _events.erase(iter);
+}
+
+std::vector<editor::resources::events::Event *> & editor::resources::Object::getEvents() {
+    return _events;
 }
 
 bool editor::resources::Object::readEvents(sol::table const& events) {
@@ -108,7 +184,7 @@ bool editor::resources::Object::readLocalVars(sol::table const& localVars) {
     for (auto&& [key, value] : localVars) {
         if (!key.is<std::string>() || !value.is<sol::lua_value>())
             return false;
-        _localVariables.insert({key.as<std::string>(), value.as<sol::lua_value>()});
+        _localVariables.insert({key.as<std::string>(), value.as<sol::object>()});
     }
     return true;
 }

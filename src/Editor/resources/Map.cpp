@@ -472,3 +472,17 @@ std::string editor::resources::Map::GetFilePath(std::string const& mapName) {
 bool editor::resources::Map::isInitialized() const {
     return _init;
 }
+
+void editor::resources::Map::addObject(int key, Object *object) {
+    _objects.insert({key, object});
+}
+
+editor::resources::Object * editor::resources::Map::getObject(int key) {
+    auto it = _objects.find(key);
+    if (it == _objects.end()) return nullptr;
+    return it->second;
+}
+
+void editor::resources::Map::removeObject(int key) {
+    _objects.erase(key);
+}

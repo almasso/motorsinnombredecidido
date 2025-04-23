@@ -64,6 +64,12 @@ namespace editor::resources {
 
         bool isInitialized() const;
 
+        void addObject(int key, Object* object);
+
+        Object* getObject(int key);
+
+        void removeObject(int key);
+
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
         bool isAdjacent(const Map *other) const;

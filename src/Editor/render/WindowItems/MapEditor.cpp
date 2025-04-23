@@ -8,6 +8,9 @@
 #include "common/Project.h"
 #include "render/RenderManager.h"
 #include <imgui_internal.h>
+#include <resources/Object.h>
+#include <resources/events/Event.h>
+
 #include "resources/Tile.h"
 #include "render/Modals/MainWindow/TilesetWizard.h"
 #include "render/WindowStack.h"
@@ -43,6 +46,8 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.m
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.grid"));
     _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/collisions.png"));
     _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.collisions"));
+    _uiTextures.push_back(RenderManager::GetInstance().loadTexture(std::string(_currentDirectory) + "/settings/assets/map/object.png"));
+    _buttonTooltips.push_back(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.objectMode"));
 
     _tilesetWizard = new render::modals::TilesetWizard(project);
     WindowStack::addWindowToStack(_tilesetWizard);
@@ -72,7 +77,7 @@ void editor::render::tabs::MapEditor::beforeRender() {
 void editor::render::tabs::MapEditor::onRender() {
     drawTileSelector();
     ImGui::SameLine();
-    ImGui::BeginChild("Toolbar+Grid");
+    ImGui::BeginChild("Toolbar+Grid", ImVec2(render::RenderManager::GetInstance().getWidth() / 2, 0));
     drawToolbar();
     drawGrid();
     ImGui::EndChild();
@@ -117,7 +122,10 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 std::string buttonID = "tile_" + std::to_string(i) + "_" + std::to_string(j);
                 ImGui::SetCursorScreenPos(tilePos);
                 if (ImGui::InvisibleButton(buttonID.c_str(), ImVec2(scaledSize, scaledSize))) {
-                    if (_selectedMap != nullptr && _collisionsShown) {
+                    if (_selectedMap != nullptr && _objectMode) {
+                        _selectedObject = i + mapWidth * j;
+                    }
+                    else if (_selectedMap != nullptr && _collisionsShown) {
                         _selectedMap->getCollisions()[i + mapWidth * j] = !_selectedMap->getCollisions()[i + mapWidth * j];
                         _somethingModified = true;
                     }
@@ -132,14 +140,14 @@ void editor::render::tabs::MapEditor::drawGrid() {
 
                 bool hovered = mouseX >= tilePos.x && mouseX < tileEnd.x && mouseY >= tilePos.y && mouseY < tileEnd.y;
 
-                if(hovered && ImGui::IsMouseDown(ImGuiMouseButton_Right) && !_collisionsShown) {
+                if(hovered && ImGui::IsMouseDown(ImGuiMouseButton_Right) && !(_collisionsShown || _objectMode)) {
                     if(_project->totalTilesets() > 0 && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = nullptr;
                         _somethingModified = true;
                     }
                 }
 
-                if(isDragging && hovered && !_collisionsShown) {
+                if(isDragging && hovered && !(_collisionsShown || _objectMode)) {
                     if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
                         _selectedMap->getCollisions()[i + mapWidth * j] = _selectedMap->getCollisions()[i + mapWidth * j] || _selectedTileset->getCollisions()[_selectedTile];
@@ -147,7 +155,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
                     }
                 }
 
-                _selectedGridMode = _collisionsShown ? GridDrawingMode::DRAW_COLLISIONS : _tmpTileMode;
+                _selectedGridMode = _objectMode ? GridDrawingMode::DRAW_OBJECTS : (_collisionsShown ? GridDrawingMode::DRAW_COLLISIONS : _tmpTileMode);
                 if(_selectedMap != nullptr) drawTileInGrid(_selectedMap, mapWidth, i, j, tilePos, tileEnd, drawList);
                 if (_isGridShown) drawList->AddRect(tilePos, tileEnd, IM_COL32(255, 255, 255, 50));
             }
@@ -204,6 +212,22 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
                 }
                 drawList->AddRectFilled(tilePos, tileEnd, IM_COL32(0, 0, 0, 100));
                 _selectedMap->getCollisions()[i + mapWidth * j] ? drawX(tilePos, tileEnd, drawList) : drawList->AddCircle(ImVec2((tilePos.x + tileEnd.x) / 2, (tilePos.y + tileEnd.y) / 2),(tileEnd.x - tilePos.x) / 4,IM_COL32(0, 0, 255, 255), 0, 2);
+            }
+        } break;
+        case GridDrawingMode::DRAW_OBJECTS: {
+            if (_selectedMap != nullptr) {
+                for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
+                    resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
+                    if(tile != nullptr)
+                        drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
+                }
+                drawList->AddRectFilled(tilePos, tileEnd, IM_COL32(0, 0, 0, 100));
+                if (_selectedObject == i + mapWidth * j) {
+                    drawList->AddRect(tilePos, tileEnd, IM_COL32(90, 255, 47, 255));
+                }
+                else if (_selectedMap->getObject(i + mapWidth * j) != nullptr) {
+                    drawList->AddRect(tilePos, tileEnd, IM_COL32(255, 255, 51, 255));
+                }
             }
         } break;
     }
@@ -272,6 +296,15 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip(_buttonTooltips[7].c_str());
     }
+    ImGui::SameLine();
+    bg = _objectMode ? ImVec4(1, 0, 1, 1) : ImVec4(0, 0, 0, 0);
+    if (ImGui::ImageButton("butObjects", _uiTextures[8], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
+        _objectMode = !_objectMode;
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip(_buttonTooltips[8].c_str());
+    }
+
 
     ImGui::SameLine();
     ImGui::Spacing();
@@ -462,6 +495,139 @@ void editor::render::tabs::MapEditor::save() {
 }
 
 void editor::render::tabs::MapEditor::drawObjectInspector() {
-    ImGui::BeginChild("##objectInspector", ImVec2(RenderManager::GetInstance().getWidth()/4, 0), true);
+    ImGui::BeginChild("##objectInspector", ImVec2(0, 0), true);
+    if (_selectedMap && _objectMode) {
+        editor::resources::Object* selectedObject = _selectedMap->getObject(_selectedObject);
+        if (selectedObject != nullptr) {
+            ImGui::Text("%s", ("object_" + _selectedMap->getName() + "_" + std::to_string(_selectedObject)).c_str());
+            ImGui::SameLine();
+            bool deleteObject = ImGui::Button(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.deleteObject").c_str());
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Spacing();
+            if (ImGui::BeginCombo("##spriteDropdown", selectedObject->getSprite() != "" ? selectedObject->getSprite().c_str() :
+                io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.spriteSelector").c_str())) {
+                for(auto it = _project->getSprites().begin(); it != _project->getSprites().end(); ++it) {
+                    auto sprite = *it;
+                    bool isSelected = (selectedObject->getSprite() == sprite.first);
+                    if(ImGui::Selectable(sprite.first.c_str(), isSelected)) {
+                        selectedObject->setSprite(sprite.first);
+                        _somethingModified = true;
+                    }
+                }
+                ImGui::EndCombo();
+            }
+            ImGui::Spacing();
+            ImGui::Spacing();
+            ImVec2 spriteSize(128, 128);
+            ImTextureID* texId = nullptr;
+            float windowWidth = ImGui::GetContentRegionAvail().x;
+            float offsetX = (windowWidth - spriteSize.x) * 0.5f;
+            if (offsetX < 0) offsetX = 0;
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offsetX);
+            std::string spriteName = selectedObject->getSprite();
+            if (!spriteName.empty() && _project->getSprite(spriteName)) {
+
+            }
+            if (texId) {
+                ImVec2 p = ImGui::GetCursorScreenPos();
+                ImGui::GetWindowDrawList()->AddRectFilled(p, ImVec2(p.x + spriteSize.x, p.y + spriteSize.y), IM_COL32(150, 150, 150, 180));
+                ImGui::Image(*texId, spriteSize);
+            } else {
+                ImVec2 p = ImGui::GetCursorScreenPos();
+                ImGui::GetWindowDrawList()->AddRectFilled(p, ImVec2(p.x + spriteSize.x, p.y + spriteSize.y), IM_COL32(150, 150, 150, 180));
+                ImGui::Dummy(spriteSize);
+            }
+            ImGui::Spacing();
+            ImGui::Spacing();
+            int layer = selectedObject->getLayer();
+            if (ImGui::InputInt(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.spriteLayer").c_str(), &layer)) {
+                selectedObject->setLayer(layer);
+                _somethingModified = true;
+            };
+            int pos[2] = { selectedObject->getX(),selectedObject->getY()};
+            ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.objectPosition").c_str());
+            if (ImGui::InputInt2("##objectPosition", pos)) {
+                if (selectedObject->getX() != pos[0] || selectedObject->getY() != pos[1]) {
+                    _selectedMap->removeObject(_selectedObject);
+                    selectedObject->setX(pos[0]);
+                    selectedObject->setY(pos[1]);
+                    _selectedObject = selectedObject->getX() + _selectedMap->getMapWidth() * selectedObject->getY();
+                    _selectedMap->addObject(_selectedObject, selectedObject);
+                    _somethingModified = true;
+                }
+            }
+            bool collides = selectedObject->getCollide();
+            if (ImGui::Checkbox(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.objectCollides").c_str(), &collides)) {
+                selectedObject->setCollide(collides);
+                _somethingModified = true;
+            }
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Spacing();
+            ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.objectVariables").c_str());
+            for (auto [name, value] : selectedObject->getVariables()) {
+                char variableValue[256];
+                std::strncpy(variableValue, value.as<std::string>().c_str(), sizeof(variableValue) - 1);
+                if (ImGui::InputText(name.c_str(),
+                    variableValue, IM_ARRAYSIZE(variableValue), ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    selectedObject->setVariable(name, variableValue);
+                    _somethingModified = true;
+                }
+            }
+            char newVariableName[256] = {0};
+            if (ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.addVariable").c_str(),
+                newVariableName, IM_ARRAYSIZE(newVariableName), ImGuiInputTextFlags_EnterReturnsTrue)) {
+                selectedObject->addVariable(newVariableName);
+                _somethingModified = true;
+            }
+            ImGui::Spacing();
+            ImGui::Separator();
+            ImGui::Spacing();
+            ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.events").c_str());
+            for (auto event = selectedObject->getEvents().begin(); event != selectedObject->getEvents().end();) {
+                ImGui::Text((*event)->getName().c_str());
+                ImGui::SameLine();
+                if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.removeEvent").c_str())) {
+                    event = selectedObject->removeEvent(event);
+                    _somethingModified = true;
+                }
+                else ++event;
+                ImGui::Spacing();
+            }
+            if (ImGui::BeginCombo("##addEventDropdown",io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.addEvent").c_str())) {
+                for (auto [name, event] : _project->getEvents()) {
+                    if(ImGui::Selectable((name).c_str(), false)) {
+                        selectedObject->addEvent(event);
+                        _somethingModified = true;
+                    }
+                }
+                ImGui::EndCombo();
+            }
+            if (deleteObject) {
+                _selectedMap->removeObject(selectedObject->getX() + _selectedMap->getMapWidth() * selectedObject->getY());
+                _somethingModified = true;
+                delete selectedObject;
+            }
+        }
+        else if (_selectedObject >= 0) {
+            const char* buttonLabel = io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createObject").c_str();
+            ImVec2 buttonSize = ImVec2(256, 64);
+            ImVec2  avail = ImGui::GetContentRegionAvail();
+            ImVec2 cursorPos;
+            cursorPos.x = (avail.x - buttonSize.x) * 0.5f;
+            cursorPos.y = (avail.y - buttonSize.y) * 0.5f;
+            if (cursorPos.x < 0) cursorPos.x = 0;
+            if (cursorPos.y < 0) cursorPos.y = 0;
+            ImGui::SetCursorPos(cursorPos);
+
+            if (ImGui::Button(buttonLabel, buttonSize)) {
+                int y = _selectedObject / _selectedMap->getMapWidth();
+                int x = _selectedObject % _selectedMap->getMapWidth();
+                _selectedMap->addObject(_selectedObject, new resources::Object(_project, x, y));
+                _somethingModified = true;
+            }
+        }
+    }
     ImGui::EndChild();
 }
