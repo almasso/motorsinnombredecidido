@@ -10,6 +10,7 @@
 #include <list>
 #include <filesystem>
 #include <imgui.h>
+#include <vector>
 
 namespace editor {
     class Project;
