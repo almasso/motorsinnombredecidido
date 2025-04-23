@@ -14,7 +14,6 @@ editor::resources::events::DialogueBehaviour::DialogueBehaviour(Event* event) :
     EventBehaviourTemplate(event),
     _text(new char[MAX_DIALOGUE]) {
     _text[0] = '\0';
-//    strcpy_s(_text, MAX_DIALOGUE, std::string(MAX_DIALOGUE, '\0').c_str());
 }
 
 editor::resources::events::DialogueBehaviour::~DialogueBehaviour() {
