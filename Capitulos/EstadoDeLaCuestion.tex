@@ -146,27 +146,35 @@ Los desarrolladores \textit{indie}, por su parte, tienen la posibilidad de poder
 
 \subsubsection{Componentes de un motor de videojuegos}
 
-\figuratikzparametros{Esquema de la estructura de un juego y su motor}{fig:juegoymotor}{
+\figuratikzparametros{Representación esquemática de la estructura de un juego y su motor con algunos de los componentes principales}{fig:juegoymotor}{
 	enginebox/.style={draw, thick, minimum width=9cm, minimum height=6cm, align=center},
   subbox/.style={draw, thick, minimum width=3.8cm, minimum height=1cm, align=center},
   labelbox/.style={draw, thick, minimum width=3cm, minimum height=1cm, align=center}
 }{
-	\node[labelbox] (game) {Juego};
+	\node[labelbox] (game) {\textbf{Juego}};
 	
-	\node[enginebox, below=1.5cm of game] (engine) {Motor};
+	\node[enginebox, below=1.5cm of game] (engine) {\textbf{Motor}};
 	
-	\node[subbox, anchor=north west] at ([xshift=0.5cm, yshift=-0.8cm]engine.north west) (render) {Motor de \textit{render}};
+	\node[subbox, anchor=north west] at ([xshift=0.5cm, yshift=-0.3cm]engine.north west) (render) {Motor de \textit{render}};
 	
 	\node[subbox, right=0.5cm of render] (physics) {Motor de físicas};
 	
-	\node[subbox, below=0.6cm of render] (sound) {Motor de sonido};
+	\node[subbox, below=0.3cm of render] (sound) {Motor de sonido};
 	
 	\node[subbox, right=0.5cm of sound] (input) {Motor de \textit{input}};
 	
-	\draw[->, thick] (game.south) -- (engine.north);
+	\node[subbox, below=2.1cm of render] (net) {Motor de red};
+	
+	\node[subbox, right=0.5cm of net] (scripting) {Motor de \textit{scripting}};
+	
+	\node[subbox, below=0.3cm of net] (anim) {Sistema de animación};
+	
+	\node[subbox, right=0.5cm of anim] (AI) {Motor de IA};
+	
+	\draw[->, thick] (game.south) -- node[midway, right] {utiliza} (engine.north);
 }
 
-Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores de tecnología dependiendo de las necesidades de los programadores o del juego que se esté programando. Por lo general, estos son los componentes de un motor de videojuegos tanto de grandes empresas, como motores con licencia gratuita, como aquellos de código abierto:
+Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores de tecnología dependiendo de las necesidades de los programadores o del juego que se esté programando. Siguiendo el esquema provisto en la figura \ref{fig:juegoymotor}, estos son los componentes principales de un motor de videojuegos tanto de grandes empresas, como motores con licencia gratuita, como aquellos de código abierto:
 \begin{itemize}
 \item \textit{Motor de render o de dibujado}: se encarga de gestionar todas las tareas relacionadas con los gráficos que se muestran en pantalla. Para ello, dibuja objetos bidimensionales o tridimensionales, representados generalmente mediante \comillas{mallas}, a través de técnicas de informática gráfica, como pueden ser la \textit{rasterización} o el trazado de rayos. También es el encargado de gestionar la cámara, luces, sombras, materiales y texturas, y puede aplicar diversos efectos de posprocesado al fotograma final. Muchas de estas tareas las puede definir el propio programador haciendo uso de un tipo de \textit{script} especial llamado \textit{shader}, que en lugar de ejecutarse en el procesador de nuestro computador se ejecuta en el procesador de las tarjetas gráficas. Estos motores suelen ser una capa de abstracción sobre especificaciones estándar para gráficos como \textit{OpenGL}, \textit{Vulkan}, \textit{DirectX} o \textit{Metal}.
 \item \textit{Motor de físicas}: se encarga de simular comportamientos físicos realistas. Entre estos comportamientos físicos encontramos las colisiones de objetos con otros objetos o con el entorno, aplicar la fuerza de gravedad a unos determinados objetos, simular las dinámicas de cuerpos rígidos (es decir, el movimiento de cuerpos interconectados bajo la acción de una fuerza externa, como por ejemplo, cajas que se pueden tirar, deslizar o romper), simular dinámicas de cuerpos blandos (similares a los cuerpos rígidos, pero con la posibilidad de que estos se deformen), y, en algunos casos, simulaciones de fluidos y de materiales textiles. Ya que hacer una simulación física es complicado, se suelen utilizar motores de terceros, como por ejemplo \textit{NVIDIA PhysX}, \textit{Havok}, \textit{Bullet} o \textit{Box2D}.
@@ -225,11 +233,53 @@ Si, como es el caso de este proyecto, nos interesa hacer un motor que fije gran 
 
 Este tipo de motores son mucho más rígidos a la hora de poder implementar nuevas funcionalidades y limitan bastante los juegos que se pueden crear con ellos, pero simplifican bastante el desarrollo, y son especialmente útiles para nuevos programadores, que muchas veces se ven abrumados ante tal cantidad de opciones que ofrecen el resto de motores más flexibles, si bien es cierto que no ofrecen la libertad de estos, y la jugabilidad está fijada por el desarrollador del motor y no el del juego.
 
-\subsubsection{Programación dirigida por datos (\textit{DDP}) en videojuegos}
+\subsubsection{Programación dirigida por datos (DDP) en videojuegos}
+La programación dirigida por datos (DDP, \textit{data-driven programming}) es un paradigma de diseño en el que gran parte del comportamiento y lógica de un programa están controlados por datos externos en lugar de estar programados en el código fuente de este. Gracias a este paradigma, según \citeauthor{gregory2018game}, ampliamente extendido entre las empresas desarrolladoras de juegos \textit{triple A}, permite a los desarrolladores modificar o expandir el comportamiento del juego sin la necesidad de alterar el motor o el código base de este.
+
+\medskip
+
+Los motores de videojuegos suelen estar programados utilizando lenguajes de  nivel medio (como C o C++, que en la base son lenguajes de alto nivel pero poseen estructuras de acceso a \textit{hardware} como los lenguajes de bajo nivel), ya que se espera tener una gran optimización en estos así como una portabilidad multiplataforma. De todo el gran abanico de lenguajes de nivel medio, un gran porcentaje son lenguajes compilados, es decir, requieren de un \comillas{traductor} (compilador) para generar el código máquina antes de poder ejecutar el programa. Esta compilación depende del tamaño del proyecto y del número de ficheros a compilar, y, en el caso de muchos motores, la compilación puede llegar a tardar decenas de minutos.
+
+\smallskip
+
+Para evitar tener que esperar estos minutos recompilando todo un juego en caso de cambiar un simple parámetro referente al \textit{gameplay}, se opta por la solución más flexible, que es desarrollar todo el juego utilizando datos, generalmente en lenguajes de \textit{scripting}, de alto nivel, como Lua, que no necesitan ser compilados, sino interpretados (la \comillas{traducción} a lenguaje máquina se realiza en ejecución del programa y a medida que sea necesaria) por el motor del juego.
+
+\medskip
+
+Además de reducir los tiempos de compilación en los juegos, lo cual ayuda a reducir los tiempos en las iteraciones de desarrollo, la programación dirigida por datos permite a los diseñadores del juego, que no tienen que ser necesariamente programadores, modificar comportamientos, ajustar parámetros o añadir contenido utilizando archivos de configuración o mediante herramientas visuales.
+
+\medskip
+
+Este paradigma refuerza la ya mencionada separación entre motor y \textit{gameplay}, ya que un mismo motor puede ejecutar distintos juegos (es decir, distintos datos) sin la necesidad de tener que ser recompilado, siempre y cuando los datos estén en un formato y estructura que el motor sea capaz de interpretar.
+
+\medskip
+
+Sin embargo, uno de los principales problemas que supone este paradigma es la depuración del código. Como los datos se suelen almacenar en lenguajes de \textit{scripting}, o en lenguajes de almacenamiento de datos (como JSON o XML), depurar un código o simplemente datos que nuestro motor interpretan, resulta extremadamente difícil si el motor no cuenta con herramientas de depuración integradas específicas para interpretar esos datos.
 
 \subsubsection{Programación multiplataforma}
+La programación multiplataforma es una práctica esencial en el desarrollo de videojuegos modernos. Esta característica permite que un mismo juego funcione idénticamente en distintos dispositivos y sistemas operativos (por ejemplo, en el caso de los videojuegos, que funcione en ordenadores Windows, Linux o Mac; en consolas, como PlayStation, Xbox o Nintendo Switch; o en dispositivos móviles, como Android o iOS). Pese a que aumenta las labores de desarrollo del motor (ya que en muchos casos hay que desarrollar módulos específicos para cada una de las plataformas, principalmente de \textit{renderizado}), reduce los costes de mantener un juego y maximiza el alcance de este.
+
+\medskip
+
+Para lograr que un motor sea multiplataforma, hay que tener en cuenta para qué plataformas se va a desarrollar y qué diferencias hay entre cada una de ellas. Es por ello que se suelen utilizar capas de abstracción, que permiten que el núcleo del motor permanezca intacto entre las distintas implementaciones, mientras que son aquellos módulos que difieren de un sistema a otro los que se modifican.
+
+\smallskip
+
+Otro factor a tener en cuenta es la compilación cruzada, es decir, el proceso por el cual el código se compila en una plataforma (principalmente un ordenador con Windows o Linux), pero el ejecutable se genera para una plataforma distinta (por ejemplo, para Android o para PlayStation). Para ello, se deben disponer de herramientas, como CMake, que faciliten la configuración de estas compilaciones.
+
+\medskip
+
+Los principales desafíos en la programación multiplataforma de videojuegos son debidos a las diferencias entre las distintas API (\textit{application programming interface}, interfaz de programación de aplicaciones, es decir, todo el código que permite a dos aplicaciones comunicarse entre sí) de las videoconsolas, tanto en el \textit{render}, como en el manejo de archivos; o las compatibilidades que una librería pueda tener en un sistema o en otro.
+
+\medskip
+
+Otra dificultad añadida es la de la obtención de las distintas SDK (\textit{software development kit}, kit de desarrollo de \textit{software}) y licencias de cada empresa, ya que no son código libre (todo el código está bajo acuerdos de confidencialidad), y muchas de ellas no suelen ser flexibles a la hora de entregar estas licencias a nuevas empresas.
+
+\medskip
+
+Es por ello que muchas veces, en proyectos no profesionales, se suelen utilizar librerías multiplataforma, como SDL, que simplifican bastante la conversión de un sistema a otro y agilizan el desarrollo de un motor; o, directamente, se usan motores multiplataforma, como los ya mencionados \textit{Unity}, \textit{Unreal Engine} o \textit{Godot}.
 
 \subsection{Editor de videojuegos}
 
-\subsubsection{Editores específicos para desarrollo de \textit{RPG}}
+\subsubsection{Editores específicos para desarrollo de RPG}
 
