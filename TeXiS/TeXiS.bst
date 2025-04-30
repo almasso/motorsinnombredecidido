@@ -1395,6 +1395,7 @@ FUNCTION {game}
   format.date "year" output.check
   new.block
   format.webpage output
+  format.note output
   fin.entry
 }
 

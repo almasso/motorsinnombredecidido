@@ -114,7 +114,7 @@ En el nuevo milenio, que para \citeauthor{barton2008dungeons} es la \comillas{et
 Para entender cómo las empresas o equipos \textit{indies} desarrollan un videojuego desde cero, es imprescindible saber con exactitud cómo funciona el software internamente, y qué formas tienen los programadores o desarrolladores para comunicarse con las entrañas de este durante el proceso de desarrollo. Es por eso que en este apartado veremos lo que es un \textit{motor} y lo que es un \textit{editor}.
 
 \subsection{Motor de videojuegos}
-\cite{gregory2018game} define un motor de videojuegos (\textit{game engine}) como todo aquel \textit{software} extensible que, sin apenas modificaciones, puedan servir de base o cimiento para múltiples videojuegos distintos. Ese \textit{software} al que nos referimos es todo el conjunto de herramientas que hacen que por detrás funcione un juego, como por ejemplo, todas las herramientas que se encarguen del \textit{renderizado} o dibujado en pantalla, bien sea en 2D o en 3D, aquellas que se encarguen de la simulación física y detección de colisiones con el entorno, las que se encarguen del sonido, las del \textit{scripting}, animaciones, inteligencia artificial, etc\ldots A todas estas herramientas también se les denomina \textit{motores} (por ejemplo, \textit{motor de render}, \textit{motor de físicas}\ldots).
+\cite{gregory2018game} define un motor de videojuegos (\textit{game engine}) como \comillas{todo aquel \textit{software} extensible que, sin apenas modificaciones, puedan servir de base o cimiento para múltiples videojuegos distintos}. Ese \textit{software} al que nos referimos es todo el conjunto de herramientas que hacen que por detrás funcione un juego, como por ejemplo, todas las herramientas que se encarguen del \textit{renderizado} o dibujado en pantalla, bien sea en 2D o en 3D, aquellas que se encarguen de la simulación física y detección de colisiones con el entorno, las que se encarguen del sonido, las del \textit{scripting}, animaciones, inteligencia artificial, etc\ldots A todas estas herramientas también se les denomina \textit{motores} (por ejemplo, \textit{motor de render}, \textit{motor de físicas}\ldots).
 
 \smallskip
 
@@ -138,7 +138,7 @@ Con la generalización de internet a principios de los 2000, comenzó el auge de
 
 \smallskip
 
-A día de hoy, las empresas dedican numerosos recursos a la hora de desarrollar nuevos motores, ya que son la parte fundamental del desarrollo de videojuegos, y cada vez son más sofisticados y requieren de gran conocimiento. Por lo general, la gran mayoría de motores actuales suelen ser multiplataforma, algo de lo que hablaremos más adelante.
+A día de hoy, las empresas dedican numerosos recursos a la hora de desarrollar nuevos motores, ya que son la parte fundamental del desarrollo de videojuegos, y cada vez son más sofisticados y requieren de gran conocimiento. Por lo general, la gran mayoría de motores actuales suelen ser multiplataforma, algo de lo que hablaremos en el apartado \ref{section:multiplataforma}.
 
 \smallskip
 
@@ -233,8 +233,8 @@ Si, como es el caso de este proyecto, nos interesa hacer un motor que fije gran 
 
 Este tipo de motores son mucho más rígidos a la hora de poder implementar nuevas funcionalidades y limitan bastante los juegos que se pueden crear con ellos, pero simplifican bastante el desarrollo, y son especialmente útiles para nuevos programadores, que muchas veces se ven abrumados ante tal cantidad de opciones que ofrecen el resto de motores más flexibles, si bien es cierto que no ofrecen la libertad de estos, y la jugabilidad está fijada por el desarrollador del motor y no el del juego.
 
-\subsubsection{Programación dirigida por datos (DDP) en videojuegos}
-La programación dirigida por datos (DDP, \textit{data-driven programming}) es un paradigma de diseño en el que gran parte del comportamiento y lógica de un programa están controlados por datos externos en lugar de estar programados en el código fuente de este. Gracias a este paradigma, según \citeauthor{gregory2018game}, ampliamente extendido entre las empresas desarrolladoras de juegos \textit{triple A}, permite a los desarrolladores modificar o expandir el comportamiento del juego sin la necesidad de alterar el motor o el código base de este.
+\subsubsection{Programación dirigida por datos (DDP) en videojuegos} \label{section:ddp}
+La programación dirigida por datos (DDP, \textit{data-driven programming}) es un paradigma de diseño en el que gran parte del comportamiento y lógica de un programa están controlados por datos externos en lugar de estar programados en el código fuente de este. Este paradigma, según \citeauthor{gregory2018game}, ampliamente extendido entre las empresas desarrolladoras de juegos \textit{triple A}, permite a los desarrolladores modificar o expandir el comportamiento del juego sin la necesidad de alterar el motor o el código base de este.
 
 \medskip
 
@@ -257,6 +257,7 @@ Este paradigma refuerza la ya mencionada separación entre motor y \textit{gamep
 Sin embargo, uno de los principales problemas que supone este paradigma es la depuración del código. Como los datos se suelen almacenar en lenguajes de \textit{scripting}, o en lenguajes de almacenamiento de datos (como JSON o XML), depurar un código o simplemente datos que nuestro motor interpretan, resulta extremadamente difícil si el motor no cuenta con herramientas de depuración integradas específicas para interpretar esos datos.
 
 \subsubsection{Programación multiplataforma}
+\label{section:multiplataforma}
 La programación multiplataforma es una práctica esencial en el desarrollo de videojuegos modernos. Esta característica permite que un mismo juego funcione idénticamente en distintos dispositivos y sistemas operativos (por ejemplo, en el caso de los videojuegos, que funcione en ordenadores Windows, Linux o Mac; en consolas, como PlayStation, Xbox o Nintendo Switch; o en dispositivos móviles, como Android o iOS). Pese a que aumenta las labores de desarrollo del motor (ya que en muchos casos hay que desarrollar módulos específicos para cada una de las plataformas, principalmente de \textit{renderizado}), reduce los costes de mantener un juego y maximiza el alcance de este.
 
 \medskip
@@ -281,5 +282,68 @@ Es por ello que muchas veces, en proyectos no profesionales, se suelen utilizar 
 
 \subsection{Editor de videojuegos}
 
+\figura{Bitmap/unreal}{width=0.9\textwidth}{fig:unreal}{Vista de la interfaz de \textit{Unreal Engine} 5.2, extraída de \cite{unrealinterfaz}.}
+
+Un editor de videojuegos es una herramienta, generalmente visual, que permite a los desarrolladores crear, modificar y probar contenido de un juego sin la necesidad de programar directamente en código. Un editor también es especialmente útil para \textit{no programadores}, es decir, diseñadores o artistas que pueden estar involucrados en el desarrollo del juego sin necesariamente tener que saber programar.
+
+\medskip
+
+Por lo general, los editores como el de \textit{Unreal Engine} permiten al usuario diseñar y editar los niveles, mapas o escenarios sobre los que se desarrolla la acción; editar entidades o actores (como personajes, enemigos, NPC (\textit{non playable character}, personaje no jugable); editar \textit{scripts} o crear eventos que definan el comportamiento o la jugabilidad; gestionar y editar recursos como materiales, texturas, partículas o animaciones; y poder ejecutar y depurar una versión del juego para probar y solucionar problemas sin la necesidad de generar un ejecutable final.
+
+\smallskip
+
+Una característica esencial de los editores es un sistema de \comillas{hacer-deshacer-rehacer}, que permite a los desarrolladores experimentar con cambios sin riesgo a perder el progreso.
+
+\medskip
+
+En el editor de \textit{Unreal Engine}, mostrado en la figura \ref{fig:unreal}, apreciamos varias de estas características, como la edición de materiales y texturas (cada una de las esferas que se muestran en el cajón inferior representa un material o textura que se puede aplicar a los objetos en la escena), un visor de las entidades que se encuentran en la escena (en la parte derecha, que permite la edición individual de cada una de las entidades, bien sean parte del escenario o personajes y la propia escena (o \textit{viewport}, en grande, en el centro del editor, en la cual el usuario puede mover libremente la cámara y mover, rotar y escalar cada objeto).
+
+\medskip
+
+Los editores suelen estar integrados con el motor del juego y aprovechan los principios de la programación dirigida por datos (ver apartado \ref{section:ddp}), haciendo posible que los cambios realizados por el usuario se reflejen en el juego sin la necesidad de recompilar el motor ni generando un ejecutable externo. Esto permite poder ejecutar el juego directamente desde el propio editor (\textit{Unreal Engine} lo denomina \textit{Play In Editor}), lo cual agiliza las iteraciones durante el desarrollo.
+
+\medskip
+
+\figura{Bitmap/godot}{width=0.8\textwidth}{fig:godot}{Vista del \textit{scripting} visual mediante nodos de \textit{Godot}, extraída de \cite{godotnodos}.}
+
+Algunos editores modernos suelen ofrecer herramientas de \textit{scripting} visual, como es el caso de los \textit{blueprints} en \textit{Unreal Engine} o el sistema de nodos en \textit{Godot} (ver figura \ref{fig:godot}), que permiten implementar la lógica sin tener que escribir código tradicional. Estas herramientas, junto con el patrón ECS (\textit{entity-component-system}, entidad-componente-sistema), una importación automatizada de los recursos, y el poder extender la funcionalidad del editor mediante \textit{plugins} (complementos o extensiones), convierten a los editores modernos en los ejes centrales del flujo de trabajo en el desarrollo de videojuegos.
+
 \subsubsection{Editores específicos para desarrollo de RPG}
 
+\begin{figure}[h]
+\centering
+\begin{SubFloat}
+{\label{fig:rpgmakermz}%
+	Vista de la interfaz de \cite{rpgmakermz}.}%
+	\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rpgmakermz}%
+\end{SubFloat}
+\qquad
+\begin{SubFloat}
+{\label{fig:rpgmakerevent}%
+	Vista del editor de eventos de \textit{RPG Maker MV}, extraída de \cite{rpgmakerevent}.}%
+	\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rpgmakereventeditor}%
+\end{SubFloat}
+\caption{Capturas de distintos elementos de la interfaz de \textit{RPG Maker}. \label{fig:rpgmaker}}
+\end{figure}
+
+Si bien es cierto que una gran parte de los juegos vendidos a diario son RPG, hay muy pocos motores y editores específicos para este tipo de juegos, y se tiende a usar motores más generalistas. De entre los específicos, necesariamente tenemos que mencionar a la serie de herramientas más conocida de todas, \textit{RPG Maker}, desarrollada desde 1992 por ASCII (ahora Enterbrain) y Gotcha Gotcha Games. \textit{RPG Maker} está pensada para permitir a usuarios sin conocimientos avanzados de programación crear juegos completos mediante una interfaz sencilla (ver figura \ref{fig:rpgmakermz}).
+
+\smallskip
+
+Incluye un sistema de creación de mapas basado en baldosas, un generador de personajes y una base de datos para poder definir los enemigos, objetos, habilidades, clases, estados y eventos mediante lógica visual (figura \ref{fig:rpgmakerevent}). 
+
+\medskip
+
+Este sistema de eventos es una de las características más potentes y distintivas de \textit{RPG Maker}, ya que permite definir la lógica utilizando una lista secuencial de comandos que representan acciones (\textit{mostrar diálogo}, \textit{mover personaje}, \textit{cambiar variable}\ldots) y que puede ser utilizado por diseñadores sin experiencia alguna, así como desarrolladores más curtidos en la materia que pueden crear sistemas más complejos.
+
+\medskip
+
+También se incluye un sistema de batallas por turnos tradicional, inspirado en los JRPG clásicos, aunque es posible modificarlo utilizando \textit{plugins} o \textit{scripts} (desarrollados en las últimas versiones en JavaScript, así como la posibilidad de poder exportar los juegos a múltiples plataformas (desde las últimas versiones), como PC, web y dispositivos móviles.
+
+\bigskip
+
+Además de \textit{RPG Maker}, existen varias alternativas de código abierto, como \textit{RPG Paper Maker}, que permite crear RPG en 3D con estética retro. Otras opciones, como \textit{RPG JS} permiten desarrollar los juegos utilizando lenguajes como TypeScript o HTML5 para navegadores.
+
+\smallskip
+
+También encontramos proyectos como \textit{EasyRPG}, que busca recrear el motor proporcionado en \textit{RPG Maker 2000/2003} de manera gratuita y de código abierto, facilitando la ejecución de RPG antiguos que ya no tienen soporte en plataformas modernas así como la creación de nuevos juegos sin la necesidad de utilizar un software propietario; o \textit{OHRRPGCE} (\textit{Official Hamster Republic Role Playing Game Construction Engine}), un motor que se lleva manteniendo desde 1998 con un enfoque en juegos del estilo de \textit{Final Fantasy}.
