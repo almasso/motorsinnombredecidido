@@ -20,8 +20,11 @@ namespace editor::resources::events {
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
     private:
-        std::string _variable;
-        sol::lua_value _equals;
+        char* _variable;
+        char* _equals;
+
+        bool renderVariable();
+        bool renderValue();
     };
 
 }

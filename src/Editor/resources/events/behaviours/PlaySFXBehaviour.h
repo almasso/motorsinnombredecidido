@@ -20,7 +20,7 @@ namespace editor::resources::events {
     protected:
         bool writeParams(sol::table& params) override;
     private:
-        char* _sfxHandler;
+        char* _sfxSource;
 
         bool renderAudioSelector();
     };
