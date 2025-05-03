@@ -62,3 +62,6 @@ CMakeSettings.json
 CMakeCache.txt
 
 /projects/APK/build
+
+imgui.ini
+projects.lua

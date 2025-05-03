@@ -26,6 +26,8 @@ return {
     ["window.mainwindow.eventeditor.condition.Always"] = "Siempre",
     ["window.mainwindow.eventeditor.condition.And"] = "Y",
     ["window.mainwindow.eventeditor.condition.AreColliding"] = "Están colisionando",
+    ["window.mainwindow.eventeditor.condition.AreColliding.objectA"] = "Selecciona un objeto",
+    ["window.mainwindow.eventeditor.condition.AreColliding.objectB"] = "Selecciona un objeto",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded"] = "Fin de comportamiento",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.object"] = "Selecciona un objeto",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.event"] = "Selecciona un evento",

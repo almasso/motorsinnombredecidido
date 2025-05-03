@@ -26,6 +26,8 @@ return {
     ["window.mainwindow.eventeditor.condition.Always"] = "Always",
     ["window.mainwindow.eventeditor.condition.And"] = "And",
     ["window.mainwindow.eventeditor.condition.AreColliding"] = "Are colliding",
+    ["window.mainwindow.eventeditor.condition.AreColliding.objectA"] = "Select an objet",
+    ["window.mainwindow.eventeditor.condition.AreColliding.objectB"] = "Select an objet",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded"] = "Behaviour ended",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.object"] = "Select an objet",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.event"] = "Select an event",
