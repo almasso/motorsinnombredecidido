@@ -49,6 +49,9 @@ projects/APK/gradle/*
 projects/APK/app/build/*
 projects/APK/app/.cxx/*
 
+bin/settings/projects/projects.lua
+bin/imgui.ini
+
 # Archivos y directorios temporales generados por CLion, CMake o Android Studio al compilar
 .idea/*
 cmake-build-debug/*
