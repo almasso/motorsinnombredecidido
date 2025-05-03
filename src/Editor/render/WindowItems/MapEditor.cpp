@@ -130,7 +130,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
                         _somethingModified = true;
                     }
                     else {
-                        if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
+                        if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr && _selectedTile != -1) {
                             _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
                             _selectedMap->getCollisions()[i + mapWidth * j] = _selectedMap->getCollisions()[i + mapWidth * j] || _selectedTileset->getCollisions()[_selectedTile];
                             _somethingModified = true;
@@ -148,7 +148,7 @@ void editor::render::tabs::MapEditor::drawGrid() {
                 }
 
                 if(isDragging && hovered && !(_collisionsShown || _objectMode)) {
-                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr) {
+                    if(_project->totalTilesets() > 0 && _selectedTileset != nullptr && _selectedMap != nullptr && _selectedTile != -1) {
                         _selectedMap->getTiles()[_selectedLayer][i + mapWidth * j] = _selectedTileset->getTiles()[_selectedTile];
                         _selectedMap->getCollisions()[i + mapWidth * j] = _selectedMap->getCollisions()[i + mapWidth * j] || _selectedTileset->getCollisions()[_selectedTile];
                         _somethingModified = true;
