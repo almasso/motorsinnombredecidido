@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(TimePassedCondition, "TimePassed") {
     public:
-        TimePassedCondition();
+        TimePassedCondition(Event* event);
         ~TimePassedCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

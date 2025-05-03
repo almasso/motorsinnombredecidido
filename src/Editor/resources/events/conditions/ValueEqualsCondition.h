@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(ValueEqualsCondition, "ValueEquals") {
     public:
-        ValueEqualsCondition();
+        ValueEqualsCondition(Event* event);
         ~ValueEqualsCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

@@ -18,7 +18,7 @@
 editor::resources::events::JumpIfBehaviour::JumpIfBehaviour(Event* event) :
     EventBehaviourTemplate(event),
     _target(-1),
-    _condition(EventConditionFactory::Create("OnStart")) {
+    _condition(EventConditionFactory::Create("OnStart", event)) {
 }
 
 editor::resources::events::JumpIfBehaviour::~JumpIfBehaviour() {
@@ -34,7 +34,7 @@ bool editor::resources::events::JumpIfBehaviour::read(sol::table const& params) 
     if (!condition.has_value())
         return false;
     delete _condition;
-    _condition = EventConditionFactory::Create(condition.value());
+    _condition = EventConditionFactory::Create(condition.value(), _event);
     return _condition != nullptr;
 }
 
@@ -74,7 +74,7 @@ bool editor::resources::events::JumpIfBehaviour::renderConditionSelector(EventCo
         if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionName).c_str(), isSelected)) {
             if (!isSelected) {
                 delete condition;
-                condition = EventConditionFactory::Create(conditionName);
+                condition = EventConditionFactory::Create(conditionName, _event);
                 edited = true;
             }
         }

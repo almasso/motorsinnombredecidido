@@ -5,6 +5,10 @@
 
 #include "OnStartCondition.h"
 
+editor::resources::events::OnStartCondition::OnStartCondition(Event* event) :
+    EventConditionTemplate(event) {
+}
+
 editor::resources::events::OnStartCondition::~OnStartCondition() {
 }
 

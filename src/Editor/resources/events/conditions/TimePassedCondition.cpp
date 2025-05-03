@@ -10,7 +10,8 @@
 
 #define secondsKey "seconds"
 
-editor::resources::events::TimePassedCondition::TimePassedCondition() :
+editor::resources::events::TimePassedCondition::TimePassedCondition(Event* event) :
+    EventConditionTemplate(event),
     _seconds(0.0f) {
 }
 

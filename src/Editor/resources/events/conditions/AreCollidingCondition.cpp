@@ -8,7 +8,8 @@
 #define objectAKey "objectA"
 #define objectBKey "objectB"
 
-editor::resources::events::AreCollidingCondition::AreCollidingCondition() :
+editor::resources::events::AreCollidingCondition::AreCollidingCondition(Event* event) :
+    EventConditionTemplate(event),
     _objectA(),
     _objectB() {
 }

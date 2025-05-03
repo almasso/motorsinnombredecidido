@@ -14,9 +14,10 @@
 #define conditionAKey "conditionA"
 #define conditionBKey "conditionB"
 
-editor::resources::events::OrCondition::OrCondition() :
-    _conditionA(EventConditionFactory::Create("OnStart")),
-    _conditionB(EventConditionFactory::Create("OnStart")) {
+editor::resources::events::OrCondition::OrCondition(Event* event) :
+    EventConditionTemplate(event),
+    _conditionA(EventConditionFactory::Create("OnStart", event)),
+    _conditionB(EventConditionFactory::Create("OnStart", event)) {
 }
 
 editor::resources::events::OrCondition::~OrCondition() {
@@ -29,7 +30,7 @@ bool editor::resources::events::OrCondition::read(sol::table const& params) {
     if (!conditionA.has_value())
         return false;
     delete _conditionA;
-    _conditionA = EventConditionFactory::Create(conditionA.value());
+    _conditionA = EventConditionFactory::Create(conditionA.value(), _event);
     if (_conditionA == nullptr)
         return false;
 
@@ -37,7 +38,7 @@ bool editor::resources::events::OrCondition::read(sol::table const& params) {
     if (!conditionB.has_value())
         return false;
     delete _conditionB;
-    _conditionB = EventConditionFactory::Create(conditionB.value());
+    _conditionB = EventConditionFactory::Create(conditionB.value(), _event);
     if (_conditionB == nullptr)
         return false;
 
@@ -90,7 +91,7 @@ bool editor::resources::events::OrCondition::renderConditionSelector(EventCondit
     bool edited = false;
     std::string conditionID(condition->getID());
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-    if (!ImGui::BeginCombo((std::string("###andConditionSelector") + std::to_string(reinterpret_cast<long long>(condition))).c_str(),
+    if (!ImGui::BeginCombo((std::string("###orConditionSelector") + std::to_string(reinterpret_cast<long long>(condition))).c_str(),
         io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionID).c_str()))
         return false;
 
@@ -100,7 +101,7 @@ bool editor::resources::events::OrCondition::renderConditionSelector(EventCondit
         if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionName).c_str(), isSelected)) {
             if (!isSelected) {
                 delete condition;
-                condition = EventConditionFactory::Create(conditionName);
+                condition = EventConditionFactory::Create(conditionName, _event);
                 edited = true;
             }
         }

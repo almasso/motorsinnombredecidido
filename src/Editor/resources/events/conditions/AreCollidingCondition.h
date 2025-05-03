@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(AreCollidingCondition, "AreColliding") {
     public:
-        AreCollidingCondition();
+        AreCollidingCondition(Event* event);
         ~AreCollidingCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

@@ -73,7 +73,7 @@ bool editor::resources::events::Event::read(std::string const& name, sol::table 
     sol::optional<sol::table> condition = eventTable.get<sol::optional<sol::table>>(conditionKey);
     if (!condition.has_value())
         return false;
-    _condition = EventConditionFactory::Create(*condition);
+    _condition = EventConditionFactory::Create(*condition, this);
     if (!_condition)
         return false;
 
@@ -124,7 +124,7 @@ editor::resources::events::EventCondition* editor::resources::events::Event::get
 
 void editor::resources::events::Event::setCondition(std::string const& condition) {
     delete _condition;
-    _condition = EventConditionFactory::Create(condition);
+    _condition = EventConditionFactory::Create(condition, this);
 }
 
 std::list<editor::resources::events::EventBehaviour*>& editor::resources::events::Event::getBehaviours() {

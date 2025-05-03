@@ -12,6 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(OnStartCondition, "OnStart") {
     public:
+        OnStartCondition(Event* event);
         ~OnStartCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

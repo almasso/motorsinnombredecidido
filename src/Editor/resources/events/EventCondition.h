@@ -14,9 +14,11 @@
 #define paramsKey "params"
 
 namespace editor::resources::events {
+    class Event;
 
     class EventCondition {
     public:
+        explicit EventCondition(Event* event);
         virtual ~EventCondition();
         virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& condition) = 0;
@@ -24,6 +26,8 @@ namespace editor::resources::events {
         virtual const char* getID() const = 0;
         virtual bool render() = 0;
     protected:
+        Event* _event;
+
         virtual bool writeParams(sol::table& params) = 0;
         virtual bool writeParamsToEngine(sol::table& params) = 0;
     };
@@ -32,6 +36,10 @@ namespace editor::resources::events {
     class EventConditionTemplate : public EventCondition {
     public:
         static constexpr const char* id = name.value;
+
+        EventConditionTemplate(Event* event) :
+            EventCondition(event) {
+        }
 
         bool write(sol::table& condition) final {
             condition[typeKey] = id;

@@ -8,11 +8,16 @@
 
 #include "../EventCondition.h"
 
+namespace editor::resources
+{
+    class Object;
+}
+
 namespace editor::resources::events {
 
     class EventConditionClass(BehaviourEndedCondition, "BehaviourEnded") {
     public:
-        BehaviourEndedCondition();
+        BehaviourEndedCondition(Event* event);
         ~BehaviourEndedCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;
@@ -20,9 +25,15 @@ namespace editor::resources::events {
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
     private:
-        std::string _entity;
-        std::string _event;
-        int _behaviour;
+        std::string _conditionObject;
+        std::string _conditionEvent;
+        int _conditionBehaviour;
+
+        bool renderObjectSelector(Object*& selectedObject);
+        bool renderEventSelector(Object* selectedObject, Event*& selectedEvent);
+        bool renderBehaviourSelector(Event* selectedEvent);
+
+        static std::string getObjectName(std::string const& map, int object);
     };
 
 }

@@ -14,7 +14,8 @@
 #define VARIABLE_MAX_SIZE 128
 #define VALUE_MAX_SIZE 32
 
-editor::resources::events::ValueEqualsCondition::ValueEqualsCondition() :
+editor::resources::events::ValueEqualsCondition::ValueEqualsCondition(Event* event) :
+    EventConditionTemplate(event),
     _variable(new char[VARIABLE_MAX_SIZE]),
     _equals(new char[VALUE_MAX_SIZE]) {
     _variable[0] = '\0';
