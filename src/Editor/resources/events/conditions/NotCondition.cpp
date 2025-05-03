@@ -13,8 +13,9 @@
 
 #define conditionKey "condition"
 
-editor::resources::events::NotCondition::NotCondition() :
-    _condition(EventConditionFactory::Create("Always")) {
+editor::resources::events::NotCondition::NotCondition(Event* event) :
+    EventConditionTemplate(event),
+    _condition(EventConditionFactory::Create("Always", event)) {
 }
 
 editor::resources::events::NotCondition::~NotCondition() {
@@ -26,7 +27,7 @@ bool editor::resources::events::NotCondition::read(sol::table const& params) {
     if (!condition.has_value())
         return false;
     delete _condition;
-    _condition = EventConditionFactory::Create(condition.value());
+    _condition = EventConditionFactory::Create(condition.value(), _event);
     if (_condition == nullptr)
         return false;
     return true;
@@ -70,7 +71,7 @@ bool editor::resources::events::NotCondition::renderConditionSelector(EventCondi
         if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionName).c_str(), isSelected)) {
             if (!isSelected) {
                 delete condition;
-                condition = EventConditionFactory::Create(conditionName);
+                condition = EventConditionFactory::Create(conditionName, _event);
                 edited = true;
             }
         }

@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(AlwaysCondition, "Always") {
     public:
-        AlwaysCondition();
+        AlwaysCondition(Event* event);
         ~AlwaysCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

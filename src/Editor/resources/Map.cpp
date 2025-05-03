@@ -486,3 +486,7 @@ editor::resources::Object * editor::resources::Map::getObject(int key) {
 void editor::resources::Map::removeObject(int key) {
     _objects.erase(key);
 }
+
+std::unordered_map<int, editor::resources::Object*> const& editor::resources::Map::getObjects() const {
+    return _objects;
+}

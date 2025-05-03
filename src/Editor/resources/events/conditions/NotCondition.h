@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(NotCondition, "Not") {
     public:
-        NotCondition();
+        NotCondition(Event* event);
         ~NotCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

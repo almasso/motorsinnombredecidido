@@ -5,7 +5,9 @@
 
 #include "AlwaysCondition.h"
 
-editor::resources::events::AlwaysCondition::AlwaysCondition() = default;
+editor::resources::events::AlwaysCondition::AlwaysCondition(Event* event) :
+    EventConditionTemplate(event) {
+}
 
 editor::resources::events::AlwaysCondition::~AlwaysCondition() = default;
 

@@ -18,21 +18,21 @@
 #include "conditions/ValueEqualsCondition.h"
 
 
-std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*()>> editor::resources::events::EventConditionFactory::_conditions;
+std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*(editor::resources::events::Event*)>> editor::resources::events::EventConditionFactory::_conditions;
 std::set<std::string> editor::resources::events::EventConditionFactory::_conditionKeys;
 bool editor::resources::events::EventConditionFactory::_initialized = false;
 
-editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(std::string const& id) {
+editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(std::string const& id, Event* event) {
     if (!_initialized)
         Init();
 
     auto it = _conditions.find(id);
     if (it == _conditions.end())
         return nullptr;
-    return it->second();
+    return it->second(event);
 }
 
-editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(sol::table const& condition) {
+editor::resources::events::EventCondition* editor::resources::events::EventConditionFactory::Create(sol::table const& condition, Event* event) {
     std::string id = condition.get_or<std::string>(typeKey, "");
     if (id.empty())
         return nullptr;
@@ -41,7 +41,7 @@ editor::resources::events::EventCondition* editor::resources::events::EventCondi
     if (!params.has_value())
         return nullptr;
 
-    auto instance = Create(id);
+    auto instance = Create(id, event);
     if (!instance)
         return nullptr;
 

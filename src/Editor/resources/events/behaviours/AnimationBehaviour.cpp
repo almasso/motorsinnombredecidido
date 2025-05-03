@@ -5,6 +5,9 @@
 
 #include "AnimationBehaviour.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+
 #define actionKey "action"
 #define animationChangeKey "animation"
 
@@ -42,7 +45,10 @@ bool editor::resources::events::AnimationBehaviour::writeToEngine(sol::table& be
 }
 
 bool editor::resources::events::AnimationBehaviour::render() {
-    return false;
+    bool edited = renderActionSelector();
+    if (_action == CHANGE)
+        edited = renderAnimationSelector() || edited;
+    return edited;
 }
 
 bool editor::resources::events::AnimationBehaviour::writeParams(sol::table& params) {
@@ -62,4 +68,50 @@ bool editor::resources::events::AnimationBehaviour::writeParams(sol::table& para
         break;
     }
     return true;
+}
+
+bool editor::resources::events::AnimationBehaviour::renderActionSelector() {
+    bool edited = false;
+    std::string actionName = getActionName(_action);
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+    if (!ImGui::BeginCombo((std::string("###animationActionSelector") + std::to_string(reinterpret_cast<long long>(this))).c_str(), actionName.c_str()))
+        return false;
+
+    for (int i = 0; i < MAX_ACTION; ++i) {
+        bool isSelected = (i == _action);
+        if (ImGui::Selectable((getActionName(static_cast<ANIMATION_ACTION>(i)) + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
+            if (!isSelected) {
+                if (_action == CHANGE) {
+                    // delete[] _animationToChange;
+                }
+                _action = static_cast<ANIMATION_ACTION>(i);
+                if (_action == CHANGE) {
+                    // _param.clip = new char[MAX_CLIP_BUFFER];
+                    // _param.clip[0] = '\0';
+                }
+                edited = true;
+            }
+        }
+    }
+    ImGui::EndCombo();
+    return edited;
+}
+
+bool editor::resources::events::AnimationBehaviour::renderAnimationSelector() {
+    return false;
+}
+
+std::string editor::resources::events::AnimationBehaviour::getActionName(ANIMATION_ACTION action) const {
+    switch (action) {
+    case PLAY:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.play");
+    case STOP:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.stop");
+    case RESET:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.reset");
+    case CHANGE:
+        return io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.change");
+    default:
+        return "";
+    }
 }

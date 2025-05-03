@@ -70,6 +70,8 @@ namespace editor::resources {
 
         void removeObject(int key);
 
+        std::unordered_map<int, Object*> const& getObjects() const;
+
         static void SetMapsDirectory(std::filesystem::path const& mapsDirectory);
 
         bool isAdjacent(const Map *other) const;

@@ -14,9 +14,10 @@
 #define conditionAKey "conditionA"
 #define conditionBKey "conditionB"
 
-editor::resources::events::AndCondition::AndCondition() :
-    _conditionA(EventConditionFactory::Create("OnStart")),
-    _conditionB(EventConditionFactory::Create("OnStart")) {
+editor::resources::events::AndCondition::AndCondition(Event* event) :
+    EventConditionTemplate(event),
+    _conditionA(EventConditionFactory::Create("OnStart", event)),
+    _conditionB(EventConditionFactory::Create("OnStart", event)) {
 }
 
 editor::resources::events::AndCondition::~AndCondition() {
@@ -29,7 +30,7 @@ bool editor::resources::events::AndCondition::read(sol::table const& params) {
     if (!conditionA.has_value())
         return false;
     delete _conditionA;
-    _conditionA = EventConditionFactory::Create(conditionA.value());
+    _conditionA = EventConditionFactory::Create(conditionA.value(), _event);
     if (_conditionA == nullptr)
         return false;
 
@@ -37,7 +38,7 @@ bool editor::resources::events::AndCondition::read(sol::table const& params) {
     if (!conditionB.has_value())
         return false;
     delete _conditionB;
-    _conditionB = EventConditionFactory::Create(conditionB.value());
+    _conditionB = EventConditionFactory::Create(conditionB.value(), _event);
     if (_conditionB == nullptr)
         return false;
 
@@ -100,7 +101,7 @@ bool editor::resources::events::AndCondition::renderConditionSelector(EventCondi
         if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition." + conditionName).c_str(), isSelected)) {
             if (!isSelected) {
                 delete condition;
-                condition = EventConditionFactory::Create(conditionName);
+                condition = EventConditionFactory::Create(conditionName, _event);
                 edited = true;
             }
         }

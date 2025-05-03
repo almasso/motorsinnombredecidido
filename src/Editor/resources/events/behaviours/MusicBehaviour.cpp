@@ -179,7 +179,8 @@ bool editor::resources::events::MusicBehaviour::renderChangeAction() {
     }
     ImGui::SameLine();
     edited = ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.change.source") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
-                     _param.clip, IM_ARRAYSIZE(_param.clip), ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+                     _param.clip, MAX_CLIP_BUFFER, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+
     return edited;
 }
 

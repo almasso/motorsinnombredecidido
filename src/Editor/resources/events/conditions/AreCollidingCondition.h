@@ -12,16 +12,20 @@ namespace editor::resources::events {
 
     class EventConditionClass(AreCollidingCondition, "AreColliding") {
     public:
-        AreCollidingCondition();
+        AreCollidingCondition(Event* event);
         ~AreCollidingCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;
     protected:
         bool writeParamsToEngine(sol::table& params) override;
         bool writeParams(sol::table& params) override;
+
     private:
         std::string _objectA;
         std::string _objectB;
+
+        bool renderObjectSelector(std::string& object, int i);
+        static std::string getObjectName(std::string const& map, int object);
     };
 
 }

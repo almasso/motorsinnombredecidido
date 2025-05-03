@@ -12,7 +12,7 @@ namespace editor::resources::events {
 
     class EventConditionClass(AndCondition, "And") {
     public:
-        AndCondition();
+        AndCondition(Event* event);
         ~AndCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;

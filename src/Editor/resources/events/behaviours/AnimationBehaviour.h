@@ -20,13 +20,19 @@ namespace editor::resources::events {
         bool writeParams(sol::table& params) override;
 
     private:
-        enum {
+        enum ANIMATION_ACTION{
             PLAY,
             STOP,
             RESET,
-            CHANGE
+            CHANGE,
+            MAX_ACTION
         } _action;
         std::string _animationToChange;
+
+        bool renderActionSelector();
+        bool renderAnimationSelector();
+        std::string getActionName(ANIMATION_ACTION action) const;
+
     };
 
 }

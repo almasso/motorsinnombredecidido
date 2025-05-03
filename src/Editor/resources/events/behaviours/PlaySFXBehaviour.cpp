@@ -18,19 +18,19 @@
 
 editor::resources::events::PlaySFXBehaviour::PlaySFXBehaviour(Event* event) :
     EventBehaviourTemplate(event),
-    _sfxHandler(new char[MAX_CLIP_BUFFER]) {
-    _sfxHandler[0] = '\0';
+    _sfxSource(new char[MAX_CLIP_BUFFER]) {
+    _sfxSource[0] = '\0';
 }
 
 editor::resources::events::PlaySFXBehaviour::~PlaySFXBehaviour() {
-    delete[] _sfxHandler;
+    delete[] _sfxSource;
 }
 
 bool editor::resources::events::PlaySFXBehaviour::read(sol::table const& params) {
     sol::optional<std::string> sfxHandler = params.get<sol::optional<std::string>>(sfxKey);
     if (!sfxHandler.has_value())
         return false;
-    sfxHandler.value().copy(_sfxHandler, MAX_CLIP_BUFFER);
+    sfxHandler.value().copy(_sfxSource, MAX_CLIP_BUFFER);
     return true;
 }
 
@@ -43,7 +43,7 @@ bool editor::resources::events::PlaySFXBehaviour::render() {
 }
 
 bool editor::resources::events::PlaySFXBehaviour::writeParams(sol::table& params) {
-    params[sfxKey] = _sfxHandler;
+    params[sfxKey] = _sfxSource;
     return true;
 }
 
@@ -63,19 +63,19 @@ bool editor::resources::events::PlaySFXBehaviour::renderAudioSelector() {
         if(route != nullptr) {
             if(std::filesystem::path(route).parent_path() != (project->getPath() / "assets")) {
                 showUserWarning(io::LocalizationManager::GetInstance().getString("error.assetlocationnotvalid"))
-                strncpy(_sfxHandler, "", MAX_CLIP_BUFFER - 1);
-                _sfxHandler[MAX_CLIP_BUFFER - 1] = '\0';
+                strncpy(_sfxSource, "", MAX_CLIP_BUFFER - 1);
+                _sfxSource[MAX_CLIP_BUFFER - 1] = '\0';
             }
             else {
                 std::string fR(std::filesystem::path(route).lexically_normal().string());
-                strncpy(_sfxHandler, fR.c_str(), MAX_CLIP_BUFFER - 1);
-                _sfxHandler[MAX_CLIP_BUFFER - 1] = '\0';
+                strncpy(_sfxSource, fR.c_str(), MAX_CLIP_BUFFER - 1);
+                _sfxSource[MAX_CLIP_BUFFER - 1] = '\0';
                 edited = true;
             }
         }
     }
     ImGui::SameLine();
     edited = ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.PlaySFXBehaviour.source") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
-                     _sfxHandler, IM_ARRAYSIZE(_sfxHandler), ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+                     _sfxSource, MAX_CLIP_BUFFER, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
     return edited;
 }

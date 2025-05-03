@@ -5,4 +5,8 @@
 
 #include "EventCondition.h"
 
+editor::resources::events::EventCondition::EventCondition(Event* event) :
+    _event(event) {
+}
+
 editor::resources::events::EventCondition::~EventCondition() = default;

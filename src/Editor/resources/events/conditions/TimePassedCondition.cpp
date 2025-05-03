@@ -5,9 +5,13 @@
 
 #include "TimePassedCondition.h"
 
+#include <imgui.h>
+#include <io/LocalizationManager.h>
+
 #define secondsKey "seconds"
 
-editor::resources::events::TimePassedCondition::TimePassedCondition() :
+editor::resources::events::TimePassedCondition::TimePassedCondition(Event* event) :
+    EventConditionTemplate(event),
     _seconds(0.0f) {
 }
 
@@ -19,7 +23,9 @@ bool editor::resources::events::TimePassedCondition::read(sol::table const& para
 }
 
 bool editor::resources::events::TimePassedCondition::render() {
-    return false;
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.TimePassed.seconds").c_str());
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+    return ImGui::InputFloat(("##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_seconds);
 }
 
 bool editor::resources::events::TimePassedCondition::writeParamsToEngine(sol::table& params) {
