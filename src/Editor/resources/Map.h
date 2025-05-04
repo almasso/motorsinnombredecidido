@@ -89,6 +89,8 @@ namespace editor::resources {
 
         int _mapWidth;
         int _mapHeight;
+        int _oldMapWidth;
+        int _oldMapHeight;
         int _mapX;
         int _mapY;
         int _layers;
