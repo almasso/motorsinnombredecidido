@@ -67,78 +67,74 @@ void editor::resources::Map::init(std::string const& name, int mapWidth, int map
 void editor::resources::Map::handleVectorChanges() {
     // Objetos
     int addedColumns = _mapWidth - _oldMapWidth;
+    int addedRows = _mapHeight - _oldMapHeight;
     if(addedColumns != 0) {
-        if(!_objects.empty()) {
+        if (!_objects.empty()) {
             std::unordered_map<int, Object*> objTmp;
-            for(auto it = _objects.begin(); it != _objects.end();) {
-                if(it->first % _oldMapWidth < _oldMapWidth + addedColumns) {
-                    int objX = it->first % _oldMapWidth, objY = it->first / _oldMapWidth;
-                    objTmp[objX + _mapWidth * objY] = it->second;
+            for (int y = 0; y < _oldMapHeight; ++y) {
+                if (y >= _mapHeight) break;
+                for (int x = 0; x < _oldMapWidth; ++x) {
+                    if (x >= _mapWidth) break;
+                    int oldIndex = _oldMapWidth * y + x;
+                    int newIndex = _mapWidth * y + x;
+
+                    auto it = _objects.find(oldIndex);
+                    if (it != _objects.end()) {
+                        objTmp[newIndex] = it->second;
+                        it->second = nullptr;
+                    }
                 }
-                ++it;
             }
 
-            for(auto& obj : _objects) delete obj.second;
-            _objects.clear();
+            for (auto& obj : _objects) {
+                delete obj.second;
+            }
             _objects = std::move(objTmp);
         }
 
         // Tiles
-        if(!_tiles.empty()) {
-            std::vector<std::vector<Tile*>> tilesTmp = std::vector(_layers, std::vector<Tile*>(_mapWidth * _mapHeight, nullptr));
-            int minLayers = std::min(tilesTmp.size(), _tiles.size());
-            int countX = 0, countY = 0;
-            for(int i = 0; i < minLayers; ++i) {
-                int minGridSize = std::min(tilesTmp[i].size(), _tiles[i].size());
-                for(int j = 0; j < minGridSize; ++j) {
-                    if(addedColumns < 0) {
-                        tilesTmp[i][j] = _tiles[i][j + (-addedColumns) * countY];
-                        _tiles[i][j + (-addedColumns) * countY] = nullptr;
-                    }
-                    else {
-                        tilesTmp[i][j + addedColumns * countY] = _tiles[i][j];
-                        _tiles[i][j] = nullptr;
-                    }
-                    ++countX;
-                    if(countX == _oldMapWidth) {
-                        countX = 0;
-                        ++countY;
+        if (!_tiles.empty()) {
+            std::vector<std::vector<Tile*>> tilesTmp(_layers, std::vector<Tile*>(_mapWidth * _mapHeight, nullptr));
+            int minLayers = std::min<int>(_layers, _tiles.size());
+            for (int layer = 0; layer < minLayers; ++layer) {
+                for (int y = 0; y < _oldMapHeight; ++y) {
+                    if (y >= _mapHeight) break;
+                    for (int x = 0; x < _oldMapWidth; ++x) {
+                        if (x >= _mapWidth) break;
+                        int oldIndex = _oldMapWidth * y + x;
+                        int newIndex = _mapWidth * y + x;
+
+                        tilesTmp[layer][newIndex] = _tiles[layer][oldIndex];
+                        _tiles[layer][oldIndex] = nullptr;
                     }
                 }
-                for(int k = minGridSize; k < _tiles[i].size(); ++k) {
-                    delete _tiles[i][k];
-                    _tiles[i][k] = nullptr;
+                for (Tile* tile : _tiles[layer]) {
+                    tile = nullptr;
                 }
             }
-            for(int k = minLayers; k < _tiles.size(); ++k) {
-                for(Tile* tile : _tiles[k]) delete tile;
+            for (int k = minLayers; k < _tiles.size(); ++k) {
+                for (Tile* tile : _tiles[k]) {
+                    tile = nullptr;
+                }
             }
-            _tiles.clear();
             _tiles = std::move(tilesTmp);
         }
         else _tiles = std::vector(_layers, std::vector<Tile*>(_mapWidth * _mapHeight, nullptr));
 
         // Collisions
-        if(!_collisions.empty()) {
-            int countX = 0, countY = 0;
-            std::vector<bool> collTmp = std::vector(_mapWidth * _mapHeight, false);
+        if (!_collisions.empty()) {
+            std::vector<bool> collTmp(_mapWidth * _mapHeight, false);
+            for (int y = 0; y < _oldMapHeight; ++y) {
+                if (y >= _mapHeight) break;
+                for (int x = 0; x < _oldMapWidth; ++x) {
+                    if (x >= _mapWidth) break;
+                    int oldIndex = _oldMapWidth * y + x;
+                    int newIndex = _mapWidth * y + x;
 
-            int minSize = std::min(_collisions.size(), collTmp.size());
-            for(int i = 0; i < minSize; ++i) {
-                if(addedColumns < 0) {
-                    collTmp[i] = _collisions[i + (-addedColumns) * countY];
-                }
-                else {
-                    collTmp[i + addedColumns * countY] = _collisions[i];
-                }
-
-                ++countX;
-                if(countX == _oldMapWidth) {
-                    countX = 0;
-                    ++countY;
+                    if (oldIndex < _collisions.size() && newIndex < collTmp.size())
+                        collTmp[newIndex] = _collisions[oldIndex];
                 }
             }
-            _collisions.clear();
             _collisions = std::move(collTmp);
         }
         else _collisions = std::vector(_mapWidth * _mapHeight, false);
