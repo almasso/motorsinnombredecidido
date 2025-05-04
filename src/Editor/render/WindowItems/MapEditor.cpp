@@ -410,6 +410,7 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                 bool isSelected = (_selectedTileset == tileset.second);
                 if(ImGui::Selectable(tileset.second->getName().c_str(), isSelected)) {
                     _selectedTileset = tileset.second;
+                    _selectedTile = -1;
                     if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
                         ImGui::OpenPopup((tileset.second->getName() + "tilesetoptions").c_str());
                     }
@@ -453,6 +454,12 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                     if(!_collisionsShown) _selectedTile = i;
                     else _selectedTileset->getCollisions()[i] = !_selectedTileset->getCollisions()[i];
                 }
+
+                if(!_collisionsShown && i == _selectedTile) {
+                    ImDrawList* drawList = ImGui::GetWindowDrawList();
+                    drawList->AddRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(255, 255, 0, 255), 0.0f, 0, 3.0f);
+                }
+
                 if(_collisionsShown) {
                     ImVec2 min = ImGui::GetItemRectMin();
                     ImVec2 max = ImGui::GetItemRectMax();
