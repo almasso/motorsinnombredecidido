@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_LUAMANAGER_H
-#define MOTORSINNOMBREDECIDIDO_LUAMANAGER_H
+#ifndef RPGBAKER_LUAMANAGER_H
+#define RPGBAKER_LUAMANAGER_H
 
 #include <memory>
 #include <string>
@@ -61,4 +61,4 @@ namespace editor::io {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_LUAMANAGER_H
+#endif //RPGBAKER_LUAMANAGER_H

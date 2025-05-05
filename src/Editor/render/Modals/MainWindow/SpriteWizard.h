@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_SPRITEWIZARD_H
-#define MOTORSINNOMBREDECIDIDO_SPRITEWIZARD_H
+#ifndef RPGBAKER_SPRITEWIZARD_H
+#define RPGBAKER_SPRITEWIZARD_H
 
 #include "render/ModalWindow.h"
 #include <imgui.h>

@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_TILESET_H
-#define MOTORSINNOMBREDECIDIDO_TILESET_H
+#ifndef RPGBAKER_TILESET_H
+#define RPGBAKER_TILESET_H
 
 #include "EditorResource.h"
 #include <vector>

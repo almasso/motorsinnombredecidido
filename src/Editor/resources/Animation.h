@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_ANIMATION_H
-#define MOTORSINNOMBREDECIDIDO_ANIMATION_H
+#ifndef RPGBAKER_ANIMATION_H
+#define RPGBAKER_ANIMATION_H
 
 #include "EditorResource.h"
 #include <string>

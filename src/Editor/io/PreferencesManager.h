@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_PREFERENCESMANAGER_H
-#define MOTORSINNOMBREDECIDIDO_PREFERENCESMANAGER_H
+#ifndef RPGBAKER_PREFERENCESMANAGER_H
+#define RPGBAKER_PREFERENCESMANAGER_H
 
 #include <memory>
 #include <filesystem>
@@ -68,4 +68,4 @@ namespace editor::io {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_PREFERENCESMANAGER_H
+#endif //RPGBAKER_PREFERENCESMANAGER_H

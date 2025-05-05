@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_MAP_H
-#define MOTORSINNOMBREDECIDIDO_MAP_H
+#ifndef RPGBAKER_MAP_H
+#define RPGBAKER_MAP_H
 
 #include "EditorResource.h"
 #include <vector>
@@ -124,4 +124,4 @@ namespace editor::resources {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_MAP_H
+#endif //RPGBAKER_MAP_H

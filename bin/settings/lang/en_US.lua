@@ -1,5 +1,5 @@
 return {
-	["window.global.editorname"] = "Ngin Editor",
+	["window.global.editorname"] = "RPGBaker Editor",
 	["window.global.currentversion"] = "v.0.1.0",
 	["window.global.yes"] = "Yes",
 	["window.global.no"] = "No",
@@ -116,6 +116,9 @@ return {
     ["window.mainwindow.mapconnections.createWorld"] = "Create new world",
     ["window.mainwindow.mapconnections.mapPosition"] = "Map position (x, y)",
     ["window.mainwindow.mapconnections.removeMap"] = "Remove",
+    ["window.mainwindow.spriteeditor"] = "Sprites and Animations",
+    ["window.mainwindow.spriteeditor.sprites"] = "Sprites",
+    ["window.mainwindow.spriteeditor.animations"] = "Animations",
     ["window.mainwindow.popup.eventwizard.title"] = "Event creation wizard",
     ["window.mainwindow.popup.eventwizard.eventname"] = "Event name",
     ["window.mainwindow.popup.tilesetwizard.title"] = "Tileset creation wizard",

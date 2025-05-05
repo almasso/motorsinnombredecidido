@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_WINDOWITEM_H
-#define MOTORSINNOMBREDECIDIDO_WINDOWITEM_H
+#ifndef RPGBAKER_WINDOWITEM_H
+#define RPGBAKER_WINDOWITEM_H
 
 #include "RenderObject.h"
 #include <imgui.h>
@@ -29,4 +29,4 @@ namespace editor::render {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_WINDOWITEM_H
+#endif //RPGBAKER_WINDOWITEM_H

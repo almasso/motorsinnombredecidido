@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_PROJECTMANAGER_H
-#define MOTORSINNOMBREDECIDIDO_PROJECTMANAGER_H
+#ifndef RPGBAKER_PROJECTMANAGER_H
+#define RPGBAKER_PROJECTMANAGER_H
 
 #include <memory>
 #include <filesystem>
@@ -78,4 +78,4 @@ namespace editor::io {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_PROJECTMANAGER_H
+#endif //RPGBAKER_PROJECTMANAGER_H

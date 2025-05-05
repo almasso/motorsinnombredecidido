@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_RENDERMANAGER_H
-#define MOTORSINNOMBREDECIDIDO_RENDERMANAGER_H
+#ifndef RPGBAKER_RENDERMANAGER_H
+#define RPGBAKER_RENDERMANAGER_H
 
 #include <cstdint>
 #include <memory>
@@ -322,4 +322,4 @@ namespace editor::render {
 
 
 
-#endif //MOTORSINNOMBREDECIDIDO_RENDERMANAGER_H
+#endif //RPGBAKER_RENDERMANAGER_H

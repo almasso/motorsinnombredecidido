@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_MAPEDITOR_H
-#define MOTORSINNOMBREDECIDIDO_MAPEDITOR_H
+#ifndef RPGBAKER_MAPEDITOR_H
+#define RPGBAKER_MAPEDITOR_H
 
 #include "render/WindowItem.h"
 #include <vector>
@@ -85,4 +85,4 @@ namespace editor::render::tabs {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_MAPEDITOR_H
+#endif //RPGBAKER_MAPEDITOR_H

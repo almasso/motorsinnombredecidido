@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_PROJECT_H
-#define MOTORSINNOMBREDECIDIDO_PROJECT_H
+#ifndef RPGBAKER_PROJECT_H
+#define RPGBAKER_PROJECT_H
 
 #include <string>
 #include <filesystem>
@@ -236,4 +236,4 @@ namespace editor {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_PROJECT_H
+#endif //RPGBAKER_PROJECT_H

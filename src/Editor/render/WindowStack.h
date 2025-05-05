@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_WINDOWSTACK_H
-#define MOTORSINNOMBREDECIDIDO_WINDOWSTACK_H
+#ifndef RPGBAKER_WINDOWSTACK_H
+#define RPGBAKER_WINDOWSTACK_H
 
 #include <memory>
 #include "utils/SearchableList.h"
@@ -123,4 +123,4 @@ namespace editor::render {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_WINDOWSTACK_H
+#endif //RPGBAKER_WINDOWSTACK_H

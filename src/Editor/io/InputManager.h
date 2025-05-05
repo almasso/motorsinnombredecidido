@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_INPUTMANAGER_H
-#define MOTORSINNOMBREDECIDIDO_INPUTMANAGER_H
+#ifndef RPGBAKER_INPUTMANAGER_H
+#define RPGBAKER_INPUTMANAGER_H
 
 #include <memory>
 
@@ -38,4 +38,4 @@ namespace editor::io {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_INPUTMANAGER_H
+#endif //RPGBAKER_INPUTMANAGER_H

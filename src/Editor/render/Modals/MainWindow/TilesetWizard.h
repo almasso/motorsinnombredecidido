@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_TILESETWIZARD_H
-#define MOTORSINNOMBREDECIDIDO_TILESETWIZARD_H
+#ifndef RPGBAKER_TILESETWIZARD_H
+#define RPGBAKER_TILESETWIZARD_H
 
 #include "render/ModalWindow.h"
 #include <imgui.h>
@@ -60,4 +60,4 @@ namespace editor::render::modals {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_TILESETWIZARD_H
+#endif //RPGBAKER_TILESETWIZARD_H

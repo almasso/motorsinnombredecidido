@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_EDITORRESOURCE_H
-#define MOTORSINNOMBREDECIDIDO_EDITORRESOURCE_H
+#ifndef RPGBAKER_EDITORRESOURCE_H
+#define RPGBAKER_EDITORRESOURCE_H
 
 #include <string>
 

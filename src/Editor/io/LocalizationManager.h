@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_LOCALIZATIONMANAGER_H
-#define MOTORSINNOMBREDECIDIDO_LOCALIZATIONMANAGER_H
+#ifndef RPGBAKER_LOCALIZATIONMANAGER_H
+#define RPGBAKER_LOCALIZATIONMANAGER_H
 
 #include <memory>
 #include <unordered_map>
@@ -84,4 +84,4 @@ namespace editor::io {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_LOCALIZATIONMANAGER_H
+#endif //RPGBAKER_LOCALIZATIONMANAGER_H

@@ -1,5 +1,5 @@
 return {
-	["window.global.editorname"] = "Ngin Editor",
+	["window.global.editorname"] = "RPGBaker Editor",
 	["window.global.currentversion"] = "v.0.1.0",
 	["window.global.yes"] = "Sí",
 	["window.global.no"] = "No",
@@ -116,6 +116,9 @@ return {
     ["window.mainwindow.mapconnections.createWorld"] = "Crea un nuevo mundo",
     ["window.mainwindow.mapconnections.mapPosition"] = "Posición del mapa (x, y)",
     ["window.mainwindow.mapconnections.removeMap"] = "Quitar",
+    ["window.mainwindow.spriteeditor"] = "Sprites y Animaciones",
+    ["window.mainwindow.spriteeditor.sprites"] = "Sprites",
+    ["window.mainwindow.spriteeditor.animations"] = "Animaciones",
     ["window.mainwindow.popup.eventwizard.title"] = "Asistente para la creación de eventos",
     ["window.mainwindow.popup.eventwizard.eventname"] = "Nombre del evento",
     ["window.mainwindow.popup.tilesetwizard.title"] = "Asistente para la creación de tilesets",

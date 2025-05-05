@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_RENDEROBJECT_H
-#define MOTORSINNOMBREDECIDIDO_RENDEROBJECT_H
+#ifndef RPGBAKER_RENDEROBJECT_H
+#define RPGBAKER_RENDEROBJECT_H
 
 #include <string>
 
@@ -24,4 +24,4 @@ namespace editor::render {
     };
 }
 
-#endif //MOTORSINNOMBREDECIDIDO_RENDEROBJECT_H
+#endif //RPGBAKER_RENDEROBJECT_H

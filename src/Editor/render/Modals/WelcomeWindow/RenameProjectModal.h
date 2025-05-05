@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_RENAMEPROJECTMODAL_H
-#define MOTORSINNOMBREDECIDIDO_RENAMEPROJECTMODAL_H
+#ifndef RPGBAKER_RENAMEPROJECTMODAL_H
+#define RPGBAKER_RENAMEPROJECTMODAL_H
 
 #include "render/ModalWindow.h"
 
@@ -34,4 +34,4 @@ namespace editor::render::modals {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_RENAMEPROJECTMODAL_H
+#endif //RPGBAKER_RENAMEPROJECTMODAL_H

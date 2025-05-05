@@ -70,7 +70,7 @@
 
          An example Java class can be found in README-android.md
     -->
-    <application android:label="RPGNgine"
+    <application android:label="RPGBaker"
                  android:allowBackup="true"
                  android:hardwareAccelerated="true">
 

@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_SEARCHABLELIST_H
-#define MOTORSINNOMBREDECIDIDO_SEARCHABLELIST_H
+#ifndef RPGBAKER_SEARCHABLELIST_H
+#define RPGBAKER_SEARCHABLELIST_H
 
 #include <list>
 #include <unordered_map>
@@ -226,4 +226,4 @@ private:
 };
 
 
-#endif //MOTORSINNOMBREDECIDIDO_SEARCHABLELIST_H
+#endif //RPGBAKER_SEARCHABLELIST_H

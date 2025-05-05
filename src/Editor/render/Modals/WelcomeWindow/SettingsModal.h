@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_SETTINGSMODAL_H
-#define MOTORSINNOMBREDECIDIDO_SETTINGSMODAL_H
+#ifndef RPGBAKER_SETTINGSMODAL_H
+#define RPGBAKER_SETTINGSMODAL_H
 
 #include "render/ModalWindow.h"
 #include <vector>
@@ -25,4 +25,4 @@ namespace editor::render::modals {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_SETTINGSMODAL_H
+#endif //RPGBAKER_SETTINGSMODAL_H

@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_MAPWIZARD_H
-#define MOTORSINNOMBREDECIDIDO_MAPWIZARD_H
+#ifndef RPGBAKER_MAPWIZARD_H
+#define RPGBAKER_MAPWIZARD_H
 
 #include "render/ModalWindow.h"
 
@@ -47,4 +47,4 @@ namespace editor::render::modals {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_MAPWIZARD_H
+#endif //RPGBAKER_MAPWIZARD_H

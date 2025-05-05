@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_EDITORERROR_H
-#define MOTORSINNOMBREDECIDIDO_EDITORERROR_H
+#ifndef RPGBAKER_EDITORERROR_H
+#define RPGBAKER_EDITORERROR_H
 
 #include <string>
 #include "utils/tinyfiledialogs/tinyfiledialogs.h"
@@ -82,4 +82,4 @@ namespace editor {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_EDITORERROR_H
+#endif //RPGBAKER_EDITORERROR_H

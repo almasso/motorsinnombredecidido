@@ -58,6 +58,7 @@ cmake-build-debug/*
 cmake-build-release/*
 cmake-build-default/*
 cmake-build-wsl_profile/*
+cmake-build-wsl/*
 .vs/*
 out/*
 CMakeFiles/*

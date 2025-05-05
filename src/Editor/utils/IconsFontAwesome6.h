@@ -3,8 +3,8 @@
 // from codepoints https://github.com/FortAwesome/Font-Awesome/raw/6.x/metadata/icons.yml
 // for use with font https://github.com/FortAwesome/Font-Awesome/blob/6.x/webfonts/fa-regular-400.ttf, https://github.com/FortAwesome/Font-Awesome/blob/6.x/webfonts/fa-solid-900.ttf
 
-#ifndef MOTORSINNOMBREDECIDIDO_ICONSFONTAWESOME6_H
-#define MOTORSINNOMBREDECIDIDO_ICONSFONTAWESOME6_H
+#ifndef RPGBAKER_ICONSFONTAWESOME6_H
+#define RPGBAKER_ICONSFONTAWESOME6_H
 
 #define FONT_ICON_FILE_NAME_FAR "fa-regular-400.ttf"
 #define FONT_ICON_FILE_NAME_FAS "fa-solid-900.ttf"
@@ -1416,4 +1416,4 @@
 #define ICON_FA_YIN_YANG "\xef\x9a\xad"	// U+f6ad
 #define ICON_FA_Z "Z"	// U+005a
 
-#endif //MOTORSINNOMBREDECIDIDO_ICONSFONTAWESOME_H
+#endif //RPGBAKER_ICONSFONTAWESOME_H

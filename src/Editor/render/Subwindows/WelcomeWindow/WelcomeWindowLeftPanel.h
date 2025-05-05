@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_WELCOMEWINDOWLEFTPANEL_H
-#define MOTORSINNOMBREDECIDIDO_WELCOMEWINDOWLEFTPANEL_H
+#ifndef RPGBAKER_WELCOMEWINDOWLEFTPANEL_H
+#define RPGBAKER_WELCOMEWINDOWLEFTPANEL_H
 
 #include "render/Subwindow.h"
 
@@ -26,4 +26,4 @@ namespace editor::render::subwindows {
 }
 
 
-#endif //MOTORSINNOMBREDECIDIDO_WELCOMEWINDOWLEFTPANEL_H
+#endif //RPGBAKER_WELCOMEWINDOWLEFTPANEL_H
