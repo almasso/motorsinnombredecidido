@@ -13,6 +13,7 @@
 #include "render/Modals/MainWindow/SpriteWizard.h"
 #include "render/Modals/MainWindow/AnimationWizard.h"
 #include "render/WindowStack.h"
+#include <SDL3/SDL.h>
 
 editor::render::tabs::SpriteAnimViewer::SpriteAnimViewer(editor::Project *project) :
 WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.spriteeditor") + ""), _project(project) {
@@ -49,8 +50,7 @@ void editor::render::tabs::SpriteAnimViewer::save() {
 
 void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
     if(ImGui::BeginTabItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.spriteeditor.sprites").c_str())) {
-
-        const float thumbnailSize = 64.0f;
+        const float thumbnailSize = 250.0f;
         const float padding = 8.0f;
         float cellSize = thumbnailSize + padding;
         float panelWidth = ImGui::GetContentRegionAvail().x;
@@ -58,17 +58,32 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
         if(columns < 1) columns = 1;
 
         int count = 0;
+        ImGui::Dummy(ImVec2(0, 50.0f));
+        ImGui::Indent(50.0f);
         for(auto it = _project->getSprites().begin(); it != _project->getSprites().end();) {
             ImGui::PushID(count);
-            ImGui::Image(it->second->getTextureID(), ImVec2(thumbnailSize, thumbnailSize));
+            auto* sprite = it->second;
+
+            float textureWidth = ((SDL_Texture*)sprite->getTextureID())->w;
+            float textureHeight = ((SDL_Texture*)sprite->getTextureID())->h;
+
+            ImVec2 uv0 = ImVec2(sprite->getX() / textureWidth, sprite->getY() / textureHeight);
+            ImVec2 uv1 = ImVec2((sprite->getX() + sprite->getWidth()) / textureWidth, (sprite->getY() + sprite->getHeight()) / textureHeight);
+
+            ImGui::BeginGroup();
+            ImGui::Image(it->second->getTextureID(), ImVec2(thumbnailSize, thumbnailSize), uv0, uv1);
             float textWidth = ImGui::CalcTextSize(it->second->getName().c_str()).x;
             float textOffsetX = (thumbnailSize - textWidth) * 0.5f;
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + textOffsetX);
             ImGui::Text("%s", it->second->getName().c_str());
+            ImGui::EndGroup();
             ImGui::PopID();
             ++count;
+            ++it;
             if(count % columns != 0) ImGui::SameLine();
         }
+
+        if(count % columns != 0) ImGui::SameLine();
         ImGui::PushID("addSprite");
         if(ImGui::Button("+", ImVec2(thumbnailSize, thumbnailSize))) {
             _createdSprite = new editor::resources::Sprite(_project);
@@ -76,6 +91,8 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
             _spriteWizard->show();
         }
         ImGui::PopID();
+        ImGui::Unindent(50.0f);
+
         ImGui::EndTabItem();
     }
 

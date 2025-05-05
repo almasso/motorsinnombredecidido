@@ -96,7 +96,7 @@ void editor::render::modals::SpriteWizard::drawControls() {
         ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.spritewizard.spritename").c_str(),
                          _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
-        if(_project->getTileset(_nameBuffer) != nullptr) _sameName = true;
+        if(_project->getSprite(_nameBuffer) != nullptr) _sameName = true;
         else _sameName = false;
 
         if(_spriteToModify->getName() != "" && _spriteToModify->getName() == _nameBuffer) _sameName = false;
