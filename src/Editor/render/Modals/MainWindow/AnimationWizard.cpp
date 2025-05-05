@@ -41,7 +41,7 @@ void editor::render::modals::AnimationWizard::drawControls() {
         _nameBuffer[sizeof(_nameBuffer) - 1] = '\0';
         if(_animationToModify->isInitialized()) {
             _loop = _animationToModify->isLoop();
-            copyFramesToList(_animationToModify->getFrames());
+            //copyFramesToList(_animationToModify->getFrames());
             framesToTextures();
             _timeBetweenFrames = _animationToModify->getTimeBetweenFrames();
         }

@@ -5,6 +5,7 @@
 
 
 #include "Animation.h"
+#include "resources/Sprite.h"
 
 std::filesystem::path editor::resources::Animation::_animationsDirectory;
 
@@ -19,7 +20,7 @@ editor::resources::Animation::Animation(Project *project) :
 
 editor::resources::Animation::~Animation() = default;
 
-void editor::resources::Animation::init(const std::string &name, const std::vector<std::filesystem::path> &frames,
+void editor::resources::Animation::init(const std::string &name, const std::vector<editor::resources::Sprite*> &frames,
     float timeBetweenFrames, bool loop) {
     _name = name;
     _frames = frames;
@@ -45,7 +46,7 @@ bool editor::resources::Animation::isInitialized() const {
     return _init;
 }
 
-const std::vector<std::filesystem::path> & editor::resources::Animation::getFrames() const {
+const std::vector<editor::resources::Sprite*> & editor::resources::Animation::getFrames() const {
     return _frames;
 }
 

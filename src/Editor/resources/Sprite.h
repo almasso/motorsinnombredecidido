@@ -13,13 +13,16 @@ namespace editor {
     class Project;
 }
 
+typedef unsigned long long ImU64;
+typedef ImU64 ImTextureID;
+
 namespace editor::resources {
     class Sprite : public EditorResource {
     public:
         explicit Sprite(Project* project);
         ~Sprite();
 
-        void init(std::string const& name, std::filesystem::path const& path, int x, int y, int w, int h);
+        void init(std::string const& name, std::filesystem::path const& path, ImTextureID textureID, int x, int y, int w, int h);
 
         bool readFromLua(std::string const& name) final;
 
@@ -29,6 +32,7 @@ namespace editor::resources {
 
         const std::string& getName() const;
         const std::filesystem::path& getSource() const;
+        const ImTextureID getTextureID() const;
 
         bool isInitialized() const;
 
@@ -46,6 +50,7 @@ namespace editor::resources {
         int _width;
         int _height;
         std::filesystem::path _source;
+        ImTextureID _textureID;
         Project* _project;
     };
 

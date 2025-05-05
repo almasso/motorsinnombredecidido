@@ -29,6 +29,7 @@ namespace editor::render::modals {
         Project* _project = nullptr;
 
         ImTextureID _loadedTexture = 0;
+        ImTextureID _spriteTexture = 0;
 
         editor::resources::Sprite* _spriteToModify = nullptr;
 
@@ -50,8 +51,6 @@ namespace editor::render::modals {
         char _nameBuffer[256];
 
         char _routeBuffer[1024];
-
-        float _color[3];
 
         void beforeRender() override;
 

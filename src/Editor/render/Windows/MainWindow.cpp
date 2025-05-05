@@ -10,6 +10,7 @@
 #include "render/WindowItems/MapEditor.h"
 #include "render/WindowItems/EventEditor.h"
 #include "render/WindowItems/MapConnections.h"
+#include "render/WindowItems/SpriteAnimViewer.h"
 #include "utils/IconsFontAwesome6.h"
 
 editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Window("mainWindow"), _project(project) {
@@ -25,6 +26,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
     _mapEditor = new tabs::MapEditor(_project);
     _eventEditor = new tabs::EventEditor(_project);
     _mapConnections = new tabs::MapConnections(_project);
+    _spriteEditor = new tabs::SpriteAnimViewer(_project);
 
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
                              ImGuiWindowFlags_NoResize |
@@ -49,6 +51,7 @@ void editor::render::windows::MainWindow::onRender() {
         _mapEditor->save();
         _eventEditor->save();
         _mapConnections->save();
+        _spriteEditor->save();
         _mapConnections->getAdjacentMaps();
         _project->build("Desktop");
     }
@@ -63,6 +66,7 @@ void editor::render::windows::MainWindow::onRender() {
     _mapEditor->render();
     _eventEditor->render();
     _mapConnections->render();
+    _spriteEditor->render();
     ImGui::EndTabBar();
     ImGui::EndChild();
 }

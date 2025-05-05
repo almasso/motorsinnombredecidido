@@ -5,6 +5,7 @@
 
 #include "Sprite.h"
 #include "Render/Sprite.h"
+#include "render/RenderManager.h"
 
 std::filesystem::path editor::resources::Sprite::_spritesDirectory;
 
@@ -16,13 +17,16 @@ editor::resources::Sprite::Sprite(Project *project) :
     _x(0),
     _y(0),
     _source(""),
-    _project(project) {
+    _project(project),
+    _textureID(0) {
 
 }
 
-editor::resources::Sprite::~Sprite() = default;
+editor::resources::Sprite::~Sprite() {
+    if(_textureID != 0) editor::render::RenderManager::GetInstance().destroyTexture(_textureID);
+}
 
-void editor::resources::Sprite::init(std::string const &name, std::filesystem::path const &path, int x, int y, int w,
+void editor::resources::Sprite::init(std::string const &name, std::filesystem::path const &path, ImTextureID textureID, int x, int y, int w,
     int h) {
     _name = name;
     _source = path;
@@ -31,6 +35,8 @@ void editor::resources::Sprite::init(std::string const &name, std::filesystem::p
     _x = x;
     _y = y;
     _init = true;
+    if(_textureID != 0) editor::render::RenderManager::GetInstance().destroyTexture(_textureID);
+    _textureID = textureID;
 }
 
 bool editor::resources::Sprite::readFromLua(std::string const &name) {
@@ -68,5 +74,9 @@ int editor::resources::Sprite::getWidth() const {
 
 int editor::resources::Sprite::getHeight() const {
     return _height;
+}
+
+const ImTextureID editor::resources::Sprite::getTextureID() const {
+    return _textureID;
 }
 

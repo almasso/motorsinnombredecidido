@@ -16,12 +16,14 @@ namespace editor {
 }
 
 namespace editor::resources {
+    class Sprite;
+
     class Animation : public EditorResource{
     public:
         explicit Animation(Project* project);
         ~Animation();
 
-        void init(const std::string& name, const std::vector<std::filesystem::path>& frames, float timeBetweenFrames, bool loop);
+        void init(const std::string& name, const std::vector<Sprite*>& frames, float timeBetweenFrames, bool loop);
 
         bool readFromLua(const std::string& name) final;
 
@@ -30,7 +32,7 @@ namespace editor::resources {
         void writeToEngineLua(const std::string &platform) final;
 
         const std::string& getName() const;
-        const std::vector<std::filesystem::path>& getFrames() const;
+        const std::vector<Sprite*>& getFrames() const;
         float getTimeBetweenFrames() const;
         bool isLoop() const;
 
@@ -39,7 +41,7 @@ namespace editor::resources {
         static std::filesystem::path _animationsDirectory;
         bool _init = false;
         std::string _name;
-        std::vector<std::filesystem::path> _frames;
+        std::vector<Sprite*> _frames;
         float _timeBetweenFrames;
         bool _loop;
         Project* _project;
