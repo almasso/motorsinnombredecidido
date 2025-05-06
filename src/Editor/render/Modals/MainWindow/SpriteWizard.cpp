@@ -12,7 +12,7 @@
 #include "common/EditorError.h"
 #include <SDL3/SDL.h>
 
-editor::render::modals::SpriteWizard::SpriteWizard(editor::Project* project) : ModalWindow("##spriteWizard"), _project(project) {}
+editor::render::modals::SpriteWizard::SpriteWizard(editor::Project* project) : ModalWindow(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.spritewizard.title") + ""), _project(project) {}
 
 editor::render::modals::SpriteWizard::~SpriteWizard() {
     if(_loadedTexture != 0) RenderManager::GetInstance().destroyTexture(_loadedTexture);

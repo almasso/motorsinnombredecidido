@@ -40,19 +40,25 @@ namespace editor::render::modals {
 
         bool _sameName = false;
 
+        bool _openSpriteSelector = false;
+
         char _nameBuffer[256];
 
         bool _loop = false;
 
+        bool _playing = false;
+
         std::list<resources::Sprite*> _frames;
 
-        std::list<ImTextureID> _frameTextures;
-
-        int _selectedFrame = 0;
+        editor::resources::Sprite* _selectedFrame = nullptr;
 
         int _reproductionFrame = 0;
 
         float _timeBetweenFrames = 1.0f;
+
+        float _frameTimer = 0.0f;
+
+        bool _animationRunning = false;
 
         void beforeRender() override;
 
@@ -64,15 +70,9 @@ namespace editor::render::modals {
 
         void drawThumbnail();
 
+        void drawSpriteSelector();
+
         void drawAnimationControls();
-
-        void copyFramesToList(const std::vector<std::filesystem::path>& frames);
-
-        void framesToTextures();
-
-        void clearTextures();
-
-        void copyFramesToVector(std::vector<std::filesystem::path>& frames);
     };
 }
 
