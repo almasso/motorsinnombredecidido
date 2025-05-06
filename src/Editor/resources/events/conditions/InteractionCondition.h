@@ -17,8 +17,12 @@ namespace editor::resources::events {
         bool read(sol::table const& params) override;
         bool render() override;
     protected:
-        bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) override;
+        bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) override;
         bool writeParams(sol::table& params) override;
+    private:
+        void writeTransform(sol::state& lua, const int* dims, sol::table& transformParams);
+        void writeCollider(sol::state& lua, const int* dims, sol::table colliderParams);
+        void writeDependencies(EventBuildDependencies& dependencies, std::string handler);
     };
 }
 

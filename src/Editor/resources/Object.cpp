@@ -95,7 +95,7 @@ bool editor::resources::Object::writeToEngine(std::ostream& object, events::Even
     std::ostringstream events;
     events << "events = {\n";
     for (auto& event : _events) {
-        event->writeToEngine(events, dependencies);
+        event->writeToEngine(events, dependencies, this);
     }
     events << "}\n";
 
@@ -220,7 +220,7 @@ bool editor::resources::Object::writeChildrenToEngine(std::ostream& children, ev
     for (auto& child : dependencies.childrenDependencies) {
         children << "{\n"; {
             if (!child.handler.empty())
-                children << "handler = \"" << child.handler << "\",";
+                children << "handler = \"" << child.handler << "\"\n,";
 
             if (child.components.empty()) {
                 children << "},\n";

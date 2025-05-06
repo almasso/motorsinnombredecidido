@@ -67,7 +67,7 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
     return true;
 }
 
-bool editor::resources::events::MusicBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
+bool editor::resources::events::MusicBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
     return true;
 }
 

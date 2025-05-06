@@ -12,7 +12,9 @@
 
 #define typeKey "type"
 #define paramsKey "params"
-
+namespace editor::resources {
+    class Object;
+}
 namespace editor::resources::events {
     class Event;
     struct EventBuildDependencies;
@@ -23,14 +25,14 @@ namespace editor::resources::events {
         virtual ~EventCondition();
         virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& condition) = 0;
-        virtual bool writeToEngine(std::ostream& condition, EventBuildDependencies& dependencies) = 0;
+        virtual bool writeToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) = 0;
         virtual const char* getID() const = 0;
         virtual bool render() = 0;
     protected:
         Event* _event;
 
         virtual bool writeParams(sol::table& params) = 0;
-        virtual bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) = 0;
+        virtual bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) = 0;
     };
 
     template<string_literal name>
@@ -50,12 +52,12 @@ namespace editor::resources::events {
             condition[paramsKey] = params;
             return true;
         }
-        bool writeToEngine(std::ostream& condition, EventBuildDependencies& dependencies) final {
+        bool writeToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) final {
             condition << typeKey << " = \"" << id << "\",\n";
             condition << paramsKey << " = {\n";
-            if (!writeParamsToEngine(condition, dependencies))
+            if (!writeParamsToEngine(condition, dependencies, container))
                 return false;
-            condition << "}\n";
+            condition << "\n}\n";
             return true;
         }
         const char* getID() const final {

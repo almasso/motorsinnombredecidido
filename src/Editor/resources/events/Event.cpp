@@ -106,17 +106,17 @@ bool editor::resources::events::Event::write(sol::table& eventTable) {
     return true;
 }
 
-bool editor::resources::events::Event::writeToEngine(std::ostream& eventOut, EventBuildDependencies& dependencies) {
+bool editor::resources::events::Event::writeToEngine(std::ostream& eventOut, EventBuildDependencies& dependencies, Object const* container) {
     eventOut << _name << " = {\n"; {
         eventOut << "loop = " << (_loop ? "true" : "false") << ",\n";
 
         eventOut << "condition = {\n"; {
-            _condition->writeToEngine(eventOut, dependencies);
+            _condition->writeToEngine(eventOut, dependencies, container);
         } eventOut << "},\n";
 
         eventOut << "behaviours = {\n"; {
             for (auto& behaviour : _behaviours) {
-                behaviour->writeToEngine(eventOut, dependencies);
+                behaviour->writeToEngine(eventOut, dependencies, container);
             }
         } eventOut << "}\n";
 

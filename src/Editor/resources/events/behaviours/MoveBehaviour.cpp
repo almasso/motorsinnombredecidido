@@ -34,7 +34,7 @@ bool editor::resources::events::MoveBehaviour::read(sol::table const& params) {
     return true;
 }
 
-bool editor::resources::events::MoveBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
+bool editor::resources::events::MoveBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
     behaviour << _xTarget << ", " << _yTarget;
     dependencies.componentDependencies.insert({"MovementComponent", {}});
     return true;

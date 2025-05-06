@@ -41,7 +41,7 @@ bool editor::resources::events::ModifyLocalVariableBehaviour::read(sol::table co
     return true;
 }
 
-bool editor::resources::events::ModifyLocalVariableBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
+bool editor::resources::events::ModifyLocalVariableBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
     return true;
 }
 

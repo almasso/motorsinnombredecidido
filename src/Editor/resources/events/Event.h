@@ -15,6 +15,11 @@
 #include <sol/forward.hpp>
 
 namespace editor {
+    namespace resources
+    {
+        class Object;
+    }
+
     class Project;
 }
 
@@ -45,7 +50,7 @@ namespace editor::resources::events {
         void init(std::string const& name, std::string const& condition);
         bool read(std::string const& name, sol::table const& eventTable);
         bool write(sol::table& eventTable);
-        bool writeToEngine(std::ostream& out, EventBuildDependencies& dependencies);
+        bool writeToEngine(std::ostream& out, EventBuildDependencies& dependencies, Object const* container);
 
         std::string const& getName() const;
         EventBehaviour* addBehaviour(std::string const& id);

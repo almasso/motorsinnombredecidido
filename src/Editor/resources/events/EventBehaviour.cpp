@@ -14,10 +14,10 @@ editor::resources::events::EventBehaviour::EventBehaviour(Event* event) :
 
 editor::resources::events::EventBehaviour::~EventBehaviour() = default;
 
-bool editor::resources::events::EventBehaviour::writeToEngine(std::ostream& behaviours, EventBuildDependencies& dependencies) {
+bool editor::resources::events::EventBehaviour::writeToEngine(std::ostream& behaviours, EventBuildDependencies& dependencies, Object const* container) {
     dependencies.requireDependencies.insert(getID());
     behaviours << getID() << ":new(";
-    if (!writeParamsToEngine(behaviours, dependencies))
+    if (!writeParamsToEngine(behaviours, dependencies, container))
         return false;
     behaviours << "),\n";
     return true;

@@ -41,9 +41,9 @@ bool editor::resources::events::NotCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::NotCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+bool editor::resources::events::NotCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << conditionKey << " = {\n";
-    if (!_condition->writeToEngine(condition, dependencies))
+    if (!_condition->writeToEngine(condition, dependencies, container))
         return false;
     condition << "}\n";
     return true;
