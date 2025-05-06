@@ -5,6 +5,9 @@
 
 #include "Sprite.h"
 #include "Render/Sprite.h"
+
+#include <SDL3/SDL_render.h>
+
 #include "render/RenderManager.h"
 #include <sol/sol.hpp>
 #include "common/EditorError.h"
@@ -21,7 +24,6 @@ std::filesystem::path editor::resources::Sprite::_spritesDirectory;
 
 editor::resources::Sprite::Sprite(Project *project) :
     EditorResource("sprite"),
-    _name(),
     _height(1),
     _width(1),
     _x(0),
@@ -124,6 +126,16 @@ int editor::resources::Sprite::getWidth() const {
 
 int editor::resources::Sprite::getHeight() const {
     return _height;
+}
+
+ImVec2 editor::resources::Sprite::getSpriteCoordsMin() const {
+    return ImVec2(static_cast<float>(_x) / reinterpret_cast<SDL_Texture *>(_textureID)->w,
+        static_cast<float>(_y) / reinterpret_cast<SDL_Texture *>(_textureID)->h);
+}
+
+ImVec2 editor::resources::Sprite::getSpriteCoordsMax() const {
+    return ImVec2(static_cast<float>(_x + _width) / reinterpret_cast<SDL_Texture *>(_textureID)->w,
+        static_cast<float>(_y + _height) / reinterpret_cast<SDL_Texture *>(_textureID)->h);
 }
 
 const ImTextureID editor::resources::Sprite::getTextureID() const {

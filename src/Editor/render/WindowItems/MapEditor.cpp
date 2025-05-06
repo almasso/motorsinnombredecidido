@@ -292,6 +292,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     bg = _collisionsShown ? ImVec4(1, 0, 1, 1) : ImVec4(0, 0, 0, 0);
     if (ImGui::ImageButton("butCollisions", _uiTextures[7], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
         _collisionsShown = !_collisionsShown;
+        if (_collisionsShown) _objectMode = false;
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip(_buttonTooltips[7].c_str());
@@ -300,6 +301,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     bg = _objectMode ? ImVec4(1, 0, 1, 1) : ImVec4(0, 0, 0, 0);
     if (ImGui::ImageButton("butObjects", _uiTextures[8], ImVec2(32, 32), ImVec2(0,0), ImVec2(1,1), bg)) {
         _objectMode = !_objectMode;
+        if (_objectMode) _collisionsShown = false;
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip(_buttonTooltips[8].c_str());
@@ -354,7 +356,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
         }
         ImGui::SameLine();
         ImGui::SetNextItemWidth(250);
-        if (ImGui::BeginCombo("##layerDropdown", _selectedLayer >= 0 ? (io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer") + " " + std::to_string(_selectedLayer)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layerselector").c_str())) {
+        if (ImGui::BeginCombo("##layerDropdown", _selectedLayer >= 0 ? (io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer") + " " + std::to_string(_selectedLayer)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer").c_str())) {
             if(_selectedMap != nullptr) {
                 for(int i = 0; i < _selectedMap->getLayers(); ++i) {
                     bool isSelected = (i == _selectedLayer);
@@ -445,11 +447,17 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
 
         ImGui::Separator();
 
-        ImGui::BeginChild("##tilesetGrid", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysVerticalScrollbar);
+        ImGui::BeginChild("##tilesetGrid", ImVec2(0, 0), true, ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_HorizontalScrollbar);
         if(_selectedTileset != nullptr) {
             int i = 0;
             for(auto tile : _selectedTileset->getTiles()) {
                 if(i % _selectedTileset->getXTiles() != 0) ImGui::SameLine();
+                bool isSelected = (!_collisionsShown && !_objectMode && i == _selectedTile);
+                if (isSelected) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(100, 200, 255, 255));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, IM_COL32(130, 230, 255, 255));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, IM_COL32(80, 170, 230, 255));
+                }
                 if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), tile->texture, ImVec2(32, 32), tile->rect.Min, tile->rect.Max)) {
                     if(!_collisionsShown) _selectedTile = i;
                     else {
@@ -457,12 +465,9 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                         _somethingModified = true;
                     }
                 }
-
-                if(!_collisionsShown && i == _selectedTile) {
-                    ImDrawList* drawList = ImGui::GetWindowDrawList();
-                    drawList->AddRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(255, 255, 0, 255), 0.0f, 0, 3.0f);
+                if (isSelected) {
+                    ImGui::PopStyleColor(3);
                 }
-
                 if(_collisionsShown) {
                     ImVec2 min = ImGui::GetItemRectMin();
                     ImVec2 max = ImGui::GetItemRectMax();
@@ -525,24 +530,27 @@ void editor::render::tabs::MapEditor::drawObjectInspector() {
                         _somethingModified = true;
                     }
                 }
+                if(ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.spriteSelectorNone").c_str(),
+                    selectedObject->getSprite() == "")) {
+                    selectedObject->setSprite("");;
+                    _somethingModified = true;
+                }
                 ImGui::EndCombo();
             }
             ImGui::Spacing();
             ImGui::Spacing();
             ImVec2 spriteSize(128, 128);
-            ImTextureID* texId = nullptr;
             float windowWidth = ImGui::GetContentRegionAvail().x;
             float offsetX = (windowWidth - spriteSize.x) * 0.5f;
             if (offsetX < 0) offsetX = 0;
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offsetX);
             std::string spriteName = selectedObject->getSprite();
             if (!spriteName.empty() && _project->getSprite(spriteName)) {
-
-            }
-            if (texId) {
+                resources::Sprite* sprite = _project->getSprite(spriteName);
+                ImTextureID texId = sprite->getTextureID();
                 ImVec2 p = ImGui::GetCursorScreenPos();
                 ImGui::GetWindowDrawList()->AddRectFilled(p, ImVec2(p.x + spriteSize.x, p.y + spriteSize.y), IM_COL32(150, 150, 150, 180));
-                ImGui::Image(*texId, spriteSize);
+                ImGui::Image(texId, spriteSize, sprite->getSpriteCoordsMin(), sprite->getSpriteCoordsMax());
             } else {
                 ImVec2 p = ImGui::GetCursorScreenPos();
                 ImGui::GetWindowDrawList()->AddRectFilled(p, ImVec2(p.x + spriteSize.x, p.y + spriteSize.y), IM_COL32(150, 150, 150, 180));

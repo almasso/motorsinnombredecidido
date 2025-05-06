@@ -59,7 +59,7 @@ namespace editor::render::tabs {
         int _selectedLayer = -1;
         editor::resources::Tileset* _selectedTileset = nullptr;
         int _selectedTile = -1;
-        int _selectedObject = 0;
+        int _selectedObject = -1;
         editor::resources::Map* _selectedMap = nullptr;
         bool _isGridShown = true;
         bool _collisionsShown = false;

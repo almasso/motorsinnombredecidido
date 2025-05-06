@@ -7,6 +7,7 @@
 #define SPRITE_H
 
 #include "EditorResource.h"
+#include "imgui.h"
 #include <filesystem>
 
 namespace editor {
@@ -40,6 +41,10 @@ namespace editor::resources {
         int getY() const;
         int getWidth() const;
         int getHeight() const;
+
+        ImVec2 getSpriteCoordsMin() const;
+
+        ImVec2 getSpriteCoordsMax() const;
 
         static void setSpritesDirectory(const std::filesystem::path& spritesDirectory);
 
