@@ -21,8 +21,8 @@ namespace editor::resources::events {
         bool writeParams(sol::table& params) override;
     private:
         void writeTransform(sol::state& lua, const int* dims, sol::table& transformParams);
-        void writeCollider(sol::state& lua, const int* dims, sol::table colliderParams);
-        void writeDependencies(EventBuildDependencies& dependencies, std::string handler);
+        void writeCollider(sol::state& lua, const int* dims, sol::table& colliderParams);
+        void writeDependencies(EventBuildDependencies& dependencies, std::string const& handler);
     };
 }
 

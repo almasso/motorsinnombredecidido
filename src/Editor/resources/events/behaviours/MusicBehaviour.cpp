@@ -47,7 +47,8 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
         if (!clip.has_value())
             return false;
         _param.clip = new char[MAX_CLIP_BUFFER];
-        clip.value().copy(_param.clip, MAX_CLIP_BUFFER);
+        clip.value().copy(_param.clip, MAX_CLIP_BUFFER - 1);
+        _param.clip[MAX_CLIP_BUFFER - 1] = '\0';
     }
     else if (action == "volume") {
         _action = VOLUME;

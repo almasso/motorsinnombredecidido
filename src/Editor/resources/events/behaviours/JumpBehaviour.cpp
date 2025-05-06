@@ -27,6 +27,7 @@ bool editor::resources::events::JumpBehaviour::read(sol::table const& params) {
 }
 
 bool editor::resources::events::JumpBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    behaviour << _target;
     return true;
 }
 

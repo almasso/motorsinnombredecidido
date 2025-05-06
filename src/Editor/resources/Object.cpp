@@ -220,7 +220,7 @@ bool editor::resources::Object::writeChildrenToEngine(std::ostream& children, ev
     for (auto& child : dependencies.childrenDependencies) {
         children << "{\n"; {
             if (!child.handler.empty())
-                children << "handler = \"" << child.handler << "\"\n,";
+                children << "handler = \"" << child.handler << "\",\n";
 
             if (child.components.empty()) {
                 children << "},\n";

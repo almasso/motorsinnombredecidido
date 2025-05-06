@@ -23,6 +23,7 @@ namespace editor::resources::events {
         char* _sfxSource;
 
         bool renderAudioSelector();
+        void writeDependencies(EventBuildDependencies& dependencies, std::string const& handler);
     };
 
 }

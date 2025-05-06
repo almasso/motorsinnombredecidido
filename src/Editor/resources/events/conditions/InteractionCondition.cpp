@@ -40,14 +40,14 @@ void editor::resources::events::InteractionCondition::writeTransform(sol::state&
     posTable.add(-dims[1]);
 }
 
-void editor::resources::events::InteractionCondition::writeCollider(sol::state& lua, const int* dims, sol::table colliderParams) {
+void editor::resources::events::InteractionCondition::writeCollider(sol::state& lua, const int* dims, sol::table& colliderParams) {
     sol::table sizeTable = lua.create_table();
     sizeTable.add(dims[0] * 3);
     sizeTable.add(dims[1] * 3);
     colliderParams["size"] = sizeTable;
 }
 
-void editor::resources::events::InteractionCondition::writeDependencies(EventBuildDependencies& dependencies, std::string handler) {
+void editor::resources::events::InteractionCondition::writeDependencies(EventBuildDependencies& dependencies, std::string const& handler) {
     EventBuildDependencies::ComponentsMap components;
     auto& lua = io::LuaManager::GetInstance().getState();
     auto dims = _event->getProject()->getDimensions();

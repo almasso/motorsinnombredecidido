@@ -39,6 +39,9 @@ bool editor::resources::events::JumpIfBehaviour::read(sol::table const& params) 
 }
 
 bool editor::resources::events::JumpIfBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    behaviour << _target << ", {";
+    _condition->writeToEngine(behaviour, dependencies, container);
+    behaviour << "}";
     return true;
 }
 

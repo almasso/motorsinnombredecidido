@@ -30,11 +30,15 @@ bool editor::resources::events::PlaySFXBehaviour::read(sol::table const& params)
     sol::optional<std::string> sfxHandler = params.get<sol::optional<std::string>>(sfxKey);
     if (!sfxHandler.has_value())
         return false;
-    sfxHandler.value().copy(_sfxSource, MAX_CLIP_BUFFER);
+    sfxHandler.value().copy(_sfxSource, MAX_CLIP_BUFFER - 1);
+    _sfxSource[MAX_CLIP_BUFFER - 1] = '\0';
     return true;
 }
 
 bool editor::resources::events::PlaySFXBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    std::string handler(std::to_string(reinterpret_cast<long long>(this)) + std::to_string(reinterpret_cast<long long>(container)));
+    behaviour << "\"" << handler << "\"" ;
+    writeDependencies(dependencies, handler);
     return true;
 }
 
@@ -78,4 +82,18 @@ bool editor::resources::events::PlaySFXBehaviour::renderAudioSelector() {
     edited = ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.PlaySFXBehaviour.source") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
                      _sfxSource, MAX_CLIP_BUFFER, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
     return edited;
+}
+
+void editor::resources::events::PlaySFXBehaviour::writeDependencies(EventBuildDependencies& dependencies, std::string const& handler) {
+    EventBuildDependencies::ComponentsMap components;
+    auto& lua = io::LuaManager::GetInstance().getState();
+
+    sol::table audioSourceParams = lua.create_table();
+    std::filesystem::path source(_sfxSource);
+    source = ("data" / source.lexically_relative(_event->getProject()->getPath()));
+    audioSourceParams["clip"] = source.string();
+    audioSourceParams["mixer"] = "data/mixers/sfx.mixer.lua";
+    components.insert({"AudioSource", audioSourceParams});
+
+    dependencies.childrenDependencies.push_back({handler, components});
 }
