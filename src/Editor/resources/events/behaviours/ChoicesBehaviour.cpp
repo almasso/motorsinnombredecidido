@@ -152,6 +152,8 @@ bool editor::resources::events::ChoicesBehaviour::renderRemoveOptionButton(std::
 }
 
 bool editor::resources::events::ChoicesBehaviour::renderAddOptionButton() {
+    if (_options.size() >= 3)
+        return false;
     if (ImGui::Button((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.add") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0))) {
         char* text = new char[MAX_OPTION_TEXT_SIZE];
         char* value = new char[MAX_OPTION_VALUE_SIZE];

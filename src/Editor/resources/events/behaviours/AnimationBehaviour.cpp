@@ -6,6 +6,7 @@
 #include "AnimationBehaviour.h"
 
 #include <imgui.h>
+#include <common/Project.h>
 #include <io/LocalizationManager.h>
 #include <resources/events/Event.h>
 
@@ -15,7 +16,7 @@
 editor::resources::events::AnimationBehaviour::AnimationBehaviour(Event* event) :
     EventBehaviourTemplate(event),
     _action(PLAY),
-    _animationToChange() {
+    _animationToChange("") {
 }
 
 editor::resources::events::AnimationBehaviour::~AnimationBehaviour() = default;
@@ -47,10 +48,24 @@ bool editor::resources::events::AnimationBehaviour::writeParamsToEngine(std::ost
     dependencies.componentDependencies.insert({"Animator", luaManager.getState().create_table()});
 
     sol::table actionParams = luaManager.getState().create_table();
-    actionParams[actionKey] = getActionName(_action);
-    if (_action == CHANGE)
-        actionParams[animationChangeKey] = _animationToChange;
-
+    switch (_action) {
+    case PLAY:
+        actionParams[actionKey] = "play";
+        break;
+    case STOP:
+        actionParams[actionKey] = "stop";
+        break;
+    case RESET:
+        actionParams[actionKey] = "reset";
+        break;
+    case CHANGE:
+        actionParams[actionKey] = "change";
+        break;
+    }
+    if (_action == CHANGE) {
+        std::filesystem::path animPath = std::filesystem::path("data") / "animations" / (_animationToChange + ".lua");
+        actionParams[animationChangeKey] = animPath.string();
+    }
     std::string serializedParams = luaManager.serializeToString(actionParams);
     if (serializedParams.empty())
         return false;
@@ -95,14 +110,7 @@ bool editor::resources::events::AnimationBehaviour::renderActionSelector() {
         bool isSelected = (i == _action);
         if (ImGui::Selectable((getActionName(static_cast<ANIMATION_ACTION>(i)) + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
             if (!isSelected) {
-                if (_action == CHANGE) {
-                    // delete[] _animationToChange;
-                }
                 _action = static_cast<ANIMATION_ACTION>(i);
-                if (_action == CHANGE) {
-                    // _param.clip = new char[MAX_CLIP_BUFFER];
-                    // _param.clip[0] = '\0';
-                }
                 edited = true;
             }
         }
@@ -112,7 +120,27 @@ bool editor::resources::events::AnimationBehaviour::renderActionSelector() {
 }
 
 bool editor::resources::events::AnimationBehaviour::renderAnimationSelector() {
-    return false;
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+    auto const& animations = _event->getProject()->getAnimations();
+    std::string preview;
+    if (animations.contains(_animationToChange))
+        preview = _animationToChange;
+    else preview = io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.change.select");
+
+    if (!ImGui::BeginCombo("##animationChangeSelector", preview.c_str()))
+        return false;
+
+    bool edited = false;
+    for (auto& [animName, anim] : animations) {
+        bool isSelected = _animationToChange == animName;
+        if(ImGui::Selectable(animName.c_str(), isSelected)) {
+            _animationToChange = animName;
+            edited = true;
+        }
+    }
+
+    ImGui::EndCombo();
+    return edited;
 }
 
 std::string editor::resources::events::AnimationBehaviour::getActionName(ANIMATION_ACTION action) const {

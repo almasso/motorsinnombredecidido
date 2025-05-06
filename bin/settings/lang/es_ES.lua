@@ -51,6 +51,7 @@ return {
     ["window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.stop"] = "Detener",
     ["window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.reset"] = "Reiniciar",
     ["window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.change"] = "Cambiar animación",
+    ["window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.change.select"] = "Selecciona una animación",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour"] = "Selección",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.add"] = "Añadir opción",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.options"] = "Opciones",

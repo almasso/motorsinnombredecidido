@@ -232,6 +232,8 @@ namespace editor {
         void loadProject(const sol::table& project);
 
         void saveProject();
+
+        void buildAnimations(std::string const& platform);
     };
 }
 

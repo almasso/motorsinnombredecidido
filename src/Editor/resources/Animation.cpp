@@ -82,6 +82,18 @@ void editor::resources::Animation::writeToLua() {
 }
 
 void editor::resources::Animation::writeToEngineLua(const std::string &platform) {
+    sol::table animationTable = io::LuaManager::GetInstance().getState().create_table();
+    sol::table frameTable = io::LuaManager::GetInstance().getState().create_table();
+
+    for (auto const& frame : _frames) {
+        frameTable.add(frame->getName());
+    }
+
+    animationTable["frames"] = frameTable;
+    animationTable["frameTime"] = _timeBetweenFrames;
+    animationTable["loop"] = _loop;
+
+    io::LuaManager::GetInstance().writeToFile(animationTable, (_project->getBuildPath(platform) / "data" / "animations"/ (_name + ".lua")).string());
 }
 
 const std::string & editor::resources::Animation::getName() const {
