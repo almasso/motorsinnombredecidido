@@ -47,7 +47,7 @@ bool editor::resources::events::ValueEqualsCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::ValueEqualsCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+bool editor::resources::events::ValueEqualsCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << variableKey << " = \"" << _variable << "\",\n";
     condition << equalsKey << " = \"" << _equals << "\"\n";
     return true;

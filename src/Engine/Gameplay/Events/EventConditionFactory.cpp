@@ -6,6 +6,7 @@
 #include "Conditions/AndCondition.h"
 #include "Conditions/AreCollidingCondition.h"
 #include "Conditions/BehaviourEndedCondition.h"
+#include "Conditions/InteractionCondition.h"
 #include "Conditions/NotCondition.h"
 #include "Conditions/OnStartCondition.h"
 #include "Conditions/OrCondition.h"
@@ -24,6 +25,7 @@ void EventConditionFactory::Init() {
     RegisterCondition<NotCondition>();
     RegisterCondition<AreCollidingCondition>();
     RegisterCondition<ValueEqualsCondition>();
+    RegisterCondition<InteractionCondition>();
 }
 
 bool EventConditionFactory::ReadCondition(sol::table const& condition, std::string& type, sol::table& params) {

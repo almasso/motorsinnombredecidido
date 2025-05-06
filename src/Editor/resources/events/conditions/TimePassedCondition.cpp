@@ -28,7 +28,7 @@ bool editor::resources::events::TimePassedCondition::render() {
     return ImGui::InputFloat(("##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_seconds);
 }
 
-bool editor::resources::events::TimePassedCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+bool editor::resources::events::TimePassedCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << secondsKey << " = " << _seconds << "\n";
     return true;
 }

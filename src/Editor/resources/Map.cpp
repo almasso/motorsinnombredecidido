@@ -222,8 +222,10 @@ void editor::resources::Map::writeToLua() {
 
 void editor::resources::Map::writeToEngineLua(const std::string &platform) {
     auto& lua = io::LuaManager::GetInstance().getState();
-    sol::table children = lua.create_table();
     sol::table components = lua.create_table();
+    writeComponents(components);
+    sol::table children = lua.create_table();
+    writeChildren(children);
 
     events::EventBuildDependencies dependencies;
     std::ostringstream entity;
@@ -233,10 +235,9 @@ void editor::resources::Map::writeToEngineLua(const std::string &platform) {
         entity << ",\n";
         entity << "children = {\n";
         for (auto&& [key, child] : children) {
-            entity << "{\n";
             entity << io::LuaManager::GetInstance().serializeToString(child.as<sol::table>());
-            entity << "},\n";
         }
+        entity << ",\n";
         for (auto& [pos, object] : _objects) {
             entity << "{\n";
             object->writeToEngine(entity, dependencies);

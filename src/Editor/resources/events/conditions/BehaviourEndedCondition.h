@@ -22,7 +22,7 @@ namespace editor::resources::events {
         bool read(sol::table const& params) override;
         bool render() override;
     protected:
-        bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) override;
+        bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) override;
         bool writeParams(sol::table& params) override;
     private:
         std::string _conditionObject;

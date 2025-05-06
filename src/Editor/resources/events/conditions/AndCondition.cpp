@@ -57,14 +57,14 @@ bool editor::resources::events::AndCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::AndCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+bool editor::resources::events::AndCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << conditionAKey << " = {\n";
-    if (!_conditionA->writeToEngine(condition, dependencies))
+    if (!_conditionA->writeToEngine(condition, dependencies, container))
         return false;
     condition << "}\n";
 
     condition << conditionBKey << " = {\n";
-    if (!_conditionB->writeToEngine(condition, dependencies))
+    if (!_conditionB->writeToEngine(condition, dependencies, container))
         return false;
     condition << "}\n";
 

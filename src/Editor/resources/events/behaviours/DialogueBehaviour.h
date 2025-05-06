@@ -15,7 +15,7 @@ namespace editor::resources::events {
         DialogueBehaviour(Event* event);
         ~DialogueBehaviour() override;
         bool read(sol::table const& params) override;
-        bool writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) override;
+        bool writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) override;
         bool render() override;
     protected:
         bool writeParams(sol::table& params) override;

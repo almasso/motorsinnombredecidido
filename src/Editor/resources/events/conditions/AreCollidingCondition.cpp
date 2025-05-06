@@ -42,7 +42,7 @@ bool editor::resources::events::AreCollidingCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::AreCollidingCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+bool editor::resources::events::AreCollidingCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << "colliderA" << " = \"" << _objectA << "\",\n";
     condition << "colliderB" << " = \"" << _objectB << "\",\n";
     return true;

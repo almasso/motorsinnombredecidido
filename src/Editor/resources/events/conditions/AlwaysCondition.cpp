@@ -19,7 +19,7 @@ bool editor::resources::events::AlwaysCondition::render() {
     return false;
 }
 
-bool editor::resources::events::AlwaysCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+bool editor::resources::events::AlwaysCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << 0;
     return true;
 }

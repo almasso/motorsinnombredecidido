@@ -95,7 +95,7 @@ bool editor::resources::Object::writeToEngine(std::ostream& object, events::Even
     std::ostringstream events;
     events << "events = {\n";
     for (auto& event : _events) {
-        event->writeToEngine(events, dependencies);
+        event->writeToEngine(events, dependencies, this);
     }
     events << "}\n";
 
@@ -220,7 +220,7 @@ bool editor::resources::Object::writeChildrenToEngine(std::ostream& children, ev
     for (auto& child : dependencies.childrenDependencies) {
         children << "{\n"; {
             if (!child.handler.empty())
-                children << "handler = \"" << child.handler << "\",";
+                children << "handler = \"" << child.handler << "\",\n";
 
             if (child.components.empty()) {
                 children << "},\n";
@@ -249,12 +249,16 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
     components << "},\n";
     for (auto& component : dependencies.componentDependencies) {
         components << component.first << " = ";
-        if (component.second.empty())
+        if (!component.second.valid() || !component.second.empty())
             components << "{ 0 }";
         else
             components << io::LuaManager::GetInstance().serializeToString(component.second);
         components << ",\n";
     }
+    components << "Transform = {\n";
+    components << "pos = {" << _x << ", " << _y << "}\n";
+    components << "}\n";
+
     return true;
 }
 
