@@ -6,7 +6,7 @@
 #include "EventBehaviourFactory.h"
 #include "EventBehaviour.h"
 #include "behaviours/AnimationBehaviour.h"
-#include "behaviours/ChoiceBehaviour.h"
+#include "behaviours/ChoicesBehaviour.h"
 #include "behaviours/DialogueBehaviour.h"
 #include "behaviours/JumpBehaviour.h"
 #include "behaviours/JumpIfBehaviour.h"
@@ -57,7 +57,7 @@ std::set<std::string> const& editor::resources::events::EventBehaviourFactory::G
 void editor::resources::events::EventBehaviourFactory::Init() {
     _initialized = true;
     RegisterBehaviour<AnimationBehaviour>();
-    RegisterBehaviour<ChoiceBehaviour>();
+    RegisterBehaviour<ChoicesBehaviour>();
     RegisterBehaviour<DialogueBehaviour>();
     RegisterBehaviour<JumpBehaviour>();
     RegisterBehaviour<JumpIfBehaviour>();

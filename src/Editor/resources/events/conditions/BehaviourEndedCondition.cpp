@@ -55,7 +55,7 @@ bool editor::resources::events::BehaviourEndedCondition::render() {
 bool editor::resources::events::BehaviourEndedCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << entityKey << " = \"" << _conditionObject << "\",\n";
     condition << eventKey << " = \"" << _conditionEvent << "\",\n";
-    condition << behaviourKey << " = " << _conditionBehaviour << "\n";
+    condition << behaviourKey << " = " << _conditionBehaviour;
     return true;
 }
 

@@ -31,7 +31,7 @@ bool editor::resources::events::PlaySFXBehaviour::read(sol::table const& params)
     if (!sfxHandler.has_value())
         return false;
     sfxHandler.value().copy(_sfxSource, MAX_CLIP_BUFFER - 1);
-    _sfxSource[MAX_CLIP_BUFFER - 1] = '\0';
+    _sfxSource[sfxHandler.value().size()] = '\0';
     return true;
 }
 
@@ -80,7 +80,8 @@ bool editor::resources::events::PlaySFXBehaviour::renderAudioSelector() {
     }
     ImGui::SameLine();
     edited = ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.PlaySFXBehaviour.source") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
-                     _sfxSource, MAX_CLIP_BUFFER, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+                     _sfxSource, MAX_CLIP_BUFFER - 1, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+    _sfxSource[MAX_CLIP_BUFFER - 1] = '\0';
     return edited;
 }
 

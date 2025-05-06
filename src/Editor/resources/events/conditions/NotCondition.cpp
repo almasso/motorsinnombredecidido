@@ -45,7 +45,7 @@ bool editor::resources::events::NotCondition::writeParamsToEngine(std::ostream& 
     condition << conditionKey << " = {\n";
     if (!_condition->writeToEngine(condition, dependencies, container))
         return false;
-    condition << "}\n";
+    condition << "}";
     return true;
 }
 

@@ -48,7 +48,7 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
             return false;
         _param.clip = new char[MAX_CLIP_BUFFER];
         clip.value().copy(_param.clip, MAX_CLIP_BUFFER - 1);
-        _param.clip[MAX_CLIP_BUFFER - 1] = '\0';
+        _param.clip[clip.value().size()] = '\0';
     }
     else if (action == "volume") {
         _action = VOLUME;
@@ -69,6 +69,37 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
 }
 
 bool editor::resources::events::MusicBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    sol::table actionParams = io::LuaManager::GetInstance().getState().create_table();
+    switch (_action) {
+    case PLAY:
+        actionParams[actionKey] = "play";
+        break;
+    case STOP:
+        actionParams[actionKey] = "stop";
+        break;
+    case RESUME:
+        actionParams[actionKey] = "resume";
+        break;
+    case PAUSE:
+        actionParams[actionKey] = "pause";
+        break;
+    case CHANGE: {
+            actionParams[actionKey] = "change";
+            std::filesystem::path clip(_param.clip);
+            clip = "data" / clip.lexically_relative(_event->getProject()->getPath());
+            actionParams[clipKey] = clip.string();
+        }
+        break;
+    case VOLUME:
+        actionParams[actionKey] = "volume";
+        actionParams[volumeKey] = _param.volume;
+        break;
+    case LOOP:
+        actionParams[actionKey] = "loop";
+        actionParams[loopKey] = _param.loop;
+        break;
+    }
+    behaviour << io::LuaManager::GetInstance().serializeToString(actionParams);
     return true;
 }
 
@@ -180,8 +211,8 @@ bool editor::resources::events::MusicBehaviour::renderChangeAction() {
     }
     ImGui::SameLine();
     edited = ImGui::InputText((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.MusicBehaviour.action.change.source") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
-                     _param.clip, MAX_CLIP_BUFFER, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
-
+                     _param.clip, MAX_CLIP_BUFFER - 1, ImGuiInputTextFlags_EnterReturnsTrue) || edited;
+    _param.clip[MAX_CLIP_BUFFER - 1] = '\0';
     return edited;
 }
 

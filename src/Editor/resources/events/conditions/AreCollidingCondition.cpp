@@ -44,7 +44,7 @@ bool editor::resources::events::AreCollidingCondition::render() {
 
 bool editor::resources::events::AreCollidingCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
     condition << "colliderA" << " = \"" << _objectA << "\",\n";
-    condition << "colliderB" << " = \"" << _objectB << "\",\n";
+    condition << "colliderB" << " = \"" << _objectB << "\"";
     return true;
 }
 

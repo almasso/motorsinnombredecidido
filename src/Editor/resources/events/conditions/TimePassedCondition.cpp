@@ -29,7 +29,7 @@ bool editor::resources::events::TimePassedCondition::render() {
 }
 
 bool editor::resources::events::TimePassedCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
-    condition << secondsKey << " = " << _seconds << "\n";
+    condition << secondsKey << " = " << _seconds;
     return true;
 }
 

@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef CHOICEBEHAVIOUR_H
-#define CHOICEBEHAVIOUR_H
+#ifndef CHOICESBEHAVIOUR_H
+#define CHOICESBEHAVIOUR_H
 
 #include <list>
 
@@ -12,10 +12,10 @@
 
 namespace editor::resources::events {
 
-    class EventBehaviourClass(ChoiceBehaviour) {
+    class EventBehaviourClass(ChoicesBehaviour) {
     public:
-        ChoiceBehaviour(Event* event);
-        ~ChoiceBehaviour() override;
+        ChoicesBehaviour(Event* event);
+        ~ChoicesBehaviour() override;
         bool read(sol::table const& params) override;
         bool writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) override;
         bool render() override;
@@ -38,4 +38,4 @@ namespace editor::resources::events {
 
 }
 
-#endif //CHOICEBEHAVIOUR_H
+#endif //CHOICESBEHAVIOUR_H

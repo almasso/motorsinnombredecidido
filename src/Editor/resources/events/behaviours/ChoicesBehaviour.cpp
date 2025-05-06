@@ -3,7 +3,7 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#include "ChoiceBehaviour.h"
+#include "ChoicesBehaviour.h"
 
 #include <imgui.h>
 #include <io/LocalizationManager.h>
@@ -17,14 +17,14 @@
 #define MAX_OPTION_VALUE_SIZE 32
 #define MAX_OPTION_TEXT_SIZE 32
 
-editor::resources::events::ChoiceBehaviour::ChoiceBehaviour(Event* event) :
+editor::resources::events::ChoicesBehaviour::ChoicesBehaviour(Event* event) :
     EventBehaviourTemplate(event),
     _variable(new char[VARIABLE_NAME_MAX_SIZE]),
     _options() {
     _variable[0] = '\0';
 }
 
-editor::resources::events::ChoiceBehaviour::~ChoiceBehaviour() {
+editor::resources::events::ChoicesBehaviour::~ChoicesBehaviour() {
     delete[] _variable;
     for (auto& [text, value] : _options) {
         delete[] text;
@@ -32,7 +32,7 @@ editor::resources::events::ChoiceBehaviour::~ChoiceBehaviour() {
     }
 }
 
-bool editor::resources::events::ChoiceBehaviour::read(sol::table const& params) {
+bool editor::resources::events::ChoicesBehaviour::read(sol::table const& params) {
     sol::optional <std::string> variable = params.get<sol::optional<std::string>>(variableKey);
     if (!variable.has_value())
         return false;
@@ -60,18 +60,28 @@ bool editor::resources::events::ChoiceBehaviour::read(sol::table const& params) 
     return true;
 }
 
-bool editor::resources::events::ChoiceBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+bool editor::resources::events::ChoicesBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    behaviour << "\"" << _variable << "\", ";
+    auto& luaManager = io::LuaManager::GetInstance();
+    sol::table optionsValues = luaManager.getState().create_table();
+    sol::table optionsTexts = luaManager.getState().create_table();
+    for (auto& [optionText, optionValue] : _options) {
+        optionsValues.add(optionValue);
+        optionsTexts.add(optionText);
+    }
+    behaviour << luaManager.serializeToString(optionsValues) << ", ";
+    behaviour << luaManager.serializeToString(optionsTexts);
     return true;
 }
 
-bool editor::resources::events::ChoiceBehaviour::render() {
+bool editor::resources::events::ChoicesBehaviour::render() {
     bool edited = renderVariableToModify();
     edited = renderOptions() || edited;
     edited = renderAddOptionButton() || edited;
     return edited;
 }
 
-bool editor::resources::events::ChoiceBehaviour::writeParams(sol::table& params) {
+bool editor::resources::events::ChoicesBehaviour::writeParams(sol::table& params) {
     params[variableKey] = _variable;
     auto& l = io::LuaManager::GetInstance().getState();
     sol::table options = l.create_table();
@@ -86,13 +96,13 @@ bool editor::resources::events::ChoiceBehaviour::writeParams(sol::table& params)
 }
 
 
-bool editor::resources::events::ChoiceBehaviour::renderVariableToModify() {
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoiceBehaviour.variable").c_str());
+bool editor::resources::events::ChoicesBehaviour::renderVariableToModify() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.variable").c_str());
     return ImGui::InputText(("##choiceVariable" + std::to_string(reinterpret_cast<long long>(this))).c_str(), _variable, VARIABLE_NAME_MAX_SIZE);
 }
 
-bool editor::resources::events::ChoiceBehaviour::renderOptions() {
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoiceBehaviour.options").c_str());
+bool editor::resources::events::ChoicesBehaviour::renderOptions() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.options").c_str());
     if (_options.empty())
         return false;
     ImGui::BeginChild(("##choiceOptions" + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0), true | ImGuiChildFlags_AutoResizeY);
@@ -119,30 +129,30 @@ bool editor::resources::events::ChoiceBehaviour::renderOptions() {
     return edited;
 }
 
-bool editor::resources::events::ChoiceBehaviour::renderOptionValue(optionValue value, int i) {
+bool editor::resources::events::ChoicesBehaviour::renderOptionValue(optionValue value, int i) {
     bool edited = ImGui::InputText(("##choiceValue" + std::to_string(i) + std::to_string(reinterpret_cast<long long>(this))).c_str(), value, MAX_OPTION_VALUE_SIZE);
     ImGui::SameLine();
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoiceBehaviour.value").c_str());
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.value").c_str());
     return edited;
 }
 
-bool editor::resources::events::ChoiceBehaviour::renderOptionText(optionText text, int i) {
+bool editor::resources::events::ChoicesBehaviour::renderOptionText(optionText text, int i) {
     bool edited = ImGui::InputTextMultiline(("##choiceText" + std::to_string(i) + std::to_string(reinterpret_cast<long long>(this))).c_str(), text, MAX_OPTION_TEXT_SIZE);
     ImGui::SameLine();
-    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoiceBehaviour.text").c_str());
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.text").c_str());
     return edited;
 }
 
-bool editor::resources::events::ChoiceBehaviour::renderRemoveOptionButton(std::list<optionsIterator>& optionsToRemove, optionsIterator it, int i) {
-    if (ImGui::Button((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoiceBehaviour.remove") + "##" + std::to_string(i) + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0))) {
+bool editor::resources::events::ChoicesBehaviour::renderRemoveOptionButton(std::list<optionsIterator>& optionsToRemove, optionsIterator it, int i) {
+    if (ImGui::Button((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.remove") + "##" + std::to_string(i) + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0))) {
         optionsToRemove.push_back(it);
         return true;
     }
     return false;
 }
 
-bool editor::resources::events::ChoiceBehaviour::renderAddOptionButton() {
-    if (ImGui::Button((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoiceBehaviour.add") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0))) {
+bool editor::resources::events::ChoicesBehaviour::renderAddOptionButton() {
+    if (ImGui::Button((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.add") + "##" + std::to_string(reinterpret_cast<long long>(this))).c_str(), ImVec2(0, 0))) {
         char* text = new char[MAX_OPTION_TEXT_SIZE];
         char* value = new char[MAX_OPTION_VALUE_SIZE];
         text[0] = '\0';

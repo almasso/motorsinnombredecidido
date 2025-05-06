@@ -188,6 +188,18 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     children["camera"] = camera;
     player["children"] = children;
     scene["player"] = player;
+
+    sol::table music = lua.create_table();
+    music["handler"] = "Music";
+    sol::table musicComponents = lua.create_table();
+    sol::table audioSource = lua.create_table();
+    audioSource["audio"] = "";
+    audioSource["mixer"] = "data/mixers/music.mixer.lua";
+    audioSource["loop"] = true;
+    musicComponents["AudioSource"] = audioSource;
+    music["components"] = musicComponents;
+    scene["music"] = music;
+
     io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
 }
 

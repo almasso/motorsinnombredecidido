@@ -119,7 +119,9 @@ void AudioClip::changeKey(std::string const& key) {
     stop();
     SDL_AudioSpec dstSpec;
     SDL_GetAudioDeviceFormat(_device, &dstSpec, NULL);
-    SDL_SetAudioStreamFormat(_stream, ResourceHandler<AudioClipData>::Instance()->get(_key)->specifier, &dstSpec);
+    auto data = ResourceHandler<AudioClipData>::Instance()->get(_key);
+    if (!_stream) _stream = SDL_CreateAudioStream(data->specifier, &dstSpec);
+    else SDL_SetAudioStreamFormat(_stream, data->specifier, &dstSpec);
     SDL_SetAudioStreamGetCallback(_stream, AudioClip::Update, this);
     switch (state) {
         case PAUSED:
@@ -154,6 +156,10 @@ bool AudioClip::assignDevice(AudioDevice device) {
     if (_mixer && device != _mixer->getDevice())
         return false;
 
+    if (_key.empty()) {
+        _device = device;
+        return true;
+    }
     auto data = ResourceHandler<AudioClipData>::Instance()->get(_key);
     if (data == nullptr)
         return false;

@@ -17,8 +17,6 @@ AudioSource::~AudioSource() {
 
 bool AudioSource::init() {
     auto clipKey = _data->getData<std::string>("clip", "");
-    if (clipKey.empty())
-        return false;
     _clip = new AudioClip(clipKey);
     auto mixerKey = _data->getData<std::string>("mixer", "");
     if (mixerKey.empty())

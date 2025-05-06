@@ -66,7 +66,7 @@ bool editor::resources::events::AndCondition::writeParamsToEngine(std::ostream& 
     condition << conditionBKey << " = {\n";
     if (!_conditionB->writeToEngine(condition, dependencies, container))
         return false;
-    condition << "}\n";
+    condition << "}";
 
     return true;
 }

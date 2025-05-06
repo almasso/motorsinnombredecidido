@@ -32,6 +32,10 @@ bool editor::resources::events::WaitForBehaviour::read(sol::table const& params)
 }
 
 bool editor::resources::events::WaitForBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    behaviour << "{";
+    if (!_condition->writeToEngine(behaviour, dependencies, container))
+        return false;
+    behaviour << "}";
     return true;
 }
 

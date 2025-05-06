@@ -196,7 +196,7 @@ bool editor::resources::Object::readEvents(sol::table const& events) {
 
 bool editor::resources::Object::readLocalVars(sol::table const& localVars) {
     for (auto&& [key, value] : localVars) {
-        if (!key.is<std::string>() || !value.is<sol::lua_value>())
+        if (!key.is<std::string>() || !value.is<sol::object>())
             return false;
         _localVariables.insert({key.as<std::string>(), value.as<sol::object>()});
     }
@@ -257,7 +257,12 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
     }
     components << "Transform = {\n";
     components << "pos = {" << _x << ", " << _y << "}\n";
-    components << "}\n";
+    components << "},\n";
+    components << "LocalVariables = {\n";
+    for (auto& [key, value] : _localVariables) {
+        components << key << " = " << value.as<std::string>() << ",\n";
+    }
+    components << "},\n";
 
     return true;
 }

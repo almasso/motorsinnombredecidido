@@ -30,6 +30,7 @@ bool editor::resources::events::DialogueBehaviour::read(sol::table const& params
 }
 
 bool editor::resources::events::DialogueBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
+    behaviour << "\"" << _text << "\"";
     return true;
 }
 
