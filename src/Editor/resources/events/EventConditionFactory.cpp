@@ -16,6 +16,7 @@
 #include "conditions/OrCondition.h"
 #include "conditions/TimePassedCondition.h"
 #include "conditions/ValueEqualsCondition.h"
+#include "conditions/InteractionCondition.h"
 
 
 std::unordered_map <std::string, std::function<editor::resources::events::EventCondition*(editor::resources::events::Event*)>> editor::resources::events::EventConditionFactory::_conditions;
@@ -67,4 +68,5 @@ void editor::resources::events::EventConditionFactory::Init() {
     RegisterCondition<OrCondition>();
     RegisterCondition<TimePassedCondition>();
     RegisterCondition<ValueEqualsCondition>();
+    RegisterCondition<InteractionCondition>();
 }

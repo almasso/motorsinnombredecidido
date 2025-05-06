@@ -33,6 +33,7 @@ return {
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.object"] = "Selecciona un objeto",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.event"] = "Selecciona un evento",
     ["window.mainwindow.eventeditor.condition.BehaviourEnded.behaviour"] = "Selecciona un comportamiento",
+    ["window.mainwindow.eventeditor.condition.Interaction"] = "Interacción",
     ["window.mainwindow.eventeditor.condition.Not"] = "No",
     ["window.mainwindow.eventeditor.condition.OnStart"] = "Al inicio",
     ["window.mainwindow.eventeditor.condition.Or"] = "O",
