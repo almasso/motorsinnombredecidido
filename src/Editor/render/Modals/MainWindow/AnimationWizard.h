@@ -73,6 +73,10 @@ namespace editor::render::modals {
         void drawSpriteSelector();
 
         void drawAnimationControls();
+
+        std::vector<editor::resources::Sprite*> getSpritesVectorFromList();
+
+        void getSpritesListFromVector(const std::vector<editor::resources::Sprite*>& frames);
     };
 }
 

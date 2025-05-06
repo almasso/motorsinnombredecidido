@@ -168,7 +168,7 @@ return {
 	["tileset.default"] = "Nuevo tileset",
 	["map.default"] = "Nuevo mapa",
 	["sprite.default"] = "Nuevo sprite",
-	["animation.default"] = "Nueva animación",
+	["animation.default"] = "Nueva animacion",
 	["event.default"] = "Nuevo evento",
 	["language.language"] = "Idioma",
 	["en_US"] = "English",

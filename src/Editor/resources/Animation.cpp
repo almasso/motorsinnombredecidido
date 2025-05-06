@@ -58,7 +58,7 @@ bool editor::resources::Animation::readFromLua(const std::string &name) {
         return false;
 
     sol::optional<sol::table> frames = animationTable.get<sol::optional<sol::table>>(framesKey);
-    if(frames.has_value())
+    if(!frames.has_value())
         return false;
 
     init(name, frames.value(), timeBetweenFrames.value(), loop.value());

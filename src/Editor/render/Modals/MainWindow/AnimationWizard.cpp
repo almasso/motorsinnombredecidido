@@ -28,6 +28,26 @@ void editor::render::modals::AnimationWizard::onRender() {
     ImGui::BeginChild("##leftPart", ImVec2(800, 650), true);
     drawControls();
     drawThumbnail();
+
+    ImGui::BeginDisabled(_frames.empty() || _sameName);
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
+        _animationToModify->init(_nameBuffer, getSpritesVectorFromList(), _timeBetweenFrames, _loop);
+        ImGui::CloseCurrentPopup();
+        _animationToModify = nullptr;
+        _isOpen = false;
+        _isGivingName = false;
+        _frames.clear();
+    }
+    ImGui::EndDisabled();
+    ImGui::SameLine();
+    if (ImGui::Button(io::LocalizationManager::GetInstance().getString("window.global.cancel").c_str(), ImVec2(120, 0))) {
+        ImGui::CloseCurrentPopup();
+        _animationToModify = nullptr;
+        _isOpen = false;
+        _isGivingName = false;
+        _frames.clear();
+    }
+
     ImGui::EndChild();
     ImGui::SameLine();
     ImGui::BeginChild("##rightPart", ImVec2(420, 650), true);
@@ -44,6 +64,7 @@ void editor::render::modals::AnimationWizard::drawControls() {
         if(_animationToModify->isInitialized()) {
             _loop = _animationToModify->isLoop();
             _timeBetweenFrames = _animationToModify->getTimeBetweenFrames();
+            getSpritesListFromVector(_animationToModify->getFrames());
         }
     }
     _isGivingName = true;
@@ -74,7 +95,7 @@ void editor::render::modals::AnimationWizard::drawControls() {
 }
 
 void editor::render::modals::AnimationWizard::drawThumbnail() {
-    ImGui::BeginChild("##thumbnails", ImVec2(300,0), true);
+    ImGui::BeginChild("##thumbnails", ImVec2(300,400), true);
     ImVec2 thumbnailSize(64, 64);
     int count = 0;
     for(auto it = _frames.begin(); it != _frames.end(); ++it, ++count) {
@@ -136,7 +157,7 @@ void editor::render::modals::AnimationWizard::drawThumbnail() {
 
     if(_openSpriteSelector) {
         ImGui::SameLine();
-        ImGui::BeginChild("##selectsprite", ImVec2(450, 0), true);
+        ImGui::BeginChild("##selectsprite", ImVec2(450, 400), true);
         drawSpriteSelector();
         ImGui::EndChild();
     }
@@ -295,6 +316,21 @@ void editor::render::modals::AnimationWizard::drawAnimationControls() {
 void editor::render::modals::AnimationWizard::setAnimationToModify(editor::resources::Animation *animation, bool modify) {
     _animationToModify = animation;
     _modify = modify;
+}
+
+std::vector<editor::resources::Sprite*> editor::render::modals::AnimationWizard::getSpritesVectorFromList() {
+    std::vector<editor::resources::Sprite*> tmp;
+    for(auto it = _frames.begin(); it != _frames.end(); ++it) {
+        tmp.push_back((*it));
+    }
+    return tmp;
+}
+
+void editor::render::modals::AnimationWizard::getSpritesListFromVector(
+        const std::vector<editor::resources::Sprite *> &frames) {
+    for(int i = 0; i < frames.size(); ++i) {
+        _frames.push_back(frames[i]);
+    }
 }
 
 
