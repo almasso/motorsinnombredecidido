@@ -1,6 +1,7 @@
 #include "Animation.h"
 
 #include <Load/LuaReader.h>
+#include <Utils/Error.h>
 
 Animation::Animation(std::string const &path) :
     Resource(path),
@@ -11,8 +12,10 @@ Animation::Animation(std::string const &path) :
 
 bool Animation::load() {
     sol::table table = LuaReader::GetTable(_path);
-    if (!table.valid())
+    if (!table.valid()) {
+        Error::ShowError("Animation not found", "Could not find animation with name: \"" + _path + "\".");
         return false;
+    }
 
     sol::table framesTable = LuaReader::GetTable(table, "frames");
     if (!framesTable.valid())

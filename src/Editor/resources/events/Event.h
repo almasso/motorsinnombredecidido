@@ -10,6 +10,8 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <unordered_set>
+#include <sol/table.hpp>
 #include <sol/forward.hpp>
 
 namespace editor {
@@ -19,6 +21,16 @@ namespace editor {
 namespace editor::resources::events {
     class EventBehaviour;
     class EventCondition;
+    struct EventBuildDependencies {
+        using ComponentsMap = std::unordered_map<std::string, sol::table>;
+        struct EntityDependency {
+            std::string handler;
+            ComponentsMap components;
+        };
+        ComponentsMap componentDependencies;
+        std::vector<EntityDependency> childrenDependencies;
+        std::unordered_set<std::string> requireDependencies;
+    };
 
     class Event {
     public:
@@ -33,7 +45,7 @@ namespace editor::resources::events {
         void init(std::string const& name, std::string const& condition);
         bool read(std::string const& name, sol::table const& eventTable);
         bool write(sol::table& eventTable);
-        bool writeToEngine(sol::table& eventTable, std::vector<std::string>& componentDependencies);
+        bool writeToEngine(std::ostream& out, EventBuildDependencies& dependencies);
 
         std::string const& getName() const;
         EventBehaviour* addBehaviour(std::string const& id);
@@ -45,6 +57,7 @@ namespace editor::resources::events {
         void removeBehaviour(std::list<EventBehaviour*>::iterator& behaviour);
         void moveBehaviourUp(std::list<EventBehaviour*>::iterator& behaviour);
         void moveBehaviourDown(std::list<EventBehaviour*>::iterator& behaviour);
+        bool* getLoop();
 
         Project* getProject();
 
@@ -57,6 +70,7 @@ namespace editor::resources::events {
         std::list<EventBehaviour*> _behaviours;
         EventCondition* _condition;
         std::string _name;
+        bool _loop;
 
         bool _initialized;
 

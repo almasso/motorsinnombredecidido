@@ -7,6 +7,7 @@
 
 #include <imgui.h>
 #include <io/LocalizationManager.h>
+#include <resources/events/Event.h>
 
 #define actionKey "action"
 #define animationChangeKey "animation"
@@ -40,7 +41,20 @@ bool editor::resources::events::AnimationBehaviour::read(sol::table const& param
     return true;
 }
 
-bool editor::resources::events::AnimationBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::AnimationBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
+    auto& luaManager = io::LuaManager::GetInstance();
+
+    dependencies.componentDependencies.insert({"Animator", luaManager.getState().create_table()});
+
+    sol::table actionParams = luaManager.getState().create_table();
+    actionParams[actionKey] = getActionName(_action);
+    if (_action == CHANGE)
+        actionParams[animationChangeKey] = _animationToChange;
+
+    std::string serializedParams = luaManager.serializeToString(actionParams);
+    if (serializedParams.empty())
+        return false;
+    behaviour << serializedParams;
     return true;
 }
 

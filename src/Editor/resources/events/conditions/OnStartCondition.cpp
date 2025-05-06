@@ -20,7 +20,7 @@ bool editor::resources::events::OnStartCondition::render() {
     return false;
 }
 
-bool editor::resources::events::OnStartCondition::writeParamsToEngine(sol::table& params) {
+bool editor::resources::events::OnStartCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
     return true;
 }
 

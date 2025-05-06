@@ -19,8 +19,8 @@ bool editor::resources::events::AlwaysCondition::render() {
     return false;
 }
 
-bool editor::resources::events::AlwaysCondition::writeParamsToEngine(sol::table& params) {
-    params.add(0);
+bool editor::resources::events::AlwaysCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+    condition << 0;
     return true;
 }
 

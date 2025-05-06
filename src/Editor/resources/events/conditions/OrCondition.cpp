@@ -57,17 +57,16 @@ bool editor::resources::events::OrCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::OrCondition::writeParamsToEngine(sol::table& params) {
-    auto& l = io::LuaManager::GetInstance().getState();
-    sol::table conditionA = l.create_table();
-    if (!_conditionA->writeToEngine(conditionA))
+bool editor::resources::events::OrCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+    condition << conditionAKey << " = {\n";
+    if (!_conditionA->writeToEngine(condition, dependencies))
         return false;
-    params[conditionAKey] = conditionA;
+    condition << "}\n";
 
-    sol::table conditionB = l.create_table();
-    if (!_conditionB->writeToEngine(conditionB))
+    condition << conditionBKey << " = {\n";
+    if (!_conditionB->writeToEngine(condition, dependencies))
         return false;
-    params[conditionBKey] = conditionB;
+    condition << "}\n";
 
     return true;
 }

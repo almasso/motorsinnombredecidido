@@ -14,12 +14,14 @@
 
 #define behavioursKey "behaviours"
 #define conditionKey "condition"
+#define loopKey "loop"
 
 std::filesystem::path editor::resources::events::Event::_eventsDirectory;
 
 editor::resources::events::Event::Event(Project* project) :
     _project(project),
     _condition(nullptr),
+    _loop(false),
     _initialized(false) {
 }
 
@@ -83,6 +85,8 @@ bool editor::resources::events::Event::read(std::string const& name, sol::table 
     if (!readBehaviours(*behaviours))
         return false;
 
+    _loop = eventTable.get_or<bool, std::string, bool>(loopKey, false);
+
     return true;
 }
 
@@ -97,10 +101,26 @@ bool editor::resources::events::Event::write(sol::table& eventTable) {
         return false;
     eventTable[behavioursKey] = behavioursTable;
 
+    eventTable[loopKey] = _loop;
+
     return true;
 }
 
-bool editor::resources::events::Event::writeToEngine(sol::table& eventTable, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::Event::writeToEngine(std::ostream& eventOut, EventBuildDependencies& dependencies) {
+    eventOut << _name << " = {\n"; {
+        eventOut << "loop = " << (_loop ? "true" : "false") << ",\n";
+
+        eventOut << "condition = {\n"; {
+            _condition->writeToEngine(eventOut, dependencies);
+        } eventOut << "},\n";
+
+        eventOut << "behaviours = {\n"; {
+            for (auto& behaviour : _behaviours) {
+                behaviour->writeToEngine(eventOut, dependencies);
+            }
+        } eventOut << "}\n";
+
+    } eventOut << "},\n";
     return true;
 }
 
@@ -151,6 +171,10 @@ void editor::resources::events::Event::moveBehaviourUp(std::list<EventBehaviour*
 
 void editor::resources::events::Event::moveBehaviourDown(std::list<EventBehaviour*>::iterator& behaviour) {
     _behaviours.splice(++behaviour, _behaviours, behaviour++);
+}
+
+bool* editor::resources::events::Event::getLoop() {
+    return &_loop;
 }
 
 editor::Project* editor::resources::events::Event::getProject() {

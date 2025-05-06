@@ -15,7 +15,7 @@ namespace editor::resources::events {
         MoveBehaviour(Event* event);
         ~MoveBehaviour() override;
         bool read(sol::table const& params) override;
-        bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) override;
+        bool writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) override;
         bool render() override;
     protected:
         bool writeParams(sol::table& params) override;

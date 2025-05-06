@@ -33,7 +33,7 @@ bool editor::resources::events::MoveBehaviour::read(sol::table const& params) {
     return true;
 }
 
-bool editor::resources::events::MoveBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::MoveBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 

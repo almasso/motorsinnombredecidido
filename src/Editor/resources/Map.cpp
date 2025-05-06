@@ -5,6 +5,7 @@
 
 #include "Map.h"
 
+#include <fstream>
 #include <map>
 #include <map>
 #include <io/LuaManager.h>
@@ -14,6 +15,8 @@
 #include "common/Project.h"
 #include "Tileset.h"
 #include <Utils/Vector2.h>
+
+#include "events/Event.h"
 #define widthKey "width"
 #define heightKey "height"
 #define xKey "posX"
@@ -219,14 +222,39 @@ void editor::resources::Map::writeToLua() {
 
 void editor::resources::Map::writeToEngineLua(const std::string &platform) {
     auto& lua = io::LuaManager::GetInstance().getState();
-    sol::table map = lua.create_table();
     sol::table children = lua.create_table();
     sol::table components = lua.create_table();
-    writeComponents(components);
-    map["components"] = components;
-    writeChildren(children);
-    map["children"] = children;
-    io::LuaManager::GetInstance().writeToFile(map, (_project->getBuildPath(platform)/"data"/"prefabs"/(_name+".lua")).string());
+
+    events::EventBuildDependencies dependencies;
+    std::ostringstream entity;
+    entity << "return {\n"; {
+        entity << "components = ";
+        entity << io::LuaManager::GetInstance().serializeToString(components);
+        entity << ",\n";
+        entity << "children = {\n";
+        for (auto&& [key, child] : children) {
+            entity << "{\n";
+            entity << io::LuaManager::GetInstance().serializeToString(child.as<sol::table>());
+            entity << "},\n";
+        }
+        for (auto& [pos, object] : _objects) {
+            entity << "{\n";
+            object->writeToEngine(entity, dependencies);
+            entity << "}\n";
+        }
+        entity << "}\n";
+    } entity << "}\n";
+
+    std::ostringstream requireDependencies;
+    for (auto& require : dependencies.requireDependencies) {
+        requireDependencies << "local " << require << " = require(\"data.events." << require << "\");\n";
+    }
+
+    std::string file((_project->getBuildPath(platform)/"data"/"prefabs"/(_name+".lua")).string());
+    if(!std::filesystem::exists(file)) std::filesystem::create_directories(std::filesystem::path(file).parent_path());
+    std::ofstream mapFile(file);
+    mapFile << requireDependencies.str() << "\n" << entity.str();
+    mapFile.close();
 }
 
 void editor::resources::Map::writeComponents(sol::table &components) {

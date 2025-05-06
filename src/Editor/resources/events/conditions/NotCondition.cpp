@@ -41,11 +41,11 @@ bool editor::resources::events::NotCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::NotCondition::writeParamsToEngine(sol::table& params) {
-    sol::table condition = io::LuaManager::GetInstance().getState().create_table();
-    if (!_condition->writeToEngine(condition))
+bool editor::resources::events::NotCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+    condition << conditionKey << " = {\n";
+    if (!_condition->writeToEngine(condition, dependencies))
         return false;
-    params[conditionKey] = condition;
+    condition << "}\n";
     return true;
 }
 

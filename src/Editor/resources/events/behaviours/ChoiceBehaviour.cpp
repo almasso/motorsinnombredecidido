@@ -60,7 +60,7 @@ bool editor::resources::events::ChoiceBehaviour::read(sol::table const& params) 
     return true;
 }
 
-bool editor::resources::events::ChoiceBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::ChoiceBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 

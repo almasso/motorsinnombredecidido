@@ -47,9 +47,9 @@ bool editor::resources::events::ValueEqualsCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::ValueEqualsCondition::writeParamsToEngine(sol::table& params) {
-    params[variableKey] = _variable;
-    params[equalsKey] = _equals;
+bool editor::resources::events::ValueEqualsCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+    condition << variableKey << " = \"" << _variable << "\",\n";
+    condition << equalsKey << " = \"" << _equals << "\"\n";
     return true;
 }
 

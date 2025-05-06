@@ -38,7 +38,7 @@ bool editor::resources::events::JumpIfBehaviour::read(sol::table const& params) 
     return _condition != nullptr;
 }
 
-bool editor::resources::events::JumpIfBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::JumpIfBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 

@@ -18,6 +18,7 @@ return {
     ["window.welcomewindow.popup.createproject.field.tilesetdim"] = "Dimensiones del tileset (x, y)",
     ["window.mainwindow.eventeditor"] = "Eventos",
     ["window.mainwindow.eventeditor.event"] = "Evento",
+    ["window.mainwindow.eventeditor.loop"] = "En bucle",
     ["window.mainwindow.eventeditor.createevent"] = "Crear nuevo evento",
     ["window.mainwindow.eventeditor.eventselector"] = "Selecciona un evento",
     ["window.mainwindow.eventeditor.condition"] = "Condición",

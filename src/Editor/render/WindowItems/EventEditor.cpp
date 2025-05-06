@@ -195,6 +195,8 @@ void editor::render::tabs::EventEditor::renderBehaviourEditor() {
         return;
 
     ImGui::Separator();
+    ImGui::Checkbox(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.loop").c_str(), _selectedEvent->getLoop());
+    ImGui::Separator();
     auto& behaviours = _selectedEvent->getBehaviours();
     for (auto it = behaviours.begin(); it != behaviours.end(); ImGui::EndChild(), ImGui::Spacing(), ImGui::Separator(), ImGui::Spacing()) {
 

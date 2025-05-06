@@ -6,6 +6,7 @@
 #ifndef EVENTBEHAVIOUR_H
 #define EVENTBEHAVIOUR_H
 
+#include <unordered_set>
 #include <io/LuaManager.h>
 #include <sol/table.hpp>
 
@@ -14,22 +15,29 @@
 #define idKey "id"
 #define paramsKey "params"
 
+namespace editor::resources {
+    class Object;
+}
+
 namespace editor::resources::events {
     class Event;
+    struct EventBuildDependencies;
 
     class EventBehaviour {
     public:
         EventBehaviour(Event* event);
         virtual ~EventBehaviour();
         virtual bool read(sol::table const& params) = 0;
+        bool writeToEngine(std::ostream& behaviours, EventBuildDependencies& dependencies);
         virtual bool write(sol::table& behaviour) = 0;
-        virtual bool writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) = 0;
         virtual bool render() = 0;
         virtual const char* getID() = 0;
+
     protected:
         Event* _event;
 
         virtual bool writeParams(sol::table& params) = 0;
+        virtual bool writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) = 0;
     };
 
     template<string_literal name>

@@ -18,6 +18,7 @@ return {
     ["window.welcomewindow.popup.createproject.field.tilesetdim"] = "Tileset dimensions (x, y)",
     ["window.mainwindow.eventeditor"] = "Events",
     ["window.mainwindow.eventeditor.event"] = "Event",
+    ["window.mainwindow.eventeditor.loop"] = "Looped",
     ["window.mainwindow.eventeditor.createevent"] = "Create new event",
     ["window.mainwindow.eventeditor.eventselector"] = "Select event",
     ["window.mainwindow.eventeditor.condition"] = "Condition",

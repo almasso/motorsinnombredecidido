@@ -15,6 +15,7 @@
 
 namespace editor::resources::events {
     class Event;
+    struct EventBuildDependencies;
 
     class EventCondition {
     public:
@@ -22,14 +23,14 @@ namespace editor::resources::events {
         virtual ~EventCondition();
         virtual bool read(sol::table const& params) = 0;
         virtual bool write(sol::table& condition) = 0;
-        virtual bool writeToEngine(sol::table& condition) = 0;
+        virtual bool writeToEngine(std::ostream& condition, EventBuildDependencies& dependencies) = 0;
         virtual const char* getID() const = 0;
         virtual bool render() = 0;
     protected:
         Event* _event;
 
         virtual bool writeParams(sol::table& params) = 0;
-        virtual bool writeParamsToEngine(sol::table& params) = 0;
+        virtual bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) = 0;
     };
 
     template<string_literal name>
@@ -49,12 +50,12 @@ namespace editor::resources::events {
             condition[paramsKey] = params;
             return true;
         }
-        bool writeToEngine(sol::table& condition) final {
-            condition[typeKey] = id;
-            sol::table params = io::LuaManager::GetInstance().getState().create_table();
-            if (!writeParamsToEngine(params))
+        bool writeToEngine(std::ostream& condition, EventBuildDependencies& dependencies) final {
+            condition << typeKey << " = \"" << id << "\",\n";
+            condition << paramsKey << " = {\n";
+            if (!writeParamsToEngine(condition, dependencies))
                 return false;
-            condition[paramsKey] = params;
+            condition << "}\n";
             return true;
         }
         const char* getID() const final {

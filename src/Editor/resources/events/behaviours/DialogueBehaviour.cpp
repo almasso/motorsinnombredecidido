@@ -29,7 +29,7 @@ bool editor::resources::events::DialogueBehaviour::read(sol::table const& params
     return true;
 }
 
-bool editor::resources::events::DialogueBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::DialogueBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 

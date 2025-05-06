@@ -52,10 +52,10 @@ bool editor::resources::events::BehaviourEndedCondition::render() {
     return edited;
 }
 
-bool editor::resources::events::BehaviourEndedCondition::writeParamsToEngine(sol::table& params) {
-    params[entityKey] = _conditionObject;
-    params[eventKey] = _conditionEvent;
-    params[behaviourKey] = _conditionBehaviour;
+bool editor::resources::events::BehaviourEndedCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies) {
+    condition << entityKey << " = \"" << _conditionObject << "\",\n";
+    condition << eventKey << " = \"" << _conditionEvent << "\",\n";
+    condition << behaviourKey << " = " << _conditionBehaviour << "\n";
     return true;
 }
 

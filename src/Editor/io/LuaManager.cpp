@@ -52,6 +52,30 @@ editor::io::LuaManager &editor::io::LuaManager::GetInstance() {
     return *_instance;
 }
 
+std::string editor::io::LuaManager::serializeToString(const sol::table& table) {
+    sol::table serpent = getTableFromScript(std::filesystem::path(std::string(_currentDirectory) + "/settings/serializer/serpent.lua").lexically_normal().string());
+    if(!serpent.valid()) {
+        showError("Couldn't load file serializer")
+        return "";
+    }
+
+    auto block = serpent["block"];
+    if(!block.valid()) {
+        sol::error err = block;
+        showError(err.what())
+        return "";
+    }
+
+    auto result = block(table);
+    if(!result.valid()) {
+        sol::error err = result;
+        showError(err.what())
+        return "";
+    }
+
+    return result.get<std::string>();
+}
+
 editor::io::LuaManager::~LuaManager() {
     SDL_free(_currentDirectory);
     _currentDirectory = nullptr;
@@ -97,35 +121,28 @@ sol::table editor::io::LuaManager::_getTableFromScript(const std::string &filena
 }
 
 void editor::io::LuaManager::_writeToFile(const sol::table &table, const std::string &filename) {
-    sol::table serpent = getTableFromScript(std::filesystem::path(std::string(_currentDirectory) + "/settings/serializer/serpent.lua").lexically_normal().string());
+    writeToFile(table, filename, std::ios_base::out);
+}
 
+void editor::io::LuaManager::_appendedToFile(const sol::table& table, const std::string& filename) {
+    writeToFile(table, filename, std::ios_base::app);
+}
+
+void editor::io::LuaManager::writeToFile(const sol::table& table, const std::string& filename, std::ios_base::openmode mode) {
     if(!std::filesystem::exists(filename)) std::filesystem::create_directories(std::filesystem::path(filename).parent_path());
-    std::ofstream file(filename);
+    std::ofstream file(filename, mode);
 
-    if(!serpent.valid()) {
-        showError("Couldn't load file serializer")
-        return;
-    }
-
-    auto block = serpent["block"];
-    if(!block.valid()) {
-        sol::error err = block;
-        showError(err.what())
-        return;
-    }
-
-    auto result = block(table);
-    if(!result.valid()) {
-        sol::error err = result;
-        showError(err.what())
-        return;
-    }
-
-    std::string serializedData = result.get<std::string>();
     if(!file.is_open()) {
         showError("Couldn't open file: " + filename)
         return;
     }
+
+    std::string serializedData = serializeToString(table);
+    if(serializedData.empty()) {
+        showError("Couldn't serialize table")
+        return;
+    }
+
     file << "return " << serializedData;
     file.close();
 }

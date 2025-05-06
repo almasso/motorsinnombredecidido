@@ -13,6 +13,11 @@
 #include "Sprite.h"
 
 
+namespace editor::resources::events
+{
+    struct EventBuildDependencies;
+}
+
 namespace editor::resources {
     namespace events {
         class Event;
@@ -27,7 +32,7 @@ namespace editor::resources {
         ~Object();
         bool read(sol::table const& objectTable);
         bool write(sol::table& objectTable);
-        bool writeToEngine(sol::table& objectTable);
+        bool writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies);
 
         const std::string& getSprite() const;
         void setSprite(const std::string& sprite);
@@ -62,6 +67,8 @@ namespace editor::resources {
         bool readLocalVars(sol::table const& localVars);
         bool writeEvents(sol::table& events);
         void writeLocalVars(sol::table& localVars);
+        bool writeChildrenToEngine(std::ostream& children, events::EventBuildDependencies& dependencies);
+        bool writeComponentsToEngine(std::ostream& components, events::EventBuildDependencies& dependencies, std::string const& events);
     };
 }
 

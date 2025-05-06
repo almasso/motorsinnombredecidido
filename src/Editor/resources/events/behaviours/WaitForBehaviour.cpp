@@ -31,7 +31,7 @@ bool editor::resources::events::WaitForBehaviour::read(sol::table const& params)
     return _condition != nullptr;
 }
 
-bool editor::resources::events::WaitForBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::WaitForBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 

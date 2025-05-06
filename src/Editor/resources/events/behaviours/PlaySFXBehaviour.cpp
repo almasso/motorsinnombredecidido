@@ -34,7 +34,7 @@ bool editor::resources::events::PlaySFXBehaviour::read(sol::table const& params)
     return true;
 }
 
-bool editor::resources::events::PlaySFXBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::PlaySFXBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 

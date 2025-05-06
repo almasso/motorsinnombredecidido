@@ -91,7 +91,21 @@ bool editor::resources::Object::write(sol::table& objectTable) {
     return true;
 }
 
-bool editor::resources::Object::writeToEngine(sol::table& objectTable) {
+bool editor::resources::Object::writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies) {
+    std::ostringstream events;
+    events << "events = {\n";
+    for (auto& event : _events) {
+        event->writeToEngine(events, dependencies);
+    }
+    events << "}\n";
+
+    object << "children = {\n";
+    writeChildrenToEngine(object, dependencies);
+    object << "},\n";
+    object << "components = {\n";
+    writeComponentsToEngine(object, dependencies, events.str());
+    object << "}\n";
+
     return true;
 }
 
@@ -201,3 +215,46 @@ void editor::resources::Object::writeLocalVars(sol::table& localVars) {
         localVars[key] = variable;
     }
 }
+
+bool editor::resources::Object::writeChildrenToEngine(std::ostream& children, events::EventBuildDependencies& dependencies) {
+    for (auto& child : dependencies.childrenDependencies) {
+        children << "{\n"; {
+            if (!child.handler.empty())
+                children << "handler = \"" << child.handler << "\",";
+
+            if (child.components.empty()) {
+                children << "},\n";
+                continue;
+            }
+
+            children << "components = {\n";
+            for (auto& component : child.components) {
+                children << component.first << " = ";
+                if (component.second.empty())
+                    children << "{ 0 }";
+                else
+                    children << io::LuaManager::GetInstance().serializeToString(component.second);
+                children << ",\n";
+            }
+            children << "}\n";
+
+        } children << "},\n";
+    }
+    return true;
+}
+
+bool editor::resources::Object::writeComponentsToEngine(std::ostream& components, events::EventBuildDependencies& dependencies, std::string const& events) {
+    components << "EventHandler = {\n";
+    components << events;
+    components << "},\n";
+    for (auto& component : dependencies.componentDependencies) {
+        components << component.first << " = ";
+        if (component.second.empty())
+            components << "{ 0 }";
+        else
+            components << io::LuaManager::GetInstance().serializeToString(component.second);
+        components << ",\n";
+    }
+    return true;
+}
+

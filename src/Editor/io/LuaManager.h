@@ -36,6 +36,13 @@ namespace editor::io {
             _writeToFile(table, std::forward<std::string>(filename));
         }
 
+        template <std::convertible_to<std::string> T>
+        void appendedToFile(const sol::table& table, T&& filename) {
+            _appendedToFile(table, std::forward<std::string>(filename));
+        }
+
+        std::string serializeToString(const sol::table& table);
+
         LuaManager(const LuaManager &) = delete;
 
         LuaManager &operator=(const LuaManager &) = delete;
@@ -57,6 +64,8 @@ namespace editor::io {
         sol::table _getTableFromScript(const std::string& filename);
 
         void _writeToFile(const sol::table& table, const std::string& filename);
+        void _appendedToFile(const sol::table& table, const std::string& filename);
+        void writeToFile(const sol::table& table, const std::string& filename, std::ios_base::openmode mode);
     };
 }
 

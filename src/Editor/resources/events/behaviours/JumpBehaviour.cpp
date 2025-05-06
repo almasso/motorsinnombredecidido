@@ -26,7 +26,7 @@ bool editor::resources::events::JumpBehaviour::read(sol::table const& params) {
     return true;
 }
 
-bool editor::resources::events::JumpBehaviour::writeToEngine(sol::table& behaviour, std::vector<std::string>& componentDependencies) {
+bool editor::resources::events::JumpBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies) {
     return true;
 }
 
