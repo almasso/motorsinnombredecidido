@@ -200,6 +200,31 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     music["components"] = musicComponents;
     scene["music"] = music;
 
+    sol::table textBox = lua.create_table();
+    textBox["handler"] = "TextBox";
+    textBox["active"] = false;
+    sol::table textBoxComponents = lua.create_table();
+    sol::table textBoxTransform = lua.create_table();
+    textBoxTransform.add(0);
+    textBoxComponents["Transform"] = textBoxTransform;
+    sol::table textBoxText = lua.create_table();
+    textBoxText["font"] = "TODO";
+    textBoxText["fontSize"] = 64;
+    textBoxText["color"] = 0x000000FF;
+    textBoxText["size"] = sol::as_table<std::array<int,2>>({1580,280});
+    textBoxText["layer"] = 2;
+    textBoxComponents["Text"] = textBoxText;
+    sol::table textBoxRectangle = lua.create_table();
+    textBoxRectangle["layer"] = 1;
+    textBoxRectangle["size"] = sol::as_table<std::array<int,2>>({1600,290});
+    textBoxRectangle["color"] = 0xFFFFFFFF;
+    textBoxComponents["Rectangle"] = textBoxRectangle;
+    sol::table textBoxTextBox = lua.create_table();
+    textBoxTextBox.add(0);
+    textBoxComponents["TextBox"] = textBoxTextBox;
+    textBox["components"] = textBoxComponents;
+    scene["textBox"] = textBox;
+
     io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
 }
 
