@@ -35,7 +35,7 @@ void editor::resources::Sprite::init(std::string const &name, std::filesystem::p
     _x = x;
     _y = y;
     _init = true;
-    if(_textureID != 0) editor::render::RenderManager::GetInstance().destroyTexture(_textureID);
+    if(_textureID != 0 && textureID != _textureID) editor::render::RenderManager::GetInstance().destroyTexture(_textureID);
     _textureID = textureID;
 }
 

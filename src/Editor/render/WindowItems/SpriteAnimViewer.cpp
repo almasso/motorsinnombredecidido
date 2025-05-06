@@ -61,6 +61,7 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
         ImGui::Dummy(ImVec2(0, 50.0f));
         ImGui::Indent(50.0f);
         for(auto it = _project->getSprites().begin(); it != _project->getSprites().end();) {
+            bool erased = false;
             ImGui::PushID(count);
             auto* sprite = it->second;
 
@@ -78,8 +79,30 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
             ImGui::Text("%s", it->second->getName().c_str());
             ImGui::EndGroup();
             ImGui::PopID();
+            if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+                ImGui::OpenPopup((it->second->getName() + "spriteoptions").c_str());
+            }
+            if(ImGui::BeginPopupContextItem((it->second->getName() + "spriteoptions").c_str())) {
+                if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edit").c_str())) {
+                    _spriteWizard->setSpriteToModify(it->second, true);
+                    _spriteWizard->show();
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
+                    resources::Sprite* spriteTmp = it->second;
+                    it = _project->removeSprite(spriteTmp->getName());
+                    erased = true;
+                    delete spriteTmp;
+                    spriteTmp = nullptr;
+                    _somethingModified = true;
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::PopStyleColor();
+                ImGui::EndPopup();
+            }
             ++count;
-            ++it;
+            if(!erased) ++it;
             if(count % columns != 0) ImGui::SameLine();
         }
 

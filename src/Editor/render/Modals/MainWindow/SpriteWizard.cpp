@@ -49,10 +49,10 @@ void editor::render::modals::SpriteWizard::drawControls() {
         _maxHeight = INT_MAX / 2;
         if(_spriteToModify->getSource() != "") {
             _spriteTexture = _spriteToModify->getTextureID();
-            _maxX = ((SDL_Texture*)_loadedTexture)->w - 1;
-            _maxY = ((SDL_Texture*)_loadedTexture)->h - 1;
-            _maxWidth = ((SDL_Texture*)_loadedTexture)->w;
-            _maxHeight = ((SDL_Texture*)_loadedTexture)->h;
+            _maxX = ((SDL_Texture*)_spriteTexture)->w - 1;
+            _maxY = ((SDL_Texture*)_spriteTexture)->h - 1;
+            _maxWidth = ((SDL_Texture*)_spriteTexture)->w;
+            _maxHeight = ((SDL_Texture*)_spriteTexture)->h;
         }
     }
     _isGivingName = true;
@@ -133,7 +133,7 @@ void editor::render::modals::SpriteWizard::drawControls() {
 
         ImGui::BeginDisabled(std::string(_routeBuffer) == "" || _sameName);
         if (ImGui::Button(io::LocalizationManager::GetInstance().getString(_modify ? "action.edit" : "action.add").c_str(), ImVec2(120, 0))) {
-            _spriteToModify->init(_nameBuffer, _routeBuffer, _loadedTexture, _coords[0], _coords[1], _dimensions[0], _dimensions[1]);
+            _spriteToModify->init(_nameBuffer, _routeBuffer, _loadedTexture != 0 ? _loadedTexture : _spriteTexture, _coords[0], _coords[1], _dimensions[0], _dimensions[1]);
             ImGui::CloseCurrentPopup();
             _spriteToModify = nullptr;
             _isOpen = false;
