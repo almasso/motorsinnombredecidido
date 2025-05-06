@@ -6,6 +6,16 @@
 #include "Sprite.h"
 #include "Render/Sprite.h"
 #include "render/RenderManager.h"
+#include <sol/sol.hpp>
+#include "common/EditorError.h"
+#include "common/Project.h"
+#include "io/LuaManager.h"
+
+#define sourceKey "source"
+#define heightKey "height"
+#define widthKey "width"
+#define offsetXKey "offsetX"
+#define offsetYKey "offsetY"
 
 std::filesystem::path editor::resources::Sprite::_spritesDirectory;
 
@@ -39,10 +49,50 @@ void editor::resources::Sprite::init(std::string const &name, std::filesystem::p
     _textureID = textureID;
 }
 
+void editor::resources::Sprite::init(const std::string& name, const std::filesystem::path& path, int x, int y, int w, int h) {
+    init(name, path, render::RenderManager::GetInstance().loadTexture(path.string()), x, y, w, h);
+}
+
 bool editor::resources::Sprite::readFromLua(std::string const &name) {
+    sol::table spriteTable = io::LuaManager::GetInstance().getTable(getFilePath(name));
+    if(!spriteTable.valid())
+        return false;
+
+    sol::optional<std::string> source = spriteTable.get<sol::optional<std::string>>(sourceKey);
+    if(!source.has_value())
+        return false;
+
+    sol::optional<int> offsetX = spriteTable.get<sol::optional<int>>(offsetXKey);
+    if(!offsetX.has_value())
+        return false;
+
+    sol::optional<int> offsetY = spriteTable.get<sol::optional<int>>(offsetYKey);
+    if(!offsetY.has_value())
+        return false;
+
+    sol::optional<int> width = spriteTable.get<sol::optional<int>>(widthKey);
+    if(!width.has_value())
+        return false;
+
+    sol::optional<int> height = spriteTable.get<sol::optional<int>>(heightKey);
+    if(!height.has_value())
+        return false;
+
+    init(name, _project->getAssetsPath() / source.value(), offsetX.value(), offsetY.value(), width.value(), height.value());
+
+    return true;
 }
 
 void editor::resources::Sprite::writeToLua() {
+    sol::table spriteTable = io::LuaManager::GetInstance().getState().create_table();
+
+    spriteTable[sourceKey] = _source.lexically_relative(_project->getAssetsPath()).string();
+    spriteTable[offsetXKey] = _x;
+    spriteTable[offsetYKey] = _y;
+    spriteTable[widthKey] = _width;
+    spriteTable[heightKey] = _height;
+
+    io::LuaManager::GetInstance().writeToFile(spriteTable, getFilePath(_name));
 }
 
 void editor::resources::Sprite::writeToEngineLua(const std::string &platform) {
@@ -78,5 +128,13 @@ int editor::resources::Sprite::getHeight() const {
 
 const ImTextureID editor::resources::Sprite::getTextureID() const {
     return _textureID;
+}
+
+void editor::resources::Sprite::setSpritesDirectory(const std::filesystem::path &spritesDirectory) {
+    _spritesDirectory = spritesDirectory;
+}
+
+std::string editor::resources::Sprite::getFilePath(const std::string &spriteName) {
+    return (_spritesDirectory / (spriteName + ".lua")).string();
 }
 

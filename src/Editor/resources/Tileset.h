@@ -9,6 +9,7 @@
 #include "EditorResource.h"
 #include <vector>
 #include <filesystem>
+#include <sol/sol.hpp>
 
 namespace editor
 {
@@ -61,6 +62,8 @@ namespace editor::resources {
         void generateTileset();
 
         static std::string GetFilePath(std::string const& mapName);
+
+        void init(const std::string& name, const std::filesystem::path& source, const sol::table& collisions, int offsetX = 0, int offsetY = 0);
     };
 }
 

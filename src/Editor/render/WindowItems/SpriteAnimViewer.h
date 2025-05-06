@@ -47,6 +47,8 @@ namespace editor::render::tabs {
         bool _spriteOpened = false;
         bool _animationOpened = false;
 
+        std::unordered_map<std::string, float> _animTimers;
+
         void beforeRender() override;
 
         void onRender() override;

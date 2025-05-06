@@ -3,8 +3,8 @@
 // Copyright (c) 2025 Alejandro Massó Martínez, Miguel Curros García, Alejandro González Sánchez
 //
 
-#ifndef MOTORSINNOMBREDECIDIDO_ANIMATIONWIZARD_H
-#define MOTORSINNOMBREDECIDIDO_ANIMATIONWIZARD_H
+#ifndef RPGBAKER_ANIMATIONWIZARD_H
+#define RPGBAKER_ANIMATIONWIZARD_H
 
 #include "Render/ModalWindow.h"
 #include <list>

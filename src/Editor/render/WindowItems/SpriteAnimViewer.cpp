@@ -40,19 +40,24 @@ void editor::render::tabs::SpriteAnimViewer::onRender() {
     if(ImGui::BeginTabBar("animspritetabbar")) {
         drawSpriteGrid();
         drawAnimGrid();
+
+        if(_somethingModified && ImGui::IsKeyDown(ImGuiMod_Ctrl) && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
+            save();
+        }
         ImGui::EndTabBar();
     }
 }
 
 void editor::render::tabs::SpriteAnimViewer::save() {
-
+    _somethingModified = false;
+    _project->saveEverything();
 }
 
 void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
     if(ImGui::BeginTabItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.spriteeditor.sprites").c_str())) {
-        const float thumbnailSize = 250.0f;
+        const float maxThumbnailWidth = 250.0f;
         const float padding = 8.0f;
-        float cellSize = thumbnailSize + padding;
+        float cellSize = maxThumbnailWidth + padding;
         float panelWidth = ImGui::GetContentRegionAvail().x;
         int columns = (int)(panelWidth/cellSize);
         if(columns < 1) columns = 1;
@@ -68,33 +73,36 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
             float textureWidth = ((SDL_Texture*)sprite->getTextureID())->w;
             float textureHeight = ((SDL_Texture*)sprite->getTextureID())->h;
 
+            float aspectRatio = textureHeight / textureWidth;
+            float scaledWidth = maxThumbnailWidth;
+            float scaledHeight = maxThumbnailWidth * aspectRatio;
+
             ImVec2 uv0 = ImVec2(sprite->getX() / textureWidth, sprite->getY() / textureHeight);
             ImVec2 uv1 = ImVec2((sprite->getX() + sprite->getWidth()) / textureWidth, (sprite->getY() + sprite->getHeight()) / textureHeight);
 
             ImGui::BeginGroup();
-            ImGui::Image(it->second->getTextureID(), ImVec2(thumbnailSize, thumbnailSize), uv0, uv1);
-            float textWidth = ImGui::CalcTextSize(it->second->getName().c_str()).x;
-            float textOffsetX = (thumbnailSize - textWidth) * 0.5f;
+            ImGui::Image(sprite->getTextureID(), ImVec2(scaledWidth, scaledHeight), uv0, uv1);
+            float textWidth = ImGui::CalcTextSize(sprite->getName().c_str()).x;
+            float textOffsetX = (scaledWidth - textWidth) * 0.5f;
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + textOffsetX);
-            ImGui::Text("%s", it->second->getName().c_str());
+            ImGui::Text("%s", sprite->getName().c_str());
             ImGui::EndGroup();
             ImGui::PopID();
             if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
-                ImGui::OpenPopup((it->second->getName() + "spriteoptions").c_str());
+                ImGui::OpenPopup((sprite->getName() + "spriteoptions").c_str());
             }
-            if(ImGui::BeginPopupContextItem((it->second->getName() + "spriteoptions").c_str())) {
+            if(ImGui::BeginPopupContextItem((sprite->getName() + "spriteoptions").c_str())) {
                 if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edit").c_str())) {
-                    _spriteWizard->setSpriteToModify(it->second, true);
+                    _spriteWizard->setSpriteToModify(sprite, true);
                     _spriteWizard->show();
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                 if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
-                    resources::Sprite* spriteTmp = it->second;
-                    it = _project->removeSprite(spriteTmp->getName());
+                    it = _project->removeSprite(sprite->getName());
                     erased = true;
-                    delete spriteTmp;
-                    spriteTmp = nullptr;
+                    delete sprite;
+                    sprite = nullptr;
                     _somethingModified = true;
                     ImGui::CloseCurrentPopup();
                 }
@@ -108,7 +116,7 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
 
         if(count % columns != 0) ImGui::SameLine();
         ImGui::PushID("addSprite");
-        if(ImGui::Button("+", ImVec2(thumbnailSize, thumbnailSize))) {
+        if(ImGui::Button("+", ImVec2(maxThumbnailWidth, maxThumbnailWidth))) {
             _createdSprite = new editor::resources::Sprite(_project);
             _spriteWizard->setSpriteToModify(_createdSprite);
             _spriteWizard->show();
@@ -144,6 +152,102 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
 
 void editor::render::tabs::SpriteAnimViewer::drawAnimGrid() {
     if(ImGui::BeginTabItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.spriteeditor.animations").c_str())) {
+        const float thumbnailSize = 250.0f;
+        const float padding = 8.0f;
+        float cellSize = thumbnailSize + padding;
+        float panelWidth = ImGui::GetContentRegionAvail().x;
+        int columns = (int)(panelWidth/cellSize);
+        if(columns < 1) columns = 1;
+
+        float dt = ImGui::GetIO().DeltaTime;
+
+        int count = 0;
+        ImGui::Dummy(ImVec2(0, 50.0f));
+        ImGui::Indent(50.0f);
+        for(auto it = _project->getAnimations().begin(); it != _project->getAnimations().end();) {
+            bool erased = false;
+            ImGui::PushID(count);
+            auto* animation = it->second;
+            _animTimers[animation->getName()] += dt;
+
+            float totalDuration = animation->getTotalDuration();
+
+            if(_animTimers[animation->getName()] > totalDuration) _animTimers[animation->getName()] -= totalDuration;
+
+            editor::resources::Sprite* currentFrame = animation->getFrameAtTime(_animTimers[animation->getName()]);
+
+            float textureWidth = ((SDL_Texture*)currentFrame->getTextureID())->w;
+            float textureHeight = ((SDL_Texture*)currentFrame->getTextureID())->h;
+
+            ImVec2 uv0 = ImVec2(currentFrame->getX() / textureWidth, currentFrame->getY() / textureHeight);
+            ImVec2 uv1 = ImVec2((currentFrame->getX() + currentFrame->getWidth()) / textureWidth, (currentFrame->getY() + currentFrame->getHeight()) / textureHeight);
+
+            ImGui::BeginGroup();
+            ImGui::Image(currentFrame->getTextureID(), ImVec2(thumbnailSize, thumbnailSize), uv0, uv1);
+            float textWidth = ImGui::CalcTextSize(animation->getName().c_str()).x;
+            float textOffsetX = (thumbnailSize - textWidth) * 0.5f;
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + textOffsetX);
+            ImGui::Text("%s", animation->getName().c_str());
+            ImGui::EndGroup();
+            ImGui::PopID();
+            if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled) && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+                ImGui::OpenPopup((animation->getName() + "animationoptions").c_str());
+            }
+            if(ImGui::BeginPopupContextItem((animation->getName() + "animationoptions").c_str())) {
+                if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edit").c_str())) {
+                    _animationWizard->setAnimationToModify(animation, true);
+                    _animationWizard->show();
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
+                    it = _project->removeAnimation(animation->getName());
+                    erased = true;
+                    delete animation;
+                    animation = nullptr;
+                    _somethingModified = true;
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::PopStyleColor();
+                ImGui::EndPopup();
+            }
+            ++count;
+            if(!erased) ++it;
+            if(count % columns != 0) ImGui::SameLine();
+        }
+
+        if(count % columns != 0) ImGui::SameLine();
+        ImGui::PushID("addAnimation");
+        if(ImGui::Button("+", ImVec2(thumbnailSize, thumbnailSize))) {
+            _createdAnim = new editor::resources::Animation(_project);
+            _animationWizard->setAnimationToModify(_createdAnim);
+            _animationWizard->show();
+        }
+        ImGui::PopID();
+        ImGui::Unindent(50.0f);
+
         ImGui::EndTabItem();
     }
+
+    if(_animationOpened && !_animationWizard->isOpen()) {
+        if(_createdAnim != nullptr) {
+            if(_createdAnim->isInitialized()) {
+                _project->addAnimation(_createdAnim);
+                _createdAnim = nullptr;
+                _somethingModified = true;
+            }
+            else {
+                delete _createdAnim;
+                _createdAnim = nullptr;
+            }
+            _animationOpened = false;
+        }
+        else {
+            _animationOpened = false;
+            _project->refreshAnimations();
+            _somethingModified = true;
+        }
+    }
+
+    if(_animationWizard->hasBeenCalled()) _animationOpened = true;
 }

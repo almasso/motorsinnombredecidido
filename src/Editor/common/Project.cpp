@@ -27,6 +27,8 @@ void editor::Project::initResources() {
     if(!std::filesystem::exists(_projectPath / "projectfiles"/"maps/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"maps");
     if(!std::filesystem::exists(_projectPath / "projectfiles"/"tilesets/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"tilesets");
     if(!std::filesystem::exists(_projectPath / "projectfiles"/"events/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"events");
+    if(!std::filesystem::exists(_projectPath / "projectfiles"/"sprites/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"sprites");
+    if(!std::filesystem::exists(_projectPath / "projectfiles"/"animations/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"animations");
 
     std::filesystem::path tilesetsPath = (_projectPath / "projectfiles" / "tilesets");
     resources::Tileset::SetTilesetsDirectory(tilesetsPath);
@@ -59,6 +61,28 @@ void editor::Project::initResources() {
             _maps.insert({name, map});
         else
             delete map;
+    }
+
+    std::filesystem::path spritesPath = (_projectPath / "projectfiles" / "sprites");
+    resources::Sprite::setSpritesDirectory(spritesPath);
+    for(auto const& file : std::filesystem::directory_iterator(spritesPath)) {
+        auto sprite = new resources::Sprite(this);
+        auto name = file.path().stem().string();
+        if(sprite->readFromLua(name))
+            _sprites.insert({name, sprite});
+        else
+            delete sprite;
+    }
+
+    std::filesystem::path animationsPath = (_projectPath / "projectfiles" / "animations");
+    resources::Animation::setAnimationsDirectory(animationsPath);
+    for(auto const& file : std::filesystem::directory_iterator(animationsPath)) {
+        auto anim = new resources::Animation(this);
+        auto name = file.path().stem().string();
+        if(anim->readFromLua(name))
+            _animations.insert({name, anim});
+        else
+            delete anim;
     }
 }
 
@@ -266,6 +290,8 @@ void editor::Project::saveProject() {
         if(!std::filesystem::exists(_projectPath / "projectfiles"/"maps/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"maps");
         if(!std::filesystem::exists(_projectPath / "projectfiles"/"tilesets/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"tilesets");
         if(!std::filesystem::exists(_projectPath / "projectfiles"/"events/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"events");
+        if(!std::filesystem::exists(_projectPath / "projectfiles"/"sprites/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"sprites");
+        if(!std::filesystem::exists(_projectPath / "projectfiles"/"animations/")) std::filesystem::create_directories(_projectPath / "projectfiles"/"animations");
 
         io::LuaManager::GetInstance().writeToFile(pr, (_projectPath / ("ProjectSettings.lua")).string());
         for (auto& [key, tileset] : _tilesets)
@@ -274,6 +300,10 @@ void editor::Project::saveProject() {
             event->writeToLua();
         for (auto& [key, map] : _maps)
             map->writeToLua();
+        for(auto& [key, sprite] : _sprites)
+            sprite->writeToLua();
+        for(auto& [key, animation] : _animations)
+            animation->writeToLua();
     }
 }
 

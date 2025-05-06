@@ -10,6 +10,7 @@
 #include <string>
 #include <filesystem>
 #include <vector>
+#include <sol/sol.hpp>
 
 namespace editor {
     class Project;
@@ -34,9 +35,14 @@ namespace editor::resources {
         const std::string& getName() const;
         const std::vector<Sprite*>& getFrames() const;
         float getTimeBetweenFrames() const;
+        float getTotalDuration() const;
+        Sprite* getFrameAtTime(float time) const;
         bool isLoop() const;
 
         bool isInitialized() const;
+
+        static void setAnimationsDirectory(const std::filesystem::path& animationsDirectory);
+
     private:
         static std::filesystem::path _animationsDirectory;
         bool _init = false;
@@ -45,6 +51,10 @@ namespace editor::resources {
         float _timeBetweenFrames;
         bool _loop;
         Project* _project;
+
+        static std::string getFilePath(const std::string& animationName);
+
+        void init(const std::string& name, const sol::table& framesTable, float timeBetweenFrames, bool loop);
     };
 }
 

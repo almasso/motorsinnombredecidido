@@ -452,7 +452,10 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                 if(i % _selectedTileset->getXTiles() != 0) ImGui::SameLine();
                 if(ImGui::ImageButton(("tile" + std::to_string(i)).c_str(), tile->texture, ImVec2(32, 32), tile->rect.Min, tile->rect.Max)) {
                     if(!_collisionsShown) _selectedTile = i;
-                    else _selectedTileset->getCollisions()[i] = !_selectedTileset->getCollisions()[i];
+                    else {
+                        _selectedTileset->getCollisions()[i] = !_selectedTileset->getCollisions()[i];
+                        _somethingModified = true;
+                    }
                 }
 
                 if(!_collisionsShown && i == _selectedTile) {

@@ -10,13 +10,13 @@
 #include <io/LuaManager.h>
 #include <SDL3/SDL.h>
 #include "render/RenderManager.h"
-#include <sol/table.hpp>
 
 #include "Tile.h"
 
 #define sourceKey "source"
 #define offsetXKey "offsetX"
 #define offsetYKey "offsetY"
+#define collisionsKey "collisions"
 
 std::filesystem::path editor::resources::Tileset::_tilesetsDirectory;
 
@@ -44,7 +44,17 @@ void editor::resources::Tileset::init(std::string const& name, std::filesystem::
     _offsetX = offsetX;
     _offsetY = offsetY;
     generateTileset();
+    _collisions = std::vector<bool>(_xTiles * _yTiles, false);
     _init = true;
+}
+
+void editor::resources::Tileset::init(const std::string &name, const std::filesystem::path &source,
+                                      const sol::table &collisions, int offsetX, int offsetY) {
+    init(name, source, offsetX, offsetY);
+
+    for(int i = 1; i <= collisions.size(); ++i) {
+        _collisions[i - 1] = collisions[i].get<bool>();
+    }
 }
 
 bool editor::resources::Tileset::readFromLua(std::string const& name) {
@@ -64,17 +74,28 @@ bool editor::resources::Tileset::readFromLua(std::string const& name) {
     if (!offsetY.has_value())
         return false;
 
-    init(name, _project->getAssetsPath() / source.value(), offsetX.value(), offsetY.value());
+    sol::optional<sol::table> collisions = tilesetTable.get<sol::optional<sol::table>>(collisionsKey);
+    if(!collisions.has_value())
+        return false;
+
+    init(name, _project->getAssetsPath() / source.value(), collisions.value(), offsetX.value(), offsetY.value());
 
     return true;
 }
 
 void editor::resources::Tileset::writeToLua() {
     sol::table tilesetTable = io::LuaManager::GetInstance().getState().create_table();
+    sol::table collisionsTable = io::LuaManager::GetInstance().getState().create_table();
+
+    for(int i = 0; i < _collisions.size(); ++i) {
+        collisionsTable[i + 1] = static_cast<bool>(_collisions[i]);
+    }
 
     tilesetTable[sourceKey] = _source.lexically_relative(_project->getAssetsPath()).string();
     tilesetTable[offsetXKey] = _offsetX;
     tilesetTable[offsetYKey] = _offsetY;
+    tilesetTable[collisionsKey] = collisionsTable;
+
 
     io::LuaManager::GetInstance().writeToFile(tilesetTable, GetFilePath(_name));
 }

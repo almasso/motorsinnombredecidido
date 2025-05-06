@@ -41,6 +41,8 @@ namespace editor::resources {
         int getWidth() const;
         int getHeight() const;
 
+        static void setSpritesDirectory(const std::filesystem::path& spritesDirectory);
+
     private:
         static std::filesystem::path _spritesDirectory;
         bool _init = false;
@@ -52,6 +54,10 @@ namespace editor::resources {
         std::filesystem::path _source;
         ImTextureID _textureID;
         Project* _project;
+
+        static std::string getFilePath(const std::string& spriteName);
+
+        void init(const std::string& name, const std::filesystem::path& path, int x, int y, int w, int h);
     };
 
 }
