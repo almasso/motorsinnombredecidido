@@ -249,7 +249,7 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
     components << "},\n";
     for (auto& component : dependencies.componentDependencies) {
         components << component.first << " = ";
-        if (!component.second.valid() || !component.second.empty())
+        if (!component.second.valid() || component.second.empty())
             components << "{ 0 }";
         else
             components << io::LuaManager::GetInstance().serializeToString(component.second);

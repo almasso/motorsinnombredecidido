@@ -9,12 +9,14 @@ Animator::Animator(ComponentData const*data) : ComponentTemplate(data) {
 }
 
 bool Animator::init() {
-  _animation = _data->getData<std::string>("animation");
-  const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
-  if (!anim)
-    return false;
-  if (!setSprite(anim->frames[_currentFrame]))
-    return false;
+  _animation = _data->getData<std::string>("animation", "");
+  if (!_animation.empty()) {
+    const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
+    if (!anim)
+      return false;
+    if (!setSprite(anim->frames[_currentFrame]))
+      return false;
+  }
   _playing = _data->getData<bool>("playing", false);
 
   return RenderComponent::init();

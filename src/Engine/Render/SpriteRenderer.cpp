@@ -14,6 +14,8 @@ bool SpriteRenderer::init() {
 }
 
 bool SpriteRenderer::render(RenderManager *manager) {
+    if (_sprite.empty())
+        return true;
     const Sprite* sprite  = ResourceHandler<Sprite>::Instance()->get(_sprite);
     if (!sprite) {return false;}
     Vector2 size = _transform->getGlobalScale() * _size;

@@ -151,7 +151,7 @@ void editor::resources::Tileset::generateTileset() {
     for (int j = 0; j < _yTiles; j++) {
         for (int i = 0; i < _xTiles; i++) {
             Tile* tile = new Tile();
-            tile->pos = i + j * _yTiles;
+            tile->pos = i + j * _xTiles;
             tile->texture = texture;
             tile->tileset = _name;
             tile->rect = ImRect(

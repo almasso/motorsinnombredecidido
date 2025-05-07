@@ -45,7 +45,7 @@ bool editor::resources::events::AnimationBehaviour::read(sol::table const& param
 bool editor::resources::events::AnimationBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
     auto& luaManager = io::LuaManager::GetInstance();
 
-    dependencies.componentDependencies.insert({"Animator", luaManager.getState().create_table()});
+    dependencies.componentDependencies.insert({"Animator", {}});
 
     sol::table actionParams = luaManager.getState().create_table();
     switch (_action) {

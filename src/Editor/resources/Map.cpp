@@ -235,9 +235,9 @@ void editor::resources::Map::writeToEngineLua(const std::string &platform) {
         entity << ",\n";
         entity << "children = {\n";
         for (auto&& [key, child] : children) {
-            entity << io::LuaManager::GetInstance().serializeToString(child.as<sol::table>());
+            entity << io::LuaManager::GetInstance().serializeToString(child.as<sol::table>()) << ",";
         }
-        entity << ",\n";
+        entity << "\n";
         for (auto& [pos, object] : _objects) {
             entity << "{\n";
             object->writeToEngine(entity, dependencies);

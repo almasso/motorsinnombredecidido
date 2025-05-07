@@ -202,7 +202,8 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     music["components"] = musicComponents;
     scene["music"] = music;
 
-    sol::table textBox = lua.create_table();
+    // TODO
+    /*sol::table textBox = lua.create_table();
     textBox["handler"] = "TextBox";
     textBox["active"] = false;
     sol::table textBoxComponents = lua.create_table();
@@ -225,7 +226,7 @@ void editor::Project::buildOverworldScene(const std::string &platform) {
     textBoxTextBox.add(0);
     textBoxComponents["TextBox"] = textBoxTextBox;
     textBox["components"] = textBoxComponents;
-    scene["textBox"] = textBox;
+    scene["textBox"] = textBox;*/
 
     io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
 }
