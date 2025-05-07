@@ -68,7 +68,7 @@ namespace editor::resources {
         bool writeEvents(sol::table& events);
         void writeLocalVars(sol::table& localVars);
         bool writeChildrenToEngine(std::ostream& children, events::EventBuildDependencies& dependencies);
-        bool writeComponentsToEngine(std::ostream& components, events::EventBuildDependencies& dependencies, std::string const& events);
+        bool writeComponentsToEngine(std::ostream &components, events::EventBuildDependencies &dependencies, std::string const &events);
     };
 }
 

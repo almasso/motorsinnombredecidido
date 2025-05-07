@@ -59,7 +59,7 @@ void editor::render::tabs::PlayerSettings::save() {
     playerSettings["layer"] = _layer;
     playerSettings["moveSpeed"] = _moveSpeed;
     playerSettings["sprite"] = _spriteName;
-    playerSettings["moveAnimations"] = sol::as_table<std::array<std::string,4>>(std::move(_moveAnimation));
+    playerSettings["moveAnimations"] = sol::as_table<>(_moveAnimation);
     for (auto& [key, variable] : _localVariables) {
         playerVariables[key] = variable;
     }
@@ -72,14 +72,20 @@ sol::table editor::render::tabs::PlayerSettings::buildPlayer() {
     auto& lua = io::LuaManager::GetInstance().getState();
     auto dimensions = _project->getDimensions();
     sol::table components = lua.create_table();
-    if (_spriteName != "") {
+    if (!_spriteName.empty() || !_moveAnimation[0].empty() || !_moveAnimation[1].empty()
+        || !_moveAnimation[2].empty() || !_moveAnimation[3].empty()) {
         sol::table sprite = lua.create_table();
         sprite["sprite"] = (std::filesystem::path("data") / "sprites"/(_spriteName+".lua")).string();
         sprite["layer"] = _layer;
-        components["SpriteRenderer"] = sprite;
+        components["Animator"] = sprite;
     }
     sol::table movement = lua.create_table();
     movement["speed"] = dimensions[0] * _moveSpeed;
+    std::array<std::string, 4> animations;
+    for (int i = 0; i < 4; ++i) {
+        animations[i] = (std::filesystem::path("data") / "animations"/(_moveAnimation[i]+".lua")).string();
+    }
+    movement["animations"] = sol::as_table<>(animations);
     components["MovementComponent"] = movement;
     sol::table localVariables = lua.create_table();
     for (const auto& [key, value] : _localVariables) {

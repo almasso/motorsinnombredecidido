@@ -4,19 +4,25 @@
 #include <Core/Entity.h>
 #include <Render/Transform.h>
 #include <Utils/Time.h>
+#include <Render/Animator.h>
 #include <sol/state.hpp>
+#include <Utils/Error.h>
+
 
 MovementComponent::MovementComponent(ComponentData const* data) :
     ComponentTemplate(data),
     _speed(1.0f),
-    _pathIndex(0) {
+    _pathIndex(0),
+    _animator(nullptr){
 }
 
 bool MovementComponent::init() {
     if (!MovementObstacle::init()) {
         return false;
     }
+    _animator = _entity->getComponent<Animator>();
     _speed = _data->getData<float>("speed", 4.0f);
+    _animations = _data->getArray<std::string,4>("animations");
     return true;
 }
 
@@ -26,7 +32,12 @@ void MovementComponent::setTarget(const Vector2& target) {
 }
 
 bool MovementComponent::update() {
-    if (_path.empty() || _pathIndex >= _path.size()) {
+    if (_path.empty()) {
+        return true;
+    }
+    if (_pathIndex >= _path.size()) {
+        _path.clear();
+        if (_animator) _animator->changeAnimation(std::string());
         return true;
     }
     Vector2 currentPosition = _transform->getGlobalPosition();
@@ -46,6 +57,15 @@ bool MovementComponent::update() {
         }
     } else {
         _transform->move(movement);
+        if (_animator) {
+            std::string newAnimation;
+            if (std::abs(direction.getX()) > std::abs(direction.getY())) {
+                newAnimation = direction.getX() > 0 ? _animations[3] : _animations[2];
+            } else {
+                newAnimation = direction.getY() > 0 ? _animations[1] : _animations[0];
+            }
+            _animator->changeAnimation(newAnimation);
+        }
     }
     return true;
 }

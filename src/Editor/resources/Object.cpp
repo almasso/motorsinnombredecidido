@@ -14,6 +14,8 @@
 #define localVarsKey "localVariables"
 #define xKey "x"
 #define yKey "y"
+#define layerKey "layer"
+#define spriteKey "sprite"
 #define collidableKey "collidable"
 #define eventsKey "events"
 
@@ -55,6 +57,16 @@ bool editor::resources::Object::read(sol::table const& objectTable) {
         return false;
     _y = y.value();
 
+    sol::optional<int> layer = objectTable.get<sol::optional<int>>(layerKey);
+    if (!layer.has_value())
+        return false;
+    _layer = layer.value();
+
+    sol::optional<std::string> sprite = objectTable.get<sol::optional<std::string>>(spriteKey);
+    if (!y.has_value())
+        return false;
+    _spriteName = sprite.value();
+
     sol::optional<bool> collidable = objectTable.get<sol::optional<bool>>(collidableKey);
     if (!collidable.has_value())
         return false;
@@ -78,6 +90,8 @@ bool editor::resources::Object::write(sol::table& objectTable) {
     objectTable[xKey] = _x;
     objectTable[yKey] = _y;
     objectTable[collidableKey] = _collides;
+    objectTable[layerKey] = _layer;
+    objectTable[spriteKey] = _spriteName;
 
     sol::table events = io::LuaManager::GetInstance().getState().create_table();
     if (!writeEvents(events))
@@ -247,6 +261,26 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
     components << "EventHandler = {\n";
     components << events;
     components << "},\n";
+    if  (const auto& animator = dependencies.componentDependencies.find("Animator");
+        animator != dependencies.componentDependencies.end()) {
+
+        components << "Animator = {\n";
+        if (!_spriteName.empty()) {
+            components << "sprite = \"data/sprites/" << _spriteName << ".lua\",\n";
+        }
+        components << "layer = " << _layer << "\n";
+        components << "},\n";
+        dependencies.componentDependencies.erase(animator);
+    }
+    else if (!_spriteName.empty()) {
+        components << "SpriteRenderer = {\n";
+        components << "sprite = \"data/sprites/" << _spriteName << ".lua\",\n";
+        components << "layer = " << _layer << "\n";
+        components << "},\n";
+    }
+    if (!dependencies.componentDependencies.contains("MovementComponent") && _collides) {
+        components << "MovementObstacle = {0},\n";
+    }
     for (auto& component : dependencies.componentDependencies) {
         components << component.first << " = ";
         if (!component.second.valid() || component.second.empty())

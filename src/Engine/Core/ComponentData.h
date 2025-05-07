@@ -2,6 +2,8 @@
 #define COMPONENTDATA_H
 #include <Utils/Vector2.h>
 #include <sol/sol.hpp>
+#include <string>
+#include <array>
 #include <unordered_set>
 
 class ComponentData {
@@ -15,6 +17,24 @@ public:
     template<typename T>
     T getData(std::string const& key, T const& defaultValue = {}) const {
         return _data.get_or(key, defaultValue);
+    }
+    template<typename T, size_t N>
+    std::array<T,N> getArray(std::string const& key, T const& defaultValue = {}) const {
+        std::array<T, N> result;
+        sol::optional<sol::table> table = _data[key];
+
+        if (!table) {
+            result.fill(defaultValue);
+            return result;
+        }
+
+        sol::table tbl = table.value();
+        for (size_t i = 0; i < N; ++i) {
+            sol::optional<T> val = tbl[i + 1];
+            result[i] = val.value_or(defaultValue);
+        }
+
+        return result;
     }
     const std::string& getId() const;
     sol::table const& getData() const;

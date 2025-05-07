@@ -6,6 +6,7 @@
 
 class ComponentDerived(Animator, SpriteRenderer) {
     std::string _animation {};
+    std::string _defaultSprite {};
     float _frameTimer {};
     int _currentFrame {};
     bool _animationEnded {};

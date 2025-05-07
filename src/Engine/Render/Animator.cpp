@@ -10,6 +10,12 @@ Animator::Animator(ComponentData const*data) : ComponentTemplate(data) {
 
 bool Animator::init() {
   _animation = _data->getData<std::string>("animation", "");
+  _defaultSprite = _data->getData<std::string>("sprite", "");
+  if (!_defaultSprite.empty()) {
+    if (!setSprite(_defaultSprite)) {
+      return false;
+    }
+  }
   if (!_animation.empty()) {
     const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
     if (!anim)
@@ -24,6 +30,12 @@ bool Animator::init() {
 
 bool Animator::update() {
   if(_playing && !_animationEnded) {
+    if (_animation.empty()) {
+      _animationEnded = true;
+      if (!_defaultSprite.empty()) {
+        return setSprite(_defaultSprite);
+      }
+    }
     _frameTimer += Time::deltaTime;
     const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
     if(!anim) return false;
@@ -35,8 +47,11 @@ bool Animator::update() {
             _currentFrame %= anim->numFrames;
           }
           else {
-              _currentFrame = anim->numFrames - 1;
-              _animationEnded = true;
+            _currentFrame = anim->numFrames - 1;
+            _animationEnded = true;
+            if (!_defaultSprite.empty()) {
+              return setSprite(_defaultSprite);
+            }
           }
         }
         return setSprite(anim->frames[_currentFrame]);
@@ -49,11 +64,14 @@ void Animator::reset() {
   _animationEnded = false;
   _currentFrame = 0;
   _frameTimer = 0;
+  _playing = true;
 }
 
 void Animator::changeAnimation(const std::string& animation) {
-  _animation = animation;
-  reset();
+  if (_animation != animation) {
+    _animation = animation;
+    reset();
+  }
 }
 
 void Animator::setPlaying(bool playing) {
