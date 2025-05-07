@@ -12,6 +12,7 @@
 editor::render::tabs::PlayerSettings::PlayerSettings(editor::Project* project) :
 WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.playerSettings").c_str()), _project(project) {
     _filePath = _project->getPath() / "projectfiles"/ "settings" / "playerSettings.lua";
+    project->setPlayerLocalVariables(&_localVariables);
     sol::table playerSettings = io::LuaManager::GetInstance().getTable(_filePath.string(), true);
     if (playerSettings.valid()) {
         _layer = playerSettings["layer"].get_or(0);

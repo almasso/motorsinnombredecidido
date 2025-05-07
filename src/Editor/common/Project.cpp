@@ -423,6 +423,14 @@ std::filesystem::path editor::Project::getBuildPath(const std::string &platform)
     return _projectPath / "build" / platform;
 }
 
+void editor::Project::setPlayerLocalVariables(std::unordered_map<std::string, sol::object>* localVariables) {
+    _localVariables = localVariables;
+}
+
+std::unordered_map<std::string, sol::object>* editor::Project::getPlayerLocalVariables() const {
+    return _localVariables;
+}
+
 void editor::Project::buildSprites(std::string const& platform) {
     if (!exists(getBuildPath(platform)/"data"/"sprites/"))
         create_directory(getBuildPath(platform)/"data"/"sprites/");

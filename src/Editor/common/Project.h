@@ -213,6 +213,9 @@ namespace editor {
 
         std::filesystem::path getBuildPath(const std::string &platform) const;
 
+        void setPlayerLocalVariables(std::unordered_map<std::string, sol::object>* localVariables);
+        std::unordered_map<std::string, sol::object>* getPlayerLocalVariables() const;
+
     private:
         std::string _name;
         std::filesystem::path _projectPath;
@@ -226,6 +229,8 @@ namespace editor {
         std::unordered_map<std::string, editor::resources::Animation*> _animations;
         std::unordered_map<std::string, editor::resources::Map*> _maps;
         std::unordered_map<std::string, editor::resources::events::Event*> _events;
+
+        std::unordered_map<std::string, sol::object>* _localVariables;
 
         int _dimensions[2];
 

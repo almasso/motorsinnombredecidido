@@ -10,7 +10,7 @@
 #include "behaviours/DialogueBehaviour.h"
 #include "behaviours/JumpBehaviour.h"
 #include "behaviours/JumpIfBehaviour.h"
-#include "behaviours/ModifyLocalVariableBehaviour.h"
+#include "behaviours/ModifyVariableBehaviour.h"
 #include "behaviours/MoveBehaviour.h"
 #include "behaviours/MusicBehaviour.h"
 #include "behaviours/PlaySFXBehaviour.h"
@@ -61,7 +61,7 @@ void editor::resources::events::EventBehaviourFactory::Init() {
     RegisterBehaviour<DialogueBehaviour>();
     RegisterBehaviour<JumpBehaviour>();
     RegisterBehaviour<JumpIfBehaviour>();
-    RegisterBehaviour<ModifyLocalVariableBehaviour>();
+    RegisterBehaviour<ModifyVariableBehaviour>();
     RegisterBehaviour<MoveBehaviour>();
     RegisterBehaviour<MusicBehaviour>();
     RegisterBehaviour<PlaySFXBehaviour>();

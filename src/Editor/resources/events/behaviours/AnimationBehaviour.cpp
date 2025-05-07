@@ -127,7 +127,7 @@ bool editor::resources::events::AnimationBehaviour::renderAnimationSelector() {
         preview = _animationToChange;
     else preview = io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.AnimationBehaviour.action.change.select");
 
-    if (!ImGui::BeginCombo("##animationChangeSelector", preview.c_str()))
+    if (!ImGui::BeginCombo(("##animationChangeSelector" + std::to_string(reinterpret_cast<long long>(this))).c_str(), preview.c_str()))
         return false;
 
     bool edited = false;
