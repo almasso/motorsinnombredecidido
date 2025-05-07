@@ -233,6 +233,7 @@ namespace editor {
 
         void saveProject();
 
+        void buildSprites(std::string const& platform);
         void buildAnimations(std::string const& platform);
     };
 }

@@ -86,7 +86,7 @@ void editor::resources::Animation::writeToEngineLua(const std::string &platform)
     sol::table frameTable = io::LuaManager::GetInstance().getState().create_table();
 
     for (auto const& frame : _frames) {
-        frameTable.add(frame->getName());
+        frameTable.add("data/sprites/" + frame->getName());
     }
 
     animationTable["frames"] = frameTable;

@@ -117,6 +117,7 @@ bool editor::Project::build(const std::string &platform) {
         buildSettings(platform);
         buildAudioSettings(platform);
         buildOverworldScene(platform);
+        buildSprites(platform);
         buildAnimations(platform);
     } catch (std::filesystem::filesystem_error& e) {
         EditorError::showError_impl(e.what(), "Project",97);
@@ -483,6 +484,14 @@ void editor::Project::saveEverything() {
 
 std::filesystem::path editor::Project::getBuildPath(const std::string &platform) const {
     return _projectPath / "build" / platform;
+}
+
+void editor::Project::buildSprites(std::string const& platform) {
+    if (!exists(getBuildPath(platform)/"data"/"sprites/"))
+        create_directory(getBuildPath(platform)/"data"/"sprites/");
+    for (auto const& [spriteName, sprite] : _sprites) {
+        sprite->writeToEngineLua(platform);
+    }
 }
 
 void editor::Project::buildAnimations(std::string const& platform) {

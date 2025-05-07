@@ -98,6 +98,17 @@ void editor::resources::Sprite::writeToLua() {
 }
 
 void editor::resources::Sprite::writeToEngineLua(const std::string &platform) {
+    sol::table spriteTable = io::LuaManager::GetInstance().getState().create_table();
+
+    spriteTable["texture"] = "data/assets/" + _source.lexically_relative(_project->getAssetsPath()).string();
+    sol::table rectTable = io::LuaManager::GetInstance().getState().create_table();
+    rectTable["x"] = _x;
+    rectTable["y"] = _y;
+    rectTable["w"] = _width;
+    rectTable["h"] = _height;
+    spriteTable["rect"] = rectTable;
+
+    io::LuaManager::GetInstance().writeToFile(spriteTable, (_project->getBuildPath(platform) / "data" / "sprites"/ (_name + ".lua")).string());
 }
 
 const std::string & editor::resources::Sprite::getName() const {
