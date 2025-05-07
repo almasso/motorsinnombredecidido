@@ -1,6 +1,7 @@
 var classComponentData =
 [
     [ "ComponentData", "classComponentData.html#a09126700c66e03902d81dc2f70aa49d9", null ],
+    [ "getArray", "classComponentData.html#aa7335ae755037094f1a135770c6035d7", null ],
     [ "getData", "classComponentData.html#a4dcb5ccb3391e267bfd28044e8b204f7", null ],
     [ "getData", "classComponentData.html#a87988c45a319504ac553e2413b46dfc5", null ],
     [ "getId", "classComponentData.html#af9e3fa1e1339ec25a87992116931e86b", null ],
