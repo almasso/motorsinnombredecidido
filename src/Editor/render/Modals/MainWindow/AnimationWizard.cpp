@@ -131,20 +131,30 @@ void editor::render::modals::AnimationWizard::drawThumbnail() {
         ImVec2 uv0 = ImVec2((*it)->getX() / textureWidth, (*it)->getY() / textureHeight);
         ImVec2 uv1 = ImVec2(((*it)->getX() + (*it)->getWidth()) / textureWidth, ((*it)->getY() + (*it)->getHeight()) / textureHeight);
 
-        if(ImGui::ImageButton("##thumbnailImg", (*it)->getTextureID(), thumbnailSize, uv0, uv1)) {
-            _selectedFrame = *it;
-        }
+        ImGui::Image((*it)->getTextureID(), thumbnailSize, uv0, uv1);
 
-        if(ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
-
-        }
 
         ImGui::SameLine();
         ImGui::Text((*it)->getName().c_str());
         ImGui::EndGroup();
+        if(ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+            ImGui::OpenPopup(((*it)->getName() + "animOptionsInList").c_str());
+        }
+
+        if(ImGui::BeginPopupContextItem(((*it)->getName() + "animOptionsInList").c_str())) {
+            ImGui::BeginDisabled(_animationRunning);
+            if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
+                it = _frames.erase(it);
+                _reproductionFrame = 0;
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndDisabled();
+            ImGui::EndPopup();
+        }
+
         ImGui::EndGroup();
 
-        if(ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+        if(ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID) && !_animationRunning) {
             ImGui::SetDragDropPayload("FRAME_PAYLOAD", &count, sizeof(int));
             ImGui::BeginGroup();
             ImGui::Image((*it)->getTextureID(), ImVec2(32, 32), uv0, uv1, ImVec4(1,1,1,0.5f), ImVec4(0, 0, 0, 0.0f));
@@ -154,7 +164,7 @@ void editor::render::modals::AnimationWizard::drawThumbnail() {
             ImGui::EndDragDropSource();
         }
 
-        if(ImGui::BeginDragDropTarget()) {
+        if(ImGui::BeginDragDropTarget() && !_animationRunning) {
             if(const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("FRAME_PAYLOAD")) {
                 IM_ASSERT(payload->DataSize == sizeof(int));
                 int srcIndex = *(const int*)payload->Data;
@@ -174,9 +184,11 @@ void editor::render::modals::AnimationWizard::drawThumbnail() {
         ImGui::PopID();
     }
 
-    if(ImGui::Button("+", thumbnailSize)) {
+    ImGui::BeginDisabled(_animationRunning);
+    if(ImGui::Button("+", thumbnailSize) && !_animationRunning) {
         _openSpriteSelector = true;
     }
+    ImGui::EndDisabled();
     ImGui::EndChild();
 
     if(_openSpriteSelector) {
@@ -241,7 +253,7 @@ void editor::render::modals::AnimationWizard::drawSpriteSelector() {
         ImVec2 uv0 = ImVec2(sprite->getX() / textureWidth, sprite->getY() / textureHeight);
         ImVec2 uv1 = ImVec2((sprite->getX() + sprite->getWidth()) / textureWidth, (sprite->getY() + sprite->getHeight()) / textureHeight);
 
-        if (ImGui::ImageButton("spriteBtn", sprite->getTextureID(), ImVec2(thumbnailSize, thumbnailSize), uv0, uv1)) {
+        if (ImGui::ImageButton("spriteBtn", sprite->getTextureID(), ImVec2(thumbnailSize, thumbnailSize), uv0, uv1) && !_animationRunning) {
             _frames.push_back(sprite);
             _openSpriteSelector = false;
         }
