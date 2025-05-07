@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <string>
 #include <render/WindowItem.h>
+#include <sol/table.hpp>
 
 struct ImFont;
 
@@ -23,12 +24,19 @@ namespace editor::render::tabs {
 
         void save();
 
+        sol::table buildOverworldScene(const sol::table &playerComponents) const;
+
+        std::array<float, 3> getAudioSettings() const;
+
+        bool usingGenericFont() const;
+
         ~GeneralSettings() override;
     private:
         Project* _project = nullptr;
         bool _somethingModified = false;
         std::filesystem::path _filePath;
         std::string _gameName;
+        std::string _startingMap;
         int _cameraSize[2] = { 18, 12 };
         float _textColor[4] = {0, 0, 0, 1};
         float _backgroundColor[4] = {1, 1, 1, 1};

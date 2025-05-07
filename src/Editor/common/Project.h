@@ -41,17 +41,17 @@ namespace editor {
 
         void initResources();
 
-        bool build(const std::string &platform);
+        bool build(const std::string &platform, const sol::table &overWorldScene, const std::array<float, 3> &audio, bool genericFont);
 
         std::unordered_map<std::string, std::vector<std::string>> getAdjacentMaps();
 
         void buildSettings(const std::string &platform);
 
-        void buildAudioSettings(const std::string &platform);
-
-        void buildOverworldScene(const std::string &platform);
+        void buildAudioSettings(const std::string &platform, const std::array<float, 3> &audio);
 
         const std::string& getName() const;
+
+        int getMaxLayers() const;
 
         template <std::convertible_to<std::string> T>
         void setName(T&& name) {

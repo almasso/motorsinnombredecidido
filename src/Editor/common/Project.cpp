@@ -86,7 +86,7 @@ void editor::Project::initResources() {
     }
 }
 
-bool editor::Project::build(const std::string &platform) {
+bool editor::Project::build(const std::string &platform, const sol::table& overWorldScene, const std::array<float,3>& audio, bool genericFont) {
     try {
         if (!exists(getBuildPath("") )) {
             create_directory(getBuildPath(""));
@@ -99,7 +99,6 @@ bool editor::Project::build(const std::string &platform) {
         copy(path,getBuildPath(platform),
              std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
             std::filesystem::copy_options::overwrite_existing);
-        SDL_free(filepath);
         if (!exists(getBuildPath(platform) )) {
             create_directory(getBuildPath(platform));
         }
@@ -108,25 +107,31 @@ bool editor::Project::build(const std::string &platform) {
         copy(getAssetsPath(),getBuildPath(platform)/"data"/"assets",
              std::filesystem::copy_options::recursive | std::filesystem::copy_options::copy_symlinks |
              std::filesystem::copy_options::overwrite_existing);
+        if (genericFont) {
+            auto fontPath = std::filesystem::path(filepath)/"settings"/"fonts"/"Raleway-Regular.ttf";
+            copy_file(fontPath,getBuildPath(platform)/"data"/"assets",
+                std::filesystem::copy_options::overwrite_existing);
+        }
+        SDL_free(filepath);
         for (const auto& [key,map] : _maps) {
             map->writeToEngineLua(platform);
         }
         for (const auto& [key,tileset] : _tilesets) {
             tileset->writeToEngineLua(platform);
         }
+        io::LuaManager::GetInstance().writeToFile(overWorldScene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
         buildSettings(platform);
-        buildAudioSettings(platform);
-        buildOverworldScene(platform);
+        buildAudioSettings(platform, audio);
         buildSprites(platform);
         buildAnimations(platform);
     } catch (std::filesystem::filesystem_error& e) {
-        EditorError::showError_impl(e.what(), "Project",97);
+        EditorError::showError_impl(e.what(), "Project",128);
         return false;
     }
     return true;
 }
 
-void editor::Project::buildSettings(const std::string &platform) {
+void editor::Project::buildSettings(const std::string& platform) {
     auto& lua = io::LuaManager::GetInstance().getState();
     sol::table config = lua.create_table();
     sol::table memory = lua.create_table();
@@ -136,104 +141,35 @@ void editor::Project::buildSettings(const std::string &platform) {
     io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data"/"config.lua").string());
 }
 
-void editor::Project::buildAudioSettings(const std::string &platform) {
+void editor::Project::buildAudioSettings(const std::string &platform, const std::array<float,3>& audio) {
     auto& lua = io::LuaManager::GetInstance().getState();
     sol::table master = lua.create_table();
     master["inputs"] = {"data/mixers/music.mixer.lua","data/mixers/sfx.mixer.lua"};
     master["name"] = "Master";
+    master["volume"] = audio[0];
     io::LuaManager::GetInstance().writeToFile(master, (getBuildPath(platform)/"data"/"mixers"/"master.mixer.lua").string());
     sol::table music = lua.create_table();
     music["output"] = "data/mixers/master.mixer.lua";
     music["name"] = "Music";
-    music["volume"] = 0.5f;
+    music["volume"] = audio[1];
     io::LuaManager::GetInstance().writeToFile(music, (getBuildPath(platform)/"data"/"mixers"/"music.mixer.lua").string());
     sol::table sfx = lua.create_table();
     sfx["output"] = "data/mixers/master.mixer.lua";
     sfx["name"] = "SFX";
+    sfx["volume"] = audio[2];
     io::LuaManager::GetInstance().writeToFile(sfx, (getBuildPath(platform)/"data"/"mixers"/"sfx.mixer.lua").string());
 }
 
-void editor::Project::buildOverworldScene(const std::string &platform) {
-    auto& lua = io::LuaManager::GetInstance().getState();
-    sol::table scene = lua.create_table();
-    sol::table manager = lua.create_table();
-    sol::table components = lua.create_table();
-    sol::table movement = lua.create_table();
-    sol::table overworld = lua.create_table();
-    movement["tileWidth"] = _dimensions[0];
-    movement["tileHeight"] = _dimensions[1];
-    components["MovementManager"] = movement;
-    overworld["startingMap"] = _maps.begin()->second->getName();
-    components["OverworldManager"] = overworld;
-    manager["handler"] = "Manager";
-    manager["components"] = components;
-    scene["manager"] = manager;
-    sol::table player = lua.create_table();
-    components = lua.create_table();
-    movement = lua.create_table();
-    movement["speed"] = _dimensions[0] * 2.0f;
-    components["MovementComponent"] = movement;
-    components["Transform"] = sol::as_table<std::array<int,1>>({0});
-    components["PlayerInput"] = sol::as_table<std::array<int,1>>({0});
-    components["Collider"] = sol::as_table<std::array<int,1>>({0});
-    player["components"] = components;
-    player["handler"] = "Player";
-    sol::table camera = lua.create_table();
-    sol::table cameraComponent = lua.create_table();
-    components = lua.create_table();
-    cameraComponent["size"] = sol::as_table<std::array<int,2>>({1920,1080});
-    components["Camera"] = cameraComponent;
-    components["Transform"] = sol::as_table<std::array<int,1>>({0});
-    camera["components"] = components;
-    camera["handler"] = "Camera";
-    sol::table children = lua.create_table();
-    children["camera"] = camera;
-    player["children"] = children;
-    scene["player"] = player;
-
-    sol::table music = lua.create_table();
-    music["handler"] = "Music";
-    sol::table musicComponents = lua.create_table();
-    sol::table audioSource = lua.create_table();
-    audioSource["audio"] = "";
-    audioSource["mixer"] = "data/mixers/music.mixer.lua";
-    audioSource["loop"] = true;
-    musicComponents["AudioSource"] = audioSource;
-    music["components"] = musicComponents;
-    scene["music"] = music;
-
-    // TODO
-    /*sol::table textBox = lua.create_table();
-    textBox["handler"] = "TextBox";
-    textBox["active"] = false;
-    sol::table textBoxComponents = lua.create_table();
-    sol::table textBoxTransform = lua.create_table();
-    textBoxTransform.add(0);
-    textBoxComponents["Transform"] = textBoxTransform;
-    sol::table textBoxText = lua.create_table();
-    textBoxText["font"] = "TODO";
-    textBoxText["fontSize"] = 64;
-    textBoxText["color"] = 0x000000FF;
-    textBoxText["size"] = sol::as_table<std::array<int,2>>({1580,280});
-    textBoxText["layer"] = 2;
-    textBoxComponents["Text"] = textBoxText;
-    sol::table textBoxRectangle = lua.create_table();
-    textBoxRectangle["layer"] = 1;
-    textBoxRectangle["size"] = sol::as_table<std::array<int,2>>({1600,290});
-    textBoxRectangle["color"] = 0xFFFFFFFF;
-    textBoxComponents["Rectangle"] = textBoxRectangle;
-    sol::table textBoxTextBox = lua.create_table();
-    textBoxTextBox.add(0);
-    textBoxComponents["TextBox"] = textBoxTextBox;
-    textBox["components"] = textBoxComponents;
-    scene["textBox"] = textBox;*/
-
-    io::LuaManager::GetInstance().writeToFile(scene, (getBuildPath(platform)/"data"/"scenes"/"overworld.scene.lua").string());
-}
-
-
 const std::string &editor::Project::getName() const {
     return _name;
+}
+
+int editor::Project::getMaxLayers() const {
+    int max = 0;
+    for (const auto& [key,map] : _maps) {
+        if (map->getLayers() > max) max = map->getLayers();
+    }
+    return max;
 }
 
 const std::filesystem::path &editor::Project::getPath() const {

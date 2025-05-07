@@ -133,6 +133,7 @@ return {
     ["window.mainwindow.generalSettings.settings"] = "General Settings",
     ["window.mainwindow.generalSettings.gameName"] = "Game Name",
     ["window.mainwindow.generalSettings.defaultGameName"] = "Game",
+    ["window.mainwindow.generalSettings.startingMap"] = "Starting Map",
     ["window.mainwindow.generalSettings.camera"] = "Camera",
     ["window.mainwindow.generalSettings.cameraSize"] = "Camera Size (Tiles)",
     ["window.mainwindow.generalSettings.text"] = "Text",

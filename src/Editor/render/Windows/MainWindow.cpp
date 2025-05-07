@@ -51,16 +51,11 @@ void editor::render::windows::MainWindow::onRender() {
     ImGui::BeginChild("##mainWindowToolbar");
     ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 2 - 30);
+    ImGui::BeginDisabled(_project->getMaps().empty());
     if(ImGui::Button("##BuildButton", {60, 60})) {
-        _mapEditor->save();
-        _eventEditor->save();
-        _mapConnections->save();
-        _playerSettings->save();
-        _generalSettings->save();
-        _spriteEditor->save();
-        _mapConnections->getAdjacentMaps();
-        _project->build("Desktop");
+        build("Desktop");
     }
+    ImGui::EndDisabled();
     ImVec2 pos = ImGui::GetItemRectMin();
     ImGui::SetCursorPos({pos.x + 5, pos.y - 35});
     ImGui::TextColored({0, 255, 0, 255}, ICON_FA_PLAY);
@@ -77,4 +72,18 @@ void editor::render::windows::MainWindow::onRender() {
     _spriteEditor->render();
     ImGui::EndTabBar();
     ImGui::EndChild();
+}
+
+void editor::render::windows::MainWindow::build(const std::string &platform) {
+    _mapEditor->save();
+    _eventEditor->save();
+    _mapConnections->save();
+    _playerSettings->save();
+    _generalSettings->save();
+    _spriteEditor->save();
+    _mapConnections->getAdjacentMaps();
+    sol::table playerTable = _playerSettings->buildPlayer();
+    sol::table sceneTable = _generalSettings->buildOverworldScene(playerTable);
+    std::array<float,3> audio = _generalSettings->getAudioSettings();
+    _project->build(platform, sceneTable, audio, _generalSettings->usingGenericFont());
 }

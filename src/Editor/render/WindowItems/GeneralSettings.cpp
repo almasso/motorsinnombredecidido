@@ -19,6 +19,7 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.g
     sol::table settings = io::LuaManager::GetInstance().getTable(_filePath.string(), true);
     if (settings.valid()) {
         _gameName = settings["gameName"].get_or(_project->getName());
+        _startingMap = settings["startingMap"].get_or(std::string());
         sol::object cameraSize = settings["cameraSize"];
         if (cameraSize.valid() && cameraSize.is<sol::table>()){
             sol::table cameraSizeTable = cameraSize;
@@ -76,6 +77,7 @@ void editor::render::tabs::GeneralSettings::save() {
     _somethingModified = false;
     sol::table settings = io::LuaManager::GetInstance().getState().create_table();
     settings["gameName"] = _gameName;
+    settings["startingMap"] = _startingMap;
     settings["cameraSize"] = sol::as_table<std::array<int,2>>({_cameraSize[0], _cameraSize[1]});
     settings["textColor"] = sol::as_table<std::array<float,4>>({_textColor[0], _textColor[1],_textColor[2], _textColor[3]});
     settings["backgroundColor"] = sol::as_table<std::array<float,4>>({_backgroundColor[0], _backgroundColor[1],_backgroundColor[2], _backgroundColor[3]});
@@ -85,6 +87,144 @@ void editor::render::tabs::GeneralSettings::save() {
     settings["musicVolume"] = _musicVolume;
     settings["sfxVolume"] = _sfxVolume;
     io::LuaManager::GetInstance().writeToFile(settings, _filePath.string());
+}
+
+uint32_t colorToHex(const float color[4]) {
+    auto toByte = [](float c) -> uint8_t {
+        return static_cast<uint8_t>(std::clamp(c, 0.0f, 1.0f) * 255.0f + 0.5f);
+    };
+
+    uint8_t r = toByte(color[0]);
+    uint8_t g = toByte(color[1]);
+    uint8_t b = toByte(color[2]);
+    uint8_t a = toByte(color[3]);
+
+    return (r << 24) | (g << 16) | (b << 8) | a;
+}
+
+sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol::table& playerComponents) const{
+    auto& lua = io::LuaManager::GetInstance().getState();
+    auto dimensions = _project->getDimensions();
+
+    sol::table scene = lua.create_table();
+    sol::table manager = lua.create_table();
+    sol::table components = lua.create_table();
+    sol::table movement = lua.create_table();
+    sol::table overworld = lua.create_table();
+    movement["tileWidth"] = dimensions[0];
+    movement["tileHeight"] = dimensions[1];
+    components["MovementManager"] = movement;
+    overworld["startingMap"] = _startingMap == "" ? _project->getMaps().begin()->first : _startingMap;
+    components["OverworldManager"] = overworld;
+    manager["handler"] = "Manager";
+    manager["components"] = components;
+    scene["manager"] = manager;
+
+    sol::table player = lua.create_table();
+    player["components"] = playerComponents;
+    player["handler"] = "Player";
+    sol::table camera = lua.create_table();
+    sol::table cameraComponent = lua.create_table();
+    components = lua.create_table();
+    cameraComponent["size"] = sol::as_table<std::array<int,2>>({dimensions[0] * _cameraSize[0], dimensions[1] * _cameraSize[1]});
+    components["Camera"] = cameraComponent;
+    components["Transform"] = sol::as_table<std::array<int,1>>({0});
+    camera["components"] = components;
+    camera["handler"] = "Camera";
+    sol::table children = lua.create_table();
+    children["camera"] = camera;
+    player["children"] = children;
+    scene["player"] = player;
+
+    sol::table music = lua.create_table();
+    music["handler"] = "Music";
+    sol::table musicComponents = lua.create_table();
+    sol::table audioSource = lua.create_table();
+    audioSource["audio"] = "";
+    audioSource["mixer"] = "data/mixers/music.mixer.lua";
+    audioSource["loop"] = true;
+    musicComponents["AudioSource"] = audioSource;
+    music["components"] = musicComponents;
+    scene["music"] = music;
+
+    sol::table textBox = lua.create_table();
+    textBox["handler"] = "TextBox";
+    textBox["active"] = false;
+    sol::table textBoxComponents = lua.create_table();
+    sol::table textBoxTransform = lua.create_table();
+    textBoxTransform["position"] = sol::as_table<std::array<int,2>>({0,
+        static_cast<int>(370.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+    textBoxComponents["Transform"] = textBoxTransform;
+    sol::table textBoxText = lua.create_table();
+    if (usingGenericFont()) {
+        textBoxText["font"] = "data/assets/Raleway-Regular.ttf";
+    }
+    else {
+        textBoxText["font"] = "data/assets/" + _font.lexically_relative(_project->getAssetsPath()).string();
+    }
+    textBoxText["fontSize"] = _fontSize;
+    textBoxText["color"] = colorToHex(_textColor);
+    textBoxText["size"] = sol::as_table<std::array<int,2>>({
+        static_cast<int>(1580.0f/1920.0f * dimensions[0] * _cameraSize[0]),
+        static_cast<int>(280.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+    textBoxText["layer"] = _project->getMaxLayers() + 1;
+    textBoxComponents["Text"] = textBoxText;
+    sol::table textBoxRectangle = lua.create_table();
+    textBoxRectangle["layer"] = _project->getMaxLayers();
+    textBoxRectangle["size"] = sol::as_table<std::array<int,2>>({
+        static_cast<int>(1600.0f/1920.0f  * dimensions[0] * _cameraSize[0]),
+        static_cast<int>(290.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+    textBoxRectangle["color"] = colorToHex(_backgroundColor);
+    textBoxComponents["Rectangle"] = textBoxRectangle;
+    sol::table textBoxTextBox = lua.create_table();
+    textBoxTextBox.add(0);
+    textBoxComponents["TextBox"] = textBoxTextBox;
+    textBox["components"] = textBoxComponents;
+    scene["textBox"] = textBox;
+
+    for (int i = 1; i < 4; i++) {
+        sol::table choice = lua.create_table();
+        choice["handler"] = "Choice"+std::to_string(i);
+        choice["active"] = false;
+        sol::table choiceComponents = lua.create_table();
+        sol::table choiceTransform = lua.create_table();
+        choiceTransform["position"] = sol::as_table<std::array<int,2>>({
+            static_cast<int>(400.0f*(i-2)/1920.0f * dimensions[0] * _cameraSize[0]),
+            static_cast<int>(100.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+        choiceComponents["Transform"] = choiceTransform;
+        sol::table choiceText = lua.create_table();
+        choiceText["font"] = "data/assets/" + _font.lexically_relative(_project->getAssetsPath()).string();
+        choiceText["fontSize"] = _fontSize;
+        choiceText["color"] = colorToHex(_textColor);
+        choiceText["size"] = sol::as_table<std::array<int,2>>({
+            static_cast<int>(200.0f/1920.0f * dimensions[0] * _cameraSize[0]),
+            static_cast<int>(100.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+        choiceText["layer"] = _project->getMaxLayers() + 1;
+        choiceComponents["Text"] = choiceText;
+        sol::table choiceRectangle = lua.create_table();
+        choiceRectangle["layer"] = _project->getMaxLayers();
+        choiceRectangle["size"] = sol::as_table<std::array<int,2>>({
+            static_cast<int>(220.0f/1920.0f  * dimensions[0] * _cameraSize[0]),
+            static_cast<int>(120.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+        choiceRectangle["color"] = colorToHex(_backgroundColor);
+        choiceComponents["Rectangle"] = choiceRectangle;
+        sol::table choiceButton = lua.create_table();
+        choiceButton["size"] = sol::as_table<std::array<int,2>>({
+            static_cast<int>(220.0f/1920.0f  * dimensions[0] * _cameraSize[0]),
+            static_cast<int>(120.0f/1080.0f * dimensions[1] * _cameraSize[1])});
+        choiceRectangle["params"] = sol::as_table<std::array<int,1>>({i});
+        choiceComponents["Rectangle"] = choiceRectangle;
+    }
+
+    return scene;
+}
+
+std::array<float, 3> editor::render::tabs::GeneralSettings::getAudioSettings() const {
+    return std::array{_masterVolume, _musicVolume, _sfxVolume};
+}
+
+bool editor::render::tabs::GeneralSettings::usingGenericFont() const {
+    return _font.empty();
 }
 
 void editor::render::tabs::GeneralSettings::drawSettings() {
@@ -103,9 +243,23 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     ImGui::Spacing();
     ImGui::Separator();
     ImGui::Spacing();
+    ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.startingMap").c_str());
+    if (ImGui::BeginCombo("##mapDropdown", _startingMap != "" ? _startingMap.c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
+        for (auto [name, map] : _project->getMaps()) {
+            if(ImGui::Selectable((name).c_str(), _startingMap == name)) {
+                _startingMap = name;
+                _somethingModified = true;
+            }
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.camera").c_str());
     ImGui::SetNextItemWidth(RenderManager::GetInstance().getWidth()/4);
-    if (ImGui::InputInt2(io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.cameraSize").c_str(), _cameraSize)) {
+    if (ImGui::DragInt2(io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.cameraSize").c_str(),
+                        _cameraSize, 1, 1, 100)) {
         _somethingModified = true;
     }
     ImGui::Spacing();
@@ -187,14 +341,14 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     ImGui::Separator();
     ImGui::Spacing();
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.audio").c_str());
-    ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.masterVolume")).c_str(),
-        &_masterVolume, 0, 1);
+    if(ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.masterVolume")).c_str(),
+        &_masterVolume, 0, 1)) {_somethingModified = true;}
     ImGui::Spacing();
-    ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.musicVolume")).c_str(),
-        &_musicVolume, 0, 1);
+    if(ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.musicVolume")).c_str(),
+        &_musicVolume, 0, 1)) {_somethingModified = true;}
     ImGui::Spacing();
-    ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.sfxVolume")).c_str(),
-        &_sfxVolume, 0, 1);
+    if(ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.sfxVolume")).c_str(),
+        &_sfxVolume, 0, 1)) {_somethingModified = true;}
     ImGui::Spacing();
     ImGui::EndChild();
 }

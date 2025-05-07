@@ -134,6 +134,7 @@ return {
     ["window.mainwindow.generalSettings.settings"] = "Ajustes Generales",
     ["window.mainwindow.generalSettings.gameName"] = "Nombre del Juego",
     ["window.mainwindow.generalSettings.defaultGameName"] = "Juego",
+    ["window.mainwindow.generalSettings.startingMap"] = "Mapa de inicio",
     ["window.mainwindow.generalSettings.camera"] = "Cámara",
     ["window.mainwindow.generalSettings.cameraSize"] = "Tamaño de Cámara (Casillas)",
     ["window.mainwindow.generalSettings.text"] = "Texto",

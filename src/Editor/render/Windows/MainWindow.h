@@ -6,6 +6,8 @@
 #ifndef RPGBAKER_MAINWINDOW_H
 #define RPGBAKER_MAINWINDOW_H
 
+#include <sol/sol.hpp>
+
 #include "render/Window.h"
 
 namespace editor {
@@ -38,6 +40,8 @@ namespace editor::render::windows {
         void beforeRender() override;
 
         void onRender() override;
+
+        void build(const std::string &platform);
     };
 };
 

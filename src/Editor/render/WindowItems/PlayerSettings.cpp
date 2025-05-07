@@ -68,6 +68,30 @@ void editor::render::tabs::PlayerSettings::save() {
     io::LuaManager::GetInstance().writeToFile(playerSettings, _filePath.string());
 }
 
+sol::table editor::render::tabs::PlayerSettings::buildPlayer() {
+    auto& lua = io::LuaManager::GetInstance().getState();
+    auto dimensions = _project->getDimensions();
+    sol::table components = lua.create_table();
+    if (_spriteName != "") {
+        sol::table sprite = lua.create_table();
+        sprite["sprite"] = (std::filesystem::path("data") / "sprites"/(_spriteName+".lua")).string();
+        sprite["layer"] = _layer;
+        components["SpriteRenderer"] = sprite;
+    }
+    sol::table movement = lua.create_table();
+    movement["speed"] = dimensions[0] * _moveSpeed;
+    components["MovementComponent"] = movement;
+    sol::table localVariables = lua.create_table();
+    for (const auto& [key, value] : _localVariables) {
+        localVariables[key] = value;
+    }
+    components["LocalVariables"] = localVariables;
+    components["Transform"] = sol::as_table<std::array<int,1>>({0});
+    components["PlayerInput"] = sol::as_table<std::array<int,1>>({0});
+    components["Collider"] = sol::as_table<std::array<int,1>>({0});
+    return components;
+}
+
 void editor::render::tabs::PlayerSettings::drawSettings() {
     ImGui::BeginChild("##settings", ImVec2(RenderManager::GetInstance().getWidth()/2, 0), true);
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.playerSettings.player").c_str());

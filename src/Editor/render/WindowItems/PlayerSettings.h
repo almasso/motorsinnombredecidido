@@ -21,7 +21,7 @@ namespace editor::render::tabs {
         PlayerSettings(editor::Project* project);
 
         void save();
-
+        sol::table buildPlayer();
         ~PlayerSettings() override;
     private:
         editor::Project* _project = nullptr;
