@@ -109,7 +109,7 @@ bool editor::Project::build(const std::string &platform, const sol::table& overW
              std::filesystem::copy_options::overwrite_existing);
         if (genericFont) {
             auto fontPath = std::filesystem::path(filepath)/"settings"/"fonts"/"Raleway-Regular.ttf";
-            copy_file(fontPath,getBuildPath(platform)/"data"/"assets",
+            copy_file(fontPath,(getBuildPath(platform)/"data"/"assets"/"Raleway-Regular.ttf"),
                 std::filesystem::copy_options::overwrite_existing);
         }
         SDL_free(filepath);
