@@ -86,20 +86,20 @@ sol::state& editor::io::LuaManager::getState() const {
     return *_state;
 }
 
-sol::table editor::io::LuaManager::_getTable(const std::string &filename) {
+sol::table editor::io::LuaManager::_getTable(const std::string &filename, bool noWarning) {
     sol::load_result res = _state->load_file(filename);
     if(!res.valid()) {
-        showWarning("Loaded file " + filename + " was not valid")
+        if (!noWarning) showWarning("Loaded file " + filename + " was not valid")
         return sol::lua_nil;
     }
     sol::protected_function_result res2 = res();
     if(!res2.valid()) {
-        showWarning("Loaded file " + filename + " was not valid")
+        if (!noWarning) showWarning("Loaded file " + filename + " was not valid")
         return sol::lua_nil;
     }
     sol::table table = res2.get<sol::table>();
     if(!table.valid()) {
-        showWarning("Couldn't create a sol table from " + filename)
+        if (!noWarning) showWarning("Couldn't create a sol table from " + filename)
         return sol::lua_nil;
     }
     return table;

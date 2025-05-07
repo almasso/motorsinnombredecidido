@@ -17,6 +17,7 @@ namespace editor::render::tabs {
     class EventEditor;
     class MapConnections;
     class PlayerSettings;
+    class GeneralSettings;
     class SpriteAnimViewer;
 }
 
@@ -31,6 +32,7 @@ namespace editor::render::windows {
         editor::render::tabs::EventEditor* _eventEditor = nullptr;
         editor::render::tabs::MapConnections* _mapConnections = nullptr;
         editor::render::tabs::PlayerSettings* _playerSettings = nullptr;
+        editor::render::tabs::GeneralSettings* _generalSettings = nullptr;
         editor::render::tabs::SpriteAnimViewer* _spriteEditor = nullptr;
 
         void beforeRender() override;

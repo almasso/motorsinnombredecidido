@@ -9,22 +9,16 @@
 #include <render/RenderManager.h>
 #include <resources/Sprite.h>
 
-#ifdef __APPLE__
-#define GetCurrentDir strdup(SDL_GetBasePath())
-#else
-#define GetCurrentDir SDL_GetCurrentDirectory()
-#endif
-
 editor::render::tabs::PlayerSettings::PlayerSettings(editor::Project* project) :
 WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.playerSettings").c_str()), _project(project) {
-    _filePath = _project->getPath() / "projectfiles" / "playerSettings.lua";
-    sol::table playerSettings = io::LuaManager::GetInstance().getTable(_filePath.string());
+    _filePath = _project->getPath() / "projectfiles"/ "settings" / "playerSettings.lua";
+    sol::table playerSettings = io::LuaManager::GetInstance().getTable(_filePath.string(), true);
     if (playerSettings.valid()) {
         _layer = playerSettings["layer"].get_or(0);
         _moveSpeed = playerSettings["moveSpeed"].get_or(1);
         _spriteName = playerSettings["sprite"].get_or(std::string{});
         sol::table animationsTable = playerSettings["moveAnimations"];
-        if (animationsTable.valid()) {
+        if (animationsTable.valid() && animationsTable.is<sol::table>() && animationsTable.size() == 4) {
             for (std::size_t i = 0; i < 4; ++i) {
                 _moveAnimation[i] = animationsTable[i + 1].get_or(std::string{});
             }
@@ -75,7 +69,7 @@ void editor::render::tabs::PlayerSettings::save() {
 }
 
 void editor::render::tabs::PlayerSettings::drawSettings() {
-    ImGui::BeginChild("##objectInspector", ImVec2(RenderManager::GetInstance().getWidth()/2, 0), true);
+    ImGui::BeginChild("##settings", ImVec2(RenderManager::GetInstance().getWidth()/2, 0), true);
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.playerSettings.player").c_str());
     ImGui::Spacing();
     ImGui::Separator();
@@ -158,7 +152,7 @@ void editor::render::tabs::PlayerSettings::drawSettings() {
         char variableValue[256];
         std::strncpy(variableValue, value.as<std::string>().c_str(), sizeof(variableValue) - 1);
         if (ImGui::InputText(name.c_str(),
-            variableValue, IM_ARRAYSIZE(variableValue), ImGuiInputTextFlags_EnterReturnsTrue)) {
+            variableValue, IM_ARRAYSIZE(variableValue))) {
             auto& lua = io::LuaManager::GetInstance().getState();
             _localVariables[name] = make_object(lua,variableValue);
             _somethingModified = true;

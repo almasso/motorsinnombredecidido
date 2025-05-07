@@ -12,6 +12,7 @@
 #include <imgui_impl_sdlrenderer3.h>
 #include "WindowStack.h"
 #include <filesystem>
+#include <sol/types.hpp>
 
 #ifdef __APPLE__
 #define GetCurrentDir strdup(SDL_GetBasePath())
@@ -132,6 +133,7 @@ editor::render::RenderManager::~RenderManager() {
 }
 
 bool editor::render::RenderManager::render() {
+    _checkFontRequests();
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
@@ -248,5 +250,34 @@ ImTextureID editor::render::RenderManager::_loadTexture(const std::string &filep
 
 void editor::render::RenderManager::destroyTexture(ImTextureID textureID) {
     SDL_DestroyTexture((SDL_Texture*)textureID);
+}
+
+void editor::render::RenderManager::_checkFontRequests() {
+    if (_fontRequest.needsReload) {
+        std::string key = _fontRequest.path + std::to_string(_fontRequest.size);
+        if (_fonts.contains(key)) {
+            *_fontRequest.font = _fonts[key];
+        }
+        else {
+            ImFontConfig cfg;
+            cfg.SizePixels = _fontRequest.size;
+            cfg.GlyphRanges = _io->Fonts->GetGlyphRangesDefault();
+            _fonts[key] = _io->Fonts->AddFontFromFileTTF(_fontRequest.path.c_str(), _fontRequest.size, &cfg, cfg.GlyphRanges);
+            *_fontRequest.font = _fonts[key];
+            if(!_io->Fonts->Build()) {
+                showWarning("Failed to build font: " + _fontRequest.path);
+            }
+            ImGui_ImplSDLRenderer3_DestroyDeviceObjects();
+            ImGui_ImplSDLRenderer3_CreateDeviceObjects();
+        }
+        _fontRequest.needsReload = false;
+    }
+}
+
+void editor::render::RenderManager::requestFont(const std::filesystem::path &path, float size, ImFont *&font) {
+    _fontRequest.path = path.empty() ? std::string(_currentDirectory) + "settings/fonts/Raleway-Regular.ttf" : path.string();
+    _fontRequest.size = size;
+    _fontRequest.font = &font;
+    _fontRequest.needsReload = true;
 }
 

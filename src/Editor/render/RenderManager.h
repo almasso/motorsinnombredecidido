@@ -10,6 +10,7 @@
 #include <memory>
 #include <unordered_map>
 #include <filesystem>
+#include <vector>
 
 typedef struct SDL_Window SDL_Window;
 typedef struct SDL_Renderer SDL_Renderer;
@@ -172,6 +173,8 @@ namespace editor::render {
 
         void destroyTexture(ImTextureID textureID);
 
+        void requestFont(const std::filesystem::path &path, float size, ImFont*& font);
+
         RenderManager(const RenderManager &) = delete;
         RenderManager &operator=(const RenderManager &) = delete;
 
@@ -317,6 +320,16 @@ namespace editor::render {
         void _setWindowName(const std::string& name);
 
         ImTextureID _loadTexture(const std::string& filepath);
+
+        struct FontRequest {
+            std::string path = std::string();
+            float size = 0.0f;
+            ImFont** font = nullptr;
+            bool needsReload = false;
+        };
+        FontRequest _fontRequest;
+
+        void _checkFontRequests();
     };
 }
 

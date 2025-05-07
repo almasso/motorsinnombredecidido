@@ -21,6 +21,8 @@
 #include "render/Subwindows/WelcomeWindow/WelcomeWindowRightPanel.h"
 #include "render/Subwindows/WelcomeWindow/WelcomeWindowProjectManagementButtons.h"
 
+constexpr ImWchar icons[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
+
 editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow") {
     ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
             ImGuiWindowFlags_NoResize |
@@ -47,7 +49,6 @@ editor::render::windows::WelcomeWindow::WelcomeWindow() : Window("welcomeWindow"
     ImFontConfig iconConfig;
     iconConfig.MergeMode = true;
     iconConfig.PixelSnapH = true;
-    const ImWchar icons[] = {ICON_MIN_FA, ICON_MAX_FA, 0};
     RenderManager::GetInstance().loadFont("FA 900", "settings/fonts/fa-solid-900.ttf", 48.0f, &iconConfig, icons);
 
     createModals();

@@ -20,8 +20,8 @@ namespace editor::io {
         static LuaManager& GetInstance();
 
         template <std::convertible_to<std::string> T>
-        sol::table getTable(T&& filename) {
-            return _getTable(std::forward<T>(filename));
+        sol::table getTable(T&& filename, bool noWarning = false) {
+            return _getTable(std::forward<T>(filename), noWarning);
         }
 
         [[nodiscard]] sol::state& getState() const;
@@ -59,7 +59,7 @@ namespace editor::io {
 
         bool init();
 
-        sol::table _getTable(const std::string& filename);
+        sol::table _getTable(const std::string& filename, bool noWarning);
 
         sol::table _getTableFromScript(const std::string& filename);
 
