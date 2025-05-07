@@ -269,7 +269,7 @@ bool editor::render::tabs::MapConnections::drawTileInGrid(int gridPosX, int grid
             int i = gridPosX - map->getMapX();
             int j = gridPosY - map->getMapY();
             bool drawn = false;
-            for(int x = map->getLayers() - 1; x >= 0; --x) {
+            for(int x = 0; x < map->getLayers(); ++x) {
                 resources::Tile* tile = map->getTiles()[x][i + map->getMapWidth() * j];
                 if(tile != nullptr) {
                     drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
