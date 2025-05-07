@@ -39,6 +39,8 @@ namespace editor::resources {
         Sprite* getFrameAtTime(float time) const;
         bool isLoop() const;
 
+        bool isSpriteBeingUsed(Sprite* sprite);
+
         bool isInitialized() const;
 
         static void setAnimationsDirectory(const std::filesystem::path& animationsDirectory);

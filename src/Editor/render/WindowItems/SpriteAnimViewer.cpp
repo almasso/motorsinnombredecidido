@@ -97,6 +97,9 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
                     _spriteWizard->show();
                     ImGui::CloseCurrentPopup();
                 }
+                std::vector<std::string> names;
+                bool used = _project->isSpriteBeingUsedInAnim(sprite, names);
+                ImGui::BeginDisabled(used);
                 ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                 if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
                     it = _project->removeSprite(sprite->getName());
@@ -107,6 +110,20 @@ void editor::render::tabs::SpriteAnimViewer::drawSpriteGrid() {
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::PopStyleColor();
+                ImGui::EndDisabled();
+
+                ImVec2 min = ImGui::GetItemRectMin();
+                ImVec2 max = ImGui::GetItemRectMax();
+
+                if(used && ImGui::IsMouseHoveringRect(min, max)) {
+                    ImGui::BeginTooltip();
+                    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.spriteeditor.cannotdeletesprite").c_str());
+                    for(const auto& animName : names) {
+                        ImGui::BulletText("%s", animName.c_str());
+                    }
+                    ImGui::EndTooltip();
+                }
+
                 ImGui::EndPopup();
             }
             ++count;

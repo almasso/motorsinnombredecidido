@@ -207,6 +207,8 @@ namespace editor {
             return _animations.erase(t);
         }
 
+        bool isSpriteBeingUsedInAnim(editor::resources::Sprite* sprite, std::vector<std::string>& names);
+
         std::filesystem::path getAssetsPath() const;
 
         std::filesystem::path getBuildPath(const std::string &platform) const;

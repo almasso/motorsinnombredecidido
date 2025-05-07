@@ -132,6 +132,7 @@ return {
     ["window.mainwindow.spriteeditor"] = "Sprites and Animations",
     ["window.mainwindow.spriteeditor.sprites"] = "Sprites",
     ["window.mainwindow.spriteeditor.animations"] = "Animations",
+    ["window.mainwindow.spriteeditor.cannotdeletesprite"] = "The sprite is being used in the following animations:",
     ["window.mainwindow.popup.eventwizard.title"] = "Event creation wizard",
     ["window.mainwindow.popup.eventwizard.eventname"] = "Event name",
     ["window.mainwindow.popup.tilesetwizard.title"] = "Tileset creation wizard",

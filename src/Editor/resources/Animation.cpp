@@ -8,6 +8,7 @@
 #include "resources/Sprite.h"
 #include "io/LuaManager.h"
 #include "common/Project.h"
+#include <algorithm>
 
 #define framesKey "frames"
 #define timeBFKey "timeBetweenFrames"
@@ -135,4 +136,8 @@ void editor::resources::Animation::setAnimationsDirectory(const std::filesystem:
 
 std::string editor::resources::Animation::getFilePath(const std::string &animationName) {
     return (_animationsDirectory / (animationName + ".lua")).string();
+}
+
+bool editor::resources::Animation::isSpriteBeingUsed(editor::resources::Sprite *sprite) {
+    return std::find(_frames.begin(), _frames.end(), sprite) != _frames.end();
 }

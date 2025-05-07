@@ -74,7 +74,7 @@ void editor::render::modals::AnimationWizard::drawControls() {
         ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.popup.animationwizard.animationame").c_str(),
                  _nameBuffer, IM_ARRAYSIZE(_nameBuffer), ImGuiInputTextFlags_EnterReturnsTrue);
 
-        if(_project->getTileset(_nameBuffer) != nullptr) _sameName = true;
+        if(_project->getAnimation(_nameBuffer) != nullptr) _sameName = true;
         else _sameName = false;
 
         if(_animationToModify->getName() != "" && _animationToModify->getName() == _nameBuffer) _sameName = false;
@@ -102,6 +102,29 @@ void editor::render::modals::AnimationWizard::drawThumbnail() {
         ImGui::PushID(count);
         ImGui::BeginGroup();
 
+        ImGui::BeginGroup();
+
+        ImVec2 p0 = ImGui::GetCursorScreenPos();
+        float grabLineHeight = 2.0f;
+        float grabLineSpacing = 4.0f;
+        int grabLineCount = 3;
+        float grabLineWidth = 10.0f;
+        ImU32 grabColor = ImGui::GetColorU32(ImGuiCol_TextDisabled);
+
+        float totalGrabHeight = grabLineCount * grabLineSpacing;
+        float startY = p0.y + (thumbnailSize.y - totalGrabHeight) * 0.5f;
+
+        for(int i = 0; i < grabLineCount; ++i) {
+            float y = startY + i * grabLineSpacing;
+            ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(p0.x, y), ImVec2(p0.x + grabLineWidth, y + grabLineHeight), grabColor);
+        }
+
+        ImGui::Dummy(ImVec2(grabLineWidth + 4.0f, thumbnailSize.y));
+        ImGui::EndGroup();
+        ImGui::SameLine();
+
+        ImGui::BeginGroup();
+
         float textureWidth = ((SDL_Texture*)(*it)->getTextureID())->w;
         float textureHeight = ((SDL_Texture*)(*it)->getTextureID())->h;
 
@@ -118,6 +141,7 @@ void editor::render::modals::AnimationWizard::drawThumbnail() {
 
         ImGui::SameLine();
         ImGui::Text((*it)->getName().c_str());
+        ImGui::EndGroup();
         ImGui::EndGroup();
 
         if(ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {

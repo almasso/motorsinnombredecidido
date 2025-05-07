@@ -501,3 +501,16 @@ void editor::Project::buildAnimations(std::string const& platform) {
         animation->writeToEngineLua(platform);
     }
 }
+
+bool editor::Project::isSpriteBeingUsedInAnim(editor::resources::Sprite *sprite, std::vector<std::string>& names) {
+    names.clear();
+    bool used = false;
+
+    for(auto& [key, value] : _animations) {
+        if(value->isSpriteBeingUsed(sprite)) {
+            used = true;
+            names.push_back(value->getName());
+        }
+    }
+    return used;
+}
