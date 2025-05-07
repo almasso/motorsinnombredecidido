@@ -38,7 +38,7 @@ void editor::resources::Animation::init(const std::string& name, const sol::tabl
     std::vector<Sprite*> tmpFrames;
     for(int i = 1; i <= framesTable.size(); ++i) {
         std::string frameName = framesTable[i];
-        _frames.push_back(_project->getSprite(frameName));
+        tmpFrames.push_back(_project->getSprite(frameName));
     }
 
     init(name, tmpFrames, timeBetweenFrames, loop);
