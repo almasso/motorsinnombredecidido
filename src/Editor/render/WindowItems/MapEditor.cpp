@@ -176,7 +176,7 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
                 drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
         } break;
         case GridDrawingMode::DRAW_SELECTED_LAYER_BELOW_TRANSPARENT: {
-            for(int x = currentMap->getLayers() - 1; x > _selectedLayer; --x) {
+            for(int x = 0; x < _selectedLayer; ++x) {
                 resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
                 if(tile != nullptr)
                     drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
@@ -187,7 +187,7 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
                 drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
         } break;
         case GridDrawingMode::DRAW_SELECTED_LAYER_BELOW_OPAQUE: {
-            for(int x = currentMap->getLayers() - 1; x > _selectedLayer; --x) {
+            for(int x = 0; x < _selectedLayer; ++x) {
                 resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
                 if(tile != nullptr)
                     drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
@@ -197,7 +197,7 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
                 drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
         } break;
         case GridDrawingMode::DRAW_ALL: {
-            for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
+            for(int x = 0; x <= currentMap->getLayers() - 1; ++x) {
                 resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
                 if(tile != nullptr)
                     drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
@@ -205,7 +205,7 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
         } break;
         case GridDrawingMode::DRAW_COLLISIONS: {
             if (_selectedMap != nullptr) {
-                for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
+                for(int x = 0; x <= currentMap->getLayers() - 1; ++x) {
                     resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
                     if(tile != nullptr)
                         drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
@@ -216,7 +216,7 @@ void editor::render::tabs::MapEditor::drawTileInGrid(resources::Map* currentMap,
         } break;
         case GridDrawingMode::DRAW_OBJECTS: {
             if (_selectedMap != nullptr) {
-                for(int x = currentMap->getLayers() - 1; x >= 0; --x) {
+                for(int x = 0; x <= currentMap->getLayers() - 1; ++x) {
                     resources::Tile* tile = currentMap->getTiles()[x][i + mapWidth * j];
                     if(tile != nullptr)
                         drawList->AddImage(tile->texture, tilePos, tileEnd, tile->rect.Min, tile->rect.Max);
@@ -358,7 +358,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
         ImGui::SetNextItemWidth(250);
         if (ImGui::BeginCombo("##layerDropdown", _selectedLayer >= 0 ? (io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer") + " " + std::to_string(_selectedLayer)).c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer").c_str())) {
             if(_selectedMap != nullptr) {
-                for(int i = 0; i < _selectedMap->getLayers(); ++i) {
+                for(int i = _selectedMap->getLayers() - 1; i >= 0; --i) {
                     bool isSelected = (i == _selectedLayer);
                     if (ImGui::Selectable((io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.layer") + " " + std::to_string(i)).c_str(), isSelected)) {
                         _selectedLayer = i;

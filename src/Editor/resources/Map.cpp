@@ -282,7 +282,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
     for(int i = 0; i < _collisions.size(); ++i) {
         if (_collisions[i]) collisions.insert(i);
     }
-    for (int i = 0; i < _layers; i++) {
+    for (int i = _layers - 1; i >= 0; --i) {
         for (int j = 0; j < _mapWidth; j++) {
             for (int k = 0; k < _mapHeight; k++) {
                 Tile* tile = _tiles[i][k * _mapWidth + j];
@@ -295,7 +295,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                     if (tile != nullptr) {
                         sol::table sprite = lua.create_table();
                         sprite["sprite"] = (std::filesystem::path("data") / "sprites"/(tile->tileset+std::to_string(tile->pos)+".lua")).string();
-                        sprite["layer"] = i;
+                        sprite["layer"] = (_layers - 1) - i;
                         components["SpriteRenderer"] = sprite;
                     }
                     if (auto finder = collisions.find(k * _mapWidth + j); finder != collisions.end()) {
