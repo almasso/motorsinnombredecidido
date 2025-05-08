@@ -184,7 +184,8 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
 
     for (int i = 1; i < 4; i++) {
         sol::table choice = lua.create_table();
-        choice["handler"] = "Choice"+std::to_string(i);
+        std::string choiceId ="Choice"+std::to_string(i);
+        choice["handler"] = choiceId;
         choice["active"] = false;
         sol::table choiceComponents = lua.create_table();
         sol::table choiceTransform = lua.create_table();
@@ -213,7 +214,9 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
             static_cast<int>(220.0f/1920.0f  * dimensions[0] * _cameraSize[0]),
             static_cast<int>(120.0f/1080.0f * dimensions[1] * _cameraSize[1])});
         choiceRectangle["params"] = sol::as_table<std::array<int,1>>({i});
-        choiceComponents["Rectangle"] = choiceRectangle;
+        choiceComponents["Button"] = choiceButton;
+        choice["Components"] = choiceComponents;
+        scene[choiceId] = choice;
     }
 
     return scene;
