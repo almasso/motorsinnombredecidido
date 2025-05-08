@@ -6,7 +6,9 @@
 #include "ChoicesBehaviour.h"
 
 #include <imgui.h>
+#include <common/Project.h>
 #include <io/LocalizationManager.h>
+#include <resources/events/Event.h>
 
 #define variableKey "variable"
 #define optionsKey "options"
@@ -19,6 +21,8 @@
 
 editor::resources::events::ChoicesBehaviour::ChoicesBehaviour(Event* event) :
     EventBehaviourTemplate(event),
+    _isPlayerVariable(false),
+    _playerVariable(""),
     _variable(new char[VARIABLE_NAME_MAX_SIZE]),
     _options() {
     _variable[0] = '\0';
@@ -75,7 +79,11 @@ bool editor::resources::events::ChoicesBehaviour::writeParamsToEngine(std::ostre
 }
 
 bool editor::resources::events::ChoicesBehaviour::render() {
-    bool edited = renderVariableToModify();
+    bool edited = renderIsPlayerVariable();
+    if (_isPlayerVariable)
+        edited = renderPlayerVariable() || edited;
+    else
+        edited = renderVariableToModify() || edited;
     edited = renderOptions() || edited;
     edited = renderAddOptionButton() || edited;
     return edited;
@@ -95,6 +103,35 @@ bool editor::resources::events::ChoicesBehaviour::writeParams(sol::table& params
     return true;
 }
 
+bool editor::resources::events::ChoicesBehaviour::renderIsPlayerVariable() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ModifyVariableBehaviour.playerVariable").c_str());
+    return ImGui::Checkbox(("##choiceIsPlayerVariable" + std::to_string(reinterpret_cast<long long>(this))).c_str(), &_isPlayerVariable);
+}
+
+bool editor::resources::events::ChoicesBehaviour::renderPlayerVariable() {
+    ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.isPlayerVariable").c_str());
+    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x / 2.0f);
+    auto const& variables = _event->getProject()->getPlayerLocalVariables();
+    std::string preview;
+    if (variables->contains(_playerVariable))
+        preview = _playerVariable;
+    else preview = io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ModifyVariableBehaviour.selectPlayerVariable");
+
+    if (!ImGui::BeginCombo((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ModifyVariableBehaviour.playerVariable") + "##playerVariableSelector" + std::to_string(reinterpret_cast<long long>(this))).c_str(), preview.c_str()))
+        return false;
+
+    bool edited = false;
+    for (auto& [variableName, variableValue] : *variables) {
+        bool isSelected = _playerVariable == variableName;
+        if(ImGui::Selectable(variableName.c_str(), isSelected)) {
+            _playerVariable = variableName;
+            edited = true;
+        }
+    }
+
+    ImGui::EndCombo();
+    return edited;
+}
 
 bool editor::resources::events::ChoicesBehaviour::renderVariableToModify() {
     ImGui::Text(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.variable").c_str());

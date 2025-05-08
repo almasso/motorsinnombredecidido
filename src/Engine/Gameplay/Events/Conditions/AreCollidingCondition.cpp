@@ -4,12 +4,16 @@
 #include <Core/Entity.h>
 #include <Core/Scene.h>
 #include <sol/table.hpp>
+#include <Utils/Error.h>
 
 bool AreCollidingCondition::initCollider(Collider*& collider, std::string const& handler) {
     Entity* entityA = _scene->getEntityByHandler(handler);
     if (!entityA)
         return false;
     collider = entityA->getComponent<Collider>();
+    if (collider == nullptr) {
+        Error::ShowError("Collision check error", "Object \"" + handler + "\" has no collisions");
+    }
     return collider != nullptr;
 }
 

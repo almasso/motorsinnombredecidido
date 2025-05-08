@@ -24,10 +24,14 @@ namespace editor::resources::events {
     private:
         using optionText = char*;
         using optionValue = char*;
+        bool _isPlayerVariable;
+        std::string _playerVariable;
         char* _variable;
         std::list<std::pair<optionText, optionValue>> _options;
         using optionsIterator = std::list<std::pair<optionText, optionValue>>::iterator;
 
+        bool renderIsPlayerVariable();
+        bool renderPlayerVariable();
         bool renderVariableToModify();
         bool renderOptions();
         bool renderOptionValue(optionValue value, int i);

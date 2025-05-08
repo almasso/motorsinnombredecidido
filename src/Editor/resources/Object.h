@@ -32,7 +32,7 @@ namespace editor::resources {
         ~Object();
         bool read(sol::table const& objectTable);
         bool write(sol::table& objectTable);
-        bool writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies);
+        bool writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies, std::string const& handler);
 
         const std::string& getSprite() const;
         void setSprite(const std::string& sprite);

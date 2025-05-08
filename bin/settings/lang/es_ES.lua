@@ -57,6 +57,7 @@ return {
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.options"] = "Opciones",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.text"] = "Texto",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.value"] = "Valor",
+    ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.isPlayerVariable"] = "Variable de jugador a modificar",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.variable"] = "Variable a modificar",
     ["window.mainwindow.eventeditor.behaviours.ChoicesBehaviour.remove"] = "Eliminar opción",
     ["window.mainwindow.eventeditor.behaviours.DialogueBehaviour"] = "Diálogo",

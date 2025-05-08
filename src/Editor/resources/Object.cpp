@@ -105,7 +105,7 @@ bool editor::resources::Object::write(sol::table& objectTable) {
     return true;
 }
 
-bool editor::resources::Object::writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies) {
+bool editor::resources::Object::writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies, std::string const& handler) {
     std::ostringstream events;
     events << "events = {\n";
     for (auto& event : _events) {
@@ -113,6 +113,7 @@ bool editor::resources::Object::writeToEngine(std::ostream& object, events::Even
     }
     events << "}\n";
 
+    object << "handler = \"" << handler << "\",\n";
     object << "children = {\n";
     writeChildrenToEngine(object, dependencies);
     object << "},\n";
@@ -294,9 +295,14 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
     components << "},\n";
     components << "LocalVariables = {\n";
     for (auto& [key, value] : _localVariables) {
-        components << key << " = " << value.as<std::string>() << ",\n";
+        components << key << " = \"" << value.as<std::string>() << "\",\n";
     }
     components << "},\n";
+    if (_collides) {
+        components << "Collider = {\n";
+        components << "size = {" << _project->getDimensions()[0] << ", " << _project->getDimensions()[1] << "},\n";
+        components << "},\n";
+    }
 
     return true;
 }
