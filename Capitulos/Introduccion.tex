@@ -42,6 +42,39 @@ Para ello:
 \end{itemize}
 
 \section{Plan de trabajo}
+\begin{figure}[t]
+	\begin{center}
+		\begin{ganttchart}[
+    		hgrid,
+    		vgrid,
+    		time slot format=isodate-yearmonth,
+    		title label font=\small,
+    		time slot unit=month,
+    		title/.style={fill=blue!20},
+    		title height=1.2,
+    		x unit=2cm
+  			]{2025-01}{2025-06}
+	
+			\gantttitle{Enero}{1}
+			\gantttitle{Febrero}{1}
+			\gantttitle{Marzo}{1}
+			\gantttitle{Abril}{1}
+			\gantttitle{Mayo}{1}
+			\gantttitle{Junio}{1}\\
+	
+			\ganttbar{Diseño del Proyecto}{2025-01}{2025-02}\\
+			\ganttbar{Desarrollo del motor}{2025-02}{2025-05}\\
+			\ganttbar{Desarrollo del editor}{2025-02}{2025-05}\\
+			\ganttbar{Desarrollo de la memoria}{2025-03}{2025-05}\\
+			\ganttbar{Pruebas con usuarios}{2025-05}{2025-05}\\
+			\ganttbar{Entrega final}{2025-05}{2025-05}\\
+			\ganttbar{Presentación final}{2025-06}{2025-06}	
+		\end{ganttchart}
+		\caption{Diagrama de Gantt mostrando la planificación temporal del trabajo.} 
+		\label{fig:ganttespanol}
+	\end{center}
+\end{figure}
+
 Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en tres fases:
 \begin{itemize}
 	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentarán abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentará proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.

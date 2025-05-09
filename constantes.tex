@@ -104,3 +104,10 @@
 \end{center}%
 \end{figure}%
 }
+
+\newcommand{\formatdate}[1]{%
+  \DTMdisplaydate{%
+    \DTMfetchyear{#1}}{%
+    \DTMfetchmonth{#1}}{%
+    \DTMfetchday{#1}}{%
+    -1}}

@@ -44,6 +44,39 @@ To accomplish this:
 \end{itemize}
 
 \section*{Work Plan}
+\begin{figure}[t]
+	\begin{center}
+		\begin{ganttchart}[
+    		hgrid,
+    		vgrid,
+    		time slot format=isodate-yearmonth,
+    		title label font=\small,
+    		time slot unit=month,
+    		title/.style={fill=blue!20},
+    		title height=1.2,
+    		x unit=2cm
+  			]{2025-01}{2025-06}
+	
+			\gantttitle{January}{1}
+			\gantttitle{February}{1}
+			\gantttitle{March}{1}
+			\gantttitle{April}{1}
+			\gantttitle{May}{1}
+			\gantttitle{June}{1}\\
+	
+			\ganttbar{Project design}{2025-01}{2025-02}\\
+			\ganttbar{Engine development}{2025-02}{2025-05}\\
+			\ganttbar{Editor development}{2025-02}{2025-05}\\
+			\ganttbar{Document writing}{2025-03}{2025-05}\\
+			\ganttbar{User testing}{2025-05}{2025-05}\\
+			\ganttbar{Final submission}{2025-05}{2025-05}\\
+			\ganttbar{Final presentation}{2025-06}{2025-06}	
+		\end{ganttchart}
+		\caption{Gantt diagram showing the temporal planning of the work.} 
+		\label{fig:ganttingles}
+	\end{center}
+\end{figure}
+
 To accomplish the previous objectives, the work plan will be divided in three phases: 
 \begin{itemize}
 	\item Research on the current state of engines and editors specifically designed for role-playing games, as well as on role-playing games themselves. This section will aim to identify the common features shared by all engines, editors and games, both open-source and commercial ones, and propose improvements to address the issues these tools may present for inexperienced new users. 
