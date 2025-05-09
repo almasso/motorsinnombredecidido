@@ -1,4 +1,4 @@
-\chapter{Estado de la cuestión}
+\chapter{Estado de la Cuestión}
 \label{cap:estadoDeLaCuestion}
 
 \begin{resumen}
@@ -146,33 +146,38 @@ Los desarrolladores \textit{indie}, por su parte, tienen la posibilidad de poder
 
 \subsubsection{Componentes de un motor de videojuegos}
 
-\figuratikzparametros{Representación esquemática de la estructura de un juego y su motor con algunos de los componentes principales}{fig:juegoymotor}{
-	enginebox/.style={draw, thick, minimum width=9cm, minimum height=6cm, align=center},
+\begin{figure}[t]
+	\begin{center}
+		\begin{tikzpicture}[enginebox/.style={draw, thick, minimum width=9cm, minimum height=6cm, align=center},
   subbox/.style={draw, thick, minimum width=3.8cm, minimum height=1cm, align=center},
-  labelbox/.style={draw, thick, minimum width=3cm, minimum height=1cm, align=center}
-}{
-	\node[labelbox] (game) {\textbf{Juego}};
+  labelbox/.style={draw, thick, minimum width=3cm, minimum height=1cm, align=center}]
+  			\node[labelbox] (game) {\textbf{Juego}};
 	
-	\node[enginebox, below=1.5cm of game] (engine) {\textbf{Motor}};
+			\node[enginebox, below=1.5cm of game] (engine) {\textbf{Motor}};
 	
-	\node[subbox, anchor=north west] at ([xshift=0.5cm, yshift=-0.3cm]engine.north west) (render) {Motor de \textit{render}};
+			\node[subbox, anchor=north west] at ([xshift=0.5cm, yshift=-0.3cm]engine.north west) (render) {Motor de \textit{render}};
 	
-	\node[subbox, right=0.5cm of render] (physics) {Motor de físicas};
+			\node[subbox, right=0.5cm of render] (physics) {Motor de físicas};
 	
-	\node[subbox, below=0.3cm of render] (sound) {Motor de sonido};
+			\node[subbox, below=0.3cm of render] (sound) {Motor de sonido};
 	
-	\node[subbox, right=0.5cm of sound] (input) {Motor de \textit{input}};
+			\node[subbox, right=0.5cm of sound] (input) {Motor de \textit{input}};
 	
-	\node[subbox, below=2.1cm of render] (net) {Motor de red};
+			\node[subbox, below=2.1cm of render] (net) {Motor de red};
 	
-	\node[subbox, right=0.5cm of net] (scripting) {Motor de \textit{scripting}};
+			\node[subbox, right=0.5cm of net] (scripting) {Motor de \textit{scripting}};
 	
-	\node[subbox, below=0.3cm of net] (anim) {Sistema de animación};
+			\node[subbox, below=0.3cm of net] (anim) {Sistema de animación};
 	
-	\node[subbox, right=0.5cm of anim] (AI) {Motor de IA};
+			\node[subbox, right=0.5cm of anim] (AI) {Motor de IA};
 	
-	\draw[->, thick] (game.south) -- node[midway, right] {utiliza} (engine.north);
-}
+			\draw[->, thick] (game.south) -- node[midway, right] {utiliza} (engine.north);
+		\end{tikzpicture}
+		\caption{Representación esquemática de la estructura de un juego y su motor con algunos de los componentes principales} 
+		\label{fig:juegoymotor}
+	\end{center}
+\end{figure}
+
 
 Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores de tecnología dependiendo de las necesidades de los programadores o del juego que se esté programando. Siguiendo el esquema provisto en la figura \ref{fig:juegoymotor}, estos son los componentes principales de un motor de videojuegos tanto de grandes empresas, como motores con licencia gratuita, como aquellos de código abierto:
 \begin{itemize}

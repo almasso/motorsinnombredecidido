@@ -1,7 +1,7 @@
 \chapter{Introducción}
 \label{cap:introduccion}
 
-\chapterquote{Una vez tuve una conversación bastante rara con un par de abogados y estaban hablando sobre: \comillas{¿Cómo elegís a vuestro público objetivo? ¿Hacéis ``focus groups'', encuestáis a gente y todo eso?} Y es como: \comillas{No, simplemente hacemos juegos que creemos que molan.}}{John Carmack}
+\chapterquote{Una vez tuve una conversación bastante rara con un par de abogados y estaban hablando sobre: \comillas{¿Cómo elegís a vuestro público objetivo? ¿Hacéis "focus groups", encuestáis a gente y todo eso?} Y es como: \comillas{No, simplemente hacemos juegos que creemos que molan.}}{John Carmack}
 
 \section{Motivación}
 Los videojuegos de rol han sido uno de los géneros más influyentes de la industria, desde sus orígenes en la década de los años 80 hasta la actualidad, donde concentran una gran parte de todos los juegos vendidos a diario.
@@ -16,22 +16,84 @@ Numerosos programas de edición y desarrollo de videojuegos han aparecido en las
 
 \smallskip
 
-Aquellos programas que sí que lo están tienen dos problemas fundamentales:
+Aquellos programas que sí que están pensados para el desarrollo específico de videojuegos de rol tienen dos problemas fundamentales:
 \begin{itemize}
 	\item Los que ofrecen una interfaz intuitiva, sencilla de utilizar, y bastante amigable con nuevos usuarios que están introduciéndose en el mundo del desarrollo de videojuegos están bajo un muro de pago, que pese a no ser muy elevado, hace que usuarios aficionados paguen por un \textit{software} que rara vez utilizarán si no se afianzan finalmente en el mundo del desarrollo.
 	\item Los que no están bajo un muro de pago, es decir, son \textit{software} de código libre, suelen tener interfaces y sistemas complicados de entender para noveles, quienes debido a la complejidad de estas herramientas deciden abandonar por completo el desarrollo.
 \end{itemize}
 
+\medskip
+
+La motivación principal de este Proyecto surge de la necesidad de contar con herramientas accesibles y flexibles, tanto para desarrolladores independientes experimentados que quieran crear juegos sin las limitaciones impuestas por los motores de uso general, como para personas sin amplio conocimiento en el desarrollo de videojuegos o en la programación de estos.
+
 \section{Objetivos}
-Descripción de los objetivos del trabajo.
+Este Proyecto tiene marcados como objetivos el desarrollo de un motor de videojuegos 2D, pensado específicamente para videojuegos de rol, acompañado de un editor que permita un desarrollo sencillo de videojuegos para este motor. El editor podrá generar ejecutables que el usuario solamente necesite distribuir sin la necesidad de hacer ningún paso extra posterior al desarrollo.
+
+\smallskip
+
+La interfaz del editor estará pensada para usuarios primerizos en el desarrollo, sin eliminar la posibilidad a usuarios más experimentados que quieran hacer juegos de mayor envergadura.
+
+\medskip
+
+Para ello:
+\begin{itemize}
+	\item Se desarrollará un motor y un editor funcional que pueda generar videojuegos de rol y que tenga soporte multiplataforma.
+	\item Se probará con usuarios para demostrar el funcionamiento del Proyecto y se extraerán las conclusiones necesarias, así como posibles mejoras de cara al futuro.
+\end{itemize}
 
 \section{Plan de trabajo}
-Aquí se describe el plan de trabajo a seguir para la consecución de los objetivos descritos en el apartado anterior.
+Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en tres fases:
+\begin{itemize}
+	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentarán abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentará proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
+	\item Diseño del Proyecto. Con las características comunes entre los distintos motores, editores y videojuegos, se planteará un diseño inicial que servirá como base durante el desarrollo del Proyecto. Este diseño, si bien no es inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
+	\item Desarrollo del Proyecto. Una vez finalizado el diseño casi \comillas{final} del Proyecto, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
+		\begin{itemize}
+			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades del Proyecto, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo de las aplicaciones. 
+			\item Desarrollo del motor. Se desarrollará un motor de acuerdo a los planes diseñados anteriormente, con soporte multiplataforma tanto para ordenador como para dispositivos móviles Android.
+			\item Desarrollo del editor. Al igual que con el motor, se desarrollará el editor de acuerdo al diseño preestablecido.
+		\end{itemize}
+	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento del Proyecto, se probará la aplicación final con usuarios de diversa índole ajenos al desarrollo de este. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán en el Proyecto todas aquellas características que merezcan algo de reparo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que, o bien no merezca la pena solucionar en ese momento, o bien supongan una excesiva carga como para poder desarrollarla en el tiempo restante.
+\end{itemize}
+
 
 \section{Herramientas y Metodología}
-Descripción de las herramientas utilizadas en el trabajo y de la metodología seguida para llevar a cabo las etapas del plan de trabajo.
+En cuanto a las herramientas, se usará Git como sistema de control de versiones, usando repositorios alojados en GitHub, con la ayuda de GitHub Desktop como herramienta de manejo del repositorio. La gestión de tareas se llevará a cabo a través de los proyectos que GitHub incorpora en su página web.
+
+\smallskip
+
+El acceso al repositorio con el código puede hacerse a través de esta dirección: \href{https://github.com/almasso/rpgbaker}{\textbf{https://github.com/almasso/rpgbaker}}.
+
+\medskip
+
+Con respecto a las herramientas de desarrollo del Proyecto, utilizaremos como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; y usaremos CMake como herramienta de generación de librerías externas y de compilación. Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}.
+
+\medskip
+
+Por otra parte, la generación del PDF de la memoria se llevará a cabo mediante \LaTeX , utilizando la plantilla de \texis , y utilizando como entorno de edición de esta Texmaker.
+
+\bigskip
+
+En cuanto a la metodología de trabajo, se propondrán reuniones cada dos semanas con el tutor, pudiendo variar el número de semanas dependiendo del progreso realizado. En estas reuniones se expondrá el estado del Proyecto, así como se realizarán consultas referidas al diseño o al desarrollo de este.
+
+\medskip
+
+La comunicación con el equipo se establecerá, tanto mediante reuniones presenciales cuando se tengan que abordar problemas importantes, como mediante \textit{software} que permita mensajería y chat de voz, como Discord. Es mediante esta herramienta que también se tratará de hacer las pruebas finales con los usuarios.
 
 \section{Estructura de la memoria} 
-Explicación breve de la estructura de la memoria (qué se encuentra en cada parte) y algunos enlaces de interés al repositorio con el proyecto, etc...
+En el capítulo \ref{cap:estadoDeLaCuestion}, \textit{Estado de la Cuestión}, se abordará la situación actual de los videojuegos de rol, del desarrollo de videojuegos, así como un poco de contexto histórico de ambos.
 
-\section{Enlaces adicionales}
+\medskip
+
+En el capítulo \ref{cap:planteamiento}, \textit{Planteamiento del Proyecto}, se tratará en profundidad el diseño planteado y las decisiones tomadas previas al desarrollo de las aplicaciones.
+
+\medskip
+
+En el capítulo \ref{cap:desarrollo}, \textit{Desarrollo del Proyecto}, se hablará de la estructura interna del motor y del editor en cuanto a código, abordando también los problemas que se hayan tenido durante esta fase y las soluciones propuestas.
+
+\medskip
+
+En el capítulo \ref{cap:conclusiones}, \textit{Evaluación y Conclusiones}, se expondrán las preguntas y objetivos de investigación, el desarrollo de las pruebas con los usuarios, y un análisis acerca de las pruebas, del que se extraerán conclusiones.
+
+\medskip
+
+Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Trabajo Futuro}, se detallarán posibles mejoras para la implementación final de las aplicaciones que pueden ser interesantes.
