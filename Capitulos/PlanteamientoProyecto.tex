@@ -54,4 +54,42 @@ En cuanto al diseño del motor, las primeras decisiones giraban en torno al cont
 El motor seguiría un patrón EC (entidad-componente), con las entidades agrupadas en distintas escenas.
 
 \subsection{Diseño del editor}
+Sobre el editor, la decisión más importante fue elegir qué librería se iba a utilizar para poder desarrollar toda la interfaz y la funcionalidad básica de este. Al ya haber optado por utilizar \texttt{SDL3} como base para el motor, se optó también como base para el editor, acompañada de \texttt{DearImGui} para el dibujado y manejo de los elementos de la interfaz.
 
+\medskip
+
+También, al ya haber optado por el uso de Lua como lenguaje de \textit{scripting} para el motor, se optó por el uso del mismo para la generación de \textit{scripts} del editor, acompañados por la librería \texttt{sol2}, que proporciona \textit{bindings} (código que permite el manejo de Lua desde C/C++ de una manera muy sencilla sin tener que lidiar con la a veces rebuscada sintaxis de la librería \texttt{lua} de C/C++) para facilitar el desarrollo.
+
+\medskip
+
+En cuanto a diseño, se decidió independizar el desarrollo del editor del motor para poder avanzar en el Proyecto de manera más rápida, por lo que el editor tiene sus propias clases encargadas del dibujado en pantalla, de la gestión de la entrada del usuario y del manejo del \textit{scripting} y ficheros.
+
+\smallskip
+
+Si bien es cierto que una de las técnicas comunes en el diseño de motor-editor es la de implementar el editor utilizando las propias funcionalidades del motor, ya que se evita tener que implementar dos veces las mismas funcionalidades (en cuanto al \textit{renderizado}, \textit{input} y \textit{scripting}), creemos que la opción escogida ha supuesto una menor carga de trabajo final en el Proyecto y ha permitido flujos de iteración en el desarrollo más ágiles.
+
+\medskip
+
+En cuanto a la estructura de código, se optó por utilizar un patrón típico en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas otras ventanas, con el uso de ventanas modales que apareciesen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
+
+\medskip
+
+Las ventanas tendrían comunicación unas con otras utilizando clases como \texttt{Project}, que almacenaría toda la información referente a cada uno de los proyectos que el usuario crease (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
+
+\smallskip
+
+Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada-salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que el proyecto sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
+
+\medskip
+
+Para la persistencia de los ficheros de configuración del proyecto, se optó por utilizar archivos de Lua simulando el uso que otros formatos, como JSON o XML pudiesen tener, ya que permitía reusar Lua no solo como lenguaje de \textit{scripting} y no complicaba el tener que utilizar otra librería específica para ello. Estos archivos Lua difieren de los que el motor interpretará al final, ya que el editor necesita muchos más datos que para el motor son irrelevantes, por lo que se tendría que tener una parte de compilación o generación de la \textit{build} del juego que \comillas{tradujese} los archivos del editor a archivos del motor. Al igual que como ocurre en los motores más generales, se decidió que el editor no pudiese interpretar los archivos finales del juego\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}
+
+\bigskip
+
+\figura{Bitmap/editorMapas}{width=\textwidth}{fig:mapeditor}{Editor de mapas de \textit{RPGBaker}.}
+
+El editor, se diseñó teniendo en mente las características principales que se querían poder editar del motor, es decir, un editor de mapas que permitiese al usuario cargar sus propias \textit{tilesets}, decidir el tamaño de los mapas, añadir objetos de manera visual y establecer las colisiones, aprovechándose de la posibilidad de tener varias capas de dibujado, así como poder situar la posición de los mapas en el mundo (ver figura \ref{fig:mapeditor}); un editor de eventos, que permitirían flujos condicionales y la ejecución de animaciones o lanzamiento de otros eventos; un editor del personaje, que permitiese la personalización y configuración de elementos de este; y un editor de \textit{sprites} y animaciones, que permitiesen al usuario poder elegir un fichero de imagen, generar los \textit{sprites} decidiendo las coordenadas iniciales y el alto y ancho de la imagen, y con esos \textit{sprites} poder generar las animaciones, eligiendo el tiempo entre cada uno de los fotogramas y el orden de estos. Todos estos elementos tendrían que poder ser editados y eliminados una vez creados.
+
+\medskip
+
+En un principio, se contaba con la idea de que el editor tuviese un \textit{viewport} para que el usuario final pudiese ver en tiempo real el desarrollo que estaba haciendo, y poder ejecutar el juego desde el propio editor, al estilo de \textit{Unity}, pero debido a complicaciones con la API de \texttt{SDL3} decidimos descartarlo y permitir al usuario ejecutar su juego con una instancia del motor aparte.
