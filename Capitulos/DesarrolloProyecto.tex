@@ -5,9 +5,86 @@
 En este capítulo se tratará la implementación del motor, la del editor, así como una puesta en marcha del entorno de desarrollo utilizado.
 \end{resumen}
 
-\section{Puesta en marcha}
+\section{Puesta en marcha del \textit{toolchain}}
+\begin{figure}[htbp]
+    \dirtree{%
+    .1 Proyecto.
+    .2 CMakeLists.txt.
+    .2 bin.
+    .2 projects.
+    .3 APK.
+    .4 app.
+    .5 build.gradle.
+    .5 CMakeLists.txt.
+    .5 src.
+    .6 main.
+    .7 AndroidManifest.xml.
+    .3 Executable.
+    .4 CMakeLists.txt.
+    .3 Editor.
+    .4 CMakeLists.txt.
+    .3 Engine.
+    .4 CMakeLists.txt.
+    .3 DearImGui.
+    .4 CMakeLists.txt.
+    .3 lua.
+    .4 CMakeLists.txt.
+    .2 src.
+    .3 APK.
+    .3 Executable.
+    .3 Editor.
+    .3 Engine.
+    .3 lua.
+    .4 lua.hpp.
+    }%
+    \caption{Estructura de carpetas del Proyecto.}
+    \label{fig:estructuraproyecto}
+\end{figure}
 
+Antes de comenzar a desarrollar ambas herramientas, se desarrolló un \textit{toolchain} (cadena de herramientas) que permitiese la generación de proyectos, tanto para el desarrollo en C++, como para el desarrollo en Java de Android.
 
+\smallskip
+
+Para ello, fue necesario configurar el archivo \texttt{CMakeLists.txt} de la raíz del Proyecto. Este fichero CMake permite la descarga de las dependencias externas mediante el uso del módulo \texttt{FetchContent}. Aquí se encuentra el primer \comillas{inconveniente}, derivado del uso de este módulo: \texttt{FetchContent} descarga las librerías externas que se le pidan tantas veces como plataformas y tipos de compilación posibles haya. Esto provoca que una librería muy sencilla se necesite descargar ocho veces para poder generar el ejecutable final del juego para cada una de las plataformas destino deseadas (en total, cuatro plataformas destino y dos tipos de compilación por plataforma). 
+
+\smallskip
+
+Pese a haber investigado alguna manera sencilla de poder evitarlo, el comportamiento de este módulo es fijo y no se ha podido encontrar una alternativa.
+
+\medskip
+
+Por otra parte, atendiendo a la figura \ref{fig:estructuraproyecto}, cada uno de los proyectos contiene a su vez un fichero \texttt{CMakeLists.txt} que configura las direcciones de inclusión y de enlazado de cada una de las herramientas, así como la detección de los ficheros \texttt{.cpp} necesarios para la compilación. Esta estructura modular permite un mejor mantenimiento de cada proyecto, manteniendo cada módulo separado y encapsulado, lo que permite a su vez facilidad a la hora de las pruebas durante el desarrollo.
+
+\medskip
+
+Debido a que el proyecto \texttt{Engine} ha sido concebido como una librería dinámica, se ha necesitado la creación de un proyecto \texttt{Executable}, que genera un ejecutable con llamadas a la API provista en \texttt{Engine}. Este será el ejecutable final que lance al juego.
+
+\medskip
+
+En cuanto a los proyectos \texttt{lua} y \texttt{DearImGui}, se han generado los \texttt{CMakeLists.txt} correspondientes para su sencilla incorporación, debido a que estas dos librerías no disponen de soporte inicial para CMake.
+
+\smallskip
+
+También es necesario mencionar que se ha añadido un fichero de cabeceras de C++, \texttt{lua.hpp}, con el siguiente contenido:
+
+\begin{minted}[fontsize=\small]{c}
+	extern "C" {
+		#include <lua.h>
+		#include <lauxlib.h>
+		#include <lualib.h>	
+	}
+\end{minted}
+
+Esto es debido a que la librería de Lua para C/C++ está escrita en C, por lo que es necesario decirle al compilador de C++ que trate todo el contenido de la librería como si fuese código C. Así se evita cualquier problema a la hora de enlazar el proyecto con la librería de Lua debido al \textit{name mangling} (o modificación de nombres) que el compilador de C++ pueda hacer.
+
+\bigskip
+
+En cuanto a la generación del proyecto en Android, se ha generado un fichero \texttt{build.gradle} que habilita el uso del NDK y JNI para poder ejecutar el motor desde una APK, así como la configuración de la entrada de la aplicación y del manifiesto de Android (archivo en formato XML que tiene información esencial de la aplicación).
+
+\smallskip
+
+Gracias a \texttt{SDL}, no ha hecho falta programar la entrada a la aplicación en Java, sino que es la propia librería la que se encarga de llamar automáticamente al código C++ mediante un extra para la programación en Android.
 \section{Desarrollo del motor}
 
 \section{Desarrollo del editor}
+\subsubsection{Estructura del código y organización de módulos}
