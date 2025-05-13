@@ -4,7 +4,7 @@
 \chapterquote{Una vez tuve una conversación bastante rara con un par de abogados y estaban hablando sobre: \comillas{¿Cómo elegís a vuestro público objetivo? ¿Hacéis "focus groups", encuestáis a gente y todo eso?} Y es como: \comillas{No, simplemente hacemos juegos que creemos que molan.}}{John Carmack}
 
 \section{Motivación}
-Los videojuegos de rol han sido uno de los géneros más influyentes de la industria, desde sus orígenes en la década de los años 80 hasta la actualidad, donde concentran una gran parte de todos los juegos vendidos a diario.
+Los videojuegos de rol han sido uno de los géneros más influyentes de la industria, desde sus orígenes en la década de los años 80 hasta la actualidad, donde concentran una gran parte de la cuota de mercado.
 
 \smallskip
 
@@ -37,13 +37,14 @@ La interfaz del editor estará pensada para usuarios primerizos en el desarrollo
 
 Para ello:
 \begin{itemize}
-	\item Se desarrollará un motor y un editor funcional que pueda generar videojuegos de rol y que tenga soporte multiplataforma.
-	\item Se probará con usuarios para demostrar el funcionamiento del Proyecto y se extraerán las conclusiones necesarias, así como posibles mejoras de cara al futuro.
+	\item Se desarrollará un motor multiplataforma que permita la implementación de videojuegos de rol.
+	\item Se desarrollará un editor multiplataforma que facilite la implementación de los videojuegos de rol en el motor desarrollado.
+	\item Se probarán ambas herramientas con usuarios para demostrar el funcionamiento del Proyecto y se extraerán las conclusiones necesarias, así como posibles mejoras de cara al futuro.
 \end{itemize}
 
 \section{Plan de trabajo}
 \begin{figure}[t]
-	\begin{center}
+	\scalebox{0.8}{
 		\begin{ganttchart}[
     		hgrid,
     		vgrid,
@@ -61,36 +62,37 @@ Para ello:
 			\gantttitle{Abril}{1}
 			\gantttitle{Mayo}{1}
 			\gantttitle{Junio}{1}\\
-	
+			
+			\ganttbar{Investigación del estado actual}{2025-01}{2025-02}\\	
 			\ganttbar{Diseño del Proyecto}{2025-01}{2025-02}\\
 			\ganttbar{Desarrollo del motor}{2025-02}{2025-05}\\
 			\ganttbar{Desarrollo del editor}{2025-02}{2025-05}\\
 			\ganttbar{Desarrollo de la memoria}{2025-03}{2025-05}\\
 			\ganttbar{Pruebas con usuarios}{2025-05}{2025-05}\\
-			\ganttbar{Entrega final}{2025-05}{2025-05}\\
-			\ganttbar{Presentación final}{2025-06}{2025-06}	
+			\ganttbar{Entrega final al Tutor}{2025-05}{2025-05}\\
+			\ganttbar{Defensa ante el Tribunal}{2025-06}{2025-06}	
 		\end{ganttchart}
-		\caption{Diagrama de Gantt mostrando la planificación temporal del trabajo.} 
-		\label{fig:ganttespanol}
-	\end{center}
+	}
+	\caption{Diagrama de Gantt mostrando la planificación temporal del trabajo.} 
+	\label{fig:ganttespanol}
 \end{figure}
 
 Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en tres fases:
 \begin{itemize}
-	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentarán abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentará proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
-	\item Diseño del Proyecto. Con las características comunes entre los distintos motores, editores y videojuegos, se planteará un diseño inicial que servirá como base durante el desarrollo del Proyecto. Este diseño, si bien no es inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
-	\item Desarrollo del Proyecto. Una vez finalizado el diseño casi \comillas{final} del Proyecto, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
+	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentará abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentará proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
+	\item Diseño del Proyecto. Con las características abstraídas en la fase anterior, se planteará un diseño inicial que servirá como base durante el desarrollo del Proyecto. Este diseño, si bien no será inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
+	\item Desarrollo del Proyecto. Una vez finalizado el diseño del Proyecto, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
 		\begin{itemize}
-			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades del Proyecto, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo de las aplicaciones. 
+			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades del Proyecto, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo de ambas herramientas. 
 			\item Desarrollo del motor. Se desarrollará un motor de acuerdo a los planes diseñados anteriormente, con soporte multiplataforma tanto para ordenador como para dispositivos móviles Android.
 			\item Desarrollo del editor. Al igual que con el motor, se desarrollará el editor de acuerdo al diseño preestablecido.
 		\end{itemize}
-	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento del Proyecto, se probará la aplicación final con usuarios de diversa índole ajenos al desarrollo de este. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán en el Proyecto todas aquellas características que merezcan algo de reparo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que, o bien no merezca la pena solucionar en ese momento, o bien supongan una excesiva carga como para poder desarrollarla en el tiempo restante.
+	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento del Proyecto, se probarán las herramientas finales con usuarios de diversa índole ajenos al desarrollo de estas. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán en el Proyecto todas aquellas funcionalidades críticas que requieran de un arreglo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que supongan una excesiva carga como para poder desarrollarlas en el tiempo restante.
 \end{itemize}
 
 
 \section{Herramientas y Metodología}
-En cuanto a las herramientas, se usará Git como sistema de control de versiones, usando repositorios alojados en GitHub, con la ayuda de GitHub Desktop como herramienta de manejo del repositorio. La gestión de tareas se llevará a cabo a través de los proyectos que GitHub incorpora en su página web.
+En cuanto a las herramientas, se usará Git como sistema de control de versiones, usando un repositorio alojado en GitHub, con la ayuda de GitHub Desktop como herramienta de manejo del este. La gestión de tareas se llevará a cabo a través de los proyectos que GitHub incorpora en su página web.
 
 \smallskip
 
@@ -98,7 +100,7 @@ El acceso al repositorio con el código puede hacerse a través de esta direcci�
 
 \medskip
 
-Con respecto a las herramientas de desarrollo del Proyecto, utilizaremos como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; y usaremos CMake como herramienta de generación de librerías externas y de compilación. Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}.
+Con respecto a las herramientas de desarrollo del Proyecto, se utilizarán como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; y se usará CMake como herramienta de generación de librerías externas y de compilación. Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}\textbf{**}\footnote{ANOT: No estoy del todo de si poner las razones del uso aquí o referenciar la sección posterior donde se desarrolla.}.
 
 \medskip
 
@@ -129,4 +131,4 @@ En el capítulo \ref{cap:conclusiones}, \textit{Evaluación y Conclusiones}, se 
 
 \medskip
 
-Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Trabajo Futuro}, se detallarán posibles mejoras para la implementación final de las aplicaciones que pueden ser interesantes.
+Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Trabajo Futuro}, se detallarán posibles mejoras para una futura actualización de las herramientas que podrían ser interesantes.

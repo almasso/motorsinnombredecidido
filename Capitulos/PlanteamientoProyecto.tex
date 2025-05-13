@@ -2,47 +2,51 @@
 \label{cap:planteamiento}
 
 \begin{resumen}
-En este capítulo vamos a hablar de los objetivos principales del proyecto, así como de las decisiones tomadas en cuanto a diseño del motor y del editor.
+En este capítulo se tratarán los objetivos principales del proyecto, así como las decisiones tomadas en cuanto a diseño del motor y del editor.
 \end{resumen}
 
 \section{Objetivos principales del Proyecto}
-Nuestra idea principal era el desarrollo de un motor de videojuegos, enfocado a los RPG 2D, acompañado de un editor que permitiese un desarrollo rápido y sin mucha complicación de juegos de este tipo, sobre todo para gente no programadora o sin experiencia en el desarrollo de videojuegos. El videojuego generado por el editor debería ser multiplataforma, y poderse ejecutar en Windows, Mac, Linux y Android. Por otra parte, el editor también sería multiplataforma, para las anteriormente mencionadas excepto Android, ya que no es la plataforma más preferible a la hora de poder ejecutar un editor\footnote{Los editores suelen tener elementos que son preferibles de ser utilizados mediante entrada de teclado y ratón. Si bien es cierto que Android permite la conexión de periféricos de entrada-salida, es una plataforma pensada para dispositivos móviles y táctiles.}. 
-
-\medskip
-
-El editor debería ser capaz de poder generar las cuatro versiones del juego distintas para cada plataforma, permitir al usuario elegir para qué plataforma generar el ejecutable, y volcar todo el contenido desarrollado a estos, asegurando que el comportamiento programado fuese el mismo que en el juego final, y que sea esta versión la que el usuario pueda empaquetar y distribuir, sin la necesidad de hacer nada más.
+La idea principal es el desarrollo de un motor de videojuegos, enfocado a los RPG 2D, acompañado de un editor que permita un desarrollo rápido y sin mucha complicación de juegos de este tipo para el motor desarrollado. El editor estaría pensado principalmente para gente no programadora o sin experiencia en el desarrollo de videojuegos, por lo que la interfaz tendría que ser intuitiva y sencilla de utilizar y de aprender.
 
 \smallskip
 
-El editor también debe ser capaz de poder generar diversos proyectos (es decir, distintos juegos), y capaz de guardar el estado de un proyecto y poder recuperarlo cuando el usuario desee, sin que este haya podido perder ningún cambio que haya realizado. Y, finalmente, debe poder exportar proyectos, e importar otros que otros usuarios puedan haber generado en otras plataformas sin mayor dificultad.
+El editor debería ser capaz de generar un ejecutable, que por debajo utilice el motor desarrollado previamente, con el diseño de juego realizado por el usuario en el propio editor, y que pueda ejecutarse en Windows, MacOS, Linux y Android. El editor, por su parte, deberá poder ser ejecutado tanto en Windows, MacOS o Linux, descartando la ejecución en dispositivos móviles\footnote{Los editores suelen tener elementos que son preferibles de ser utilizados mediante entrada de teclado y ratón. Si bien es cierto que Android permite la conexión de periféricos de entrada-salida, es una plataforma pensada para dispositivos móviles y táctiles.}.
+
+\smallskip
+
+El usuario podrá elegir la plataforma para la cual se va a generar el ejecutable, y el editor se encargará de volcar el contenido desarrollado en el proyecto a la \textit{build}, asegurándose de que el comportamiento volcado es el mismo que el diseñado previamente y haciendo que esta \textit{build} sea la versión del juego que el usuario pueda empaquetar y distribuir sin la necesidad de hacer nada más.
 
 \medskip
 
-El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que el usuario solo tenga que desarrollar la parte de diseño (principalmente el diseño artístico y visual. Tendrá que tener soporte para periféricos de entrada-salida tradicionales (teclado y ratón), así como entrada táctil (para los dispositivos móviles). 
+Por otra parte, el editor también debe ser capaz de poder generar diversos proyectos (es decir, distintos juegos), y capaz de guardar el estado de un proyecto y poder recuperarlo cuando el usuario desee, sin que este haya podido perder ningún cambio que haya realizado. Y, también, debe poder exportar proyectos, e importar otros que otros usuarios puedan haber diseñado en otras plataformas o sistemas sin mayor dificultad.
+
+\medskip
+
+El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que el usuario solo tenga que desarrollar la parte de diseño (principalmente el diseño artístico y visual. Tendrá que tener las funcionalidades básicas que se esperan de un RPG, así como soporte para periféricos de entrada-salida tradicionales (teclado y ratón) y entrada táctil (para los dispositivos móviles). 
 
 \section{Toma de decisiones}
 \label{sec:decisiones}
-La primera decisión a tomar fue la plataforma de desarrollo del Proyecto. El Proyecto se iba a desarrollar íntegramente en C++, ya que se quería aprovechar la potencia que ofrece con respecto a otros lenguajes, el soporte multiplataforma que tiene la familia C/C++ tanto en dispositivos de sobremesa como en móviles, y el uso de librerías más avanzadas que nos facilitarían a la hora de desarrollar el Proyecto.
+La primera decisión a tomar fue la plataforma de desarrollo del Proyecto. El Proyecto se iba a desarrollar íntegramente en C++, ya que se quería aprovechar la potencia que ofrece con respecto a otros lenguajes\footnote{El hecho de poder gestionar la memoria utilizada en cualquier momento, así como la ausencia de una máquina virtual intermedia hacen que C++ sea el lenguaje idóneo para proyectos donde el rendimiento es crítico.}, el soporte multiplataforma que tiene la familia C/C++ tanto en dispositivos de sobremesa como en móviles, y el uso de librerías más avanzadas que nos facilitarían a la hora de desarrollar el Proyecto.
 
 \medskip
 
-Debido a nuestra premisa de un desarrollo multiplataforma, se necesitaba usar un IDE (\textit{integrated development environment}, entorno de desarrollo integrado) que fuese compatible tanto con Windows, Mac, y Linux. La opción que en un principio se había valorado era la de utilizar \textit{Visual Studio}, una de las herramientas más populares para el desarrollo en C++; sin embargo, debido a que este IDE carece de versiones para Mac y Linux\footnote{Mac y Linux cuentan con \textit{Visual Studio Code}, que si bien sirve para poder compilar C/C++, es más complicado de configurar para proyectos más complejos como este.}, se optó por hacer el desarrollo del Proyecto en \textit{CLion}, un IDE con soporte para CMake, que facilitaría a la hora de agilizar el trabajo (la compilación utilizando CMake, en nuestra experiencia, es considerablemente más rápida que la compilación utilizando el compilador por defecto de \textit{Visual Studio}) y con la gestión de las dependencias externas.
+Debido a la premisa de un desarrollo multiplataforma, se necesitaba usar un IDE (\textit{integrated development environment}, entorno de desarrollo integrado) que fuese compatible tanto con Windows, MacOS, y Linux. La opción que en un principio se había valorado era la de utilizar \textit{Visual Studio}, una de las herramientas más populares para el desarrollo en C++; sin embargo, debido a que este IDE carece de versiones para MacOS y Linux\footnote{MacOS y Linux cuentan con \textit{Visual Studio Code}, que si bien sirve para poder compilar C/C++ mediante el uso de \textit{plug-in}, es más complicado de configurar para proyectos más complejos como este.}, se optó por hacer el desarrollo del Proyecto en \textit{CLion}, un IDE con soporte para CMake, que facilitaría a la hora de agilizar el trabajo (por la rápida compilación que ofrece) y con la gestión de las dependencias externas.
 
 \smallskip
 
-Pese a que el aprender a usar CMake ocupó gran parte del inicio del desarrollo del Proyecto, las ventajas que han supuesto a la hora del manejo de las distintas dependencias externas frente a la alternativa que se había valorado\footnote{La alternativa era utilizar \textit{submódulos} en GitHub, pero eso suponía un elevado coste extra a la hora de clonar el proyecto (en lugar de clonar únicamente el código a una máquina, todas las librerías que se utilizasen tendrían que ser clonadas), actualizar las librerías, etc\ldots} han hecho que esta opción haya merecido la pena.
+Pese a que el aprender a usar CMake ocupó gran parte del inicio del desarrollo del Proyecto, las ventajas que ha supuesto a la hora del manejo de las distintas dependencias externas frente a otras alternativas que se habían manejado a lo largo del transcurso del Grado, han hecho que la inversión temporal en esta opción haya merecido la pena.
 
 \medskip
 
-Por otra parte, se tendría que utilizar otra herramienta para el desarrollo de la APK (\textit{Android Application Package}, paquete de aplicaciones Android, es decir, el \comillas{ejecutable} de Android), ya que esta se debe desarrollar utilizando Java, por lo que se decidió utilizar \textit{Android Studio}, la herramienta oficial de desarrollo para Android, que proporciona máquinas virtuales de dispositivos Android de distintas versiones y generaciones para poder probar la \textit{build}.
+Por otra parte, se tendría que utilizar otra herramienta para el desarrollo de la APK (\textit{Android Application Package}, paquete de aplicaciones Android, es decir, el \comillas{ejecutable} de Android), ya que esta se debe desarrollar utilizando Java, por lo que se decidió utilizar \textit{Android Studio}, la herramienta oficial de desarrollo para Android, que proporciona máquinas virtuales de dispositivos Android de distintas versiones y generaciones para poder probar la \textit{build}. Otra ventaja añadida al uso de Android Studio es el soporte que tiene para CMake, que ha permitido el tener un único archivo de configuración para ambas herramientas.
 
 \smallskip
 
-Dentro de \textit{Android Studio}, se tendría que añadir también el módulo de NDK (\textit{Native Development Kit}, kit de desarrollo nativo) que permite el desarrollo de aplicaciones para Android utilizando llamadas a C/C++ gracias a JNI (\textit{Java Native Interface}, interfaz nativa de Java), una FFI (\textit{foreign function interface}, interfaz de funciones foráneas, es decir, un mecanismo por el cual un lenguaje de programación puede llamar a funciones o rutinas programadas o compiladas en otro lenguaje de programación distinto) integrada en el SDK de Java que permite la comunicación con C/C++. Esto sería necesario para poder ejecutar el juego, pese a que la entrada de la aplicación estuviese en Java.
+Dentro de \textit{Android Studio}, se tendría que añadir también el módulo de NDK (\textit{Native Development Kit}, kit de desarrollo nativo) que permite el desarrollo de aplicaciones para Android utilizando llamadas a C/C++ gracias a JNI (\textit{Java Native Interface}, interfaz nativa de Java) integrada en el SDK de Java. JNI es un ejemplo de una FFI (\textit{foreign function interface}, interfaz de funciones foráneas), es decir, un mecanismo por el cual un lenguaje de programación puede llamar a funciones o rutinas programadas o compiladas en otro lenguaje distinto. Esto sería necesario para poder ejecutar el juego, ya que la entrada de la aplicación Android estaría en Java.
 
 \medskip
 
-El resto de decisiones son propias de cada una de las partes del Proyecto y vamos a detallarlas a continuación.
+El resto de decisiones son propias de cada una de las partes del Proyecto y se detallarán a continuación.
 
 \subsection{Diseño del motor}
 En cuanto al diseño del motor, las primeras decisiones giraban en torno al contenido \textit{gameplay} que se quería que este tuviese. La principal idea era poder diseñar juegos al estilo de las primeras generaciones de la saga \cite{pokemon} (es decir, un juego \textit{pokemonlike}). Finalmente, se determinó que el contenido fuese el siguiente:
@@ -55,42 +59,57 @@ En cuanto al diseño del motor, las primeras decisiones giraban en torno al cont
 El motor seguiría un patrón EC (entidad-componente), con las entidades agrupadas en distintas escenas.
 
 \subsection{Diseño del editor}
-Sobre el editor, la decisión más importante fue elegir qué librería se iba a utilizar para poder desarrollar toda la interfaz y la funcionalidad básica de este. Al ya haber optado por utilizar \texttt{SDL3} como base para el motor, se optó también como base para el editor, acompañada de \texttt{DearImGui} para el dibujado y manejo de los elementos de la interfaz.
+\figura{Bitmap/editorMapas}{width=\textwidth}{fig:mapeditor}{Editor de mapas de \textit{RPGBaker}.}
+
+La esencia del editor es la de una interfaz intuitiva y sencilla de utilizar y aprender para aquellos usuarios noveles que nunca hayan utilizado una herramienta similar. Para evitar cargar cognitivamente a los usuarios con información textual, se ha optado por el uso de símbolos e iconos acompañados por descripciones emergentes cortas en la mayoría de elementos.
 
 \medskip
 
-También, al ya haber optado por el uso de Lua como lenguaje de \textit{scripting} para el motor, se optó por el uso del mismo para la generación de \textit{scripts} del editor, acompañados por la librería \texttt{sol2}, que proporciona \textit{bindings} (código que permite el manejo de Lua desde C/C++ de una manera muy sencilla sin tener que lidiar con la a veces rebuscada sintaxis de la librería \texttt{lua} de C/C++) para facilitar el desarrollo.
+Las características fundamentales que el editor tendría correspondían con aquellos elementos que podían ser modificados en el motor, es decir:
+\begin{itemize}
+	\item Editor de mapas (figura \ref{fig:mapeditor}), que permitiese al usuario cargar sus propios \textit{tilesets}; decidir el tamaño de la cuadrícula que ocuparía el mapa; dibujar el mapa sobre la cuadrícula utilizando las baldosas del \textit{tileset}, con la posibilidad de tener varias capas para poder simular un efecto de profundidad; y establecer las regiones de colisión del mapa.
+	\item Editor de eventos, que permitiese al usuario la creación de eventos, asignándoles la condición de lanzamiento y los comportamientos que se ejecutarán cuando la condición se cumpla. El editor de eventos tendría que tener soporte para eventos complejos, en el caso de que el usuario requiera de la creación de uno de ellos.
+	\item Editor de \textit{sprites} y de animaciones, que permitiese al usuario generar un \textit{sprite} dada una imagen o \textit{spritesheet}, y, posteriormente, animaciones dada una serie de \textit{sprites}. Ambos editores tendrían una previsualización del \textit{sprite} o animación, añadiéndose controles para la reproducción en este último caso. 
+	\item Editor de objetos, que permitiese al usuario generar un objeto para cada una de las baldosas en la cuadrícula del mapa y asignarle un \textit{sprite} y un evento.
+	\item Editor de personaje, que permitiese al usuario personalizar su \textit{sprite}, añadirle animaciones de movimiento y configurar diversos parámetros adicionales, como su posición de origen en el mapa.
+	\item Editor de conexiones entre los mapas, que permitiese al usuario establecer las posiciones de los distintos mapas en el mundo, de manera visual e intuitiva.
+	\item Editor de ajustes generales del ejecutable final, como por ejemplo el nombre del juego, dimensiones de la cámara, la fuente por defecto a utilizar en los textos, o el mapa inicial del juego.
+\end{itemize} 
+
+Todos estos elementos tendrían la capacidad de poder ser configurados al gusto del usuario, permitiendo ser editados y eliminados cuando este desee.
 
 \medskip
 
-En cuanto a diseño, se decidió independizar el desarrollo del editor del motor para poder avanzar en el Proyecto de manera más rápida, por lo que el editor tiene sus propias clases encargadas del dibujado en pantalla, de la gestión de la entrada del usuario y del manejo del \textit{scripting} y ficheros.
-
-\smallskip
-
-Si bien es cierto que una de las técnicas comunes en el diseño de motor-editor es la de implementar el editor utilizando las propias funcionalidades del motor, ya que se evita tener que implementar dos veces las mismas funcionalidades (en cuanto al \textit{renderizado}, \textit{input} y \textit{scripting}), creemos que la opción escogida ha supuesto una menor carga de trabajo final en el Proyecto y ha permitido flujos de iteración en el desarrollo más ágiles.
+Además, el editor incluiría un \textit{viewport} para que el usuario pudiese ver en tiempo real el diseño final del juego, sobre el cual se podría ejecutar y probar las funcionalidades implementadas, al estilo de \textit{Unity}.
 
 \medskip
 
-En cuanto a la estructura de código, se optó por utilizar un patrón típico en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas otras ventanas, con el uso de ventanas modales que apareciesen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
-
-\medskip
-
-Las ventanas tendrían comunicación unas con otras utilizando clases como \texttt{Project}, que almacenaría toda la información referente a cada uno de los proyectos que el usuario crease (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
-
-\smallskip
-
-Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada-salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que el proyecto sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
-
-\medskip
-
-Para la persistencia de los ficheros de configuración del proyecto, se optó por utilizar archivos de Lua simulando el uso que otros formatos, como JSON o XML pudiesen tener, ya que permitía reusar Lua no solo como lenguaje de \textit{scripting} y no complicaba el tener que utilizar otra librería específica para ello. Estos archivos Lua difieren de los que el motor interpretará al final, ya que el editor necesita muchos más datos que para el motor son irrelevantes, por lo que se tendría que tener una parte de compilación o generación de la \textit{build} del juego que \comillas{tradujese} los archivos del editor a archivos del motor. Al igual que como ocurre en los motores más generales, se decidió que el editor no pudiese interpretar los archivos finales del juego\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}
+Por otra parte, el editor contará con un sistema de persistencia, que permita una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todas los \textit{assets} utilizados tendrán que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
 
 \bigskip
 
-\figura{Bitmap/editorMapas}{width=\textwidth}{fig:mapeditor}{Editor de mapas de \textit{RPGBaker}.}
-
-El editor, se diseñó teniendo en mente las características principales que se querían poder editar del motor, es decir, un editor de mapas que permitiese al usuario cargar sus propias \textit{tilesets}, decidir el tamaño de los mapas, añadir objetos de manera visual y establecer las colisiones, aprovechándose de la posibilidad de tener varias capas de dibujado, así como poder situar la posición de los mapas en el mundo (ver figura \ref{fig:mapeditor}); un editor de eventos, que permitirían flujos condicionales y la ejecución de animaciones o lanzamiento de otros eventos; un editor del personaje, que permitiese la personalización y configuración de elementos de este; y un editor de \textit{sprites} y animaciones, que permitiesen al usuario poder elegir un fichero de imagen, generar los \textit{sprites} decidiendo las coordenadas iniciales y el alto y ancho de la imagen, y con esos \textit{sprites} poder generar las animaciones, eligiendo el tiempo entre cada uno de los fotogramas y el orden de estos. Todos estos elementos tendrían que poder ser editados y eliminados una vez creados.
+Para conseguir todos los objetivos anteriores, se investigó qué librerías se iban a poder utilizar para conseguir desarrollar toda la interfaz y la funcionalidad básica. Al ya haber optado por utilizar \texttt{SDL3} como base para el motor, se optó también como base para el editor, acompañada de \texttt{DearImGui} para el dibujado y manejo de los elementos de la interfaz.
 
 \medskip
 
-En un principio, se contaba con la idea de que el editor tuviese un \textit{viewport} para que el usuario final pudiese ver en tiempo real el desarrollo que estaba haciendo, y poder ejecutar el juego desde el propio editor, al estilo de \textit{Unity}, pero debido a complicaciones con la API de \texttt{SDL3} decidimos descartarlo y permitir al usuario ejecutar su juego con una instancia del motor aparte.
+También, al ya haber optado por el uso de Lua como lenguaje de \textit{scripting} y de definición de datos para el motor, se optó por el uso del mismo para el editor, acompañados por la anteriormente mencionada librería \texttt{sol2}, por lo que todos los archivos de configuración del proyecto tendrán la extensión \texttt{.lua}.
+
+\smallskip
+
+Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}, etc...), por lo que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos de lo que él necesita a lo que el motor espera en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo, al igual que como ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.
+
+\medskip
+
+Si bien es cierto que una de las técnicas más comunes en la implementación de un editor es la de utilizar el motor para el que se desarrolla como base, ya que esto evita el tener que implementar dos veces las mismas funcionalidades (principalmente en \textit{renderizado}, \textit{input} y \textit{scripting}), se decidió independizar el desarrollo del editor del motor para poder avanzar más rápidamente en el Proyecto. Esta opción, pese a que ha supuesto una mayor carga de trabajo, ha permitido flujos de iteración en el desarrollo más cortos.
+
+\medskip
+
+En cuanto a la estructura de la interfaz, se optó por utilizar un patrón típico en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas en otras ventanas, con el uso de ventanas modales que apareciesen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
+
+\medskip
+
+Las ventanas tendrían comunicación unas con otras utilizando al \textit{proyecto}, que almacenaría toda la información referente a cada uno de los juegos que el usuario crease (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
+
+\smallskip
+
+Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada-salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que el Proyecto sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.

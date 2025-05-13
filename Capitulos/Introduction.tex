@@ -6,7 +6,7 @@
 
 
 \section*{Motivation}
-Role-playing video games have been one of the most influential genres in the industry, from their origins in the 1980s to the present day, where they account for a large portion of all games sold daily.
+Role-playing video games have been one of the most influential genres in the industry, from their origins in the 1980s to the present day, where they account for a large portion of the market share.
 
 \smallskip
 
@@ -39,13 +39,14 @@ The editor's interface will be designed for beginners in game development, while
 
 To accomplish this:
 \begin{itemize}
-	\item A functional, cross-platform engine and an editor capable of generating role-playing games will be developed.
+	\item A cross-platform engine that allows the user to implement role-playing games will be developed.
+	\item A cross-platform editor that eases the implementation of a role-playing game in the developed engine will be developed.
 	\item The Project will be tested with users to demonstrate its functionality, and necessary conclusions will be drawn, along with potential improvements for the future.
 \end{itemize}
 
 \section*{Work Plan}
 \begin{figure}[t]
-	\begin{center}
+	\scalebox{0.8}{
 		\begin{ganttchart}[
     		hgrid,
     		vgrid,
@@ -64,35 +65,36 @@ To accomplish this:
 			\gantttitle{May}{1}
 			\gantttitle{June}{1}\\
 	
+			\ganttbar{Research on the current state}{2025-01}{2025-02}\\
 			\ganttbar{Project design}{2025-01}{2025-02}\\
 			\ganttbar{Engine development}{2025-02}{2025-05}\\
 			\ganttbar{Editor development}{2025-02}{2025-05}\\
 			\ganttbar{Document writing}{2025-03}{2025-05}\\
 			\ganttbar{User testing}{2025-05}{2025-05}\\
-			\ganttbar{Final submission}{2025-05}{2025-05}\\
-			\ganttbar{Final presentation}{2025-06}{2025-06}	
+			\ganttbar{Final submission to the Tutor}{2025-05}{2025-05}\\
+			\ganttbar{Defense before the Committee}{2025-06}{2025-06}	
 		\end{ganttchart}
-		\caption{Gantt diagram showing the temporal planning of the work.} 
-		\label{fig:ganttingles}
-	\end{center}
+	}
+	\caption{Gantt diagram showing the temporal planning of the work.} 
+	\label{fig:ganttingles}
 \end{figure}
 
 To accomplish the previous objectives, the work plan will be divided in three phases: 
 \begin{itemize}
 	\item Research on the current state of engines and editors specifically designed for role-playing games, as well as on role-playing games themselves. This section will aim to identify the common features shared by all engines, editors and games, both open-source and commercial ones, and propose improvements to address the issues these tools may present for inexperienced new users. 
-	\item Project Design. Based on the common features identified across engines, editors and games, an initial design will be proposed to serve as a basis for the development of the Project. This design, while not immutable, should be as close to final as possible to avoid any issues during the development phase.
-	\item Project Development. Once the near-final design phase is completed, development will begin. This phase will, in turn, be split across multiple phases:
+	\item Project Design. Based on the common features identified in the previous phase, an initial design will be proposed to serve as a basis for the development of the Project. This design, while not immutable, should be as close to final as possible to avoid any issues during the development phase.
+	\item Project Development. Once the design phase is completed, development will begin. This phase will, in turn, be split across multiple phases:
 		\begin{itemize}
 			\item Setting up the development environment. A development environment will be chosen based on the Project's needs, and everything will be configured to minimize effort during the development of the applications.
 			\item Engine development. An engine will be developed according to the previously established plans, with cross-platform support for both PCs and Android mobile devices.
 			\item Editor development. Like the engine, the editor will be developed according to the established design.
 		\end{itemize}
-	\item User testing. To ensure the correct functioning of the Project, the final application will be tested by a variety of users not involved in its development. After the tests are completed, the necessary conclusions will be drawn, and the Project will be adjusted to address any issues that require attention before releasing the public version. Features that are either not worth fixing at that moment or would require excessive effort to implement within the available time will be left as future work.
+	\item User testing. To ensure the correct functioning of the Project, the final tools will be tested by a variety of users not involved in their development. After the tests are completed, the necessary conclusions will be drawn, and the Project will be adjusted to address any critical issues that require attention before releasing the public version. Features that would require excessive effort to implement within the available time will be left as future work.
 \end{itemize}
 
 
 \section*{Tools and Methodology}
-Regarding the tools, Git will be used as the version control system, with repositories hosted on GitHub and managed through GitHub Desktop. Task management will be carried out using GitHub Projects, available on the GitHub website.
+Regarding the tools, Git will be used as the version control system, with a repository hosted on GitHub and managed through GitHub Desktop. Task management will be carried out using GitHub Projects, available on the GitHub website.
 
 \smallskip
 
