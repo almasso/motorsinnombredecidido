@@ -160,7 +160,7 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
         textBoxText["font"] = "data/assets/Raleway-Regular.ttf";
     }
     else {
-        textBoxText["font"] = "data/assets/" + _font.lexically_relative(_project->getAssetsPath()).string();
+        textBoxText["font"] = "data/assets/" + _font.string();
     }
     textBoxText["fontSize"] = _fontSize;
     textBoxText["color"] = colorToHex(_textColor);
@@ -194,7 +194,7 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
             static_cast<int>(100.0f/1080.0f * dimensions[1] * _cameraSize[1])});
         choiceComponents["Transform"] = choiceTransform;
         sol::table choiceText = lua.create_table();
-        choiceText["font"] = "data/assets/" + _font.lexically_relative(_project->getAssetsPath()).string();
+        choiceText["font"] = "data/assets/" + _font.string();
         choiceText["fontSize"] = _fontSize;
         choiceText["color"] = colorToHex(_textColor);
         choiceText["size"] = sol::as_table<std::array<int,2>>({
@@ -290,7 +290,7 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
             }
             else {
                 std::filesystem::path selectedPath(route);
-                _font = selectedPath;
+                _font = selectedPath.lexically_relative(_project->getAssetsPath());
                 _fontModified = true;
                 _somethingModified = true;
             }
@@ -313,7 +313,7 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
         _fontSize = _sliderValue;
     }
     if (_fontModified) {
-        RenderManager::GetInstance().requestFont(_font, _fontSize, _previewFont);
+        RenderManager::GetInstance().requestFont(_project->getAssetsPath() / _font, _fontSize, _previewFont);
         _fontModified = false;
     }
     ImGui::Spacing();
