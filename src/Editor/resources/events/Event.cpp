@@ -107,7 +107,7 @@ bool editor::resources::events::Event::write(sol::table& eventTable) {
 }
 
 bool editor::resources::events::Event::writeToEngine(std::ostream& eventOut, EventBuildDependencies& dependencies, Object const* container) {
-    eventOut << _name << " = {\n"; {
+    eventOut << "[\"" << _name << "\"] = {\n"; {
         eventOut << "loop = " << (_loop ? "true" : "false") << ",\n";
 
         eventOut << "condition = {\n"; {

@@ -298,11 +298,6 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
         components << key << " = \"" << value.as<std::string>() << "\",\n";
     }
     components << "},\n";
-    if (_collides) {
-        components << "Collider = {\n";
-        components << "size = {" << _project->getDimensions()[0] << ", " << _project->getDimensions()[1] << "},\n";
-        components << "},\n";
-    }
 
     return true;
 }

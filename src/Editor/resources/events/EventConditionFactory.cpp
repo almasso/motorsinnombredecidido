@@ -9,7 +9,7 @@
 
 #include "conditions/AlwaysCondition.h"
 #include "conditions/AndCondition.h"
-#include "conditions/AreCollidingCondition.h"
+#include "conditions/CollidesWithPlayerCondition.h"
 #include "conditions/BehaviourEndedCondition.h"
 #include "conditions/NotCondition.h"
 #include "conditions/OnStartCondition.h"
@@ -61,7 +61,7 @@ void editor::resources::events::EventConditionFactory::Init() {
     _initialized = true;
     RegisterCondition<AlwaysCondition>();
     RegisterCondition<AndCondition>();
-    RegisterCondition<AreCollidingCondition>();
+    RegisterCondition<CollidesWithPlayerCondition>();
     RegisterCondition<BehaviourEndedCondition>();
     RegisterCondition<NotCondition>();
     RegisterCondition<OnStartCondition>();

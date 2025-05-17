@@ -12,7 +12,7 @@ void CollisionManager::handleCollision(Collider* collider, Collider* collider2) 
 
 void CollisionManager::handleCollisionEnd(Collider* collider, Collider* collider2) {
     if (auto it = collider->_isColliding.find(collider2);
-        it == collider->_isColliding.end()) {
+        it != collider->_isColliding.end()) {
         collider->_collisionEnded.insert(collider2);
         collider->_isColliding.erase(it);
     }
@@ -44,6 +44,7 @@ CollisionManager* CollisionManager::Instance() {
 
 void CollisionManager::Shutdown() {
     delete _instance;
+    _instance = nullptr;
 }
 
 

@@ -10,22 +10,15 @@
 
 namespace editor::resources::events {
 
-    class EventConditionClass(AreCollidingCondition, "AreColliding") {
+    class EventConditionClass(CollidesWithPlayerCondition, "CollidesWithPlayer") {
     public:
-        AreCollidingCondition(Event* event);
-        ~AreCollidingCondition() override;
+        CollidesWithPlayerCondition(Event* event);
+        ~CollidesWithPlayerCondition() override;
         bool read(sol::table const& params) override;
         bool render() override;
     protected:
         bool writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) override;
         bool writeParams(sol::table& params) override;
-
-    private:
-        std::string _objectA;
-        std::string _objectB;
-
-        bool renderObjectSelector(std::string& object, int i);
-        static std::string getObjectName(std::string const& map, int object);
     };
 
 }

@@ -10,7 +10,7 @@ bool LocalVariables::init() {
     auto& data = _data->getData();
     for (auto& [key, value] : data) {
         if (!key.is<std::string>()) {
-            Error::ShowError("LocalVariables", "key is not a string");
+            Error::ShowError("LocalVariables", "Key is not a string");
             return false;
         }
         variables.insert({key.as<std::string>(), value.as<sol::lua_value>()});

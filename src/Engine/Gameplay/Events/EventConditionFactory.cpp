@@ -1,10 +1,11 @@
 #include "EventConditionFactory.h"
 
 #include <Load/LuaReader.h>
+#include <Utils/Error.h>
 
 #include "Conditions/AlwaysCondition.h"
 #include "Conditions/AndCondition.h"
-#include "Conditions/AreCollidingCondition.h"
+#include "Conditions/CollidesWithPlayerCondition.h"
 #include "Conditions/BehaviourEndedCondition.h"
 #include "Conditions/InteractionCondition.h"
 #include "Conditions/NotCondition.h"
@@ -23,15 +24,17 @@ void EventConditionFactory::Init() {
     RegisterCondition<BehaviourEndedCondition>();
     RegisterCondition<TimePassedCondition>();
     RegisterCondition<NotCondition>();
-    RegisterCondition<AreCollidingCondition>();
+    RegisterCondition<CollidesWithPlayerCondition>();
     RegisterCondition<ValueEqualsCondition>();
     RegisterCondition<InteractionCondition>();
 }
 
 bool EventConditionFactory::ReadCondition(sol::table const& condition, std::string& type, sol::table& params) {
     type = condition.get_or<std::string>("type", "");
-    if (type.empty())
+    if (type.empty()) {
+        Error::ShowError("EventConditionFactory", "EventCondition type is not a string or is empty.");
         return false;
+    }
 
     params = LuaReader::GetTable(condition, "params");
     return true;
@@ -39,8 +42,10 @@ bool EventConditionFactory::ReadCondition(sol::table const& condition, std::stri
 
 EventCondition* EventConditionFactory::CreateCondition(std::string const& type, sol::table const& params, Scene* scene, Entity* entity, Event* event) {
     auto it = _factory.find(type);
-    if (it == _factory.end())
+    if (it == _factory.end()) {
+        Error::ShowError("EventConditionFactory", "EventCondition \"" + type + "\" not registered.");
         return nullptr;
+    }
 
     auto instance = it->second();
     instance->setContext(scene, entity, event);
@@ -48,6 +53,7 @@ EventCondition* EventConditionFactory::CreateCondition(std::string const& type, 
         return instance;
 
     delete instance;
+    Error::ShowError("EventConditionFactory", "Failed initializing EventCondition \"" + type + "\".");
     return nullptr;
 }
 

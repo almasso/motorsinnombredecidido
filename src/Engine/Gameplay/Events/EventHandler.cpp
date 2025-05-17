@@ -7,11 +7,13 @@
 
 bool EventHandler::addEvent(std::string const& name, sol::table const& eventTable) {
     auto event = Event::Create(_game, _scene, _entity, eventTable);
-    if (!event)
+    if (!event) {
+        Error::ShowError("EventHandler", "Could not create event \"" + name + "\".");
         return false;
-
+    }
     if (!_events.insert({name, event}).second) {
         delete event;
+        Error::ShowError("EventHandler", "Event \"" + name + "\" already exists in this EventHandler.");
         return false;
     }
 
@@ -37,11 +39,11 @@ bool EventHandler::init() {
     }
     for (auto const& [name, event] : events) {
         if (!name.is<std::string>() || !event.is<sol::table>()) {
-            Error::ShowError("EventHandler", "Invalid event name or table format");
+            Error::ShowError("EventHandler", "Invalid event name or table format.");
             return false;
         }
         if (!addEvent(name.as<std::string>(), event.as<sol::table>())){
-            Error::ShowError("EventHandler", "Invalid event table");
+            Error::ShowError("EventHandler", "Event \"" + name.as<std::string>() + "\" is invalid.");
             return false;
         }
     }
@@ -50,16 +52,20 @@ bool EventHandler::init() {
 
 bool EventHandler::update() {
     for (auto& [name, event] : _events) {
-        if (!event->update())
+        if (!event->update()) {
+            Error::ShowError("EventHandler", "Event \"" + name + "\" updating failed.");
             return false;
+        }
     }
     return true;
 }
 
 Event* EventHandler::getEvent(std::string const& name) {
     auto it = _events.find(name);
-    if (it == _events.end())
+    if (it == _events.end()) {
+        Error::ShowError("EventHandler", "Event \"" + name + "\" not present in the EventHandler.");
         return nullptr;
+    }
     return it->second;
 }
 

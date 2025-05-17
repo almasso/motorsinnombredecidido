@@ -56,8 +56,10 @@ Event::Event(Game* game, Scene* scene, Entity* entity) :
 
 bool Event::init(sol::table const& event) {
     _loop = event.get_or("loop", false);
-    if (!initCondition(event))
+    if (!initCondition(event)) {
+        Error::ShowError("Event", "Could not create EventCondition.");
         return false;
+    }
     if (!initBehaviours(event))
         return false;
     for (auto& behaviour : _behaviours) {
@@ -111,8 +113,10 @@ void Event::jump(int index) {
 }
 
 EventBehaviour const* Event::getBehaviour(int index) const {
-    if (index >= _behaviours.size() || index < 0)
+    if (index >= _behaviours.size() || index < 0) {
+        Error::ShowError("Event", "Can't access EventBehaviour with index " + std::to_string(index) + ".");
         return nullptr;
+    }
     return _behaviours[index];
 }
 
@@ -132,10 +136,11 @@ bool Event::update() {
     if (_isPaused)
         return true;
 
-
     auto behaviour = _behaviours[_currentBehaviour];
-    if (!behaviour->act())
+    if (!behaviour->act()) {
+        Error::ShowError("Event", "Failed to do EventBehaviour action.");
         return false;
+    }
 
     if (behaviour->done()) {
         ++_currentBehaviour;
