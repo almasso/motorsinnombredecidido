@@ -137,7 +137,9 @@ constantes,guionado,Cascaras/bibliografia,config%
 
 
 \include{Capitulos/Introduccion}
-\include{Capitulos/EstadoDeLaCuestion}
+%\include{Capitulos/EstadoDeLaCuestion}
+\include{Capitulos/EAJuegosRol}
+\include{Capitulos/EAVideojuegosRol}
 \include{Capitulos/PlanteamientoProyecto}
 %\include{Capitulos/Motor}
 %\include{Capitulos/Editor}
@@ -166,6 +168,10 @@ constantes,guionado,Cascaras/bibliografia,config%
 % Si el TFM se escribe en inglés, editar TeXiS/TeXiS_bib para cambiar el
 % estilo de las referencias
 \include{Cascaras/bibliografia}
+
+
+%\input{acron}
+%\printglossary[type=\acronymtype, title={Lista de acrónimos}]
 
 
 % Apéndices
@@ -204,10 +210,9 @@ constantes,guionado,Cascaras/bibliografia,config%
 % Sólo  lo  generamos  si  está declarada  \generaacronimos.  Consulta
 % TeXiS.sty para más información.
 
-
 \ifx\generaacronimos\undefined
 \else
-\include{TeXiS/TeXiS_acron}
+%\include{TeXiS/TeXiS_acron}
 \fi
 
 %
