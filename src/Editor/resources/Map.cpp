@@ -6,8 +6,6 @@
 #include "Map.h"
 
 #include <fstream>
-#include <map>
-#include <map>
 #include <io/LuaManager.h>
 
 #include "Object.h"
@@ -17,6 +15,7 @@
 #include <Utils/Vector2.h>
 
 #include "events/Event.h"
+
 #define widthKey "width"
 #define heightKey "height"
 #define xKey "posX"
@@ -238,10 +237,11 @@ void editor::resources::Map::writeToEngineLua(const std::string &platform) {
             entity << io::LuaManager::GetInstance().serializeToString(child.as<sol::table>()) << ",";
         }
         entity << "\n";
+        Vector2 center = Vector2(_mapWidth/2.0f, _mapHeight/2.0f);
         for (auto& [pos, object] : _objects) {
             entity << "{\n";
             std::string object_handler("object_" + getName() + "_" + std::to_string(pos));
-            object->writeToEngine(entity, dependencies, object_handler);
+            object->writeToEngine(entity, dependencies, object_handler, center);
             entity << "},\n";
             dependencies.childrenDependencies.clear();
             dependencies.componentDependencies.clear();

@@ -7,6 +7,7 @@
 
 #include <io/LuaManager.h>
 #include <sol/table.hpp>
+#include <Utils/Vector2.h>
 
 #include "events/Event.h"
 #include "common/Project.h"
@@ -105,7 +106,7 @@ bool editor::resources::Object::write(sol::table& objectTable) {
     return true;
 }
 
-bool editor::resources::Object::writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies, std::string const& handler) {
+bool editor::resources::Object::writeToEngine(std::ostream& object, events::EventBuildDependencies& dependencies, std::string const& handler, Vector2 const& center) {
     std::ostringstream events;
     events << "events = {\n";
     for (auto& event : _events) {
@@ -118,7 +119,7 @@ bool editor::resources::Object::writeToEngine(std::ostream& object, events::Even
     writeChildrenToEngine(object, dependencies);
     object << "},\n";
     object << "components = {\n";
-    writeComponentsToEngine(object, dependencies, events.str());
+    writeComponentsToEngine(object, dependencies, events.str(), center);
     object << "}\n";
 
     return true;
@@ -258,7 +259,7 @@ bool editor::resources::Object::writeChildrenToEngine(std::ostream& children, ev
     return true;
 }
 
-bool editor::resources::Object::writeComponentsToEngine(std::ostream& components, events::EventBuildDependencies& dependencies, std::string const& events) {
+bool editor::resources::Object::writeComponentsToEngine(std::ostream& components, events::EventBuildDependencies& dependencies, std::string const& events, Vector2 const& center) {
     components << "EventHandler = {\n";
     components << events;
     components << "},\n";
@@ -290,8 +291,9 @@ bool editor::resources::Object::writeComponentsToEngine(std::ostream& components
             components << io::LuaManager::GetInstance().serializeToString(component.second);
         components << ",\n";
     }
+    int const* dims = _project->getDimensions();
     components << "Transform = {\n";
-    components << "pos = {" << _x << ", " << _y << "}\n";
+    components << "position = {" << (_x - center.getX()) * dims[0] << ", " << (_y - center.getY()) * dims[1] << "}\n";
     components << "},\n";
     components << "LocalVariables = {\n";
     for (auto& [key, value] : _localVariables) {
