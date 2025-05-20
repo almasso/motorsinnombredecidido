@@ -68,7 +68,7 @@ void Animator::reset() {
 }
 
 void Animator::changeAnimation(const std::string& animation) {
-  if (_animation != animation) {
+  if (!animation.empty() && _animation != animation) {
     _animation = animation;
     reset();
   }

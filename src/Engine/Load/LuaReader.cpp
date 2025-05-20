@@ -47,6 +47,15 @@ void LuaReader::registerUserTypes() {
 
 bool LuaReader::init() {
     _lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::table);
+    _lua.add_package_loader([&](std::string const& module){
+        std::string filename = module;
+        std::ranges::replace(filename, '.', '/');
+        filename += ".lua";
+        std::string fileContent;
+        if (!ReadFile(filename, fileContent))
+            return sol::make_object(_lua, ("\n\tno bindings module " + module));
+        return _instance->_lua.load(fileContent).get<sol::object>();
+    });
     registerUserTypes();
     return true;
 }
