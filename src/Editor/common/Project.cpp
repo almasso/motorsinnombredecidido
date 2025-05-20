@@ -17,6 +17,12 @@
 #include <SDL3/SDL_filesystem.h>
 #include "resources/events/Event.h"
 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <SDL3/SDL_process.h>
+#endif
+
 #ifdef __APPLE__
 #define GetCurrentDir strdup(SDL_GetBasePath())
 #else
@@ -128,6 +134,7 @@ bool editor::Project::build(const std::string &platform, const sol::table& overW
         EditorError::showError_impl(e.what(), "Project",128);
         return false;
     }
+    launchBuild();
     return true;
 }
 
@@ -445,6 +452,29 @@ void editor::Project::buildAnimations(std::string const& platform) {
         animation->writeToEngineLua(platform);
     }
 }
+
+#ifdef _WIN32
+void editor::Project::launchBuild() {
+    STARTUPINFO info={sizeof(info)};
+    PROCESS_INFORMATION processInfo;
+    auto exeDirectory = getBuildPath("Desktop").string();
+    auto exePath = (getBuildPath("Desktop") / "Executable.exe").string();
+    if (CreateProcess(NULL, const_cast<LPSTR>(exePath.c_str()), NULL, NULL, TRUE, 0, NULL, exeDirectory.c_str(), &info, &processInfo)) {
+        WaitForSingleObject(processInfo.hProcess, INFINITE);
+        CloseHandle(processInfo.hProcess);
+        CloseHandle(processInfo.hThread);
+    }
+}
+#else
+void editor::Project::launchBuild() {
+    SDL_PropertiesID prop = SDL_CreateProperties();
+    auto exePath = (getBuildPath("Desktop") / "Executable.exe").string();
+    const char *args[] = { exePath.c_str(), NULL };
+    SDL_SetPointerProperty(prop, SDL_PROP_PROCESS_CREATE_ARGS_POINTER, args);
+    SDL_CreateProcessWithProperties(prop);
+}
+#endif
+
 
 bool editor::Project::isSpriteBeingUsedInAnim(editor::resources::Sprite *sprite, std::vector<std::string>& names) {
     names.clear();

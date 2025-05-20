@@ -242,6 +242,7 @@ namespace editor {
 
         void buildSprites(std::string const& platform);
         void buildAnimations(std::string const& platform);
+        void launchBuild();
     };
 }
 

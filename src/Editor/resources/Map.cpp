@@ -242,7 +242,7 @@ void editor::resources::Map::writeToEngineLua(const std::string &platform) {
             entity << "{\n";
             std::string object_handler("object_" + getName() + "_" + std::to_string(pos));
             object->writeToEngine(entity, dependencies, object_handler);
-            entity << "}\n";
+            entity << "},\n";
             dependencies.childrenDependencies.clear();
             dependencies.componentDependencies.clear();
         }
