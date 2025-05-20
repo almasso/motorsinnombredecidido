@@ -1,4 +1,4 @@
-local EventBehaviour = require 'assets.events.EventBehaviour'
+local EventBehaviour = require 'data.events.EventBehaviour'
 
 --- @class PlaySFX
 local PlaySFX = EventBehaviour:inherit();
@@ -22,6 +22,10 @@ function PlaySFX:act(game, scene, entity, event)
     --print("\nPlaySFX act:");
     self._done = true;
     return self._source:play();
+end
+
+function PlaySFX:ended(scene, entity, event)
+    return not (self._source:isPlaying() or self._source:isPaused());
 end
 
 return PlaySFX;

@@ -1,4 +1,4 @@
-local EventBehaviour = require 'assets.events.EventBehaviour'
+local EventBehaviour = require 'data.events.EventBehaviour'
 
 --- @class Dialogue
 local Dialogue = EventBehaviour:inherit();

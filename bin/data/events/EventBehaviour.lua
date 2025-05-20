@@ -1,4 +1,4 @@
-local Class = require 'assets.events.Class'
+local Class = require 'data.events.Class'
 
 ---@class EventBehaviour
 local EventBehaviour = Class:inherit()

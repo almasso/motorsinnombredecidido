@@ -1,13 +1,13 @@
-local Move = require('assets.events.MoveBehaviour');
-local WaitFor = require('assets.events.WaitForBehaviour');
-local Jump = require('assets.events.JumpBehaviour');
-local JumpIf = require('assets.events.JumpIfBehaviour');
-local PlaySFX = require('assets.events.PlaySFXBehaviour');
-local Music = require('assets.events.MusicBehaviour');
-local Animation = require('assets.events.AnimationBehaviour');
-local ModifyVariable = require('assets.events.ModifyVariableBehaviour');
-local Dialogue = require('assets.events.DialogueBehaviour')
-local Choices = require('assets.events.ChoicesBehaviour')
+local Move = require('data.events.MoveBehaviour');
+local WaitFor = require('data.events.WaitForBehaviour');
+local Jump = require('data.events.JumpBehaviour');
+local JumpIf = require('data.events.JumpIfBehaviour');
+local PlaySFX = require('data.events.PlaySFXBehaviour');
+local Music = require('data.events.MusicBehaviour');
+local Animation = require('data.events.AnimationBehaviour');
+local ModifyVariable = require('data.events.ModifyVariableBehaviour');
+local Dialogue = require('data.events.DialogueBehaviour')
+local Choices = require('data.events.ChoicesBehaviour')
 
 return {
     manager = {

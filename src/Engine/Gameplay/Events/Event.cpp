@@ -127,7 +127,7 @@ bool Event::update() {
         _targetBehaviour = -1;
     }
 
-    if (_currentBehaviour == _behaviours.size()) {
+    if (!_behaviours.empty() && _currentBehaviour == _behaviours.size()) {
         if (_condition->met())
             start();
         else return true;

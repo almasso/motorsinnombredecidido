@@ -18,8 +18,8 @@
 
 editor::resources::events::BehaviourEndedCondition::BehaviourEndedCondition(Event* event) :
     EventConditionTemplate(event),
-    _conditionObject(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.object")),
-    _conditionEvent(io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.event")),
+    _conditionObject(),
+    _conditionEvent(),
     _conditionBehaviour(-1) {
 }
 
@@ -53,8 +53,10 @@ bool editor::resources::events::BehaviourEndedCondition::render() {
 }
 
 bool editor::resources::events::BehaviourEndedCondition::writeParamsToEngine(std::ostream& condition, EventBuildDependencies& dependencies, Object const* container) {
-    condition << entityKey << " = \"" << _conditionObject << "\",\n";
-    condition << eventKey << " = \"" << _conditionEvent << "\",\n";
+    if (!_conditionObject.empty())
+        condition << entityKey << " = \"" << _conditionObject << "\",\n";
+    if (!_conditionEvent.empty())
+        condition << eventKey << " = \"" << _conditionEvent << "\",\n";
     condition << behaviourKey << " = " << _conditionBehaviour;
     return true;
 }
@@ -69,10 +71,22 @@ bool editor::resources::events::BehaviourEndedCondition::writeParams(sol::table&
 bool editor::resources::events::BehaviourEndedCondition::renderObjectSelector(Object*& selectedObject) {
     bool edited = false;
 
+    std::string preview = _conditionObject.empty() ?
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.object") :
+        _conditionObject;
+
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     bool render = ImGui::BeginCombo((std::string("##behaviourEndedObjectSelector") + std::to_string(reinterpret_cast<long long>(this))).c_str(),
-        _conditionObject.c_str());
+        preview.c_str());
 
+    if (render && ImGui::Selectable((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.object") + "##behaviourEndedObject" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
+        _conditionObject.empty())) {
+        if (!_conditionObject.empty()) {
+            _conditionObject = "";
+            selectedObject = nullptr;
+            edited = true;
+        }
+    }
     auto const& maps = _event->getProject()->getMaps();
     for (auto const& [mapName, map] : maps) {
         auto const& objects = map->getObjects();
@@ -96,27 +110,58 @@ bool editor::resources::events::BehaviourEndedCondition::renderObjectSelector(Ob
 }
 
 bool editor::resources::events::BehaviourEndedCondition::renderEventSelector(Object* selectedObject, Event*& selectedEvent) {
-    if (selectedObject == nullptr)
-        return false;
     bool edited = false;
+
+    std::string preview = _conditionEvent.empty() ?
+        io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.event") :
+        _conditionEvent;
 
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     bool render = ImGui::BeginCombo((std::string("##behaviourEndedEventSelector") + std::to_string(reinterpret_cast<long long>(this))).c_str(),
-        _conditionEvent.c_str());
+        preview.c_str());
 
-    auto const& events = selectedObject->getEvents();
-    for (auto const& event : events) {
-        bool isSelected = (event->getName() == _conditionEvent);
-        if (isSelected)
-            selectedEvent = event;
-        if (render && ImGui::Selectable((event->getName() + "##behaviourEndedEvent" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
-            if (!isSelected) {
-                _conditionEvent = event->getName();
+    if (_conditionEvent.empty())
+        selectedEvent = nullptr;
+    if (render && ImGui::Selectable((io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.event") + "##behaviourEndedEvent" + std::to_string(reinterpret_cast<long long>(this))).c_str(),
+        _conditionEvent.empty())) {
+        if (!_conditionEvent.empty()) {
+            _conditionEvent = "";
+            selectedEvent = nullptr;
+            edited = true;
+        }
+    }
+
+    if (selectedObject != nullptr) {
+        auto const& events = selectedObject->getEvents();
+        for (auto const& event : events) {
+            bool isSelected = (event->getName() == _conditionEvent);
+            if (isSelected)
                 selectedEvent = event;
-                edited = true;
+            if (render && ImGui::Selectable((event->getName() + "##behaviourEndedEvent" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
+                if (!isSelected) {
+                    _conditionEvent = event->getName();
+                    selectedEvent = event;
+                    edited = true;
+                }
             }
         }
     }
+    else {
+        auto const& events = _event->getProject()->getEvents();
+        for (auto const& [eventName, event] : events) {
+            bool isSelected = (eventName == _conditionEvent);
+            if (isSelected)
+                selectedEvent = event;
+            if (render && ImGui::Selectable((eventName + "##behaviourEndedEvent" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
+                if (!isSelected) {
+                    _conditionEvent = eventName;
+                    selectedEvent = event;
+                    edited = true;
+                }
+            }
+        }
+    }
+
     if (render)
         ImGui::EndCombo();
     return edited;
@@ -124,7 +169,7 @@ bool editor::resources::events::BehaviourEndedCondition::renderEventSelector(Obj
 
 bool editor::resources::events::BehaviourEndedCondition::renderBehaviourSelector(Event* selectedEvent) {
     if (selectedEvent == nullptr)
-        return false;
+        selectedEvent = _event;
 
     bool edited = false;
 
@@ -132,7 +177,7 @@ bool editor::resources::events::BehaviourEndedCondition::renderBehaviourSelector
     if (_conditionBehaviour >= 0 && _conditionBehaviour < selectedEvent->getBehaviours().size()) {
         auto behaviourIt = selectedEvent->getBehaviours().begin();
         for (int i = 0; i < _conditionBehaviour; ++i) ++behaviourIt;
-        selectedBehaviourID = std::to_string(_conditionBehaviour) + " - " + (*behaviourIt)->getID();
+        selectedBehaviourID = std::to_string(_conditionBehaviour) + " - " + io::LocalizationManager::GetInstance().getString(std::string("window.mainwindow.eventeditor.behaviours.") + (*behaviourIt)->getID());
     }
     else selectedBehaviourID = io::LocalizationManager::GetInstance().getString("window.mainwindow.eventeditor.condition.BehaviourEnded.behaviour");
 
@@ -145,7 +190,7 @@ bool editor::resources::events::BehaviourEndedCondition::renderBehaviourSelector
     auto const& behaviours = selectedEvent->getBehaviours();
     for (auto const& behaviour : behaviours) {
         bool isSelected = (i == _conditionBehaviour);
-        if (ImGui::Selectable((std::to_string(i) + " - " + behaviour->getID() + "##behaviourEndedBehaviour" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
+        if (ImGui::Selectable((std::to_string(i) + " - " + io::LocalizationManager::GetInstance().getString(std::string("window.mainwindow.eventeditor.behaviours.") + behaviour->getID()) + "##behaviourEndedBehaviour" + std::to_string(reinterpret_cast<long long>(this))).c_str(), isSelected)) {
             if (!isSelected) {
                 _conditionBehaviour = i;
                 edited = true;
