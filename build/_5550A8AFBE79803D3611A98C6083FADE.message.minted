@@ -1,3 +1,0 @@
-\def\minted@exec@error{%
-  \minted@error{minted data file \detokenize{"_5550A8AFBE79803D3611A98C6083FADE.data.minted"} has incorrect timestamp}%
-}%
