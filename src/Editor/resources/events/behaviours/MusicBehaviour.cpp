@@ -87,7 +87,9 @@ bool editor::resources::events::MusicBehaviour::writeParamsToEngine(std::ostream
             actionParams[actionKey] = "change";
             std::filesystem::path clip(_param.clip);
             clip = "data" / clip.lexically_relative(_event->getProject()->getPath());
-            actionParams[clipKey] = clip.string();
+            std::string clipPath = clip.string();
+            std::ranges::replace(clipPath, '\\', '/');
+            actionParams[clipKey] = clipPath;
         }
         break;
     case VOLUME:

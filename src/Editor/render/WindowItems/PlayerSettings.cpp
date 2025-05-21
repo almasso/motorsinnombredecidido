@@ -76,7 +76,7 @@ sol::table editor::render::tabs::PlayerSettings::buildPlayer() {
     if (!_spriteName.empty() || !_moveAnimation[0].empty() || !_moveAnimation[1].empty()
         || !_moveAnimation[2].empty() || !_moveAnimation[3].empty()) {
         sol::table sprite = lua.create_table();
-        sprite["sprite"] = (std::filesystem::path("data") / "sprites"/(_spriteName+".lua")).string();
+        sprite["sprite"] = "data/sprites/"+_spriteName+".lua";
         sprite["layer"] = _layer;
         components["Animator"] = sprite;
     }
@@ -84,7 +84,7 @@ sol::table editor::render::tabs::PlayerSettings::buildPlayer() {
     movement["speed"] = dimensions[0] * _moveSpeed;
     std::array<std::string, 4> animations;
     for (int i = 0; i < 4; ++i) {
-        animations[i] = (std::filesystem::path("data") / "animations"/(_moveAnimation[i]+".lua")).string();
+        animations[i] = "data/animations/" + _moveAnimation[i] + ".lua";
     }
     movement["animations"] = sol::as_table<>(animations);
     components["MovementComponent"] = movement;

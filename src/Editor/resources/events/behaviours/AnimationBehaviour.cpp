@@ -63,8 +63,7 @@ bool editor::resources::events::AnimationBehaviour::writeParamsToEngine(std::ost
         break;
     }
     if (_action == CHANGE) {
-        std::filesystem::path animPath = std::filesystem::path("data") / "animations" / (_animationToChange + ".lua");
-        actionParams[animationChangeKey] = animPath.string();
+        actionParams[animationChangeKey] = "data/animations/" + _animationToChange + ".lua";
     }
     std::string serializedParams = luaManager.serializeToString(actionParams);
     if (serializedParams.empty())

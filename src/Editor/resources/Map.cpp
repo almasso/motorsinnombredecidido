@@ -295,7 +295,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                     components["Transform"] = transform;
                     if (tile != nullptr) {
                         sol::table sprite = lua.create_table();
-                        sprite["sprite"] = (std::filesystem::path("data") / "sprites"/(tile->tileset+std::to_string(tile->pos)+".lua")).string();
+                        sprite["sprite"] = "data/sprites/"+tile->tileset+std::to_string(tile->pos)+".lua";
                         sprite["layer"] = i;
                         components["SpriteRenderer"] = sprite;
                     }

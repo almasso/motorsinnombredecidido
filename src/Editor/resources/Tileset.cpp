@@ -104,7 +104,9 @@ void editor::resources::Tileset::writeToEngineLua(const std::string &platform) {
     auto& lua = io::LuaManager::GetInstance().getState();
     for (Tile* tile : _tiles) {
         sol::table tileSprite = lua.create_table();
-        tileSprite["texture"] = (std::filesystem::path("data") / "assets" / _source.lexically_relative(_project->getAssetsPath())).string();
+        std::string texturePath = (std::filesystem::path("data") / "assets" / _source.lexically_relative(_project->getAssetsPath())).string();
+        std::ranges::replace(texturePath, '\\', '/');
+        tileSprite["texture"] = texturePath;
         sol::table rect = lua.create_table();
         SDL_Texture* sdlTexture = reinterpret_cast<SDL_Texture*>(tile->texture);
 

@@ -92,7 +92,9 @@ void editor::resources::events::PlaySFXBehaviour::writeDependencies(EventBuildDe
     sol::table audioSourceParams = lua.create_table();
     std::filesystem::path source(_sfxSource);
     source = ("data" / source.lexically_relative(_event->getProject()->getPath()));
-    audioSourceParams["clip"] = source.string();
+    std::string sourcePath = source.string();
+    std::ranges::replace(sourcePath, '\\', '/');
+    audioSourceParams["clip"] = sourcePath;
     audioSourceParams["mixer"] = "data/mixers/sfx.mixer.lua";
     components.insert({"AudioSource", audioSourceParams});
 
