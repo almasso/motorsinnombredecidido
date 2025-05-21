@@ -1,16 +1,57 @@
 \chapter{Evaluación y Conclusiones}
 \label{cap:conclusiones}
 
-Conclusiones del trabajo y líneas de trabajo futuro.
-
-Antes de la entrega de actas de cada convocatoria, en el plazo que se indica en el calendario de los trabajos de fin de grado, el estudiante entregará en el Campus Virtual la versión final de la memoria en PDF.
+Al conocer en profundidad cómo funcionan todos los sistemas del motor y el editor, no podemos tener la certeza de que estos funcionen como un usuario promedio esperaría. Por esto, realizar pruebas con usuarios sin sesgos es crucial para obtener la información de las posibles brechas entre los programas y esos usuarios. De cara a ofrecer una experiencia de uso agradable se analizarán las pruebas en busca de formas de mejorarla. Se buscarán distintos tipos de perfiles para obtener una mayor cantidad de datos sobre los posibles conflictos que estos tengan con los sistemas.
 
 \section{Objetivo de la evaluación}
+Los objetivos de las pruebas con usuarios son principalmente dos. El primero es evaluar si los usuarios entienden los sistemas y son capaces de usarlos cómodamente, es importante que el entorno sea agradable de usar para permitir que los usuarios entiendan las capacidades del mismo y las puedan aprovechar. El segundo es evaluar si cada usuario es capaz de usar el editor creativamente, de forma que los videojuegos que cree un usuario suponga una experiencia diferente a los que haga otro, comprobando así la flexibilidad de uso del editor.
 
 \section{Metodología}
+Para realizar estas pruebas, una vez se plantearon los objetivos, se diseñó cómo se iban a realizar. Cada usuario realizará las pruebas de manera individual en compañía de un supervisor, tendrán una duración estimada de una hora. A cada probador se le preguntan lo primero de todo su experiencia tanto jugando como creando videojuegos, haciendo énfasis en los RPGs. Una vez con estos datos se le entregan varios ficheros al empezar la prueba, el ejecutable del editor, un paquete de recursos para no desaprovechar tiempo de la prueba buscando y una breve guía de uso del editor. En esta guía se explica brevemente el modo de uso de cada uno de los sistemas disponibles en el editor. Una vez con esto, el probador seguirá la guía para entender los mecanismos y podrá para utilizarlos a su libre albedrío.
+
+\medskip
+
+El investigador se encargará de registrar todas las interacciones destacables de los probadores con el editor, además de prestar ayuda si surge algún error con el programa a lo largo de las pruebas. Para poder observar una experiencia real, el investigador no podrá intervenir en las acciones del usuario más que en esos casos excepcionales con los errores o en momentos de bloqueo en los que el probador no es capaz de continuar por alguna brecha. Estas pruebas están pensadas para realizarse tanto en persona como telemáticamente a mayor comodidad de cada caso concreto. Una vez finalice la prueba se le pedirá al usuario una valoración general sobre los sistemas y su experiencia de uso aportando sus quejas e ideas.
 
 \section{Resultados}
 
+Podemos agrupar los usuarios en 3 categorías según su experiencia con los videojuegos y los RPG en concreto.
+
+\smallskip 
+
+En primer lugar, tendríamos a los usuarios más ajenos al mundo de los videojuegos, con poca experiencia jugando a juegos en general y jugando a juegos RPG en concreto. Con este tipo de usuario queríamos ver como de intuitivas eran las herramientas y la UI de la aplicación del editor, así como ver si se entendían bien las instrucciones de las pruebas. Este primer grupo consiguió crear mapas con cierto sentido, pero la mayoría utilizó únicamente una o dos capas por lo que con esto quedaban un poco limitados a la hora del desarrollo. No invirtieron gran cantidad de tiempo explorando los tilesets e hicieron unos diseños más bien sencillos. Las configuraciones las entendieron bastante bien, y siguiendo la guía las consiguieron rellenar. A la hora de crear eventos se quedaron en los behaviours más sencillos y no entraron en intentar crear eventos complejos usando variables y condiciones. En general la prueba fue satisfactoria y los resultados estaban dentro de lo esperado. 
+
+\medskip
+
+En segundo lugar, tenemos a usuarios que sí juegan a videojuegos y algunos incluso están relacionados con la industria, pero no tienen conocimientos de programación o de desarrollo más allá de sus áreas específicas. Estos si aprovecharon mucho más el apartado del mapeado, utilizando más capas y varios tilesets creando mapas mucho más interesantes. A la hora de los eventos se les insistió más que al primer grupo para que intentaran crear algunos eventos algo más complejos, pero al parecer no les quedaba tan claro como estructurarlos para aprovechar al máximo las funcionalidades y la mayoría se quedó en cosas algo más sencillas o tuvieron que recibir bastante ayuda por parte de los supervisores. Pese a que los eventos en sí no requieren de conocimiento de programación la estructura de estos es similar a la programación y requiere de más tiempo que el que la prueba permitía para entender como estructurarlos correctamente. 
+
+\medskip
+
+Por último, tenemos el grupo de gente que tiene conocimiento en el desarrollo de los videojuegos, incluso en el desarrollo de RPGMaker específicamente, lo que fue muy interesante a la hora de obtener feedback comparativo. Este grupo entendió bien las herramientas de mapeado y señaló que echaba en falta herramientas más avanzadas que agilizaran un poco el proceso, como la opción de seleccionar varios tiles a la vez o de rellenar zonas con tiles de un tipo. También señalaron lo lento que es el proceso de creación de sprites y animaciones, proponiendo algún tipo de automatización de este como ocurre con los tilesets. En cuanto a los eventos lograron entender como montar estructuras más avanzadas, lo cual fue un resultado positivo. 
+
+\medskip
+
+Adicionalmente a todo este feedback y obsevaciones también pudimos detectar varios bugs y cosas que no estaban funcionando del todo como pensábamos lo que nos fue de gran ayuda de cara a darle un pulido final a la versión del editor. 
+
 \section{Análisis de los resultados y conclusiones}
+Pese a que las pruebas no fueron tan extensas y variadas como nos habría gustado por motivos logísticos podemos sacar algunas conclusiones interesantes de cara al desarrollo y sobre todo a un posible trabajo futuro.
+
+\smallskip 
+
+Lo prioritario sería mejorar la experiencia de diseño de mapas y de creación de Sprites/Animaciones. Para esto hemos propuesto las siguientes mejoras:
+
+\begin{itemize}
+	\item La opción de seleccionar varios tiles a la vez y poder pintar todos ellos de golpe en el mapa. 
+
+	\item La opción de rellenar toda la zona con el tile seleccionado. 
+
+	\item La opción de poder seleccionar tiles desde el mapa sin tener que buscarlos en el tileset. 
+
+	\item La opción de poder deshacer la última edición. 
+
+	\item Poder automatizar la creación de varios sprites y convertirlos en animaciones a partir de una única fuente, parecido a cómo funcionan el editor de tilesets. 
+\end{itemize}
+
+También creemos que vendrían bien algunas mejoras en forma de tooltips en la sección de eventos para explicar bien todas las funcionalidades y quizás ofrecer algunos eventos predefinidos para ver de forma más práctica como se utilizan.
 
 
