@@ -4,11 +4,11 @@
 \chapterquote{Una vez tuve una conversación bastante rara con un par de abogados y estaban hablando sobre: \comillas{¿Cómo elegís a vuestro público objetivo? ¿Hacéis "focus groups", encuestáis a gente y todo eso?} Y es como: \comillas{No, simplemente hacemos juegos que creemos que molan.}}{John Carmack}
 
 \section{Motivación}
-Los videojuegos de rol han sido uno de los géneros más influyentes de la industria, desde sus orígenes en la década de los años 80 hasta la actualidad, donde concentran una gran parte de la cuota de mercado.
+Los videojuegos de rol constituyen uno de los géneros más influyentes de la industria\footnote{En total, se han vendido más de mil millones de copias de videojuegos de rol a lo largo de la historia, según \textit{VGChartz} (\url{https://shorturl.at/VI2Zy}).} desde sus orígenes en la década de los años 80 hasta la actualidad, donde concentran una gran parte de la cuota de mercado\footnote{Según \textit{Rocket Brush Studio}, los videojuegos de rol corresponden al sector de videojuegos más vendido en el mercado móvil, el tercero en el mercado de PC y el quinto en el mercado de las videoconsolas (\url{https://rocketbrush.com/blog/most-popular-video-game-genres-in-2024-revenue-statistics-genres-overview}).}.
 
 \smallskip
 
-El desarrollo de este tipo de juegos ha sufrido cambios mayúsculos con el paso de los años y con las consecuentes mejoras \textit{hardware} y \textit{software}, que nos han permitido evolucionar desde máquinas diseñadas exclusivamente para poder ejecutar un único juego a la amplia gama de dispositivos multimedia de los que disponemos actualmente.
+El desarrollo de este tipo de juegos ha sufrido cambios mayúsculos con el paso de los años y con las consecuentes mejoras \textit{hardware} y \textit{software}, que nos han permitido evolucionar desde simples escenas monocromas y con interfaces basadas en texto hasta las representaciones tridimensionales en tiempo real, mundos abiertos complejos y sistemas de interacción avanzados. Estas mejoras han influido no solo en el apartado visual, sino también en la narrativa, la jugabilidad y la inmersión del jugador, permitiendo experiencias cada vez más ricas y personalizadas.
 
 \medskip
 
@@ -18,13 +18,13 @@ Numerosos programas de edición y desarrollo de videojuegos han aparecido en las
 
 Aquellos programas que sí que están pensados para el desarrollo específico de videojuegos de rol tienen dos problemas fundamentales:
 \begin{itemize}
-	\item Los que ofrecen una interfaz intuitiva, sencilla de utilizar, y bastante amigable con nuevos usuarios que están introduciéndose en el mundo del desarrollo de videojuegos están bajo un muro de pago, que pese a no ser muy elevado, hace que usuarios aficionados paguen por un \textit{software} que rara vez utilizarán si no se afianzan finalmente en el mundo del desarrollo.
-	\item Los que no están bajo un muro de pago, es decir, son \textit{software} de código libre, suelen tener interfaces y sistemas complicados de entender para noveles, quienes debido a la complejidad de estas herramientas deciden abandonar por completo el desarrollo.
+	\item Los que ofrecen una interfaz intuitiva, sencilla de utilizar, y bastante amigable con nuevos usuarios que están introduciéndose en el mundo del desarrollo de videojuegos están bajo un muro de pago. Este muro de pago hace que nuevos usuarios paguen por un \textit{software} que rara vez utilizarán si no se afianzan finalmente en el mundo del desarrollo.
+	\item Aquellos que no están bajo un muro de pago o que son \textit{software} de código libre, suelen tener interfaces y sistemas complejos, difíciles de entender para usuarios noveles, quienes a menudo abandonan el desarrollo debido a dicha complejidad.
 \end{itemize}
 
 \medskip
 
-La motivación principal de este Proyecto surge de la necesidad de contar con herramientas accesibles y flexibles, tanto para desarrolladores independientes experimentados que quieran crear juegos sin las limitaciones impuestas por los motores de uso general, como para personas sin amplio conocimiento en el desarrollo de videojuegos o en la programación de estos.
+La motivación principal de este Proyecto surge de la necesidad de contar con herramientas sencillas de utilizar y flexibles, tanto para desarrolladores independientes experimentados que quieran crear juegos sin las limitaciones impuestas por los motores de uso general, como para personas sin amplio conocimiento en el desarrollo de videojuegos o en la programación de estos.
 
 \section{Objetivos}
 Este Proyecto tiene marcados como objetivos el desarrollo de un motor de videojuegos 2D, pensado específicamente para videojuegos de rol, acompañado de un editor que permita un desarrollo sencillo de videojuegos para este motor. El editor podrá generar ejecutables que el usuario solamente necesite distribuir sin la necesidad de hacer ningún paso extra posterior al desarrollo.
@@ -44,7 +44,7 @@ Para ello:
 
 \section{Plan de trabajo}
 \begin{figure}[t]
-	\scalebox{0.8}{
+	\scalebox{0.9}{
 		\begin{ganttchart}[
     		hgrid,
     		vgrid,
@@ -54,14 +54,13 @@ Para ello:
     		title/.style={fill=blue!20},
     		title height=1.2,
     		x unit=2cm
-  			]{2025-01}{2025-06}
-	
+  			]{2025-01}{2025-05}
+  				
 			\gantttitle{Enero}{1}
 			\gantttitle{Febrero}{1}
 			\gantttitle{Marzo}{1}
 			\gantttitle{Abril}{1}
-			\gantttitle{Mayo}{1}
-			\gantttitle{Junio}{1}\\
+			\gantttitle{Mayo}{1}\\
 			
 			\ganttbar{Investigación del estado actual}{2025-01}{2025-02}\\	
 			\ganttbar{Diseño del Proyecto}{2025-01}{2025-02}\\
@@ -77,13 +76,13 @@ Para ello:
 
 Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en tres fases:
 \begin{itemize}
-	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentará abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentará proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
+	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentarán abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentarán proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
 	\item Diseño del Proyecto. Con las características abstraídas en la fase anterior, se planteará un diseño inicial que servirá como base durante el desarrollo del Proyecto. Este diseño, si bien no será inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
 	\item Desarrollo del Proyecto. Una vez finalizado el diseño del Proyecto, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
 		\begin{itemize}
 			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades del Proyecto, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo de ambas herramientas. 
 			\item Desarrollo del motor. Se desarrollará un motor de acuerdo a los planes diseñados anteriormente, con soporte multiplataforma tanto para ordenador como para dispositivos móviles Android.
-			\item Desarrollo del editor. Al igual que con el motor, se desarrollará el editor de acuerdo al diseño preestablecido.
+			\item Desarrollo del editor. Al igual que con el motor, se desarrollará el editor de acuerdo al diseño preestablecido. Tendrá que tener soporte multiplataforma en PC, es decir, Windows, MacOS y Linux, no así con Android.
 		\end{itemize}
 	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento del Proyecto, se probarán las herramientas finales con usuarios de diversa índole ajenos al desarrollo de estas. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán en el Proyecto todas aquellas funcionalidades críticas que requieran de un arreglo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que supongan una excesiva carga como para poder desarrollarlas en el tiempo restante.
 \end{itemize}
@@ -98,7 +97,7 @@ El acceso al repositorio con el código puede hacerse a través de esta direcci�
 
 \medskip
 
-Con respecto a las herramientas de desarrollo del Proyecto, se utilizarán como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; se usará CMake como herramienta de generación de librerías externas; y MinGW como compilador en Windows, Clang como compilador en MacOS, y GCC como compilador en Linux . Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}\textbf{**}\footnote{ANOT: No estoy del todo de si poner las razones del uso aquí o referenciar la sección posterior donde se desarrolla.}.
+Con respecto a las herramientas de desarrollo del Proyecto, se utilizarán como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; se usará CMake como herramienta de generación de librerías externas; y MinGW como compilador en Windows, Clang como compilador en MacOS, y GCC como compilador en Linux . Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}.
 
 \medskip
 
@@ -113,20 +112,24 @@ En cuanto a la metodología de trabajo, se propondrán reuniones cada dos semana
 La comunicación con el equipo se establecerá, tanto mediante reuniones presenciales cuando se tengan que abordar problemas importantes, como mediante \textit{software} que permita mensajería y chat de voz, como Discord. Es mediante esta herramienta que también se tratará de hacer las pruebas finales con los usuarios.
 
 \section{Estructura de la memoria} 
-En el capítulo \ref{cap:estadoDeLaCuestion}, \textit{Estado de la Cuestión}, se abordará la situación actual de los videojuegos de rol, del desarrollo de videojuegos, así como un poco de contexto histórico de ambos.
+En el capítulo \ref{cap:juegosrol}, \textit{Juegos de Rol}, se habla de los juegos de rol, sus características, orígenes así como un análisis de alguno de los juegos de rol más importantes.
 
 \medskip
 
-En el capítulo \ref{cap:planteamiento}, \textit{Planteamiento del Proyecto}, se tratará en profundidad el diseño planteado y las decisiones tomadas previas al desarrollo de las aplicaciones.
+En el capítulo \ref{cap:videojuegosrol}, \textit{Videojuegos de Rol}, se introducen los videojuegos de rol y su historia, así como el proceso de desarrollo y el uso de motores y editores de videojuegos.
 
 \medskip
 
-En el capítulo \ref{cap:desarrollo}, \textit{Desarrollo del Proyecto}, se hablará de la estructura interna del motor y del editor en cuanto a código, abordando también los problemas que se hayan tenido durante esta fase y las soluciones propuestas.
+En el capítulo \ref{cap:planteamiento}, \textit{Planteamiento del Proyecto}, se trata en profundidad el diseño planteado y las decisiones tomadas previas al desarrollo de las aplicaciones.
 
 \medskip
 
-En el capítulo \ref{cap:conclusiones}, \textit{Evaluación y Conclusiones}, se expondrán las preguntas y objetivos de investigación, el desarrollo de las pruebas con los usuarios, y un análisis acerca de las pruebas, del que se extraerán conclusiones.
+En el capítulo \ref{cap:desarrollo}, \textit{Desarrollo del Proyecto}, se habla de la estructura interna del motor y del editor en cuanto a código, abordando también los problemas que se hayan tenido durante esta fase y las soluciones propuestas.
 
 \medskip
 
-Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Trabajo Futuro}, se detallarán posibles mejoras para una futura actualización de las herramientas que podrían ser interesantes.
+En el capítulo \ref{cap:conclusiones}, \textit{Evaluación y Conclusiones}, se exponen las preguntas y objetivos de investigación, el desarrollo de las pruebas con los usuarios, y un análisis acerca de las pruebas, del que se han extraído conclusiones.
+
+\medskip
+
+Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Trabajo Futuro}, se detallan posibles mejoras para una futura actualización de las herramientas que pueden ser interesantes.

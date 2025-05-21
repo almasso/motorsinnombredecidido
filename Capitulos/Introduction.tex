@@ -6,11 +6,11 @@
 
 
 \section*{Motivation}
-Role-playing video games have been one of the most influential genres in the industry, from their origins in the 1980s to the present day, where they account for a large portion of the market share.
+Role-playing video games are one of the most influential genres in the industry\footnote{In total, more than one billion copies of role-playing video games have been sold throughout history, according to \textit{VGChartz} (\url{https://shorturl.at/VI2Zy}).}, from their origins in the 1980s to the present day, where they account for a large portion of the market share\footnote{According to \textit{Rocket Brush Studio}, role-playing video games correspond to the best-selling genre in the mobile market, the third-best in the PC market, and the fifth-best in the console market (\url{https://rocketbrush.com/blog/most-popular-video-game-genres-in-2024-revenue-statistics-genres-overview}).}.
 
 \smallskip
 
-The development of this type of game has undergone major changes over the years, driven by continuous hardware and software improvements, which have allowed us to evolve from machines designed solely to run a single game to the wide range of multimedia devices available today.
+The development of this type of game has undergone significant changes over the years, along with consequent improvements in hardware and software, which have allowed us to evolve from simple monochrome scenes with text-based interfaces to real-time 3D graphics, complex open worlds, and advanced interaction systems. These improvements have influenced not only the visual aspect but also the narrative, gameplay, and player immersion, enabling increasingly rich and personalized experiences.
 
 \medskip
 
@@ -21,12 +21,12 @@ Numerous video game development and editing tools have appeared in the last two 
 Those tools that are specifically designed for role-playing game development have two fundamental flaws:
 \begin{itemize}
 	\item Those that offer an intuitive, easy-to-use interface that is friendly to newcomers in game development are locked behind a paywall which, although not very expensive, forces amateur users to pay for a software they will rarely unless they consolidate as developers.
-	\item Those that are not locked behind a paywall, that is, open source, often have interfaces and systems that are difficult for beginners to understand, leading many to abandon game development due to the complexity of these tools.
+	\item Those that are not locked behind a paywall or are open source, often have interfaces and systems that are difficult for beginners to understand, leading many to abandon game development due to the complexity of these tools.
 \end{itemize}
 
 \medskip
 
-The main motivation behind this Project arises from the need to have accessible and flexible tools, both for experimented independent developers who desire to create games without the limitations imposed by general-purpose engines, and for people with little knowledge of video game development or programming.
+The main motivation behind this Project arises from the need to have easy-to-use and flexible tools, both for experimented independent developers who desire to create games without the limitations imposed by general-purpose engines, and for people with little knowledge of video game development or programming.
 
 \section*{Objectives}
 This project aims to develop a 2D game engine specifically designed for role-playing games, along with an editor that enables simple and straightforward game development for this engine. The editor will be capable of generating executable files that users can distribute without the need for any additional steps after development.
@@ -46,7 +46,7 @@ To accomplish this:
 
 \section*{Work Plan}
 \begin{figure}[t]
-	\scalebox{0.8}{
+	\scalebox{0.9}{
 		\begin{ganttchart}[
     		hgrid,
     		vgrid,
@@ -56,7 +56,7 @@ To accomplish this:
     		title/.style={fill=blue!20},
     		title height=1.2,
     		x unit=2cm
-  			]{2025-01}{2025-06}
+  			]{2025-01}{2025-05}
 	
 			\gantttitle{January}{1}
 			\gantttitle{February}{1}
@@ -85,7 +85,7 @@ To accomplish the previous objectives, the work plan will be divided in three ph
 		\begin{itemize}
 			\item Setting up the development environment. A development environment will be chosen based on the Project's needs, and everything will be configured to minimize effort during the development of the applications.
 			\item Engine development. An engine will be developed according to the previously established plans, with cross-platform support for both PCs and Android mobile devices.
-			\item Editor development. Like the engine, the editor will be developed according to the established design.
+			\item Editor development. Like the engine, the editor will be developed according to the established design. It must support multiple platforms on PC, namely Windows, MacOS and Linux, but not Android.
 		\end{itemize}
 	\item User testing. To ensure the correct functioning of the Project, the final tools will be tested by a variety of users not involved in their development. After the tests are completed, the necessary conclusions will be drawn, and the Project will be adjusted to address any critical issues that require attention before releasing the public version. Features that would require excessive effort to implement within the available time will be left as future work.
 \end{itemize}
@@ -115,23 +115,27 @@ Regarding the working methodology, bi-weekly meetings will be proposed with the 
 Communication with the team will be established through both in-person meetings when important issues need to be addressed and via software that allows messaging and voice chat, such as Discord. This tool will also be used for conducting user testing.
 
 \section*{Document Structure} 
-In Chapter \ref{cap:estadoDeLaCuestion}, \textit{State of the Art}, the current situation of role-playing video games, video game development, and a bit of historical context of both will be discussed.
+In Chapter \ref{cap:juegosrol}, \textit{Role-Playing Games}, the topic of role-playing games is discussed, including their characteristics, origins, and an analysis of some of the most important titles in the genre.
 
 \medskip
 
-In Chapter \ref{cap:planteamiento}, \textit{Project Planning}, the design and decisions made prior to the development of the applications will be discussed in detail.
+In Chapter \ref{cap:videojuegosrol}, \textit{Role-Playing Video Games}, role-playing video games and their history are introduced, along with the development process and the use of game engines and editors.
 
 \medskip
 
-In Chapter \ref{cap:desarrollo}, \textit{Project Development}, the internal structure of the engine and editor in terms of code will be discussed, while addressing the problems encountered during this phase and the solutions proposed.
+In Chapter \ref{cap:planteamiento}, \textit{Project Planning}, the design and decisions made prior to the development of the applications are discussed in detail.
 
 \medskip
 
-In Chapter \ref{cap:conclusiones}, \textit{Evaluation and Conclusions}, the research questions and objectives will be presented, along with the development of the user testing phase and an analysis of the tests, from which conclusions will be drawn.
+In Chapter \ref{cap:desarrollo}, \textit{Project Development}, the internal structure of the engine and editor in terms of code are discussed, while addressing the problems encountered during this phase and the solutions proposed.
 
 \medskip
 
-Finally, in Chapter \ref{cap:trabajoFuturo}, \textit{Future Work}, potential improvements for the final implementation of the applications that may be interest will be detailed.
+In Chapter \ref{cap:conclusiones}, \textit{Evaluation and Conclusions}, the research questions and objectives are presented, along with the development of the user testing phase and an analysis of the tests, from which conclusions are drawn.
+
+\medskip
+
+Finally, in Chapter \ref{cap:trabajoFuturo}, \textit{Future Work}, potential improvements for the final implementation of the applications that may be of interest are detailed.
 
 
 
