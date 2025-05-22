@@ -14,18 +14,18 @@ El entorno de juego consta de múltiples Componentes, cada uno contenido en una 
 La lógica de cada componente se rige por un ciclo de vida con las siguientes fases: 
 
 \begin{itemize}
-	\item \texttt{Init}: se invoca solo una vez al crear el componente (durante la construcción de la Entidad o más adelante en tiempo de ejecución). Su función es inicializar atributos, ya sea obteniendo referencias de otros elementos de la escena o leyendo parámetros desde el \texttt{ComponentData} generado a partir del archivo \texttt{.lua}.
-	\item \texttt{Update}: se llama en cada iteración del bucle principal si el componente está activo. Aquí reside la mayor parte de la lógica del componente.
-	\item \texttt{OnEnable / OnDisable}: se disparan al activar o desactivar el componente mediante \texttt{setEnabled(true/false)}. Además, si un componente llega habilitado por defecto al cargar la escena, se invoca automáticamente \texttt{OnEnable}.
+	\item \texttt{Init}: se invoca solo una vez al crear el componente, durante la construcción de la Entidad o más adelante en tiempo de ejecución. Su función es inicializar atributos, ya sea obteniendo referencias de otros elementos de la escena o leyendo parámetros desde un objeto \texttt{ComponentData} que contiene datos leídos del archivo \texttt{.lua}.
+	\item \texttt{Update}: se llama en cada iteración del bucle principal, aquí reside la mayor parte de la lógica del componente. Se puede evitar que esta llamada ocurra desactivando el componente y viceversa mediante un método \texttt{setEnabled(true/false)}.
+	\item \texttt{OnEnable / OnDisable}: se disparan al activar o desactivar el componente respectivamente. Además, si un componente comienza habilitado al cargar la escena, \texttt{OnEnable} se invoca automáticamente.
 \end{itemize}
 
 \medskip
 
-Cada Entidad mantiene sus Componentes en un diccionario ordenado, donde la clave es un entero que define el orden de ejecución. Además, puede tener Entidades hijas: cada una almacena un conjunto sin ordenar de punteros a sus hijas y un puntero a su padre. La propia Entidad propaga las llamadas de \texttt{Update} y el resto del ciclo de vida a sus hijos, la escena solo conserva referencias a las raíces de la jerarquía. Para eliminar una Entidad, se marca su atributo \texttt{Alive} en \texttt{false} y luego se purga en la llamada a \texttt{refresh}.
+Cada Entidad mantiene sus Componentes en un diccionario ordenado, donde la clave es un entero que define el orden de ejecución. Además, cada una de ellas puede tener otras Entidades hijas: cada una almacena un conjunto sin ordenar de punteros a sus hijas y un puntero a su padre. La propia Entidad propaga las llamadas de \texttt{Update} y el resto del ciclo de vida a sus hijos, la escena solo conserva referencias a las raíces de la jerarquía. Para eliminar una Entidad, se marca su atributo \texttt{Alive} en \texttt{false} y luego se purga en la llamada a \texttt{refresh} que ocurre tras cada \texttt{Update}.
 
 \medskip
 
-Las escenas guardan sus Entidades raíz en un conjunto sin orden y ejecutan recursivamente las llamadas correspondientes sobre cada rama de la jerarquía. También mantienen un diccionario de \comillas{handlers} (claves únicas de tipo \textit{string}) para referenciar rápidamente Entidades desde cualquier componente, y almacenan referencias a los \texttt{RenderComponent} registrados, organizados por capas. 
+Las escenas guardan sus Entidades raíz en un conjunto sin orden y ejecutan recursivamente las llamadas correspondientes sobre cada rama de la jerarquía. También mantienen un diccionario de \comillas{handlers}, claves únicas de tipo \textit{string}, para referenciar rápidamente Entidades desde cualquier componente. Además, almacenan referencias a los \texttt{RenderComponent} registrados, organizados por capas, que se explicarán más adelante. 
 
 \medskip
 
@@ -39,17 +39,17 @@ Esta base está preparada para funcionar con múltiples escenas distintas con di
 La segunda parte fundamental de la base del motor es el sistema de gestión de recursos. Su objetivo es poder cargar distintos tipos de recursos de forma genérica y flexible para poder implementar funcionalidades dependientes de archivos externos. Para poder hacerlo este sistema consta de tres partes esenciales: 
 
 \begin{itemize}
-	\item \texttt{Resource} es una clase base que sirve como interfaz para poder crear cualquier tipo de recurso que se necesite. Permite implementar dos métodos \texttt{load()} y \texttt{unload()}. El primero es el que se encargará de leer el archivo correspondiente a ese recurso y almacenar el contenido en memoria. El segundo liberará la memoria reservada por el primero invalidando los accesos posteriores que se puedan hacer sobre el recurso. Además de esto, esta clase da acceso a un parámetro en el que cada uno de los recursos registrará el espacio ocupado en memoria. Este podrá ser consultado desde otras partes del código para poder tener una gestión de memoria más profunda.
-	\item \texttt{ResourceHandler} es una clase plantilla que sirve para poder acceder a los distintos tipos de recursos que se creen como implementaciones de la interfaz \texttt{Resource}. Usa el patrón \textit{singleton}, pues queremos permitir que se pueda acceder a los recursos desde cualquier punto del motor. Su función principal es devolver un recurso que se pueda construir a partir de un archivo dado. Con su método \texttt{get(key)} se encargará de crear el recurso solicitado si no lo estaba ya y retornarlo. 
-	\item \texttt{ResourceMemoryManager} se encarga de controlar qué recursos permanecen cargados y cuánto espacio de memoria están ocupando. A través de un archivo de configuración se puede establecer cuál es el límite de memoria que se quiere usar para los recursos; esta clase es la que se encarga de que ese umbral no se supere. A través de un algoritmo LRU se gestiona qué recursos están cargados en cada instante. Cada vez que se quiera usar alguno de estos; es decir, cada vez que se llame a \texttt{get(key)} de un \texttt{ResourceHandler}; se le solicitará a este gestor de memoria que lo active. Esta activación consiste en: primero comprobar si el recurso está ya cargado, si es así simplemente se actualizará en el LRU; en caso contrario iría al segundo paso que es cargarlo y comprobar si hay espacio suficiente, de ser así se almacenaría; si no, el tercer paso es crear espacio suficiente para este y, a través del LRU, se irán descargando aquellos recursos que lleven más tiempo sin ser utilizados hasta que haya espacio suficiente para el nuevo y se almacene.
+	\item \texttt{Resource} es una clase base que sirve como interfaz para poder crear cualquier tipo de recurso que se necesite. Permite implementar dos métodos \texttt{load()} y \texttt{unload()}. El primero es el que se encargará de leer el archivo correspondiente a ese recurso y almacenar su contenido en memoria. El segundo liberará la memoria reservada por el primero invalidando los accesos posteriores que se puedan hacer sobre el recurso. Además de esto, esta clase da acceso a un parámetro en el que cada uno de los recursos registrará el espacio ocupado en memoria. Este podrá ser consultado desde otras partes del código para poder tener una gestión de memoria más profunda.
+	\item \texttt{ResourceHandler} es una clase plantilla que sirve para poder acceder a los distintos tipos de recursos que implementen la interfaz \texttt{Resource}. Usa el patrón \textit{singleton}, pues queremos permitir que se pueda acceder a los recursos desde cualquier punto del motor. Su función principal es devolver un recurso que se pueda acceder a partir de un archivo dado. Con su método \texttt{get(key)} se encargará de crear el recurso solicitado en el motor si no lo estaba y retornarlo. 
+	\item \texttt{ResourceMemoryManager} se encarga de controlar qué recursos permanecen cargados y cuánto espacio de memoria están ocupando. A través de un archivo de configuración se puede establecer cuál es el límite de memoria que se quiere usar para los recursos; esta clase es la que se encarga de que ese umbral no se supere. A través de un algoritmo LRU se gestiona qué recursos están cargados en cada instante. Cada vez que se quiera usar alguno de estos, es decir, cada vez que se llame a \texttt{get(key)} de un \texttt{ResourceHandler}, se le solicitará a este gestor de memoria que lo active. Esta activación consiste en tres fases. Primero comprobar si el recurso está ya cargado, si es así simplemente se actualizará en el LRU. En caso contrario, iría al segundo paso que es cargarlo y comprobar si hay espacio suficiente, de ser así se almacenaría. Si no, el tercer paso es crear ese espacio y, a través del LRU, se irán descargando aquellos recursos que lleven más tiempo sin ser utilizados, hasta que haya espacio suficiente para que el nuevo se almacene.
 \end{itemize}
 
 \medskip
 
-Sobre estas tres piezas fundamentales está estructurado el sistema de gestión de recursos y, adicionalmente, existen otras dos clases que ayudan en esta tarea. \texttt{ResourceManager}, que se encarga de inicializar el sistema con la configuración dada yestablecer la conexión entre \texttt{ResourceMemoryManager} y los \texttt{ResourceHandler}. Y \texttt{LuaReader}, que ofrece una interfaz sencilla para poder extraer tablas de Lua guardadas en un archivo o dentro de otra tabla de Lua. La lectura de estos archivos se hace a través de \texttt{SDL}, para poder mantener la funcionalidad entre plataformas, y la interpretación a través de \texttt{sol2}, que lo usaremos en más puntos del motor para tener un sencillo manejo en C++ de datos extraídos de Lua.
+Sobre estas tres piezas fundamentales está estructurado el sistema de gestión de recursos y, adicionalmente, existen otras dos clases que ayudan en esta tarea. \texttt{ResourceManager}, que se encarga de inicializar el sistema con la configuración dada y establecer la conexión entre \texttt{ResourceMemoryManager} y los \texttt{ResourceHandler}. Y \texttt{LuaReader}, que ofrece una interfaz sencilla para poder extraer tablas de Lua guardadas en un archivo o dentro de otra tabla de Lua. La lectura de estos archivos se hace a través de \texttt{SDL}, para poder mantener la funcionalidad entre plataformas, y la interpretación a través de \texttt{sol2}.
 
 \subsection{Carga de escenas a partir de datos}
-Una parte fundamental de los motores de videojuegos es que han de permitir ejecuciones con resultados distintos dependiendo de los datos que se le aporten. Esto es para poder reutilizar las herramientas que este ofrece en videojuegos completamente distintos. Se usará un paradigma conocido como programación dirigida por datos, \textit{data-driven programming}. 
+Una parte fundamental de los motores de videojuegos es que han de permitir ejecuciones con resultados distintos dependiendo de los datos que se le aporten. Esto es para poder reutilizar en videojuegos completamente distintos las herramientas que este ofrece. Se usará un paradigma conocido como programación dirigida por datos, \textit{data-driven programming}. 
 
 \medskip
 
@@ -57,8 +57,8 @@ Las escenas son un conjunto de entidades que se definen en archivos \texttt{.lua
 
 \begin{itemize}
 	\item \texttt{SceneBlueprint}: se guarda como recurso del sistema de carga. Lee un archivo \texttt{.lua} con el nombre de la escena y almacena todas las entidades definidas en él en un vector de \texttt{EntityBlueprints}. Más adelante, el \texttt{SceneManager} lo utiliza para crear la escena, iterando sobre el vector de entidades e instanciándolas. 
-	\item \texttt{EntityBlueprint}: contiene la información necesaria para crear e instanciar una entidad. Normalmente, forma parte de un \texttt{SceneBlueprint}. Guarda todos los hijos como \texttt{EntityBlueprints} (en un vector \texttt{children}) y todos sus componentes en un vector de \texttt{ComponentData}. Adicionalmente, almacena dos variables: un \textit{string}, el \texttt{handler}, que, si no está vacío, se registra en la escena para poder referenciar esa entidad; y un \textit{booleano}, \texttt{active}, que indica si la entidad se instancia activa o inactiva en la jerarquía de la escena (una entidad inactiva no recibe llamadas a \texttt{update} ni a \texttt{render}). El \texttt{SceneManager} recorre recursivamente los hijos llamando al método de creación de entidad y luego itera sobre los componentes para añadirlos e inicializarlos con los parámetros almacenados en cada \texttt{ComponentData}. 
-	\item \texttt{PrefabBlueprint}: es una subclase de \texttt{EntityBlueprint} que se guarda como recurso independiente mediante herencia múltiple. Funcionalmente es idéntico, pero en lugar de formar parte de un \texttt{SceneBlueprint}, se lee desde un archivo de \texttt{Prefab} y se mantiene de forma separada. El \texttt{SceneManager} lo utiliza para instanciar entidades en tiempo de ejecución, por ejemplo, en el sistema de mapas.
+	\item \texttt{EntityBlueprint}: contiene la información necesaria para crear e instanciar una entidad. Normalmente, forma parte de un \texttt{SceneBlueprint}. Guarda todos los hijos como \texttt{EntityBlueprints}, en un vector \texttt{children}, y todos sus componentes en un vector de \texttt{ComponentData}. Adicionalmente, almacena dos variables: el \texttt{handler}, un \textit{string} que, si no está vacío, se registra en la escena para poder referenciar esa entidad; y un \textit{booleano}, \texttt{active}, que indica si la entidad se instancia activa o inactiva en la jerarquía de la escena, esto significa que no recibirá llamadas a \texttt{update} ni a \texttt{render}. El \texttt{SceneManager} recorre recursivamente los hijos llamando al método de creación de entidad y luego itera sobre los componentes para añadirlos e inicializarlos con los parámetros almacenados en cada \texttt{ComponentData}. 
+	\item \texttt{PrefabBlueprint}: es una subclase de \texttt{EntityBlueprint} que se guarda como recurso independiente mediante herencia múltiple. Funcionalmente es idéntico, pero en lugar de formar parte de un \texttt{SceneBlueprint}, se lee desde su propio archivo de recurso y se mantiene de forma separada. El \texttt{SceneManager} lo utiliza para instanciar entidades en tiempo de ejecución, por ejemplo, en el sistema de mapas.
 	\item \texttt{ComponentData}: almacena toda la información necesaria para crear e inicializar un componente. Consta de dos elementos: 
 		\begin{itemize}
 			\item El identificador de componente, un \textit{string} que se usa para crear la una instancia de la clase de componente correspondiente. 
@@ -68,32 +68,32 @@ Las escenas son un conjunto de entidades que se definen en archivos \texttt{.lua
 
 \medskip
 
-Para crear los componentes a partir de esta información surge el problema de tener que crear objetos de clases distintas a partir de identificadores. La solución aplicada en este caso es el uso del patrón factoría. En una clase \texttt{ComponentFactory} se registrará la creación de cada tipo de componente asociada a un identificador. Con esto se le podrá solicitar esta clase crear cada tipo de componente haciéndole llegar un identificador. 
+Para crear los componentes a partir de la información de estos \texttt{ComponentData} surge el problema de tener que crear objetos de clases distintas a partir de identificadores. La solución aplicada en este caso es el uso del patrón factoría. En una clase \texttt{ComponentFactory} se registrará la creación de cada tipo de componente asociada a un identificador. Con esto se le podrá solicitar a esta clase crear cada tipo de componente haciéndole llegar un identificador. 
 
 \smallskip
 
-Para poder definir ese identificador fácilmente en cada componente se ha creado un paso intermedio en la herencia de componentes, \texttt{ComponentTemplate}. Cada componente derivará de este permitiendo definir el identificador de cada componente fácilmente en su declaración. 
+Para poder definir ese identificador fácilmente en cada componente se ha creado un paso intermedio en la herencia de estos, \texttt{ComponentTemplate}. Cada componente derivará de este permitiendo definir el identificador de cada componente fácilmente en su declaración.
 
 \smallskip
 
-Con esto, a partir de un objeto \texttt{ComponentData}, el \texttt{SceneManager} crea los componentes mediante \texttt{ComponentFactory}; estos conservan la tabla \texttt{data} para usarla en su llamada a \texttt{init}. Para evitar el uso directo de los métodos de \texttt{sol2} en cada componente, \texttt{ComponentData} proporciona plantillas \texttt{getData} y \texttt{getArray}, que permiten obtener valores o declarar un valor por defecto si no existen. Además, \texttt{ComponentData} incluye en su propia tabla \texttt{data} un indicador que señala si el componente debe instanciarse habilitado o deshabilitado. 
+Con esto, a partir de un objeto \texttt{ComponentData}, el \texttt{SceneManager} crea los componentes mediante \texttt{ComponentFactory}, estos \textit{blueprints} conservan la tabla \texttt{data} para usarla en su llamada a \texttt{init}. Para evitar el uso directo de los métodos de \texttt{sol2} en cada componente, \texttt{ComponentData} proporciona las interfaces \texttt{getData} y \texttt{getArray}, que permiten obtener los valores almacenados. Además, \texttt{ComponentData} incluye en su propia tabla \texttt{data} un indicador que señala si el componente debe instanciarse habilitado o deshabilitado.
 
 \section{Componentes genéricos de juego}
-De cara a facilitar el desarrollo de videojuegos los motores ofrecen implementaciones de sistemas que se usan en la gran mayoría de estos. Hay múltiples bibliotecas que facilitan la adición de estas funcionalidades, en este caso se usará \texttt{SDL} que ofrece todo lo necesario para desarrollar de forma sencilla lo diseñado además de ofrecer soporte multiplataforma. 
+De cara a facilitar el desarrollo de videojuegos los motores ofrecen implementaciones de sistemas que se usan en la gran mayoría de estos. Hay múltiples bibliotecas que facilitan la adición de estas funcionalidades, en este caso se usará \texttt{SDL3} que ofrece todo lo necesario para desarrollar de forma sencilla lo diseñado además de ofrecer soporte multiplataforma.
 
 \subsection{\texttt{Render}}
-Para el apartado de renderizado utilizamos las funciones que ofrece \textit{SDL}. El \texttt{RenderManager} se encarga de generalizar estos métodos para que los componentes de render puedan acceder a ellos fácilmente. Para ello implementa: 
+Para el apartado de \textit{renderizado} utilizamos las funciones que ofrece \textit{SDL}. El \texttt{RenderManager} se encarga de generalizar estos métodos para que los componentes de \textit{render} puedan acceder a ellos fácilmente. Para ello implementa: 
 
 \begin{itemize}
-	\item \texttt{clear}: se llama al comienzo de cada frame, vacía el buffer de vídeo a negro para preparar el siguiente renderizado.
-	\item \texttt{present}: se invoca al final de cada frame, después de llamar a todos los \texttt{RenderComponent}, muestra el contenido del buffer de vídeo en pantalla.
-	\item \texttt{drawRect}: rellena un rectángulo de tamaño y posición parametrizables con el color indicado.
+	\item \texttt{clear}: se llama al comienzo de cada fotograma y vacía el \textit{buffer} de vídeo para preparar el siguiente \textit{renderizado}.
+	\item \texttt{present}: se invoca al final de cada fotograma, después de llamar a todos los \texttt{RenderComponent}; muestra el contenido del \textit{buffer} de vídeo en pantalla.
+	\item \texttt{drawRect}: rellena un rectángulo de tamaño y posición dados con el color indicado.
 	\item \texttt{drawSprite}: dibuja un fragmento de una imagen en la posición de pantalla y con la rotación indicadas.
-	\item \texttt{drawText}: dibuja una textura de texto (creada previamente) en la posición y rotación indicadas. 
-	\item \texttt{setViewRect}: establece el \textit{viewRect}, es decir, el fragmento del mundo que se va a renderizar, ajusta offsets y reescalados antes de dibujar los elementos. 
+	\item \texttt{drawText}: dibuja un bloque de texto creada previamente en la posición y rotación indicadas. 
+	\item \texttt{setViewRect}: establece el \textit{viewRect}, es decir, el fragmento del mundo que se va a ver en pantalla. Ajusta desplazamientos y reescalados antes de dibujar los elementos.
 \end{itemize}
 
-El ciclo de renderizado de cada frame es: 
+El ciclo de \textit{renderizado} de cada fotograma es: 
 \begin{enumerate}
 	\item Llamar a \texttt{clear} para limpiar el buffer.
 	\item Invocar \texttt{render} en el \texttt{SceneManager}, que lo replica en cada escena y, a su vez, en todos los \texttt{RenderComponent} registrados. 
@@ -108,18 +108,18 @@ Además, el \texttt{RenderManager} gestiona la inicialización y el cierre de lo
 
 \medskip
 
-El resto de la funcionalidad de vídeo se concentra en los componentes de render (\texttt{RenderComponent}) y en los recursos que utilizan. Cada \texttt{RenderComponent} hereda de \texttt{Component} y se define mediante un \texttt{ComponentTemplate}. Implementa el método \texttt{Render(RenderManager*)} en el que realiza las llamadas a los métodos de renderizado necesarios. Todos dependen de un \texttt{Transform} que indica posición, rotación y escala, y especifican su capa para organizar el orden de dibujo. Los \texttt{RenderComponent} se registran en la escena en \texttt{OnEnable} y se desregistran en \texttt{OnDisable}, con lo que la escena controla qué componentes están activos en cada momento.  
+El resto de la funcionalidad de vídeo se concentra en los componentes de \textit{render} (\texttt{RenderComponent}) y en los recursos que utilizan. Implementa el método \texttt{Render(RenderManager*)} en el que realiza las llamadas a los métodos de \textit{renderizado} necesarios. Todos dependen de un \texttt{Transform} que indica posición, rotación y escala, y especifican su capa para organizar el orden de dibujo. Los \texttt{RenderComponent} se registran en la escena en \texttt{OnEnable} y se desregistran en \texttt{OnDisable}, con lo que la escena controla qué componentes están activos en cada momento.  
 
 \medskip
 
-Las llamadas de renderizado se realizan en orden inverso de la pila de forma que las escenas que estén más abajo en la pila se llaman primero y por lo tanto quedan por debajo de las siguientes. Además, dentro de cada escena los \texttt{RenderComponent} se llaman en orden de capas de forma que las capas más altas se pintan las últimas. 
+Las llamadas de \textit{renderizado} se realizan en orden inverso de la pila de forma que las escenas que estén más abajo en la pila se llaman primero y por lo tanto se ven por debajo de las siguientes. Además, dentro de cada escena los \texttt{RenderComponent} se llaman en orden de capas de forma que las capas más altas se pintan las últimas.
 
 \medskip
 
 Los \texttt{RenderComponent} implementados son: 
 
 \begin{itemize}
-	\item \texttt{Camera}: modifica el área de renderizado llamando a \texttt{setViewRect}. Tiene un tamaño lógico en píxeles y su posición se controla mediante su \texttt{Transform}. Por defecto usa el layer \texttt{-1} para que su llamada \texttt{Render} sea la primera de la escena.
+	\item \texttt{Camera}: modifica el área de \textit{renderizado} llamando a \texttt{setViewRect}. Tiene un tamaño lógico en píxeles y su posición se controla mediante su \texttt{Transform}. Por defecto usa la capa \texttt{-1} para que su llamada \texttt{Render} sea la primera de la escena.
 	\item \texttt{Rectangle}: guarda tamaño y color, y dibuja un rectángulo en la posición del \texttt{Transform}. 
 	\item \texttt{Text}: crea una \texttt{TextTexture} a partir de fuente, tamaño, color, centrado y texto, y la dibuja en la posición del \texttt{Transform}.
 	\item \texttt{SpriteRenderer}: dibuja un \texttt{Sprite} (fragmento de textura cargada desde una imagen) en la posición del \texttt{Transform}. 
@@ -129,77 +129,77 @@ Los \texttt{RenderComponent} implementados son:
 Las clases auxiliares de recursos son: 
 
 \begin{itemize}
-	\item \texttt{Animation}: guarda un vector con las ID de \texttt{Sprite} para cada frame, un tiempo de duración y si debe o no reproducirse en bucle. Se crea a partir de la lectura de un archivo \texttt{.lua} con esta información.
-	\item \texttt{Sprite}: almacena el ID de una textura y el rectángulo correspondiente a la zona a dibujar. 
-	\item \texttt{Font}: crea y gestiona una \texttt{TTFFont} de SDL a partir de un archivo \texttt{.ttf} y un tamaño. 
-	\item \texttt{Texture}: crea y gestiona una \texttt{SDLTexture} a partir de un archivo de imagen.
-	\item \texttt{TextTexture}: genera y administra una textura de texto de SDL a partir de un texto y unas características de fuente.
-	\item \texttt{TextureLoader}: \textit{singleton} encargado de crear texturas usando el renderer de \texttt{RenderManager}.  
+	\item \texttt{Animation}: guarda un vector con los identificadores de \texttt{Sprite} para cada fotograma, un tiempo de duración y si debe reproducirse en bucle. Se crea desde un archivo \texttt{.lua} con esta información. 
+	\item \texttt{Sprite}: almacena el identificador de una textura y el rectángulo correspondiente a la zona a dibujar. 
+	\item \texttt{Font}: crea y gestiona una \texttt{TTFFont} de \texttt{SDL} a partir de un archivo \texttt{.ttf} y un tamaño. 
+	\item \texttt{Texture}: crea y gestiona una \texttt{SDLTexture} a partir de un archivo de imagen. 
+	\item \texttt{TextTexture}: genera y administra una textura de texto de \texttt{SDL} a partir de un texto y unas características de fuente.
+	\item \texttt{TextureLoader}: \textit{singleton} encargado de crear texturas usando el \textit{renderer} de \texttt{RenderManager}.  
 \end{itemize}
 
 Con esta infraestructura podemos dibujar en pantalla todo lo necesario para representar las entidades de nuestros juegos. 
 
-\subsection{\texttt{Input}}
-El sistema de \texttt{Input} gestiona toda la información que recogemos de los eventos de ratón y pantalla táctil de \texttt{SDL} en un \texttt{struct} al que podemos acceder desde cualquier lugar del motor mediante un patrón \textit{singleton}. Aunque no se expone directamente la instancia del \texttt{InputManager}, sí es posible obtener una referencia constante al \texttt{struct} que contiene toda la información necesaria para implementar el \textit{gameplay} de los juegos. Decidimos no implementar ningún tipo de entrada por teclado o mando, con el fin de garantizar un diseño multiplataforma sencillo, ya que todas las funcionalidades de \textit{input} que necesitábamos se pueden abstraer con clics o pulsaciones. 
+\subsection{Entrada}
+El sistema de entrada gestiona toda la información que recogemos de los eventos de ratón y pulsación de \texttt{SDL} en un \texttt{struct} al que podemos acceder desde cualquier lugar del motor mediante un patrón \textit{singleton}. Aunque no se expone directamente la instancia del \texttt{InputManager}, sí es posible obtener una referencia constante al \texttt{struct} que contiene toda la información necesaria para implementar el \textit{gameplay} de los juegos. Decidimos no implementar ningún tipo de entrada por teclado o mando, con el fin de garantizar un diseño multiplataforma sencillo, ya que todas las funcionalidades de \textit{input} que necesitábamos se pueden abstraer con clics o pulsaciones. 
 
 \medskip
 
-En coordinación con este sistema, también creamos el componente \texttt{Button}. Este almacena una \texttt{sol::function} como callback, que se invoca con unos parámetros de tipo \texttt{sol::object} cuando detecta un \textit{input} dentro de su área. Gracias a esto, podemos conectar el motor genérico en C++ con la lógica específica de \textit{gameplay} programada en \texttt{.lua}. 
+En coordinación con este sistema, también creamos el componente \texttt{Button}. Este almacena una \texttt{sol::function} como \textit{callback}, que se invoca con unos parámetros de tipo \texttt{sol::object} cuando detecta un \textit{input} dentro de su área. Gracias a esto, podemos conectar el motor genérico en C++ con la lógica específica de \textit{gameplay} programada en Lua. 
 
 \subsection{Audio}
-Este es el sistema que se encarga de controlar la reproducción de sonidos para los juegos. Envuelve al nuevo sistema de sonido de \texttt{SDL3} para ofrecer una interfaz adecuada al resto de sistemas del motor. Esto está hecho centrando estas funcionalidades alrededor de la creación de un componente \texttt{AudioSource}, cuya función es permitir controlar la reproducción de una sola instancia de un sonido. Lo que se busca en \texttt{AudioSource} se puede separar en otras dos clases:
+Este es el sistema que se encarga de controlar la reproducción de sonidos para los juegos. Envuelve al nuevo sistema de sonido de \texttt{SDL3} para ofrecer una interfaz adecuada al resto de sistemas del motor. Está hecho centrando estas funcionalidades alrededor de un componente \texttt{AudioSource}, cuya función es permitir controlar la reproducción de una sola instancia de un sonido. Lo que se busca en \texttt{AudioSource} se puede separar en otras dos clases:
 
 \begin{itemize}
-	\item \texttt{AudioClip} se encarga de envolver a \texttt{SDL\_AudioStream} ofreciendo una interfaz simplificada. Representa una pista de sonido, se puede reproducir, pausar, detener o cambiar su volumen entre otros. Pese a esto no es esta clase la que guarda la información del audio que controlará, almacena únicamente su identificador. Para su funcionamiento se apoya en el sistema de gestión de recursos, con una clase que extiende de \texttt{Resource}, \texttt{AudioClipData}. Cada vez que se quiera hacer una modificación en el estado de la pista se solicitará el acceso al recurso correspondiente. 
-	\item \texttt{AudioMixer} simula una simplificación de cómo funciona un mezclador de audio. Puede recibir múltiples entradas de audio y ofrece una salida. Esto significa que a un \texttt{AudioMixer} se le pueden conectar tanto múltiples \texttt{AudioClip} como \texttt{AudioMixer}. Permite modificar el volumen de reproducción de todos sus elementos conectados. Esto es así para poder permitir un control más preciso de distintos tipos de sonido. En los videojuegos es típico permitir al jugador controlar tanto el volumen general como el de la música o los efectos de sonido, por ejemplo. De esta manera se pueden estructurar en forma de árbol las distintas salidas de audio para ofrecer esta funcionalidad. Con esto y con una clase \texttt{AudioManager}; encargada de gestionar el dispositivo de salida y las conexiones entre los \texttt{AudioMixer}, a través de un recurso \texttt{AudioMixerData}; se completa la implementación del componente \texttt{AudioSource}.
+	\item \texttt{AudioClip} se encarga de envolver a \texttt{SDL\_AudioStream} ofreciendo una interfaz simplificada. Representa una pista de sonido, se puede reproducir, pausar, detener o cambiar su volumen entre otros. Almacena un identificador de la pista de audio que representa. Para su funcionamiento se apoya en el sistema de gestión de recursos, con una clase que extiende de \texttt{Resource}, \texttt{AudioClipData}. Cada vez que se quiera hacer una modificación en el estado de la pista se solicitará el acceso al recurso correspondiente a través de su identificador.
+	\item \texttt{AudioMixer} simula una simplificación de cómo funciona un mezclador de audio. Puede recibir múltiples entradas de audio y ofrece una salida. Esto significa que, a un \texttt{AudioMixer}, se le pueden conectar tanto múltiples \texttt{AudioClip} como otros \texttt{AudioMixer}. Permite modificar el volumen de reproducción de todos sus elementos conectados. Esto es así para poder permitir un control más preciso de distintos tipos de sonidos. En los videojuegos es típico permitir al jugador controlar tanto el volumen general como el de la música o los efectos de sonido, por ejemplo. De esta manera se pueden estructurar en forma de árbol las distintas salidas de audio para ofrecer esta funcionalidad. Con esto y con una clase \texttt{AudioManager}, encargada de gestionar el dispositivo de salida y las conexiones entre los \texttt{AudioMixer}, se completa la implementación del componente \texttt{AudioSource}.
 \end{itemize}
 
 \subsection{Colisiones}
-En lo que refiere a detección de colisiones el sistema no se busca que sea especialmente complejo. Los videojuegos que se ofrecerán crear con el motor no necesitan más que comprobaciones sencillas obtenidas a partir de intersecciones entre rectángulos. Para hacer esto el sistema de colisiones consta de dos elementos: 
+En lo que refiere a detección de colisiones no se busca que el sistema sea especialmente complejo. Los videojuegos que se ofrecerán crear con el motor no necesitan más que comprobaciones sencillas obtenidas a partir de intersecciones entre rectángulos. Para hacer esto el sistema de colisiones consta de dos elementos: 
 
 \begin{itemize}
 	\item \texttt{Collider} es el componente que representa un elemento que puede colisionar. Permite la comprobación de si otro \texttt{Collider} acaba de empezar a colisionar, está colisionando o acaba de dejar de colisionar con este. 
-	\item \texttt{CollisionManager} es quien se encarga de mantener al día el registro del estado de cada \texttt{Collider}. Cada vez que se crea una instancia del componente se registra en esta clase. En cada actualización de juego se encargará de cambiar los estados en función de las áreas cubiertas por cada elemento en ese momento. Esto lo hace a través de una sencilla función que proporciona \texttt{SDL} que comprueba si dos rectángulos tienen intersección.
+	\item \texttt{CollisionManager} es quien se encarga de mantener al día el estado de cada \texttt{Collider}. Cada vez que se crea una instancia del componente se registra en esta clase. En cada actualización de juego se encargará de cambiar los estados en función de las áreas representadas por cada componente. Esto lo hace a través de una sencilla función que proporciona \texttt{SDL} que comprueba si dos rectángulos tienen intersección.
 \end{itemize}
 
 \section{Componentes específicos de RPG}
 Sobre toda la infraestructura creada en las secciones anteriores se construyen algunos componentes específicos orientados a los juegos RPG que se podrán diseñar en el editor. 
 
 \subsection{Movimiento}
-El sistema de movimiento es autónomo y está basado en el cálculo de una ruta a una casilla objetivo desde una casilla inicial. Para ello se utiliza un algoritmo de \textit{A*} sobre casillas, con distancia \textit{Manhattan} y movimiento en cuatro direcciones. El sistema consta de tres componentes: 
+El sistema de movimiento es autónomo y está basado en el cálculo de una ruta entre dos casillas. Para ello se utiliza un algoritmo de \textit{A*} sobre casillas, con distancia \textit{Manhattan} y movimiento en cuatro direcciones. El sistema consta de tres componentes: 
 
 \begin{itemize}
 	\item \texttt{MovementManager}: componente único en escena encargado de registrar las casillas ocupadas, ya sea por elementos estáticos (\texttt{MovementObstacle}) o dinámicos (\texttt{MovementComponent}), y de calcular las rutas más eficientes bajo demanda de los \texttt{MovementComponent}. 
 	\item \texttt{MovementObstacle}: representa casillas estáticas ocupadas en el sistema de movimiento. Se registra en el \texttt{MovementManager} en \texttt{OnEnable} y se desregistra en \texttt{OnDisable}. 
-	\item \texttt{MovementComponent}: hereda de \texttt{MovementObstacle}. Obtiene un \texttt{Path} (un \textit{vector} de movimientos) e itera por él moviendo el \texttt{Transform} a cada paso. Actualiza su posición en el \texttt{MovementManager} cada vez que cambia de casilla. Su velocidad de movimiento es parametrizable y se le pueden asignar animaciones que se reproducen en coordinación con cada dirección de desplazamiento. 
+	\item \texttt{MovementComponent}: hereda de \texttt{MovementObstacle}. Obtiene un \texttt{Path}, un \textit{vector} de movimientos, e itera por él moviendo el \texttt{Transform} a cada paso. Actualiza su posición en el \texttt{MovementManager} cada vez que cambia de casilla. Su velocidad de movimiento es parametrizable y se le pueden asignar animaciones que se reproducen en coordinación con cada dirección de desplazamiento. 
 \end{itemize}
 
-Este sistema lo utilizan tanto los \textit{NPC} (vía el sistema de eventos y su \textit{behaviour}) como el jugador, mediante un sistema de input que obtiene la casilla libre más cercana al click o touch del jugador y la establece como objetivo para su \texttt{MovementComponent}. 
+Este sistema lo utilizan tanto los \textit{NPC}, vía el sistema de eventos y su comportamiento, como el jugador, mediante el sistema de entrada que obtiene la casilla libre más cercana al clic o pulsación del jugador y la establece como objetivo para su \texttt{MovementComponent}. 
 
 \subsection{Mapas}
-Los diferentes mapas creados en el editor no se instancian en el motor como escenas independientes, sino como entidades que se activan y desactivan dinámicamente en la escena de \textit{Overworld}. Para gestionar esto existen dos componentes:
+Los diferentes mapas creados en el editor no se instancian en el motor como escenas independientes, sino como entidades que se activan y desactivan dinámicamente en la escena del mundo. Para gestionar esto existen dos componentes:
 
 \begin{itemize}
 	\item \texttt{OverworldManager}: mantiene dos conjuntos de mapas, los activos y los cargados pero inactivos. Cuando el jugador cambia de mapa, activa los colindantes, carga los que no estaban cargados y desactiva los que ya no son necesarios.
 	\item \texttt{MapComponent}: detecta cuándo el jugador entra en un nuevo mapa y notifica al \texttt{OverworldManager}. Guarda los nombres de los mapas adyacentes y el propio y se los envía al \texttt{OverworldManager} para que gestione la carga/descarga de estos.
 \end{itemize}
 
-Con este sistema la carga de mapas ocurre dinámicamente durante la partida y no es necesario cargar todo el mundo de golpe o estar constantemente cargando un mapa cada vez que pasemos de uno a otro, obteniendo así un buen equilibrio entre tiempos de carga y uso de memoria. 
+Con este sistema la carga de mapas ocurre dinámicamente durante la partida y no es necesario cargar todo el mundo de una vez o estar constantemente cargando un mapa cada vez que pasemos de uno a otro, obteniendo así un buen equilibrio entre tiempos de carga y uso de memoria. 
 
 \subsection{Diálogos}
 Un elemento indispensable en un RPG son los diálogos. El motor ofrece dos elementos clave: 
 
 \begin{itemize}
-	\item \texttt{Textbox}: divide un texto largo (en formato \textit{string}) en fragmentos que caben en el espacio parametrizado. Muestra cada carácter de forma progresiva y, al llenar la caja, espera un input para pasar al siguiente fragmento, facilitando la presentación dinámica de los diálogos. 
-	\item \texttt{Choices}: conjunto de hasta tres botones a los que se les asignan, mediante eventos, diferentes textos y valores que guardan la elección en una variable de juego. El script en \texttt{.lua} define los textos y asocia una función \textit{callback} que se invoca con el índice de la opción seleccionada, permitiendo interactividad entre el jugador y los eventos diseñados. 
+	\item \texttt{Textbox}: divide un texto largo (en formato \textit{string}) en fragmentos que caben en el espacio parametrizado. Muestra cada carácter de forma progresiva y, al llenar la caja, espera una entrada para pasar al siguiente fragmento, facilitando la presentación dinámica de los diálogos. 
+	\item \texttt{Choices}: conjunto de hasta tres botones a los que se les asignan, mediante eventos, diferentes textos y valores que guardan la elección en una variable de juego. El \textit{script} en \texttt{.lua} define los textos y asocia una función \textit{callback} que se invoca con el índice de la opción seleccionada, permitiendo interactividad entre el jugador y los eventos diseñados.
 \end{itemize}
 
 \section{Sistema de eventos}
-Este sistema es la estructura que permite agregar lógica a un juego sin necesidad de programar. A través de añadir eventos a entidades se puede conseguir que estas se comporten de formas completamente diferentes. La forma en la que este sistema se conecta con el resto del juego es con un componente que se encarga de manejar todos los eventos asociados a una entidad, \texttt{EventHandler}. Este componente funciona como un conjunto de eventos, se encarga de actualizarlos y permite acceder a ellos individualmente a partir de su nombre. 
+Este sistema es la estructura que permite agregar lógica a un juego sin necesidad de programar. A través de añadir eventos a entidades se puede conseguir que estas se comporten de formas completamente diferentes. La forma en la que este sistema se conecta con el resto del juego es con un componente que se encarga de manejar todos los eventos asociados a una entidad, \texttt{EventHandler}. Este componente funciona como un conjunto de eventos, se encarga de actualizarlos y permite acceder a ellos individualmente a partir de su nombre.
 
 \medskip
 
-Un evento es una estructura que consta de una condición y una secuencia de acciones. En cuanto la condición de ese evento se cumpla se comenzará a ejecutar su secuencia de acciones. Dentro del motor está definido a través de la clase \texttt{Event}. Tienen un método \texttt{update()} que marca cada una de las actualizaciones del evento, dentro de este es donde ocurre su lógica definida. Cada actualización consta de tres partes: comprobar si la condición se cumple, en cuyo caso se comenzará con la ejecución de los comportamientos desde el primero; ejecutar la acción del comportamiento actual y, si se completó la acción, avanzar al siguiente comportamiento para la siguiente actualización. 
+Un evento es una estructura que consta de una condición y una secuencia de acciones. En cuanto la condición de ese evento se cumpla se comenzará a ejecutar su secuencia de acciones. Dentro del motor está definido a través de la clase \texttt{Event}. Tienen un método \texttt{update()} que marca cada una de las actualizaciones del evento, dentro de este es donde ocurre su lógica definida. Cada actualización consta de tres partes. Primero, comprobar si la condición se cumple, en cuyo caso se comenzará con la ejecución de los comportamientos desde el primero. Segundo, ejecutar la acción del comportamiento actual. Y, tercero, si se completó la acción, avanzar al siguiente comportamiento para la próxima actualización. 
 
 \medskip
 
@@ -210,30 +210,30 @@ Las condiciones, \texttt{EventCondition}, se encargan de determinar si ciertos e
 
 \medskip
 
-Cada implementación de condición tiene alguna comprobación esencial para la creación de este tipo de juegos como, por ejemplo, si el jugador intenta interactuar con algún elemento. Además de condiciones directamente ligadas al estado del propio sistema de eventos como si se completó un comportamiento. Otras comprobaciones cruciales de cara a ofrecer un sistema flexible que permite la creación de sistemas complejos son las puertas lógicas. Existen las condiciones \textit{and}, \textit{or} y \textit{not} que permiten combinar condiciones cualesquiera con otras. 
+Cada implementación de condición tiene alguna comprobación esencial para la creación de este tipo de juegos como, por ejemplo, si el jugador intenta interactuar con algún elemento. Además de condiciones directamente ligadas al estado del propio sistema de eventos como, por ejemplo, si se completó un comportamiento. Otras comprobaciones cruciales de cara a ofrecer un sistema flexible que permite la creación de sistemas complejos son las puertas lógicas. Existen las condiciones \textit{and}, \textit{or} y \textit{not} que permiten combinar condiciones cualesquiera con otras. 
 
 \medskip
 
-Uno de los problemas de cara a la implementación de estas condiciones es el mismo uno que surgió con los componentes, se deben poder construir los distintos tipos de condiciones a partir de información extraída de Lua. Para ello la solución aplicada es la misma, crear una factoría que permita la creación de cada una de las condiciones a partir de un identificador, \texttt{EventConditionFactory}. A través de una clase plantilla como paso intermedio entre \texttt{EventCondition} y sus implementaciones, cada una de estas puede definir su identificador al declararse que será el que usará la factoría. 
+Uno de los problemas de cara a la implementación de estas condiciones es el mismo uno que surgió con los componentes, se deben poder construir los distintos tipos de condiciones a partir de información extraída de Lua. Para ello la solución aplicada es la misma, crear una factoría, \texttt{EventConditionFactory}, que permita la creación de cada una de las condiciones a partir de un identificador. A través de una clase plantilla como paso intermedio entre \texttt{EventCondition} y sus implementaciones, cada una de estas puede definir su identificador al declararse, que será el que usará la factoría. 
 
 \subsection{Comportamientos}
-Los comportamientos son cada una de las acciones que se pueden realizar a través de un evento. Cada evento consta de un listado de comportamientos que funcionan de forma similar a una lista de instrucciones. Cada uno de estos recibe unos parámetros que harán que se realicen unas modificaciones u otras en el juego. 
+Los comportamientos son cada una de las acciones que se pueden realizar a través de un evento. Cada evento consta de un listado de comportamientos que funcionan de forma similar a una lista de instrucciones. Cada uno de estos recibe unos parámetros que harán que se realicen unas modificaciones u otras en el juego.
 
 \medskip
 
-Buscando que estos comportamientos sean flexibles y se puedan crear nuevos sin necesidad de recompilar el motor se decidió que se implementarían en Lua. De esta manera se pueden añadir a las escenas muy fácilmente al estar también escritas en Lua. Aún con esto surge el problema de que en Lua no existe de forma nativa la infraestructura de la POO (Programación orientada a objetos) que encaja perfectamente con el diseño planteado. Sin embargo, existen formas sencillas de simular este comportamiento a través de las tablas, que son la estructura básica de la programación en Lua. Gracias a poder asignar funciones dentro de las tablas y modificando las \textit{metatablas}, tablas internas de cada tabla que contienen información sobre esta, se puede simular la herencia de clases. 
+Buscando que estos comportamientos sean flexibles y se puedan crear nuevos sin necesidad de recompilar el motor se decidió que se implementaran en Lua. De esta manera se pueden añadir a las escenas muy fácilmente al estar estas también escritas en Lua. Aún con esto, surge el problema de que en Lua no existe de forma nativa la infraestructura de la POO (Programación orientada a objetos) que encaja perfectamente con el diseño planteado. Sin embargo, existen formas sencillas de simular este comportamiento a través de las tablas, que son la estructura básica de la programación en Lua. Gracias a poder asignar funciones dentro de las tablas y modificando las \textit{metatablas}, tablas internas de cada tabla que contienen información sobre esta, se puede simular la herencia de clases.
 
 \medskip
 
-Con esto se creó en Lua una clase \texttt{EventBehaviour} que consta de métodos de inicialización, un método de acción y métodos de comprobación de compleción. En estos cada uno de los comportamientos se comunica con el motor en C++ para identificar y modificar el estado del juego. Para que funcionara esta comunicación se definió, a través de \texttt{sol2}, qué clases de C++ se pueden acceder desde Lua y a qué atributos se da acceso. 
+Con esto se creó en Lua una clase \texttt{EventBehaviour} que consta de métodos de inicialización, un método de acción y métodos de comprobación de compleción. En estos, cada uno de los comportamientos se comunica con el motor en C++ para identificar y modificar el estado del juego. Para que funcionara esta comunicación se definió, a través de \texttt{sol2}, qué clases de C++ se pueden acceder desde Lua y a cuáles de sus atributos dan acceso.
 
 \medskip
 
-Los comportamientos tienen dos comprobaciones de compleción distintas: \texttt{done()} y \texttt{ended()}. La primera será cierta cuando el comportamiento haya finalizado su acción, dando paso a que el evento continúe al siguiente comportamiento. La segunda en cambio se encarga de confirmar que la instrucción lanzada por el comportamiento se haya completado. Esto es porque hay comportamientos que le comunican al juego cuál es el cambio a realizar y este puede ser ejecutado de forma simultánea al resto del evento. Aún con esto en casos concretos se puede querer que el evento no continúe sin que se complete en su totalidad la acción solicitada. Para ese caso, entre otros, existe la segunda comprobación, esta se puede combinar con uno de estos comportamientos, \texttt{WaitForBehaviour}. 
+Los comportamientos tienen dos comprobaciones de compleción distintas: \texttt{done()} y \texttt{ended()}. La primera será cierta cuando el comportamiento haya finalizado su acción, dando paso a que el evento continúe al siguiente comportamiento. La segunda en cambio se encarga de confirmar que la instrucción lanzada por el comportamiento se haya completado. Esto es porque hay comportamientos que le comunican al juego cuál es el cambio a realizar y este puede ser ejecutado de forma simultánea al resto del evento. Aún con esto en casos concretos se puede querer que el evento no continúe sin que se complete en su totalidad la acción solicitada. Para ese caso, entre otros, existe la segunda comprobación, esta se puede combinar con uno de estos comportamientos, \texttt{WaitForBehaviour}.
 
 \medskip
 
-Hay ciertos comportamientos que permiten alterar el flujo de estos dentro de un evento. \texttt{WaitForBehaviour} detiene este flujo hasta que se cumpla una \texttt{EventCondition} concreta. Combinándolo con la condición \texttt{BehaviourEndedCondition}, que comprueba si la acción lanzada por un comportamiento concreto se ha completado, se puede obtener el resultado recién mencionado, por ejemplo. Hay otros dos comportamientos que modifican el flujo de ejecución de un evento: \texttt{JumpBehaviour} y \texttt{JumpIfBehaviour}. Estos simulan el comportamiento de una instrucción de salto en una CPU, es decir, establecen cuál es el siguiente comportamiento desde el que se seguirá ejecutando la lista independientemente de su posición en esta. La diferencia entre estos dos es que el primero siempre hará este salto mientras que el segundo solo lo hará si se cumple una \texttt{EventCondition}. Gracias a estos se puede conseguir que ciertos comportamientos se ejecuten, no lo hagan o lo vuelvan a hacer según el estado del juego.
+Hay ciertos comportamientos que permiten alterar el flujo de estos dentro de un evento. \texttt{WaitForBehaviour} detiene este flujo hasta que se cumpla una \texttt{EventCondition} concreta. Combinándolo con la condición \texttt{BehaviourEndedCondition}, que comprueba si la acción lanzada por un comportamiento concreto se ha completado, se puede obtener el resultado recién mencionado, por ejemplo. Hay otros dos comportamientos que modifican el flujo de ejecución de un evento: \texttt{JumpBehaviour} y \texttt{JumpIfBehaviour}. Estos simulan el comportamiento de una instrucción de salto en una CPU, es decir, establecen cuál es el siguiente comportamiento desde el que se seguirá ejecutando la lista, independientemente de su posición en esta. La diferencia entre estos dos es que el primero siempre hará este salto, mientras que el segundo solo lo hará si se cumple una \texttt{EventCondition}. Gracias a estos se puede conseguir que ciertos comportamientos se ejecuten, no lo hagan o lo vuelvan a hacer según el estado del juego.
 
 \smallskip
 
@@ -241,7 +241,7 @@ Las acciones del resto de comportamientos permiten establecer movimiento, cambia
 
 \medskip
 
-Por último, se pueden también definir y cambiar valores propios en cada entidad de cara al diseño del videojuego. En un componente \texttt{LocalVariables} cada entidad puede tener las variables que se quieran con los valores que se quieran. A través de un comportamiento \texttt{ModifyVariableBehaviour} se pueden modificar estas variables que de las que se podrá comprobar sus valores gracias a condiciones. 
+Por último, se pueden también definir y cambiar valores propios en cada entidad de cara al diseño del videojuego. En un componente \texttt{LocalVariables} cada entidad puede tener las variables que se quieran con los valores que se quieran. A través de un comportamiento \texttt{ModifyVariableBehaviour} se pueden modificar estas variables de las que se podrán comprobar sus valores gracias a condiciones. 
 
 \medskip
 
