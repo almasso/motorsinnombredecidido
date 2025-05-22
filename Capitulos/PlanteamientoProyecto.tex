@@ -6,11 +6,11 @@ En este capítulo se tratarán los objetivos principales del proyecto, así como
 \end{resumen}
 
 \section{Objetivos principales del Proyecto}
-La idea principal es el desarrollo de un motor de videojuegos, enfocado a los RPG 2D, acompañado de un editor que permita un desarrollo rápido y simple de juegos de este tipo para el motor desarrollado. El editor estaría pensado principalmente para gente no programadora o sin experiencia en el desarrollo de videojuegos, por lo que la interfaz tendría que ser intuitiva y fácil de utilizar y aprender.
+La idea principal es el desarrollo de un motor de videojuegos, enfocado a los RPG 2D, acompañado de un editor que permita un desarrollo rápido y simple de juegos de este tipo para el motor desarrollado. El editor está pensado principalmente para gente no programadora o sin experiencia en el desarrollo de videojuegos, por lo que la interfaz tiene que ser intuitiva y fácil de utilizar y aprender.
 
 \smallskip
 
-El editor debería ser capaz de generar un ejecutable, que por debajo utilice el motor desarrollado previamente, con el diseño de juego realizado por el usuario en el propio editor, y que pueda ejecutarse en Windows, MacOS, Linux y Android. El editor, por su parte, ha de poder ser ejecutado tanto en Windows, MacOS o Linux, descartando la ejecución en dispositivos móviles\footnote{Los editores suelen tener elementos que son preferibles de ser utilizados mediante entrada de teclado y ratón. Si bien es cierto que Android permite la conexión de periféricos de entrada-salida, es una plataforma pensada para dispositivos móviles y táctiles.}.
+El editor debe ser capaz de generar un ejecutable, que por debajo utilice el motor desarrollado previamente, con el diseño de juego realizado por el usuario en el propio editor, y que pueda ejecutarse en Windows, MacOS, Linux y Android. El editor, por su parte, ha de poder ser ejecutado tanto en Windows, MacOS o Linux, descartando la ejecución en dispositivos móviles\footnote{Los editores suelen tener elementos que son preferibles de ser utilizados mediante entrada de teclado y ratón. Si bien es cierto que Android permite la conexión de periféricos de entrada-salida, es una plataforma pensada para dispositivos móviles y táctiles.}.
 
 \smallskip
 
@@ -18,11 +18,11 @@ El usuario podrá elegir la plataforma para la cual se va a generar el ejecutabl
 
 \medskip
 
-Por otra parte, se espera que el editor pueda generar diversos proyectos (es decir, distintos juegos), y capaz de guardar el estado de un proyecto y poder recuperarlo cuando el usuario desee, sin que se hayan podido perder los cambios que se hayan realizado. Y, también, debe poder exportar proyectos, e importar otros que otros usuarios puedan haber diseñado en otras plataformas o sistemas sin mayor dificultad.
+Por otra parte, se espera que el editor pueda generar diversos proyectos (es decir, distintos juegos), y sea capaz de guardar el estado de un proyecto y recuperarlo cuando el usuario desee, sin que se hayan perdido los cambios que se hayan realizado. Y, también, debe poder exportar proyectos, así como importarlos incluyendo aquellos que otros usuarios puedan haber diseñado en otras plataformas o sistemas sin mayor dificultad.
 
 \medskip
 
-El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que el usuario solo tenga que desarrollar la parte de diseño (principalmente el diseño artístico y visual. Tendrá que tener las funcionalidades básicas que se esperan de un RPG, así como soporte para periféricos de entrada-salida tradicionales (teclado y ratón) y entrada táctil (para los dispositivos móviles). 
+El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que el usuario solo tenga que desarrollar la parte de diseño (principalmente el diseño artístico y visual. Tendrá que tener las funcionalidades básicas que se esperan de un RPG, así como soporte para periféricos de entrada salida tradicionales (teclado y ratón) y entrada táctil (para los dispositivos móviles). 
 
 \section{Toma de decisiones}
 \label{sec:decisiones}
@@ -38,11 +38,11 @@ Pese a que el aprender a usar CMake ocupó gran parte del inicio del desarrollo 
 
 \medskip
 
-Por otra parte, se tendría que utilizar otra herramienta para el desarrollo de la APK (\textit{Android Application Package}, paquete de aplicaciones Android, es decir, el ejecutable de Android), ya que esta se debe desarrollar utilizando Java, por lo que se decidió utilizar \textit{Android Studio}, la herramienta oficial de desarrollo para Android, que proporciona máquinas virtuales de dispositivos Android de distintas versiones y generaciones para poder probar la \textit{build}. Otra ventaja añadida al uso de Android Studio es el soporte que tiene para CMake, que ha permitido disponer de un único archivo de configuración para ambas herramientas.
+Por otra parte, para el desarrollo del motor, se tendría que utilizar otra herramienta para el desarrollo de la APK (\textit{Android Application Package}, paquete de aplicaciones Android, es decir, el ejecutable de Android), ya que esta se debe desarrollar utilizando Java. Por esto se decidió utilizar \textit{Android Studio}, la herramienta oficial de desarrollo para Android, que proporciona máquinas virtuales de dispositivos Android de distintas versiones y generaciones para poder probar la \textit{build}. Otra ventaja añadida al uso de Android Studio es el soporte que tiene para CMake, que ha permitido disponer de un único archivo de configuración para ambas herramientas.
 
 \smallskip
 
-Dentro de \textit{Android Studio}, se tendría que añadir también el módulo de NDK (\textit{Native Development Kit}, kit de desarrollo nativo) que permite el desarrollo de aplicaciones para Android utilizando llamadas a C/C++ gracias a JNI (\textit{Java Native Interface}, interfaz nativa de Java) integrada en el SDK de Java. JNI es un ejemplo de una FFI (\textit{foreign function interface}, interfaz de funciones foráneas), es decir, un mecanismo por el cual un lenguaje de programación puede llamar a funciones o rutinas programadas o compiladas en otro lenguaje distinto, lo cual es necesario para poder ejecutar el juego, ya que la entrada de la aplicación Android estaría en Java.
+Dentro de \textit{Android Studio}, se tiene que añadir también el módulo de NDK (\textit{Native Development Kit}, kit de desarrollo nativo) que permite el desarrollo de aplicaciones para Android utilizando llamadas a C/C++ gracias a JNI (\textit{Java Native Interface}, interfaz nativa de Java) integrada en el SDK de Java. JNI es un ejemplo de una FFI (\textit{foreign function interface}, interfaz de funciones foráneas), es decir, un mecanismo por el cual un lenguaje de programación puede llamar a funciones o rutinas programadas o compiladas en otro lenguaje distinto, lo cual es necesario para poder ejecutar el juego, ya que la entrada de la aplicación Android está en Java.
 
 \medskip
 
@@ -50,47 +50,52 @@ El resto de decisiones son propias de cada una de las partes del Proyecto y se d
 
 \subsection{Diseño del motor}
 \subsubsection{Base con el sistema entidad-componente}
-La base del motor se estructurará atendiendo a un patrón EC (entidad-componente). Los sistemas específicos de los juegos RPG se construirán sobre esta base modular, que se puede separar en dos partes diferenciadas: el bucle de juego y la carga de recursos.
+El objetivo del motor es poder ejecutar juegos RPG, por ello deberá implementar sus sistemas y permitir su uso a alto nivel. Sin embargo, aún teniendo la separación entre motor y \textit{gameplay} de un motor específico en este alto nivel, a bajo nivel estos sistemas estarán construidos al rededor de estructuras modulares propias de motores generalistas.
 
 \medskip  
 
-El bucle de juego se estructurará en escenas. Cada escena estará formada por un conjunto de entidades que se actualizarán en paralelo. A su vez, cada una de estas entidades agrupará un conjunto de componentes, que encapsularán funcionalidades específicas, permitiendo una gran flexibilidad mediante el uso de polimorfismo. Gracias a esta estructura se podrán implementar una amplia variedad de mecánicas mediante la creación de distintos componentes asociados a las entidades.  
+La base del motor se estructurará atendiendo a un patrón EC (entidad componente) y los sistemas específicos de los juegos RPG se construirán sobre esa base. Lo primero a tener en cuenta en esta parte es el bucle de juego.
+
+\medskip  
+
+En este bucle de juego es en el que se actualizarán los elementos de cada juego. Estos elementos están organizados según una jerarquía. La primera pieza son las escenas. Cada escena se define como un conjunto de entidades. A su vez, cada una de estas entidades es quien representa cualquier elemento del juego: un personaje, un obstáculo, un cuadro de texto... Para definir cuál será el comportamiento de cada una de las entidades estas contienen un conjunto de componentes. Los componentes encapsulan funcionalidades específicas, se pueden crear de múltiples tipos permitiendo una gran flexibilidad a la hora de marcar el funcionamiento de cada entidad. Gracias a esta estructura se podrán implementar una amplia variedad de mecánicas mediante la creación de distintos componentes.  
 
 \medskip
 
-En cuanto a la carga de recursos, este sistema se encargará de informar al motor sobre las escenas creadas y su contenido. Estas escenas estarán descritas cada una en un fichero Lua, estructurado de forma que puede descomponerse fácilmente en sus entidades, y, a su vez, en los componentes que las conforman.
+Una vez con esta estructura montada, para funcionar necesita conocer qué escenas, entidades y componentes debe utilizar. Para este propósito se crea un sistema de gestión de recursos. Definimos recurso, o \textit{asset}, como todo aquel elemento externo al código del programa que este usará para obtener el comportamiento deseado, estos pueden ser por ejemplo imágenes, audios, fuentes de texto... La forma en la que este sistema se conecta con el anterior es a través de estos recursos. Cada una de las escenas se definirá en un fichero que el motor interpretará como un recurso con el que crearlas dentro del programa. De esta forma el motor no deberá conocer de antemano estas escenas y su contenido permitiendo un uso mucho más ligero.
 
 \smallskip
 
-Lua ha sido elegido por su simplicidad, su integración fluida con C++ mediante librerías como \texttt{sol2}, y su compatibilidad multiplataforma. Estas librerías proporcionan \textit{bindings}, es decir, código que facilita el uso de Lua desde C++ y viceversa.
-
-\smallskip
-
-La parte más compleja de este sistema es la conversión de estructuras de texto en Lua a instancias de clases de C++ específicas. Para ello, se usará un \textit{patrón factoría}: cada componente estará asociado a un identificador, que estas \comillas{factorías} utilizarán para instanciar el componente correspondiente y añadirlo a la entidad.
+Estos recursos de escenas estarán descritos cada uno en un fichero Lua y son lo que definirá el \textit{gameplay} de cada juego. Lua ha sido elegido por su simplicidad, su integración fluida con C++ mediante librerías como \texttt{sol2}, y su compatibilidad multiplataforma. Estas librerías proporcionan \textit{bindings}, es decir, código que facilita el uso de Lua desde C++ y viceversa.
 
 \medskip
 
-Además de la carga de escenas, el sistema de carga de recursos permitirá gestionar múltiples tipos de recursos que pueden ser utilizados por el resto del motor. Cuando se solicite un recurso, este se cargará en memoria si no lo estaba previamente. Esta operación se realizará hasta alcanzar un límite de memoria, definido por el usuario. Una vez alcanzado dicho límite, si se solicitase un nuevo recurso, se aplicará un algoritmo LRU (\textit{least-recently-used}, menos usado recientemente), que liberará el recurso que más tiempo lleve sin usarse para hacer espacio al nuevo.
+Además de la carga de escenas, el sistema de carga de recursos permitirá gestionar múltiples tipos de recursos que pueden ser utilizados por el resto del motor. Cuando se solicite un recurso, este se cargará en memoria si no lo estaba previamente. Esta operación se realizará hasta alcanzar un límite de memoria, definido por el usuario. Una vez alcanzado dicho límite, si se solicitase un nuevo recurso, se aplicará un algoritmo LRU (\textit{least-recently-used}, usado menos recientemente), que liberará el recurso que más tiempo lleve sin usarse para hacer espacio al nuevo.
 
 \subsubsection{Componentes genéricos de juego}
 Para desarrollar videojuegos, es necesario contar con ciertas funcionalidades básicas que faciliten la implementación de los sistemas específicos del juego.
 
 \smallskip
 
-En el motor, se utilizará la librería \texttt{SDL} para implementar estos sistemas. Esta elección se debe principalmente, a su sencillez de uso y a su robusto soporte multiplataforma, que permite ejecutar los juegos tanto en sistemas de escritorio como en dispositivos Android.
+En el motor, se utilizará la librería \texttt{SDL3} para implementar estos sistemas. Esta elección se debe principalmente, a su sencillez de uso y a su robusto soporte multiplataforma, que permite ejecutar los juegos tanto en sistemas de escritorio como en dispositivos Android.
 
 \medskip
 
 Los sistemas que se implementarán serán los siguientes:
 \begin{itemize}
 	\item Sistema de \textit{renderizado}: es imprescindible contar con un mecanismo que permita mostrar visualmente lo que ocurre en el juego. Dado que se trata de un motor para videojuegos 2D, se usarán imágenes y texto para cubrir esta necesidad. Estos sistemas de \textit{renderizado} se expondrán al usuario a través de componentes que permitirán mostrar y animar imágenes, mostrar texto y controlar una cámara desplazable. Además, se implementará un sistema de \textit{renderizado} basado en capas y escenas, que permitirá superponer diferentes escenas, lo cual resulta útil para mostrar elementos (como menús) en forma de \textit{overlay}, y permite tener un mayor control sobre el orden de \textit{renderizado}.
-	\item Sistema de \textit{input}: se desarrollará un sistema de entrada sencillo basado en clics y toques. Este diseño garantiza la compatibilidad multiplataforma y permite centrar la jugabilidad en la interacción mediante botones, en línea con la experiencia tipo \textit{point-and-click} que se quiere ofrecer. El motor unificará el \textit{input} mediante clic y toque en una estructura común que incluya la posición del evento y su estado (inicio, mantenido o final) en un determinado fotograma.
-	\item Sistema de sonido: la retroalimentación auditiva es un componente esencial en los videojuegos. Para su implementación, se empleará el nuevo sistema de sonido incluido en \texttt{SDL3}. Desde el punto de vista del desarrollador, su uso es sencillo: se creará un componente que permita reproducir, pausar, detener y reanudar los sonidos. Además, estos pueden agruparse en diferentes conjuntos, lo que permite controlar de forma independiente el volumen general, el de música y el de los efectos sonoros.
+	\item Sistema de entrada: se desarrollará un sistema de \textit{input} sencillo basado en clics y toques. Este diseño garantiza la compatibilidad multiplataforma y permite centrar la jugabilidad en la interacción mediante botones, en línea con la experiencia tipo \textit{point-and-click} que se quiere ofrecer. El motor unificará la entrada mediante clic y toque en una estructura común que incluya la posición del evento y su estado (inicio, mantenido o final) en un determinado fotograma.
+	\item Sistema de sonido: la retroalimentación auditiva es un componente esencial en los videojuegos. Para su implementación, se empleará el nuevo sistema de sonido incluido en \texttt{SDL3}. Para lograr este propósito se creará un componente que permita reproducir, pausar, detener y reanudar los sonidos. Además, estos pueden agruparse en diferentes conjuntos, lo que permite controlar de forma independiente el volumen general, el de música y el de los efectos sonoros.
 	\item Sistema de colisiones: está diseñado para cubrir las necesidades de los juegos previstos, donde será suficiente con detectar intersecciones entre rectángulos. A través del componente correspondiente, será posible comprobar si un objeto colisiona con otro, si acaba de entrar en colisión o si ha dejado de colisionar.
 \end{itemize}
 
 \subsubsection{Componentes específicos de RPG}
-En primer lugar, se ha diseñado un sistema de movimiento automático y detección de colisiones basado en una cuadrícula de casillas y un algoritmo A* de búsqueda de caminos. Para ello, se mantendrán actualizadas las posiciones ocupadas dentro de la cuadrícula, tanto por elementos estáticos como por elementos dinámicos, y se recalculará la ruta siempre que sea necesario. Este sistema se aplicará tanto a los NPC, a través del sistema de eventos y sus comportamientos asociados, como al jugador, mediante un sistema de entrada de tipo \textit{point-and-click}.
+
+Para la navegación por el mundo el motor ofrece un sistema de mapas. Cada mapa será una de las áreas de un juego especificada por el diseñador. Estos mapas están formados por casillas y cada una de ellas puede contener \textit{tiles}. Los \textit{tiles} son imágenes preparadas para combinarse modularmente de forma que en conjunto dibujen un escenario. En estos mapas también se podrán definir los elementos interactivos del juego como, por ejemplo, los NPC.
+
+\medskip  
+
+Sobre estos mapas, se ha diseñado un sistema de movimiento automático y detección de colisiones basado en una cuadrícula de casillas y un algoritmo A* de búsqueda de caminos. Para ello, se mantendrán actualizadas las posiciones ocupadas dentro de la cuadrícula, tanto por elementos estáticos como por elementos dinámicos, y se recalculará la ruta siempre que sea necesario. Este sistema se aplicará tanto a los NPC, a través del sistema de eventos y sus comportamientos asociados, como al jugador, mediante un sistema de entrada de tipo \textit{point-and-click}.
 
 \medskip
 
@@ -113,11 +118,11 @@ Uno de los objetivos principales del motor es ofrecer la posibilidad de crear un
 
 \medskip
 
-La idea fundamental es sencilla: gracias al componente de gestión de eventos, una entidad podrá contener un conjunto de eventos. Cada uno de estos eventos estará compuesto por dos elementos principales: una condición y un conjunto de comportamientos.
+La idea fundamental es sencilla: gracias al componente de gestión de eventos, una entidad podrá contener un conjunto de eventos. Dentro del motor se define un evento como una combinación de una condición y una serie de comportamientos.
 
 \medskip
 
-La condición determinará bajo qué circunstancias deberá activarse el evento. Existirán múltiples tipos de condiciones, encargadas de evaluar distintos aspectos del estado del juego. Si una de las condiciones se cumple, el evento asociado comenzará su ejecución. Además, será posible combinar condiciones mediante operadores lógicos (\textit{not}, \textit{or}, \textit{and}), lo que permitirá definir reglas más complejas y flexibles.
+La condición determinará bajo qué circunstancias deberá activarse el evento. Existirán múltiples tipos de estas condiciones de alto nivel, encargadas de evaluar distintos aspectos del estado del juego. Algunas de ellas son, por ejemplo, si el jugador ha interactuado con un elemento o si ha pasado un cierto tiempo desde un instante. Si una condición se cumple su evento asociado comenzará su ejecución. Además, será posible combinar condiciones mediante operadores lógicos (\textit{not}, \textit{or}, \textit{and}), lo que permitirá definir reglas más complejas y flexibles.
 
 \medskip
 
@@ -144,7 +149,7 @@ La esencia del editor es la de una interfaz intuitiva y sencilla de utilizar y a
 
 \medskip
 
-Las características fundamentales que el editor tendría correspondían con aquellos elementos que podían ser modificados en el motor, es decir:
+Las características fundamentales que el editor tiene corresponden con aquellos elementos que pueden ser modificados en el motor, es decir:
 \begin{itemize}
 	\item Editor de mapas (figura \ref{fig:mapeditor}), que permitiese al usuario cargar sus propios \textit{tilesets}; decidir el tamaño de la cuadrícula que ocuparía el mapa; dibujar el mapa sobre la cuadrícula utilizando las baldosas del \textit{tileset}, con la posibilidad de tener varias capas para poder simular un efecto de profundidad; y establecer las regiones de colisión del mapa.
 	\item Editor de eventos, que permitiese al usuario la creación de eventos, asignándoles la condición de lanzamiento y los comportamientos que se ejecutarán cuando la condición se cumpla. El editor de eventos tendría que tener soporte para eventos complejos, en el caso de que el usuario requiera de la creación de uno de ellos.
@@ -163,10 +168,10 @@ Además, el editor incluiría un \textit{viewport} para que el usuario pudiese v
 
 \medskip
 
-Por otra parte, el editor contará con un sistema de persistencia, que permita una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todas los \textit{assets} utilizados tendrán que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
+Por otra parte, el editor contará con un sistema de persistencia, que permita una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todos los \textit{assets} utilizados tendrán que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
 
 \subsubsection{Modularidad y arquitectura}
-En cuanto a la estructura de la interfaz, se optó por utilizar un patrón típico en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas en otras ventanas, con el uso de ventanas modales que apareciesen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
+En cuanto a la estructura de la interfaz, se optó por utilizar una arquitectura típica en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas en otras ventanas, con el uso de ventanas modales que apareciesen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
 
 \medskip
 
@@ -174,11 +179,11 @@ Las ventanas tendrían comunicación unas con otras utilizando al \textit{proyec
 
 \smallskip
 
-Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada-salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que el Proyecto sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
+Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que el Proyecto sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
 
 \subsubsection{Tecnologías utilizadas}
 
-Para conseguir todos los objetivos anteriores, se investigó qué librerías se iban a poder utilizar para conseguir desarrollar toda la interfaz y la funcionalidad básica. Al ya haber optado por utilizar \texttt{SDL3} como base para el motor, se optó también como base para el editor, acompañada de \texttt{DearImGui} para el dibujado y manejo de los elementos de la interfaz.
+Para conseguir todos los objetivos anteriores, se investigó qué librerías se iban a poder utilizar para conseguir desarrollar toda la interfaz y la funcionalidad básica. Al ofrecer las facilidades necesarias para los objetivos de esta parte del proyecto, como el soporte multiplataforma, se optó por \texttt{SDL3} como base para el editor, acompañada de \texttt{DearImGui} para el dibujado y manejo de los elementos de la interfaz.
 
 \medskip
 
@@ -186,7 +191,7 @@ También, al ya haber optado por el uso de Lua como lenguaje de \textit{scriptin
 
 \smallskip
 
-Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}, etc...). Es por eso que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos a los datos que el motor espera; esto se hará en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo, al igual que como ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.
+Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}, etc.). Es por eso que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos a los datos que el motor espera; esto se hará en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo, al igual que ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.
 
 \medskip
 
