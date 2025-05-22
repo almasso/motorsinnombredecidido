@@ -21,7 +21,7 @@ La lógica de cada componente se rige por un ciclo de vida con las siguientes fa
 
 \medskip
 
-Cada Entidad mantiene sus Componentes en un diccionario ordenado, donde la clave es un entero que define el orden de ejecución. Además, puede tener Entidades hijas: cada una almacena un conjunto sin ordenar de punteros a sus hijas y un puntero a su padre. La propia Entidad propaga las llamadas de \texttt{Update} y el resto del ciclo de vida a sus hijos; la escena solo conserva referencias a las raíces de la jerarquía. Para eliminar una Entidad, se marca su atributo \texttt{Alive} en \texttt{false} y luego se purga en la llamada a \texttt{refresh}.
+Cada Entidad mantiene sus Componentes en un diccionario ordenado, donde la clave es un entero que define el orden de ejecución. Además, puede tener Entidades hijas: cada una almacena un conjunto sin ordenar de punteros a sus hijas y un puntero a su padre. La propia Entidad propaga las llamadas de \texttt{Update} y el resto del ciclo de vida a sus hijos, la escena solo conserva referencias a las raíces de la jerarquía. Para eliminar una Entidad, se marca su atributo \texttt{Alive} en \texttt{false} y luego se purga en la llamada a \texttt{refresh}.
 
 \medskip
 
@@ -85,12 +85,12 @@ De cara a facilitar el desarrollo de videojuegos los motores ofrecen implementac
 Para el apartado de renderizado utilizamos las funciones que ofrece \textit{SDL}. El \texttt{RenderManager} se encarga de generalizar estos métodos para que los componentes de render puedan acceder a ellos fácilmente. Para ello implementa: 
 
 \begin{itemize}
-	\item \texttt{clear}: se llama al comienzo de cada frame; vacía el buffer de vídeo a negro para preparar el siguiente renderizado.
-	\item \texttt{present}: se invoca al final de cada frame, después de llamar a todos los \texttt{RenderComponent}; muestra el contenido del buffer de vídeo en pantalla.
+	\item \texttt{clear}: se llama al comienzo de cada frame, vacía el buffer de vídeo a negro para preparar el siguiente renderizado.
+	\item \texttt{present}: se invoca al final de cada frame, después de llamar a todos los \texttt{RenderComponent}, muestra el contenido del buffer de vídeo en pantalla.
 	\item \texttt{drawRect}: rellena un rectángulo de tamaño y posición parametrizables con el color indicado.
 	\item \texttt{drawSprite}: dibuja un fragmento de una imagen en la posición de pantalla y con la rotación indicadas.
 	\item \texttt{drawText}: dibuja una textura de texto (creada previamente) en la posición y rotación indicadas. 
-	\item \texttt{setViewRect}: establece el \textit{viewRect}, es decir, el fragmento del mundo que se va a renderizar; ajusta offsets y reescalados antes de dibujar los elementos. 
+	\item \texttt{setViewRect}: establece el \textit{viewRect}, es decir, el fragmento del mundo que se va a renderizar, ajusta offsets y reescalados antes de dibujar los elementos. 
 \end{itemize}
 
 El ciclo de renderizado de cada frame es: 
@@ -129,10 +129,10 @@ Los \texttt{RenderComponent} implementados son:
 Las clases auxiliares de recursos son: 
 
 \begin{itemize}
-	\item \texttt{Animation}: guarda un vector de IDs de \texttt{Sprite} para cada frame, un tiempo de duración y si debe reproducirse en bucle; se crea desde un archivo \texttt{.lua}. 
+	\item \texttt{Animation}: guarda un vector con las ID de \texttt{Sprite} para cada frame, un tiempo de duración y si debe o no reproducirse en bucle. Se crea a partir de la lectura de un archivo \texttt{.lua} con esta información.
 	\item \texttt{Sprite}: almacena el ID de una textura y el rectángulo correspondiente a la zona a dibujar. 
 	\item \texttt{Font}: crea y gestiona una \texttt{TTFFont} de SDL a partir de un archivo \texttt{.ttf} y un tamaño. 
-	\item \texttt{Texture}: crea y gestiona una \texttt{SDLTexture} a partir de un archivo de imagen. 
+	\item \texttt{Texture}: crea y gestiona una \texttt{SDLTexture} a partir de un archivo de imagen.
 	\item \texttt{TextTexture}: genera y administra una textura de texto de SDL a partir de un texto y unas características de fuente.
 	\item \texttt{TextureLoader}: \textit{singleton} encargado de crear texturas usando el renderer de \texttt{RenderManager}.  
 \end{itemize}
@@ -140,7 +140,7 @@ Las clases auxiliares de recursos son:
 Con esta infraestructura podemos dibujar en pantalla todo lo necesario para representar las entidades de nuestros juegos. 
 
 \subsection{\texttt{Input}}
-El sistema de \texttt{Input} gestiona toda la información que recogemos de los eventos de \textit{mouse} y \textit{touch} de \textit{SDL} en un \texttt{struct} al que podemos acceder desde cualquier lugar del motor mediante un patrón \textit{singleton}. Aunque no se expone directamente la instancia del \texttt{InputManager}, sí es posible obtener una referencia constante al \texttt{struct} que contiene toda la información necesaria para implementar el \textit{gameplay} de los juegos. Decidimos no implementar ningún tipo de entrada por teclado o mando, con el fin de garantizar un diseño multiplataforma sencillo, ya que todas las funcionalidades de \textit{input} que necesitábamos se pueden abstraer con \comillas{clicks} o \comillas{touches}. 
+El sistema de \texttt{Input} gestiona toda la información que recogemos de los eventos de ratón y pantalla táctil de \texttt{SDL} en un \texttt{struct} al que podemos acceder desde cualquier lugar del motor mediante un patrón \textit{singleton}. Aunque no se expone directamente la instancia del \texttt{InputManager}, sí es posible obtener una referencia constante al \texttt{struct} que contiene toda la información necesaria para implementar el \textit{gameplay} de los juegos. Decidimos no implementar ningún tipo de entrada por teclado o mando, con el fin de garantizar un diseño multiplataforma sencillo, ya que todas las funcionalidades de \textit{input} que necesitábamos se pueden abstraer con clics o pulsaciones. 
 
 \medskip
 
@@ -174,7 +174,7 @@ El sistema de movimiento es autónomo y está basado en el cálculo de una ruta 
 	\item \texttt{MovementComponent}: hereda de \texttt{MovementObstacle}. Obtiene un \texttt{Path} (un \textit{vector} de movimientos) e itera por él moviendo el \texttt{Transform} a cada paso. Actualiza su posición en el \texttt{MovementManager} cada vez que cambia de casilla. Su velocidad de movimiento es parametrizable y se le pueden asignar animaciones que se reproducen en coordinación con cada dirección de desplazamiento. 
 \end{itemize}
 
-Este sistema lo utilizan tanto los \textit{NPCs} (vía el sistema de eventos y su \textit{behaviour}) como el jugador, mediante un sistema de input que obtiene la casilla libre más cercana al click o touch del jugador y la establece como objetivo para su \texttt{MovementComponent}. 
+Este sistema lo utilizan tanto los \textit{NPC} (vía el sistema de eventos y su \textit{behaviour}) como el jugador, mediante un sistema de input que obtiene la casilla libre más cercana al click o touch del jugador y la establece como objetivo para su \texttt{MovementComponent}. 
 
 \subsection{Mapas}
 Los diferentes mapas creados en el editor no se instancian en el motor como escenas independientes, sino como entidades que se activan y desactivan dinámicamente en la escena de \textit{Overworld}. Para gestionar esto existen dos componentes:
