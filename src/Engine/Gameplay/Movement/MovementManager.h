@@ -1,5 +1,6 @@
 #ifndef MOVEMENTMANAGER_H
 #define MOVEMENTMANAGER_H
+#include <optional>
 #include <Core/ComponentTemplate.h>
 #include <Utils/Vector2.h>
 #include <unordered_set>
@@ -17,6 +18,8 @@ class ComponentClass(MovementManager) {
     bool isOccupied(const Vector2 &position) const;
     Vector2 getCell(const Vector2 &position) const;
     std::vector<Vector2> calculatePath(const Vector2 &position, const Vector2 &target) const;
+
+    std::optional<Vector2> findNearestFreeCell(const Vector2 &center, int maxRadius) const;
 };
 
 

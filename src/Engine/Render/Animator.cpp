@@ -35,6 +35,7 @@ bool Animator::update() {
       if (!_defaultSprite.empty()) {
         return setSprite(_defaultSprite);
       }
+      return true;
     }
     _frameTimer += Time::deltaTime;
     const Animation* anim = ResourceHandler<Animation>::Instance()->get(_animation);
@@ -68,7 +69,7 @@ void Animator::reset() {
 }
 
 void Animator::changeAnimation(const std::string& animation) {
-  if (!animation.empty() && _animation != animation) {
+  if (_animation != animation) {
     _animation = animation;
     reset();
   }

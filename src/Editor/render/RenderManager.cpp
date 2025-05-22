@@ -249,7 +249,7 @@ ImTextureID editor::render::RenderManager::_loadTexture(const std::string &filep
 }
 
 void editor::render::RenderManager::destroyTexture(ImTextureID textureID) {
-    SDL_DestroyTexture((SDL_Texture*)textureID);
+    SDL_DestroyTexture(reinterpret_cast<SDL_Texture *>(textureID));
 }
 
 void editor::render::RenderManager::_checkFontRequests() {

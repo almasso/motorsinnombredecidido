@@ -12,8 +12,8 @@ MovementManager::MovementManager(ComponentData const *data) :
 }
 
 bool MovementManager::init() {
-    _tileWidth = _data->getData<int>("tileWidth",1);
-    _tileHeight = _data->getData<int>("tileHeight",1);;
+    _tileWidth = _data->getData<float>("tileWidth",1);
+    _tileHeight = _data->getData<float>("tileHeight",1);;
     return true;
 }
 
@@ -30,9 +30,9 @@ bool MovementManager::isOccupied(const Vector2 &position) const {
 }
 
 Vector2 MovementManager::getCell(const Vector2 &position) const {
-    int x = std::round(position.getX() / _tileWidth) * _tileWidth;
-    int y = std::round(position.getY() / _tileHeight) * _tileHeight;
-    return Vector2(x, y);
+    float x = std::round(position.getX() / _tileWidth) * _tileWidth;
+    float y = std::round(position.getY() / _tileHeight) * _tileHeight;
+    return {x, y};
 }
 
 std::vector<Vector2> MovementManager::calculatePath(const Vector2 &position, const Vector2 &target) const {
@@ -40,13 +40,21 @@ std::vector<Vector2> MovementManager::calculatePath(const Vector2 &position, con
     Vector2 start = getCell(position);
     Vector2 end = getCell(target);
 
+    if (isOccupied(end)) {
+        auto newTarget = findNearestFreeCell(end, 10);
+        if (!newTarget.has_value()) {
+            return path;
+        }
+        end = newTarget.value();
+    }
+
     struct Node {
         Vector2 pos;
         float cost;
         bool operator>(const Node& other) const { return cost > other.cost; }
     };
 
-    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> openList;
+    std::priority_queue<Node, std::vector<Node>, std::greater<>> openList;
     std::unordered_map<Vector2, Vector2> cameFrom;
     std::unordered_map<Vector2, float> costSoFar;
 
@@ -66,7 +74,7 @@ std::vector<Vector2> MovementManager::calculatePath(const Vector2 &position, con
                 path.push_back(step);
                 step = cameFrom[step];
             }
-            std::reverse(path.begin(), path.end());
+            std::ranges::reverse(path);
             return path;
         }
 
@@ -83,4 +91,23 @@ std::vector<Vector2> MovementManager::calculatePath(const Vector2 &position, con
         }
     }
     return path;
+}
+
+std::optional<Vector2> MovementManager::findNearestFreeCell(const Vector2& center, int maxRadius) const {
+    for (int dist = 1; dist <= maxRadius; ++dist) {
+        for (int dx = -dist; dx <= dist; ++dx) {
+            int dy = dist - std::abs(dx);
+            std::vector<Vector2> candidates = {
+                center + Vector2{static_cast<float>(dx) * _tileWidth, static_cast<float>(dy) * _tileHeight},
+                center + Vector2{static_cast<float>(dx) * _tileWidth, static_cast<float>(-dy) * _tileHeight}
+            };
+            if (dy == 0) candidates.pop_back(); // avoid duplicate if dy == 0
+            for (const Vector2& candidate : candidates) {
+                if (!isOccupied(candidate)) {
+                    return candidate;
+                }
+            }
+        }
+    }
+    return std::nullopt;
 }
