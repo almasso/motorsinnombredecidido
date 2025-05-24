@@ -160,16 +160,7 @@ Con esto, a partir de un objeto \texttt{ComponentData}, el \texttt{SceneManager}
 De cara a facilitar el desarrollo de videojuegos los motores ofrecen implementaciones de sistemas que se usan en la gran mayoría de estos. Hay múltiples bibliotecas que facilitan la adición de estas funcionalidades, en este caso se usará \texttt{SDL3} que ofrece todo lo necesario para desarrollar de forma sencilla lo diseñado además de ofrecer soporte multiplataforma.
 
 \subsection{\textit{Render}}
-Para el apartado de \textit{renderizado} utilizamos las funciones que ofrece \texttt{SDL}. El \texttt{RenderManager} se encarga de generalizar estos métodos para que los componentes de \textit{render} puedan acceder a ellos fácilmente. Para ello implementa: 
-
-\begin{itemize}
-	\item \texttt{clear}: se llama al comienzo de cada fotograma y vacía el \textit{buffer} de vídeo para preparar el siguiente \textit{renderizado}.
-	\item \texttt{present}: se invoca al final de cada fotograma, después de llamar a todos los \texttt{RenderComponent}; muestra el contenido del \textit{buffer} de vídeo en pantalla.
-	\item \texttt{drawRect}: rellena un rectángulo de tamaño y posición dados con el color indicado.
-	\item \texttt{drawSprite}: dibuja un fragmento de una imagen en la posición de pantalla y con la rotación indicadas.
-	\item \texttt{drawText}: dibuja un bloque de texto creada previamente en la posición y rotación indicadas. 
-	\item \texttt{setViewRect}: establece el \textit{viewRect}, es decir, el fragmento del mundo que se va a ver en pantalla. Ajusta desplazamientos y reescalados antes de dibujar los elementos.
-\end{itemize}
+Para el apartado de \textit{renderizado} se utilizan las funciones que ofrece \texttt{SDL}. El \texttt{RenderManager} se encarga de encapsular estas funciones en métodos para acceder a ellos de forma centralizada y simple. Desde la llamada de render de cada componente estos podrán acceder a dichos métodos para realizar tareas como dibujar imágnes, texto o cambiar la zona del mundo que se dibuja.
 
 El ciclo de \textit{renderizado} de cada fotograma es: 
 \begin{enumerate}
@@ -180,7 +171,7 @@ El ciclo de \textit{renderizado} de cada fotograma es:
 
 Este proceso se repite durante todo el ciclo de vida de la aplicación.
 
-\medskip
+\medskip	
 
 Además, el \texttt{RenderManager} gestiona la inicialización y el cierre de los subsistemas de \textit{SDL} relacionados, así como la creación de la ventana de vídeo.
 
