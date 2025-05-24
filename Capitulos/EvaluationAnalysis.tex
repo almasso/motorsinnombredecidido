@@ -1,11 +1,64 @@
-\chapter*{Evaluation and Conclusions}
+\chapter*{Evaluation and analysis}
 \label{cap:conclusions}
-\addcontentsline{toc}{chapter}{Evaluation and Conclusions}
+\addcontentsline{toc}{chapter}{Evaluation and analysis}
+
+By thoroughly understanding how all the systems of the engine and the editor work, it cannot be guaranteed that they will function as an average user expects. For this reason, conducting unbiased user testing is crucial to gather information about the possible gaps between the programs and those users. With the goal of providing a pleasant user experience, the tests will be analyzed to find ways to improve it. Different types of user profiles will be sought to obtain a greater amount of data about the potential conflicts they may have with the systems.
 
 \section*{Evaluation objective}
+The objectives of the user tests are primarily two. The first is to evaluate whether users understand the systems and are able to use them comfortably. It is important that the environment is pleasant to use in order to allow users to understand its capabilities and take full advantage of them. The second is to assess whether each user is capable of using the editor creatively, in such a way that the video games created by one user offer a different experience than those made by another, thus verifying the editor’s flexibility.
 
 \section*{Methodology}
+To conduct these tests, once the objectives were established, the testing procedure was designed. Each user will perform the tests individually, accompanied by a supervisor, with an estimated duration of one hour.
+
+\smallskip
+
+At the start, each tester is first asked about their experience both playing and creating video games, with a focus on RPGs. After gathering this information, they are given several files: the editor executable, a resource package to avoid wasting time searching during the test, and a brief user guide for the editor.
+
+\smallskip
+
+This guide provides a concise explanation of how to use each of the systems available in the editor. With this information, the tester follows the guide to understand the mechanics and then is free to use them as they wish.
+
+\medskip
+
+The researcher will be responsible for recording all notable interactions between the testers and the editor, as well as providing assistance if any errors occur during the tests. To capture a realistic user experience, the researcher will not intervene in the user’s actions except in exceptional cases—such as program errors or situations where the tester is stuck and unable to continue due to a problem.
+
+\smallskip
+
+These tests are designed to be conducted either in person or remotely, depending on what is most convenient for each individual case. Once the test is complete, the user will be asked to provide general feedback on the systems and their experience, including any complaints or suggestions.
 
 \section*{Results}
 
+Users can be grouped into three categories based on their experience with video games, and in particular, with RPGs.
+
+\smallskip
+
+First, there are users who are least familiar with the world of video games, with little experience playing games in general and, in particular, RPGs. With this type of user, the goal is to evaluate how intuitive the tools and the editor’s user interface are, as well as to verify if the test instructions are well understood. This first group managed to create maps that made some sense, but most used only one or two layers, which somewhat limited their design. They did not spend much time exploring the tilesets and made rather simple designs. They understood the configurations quite well and, following the guide, were able to complete them. When creating events, they stuck to the simplest behaviors and did not attempt to create complex events using variables and conditions. Overall, the test was satisfactory and the results were within expectations.
+
+\medskip
+
+Second, there are users who do play video games and some are even related to the industry, but they lack programming or development knowledge beyond their specific areas. These users made much greater use of the mapping section, using more layers and multiple tilesets to create much more interesting maps. Regarding events, they were encouraged more than the first group to try creating somewhat more complex events, but it seems they were not quite clear on how to structure them to fully leverage the functionalities, and most remained with simpler events or required significant help from supervisors. Although events do not require programming knowledge, their structure is similar to a system based on conditional logic, which demands more time than was available during the test to understand how to organize them properly.
+
+\medskip
+
+Finally, there is the group of people with knowledge in video game development, including specific experience with RPGMaker development, which was very useful for obtaining comparative feedback. This group understood the mapping tools well and pointed out the lack of some more advanced options that could speed up the process, such as the ability to select multiple tiles at once or fill areas with tiles of the same type. They also mentioned that the process of creating sprites and animations is slow, proposing some kind of automation similar to that available for tilesets. Regarding events, they managed to understand how to build more advanced structures, which was a positive outcome.
+
+\medskip
+
+In addition to all the observations and feedback received, the tests also helped detect several bugs and issues that were not working properly, which was very helpful for polishing the final version of the editor.
+
 \section*{Results analysis and conclusions}
+Although the tests did not reach the desired length or variety due to logistical limitations, some interesting conclusions can be drawn for the current development and, especially, for potential future work.
+
+\smallskip
+
+One of the identified priorities is improving the experience of map design and the creation of sprites and animations. To this end, the following functional improvements are proposed:
+
+\begin{itemize}
+	\item Incorporate the ability to select multiple tiles simultaneously and paint them together on the map.
+	\item Add a tool to automatically fill an entire area with the selected tile.
+	\item Allow tile selection directly from the map, without needing to manually locate them in the tileset.
+	\item Include an undo function to revert the last edit made.
+	\item Automate the process of creating multiple sprites and converting them into animations from a single source, similar to how the tileset editor works.
+\end{itemize}
+
+Additionally, it is considered advisable to implement improvements in the form of tooltips in the events section, aimed at clearly explaining all available functionalities. It is also suggested to include predefined events that serve as practical examples to facilitate understanding and use.
