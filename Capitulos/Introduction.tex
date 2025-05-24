@@ -26,7 +26,7 @@ Those tools that are specifically designed for role-playing game development hav
 
 \medskip
 
-The main motivation behind this Project arises from the need to have easy-to-use and flexible tools, both for experimented independent developers who desire to create games without the limitations imposed by general-purpose engines, and for people with little knowledge of video game development or programming.
+The main motivation behind this project arises from the need to have easy-to-use and flexible tools, both for experimented independent developers who desire to create games without the limitations imposed by general-purpose engines, and for people with little knowledge of video game development or programming.
 
 \section*{Objectives}
 This project aims to develop a 2D game engine specifically designed for role-playing games, along with an editor that enables simple and straightforward game development for this engine. The editor will be capable of generating executable files that users can distribute without the need for any additional steps after development.
@@ -41,7 +41,7 @@ To accomplish this:
 \begin{itemize}
 	\item A cross-platform engine that allows the user to implement role-playing games will be developed.
 	\item A cross-platform editor that eases the implementation of a role-playing game in the developed engine will be developed.
-	\item The Project will be tested with users to demonstrate its functionality, and necessary conclusions will be drawn, along with potential improvements for the future.
+	\item \baker{} will be tested with users to demonstrate its functionality, and necessary conclusions will be drawn, along with potential improvements for the future.
 \end{itemize}
 
 \section*{Work Plan}
@@ -53,20 +53,24 @@ To accomplish this:
     		time slot format=isodate-yearmonth,
     		title label font=\small,
     		time slot unit=month,
-    		title/.style={fill=blue!20},
     		title height=1.2,
-    		x unit=2cm
-  			]{2025-01}{2025-05}
+    		x unit=1.2cm
+  			]{2024-10}{2025-05}
+  			
+  			\gantttitle[title/.style={fill=blue!30}]{2024}{3}
+  			\gantttitle[title/.style={fill=green!30}]{2025}{5}\\
 	
-			\gantttitle{January}{1}
-			\gantttitle{February}{1}
-			\gantttitle{March}{1}
-			\gantttitle{April}{1}
-			\gantttitle{May}{1}
-			\gantttitle{June}{1}\\
+			\gantttitle[title/.style={fill=blue!15}]{Oct.}{1}
+  			\gantttitle[title/.style={fill=blue!15}]{Nov.}{1}
+  			\gantttitle[title/.style={fill=blue!15}]{Dec.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Jan.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Feb.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Mar.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Apr.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{May}{1}\\
 	
-			\ganttbar{Research on the current state}{2025-01}{2025-02}\\
-			\ganttbar{Project design}{2025-01}{2025-02}\\
+			\ganttbar{Research on the current state}{2024-10}{2025-02}\\
+			\ganttbar{\baker{} design}{2024-10}{2025-02}\\
 			\ganttbar{Engine development}{2025-02}{2025-05}\\
 			\ganttbar{Editor development}{2025-02}{2025-05}\\
 			\ganttbar{Document writing}{2025-03}{2025-05}\\
@@ -80,14 +84,14 @@ To accomplish this:
 To accomplish the previous objectives, the work plan will be divided in three phases: 
 \begin{itemize}
 	\item Research on the current state of engines and editors specifically designed for role-playing games, as well as on role-playing games themselves. This section will aim to identify the common features shared by all engines, editors and games, both open-source and commercial ones, and propose improvements to address the issues these tools may present for inexperienced new users. 
-	\item Project Design. Based on the common features identified in the previous phase, an initial design will be proposed to serve as a basis for the development of the Project. This design, while not immutable, should be as close to final as possible to avoid any issues during the development phase.
-	\item Project Development. Once the design phase is completed, development will begin. This phase will, in turn, be split across multiple phases:
+	\item \baker{} design. Based on the common features identified in the previous phase, an initial design will be proposed to serve as a basis for the development of the project. This design, while not immutable, should be as close to final as possible to avoid any issues during the development phase.
+	\item \baker{} development. Once the design phase is completed, development will begin. This phase will, in turn, be split across multiple phases:
 		\begin{itemize}
-			\item Setting up the development environment. A development environment will be chosen based on the Project's needs, and everything will be configured to minimize effort during the development of the applications.
+			\item Setting up the development environment. A development environment will be chosen based on both applications' needs, and everything will be configured to minimize effort during the development.
 			\item Engine development. An engine will be developed according to the previously established plans, with cross-platform support for both PCs and Android mobile devices.
 			\item Editor development. Like the engine, the editor will be developed according to the established design. It must support multiple platforms on PC, namely Windows, MacOS and Linux, but not Android.
 		\end{itemize}
-	\item User testing. To ensure the correct functioning of the Project, the final tools will be tested by a variety of users not involved in their development. After the tests are completed, the necessary conclusions will be drawn, and the Project will be adjusted to address any critical issues that require attention before releasing the public version. Features that would require excessive effort to implement within the available time will be left as future work.
+	\item User testing. To ensure the correct functioning of \baker, the final tools will be tested by a variety of users not involved in their development. After the tests are completed, the necessary conclusions will be drawn, and the tools will be adjusted to address any critical issues that require attention before releasing the public version. Features that would require excessive effort to implement within the available time will be left as future work.
 \end{itemize}
 
 
@@ -100,42 +104,45 @@ Access to the repository containing the code may be done through this link: \hre
 
 \medskip
 
-Regarding the development tools for the Project, CLion will be used as the C++ development environment, and Android Studio for Android development in Java. CMake will be used as the tool for generating external libraries, and MinGW for handling compilation on Windows, Clang on MacOS, and GCC on Linux. Detailed reasons for choosing these tools can be found in section \ref{sec:decisiones}.
+Regarding the development tools for \baker, CLion will be used as the C++ development environment, and Android Studio for Android development in Java. CMake will be used as the tool for generating external libraries, and MinGW for handling compilation on Windows, Clang on MacOS, and GCC on Linux. Detailed reasons for choosing these tools can be found in section \ref{sec:decisiones}.
 
 \medskip
 
-On the other hand, PDF generation of the document will be carried out using \LaTeX, with the \texis template, and Texmaker will be used as the editing environment.
+On the other hand, PDF generation of the document will be carried out using \LaTeX, with the \texis{} template, and Texmaker will be used as the editing environment.
 
 \bigskip
 
-Regarding the working methodology, bi-weekly meetings will be proposed with the tutor, although the number of weeks may vary depending on the progress made. During these meetings, the current status of the Project will be presented, and advice related to the design or development of the Project will be requested.
+Regarding the working methodology, bi-weekly meetings will be proposed with the tutor, although the number of weeks may vary depending on the progress made. During these meetings, the current status of the project will be presented, and advice related to the design or development will be requested.
 
 \medskip
 
 Communication with the team will be established through both in-person meetings when important issues need to be addressed and via software that allows messaging and voice chat, such as Discord. This tool will also be used for conducting user testing.
 
 \section*{Document Structure} 
-In Chapter \ref{cap:juegosrol}, \textit{Role-Playing Games}, the topic of role-playing games is discussed, including their characteristics, origins, and an analysis of some of the most important titles in the genre.
+In Chapter \ref{cap:juegosrol}, \textit{Role-playing games}, the topic of role-playing games is discussed, including their characteristics, origins, and an analysis of some of the most important titles in the genre.
 
 \medskip
 
-In Chapter \ref{cap:videojuegosrol}, \textit{Role-Playing Video Games}, role-playing video games and their history are introduced, along with the development process and the use of game engines and editors.
+In Chapter \ref{cap:videojuegosrol}, \textit{Role-playing video games}, role-playing video games and their history are introduced, along with the development process and the use of game engines and editors.
 
 \medskip
 
-In Chapter \ref{cap:planteamiento}, \textit{Project Planning}, the design and decisions made prior to the development of the applications are discussed in detail.
+In Chapter \ref{cap:planteamiento}, \textit{Project planning}, the design and decisions made prior to the development of the applications are discussed in detail.
 
 \medskip
 
-In Chapter \ref{cap:desarrollo}, \textit{Project Development}, the internal structure of the engine and editor in terms of code are discussed, while addressing the problems encountered during this phase and the solutions proposed.
+In Chapter \ref{cap:motor}, \textit{Engine}, the implementation of \baker's engine is discussed, along with some of the decisions made regarding its development.
+\medskip
+
+In Chapter \ref{cap:editor}, \textit{Editor}, the implementation of \baker's editor is discussed, along with some of the decisions made regarding its development.
 
 \medskip
 
-In Chapter \ref{cap:conclusions}, \textit{Evaluation and Conclusions}, the research questions and objectives are presented, along with the development of the user testing phase and an analysis of the tests, from which conclusions are drawn.
+In Chapter \ref{cap:conclusions}, \textit{Evaluation and analysis}, the research questions and objectives are presented, along with the development of the user testing phase and an analysis of the tests, from which conclusions are drawn.
 
 \medskip
 
-Finally, in Chapter \ref{cap:futurework}, \textit{Future Work}, potential improvements for the final implementation of the applications that may be of interest are detailed.
+Finally, in Chapter \ref{cap:futurework}, \textit{Conclusions and future work}, the project's conclusions and potential improvements for the final implementation of the applications that may be of interest are detailed.
 
 
 

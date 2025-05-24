@@ -1,4 +1,4 @@
-\chapter{Videojuegos de Rol}
+\chapter{Videojuegos de rol}
 \label{cap:videojuegosrol}
 
 \begin{resumen}
@@ -77,19 +77,19 @@ Estos primeros juegos contaban con interfaces basadas en texto, resaltadas con c
 \smallskip
 
 \begin{figure}[t]
-\centering
-\begin{SubFloat}
-{\label{fig:rogue}%
-	Captura de \cite{rogue}, extraída de \cite{rogueimg}}%
-	\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rogue}%
-\end{SubFloat}
-\qquad
-\begin{SubFloat}
-{\label{fig:ultima}%
-	Captura de \cite{ultima}, extraída de \cite{ultimaimg}}%
-	\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/ultima}%
-\end{SubFloat}
-\caption{Capturas de \textit{Rogue} y \textit{Ultima}. \label{fig:rogueultima}}
+	\centering
+	\begin{SubFloat}
+		{\label{fig:rogue}%
+		Captura de \cite{rogue}, extraída de \cite{rogueimg}}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rogue}%
+	\end{SubFloat}
+	\qquad
+	\begin{SubFloat}
+		{\label{fig:ultima}%
+		Captura de \cite{ultima}, extraída de \cite{ultimaimg}}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/ultima}%
+	\end{SubFloat}
+	\caption{Capturas de \textit{Rogue} y \textit{Ultima}. \label{fig:rogueultima}}
 \end{figure}
 
 De esta primera etapa también cabe mencionar tres videojuegos que dieron comienzo a tres distintos subgéneros dentro de los RPG: 
@@ -215,29 +215,29 @@ Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores 
 
 \subsubsection{Separación entre motor y \textit{gameplay}}
 \begin{figure}[t]
-\centering
-\begin{SubFloat}
-	{\label{fig:separaciongeneral}%
+	\centering
+	\begin{SubFloat}
+		{\label{fig:separaciongeneral}%
 		Separación en motores generalistas.}%
 		\begin{tikzpicture}
-		\draw (0,0) rectangle (3,6);
-		\draw[red, dashed] (-1,2) -- (4, 2);
-		\node at (1.5,4) {\textit{Gameplay}};
-		\node at (1.5,1) {Motor};
+			\draw (0,0) rectangle (3,6);
+			\draw[red, dashed] (-1,2) -- (4, 2);
+			\node at (1.5,4) {\textit{Gameplay}};
+			\node at (1.5,1) {Motor};
 		\end{tikzpicture}
-\end{SubFloat}
-\qquad
-\begin{SubFloat}
-	{\label{fig:separacionespecificos}%
+	\end{SubFloat}
+	\qquad
+	\begin{SubFloat}
+		{\label{fig:separacionespecificos}%
 		Separación en motores específicos.}%
 		\begin{tikzpicture}
-		\draw (0,0) rectangle (3,6);
-		\draw[red, dashed] (-1,4) -- (4,4);
-		\node at (1.5, 5) {\textit{Gameplay}};
-		\node at (1.5, 2) {Motor};
+			\draw (0,0) rectangle (3,6);
+			\draw[red, dashed] (-1,4) -- (4,4);
+			\node at (1.5, 5) {\textit{Gameplay}};
+			\node at (1.5, 2) {Motor};
 		\end{tikzpicture}
-\end{SubFloat}
-\caption{Ejemplos de separaciones entre motor y \textit{gameplay} en los distintos motores. \label{fig:separacionesmotgp}}
+	\end{SubFloat}
+	\caption{Ejemplos de separaciones entre motor y \textit{gameplay} en los distintos motores. 				\label{fig:separacionesmotgp}}
 \end{figure}
 
 Para poder reusar un motor en múltiples juegos con el menor número de cambios, es necesario saber \textit{cómo y para qué vamos a desarrollar el motor}, y de acuerdo a la decisión que se haya tomado, se establecerá la barrera de separación entre el motor y la jugabilidad del juego.
@@ -294,30 +294,30 @@ Un ejemplo histórico de DDP puede encontrarse en el motor \textit{SCUMM} (\text
 \begin{figure}[t]
 	\begin{center}
 		\begin{tikzpicture}[
-    font=\sffamily,
-    platform/.style={rectangle, draw=black, fill=blue!10, minimum width=2.5cm, minimum height=1cm},
-    layer/.style={rectangle, draw=black, fill=orange!20, minimum width=10cm, minimum height=1cm},
-    core/.style={rectangle, draw=black, fill=green!20, minimum width=10cm, minimum height=1.5cm},
-    commonlayer/.style={rectangle, draw=black, fill=magenta!20, minimum width=10cm, minimum height=0.7cm},
-    arrow/.style={->, thick}
-]
+    		font=\sffamily,
+    		platform/.style={rectangle, draw=black, fill=blue!10, minimum width=2.5cm, minimum height=1cm},
+    		layer/.style={rectangle, draw=black, fill=orange!20, minimum width=10cm, minimum height=1cm},
+    		core/.style={rectangle, draw=black, fill=green!20, minimum width=10cm, minimum height=1.5cm},
+    		commonlayer/.style={rectangle, draw=black, fill=magenta!20, minimum width=10cm, minimum height=0.7cm},
+    		arrow/.style={->, thick}
+		]
 
-\node[platform] (pc) at (-4, 4) {Motor de PC};
-\node[platform] (ps) at (0, 4) {Motor de PlayStation};
-\node[platform] (xb) at (4, 4) {Motor de Xbox};
+			\node[platform] (pc) at (-4, 4) {Motor de PC};
+			\node[platform] (ps) at (0, 4) {Motor de PlayStation};
+			\node[platform] (xb) at (4, 4) {Motor de Xbox};
 
-\node[commonlayer] (abstr) at (0, 2.5) {Interfaz común};
+			\node[commonlayer] (abstr) at (0, 2.5) {Interfaz común};
 
-\node[core] (engine) at (0, 1.25) {Componentes multiplataforma del motor};
+			\node[core] (engine) at (0, 1.25) {Componentes multiplataforma del motor};
 
-\node[layer] (game) at (0, -1) {Juego};
+			\node[layer] (game) at (0, -1) {Juego};
 
-\node[draw, thick, rounded corners, inner sep=10pt, fit=(pc) (ps) (xb) (abstr) (engine), label=left:{Motor}] (motor) {};
+			\node[draw, thick, rounded corners, inner sep=10pt, fit=(pc) (ps) (xb) (abstr) (engine), label=left:{Motor}] (motor) {};
 
-\draw[arrow] (pc.south) -- ([xshift=.-4cm]abstr.north);
-\draw[arrow] (ps.south) -- (abstr.north);
-\draw[arrow] (xb.south) -- ([xshift=4cm]abstr.north);
-\draw[arrow] (game.north) -- ([xshift=-0.1cm]motor.south);
+			\draw[arrow] (pc.south) -- ([xshift=.-4cm]abstr.north);
+			\draw[arrow] (ps.south) -- (abstr.north);
+			\draw[arrow] (xb.south) -- ([xshift=4cm]abstr.north);
+			\draw[arrow] (game.north) -- ([xshift=-0.1cm]motor.south);
 
 		\end{tikzpicture}
 		\caption{Representación esquemática de la arquitectura de un motor multiplataforma} 
@@ -376,19 +376,19 @@ Algunos editores modernos suelen ofrecer herramientas de \textit{scripting} visu
 
 \subsubsection{Editores específicos de videojuegos para desarrollo de RPG}
 \begin{figure}[h]
-\centering
-\begin{SubFloat}
-{\label{fig:rpgmakermz}%
-	Vista de la interfaz de \cite{rpgmakermz}.}%
-	\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rpgmakermz}%
-\end{SubFloat}
-\qquad
-\begin{SubFloat}
-{\label{fig:rpgmakerevent}%
-	Vista del editor de eventos de \textit{RPG Maker MV}, extraída de \cite{rpgmakerevent}.}%
-	\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rpgmakereventeditor}%
-\end{SubFloat}
-\caption{Capturas de distintos elementos de la interfaz de \textit{RPG Maker}. \label{fig:rpgmaker}}
+	\centering
+	\begin{SubFloat}
+		{\label{fig:rpgmakermz}%
+		Vista de la interfaz de \cite{rpgmakermz}.}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rpgmakermz}%
+	\end{SubFloat}
+	\qquad
+	\begin{SubFloat}
+		{\label{fig:rpgmakerevent}%
+		Vista del editor de eventos de \textit{RPG Maker MV}, extraída de \cite{rpgmakerevent}.}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Bitmap/rpgmakereventeditor}%
+	\end{SubFloat}
+	\caption{Capturas de distintos elementos de la interfaz de \textit{RPG Maker}. \label{fig:rpgmaker}}
 \end{figure}
 
 Si bien es cierto que una gran parte de los juegos más jugados a diario son RPG\footnote{Según la página \textit{SteamDB}, y, a día 21 de mayo de 2025, un 34\% de los juegos jugados a diario, solamente en PC, son RPG (\url{https://steamdb.info/stats/globaltopsellers/?displayOnly=Game&tagid=122}).}, hay muy pocos motores y editores específicos para este tipo de juegos, y se tiende a usar motores más generalistas. De entre los específicos, necesariamente tenemos que mencionar a la serie de herramientas más conocida de todas, \cite{rpgmaker}\footnote{Según \textit{itch.io}, \textit{RPG Maker} se sitúa como la octava herramienta más utilizada, siendo la primera específica de RPG que aparece en el listado, con más de diez mil proyectos creados a día 21 de mayo de 2025 y subidos a su web (\url{https://itch.io/game-development/engines/most-projects}).}. Se trata de un entorno de desarrollo completo, que combina un motor de ejecución con un editor visual, pensado para permitir a usuarios sin conocimientos avanzados de programación crear juegos completos mediante una interfaz sencilla (ver figura \ref{fig:rpgmakermz}).
@@ -407,6 +407,37 @@ También se incluye un sistema de batallas tradicional, en el cual los combatien
 
 \medskip
 
+\begin{table}[t]
+	\centering
+	\renewcommand\tabularxcolumn[1]{m{#1}}
+	\scriptsize
+	\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+		\toprule
+		\textbf{Característica} & \textbf{RPG Maker} & \textbf{RPG Paper Maker} & \textbf{RPG JS} & \textbf{EasyRPG} & \textbf{OHRRPGCE} \\
+		\midrule
+		\textbf{Licencia} & Comercial & Gratuita & Código abierto & Código abierto & Código abierto \\
+		\addlinespace[4pt]
+		\textbf{Exporta a} & PC\footnotemark, Web, Android e iOS & PC, Web & Web & PC, Android, iOS, Web & PC, Android \\
+		\addlinespace[4pt]
+		\textbf{Gráficos} & 2D & 3D retro & 2D & 2D clásico & 2D clásico \\
+		\addlinespace[4pt]
+		\textbf{\textit{Scripting}} & JavaScript (MV/MZ) & JavaScript & TypeScript y HTML5  & Eventos visuales & HamsterSpeak \\
+		\addlinespace[4pt]
+		\textbf{Facilidad de uso} & Muy fácil & Fácil & Compleja & Muy fácil & Media \\
+		\addlinespace[4pt]
+		\textbf{Personalización}  & \textit{Plugins}/\textit{Scripts} & \textit{Scripts}  & Código fuente & \textit{Scripts} & \textit{Scripts} \\
+		\addlinespace[4pt]
+		\textbf{Desarrollo activo} & Sí & Sí & Parcial & Sí & Sí \\
+		\addlinespace[4pt]
+		\textbf{Sistema de combate} & Personalizable & Personalizable & - & Por turnos & Por turnos \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Comparativa de características entre diferentes editores RPG.}
+	\label{tab:comparativarpg}
+\end{table}
+
+\footnotetext{En la tabla, para abreviar, PC se refiere tanto a Windows, MacOS como Linux.}
+
 El editor de \textit{RPG Maker} permite definir todos estos elementos mencionados anteriormente de forma visual, mientras que el motor es el que se encarga de ejecutar el resultado final. Ambos están estrechamente integrados, permitiendo una experiencia fluida durante el desarrollo, sin la necesidad de recurrir a herramientas externas ni a complejos procesos de compilación.
 
 \bigskip
@@ -419,32 +450,4 @@ También encontramos proyectos de código abierto como \textit{EasyRPG}, que bus
 
 \medskip
 
-Por último, se ha elaborado una tabla comparativa entre los distintos \textit{softwares} anteriormente mencionados con algunas de sus características más importantes.
-
-\rotatebox{270}{
-	\begin{minipage}{\textheight}
-		\begin{center}
-			\begin{tabularx}{\textwidth}{@{} X X X X X X @{}}
-				\toprule
-				\textbf{Característica} & \textbf{RPG Maker} & \textbf{RPG Paper Maker} & \textbf{RPG JS} & \textbf{EasyRPG} & \textbf{OHRRPGCE} \\
-				\midrule
-				\textbf{Licencia} & Comercial & Gratuita & Código abierto & Código abierto & Código abierto \\
-				\addlinespace[4pt]
-				\textbf{Plataformas} & PC, Web, Móvil & PC, Web & Web & PC, Android, Web & PC, Android \\
-				\addlinespace[4pt]
-				\textbf{Gráficos} & 2D & 3D retro & 2D & 2D clásico & 2D clásico \\
-				\addlinespace[4pt]
-				\textbf{\textit{Scripting}} & JavaScript (MV/MZ) & JavaScript & TypeScript y HTML5  & Ninguno (eventos visuales) & HamsterSpeak \\
-				\addlinespace[4pt]
-				\textbf{Facilidad de uso} & Muy fácil & Fácil & Compleja & Muy fácil & Media \\
-				\addlinespace[4pt]
-				\textbf{Personalización}  & \textit{Plugins}/\textit{Scripts} & \textit{Scripts}  & Código fuente & \textit{Scripts} & \textit{Scripts} \\
-				\addlinespace[4pt]
-				\textbf{Desarrollo activo} & Sí & Sí & Parcial & Sí & Sí \\
-				\addlinespace[4pt]
-				\textbf{Sistema de combate} & Personalizable & Personalizable & Por programar & Por turnos & Por turnos \\
-				\bottomrule
-			\end{tabularx}
-		\end{center}
-	\end{minipage}
-}
+Por último, en la tabla \ref{tab:comparativarpg}, se encuentra una comparativa más resumida entre los distintos \textit{softwares} anteriormente mencionados con algunas de sus características más importantes.

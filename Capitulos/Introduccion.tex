@@ -19,15 +19,15 @@ Numerosos programas de edición y desarrollo de videojuegos han aparecido en las
 Aquellos programas que sí que están pensados para el desarrollo específico de videojuegos de rol tienen dos problemas fundamentales:
 \begin{itemize}
 	\item Los que ofrecen una interfaz intuitiva, sencilla de utilizar, y bastante amigable con nuevos usuarios que están introduciéndose en el mundo del desarrollo de videojuegos están bajo un muro de pago. Este muro de pago hace que nuevos usuarios paguen por un \textit{software} que rara vez utilizarán si no se afianzan finalmente en el mundo del desarrollo.
-	\item Aquellos que no están bajo un muro de pago o que son \textit{software} de código libre, suelen tener interfaces y sistemas complejos, difíciles de entender para usuarios noveles, quienes a menudo abandonan el desarrollo debido a dicha complejidad.
+	\item Aquellos que no están bajo un muro de pago o que son \textit{software} de código libre suelen tener interfaces y sistemas complejos, difíciles de entender para usuarios noveles, quienes a menudo abandonan el desarrollo debido a dicha complejidad.
 \end{itemize}
 
 \medskip
 
-La motivación principal de este Proyecto surge de la necesidad de contar con herramientas sencillas de utilizar y flexibles, tanto para desarrolladores independientes experimentados que quieran crear juegos sin las limitaciones impuestas por los motores de uso general, como para personas sin amplio conocimiento en el desarrollo de videojuegos o en la programación de estos.
+La motivación principal de este trabajo surge de la necesidad de contar con herramientas sencillas de utilizar y flexibles, tanto para desarrolladores independientes experimentados que quieran crear juegos sin las limitaciones impuestas por los motores de uso general, como para personas sin amplio conocimiento en el desarrollo de videojuegos o en la programación de estos.
 
 \section{Objetivos}
-Este Proyecto tiene marcados como objetivos el desarrollo de un motor de videojuegos 2D, pensado específicamente para videojuegos de rol, acompañado de un editor que permita un desarrollo sencillo de videojuegos para este motor. El editor podrá generar ejecutables que el usuario solamente necesite distribuir sin la necesidad de hacer ningún paso extra posterior al desarrollo.
+Este trabajo de fin de grado tiene marcados como objetivos el desarrollo de un motor de videojuegos 2D, pensado específicamente para videojuegos de rol, acompañado de un editor que permita un desarrollo sencillo de videojuegos para este motor. El editor podrá generar ejecutables que el usuario solamente necesite distribuir sin la necesidad de hacer ningún paso extra posterior al desarrollo.
 
 \smallskip
 
@@ -39,7 +39,7 @@ Para ello:
 \begin{itemize}
 	\item Se desarrollará un motor multiplataforma que permita la implementación de videojuegos de rol.
 	\item Se desarrollará un editor multiplataforma que facilite la implementación de los videojuegos de rol en el motor desarrollado.
-	\item Se probarán ambas herramientas con usuarios para demostrar el funcionamiento del Proyecto y se extraerán las conclusiones necesarias, así como posibles mejoras de cara al futuro.
+	\item Se probarán ambas herramientas con usuarios para demostrar el funcionamiento de \baker{} y se extraerán las conclusiones necesarias, así como posibles mejoras de cara al futuro.
 \end{itemize}
 
 \section{Plan de trabajo}
@@ -51,19 +51,24 @@ Para ello:
     		time slot format=isodate-yearmonth,
     		title label font=\small,
     		time slot unit=month,
-    		title/.style={fill=blue!20},
     		title height=1.2,
-    		x unit=2cm
-  			]{2025-01}{2025-05}
-  				
-			\gantttitle{Enero}{1}
-			\gantttitle{Febrero}{1}
-			\gantttitle{Marzo}{1}
-			\gantttitle{Abril}{1}
-			\gantttitle{Mayo}{1}\\
+    		x unit=1.2cm
+  			]{2024-10}{2025-05}
+  			
+  			\gantttitle[title/.style={fill=blue!30}]{2024}{3}
+  			\gantttitle[title/.style={fill=green!30}]{2025}{5}\\
+  			
+  			\gantttitle[title/.style={fill=blue!15}]{Oct.}{1}
+  			\gantttitle[title/.style={fill=blue!15}]{Nov.}{1}
+  			\gantttitle[title/.style={fill=blue!15}]{Dic.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{En.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Feb.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Mar.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{Abr.}{1}
+  			\gantttitle[title/.style={fill=green!15}]{May.}{1}\\  		
 			
-			\ganttbar{Investigación del estado actual}{2025-01}{2025-02}\\	
-			\ganttbar{Diseño del Proyecto}{2025-01}{2025-02}\\
+			\ganttbar{Investigación del estado actual}{2024-10}{2025-02}\\	
+			\ganttbar{Diseño de \baker}{2024-10}{2025-02}\\
 			\ganttbar{Desarrollo del motor}{2025-02}{2025-05}\\
 			\ganttbar{Desarrollo del editor}{2025-02}{2025-05}\\
 			\ganttbar{Desarrollo de la memoria}{2025-03}{2025-05}\\
@@ -77,14 +82,14 @@ Para ello:
 Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en tres fases:
 \begin{itemize}
 	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentarán abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentarán proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
-	\item Diseño del Proyecto. Con las características abstraídas en la fase anterior, se planteará un diseño inicial que servirá como base durante el desarrollo del Proyecto. Este diseño, si bien no será inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
-	\item Desarrollo del Proyecto. Una vez finalizado el diseño del Proyecto, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
+	\item Diseño de \baker. Con las características abstraídas en la fase anterior, se planteará un diseño inicial que servirá como base durante el desarrollo del trabajo. Este diseño, si bien no será inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
+	\item Desarrollo de \baker. Una vez finalizado el diseño, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
 		\begin{itemize}
-			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades del Proyecto, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo de ambas herramientas. 
+			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades de ambas herramientas, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo. 
 			\item Desarrollo del motor. Se desarrollará un motor de acuerdo a los planes diseñados anteriormente, con soporte multiplataforma tanto para ordenador como para dispositivos móviles Android.
 			\item Desarrollo del editor. Al igual que con el motor, se desarrollará el editor de acuerdo al diseño preestablecido. Tendrá que tener soporte multiplataforma en PC, es decir, Windows, MacOS y Linux, no así con Android.
 		\end{itemize}
-	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento del Proyecto, se probarán las herramientas finales con usuarios de diversa índole ajenos al desarrollo de estas. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán en el Proyecto todas aquellas funcionalidades críticas que requieran de un arreglo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que supongan una excesiva carga como para poder desarrollarlas en el tiempo restante.
+	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento de \baker, se probarán las herramientas finales con usuarios de diversa índole ajenos al desarrollo de estas. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán todas aquellas funcionalidades críticas que requieran de un arreglo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que supongan una excesiva carga como para poder desarrollarlas en el tiempo restante.
 \end{itemize}
 
 
@@ -97,7 +102,7 @@ El acceso al repositorio con el código puede hacerse a través de esta direcci�
 
 \medskip
 
-Con respecto a las herramientas de desarrollo del Proyecto, se utilizarán como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; se usará CMake como herramienta de generación de librerías externas; y MinGW como compilador en Windows, Clang como compilador en MacOS, y GCC como compilador en Linux . Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}.
+Con respecto a las herramientas de desarrollo de \baker, se utilizarán como entornos de desarollo CLion, para programación en C++, y Android Studio, para la programación en Java de Android; se usará CMake como herramienta de generación de librerías externas; y MinGW como compilador en Windows, Clang como compilador en MacOS, y GCC como compilador en Linux . Las razones detalladas del uso de estas herramientas se encuentran en la sección \ref{sec:decisiones}.
 
 \medskip
 
@@ -105,31 +110,35 @@ Por otra parte, la generación del PDF de la memoria se llevará a cabo mediante
 
 \bigskip
 
-En cuanto a la metodología de trabajo, se propondrán reuniones cada dos semanas con el tutor, pudiendo variar el número de semanas dependiendo del progreso realizado. En estas reuniones se expondrá el estado del Proyecto, así como se realizarán consultas referidas al diseño o al desarrollo de este.
+En cuanto a la metodología de trabajo, se propondrán reuniones cada dos semanas con el tutor, pudiendo variar el número de semanas dependiendo del progreso realizado. En estas reuniones se expondrá el estado del trabajo, así como se realizarán consultas referidas al diseño o al desarrollo de este.
 
 \medskip
 
 La comunicación con el equipo se establecerá, tanto mediante reuniones presenciales cuando se tengan que abordar problemas importantes, como mediante \textit{software} que permita mensajería y chat de voz, como Discord. Es mediante esta herramienta que también se tratará de hacer las pruebas finales con los usuarios.
 
 \section{Estructura de la memoria} 
-En el capítulo \ref{cap:juegosrol}, \textit{Juegos de Rol}, se habla de los juegos de rol, sus características, orígenes así como un análisis de alguno de los juegos de rol más importantes.
+En el capítulo \ref{cap:juegosrol}, \textit{Juegos de rol}, se habla de los juegos de rol, sus características, orígenes así como un análisis de alguno de los juegos de rol más importantes.
 
 \medskip
 
-En el capítulo \ref{cap:videojuegosrol}, \textit{Videojuegos de Rol}, se introducen los videojuegos de rol y su historia, así como el proceso de desarrollo y el uso de motores y editores de videojuegos.
+En el capítulo \ref{cap:videojuegosrol}, \textit{Videojuegos de rol}, se introducen los videojuegos de rol y su historia, así como el proceso de desarrollo y el uso de motores y editores de videojuegos.
 
 \medskip
 
-En el capítulo \ref{cap:planteamiento}, \textit{Planteamiento del Proyecto}, se trata en profundidad el diseño planteado y las decisiones tomadas previas al desarrollo de las aplicaciones.
+En el capítulo \ref{cap:planteamiento}, \textit{Planteamiento del proyecto}, se trata en profundidad el diseño planteado y las decisiones tomadas previas al desarrollo de las aplicaciones.
 
 \medskip
 
-En el capítulo \ref{cap:desarrollo}, \textit{Desarrollo del Proyecto}, se habla de la estructura interna del motor y del editor en cuanto a código, abordando también los problemas que se hayan tenido durante esta fase y las soluciones propuestas.
+En el capítulo \ref{cap:motor}, \textit{Motor}, se habla de la implementación del motor de \baker, con algunas de las decisiones tomadas en cuanto al desarrollo.
 
 \medskip
 
-En el capítulo \ref{cap:conclusiones}, \textit{Evaluación y Conclusiones}, se exponen las preguntas y objetivos de investigación, el desarrollo de las pruebas con los usuarios, y un análisis acerca de las pruebas, del que se han extraído conclusiones.
+En el capítulo \ref{cap:editor}, \textit{Editor}, se habla de la implementación del editor de \baker, con algunas de las decisiones tomadas en cuanto al desarrollo.
 
 \medskip
 
-Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Trabajo Futuro}, se detallan posibles mejoras para una futura actualización de las herramientas que pueden ser interesantes.
+En el capítulo \ref{cap:conclusiones}, \textit{Evaluación y análisis}, se exponen las preguntas y objetivos de investigación, el desarrollo de las pruebas con los usuarios, y un análisis acerca de las pruebas, del que se han extraído conclusiones.
+
+\medskip
+
+Finalmente, en el capítulo \ref{cap:trabajoFuturo}, \textit{Conclusiones y trabajo futuro}, se detallan las conclusiones del proyecto así como posibles mejoras para una futura actualización de las herramientas que pueden ser interesantes.
