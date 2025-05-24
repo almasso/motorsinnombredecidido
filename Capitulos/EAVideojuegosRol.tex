@@ -48,6 +48,22 @@ Entre esta categorización más \comillas{clásica} se encuentran los siguientes
 
 \medskip
 
+Otro aspecto importante en la clasificación de videojuegos es la dimensión en la que se desarrolla la acción. Tradicionalmente, se distingue entre juegos en 2D , 2.5D y 3D.
+
+\smallskip
+
+Los juegos en 2D se caracterizan por usar gráficos bidimensionales, donde el movimiento y la interacción transcurren en un plano. Este tipo de juegos incluye una gran variedad de géneros clásicos, como los plataformas, puzles o juegos de aventura gráfica.
+
+\smallskip
+
+Los juegos en 3D desarrollan su acción en un espacio tridimensional completo, donde el jugador puede desplazarse libremente en los tres ejes cartesianos. Suelen ser juegos de exploración, simulación y realismo, predominantes en géneros como \textit{shooters}, juegos de acción y algunos RPG modernos.
+
+\smallskip
+
+Por último, los juegos en 2.5D combinan elementos de ambos mundos: presentan gráficos que aparentan ser tridimensionales mediante técnicas como proyecciones isométricas, o bien emplean entornos 3D con movimiento restringido a dos dimensiones. Este enfoque permite aprovechar la profundidad visual y efectos modernos sin perder la claridad o simplicidad propia del 2D.
+
+\medskip
+
 \figura{Vectorial/botw}{width=0.7\textwidth}{fig:botw}{Escena de juego de \cite{BOTW}, extraída de \cite{BOTWForbes}.}
 
 \cite{FailGeneros} argumentan que las categorías existentes a día de hoy se quedan cortas para satisfacer los propósitos del género en videojuegos (identidad, agrupación, \textit{marketing} y educación), ya que dada la gran diversidad de juegos que hay ahora, resulta casi imposible poder agrupar la naturaleza multifacética de estos en etiquetas tan \comillas{tradicionales}.
@@ -213,6 +229,39 @@ Cada motor de videojuegos es distinto, y cada uno incorpora según qué motores 
 \item \textbf{Sistema de interfaz de usuario}: se encarga de gestionar la barra de estado (HUD, \textit{head-up display}), los menús, texto, botones y otros elementos de la interfaz con los que el usuario pueda interactuar.
 \end{itemize}
 
+\subsubsection{Patrones ECS y EC}
+En cuanto a los patrones arquitectónicos utilizados en el diseño de motores de videojuegos, uno de los más usados es el patrón ECS (entidad, componente, sistema), cuya principal ventaja es la separación total entre los datos y el comportamiento. Este patrón busca eliminar los problemas de herencia profunda y acoplamiento que surgen con el enfoque clásico de la orientación a objetos, y es especialmente útil en contextos donde se manejan muchos objetos heterogéneos.
+
+\medskip
+El patrón ECS se basa en tres elementos fundamentales:
+\begin{itemize}
+	\item Entidades: son identificadores únicos que representan objetos del juego (por ejemplo, jugadores, enemigos, proyectiles...). Por sí solas, las entidades no contienen ni datos ni comportamiento.
+	\item Componentes: son estructuras de datos puras que contienen información específica de una entidad, como su posición, velocidad, salud, animación o inteligencia artificial. Cada entidad puede tener múltiples componentes.
+	\item Sistemas: son unidades lógicas encargadas de procesar todas las entidades que contienen un conjunto específico de componentes. Por ejemplo, un sistema de física puede procesar todas las entidades que tengan componentes de posición y velocidad, actualizando su movimiento en función del tiempo.
+\end{itemize}
+
+En algunas implementaciones mucho más sencillas, se eliminan los sistemas, dejando únicamente a las entidades y los componentes como base de la arquitectura. Esta implementación, conocida como patrón EC, es mucho menos escalable y modulable que el patrón ECS, pero es más próxima a la orientación a objetos. En este caso, son las propias entidades o los componentes los que se encargan del procesado de la lógica en lugar de los sistemas.
+
+\subsubsection{Bucle de juego}
+El bucle de juego (\textit{game loop}) es una estructura central en cualquier motor de videojuegos. Su propósito es mantener el flujo continuo de ejecución del juego, actualizando su estado y renderizando el resultado en pantalla de forma cíclica. Se trata de un patrón esencial que permite que el juego responda a las entradas del usuario, avance en el tiempo, y se represente visualmente de forma coherente.
+
+\medskip
+
+Típicamente, un bucle de juego sigue los siguientes pasos en cada iteración (o fotograma):
+
+\begin{enumerate}
+	\item Procesamiento de entrada: se recogen y procesan las entradas del jugador, ya sea desde el teclado, ratón, \textit{gamepad}, red...
+	\item Actualización del estado del juego: se actualiza la lógica del juego, incluyendo la física, la inteligencia artificial, las colisiones y cualquier otro sistema relevante.
+	\item \textit{Renderizado}: se genera la imagen correspondiente al nuevo estado del juego y se envía a la pantalla.
+\end{enumerate}
+
+
+Este ciclo se repite de forma constante durante toda la ejecución del juego. En juegos modernos, suele buscarse una tasa de refresco constante (por ejemplo, 60 fotogramas por segundo), aunque también pueden implementarse bucles desacoplados, donde la actualización lógica y el \textit{renderizado} ocurren a distintas frecuencias para mejorar el rendimiento o la estabilidad.
+
+\medskip
+
+Existen variantes del bucle de juego adaptadas a distintas arquitecturas o estilos de motor. Por ejemplo, en motores basados en el patrón ECS, los sistemas se ejecutan durante la fase de actualización para aplicar transformaciones a las entidades y sus componentes.
+
 \subsubsection{Separación entre motor y \textit{gameplay}}
 \begin{figure}[t]
 	\centering
@@ -289,6 +338,11 @@ Aunque DDP se asocia al uso de motores de videojuegos, su implementación no dep
 \medskip
 
 Un ejemplo histórico de DDP puede encontrarse en el motor \textit{SCUMM} (\textit{Script Creation Utility for Maniac Mansion}), desarrollado por Lucasfilm Games en los años 80 para facilitar el desarrollo de su aventura gráfica \cite{maniacmansion}. Este motor permitía definir el comportamiento de escenas y personajes mediante \textit{scripts} externos, lo que habilitaba la creación de aventuras gráficas sin necesidad de reescribir el código base. Posteriormente, el motor \textit{GrimE} (\textit{Grim Engine}), también desarrollado por LucasArts\footnote{Lucasfilm Games cambiaría su nombre a LucasArts en 1990, y, posteriormente, en 2021, lo volvería a cambiar por Lucasfilm Games.} y utilizado en juegos como \cite{grimfandango}, amplió este enfoque incorporando Lua como lenguaje de \textit{scripting}, mostrando una evolución clara hacia un diseño aún más flexible y dirigido por datos.
+
+\bigskip
+
+Para poder conectar la programación dirigida con datos con el propio código del motor o del videojuego se suele usar un patrón de diseño creacional, llamado patrón factoría (\textit{factory pattern}), que proporciona una interfaz para crear objetos en una superclase permitiendo a las subclases alterar el tipo de objeto que se crea. De esta manera, se consigue desacoplar el proceso de creación de objetos del código que los utiliza.
+
 
 \subsubsection{Programación multiplataforma en videojuegos}
 \begin{figure}[t]

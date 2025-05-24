@@ -33,28 +33,29 @@ Los elementos de lectura-escritura son todos aquellos componentes responsables d
 	\begin{itemize}
 		\item El editor cuenta con ficheros \texttt{.lua}, nombrados siguiendo la especificación IETF BCP 47 \citep{rfc5646}\footnote{Esta especificación define un idioma de la siguiente manera: \comillas{id\_PA}, donde \textit{id} es una abreviación del idioma y \textit{PA} una abreviación del país donde se habla ese idioma. Por ejemplo, para el español de España, su código BCP 47 sería \comillas{es\_ES}, y para el inglés estadounidense, \comillas{en\_US}.}, que contienen una tabla de Lua cuya clave es un identificador definido para un determinado texto en el editor, y el valor es la frase requerida en el idioma correspondiente. Por ejemplo:
 \begin{figure}[t]
- \begin{minipage}{0.6\textwidth}
+ \begin{minipage}{0.48\textwidth}
   \centering
-  \begin{minted}[fontsize=\small]{lua}
+  \begin{minted}[fontsize=\footnotesize]{lua}
 return {
-  ["action.settings"] = "Configuración",
+  ["action.settings"] = "Ajustes",
   ["action.add"] = "Añadir",
-  ["window.mainwindow.mapeditor"] = "Mapa"
+  ["window.mapeditor"] = "Mapa"
 }
   \end{minted}
-  \caption{Contenido del fichero \texttt{es\_ES.lua}.}
+  \caption{\small Contenido del fichero\\ \texttt{es\_ES.lua}.}
   \label{fig:luaes}
  \end{minipage}
- \begin{minipage}{0.6\textwidth}
+ \hfill
+ \begin{minipage}{0.48\textwidth}
   \centering
-  \begin{minted}[fontsize=\small]{lua}
+  \begin{minted}[fontsize=\footnotesize]{lua}
 return {
   ["action.settings"] = "Settings",
   ["action.add"] = "Add",
-  ["window.mainwindow.mapeditor"] = "Map"
+  ["window.mapeditor"] = "Map"
 }
   \end{minted}
-  \caption{Contenido del fichero \texttt{en\_EN.lua}.}
+  \caption{\small Contenido del fichero\\ \texttt{en\_EN.lua}.}
   \label{fig:luaen}
  \end{minipage}
   \label{fig:lualang}

@@ -26,15 +26,15 @@ El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que
 
 \section{Toma de decisiones}
 \label{sec:decisiones}
-La primera decisión a tomar fue la plataforma de desarrollo del Proyecto. Se decidió desarrollar el grueso del Proyecto en C++, ya que se quería aprovechar el alto rendimiento que ofrece en comparación a otros lenguajes\footnote{El hecho de poder gestionar la memoria utilizada en cualquier momento, así como la ausencia de una máquina virtual intermedia hacen que C++ sea el lenguaje idóneo para proyectos donde el rendimiento es crítico.}, el soporte multiplataforma que tiene la familia C/C++ tanto en dispositivos de sobremesa como en móviles, y el uso de librerías más avanzadas que facilitarían el desarrollo del Proyecto.
+La primera decisión a tomar fue la plataforma de desarrollo de \baker. Se decidió desarrollar el grueso en C++, ya que se quería aprovechar el alto rendimiento que ofrece en comparación a otros lenguajes\footnote{El hecho de poder gestionar la memoria utilizada en cualquier momento, así como la ausencia de una máquina virtual intermedia hacen que C++ sea el lenguaje idóneo para proyectos donde el rendimiento es crítico.}, el soporte multiplataforma que tiene la familia C/C++ tanto en dispositivos de sobremesa como en móviles, y el uso de librerías más avanzadas que facilitarían el desarrollo del trabajo.
 
 \medskip
 
-Debido a la premisa de un desarrollo multiplataforma, se necesitaba usar un IDE (\textit{integrated development environment}, entorno de desarrollo integrado) que fuese compatible tanto con Windows, MacOS, y Linux. La opción que en un principio se había valorado era la de utilizar \textit{Visual Studio}, una de las herramientas más populares para el desarrollo en C++; sin embargo, debido a que este IDE carece de versiones para MacOS y Linux\footnote{MacOS y Linux cuentan con \textit{Visual Studio Code}, que si bien sirve para poder compilar C/C++ mediante el uso de \textit{plug-in}, es más complicado de configurar para proyectos más complejos como este.}, se optó por hacer el desarrollo del Proyecto en \textit{CLion}, un IDE con soporte para CMake, que facilitaría a la hora de agilizar el trabajo (por su rapidez en la generación de proyectos complejos) y con la gestión de las dependencias externas.
+Debido a la premisa de un desarrollo multiplataforma, se necesitaba usar un IDE (\textit{integrated development environment}, entorno de desarrollo integrado) que fuese compatible tanto con Windows, MacOS, y Linux. La opción que en un principio se había valorado era la de utilizar \textit{Visual Studio}, una de las herramientas más populares para el desarrollo en C++; sin embargo, debido a que este IDE carece de versiones para MacOS y Linux\footnote{MacOS y Linux cuentan con \textit{Visual Studio Code}, que si bien sirve para poder compilar C/C++ mediante el uso de \textit{plug-in}, es más complicado de configurar para proyectos más complejos como este.}, se optó por hacer el desarrollo de \baker{} en \textit{CLion}, un IDE con soporte para CMake, que facilitaría a la hora de agilizar el trabajo (por su rapidez en la generación de proyectos complejos) y con la gestión de las dependencias externas.
 
 \smallskip
 
-Pese a que el aprender a usar CMake ocupó gran parte del inicio del desarrollo del Proyecto, las ventajas que ha supuesto a la hora del manejo de las distintas dependencias externas frente a otras alternativas que se habían manejado a lo largo del transcurso del Grado, han hecho que la inversión temporal en esta opción haya resultado beneficiosa.
+Pese a que el aprender a usar CMake ocupó gran parte del inicio del desarrollo, las ventajas que ha supuesto a la hora del manejo de las distintas dependencias externas frente a otras alternativas que se habían manejado a lo largo del transcurso del Grado, han hecho que la inversión temporal en esta opción haya resultado beneficiosa.
 
 \medskip
 
@@ -46,7 +46,7 @@ Dentro de \textit{Android Studio}, se tiene que añadir también el módulo de N
 
 \medskip
 
-El resto de decisiones son propias de cada una de las partes del Proyecto y se detallarán a continuación.
+El resto de decisiones son propias de cada una de las partes de \baker{} y se detallarán a continuación.
 
 \subsection{Diseño del motor}
 \subsubsection{Base con el sistema entidad-componente}
@@ -179,7 +179,7 @@ Las ventanas tendrían comunicación unas con otras utilizando al \textit{proyec
 
 \smallskip
 
-Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que el Proyecto sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
+Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que \baker{} sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
 
 \subsubsection{Tecnologías utilizadas}
 
@@ -195,4 +195,4 @@ Los archivos de configuración del proyecto difieren de los que el motor espera 
 
 \medskip
 
-Si bien es cierto que una de las técnicas más comunes en la implementación de un editor es la de utilizar el motor para el que se desarrolla como base, ya que esto evita el tener que implementar dos veces las mismas funcionalidades (principalmente en \textit{renderizado}, \textit{input} y \textit{scripting}), se decidió independizar el desarrollo del editor del motor para poder avanzar más rápidamente en el Proyecto. Esta opción, pese a que ha supuesto una mayor carga de trabajo, ha permitido flujos de iteración en el desarrollo más cortos.
+Si bien es cierto que una de las técnicas más comunes en la implementación de un editor es la de utilizar el motor para el que se desarrolla como base, ya que esto evita el tener que implementar dos veces las mismas funcionalidades (principalmente en \textit{renderizado}, \textit{input} y \textit{scripting}), se decidió independizar el desarrollo del editor del motor para poder avanzar más rápidamente. Esta opción, pese a que ha supuesto una mayor carga de trabajo, ha permitido flujos de iteración en el desarrollo más cortos.
