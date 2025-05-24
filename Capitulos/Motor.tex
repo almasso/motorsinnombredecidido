@@ -44,9 +44,55 @@ La segunda parte fundamental de la base del motor es el sistema de gestión de r
 	\item \texttt{ResourceMemoryManager} se encarga de controlar qué recursos permanecen cargados y cuánto espacio de memoria están ocupando. A través de un archivo de configuración se puede establecer cuál es el límite de memoria que se quiere usar para los recursos; esta clase es la que se encarga de que ese umbral no se supere. A través de un algoritmo LRU se gestiona qué recursos están cargados en cada instante. Cada vez que se quiera usar alguno de estos, es decir, cada vez que se llame a \texttt{get(key)} de un \texttt{ResourceHandler}, se le solicitará a este gestor de memoria que lo active. Esta activación consiste en tres fases. Primero comprobar si el recurso está ya cargado, si es así simplemente se actualizará en el LRU. En caso contrario, iría al segundo paso que es cargarlo y comprobar si hay espacio suficiente, de ser así se almacenaría. Si no, el tercer paso es crear ese espacio y, a través del LRU, se irán descargando aquellos recursos que lleven más tiempo sin ser utilizados, hasta que haya espacio suficiente para que el nuevo se almacene.
 \end{itemize}
 
-\figura{Vectorial/esquema\_ec}{width=0.7\textwidth}{fig:esquema\_ec}{Esquema de la estructura del sistema de entidad componente del motor.}
+\renewcommand{\umlfillcolor}{white}
+\renewcommand{\umldrawcolor}{black}
 
-\medskip
+\begin{figure}[t]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{class}[text width=5cm]{SceneManager}{-1,0}
+				\attribute{- scenes : list<Scene>}
+				\operation{+ addScene(string): Scene}
+				\operation{+ popScene() : void}
+				\operation{+ update() : bool}
+				\operation{+ render() : bool}
+			\end{class}
+	
+  			\begin{class}[text width=5cm]{Scene}{7,0}
+  				\attribute{- entities : list<Entity>}
+  				\operation{+ init() : bool}
+  				\operation{+ update() : bool}
+  				\operation{+ render() : bool}
+  				\operation{+ refresh() : void}
+  			\end{class}
+
+  			\begin{class}[text width=5cm]{Entity}{7,-5}
+  				\attribute{- enabled : bool}
+  				\attribute{- components : list<Component>}
+  				\operation{+ init() : bool}
+  				\operation{+ update() : bool}
+  				\operation{+ fixedUpdate() : bool}
+  				\operation{+ setEnabled(bool) : bool}
+  			\end{class}
+
+  			\begin{class}[text width=5cm]{Component}{-1,-5}
+				\attribute{- enabled : bool}
+				\attribute{- entity : Entity}
+				\operation{+ init() : bool}
+				\operation{+ update() : bool}
+				\operation{+ setEnabled(bool) : bool}
+				\operation{+ onEnabled() : bool}
+				\operation{+ onDisabled() : bool}
+  			\end{class}
+  
+  			\composition{SceneManager}{}{}{Scene}
+  			\aggregation{Scene}{}{}{Entity}
+  			\composition{Entity}{}{}{Component}
+		\end{tikzpicture}
+		\caption{Esquema de la estructura del sistema de entidad componente del motor.} 
+		\label{fig:ec}
+	\end{center}
+\end{figure}
 
 Sobre estas tres piezas fundamentales está estructurado el sistema de gestión de recursos y, adicionalmente, existen otras dos clases que ayudan en esta tarea. \texttt{ResourceManager}, que se encarga de inicializar el sistema con la configuración dada y establecer la conexión entre \texttt{ResourceMemoryManager} y los \texttt{ResourceHandler}. Y \texttt{LuaReader}, que ofrece una interfaz sencilla para poder extraer tablas de Lua guardadas en un archivo o dentro de otra tabla de Lua. La lectura de estos archivos se hace a través de \texttt{SDL}, para poder mantener la funcionalidad entre plataformas, y la interpretación a través de \texttt{sol2}.
 
@@ -80,7 +126,35 @@ Para poder definir ese identificador fácilmente en cada componente se ha creado
 
 Con esto, a partir de un objeto \texttt{ComponentData}, el \texttt{SceneManager} crea los componentes mediante \texttt{ComponentFactory}, estos \textit{blueprints} conservan la tabla \texttt{data} para usarla en su llamada a \texttt{init}. Para evitar el uso directo de los métodos de \texttt{sol2} en cada componente, \texttt{ComponentData} proporciona las interfaces \texttt{getData} y \texttt{getArray}, que permiten obtener los valores almacenados. Además, \texttt{ComponentData} incluye en su propia tabla \texttt{data} un indicador que señala si el componente debe instanciarse habilitado o deshabilitado.
 
-\figura{Vectorial/esquema\_recursos}{width=0.7\textwidth}{fig:esquema\_recursos}{Esquema de la estructura del sistema de gestión de recursos del motor.}
+%\figura{Vectorial/recursos}{width=0.7\textwidth}{fig:recursos}{Esquema de la estructura del sistema de gestión de recursos del motor.}
+\begin{figure}[t]
+	\centering
+		\begin{tikzpicture}[every node/.style={font=\small}]
+			\begin{class}[text width=5cm]{Resource}{3,0}
+				\attribute{- size : int}
+				\operation{+ load() : bool}
+				\operation{+ unload() : void}
+			\end{class}
+	
+  			\begin{class}[text width=7.5cm]{ResourceHandler<ResourceType>}{-1,-5}
+  				\attribute{- resources : unordered\_map<string, ResourceType>}
+  				\operation{+ get(string) : ResourceType}
+  			\end{class}
+
+  			\begin{class}[text width=6.5cm]{ResourceMemoryManager}{7,-5}
+  				\attribute{- resources : list<Resource>}
+  				\attribute{- maxSize : int}
+  				\attribute{- currentSize : int}
+  				\operation{+ activateResource(Resource) : bool}
+  			\end{class}
+  
+  			\aggregation{ResourceHandler<ResourceType>}{}{}{Resource}
+  			\aggregation{ResourceMemoryManager}{}{}{Resource}
+  			\unidirectionalAssociation{ResourceHandler<ResourceType>}{}{}{ResourceMemoryManager}
+		\end{tikzpicture}
+		\caption{Esquema de la estructura del sistema de gestión de recursos del motor.} 
+		\label{fig:recursos}
+\end{figure}
 
 \section{Componentes genéricos de juego}
 De cara a facilitar el desarrollo de videojuegos los motores ofrecen implementaciones de sistemas que se usan en la gran mayoría de estos. Hay múltiples bibliotecas que facilitan la adición de estas funcionalidades, en este caso se usará \texttt{SDL3} que ofrece todo lo necesario para desarrollar de forma sencilla lo diseñado además de ofrecer soporte multiplataforma.
@@ -155,10 +229,10 @@ Este es el sistema que se encarga de controlar la reproducción de sonidos para 
 
 \begin{itemize}
 	\item \texttt{AudioClip} se encarga de envolver a \texttt{SDL\_AudioStream} ofreciendo una interfaz simplificada. Representa una pista de sonido, se puede reproducir, pausar, detener o cambiar su volumen entre otros. Almacena un identificador de la pista de audio que representa. Para su funcionamiento se apoya en el sistema de gestión de recursos, con una clase que extiende de \texttt{Resource}, \texttt{AudioClipData}. Cada vez que se quiera hacer una modificación en el estado de la pista se solicitará el acceso al recurso correspondiente a través de su identificador.
-	\item \texttt{AudioMixer} simula una simplificación de cómo funciona un mezclador de audio. Puede recibir múltiples entradas de audio y ofrece una salida. Esto significa que, a un \texttt{AudioMixer}, se le pueden conectar tanto múltiples \texttt{AudioClip} como otros \texttt{AudioMixer}. Permite modificar el volumen de reproducción de todos sus elementos conectados. Esto es así para poder permitir un control más preciso de distintos tipos de sonidos. En los videojuegos es típico permitir al jugador controlar tanto el volumen general como el de la música o los efectos de sonido, por ejemplo. De esta manera se pueden estructurar en forma de árbol las distintas salidas de audio para ofrecer esta funcionalidad, como se ejemplifica en la figura \ref{fig:esquema\_audiomixers}. Con esto y con una clase \texttt{AudioManager}, encargada de gestionar el dispositivo de salida y las conexiones entre los \texttt{AudioMixer}, se completa la implementación del componente \texttt{AudioSource}.
+	\item \texttt{AudioMixer} simula una simplificación de cómo funciona un mezclador de audio. Puede recibir múltiples entradas de audio y ofrece una salida. Esto significa que, a un \texttt{AudioMixer}, se le pueden conectar tanto múltiples \texttt{AudioClip} como otros \texttt{AudioMixer}. Permite modificar el volumen de reproducción de todos sus elementos conectados. Esto es así para poder permitir un control más preciso de distintos tipos de sonidos. En los videojuegos es típico permitir al jugador controlar tanto el volumen general como el de la música o los efectos de sonido, por ejemplo. De esta manera se pueden estructurar en forma de árbol las distintas salidas de audio para ofrecer esta funcionalidad, como se ejemplifica en la figura \ref{fig:audiomixer}. Con esto y con una clase \texttt{AudioManager}, encargada de gestionar el dispositivo de salida y las conexiones entre los \texttt{AudioMixer}, se completa la implementación del componente \texttt{AudioSource}.
 \end{itemize}
 
-\figura{Vectorial/esquema\_audiomixers}{width=0.7\textwidth}{fig:esquema\_audiomixers}{Representación de un ejemplo de las conexiones de los elementos del sistema de audio del motor.}
+\figura{Vectorial/audiomixers}{width=0.7\textwidth}{fig:audiomixers}{Representación de un ejemplo de las conexiones de los elementos del sistema de audio del motor.}
 
 \subsection{Colisiones}
 En lo que refiere a detección de colisiones no se busca que el sistema sea especialmente complejo. Los videojuegos que se ofrecerán crear con el motor no necesitan más que comprobaciones sencillas obtenidas a partir de intersecciones entre rectángulos. Para hacer esto el sistema de colisiones consta de dos elementos: 
@@ -212,7 +286,7 @@ Un evento es una estructura que consta de una condición y una secuencia de acci
 
 Además de esto los eventos también ofrecen una interfaz que permite pausar, reanudar o detener su ejecución y cambiar cuál será el próximo comportamiento en actuar. Esta última funcionalidad permite una gran flexibilidad en la posible lógica de estos eventos. A través de este método \texttt{jump(index)} y el uso de condiciones se puede simular en la ejecución de los comportamientos el funcionamiento de instrucciones de salto en una CPU. Se explicará más al respecto al hablar en profundidad de los comportamientos. 
 
-\figura{Vectorial/esquema\_eventos\_motor}{width=0.7\textwidth}{fig:esquema\_eventos\_motor}{Esquema de la estructura de un evento del motor.}
+\figura{Vectorial/eventosmotor}{width=0.7\textwidth}{fig:eventosmotor}{Esquema de la estructura de un evento del motor.}
 
 \subsection{Condiciones}
 Las condiciones, \texttt{EventCondition}, se encargan de determinar si ciertos elementos del juego están en algún estado concreto. A través de la función virtual \texttt{met()}, definiendo nuevas clases que hereden de esta, la comprobación de cada condición podrá tener definiciones distintas. Cada evento tiene una de estas condiciones asociadas y se iniciará en cuanto esta se cumpla. 

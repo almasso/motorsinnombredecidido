@@ -154,11 +154,34 @@ Estas clases constituyen la base del sistema de edición de datos del proyecto, 
 \section{Interfaz del editor}
 En cuanto a la interfaz que compone el editor, toda ella está elaborada utilizando la librería \texttt{DearImGui} junto con todos los elementos de dibujado mencionados en el apartado \ref{subsec:dibujado}. 
 
-\figura{Vectorial/welcomewindow}{width=0.7\textwidth}{fig:welcomewindow}{Ventana de bienvenida de \textit{RPGBaker}.}
-\figura{Vectorial/eventos}{width=0.7\textwidth}{fig:eventwindow}{Ventana de edición de eventos de \textit{RPGBaker}.}
-\figura{Vectorial/conexiones}{width=0.7\textwidth}{fig:conexiones}{Ventana conexiones entre mapas de \textit{RPGBaker}.}
-\figura{Vectorial/jugador}{width=0.7\textwidth}{fig:playerwindow}{Ventana de edición del jugador de \textit{RPGBaker}.}
-\figura{Vectorial/animwizard}{width=0.7\textwidth}{fig:animwizard}{Asistente para la creación de animaciones de \textit{RPGBaker}.}
+\begin{figure}[t]
+	\centering
+	%
+	\begin{SubFloat}
+		{\label{fig:welcomewindow}%
+		Ventana de bienvenida de \baker.}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Vectorial/welcomewindow}%
+	\end{SubFloat}
+	\qquad
+	\begin{SubFloat}
+		{\label{fig:eventwindow}%
+		Ventana de edición de eventos de \baker.}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Vectorial/eventos}%
+	\end{SubFloat}
+	%
+	\begin{SubFloat}
+		{\label{fig:conexiones}%
+		Ventana de conexiones entre mapas de \baker.}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Vectorial/conexiones}%
+	\end{SubFloat}
+	\qquad
+	\begin{SubFloat}
+		{\label{fig:playerwindow}%
+		Ventana de edición del jugador de \baker.}%
+		\includegraphics[width=0.45\textwidth]{Imagenes/Vectorial/jugador}%
+	\end{SubFloat}
+	\caption{Distintas ventanas del editor de \baker. \label{fig:menusbaker}}
+\end{figure}
 
 \begin{itemize}
 	\item La ventana de bienvenida (figura \ref{fig:welcomewindow}), que permite la gestión de todos los proyectos creados por el usuario, así como crear uno nuevo y añadir otro ya existente, y también cambiar el idioma de la interfaz.
@@ -176,6 +199,6 @@ En cuanto a la interfaz que compone el editor, toda ella está elaborada utiliza
 		\item El editor de conexiones (figura \ref{fig:conexiones}), que permite crear mundos\footnote{Un mundo, en la jerarquía de nuestro Proyecto, es aquel elemento que puede contener diversos mapas.} y añadirle los mapas, modificando en la cuadrícula la posición final de cada uno de los mapas.
 		\item El editor del jugador (figura \ref{fig:playerwindow}), que permite establecer ajustes del jugador, como por ejemplo su \textit{sprite}, sus animaciones de movimiento en las cuatro direcciones cardinales básicas y variables propias de este.
 		\item El editor de ajustes, que permite editar información relevante al ejecutable final, como por ejemplo, el nombre de la ventana, las dimensiones que la cámara puede mostrar en pantalla de una sola vez, el mapa en el que empezará el jugador o la fuente por defecto que mostrarán los textos.
-		\item El editor de \textit{sprites} y animaciones (figura \ref{fig:animwizard}), que permite generar un \textit{sprite} a partir de un \textit{spritesheet} o de una imagen, estableciendo el \textit{offset} que se desee, y, posteriormente, a partir de los \textit{sprites}, poder generar una animación. El asistente de creación de animaciones contiene un visor en tiempo real de la animación, así como controles para poder navegar por los diversos fotogramas.
+		\item El editor de \textit{sprites} y animaciones, que permite generar un \textit{sprite} a partir de un \textit{spritesheet} o de una imagen, estableciendo el \textit{offset} que se desee, y, posteriormente, a partir de los \textit{sprites}, poder generar una animación. El asistente de creación de animaciones contiene un visor en tiempo real de la animación, así como controles para poder navegar por los diversos fotogramas.
 	\end{itemize}
 \end{itemize}
