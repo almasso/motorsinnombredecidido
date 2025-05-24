@@ -4,28 +4,28 @@
 El desarrollo del motor se fundamenta en 4 capas, cada una con distintos sistemas y utilidades. 
 
 \section{\textit{Core}}
-En primer lugar, la base del \texttt{Core} está formada por un sistema de Entidades y Componentes organizados en escenas, junto con un sistema de carga de recursos que lee tanto archivos fuente como archivos \texttt{.lua}.
+En primer lugar, la base del \texttt{Core} está formada por un sistema de entidades y componentes organizados en escenas, junto con un sistema de carga de recursos que lee tanto archivos fuente como archivos \texttt{.lua}.
 
 \subsection{Sistema de entidad-componente}
-El entorno de juego consta de múltiples Componentes, cada uno contenido en una Entidad. Estas Entidades se agrupan en escenas, que gestiona el \texttt{SceneManager}.
+El entorno de juego consta de múltiples componentes, cada uno contenido en una entidad. Estas entidades se agrupan en escenas, que gestiona el \texttt{SceneManager}.
 
 \smallskip
 
 La lógica de cada componente se rige por un ciclo de vida con las siguientes fases: 
 
 \begin{itemize}
-	\item \texttt{Init}: se invoca solo una vez al crear el componente, durante la construcción de la Entidad o más adelante en tiempo de ejecución. Su función es inicializar atributos, ya sea obteniendo referencias de otros elementos de la escena o leyendo parámetros desde un objeto \texttt{ComponentData} que contiene datos leídos del archivo \texttt{.lua}.
+	\item \texttt{Init}: se invoca solo una vez al crear el componente, durante la construcción de la entidad o más adelante en tiempo de ejecución. Su función es inicializar atributos, ya sea obteniendo referencias de otros elementos de la escena o leyendo parámetros desde un objeto \texttt{ComponentData} que contiene datos leídos del archivo \texttt{.lua}.
 	\item \texttt{Update}: se llama en cada iteración del bucle principal, aquí reside la mayor parte de la lógica del componente. Se puede evitar que esta llamada ocurra desactivando el componente y viceversa mediante un método \texttt{setEnabled(true/false)}.
 	\item \texttt{OnEnable / OnDisable}: se disparan al activar o desactivar el componente respectivamente. Además, si un componente comienza habilitado al cargar la escena, \texttt{OnEnable} se invoca automáticamente.
 \end{itemize}
 
 \medskip
 
-Cada Entidad mantiene sus Componentes en un diccionario ordenado, donde la clave es un entero que define el orden de ejecución. Además, cada una de ellas puede tener otras Entidades hijas: cada una almacena un conjunto sin ordenar de punteros a sus hijas y un puntero a su padre. La propia Entidad propaga las llamadas de \texttt{Update} y el resto del ciclo de vida a sus hijos, la escena solo conserva referencias a las raíces de la jerarquía. Para eliminar una Entidad, se marca su atributo \texttt{Alive} en \texttt{false} y luego se purga en la llamada a \texttt{refresh} que ocurre tras cada \texttt{Update}.
+Cada entidad mantiene sus componentes en un diccionario ordenado, donde la clave es un entero que define el orden de ejecución. Además, cada una de ellas puede tener otras entidades hijas: cada una almacena un conjunto sin ordenar de punteros a sus hijas y un puntero a su padre. La propia entidad propaga las llamadas de \texttt{Update} y el resto del ciclo de vida a sus hijos, la escena solo conserva referencias a las raíces de la jerarquía. Para eliminar una entidad, se marca su atributo \texttt{Alive} en \texttt{false} y luego se purga en la llamada a \texttt{refresh} que ocurre tras cada \texttt{Update}.
 
 \medskip
 
-Las escenas guardan sus Entidades raíz en un conjunto sin orden y ejecutan recursivamente las llamadas correspondientes sobre cada rama de la jerarquía. También mantienen un diccionario de \comillas{handlers}, claves únicas de tipo \textit{string}, para referenciar rápidamente Entidades desde cualquier componente. Además, almacenan referencias a los \texttt{RenderComponent} registrados, organizados por capas, que se explicarán más adelante. 
+Las escenas guardan sus entidades raíz en un conjunto sin orden y ejecutan recursivamente las llamadas correspondientes sobre cada rama de la jerarquía. También mantienen un diccionario de \comillas{handlers}, claves únicas de tipo \textit{string}, para referenciar rápidamente entidades desde cualquier componente. Además, almacenan referencias a los \texttt{RenderComponent} registrados, organizados por capas, que se explicarán más adelante. 
 
 \medskip
 
@@ -81,8 +81,8 @@ Con esto, a partir de un objeto \texttt{ComponentData}, el \texttt{SceneManager}
 \section{Componentes genéricos de juego}
 De cara a facilitar el desarrollo de videojuegos los motores ofrecen implementaciones de sistemas que se usan en la gran mayoría de estos. Hay múltiples bibliotecas que facilitan la adición de estas funcionalidades, en este caso se usará \texttt{SDL3} que ofrece todo lo necesario para desarrollar de forma sencilla lo diseñado además de ofrecer soporte multiplataforma.
 
-\subsection{\texttt{Render}}
-Para el apartado de \textit{renderizado} utilizamos las funciones que ofrece \textit{SDL}. El \texttt{RenderManager} se encarga de generalizar estos métodos para que los componentes de \textit{render} puedan acceder a ellos fácilmente. Para ello implementa: 
+\subsection{\textit{Render}}
+Para el apartado de \textit{renderizado} utilizamos las funciones que ofrece \texttt{SDL}. El \texttt{RenderManager} se encarga de generalizar estos métodos para que los componentes de \textit{render} puedan acceder a ellos fácilmente. Para ello implementa: 
 
 \begin{itemize}
 	\item \texttt{clear}: se llama al comienzo de cada fotograma y vacía el \textit{buffer} de vídeo para preparar el siguiente \textit{renderizado}.
