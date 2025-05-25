@@ -81,6 +81,10 @@ void RenderManager::shutdown() const {
 
 std::pair<float, const Vector2&> RenderManager::setViewRect(const Vector2 &viewPosition, const Vector2 &viewSize)  {
     _viewOffset = viewPosition;
+    int w, h;
+    getWindowSize(&w, &h);
+    _width = static_cast<float>(w);
+    _height = static_cast<float>(h);
     float tempScaleX = _width / viewSize.getX();
     float tempScaleY = _height / viewSize.getY();
     _screenScale = std::min(tempScaleY, tempScaleX);
