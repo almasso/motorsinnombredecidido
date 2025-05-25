@@ -10,7 +10,7 @@ La idea principal es el desarrollo de un motor de videojuegos, enfocado a los RP
 
 \smallskip
 
-El editor debe ser capaz de generar un ejecutable, que por debajo utilice el motor desarrollado previamente, con el diseño de juego realizado por el usuario en el propio editor, y que pueda ejecutarse en Windows, MacOS, Linux y Android. El editor, por su parte, ha de poder ser ejecutado tanto en Windows, MacOS o Linux, descartando la ejecución en dispositivos móviles\footnote{Los editores suelen tener elementos que son preferibles de ser utilizados mediante entrada de teclado y ratón. Si bien es cierto que Android permite la conexión de periféricos de entrada-salida, es una plataforma pensada para dispositivos móviles y táctiles.}.
+El editor debe ser capaz de generar un ejecutable, que por debajo utilice el motor desarrollado previamente, con el diseño de juego realizado por el usuario en el propio editor, y que pueda ejecutarse en Windows, MacOS, Linux y Android. El editor, por su parte, ha de poder ser ejecutado tanto en Windows, MacOS o Linux, descartando la ejecución en dispositivos móviles\footnote{Android no se utiliza como sistema operativo en el que se puedan desarrollar aplicaciones. Es más, ni siquiera las propias APK de Android se desarrollan en Android.}.
 
 \smallskip
 
@@ -22,7 +22,7 @@ Por otra parte, se espera que el editor pueda generar diversos proyectos (es dec
 
 \medskip
 
-El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que el usuario solo tenga que desarrollar la parte de diseño (principalmente el diseño artístico y visual. Tendrá que tener las funcionalidades básicas que se esperan de un RPG, así como soporte para periféricos de entrada salida tradicionales (teclado y ratón) y entrada táctil (para los dispositivos móviles). 
+El motor, por su parte, aportará la mayor parte del \textit{gameplay}, para que el usuario solo tenga que desarrollar la parte de diseño (principalmente el diseño artístico y visual). Tendrá que tener las funcionalidades básicas que se esperan de un RPG, así como soporte para periféricos de entrada/salida tradicionales (teclado y ratón) y entrada táctil (para los dispositivos móviles). 
 
 \section{Toma de decisiones}
 \label{sec:decisiones}
@@ -30,7 +30,7 @@ La primera decisión a tomar fue la plataforma de desarrollo de \baker. Se decid
 
 \medskip
 
-Debido a la premisa de un desarrollo multiplataforma, se necesitaba usar un IDE (\textit{integrated development environment}, entorno de desarrollo integrado) que fuese compatible tanto con Windows, MacOS, y Linux. La opción que en un principio se había valorado era la de utilizar \textit{Visual Studio}, una de las herramientas más populares para el desarrollo en C++; sin embargo, debido a que este IDE carece de versiones para MacOS y Linux\footnote{MacOS y Linux cuentan con \textit{Visual Studio Code}, que si bien sirve para poder compilar C/C++ mediante el uso de \textit{plug-in}, es más complicado de configurar para proyectos más complejos como este.}, se optó por hacer el desarrollo de \baker{} en \textit{CLion}, un IDE con soporte para CMake, que facilitaría a la hora de agilizar el trabajo (por su rapidez en la generación de proyectos complejos) y con la gestión de las dependencias externas.
+Debido a la premisa de un desarrollo multiplataforma, se necesitaba usar un IDE (\textit{integrated development environment}, entorno de desarrollo integrado) que fuese compatible tanto con compiladores específicos de Windows, MacOS, y Linux. La opción que en un principio se había valorado era la de utilizar \textit{Visual Studio}, una de las herramientas más populares para el desarrollo en C++; sin embargo, la configuración que ofrece \textit{Visual Studio}con otros compiladores es muy limitada y complicada, por lo que se optó por hacer el desarrollo de \baker{} en \textit{CLion}, un IDE con soporte para CMake, que facilitaría a la hora de agilizar el trabajo (por su rapidez en la generación de proyectos complejos) y con la gestión de las dependencias externas.
 
 \smallskip
 
@@ -38,7 +38,7 @@ Pese a que el aprender a usar CMake ocupó gran parte del inicio del desarrollo,
 
 \medskip
 
-Por otra parte, para el desarrollo del motor, se tendría que utilizar otra herramienta para el desarrollo de la APK (\textit{Android Application Package}, paquete de aplicaciones Android, es decir, el ejecutable de Android), ya que esta se debe desarrollar utilizando Java. Por esto se decidió utilizar \textit{Android Studio}, la herramienta oficial de desarrollo para Android, que proporciona máquinas virtuales de dispositivos Android de distintas versiones y generaciones para poder probar la \textit{build}. Otra ventaja añadida al uso de Android Studio es el soporte que tiene para CMake, que ha permitido disponer de un único archivo de configuración para ambas herramientas.
+Por otra parte, en el desarrollo del motor, se tendría que utilizar otra herramienta para el desarrollo de la APK (\textit{Android Application Package}, paquete de aplicaciones Android, es decir, el ejecutable de Android), ya que esta se debe desarrollar utilizando Java. Por esto se decidió utilizar \textit{Android Studio}, la herramienta oficial de desarrollo para Android, que proporciona máquinas virtuales de dispositivos Android con distintas versiones y generaciones para poder probar la \textit{build}. Otra ventaja añadida al uso de Android Studio es el soporte que tiene para CMake, que ha permitido disponer de un único archivo de configuración para ambas herramientas.
 
 \smallskip
 
@@ -46,7 +46,7 @@ Dentro de \textit{Android Studio}, se tiene que añadir también el módulo de N
 
 \medskip
 
-El resto de decisiones son propias de cada una de las partes de \baker{} y se detallarán a continuación.
+El resto de decisiones son propias de cada una de las partes de \baker{} y se detallan a continuación.
 
 \subsection{Diseño del motor}
 \subsubsection{Base con el sistema entidad-componente}
@@ -54,7 +54,7 @@ El objetivo del motor es poder ejecutar juegos RPG, por ello deberá implementar
 
 \medskip  
 
-La base del motor se estructurará atendiendo a un patrón EC (entidad componente) y los sistemas específicos de los juegos RPG se construirán sobre esa base. Lo primero a tener en cuenta en esta parte es el bucle de juego.
+La base del motor se estructurará atendiendo a un patrón EC (entidad/componente) y los sistemas específicos de los juegos RPG se construirán sobre esa base. Lo primero a tener en cuenta en esta parte es el bucle de juego.
 
 \medskip  
 
@@ -73,7 +73,7 @@ Estos recursos de escenas estarán descritos cada uno en un fichero Lua y son lo
 Además de la carga de escenas, el sistema de carga de recursos permitirá gestionar múltiples tipos de recursos que pueden ser utilizados por el resto del motor. Cuando se solicite un recurso, este se cargará en memoria si no lo estaba previamente. Esta operación se realizará hasta alcanzar un límite de memoria, definido por el usuario. Una vez alcanzado dicho límite, si se solicitase un nuevo recurso, se aplicará un algoritmo LRU (\textit{least-recently-used}, usado menos recientemente), que liberará el recurso que más tiempo lleve sin usarse para hacer espacio al nuevo.
 
 \subsubsection{Componentes genéricos de juego}
-Para desarrollar videojuegos, es necesario contar con ciertas funcionalidades básicas que faciliten la implementación de los sistemas específicos del juego.
+Para desarrollar videojuegos, es necesario contar con ciertas funcionalidades básicas que faciliten la implementación de los sistemas específicos del juego. Estas funcionalidades han sido mencionadas en el capítulo \ref{cap:videojuegos}, y se comentarán a continuación.
 
 \smallskip
 
@@ -151,35 +151,31 @@ La esencia del editor es la de una interfaz intuitiva y sencilla de utilizar y a
 
 Las características fundamentales que el editor tiene corresponden con aquellos elementos que pueden ser modificados en el motor, es decir:
 \begin{itemize}
-	\item Editor de mapas (figura \ref{fig:mapeditor}), que permitiese al usuario cargar sus propios \textit{tilesets}; decidir el tamaño de la cuadrícula que ocuparía el mapa; dibujar el mapa sobre la cuadrícula utilizando las baldosas del \textit{tileset}, con la posibilidad de tener varias capas para poder simular un efecto de profundidad; y establecer las regiones de colisión del mapa.
-	\item Editor de eventos, que permitiese al usuario la creación de eventos, asignándoles la condición de lanzamiento y los comportamientos que se ejecutarán cuando la condición se cumpla. El editor de eventos tendría que tener soporte para eventos complejos, en el caso de que el usuario requiera de la creación de uno de ellos.
-	\item Editor de \textit{sprites} y de animaciones, que permitiese al usuario generar un \textit{sprite} dada una imagen o \textit{spritesheet}, y, posteriormente, animaciones dada una serie de \textit{sprites}. Ambos editores tendrían una previsualización del \textit{sprite} o animación, añadiéndose controles para la reproducción en este último caso. 
-	\item Editor de objetos, que permitiese al usuario generar un objeto para cada una de las baldosas en la cuadrícula del mapa y asignarle un \textit{sprite} y un evento.
-	\item Editor de personaje, que permitiese al usuario personalizar su \textit{sprite}, añadirle animaciones de movimiento y configurar diversos parámetros adicionales, como su posición de origen en el mapa.
-	\item Editor de conexiones entre los mapas, que permitiese al usuario establecer las posiciones de los distintos mapas en el mundo, de manera visual e intuitiva.
+	\item Editor de mapas (figura \ref{fig:mapeditor}), que permite al usuario cargar sus propios \textit{tilesets}; decidir el tamaño de la cuadrícula que ocupa el mapa; dibujar el mapa sobre la cuadrícula utilizando las baldosas del \textit{tileset}, con la posibilidad de tener varias capas para poder simular un efecto de profundidad; y establecer las regiones de colisión del mapa.
+	\item Editor de eventos, que permite al usuario la creación de eventos, asignándoles la condición de lanzamiento y los comportamientos que se ejecutarán cuando la condición se cumpla. El editor de eventos tiene soporte para eventos complejos, en el caso de que el usuario requiera de la creación de uno de ellos.
+	\item Editor de \textit{sprites} y de animaciones, que permite al usuario generar un \textit{sprite} dada una imagen o \textit{spritesheet}, y, posteriormente, animaciones dada una serie de \textit{sprites}. Ambos editores tienen una previsualización del \textit{sprite} o animación, añadiéndose controles para la reproducción en este último caso. 
+	\item Editor de objetos, que permite al usuario generar un objeto para cada una de las baldosas en la cuadrícula del mapa y asignarle un \textit{sprite} y un evento.
+	\item Editor de personaje, que permite al usuario personalizar su \textit{sprite}, añadirle animaciones de movimiento y configurar diversos parámetros adicionales, como su posición de origen en el mapa.
+	\item Editor de conexiones entre los mapas, que permite al usuario establecer las posiciones de los distintos mapas en el mundo, de manera visual e intuitiva.
 	\item Editor de ajustes generales del ejecutable final, como por ejemplo el nombre del juego, dimensiones de la cámara, la fuente por defecto a utilizar en los textos, o el mapa inicial del juego.
 \end{itemize} 
 
-Todos estos elementos tendrían la capacidad de poder ser configurados al gusto del usuario, permitiendo ser editados y eliminados cuando este desee.
+Todos estos elementos tienen la capacidad de poder ser configurados al gusto del usuario, permitiendo ser editados y eliminados cuando este desee.
 
 \medskip
 
-Además, el editor incluiría un \textit{viewport} para que el usuario pudiese ver en tiempo real el diseño final del juego, sobre el cual se podría ejecutar y probar las funcionalidades implementadas, al estilo de \textit{Unity}.
-
-\medskip
-
-Por otra parte, el editor contará con un sistema de persistencia, que permita una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todos los \textit{assets} utilizados tendrán que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
+Por otra parte, el editor cuenta con un sistema de persistencia, que permite una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todos los recursos utilizados (es decir, imágenes, sonidos, animaciones...) tienen que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
 
 \subsubsection{Modularidad y arquitectura}
-En cuanto a la estructura de la interfaz, se optó por utilizar una arquitectura típica en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas en otras ventanas, con el uso de ventanas modales que apareciesen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
+En cuanto a la estructura de la interfaz, se ha optado por utilizar una arquitectura típica en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas en otras ventanas, con el uso de ventanas modales que aparecen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
 
 \medskip
 
-Las ventanas tendrían comunicación unas con otras utilizando al \textit{proyecto}, que almacenaría toda la información referente a cada uno de los juegos que el usuario crease (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
+Las ventanas tienen comunicación unas con otras utilizando al \textit{proyecto}, que almacena toda la información referente a cada uno de los juegos que el usuario crea (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
 
 \smallskip
 
-Se tendrían también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que \baker{} sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
+Se tienen también diversos gestores, tanto de \textit{scripting}, como de elementos de entrada/salida de ficheros, como de preferencias del usuario y hasta un gestor de idiomas, que permite que \baker{} sea multilingüe\footnote{En un principio, únicamente en castellano y en inglés, pero debido al sistema implementado, es muy sencillo añadir nuevos idiomas en el caso que fuese necesario.} con una amplia escalabilidad en el caso de que se quisiesen añadir más idiomas.
 
 \subsubsection{Tecnologías utilizadas}
 
@@ -187,12 +183,8 @@ Para conseguir todos los objetivos anteriores, se investigó qué librerías se 
 
 \medskip
 
-También, al ya haber optado por el uso de Lua como lenguaje de \textit{scripting} y de definición de datos para el motor, se optó por el uso del mismo para el editor, acompañados por la anteriormente mencionada librería \texttt{sol2}.
+También, al ya haber elegido Lua como lenguaje de \textit{scripting} y de definición de datos para el motor, se ha optado por el uso del mismo para el editor, acompañados por la anteriormente mencionada librería \texttt{sol2}.
 
 \smallskip
 
-Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}, etc.). Es por eso que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos a los datos que el motor espera; esto se hará en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo, al igual que ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.
-
-\medskip
-
-Si bien es cierto que una de las técnicas más comunes en la implementación de un editor es la de utilizar el motor para el que se desarrolla como base, ya que esto evita el tener que implementar dos veces las mismas funcionalidades (principalmente en \textit{renderizado}, \textit{input} y \textit{scripting}), se decidió independizar el desarrollo del editor del motor para poder avanzar más rápidamente. Esta opción, pese a que ha supuesto una mayor carga de trabajo, ha permitido flujos de iteración en el desarrollo más cortos.
+Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}...). Es por eso que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos a los datos que el motor espera; esto se hará en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo tan fácilmente, al igual que ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.
