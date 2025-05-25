@@ -72,7 +72,8 @@
     -->
     <application android:label="RPGBaker"
                  android:allowBackup="true"
-                 android:hardwareAccelerated="true">
+                 android:hardwareAccelerated="true"
+                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
         <!-- Example of setting SDL hints from AndroidManifest.xml:
         <meta-data android:name="SDL_ENV.SDL_ANDROID_TRAP_BACK_BUTTON" android:value="0"/>
