@@ -64,7 +64,8 @@ std::vector<Vector2> MovementManager::calculatePath(const Vector2 &position, con
 
     std::vector<Vector2> directions = {{_tileWidth, 0}, {-_tileWidth, 0}, {0, _tileHeight}, {0, -_tileHeight}};
 
-    while (!openList.empty()) {
+    int iteration = 0;
+    while (!openList.empty() && iteration < 99999) {
         Vector2 current = openList.top().pos;
         openList.pop();
 
@@ -89,6 +90,8 @@ std::vector<Vector2> MovementManager::calculatePath(const Vector2 &position, con
                 cameFrom[neighbor] = current;
             }
         }
+
+        iteration++;
     }
     return path;
 }
