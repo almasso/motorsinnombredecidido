@@ -30,8 +30,10 @@ bool editor::resources::events::PlaySFXBehaviour::read(sol::table const& params)
     sol::optional<std::string> sfxHandler = params.get<sol::optional<std::string>>(sfxKey);
     if (!sfxHandler.has_value())
         return false;
-    sfxHandler.value().copy(_sfxSource, MAX_CLIP_BUFFER - 1);
-    _sfxSource[sfxHandler.value().size()] = '\0';
+    std::string sfxPath = _event->getProject()->getAssetsPath().string() + "/" + sfxHandler.value();
+    sfxPath.copy(_sfxSource, MAX_CLIP_BUFFER - 1);
+
+    _sfxSource[sfxPath.size()] = '\0';
     return true;
 }
 
@@ -47,7 +49,11 @@ bool editor::resources::events::PlaySFXBehaviour::render() {
 }
 
 bool editor::resources::events::PlaySFXBehaviour::writeParams(sol::table& params) {
-    params[sfxKey] = _sfxSource;
+    std::filesystem::path source(_sfxSource);
+    source = source.lexically_relative(_event->getProject()->getAssetsPath());
+    std::string sourcePath = source.string();
+    std::ranges::replace(sourcePath, '\\', '/');
+    params[sfxKey] = sourcePath;
     return true;
 }
 

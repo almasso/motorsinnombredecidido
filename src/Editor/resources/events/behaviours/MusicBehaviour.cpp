@@ -47,8 +47,9 @@ bool editor::resources::events::MusicBehaviour::read(sol::table const& params) {
         if (!clip.has_value())
             return false;
         _param.clip = new char[MAX_CLIP_BUFFER];
-        clip.value().copy(_param.clip, MAX_CLIP_BUFFER - 1);
-        _param.clip[clip.value().size()] = '\0';
+        std::string clipPath = _event->getProject()->getAssetsPath().string() + "/" + clip.value();
+        clipPath.copy(_param.clip, MAX_CLIP_BUFFER - 1);
+        _param.clip[clipPath.size()] = '\0';
     }
     else if (action == "volume") {
         _action = VOLUME;
@@ -136,10 +137,15 @@ bool editor::resources::events::MusicBehaviour::writeParams(sol::table& params) 
     case PAUSE:
         params[actionKey] = "pause";
         break;
-    case CHANGE:
-        params[actionKey] = "change";
-        params[clipKey] = _param.clip;
-        break;
+    case CHANGE: {
+            params[actionKey] = "change";
+            std::filesystem::path source(_param.clip);
+            source = source.lexically_relative(_event->getProject()->getAssetsPath());
+            std::string sourcePath = source.string();
+            std::ranges::replace(sourcePath, '\\', '/');
+            params[clipKey] = sourcePath;
+            break;
+        }
     case VOLUME:
         params[actionKey] = "volume";
         params[volumeKey] = _param.volume;

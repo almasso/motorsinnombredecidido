@@ -63,4 +63,5 @@ bool InteractionCondition::met() {
 InteractionCondition::~InteractionCondition() {
     _interactionArea = nullptr;
     _player = nullptr;
+    _camera = nullptr;
 }

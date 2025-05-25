@@ -15,7 +15,7 @@ private:
     Collider* _player;
     Camera* _camera;
 
-    bool clickInside(const Rect& rect, const Vector2& clickPos);
+    static bool clickInside(const Rect& rect, const Vector2& clickPos);
 public:
     InteractionCondition();
     bool init(sol::table const& params) override;
