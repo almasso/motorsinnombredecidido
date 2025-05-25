@@ -41,3 +41,7 @@ bool PlayerInput::update() {
 void PlayerInput::setActive(bool active) {
     _active = active;
 }
+
+bool PlayerInput::isActive() const {
+    return _active;
+}

@@ -1,5 +1,6 @@
 #include "TextBox.h"
 #include <Core/ComponentData.h>
+#include <Core/Scene.h>
 #include <Input/InputManager.h>
 #include <Load/ResourceHandler.h>
 #include <Render/Font.h>
@@ -9,6 +10,7 @@
 #include <Utils/Time.h>
 #include <Utils/TimeManager.h>
 #include <sol/state.hpp>
+#include <Gameplay/Movement/PlayerInput.h>
 
 void TextBox::splitText(const std::string &fullText) {
     const Font* font = ResourceHandler<Font>::Instance()->get(_text->getFont());
@@ -53,9 +55,19 @@ TextBox::TextBox(ComponentData const *data) : ComponentTemplate(data) {
 }
 
 bool TextBox::init() {
+    auto player = _scene->getEntityByHandler("Player");
+    if (!player) {
+        Error::ShowError("TextBox", "Player entity not found.");
+        return false;
+    }
+    _playerInput = player->getComponent<PlayerInput>();
+    if (!_playerInput) {
+        Error::ShowError("TextBox", "Player doesn't have PlayerInput.");
+        return false;
+    }
     _text = _entity->getComponent<Text>();
     if (!_text) {
-        Error::ShowError("","");
+        Error::ShowError("TextBox", "Text component not found,");
         return false;
     }
     _text->setText("");
@@ -67,6 +79,8 @@ bool TextBox::init() {
 bool TextBox::update() {
     _timer += Time::deltaTime;
     if (_paragraphIter < _dialog.size()) {
+        if (_playerInput->isActive())
+            _playerInput->setActive(false);
         if (_charIter < _dialog[_paragraphIter].size()) {
             float delay = _characterDelay * (InputManager::GetState().mouse_pressed ? .1f : 1);
             if (_timer >= delay) {
@@ -89,6 +103,7 @@ bool TextBox::update() {
                     _entity->setActive(false);
                     _paragraphIter = 0;
                     _dialog.clear();
+                    _playerInput->setActive(true);
                 }
             }
         }

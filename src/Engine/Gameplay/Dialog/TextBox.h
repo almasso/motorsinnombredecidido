@@ -4,6 +4,7 @@
 #include <vector>
 #include <Core/ComponentTemplate.h>
 
+class PlayerInput;
 class Text;
 
 class ComponentClass(TextBox) {
@@ -13,6 +14,7 @@ class ComponentClass(TextBox) {
         float _characterDelay {};
         float _timer {};
         size_t _charIter {}, _paragraphIter {};
+        PlayerInput* _playerInput {};
         void splitText(const std::string& fullText);
     public:
         TextBox(ComponentData const* data);

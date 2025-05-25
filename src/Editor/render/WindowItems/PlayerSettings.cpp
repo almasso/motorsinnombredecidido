@@ -8,6 +8,7 @@
 #include <io/LocalizationManager.h>
 #include <render/RenderManager.h>
 #include <resources/Sprite.h>
+#include <Utils/Vector2.h>
 
 editor::render::tabs::PlayerSettings::PlayerSettings(editor::Project* project) :
 WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.playerSettings").c_str()), _project(project) {
@@ -95,7 +96,12 @@ sol::table editor::render::tabs::PlayerSettings::buildPlayer() {
     components["LocalVariables"] = localVariables;
     components["Transform"] = sol::as_table<std::array<int,1>>({0});
     components["PlayerInput"] = sol::as_table<std::array<int,1>>({0});
-    components["Collider"] = sol::as_table<std::array<int,1>>({0});
+    sol::table colliderSize = lua.create_table();
+    colliderSize.add(16);
+    colliderSize.add(16);
+    sol::table collider = lua.create_table();
+    collider["size"] = colliderSize;
+    components["Collider"] = collider;
     return components;
 }
 

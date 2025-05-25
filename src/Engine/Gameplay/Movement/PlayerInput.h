@@ -16,6 +16,7 @@ class ComponentClass(PlayerInput) {
         bool update() override;
 
         void setActive(bool active);
+        bool isActive() const;
 };
 
 #endif //PLAYERINPUT_H
