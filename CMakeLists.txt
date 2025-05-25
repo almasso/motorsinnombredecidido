@@ -111,6 +111,26 @@ if(NOT ANDROID)
     FetchContent_MakeAvailable(DearImGUI)
     set(IMGUI_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src)
     set(IMGUI_BACKENDS_DIRS ${FETCHCONTENT_BASE_DIR}/dearimgui-src/backends)
+
+    FetchContent_Declare(
+            zlib
+            GIT_REPOSITORY https://github.com/madler/zlib
+            GIT_TAG v1.3.1
+    )
+    FetchContent_MakeAvailable(zlib)
+    if(NOT TARGET ZLIB::ZLIB)
+        add_library(ZLIB::ZLIB ALIAS zlib)
+    endif()
+    set(ZLIB_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/zlib-src)
+    set(ZLIB_INCLUDE_DIR "${zlib_SOURCE_DIR}")
+    set(ZLIB_LIBRARY ZLIB::ZLIB)
+
+    FetchContent_Declare(
+            minizip
+            GIT_REPOSITORY https://github.com/domoticz/minizip
+    )
+    FetchContent_MakeAvailable(minizip)
+    set(MINIZIP_INCLUDE_DIRS ${FETCHCONTENT_BASE_DIR}/minizip-src)
 endif()
 
 # Añadimos los subdirectorios de cada uno de nuestros proyectos
