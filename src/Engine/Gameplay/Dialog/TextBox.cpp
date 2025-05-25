@@ -67,11 +67,11 @@ bool TextBox::init() {
     }
     _text = _entity->getComponent<Text>();
     if (!_text) {
-        Error::ShowError("TextBox", "Text component not found,");
+        Error::ShowError("TextBox", "Text component not found.");
         return false;
     }
     _text->setText("");
-    _characterDelay = _data->getData<float>("wordDelay", 0.015f);
+    _characterDelay = _data->getData<float>("wordDelay", 0.01f);
 
     return true;
 }
@@ -82,7 +82,7 @@ bool TextBox::update() {
         if (_playerInput->isActive())
             _playerInput->setActive(false);
         if (_charIter < _dialog[_paragraphIter].size()) {
-            float delay = _characterDelay * (InputManager::GetState().mouse_pressed ? .1f : 1);
+            float delay = _characterDelay * (InputManager::GetState().mouse_pressed ? .5f : 1);
             if (_timer >= delay) {
                 _timer = 0.0f;
                 std::string current(1,_dialog[_paragraphIter][_charIter]);
@@ -94,7 +94,7 @@ bool TextBox::update() {
                 _charIter++;
             }
         } else {
-            if (InputManager::GetState().mouse_pressed) {
+            if (InputManager::GetState().mouse_down) {
                 _timer = 0.0f;
                 _charIter = 0;
                 _paragraphIter++;
