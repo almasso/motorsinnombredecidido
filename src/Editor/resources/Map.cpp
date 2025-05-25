@@ -304,8 +304,7 @@ void editor::resources::Map::writeChildren(sol::table &children) {
                         collisions.erase(finder);
                     }
                     child["components"] = components;
-                    std::string childKey = "tile"+std::to_string(i)+std::to_string(j)+std::to_string(k);
-                    children[childKey] = child;
+                    children.add(child);
                 }
             }
         }
