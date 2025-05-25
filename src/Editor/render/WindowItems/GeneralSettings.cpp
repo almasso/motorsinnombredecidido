@@ -316,7 +316,8 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
         _fontSize = _sliderValue;
     }
     if (_fontModified) {
-        RenderManager::GetInstance().requestFont(_project->getAssetsPath() / _font, _fontSize, _previewFont);
+        std::filesystem::path fontPath = _font.empty() ? std::filesystem::path() : _project->getAssetsPath() / _font;
+        RenderManager::GetInstance().requestFont(_font, static_cast<float>(_fontSize), _previewFont);
         _fontModified = false;
     }
     ImGui::Spacing();
