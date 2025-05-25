@@ -131,21 +131,7 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
     components["Transform"] = sol::as_table<std::array<int,1>>({0});
     camera["components"] = components;
     camera["handler"] = "Camera";
-    sol::table children = lua.create_table();
-    children["camera"] = camera;
-    player["children"] = children;
-    scene["player"] = player;
-
-    sol::table music = lua.create_table();
-    music["handler"] = "Music";
-    sol::table musicComponents = lua.create_table();
-    sol::table audioSource = lua.create_table();
-    audioSource["audio"] = "";
-    audioSource["mixer"] = "data/mixers/music.mixer.lua";
-    audioSource["loop"] = true;
-    musicComponents["AudioSource"] = audioSource;
-    music["components"] = musicComponents;
-    scene["music"] = music;
+    sol::table cameraChildren = lua.create_table();
 
     sol::table textBox = lua.create_table();
     textBox["handler"] = "TextBox";
@@ -180,7 +166,7 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
     textBoxTextBox.add(0);
     textBoxComponents["TextBox"] = textBoxTextBox;
     textBox["components"] = textBoxComponents;
-    scene["textBox"] = textBox;
+    cameraChildren["textBox"] = textBox;
 
     for (int i = 1; i < 4; i++) {
         sol::table choice = lua.create_table();
@@ -216,8 +202,25 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
         choiceRectangle["params"] = sol::as_table<std::array<int,1>>({i});
         choiceComponents["Button"] = choiceButton;
         choice["Components"] = choiceComponents;
-        scene[choiceId] = choice;
+        cameraChildren[choiceId] = choice;
     }
+
+    camera["children"] = cameraChildren;
+    sol::table children = lua.create_table();
+    children["camera"] = camera;
+    player["children"] = children;
+    scene["player"] = player;
+
+    sol::table music = lua.create_table();
+    music["handler"] = "Music";
+    sol::table musicComponents = lua.create_table();
+    sol::table audioSource = lua.create_table();
+    audioSource["audio"] = "";
+    audioSource["mixer"] = "data/mixers/music.mixer.lua";
+    audioSource["loop"] = true;
+    musicComponents["AudioSource"] = audioSource;
+    music["components"] = musicComponents;
+    scene["music"] = music;
 
     return scene;
 }
