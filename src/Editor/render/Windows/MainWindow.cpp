@@ -40,6 +40,7 @@ editor::render::windows::MainWindow::MainWindow(editor::Project *project) : Wind
                              ImGuiWindowFlags_NoScrollWithMouse |
                              ImGuiWindowFlags_NoDocking;
     _windowFlags |= flags;
+    _buildTarget = _project->getPlatform();
 }
 
 void editor::render::windows::MainWindow::beforeRender() {
@@ -49,11 +50,24 @@ void editor::render::windows::MainWindow::beforeRender() {
 
 void editor::render::windows::MainWindow::onRender() {
     ImGui::BeginChild("##mainWindowToolbar");
-    ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
-    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 2 - 30);
+    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 3);
     ImGui::BeginDisabled(_project->getMaps().empty());
+    std::string targets[] = {"Windows", "MacOS", "Linux", "Android"};
+    ImGui::SetNextItemWidth(150.0f);
+    if (ImGui::BeginCombo("##mapDropdown", _buildTarget.c_str())) {
+        for(const std::string& target : targets) {
+            bool isSelected = (_buildTarget == target);
+            if(ImGui::Selectable(target.c_str(), isSelected)) {
+                _buildTarget = target;
+            }
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::SameLine();
+    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 2 - 30);
+    ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
     if(ImGui::Button("##BuildButton", {60, 60})) {
-        build("Desktop");
+        build(_buildTarget);
     }
     ImGui::EndDisabled();
     ImVec2 pos = ImGui::GetItemRectMin();

@@ -134,7 +134,7 @@ bool editor::Project::build(const std::string &platform, const sol::table& overW
         EditorError::showError_impl(e.what(), "Project",128);
         return false;
     }
-    launchBuild();
+    if (platform == getPlatform()) launchBuild(platform);
     return true;
 }
 
@@ -437,6 +437,18 @@ std::unordered_map<std::string, sol::object>* editor::Project::getPlayerLocalVar
     return _localVariables;
 }
 
+std::string editor::Project::getPlatform() const {
+#if defined(_WIN32)
+        return "Windows";
+#elif defined(__APPLE__)
+        return "MacOS";
+#elif defined(__linux__)
+        return "Linux";
+#else
+        return "ERROR";
+#endif
+}
+
 void editor::Project::buildSprites(std::string const& platform) {
     if (!exists(getBuildPath(platform)/"data"/"sprites/"))
         create_directory(getBuildPath(platform)/"data"/"sprites/");
@@ -454,11 +466,11 @@ void editor::Project::buildAnimations(std::string const& platform) {
 }
 
 #ifdef _WIN32
-void editor::Project::launchBuild() {
+void editor::Project::launchBuild(const std::string& platform) {
     STARTUPINFO info={sizeof(info)};
     PROCESS_INFORMATION processInfo;
-    auto exeDirectory = getBuildPath("Desktop").string();
-    auto exePath = (getBuildPath("Desktop") / "Executable.exe").string();
+    auto exeDirectory = getBuildPath(platform).string();
+    auto exePath = (getBuildPath(platform) / "Executable.exe").string();
     if (CreateProcess(NULL, const_cast<LPSTR>(exePath.c_str()), NULL, NULL, TRUE, 0, NULL, exeDirectory.c_str(), &info, &processInfo)) {
         WaitForSingleObject(processInfo.hProcess, INFINITE);
         CloseHandle(processInfo.hProcess);
@@ -468,7 +480,7 @@ void editor::Project::launchBuild() {
 #else
 void editor::Project::launchBuild() {
     SDL_PropertiesID prop = SDL_CreateProperties();
-    auto exePath = (getBuildPath("Desktop") / "Executable.exe").string();
+    auto exePath = (getBuildPath(platform) / "Executable.exe").string();
     const char *args[] = { exePath.c_str(), NULL };
     SDL_SetPointerProperty(prop, SDL_PROP_PROCESS_CREATE_ARGS_POINTER, args);
     SDL_CreateProcessWithProperties(prop);

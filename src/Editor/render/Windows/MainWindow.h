@@ -28,6 +28,8 @@ namespace editor::render::windows {
     public:
         MainWindow(editor::Project* project);
     private:
+        std::string _buildTarget;
+
         editor::Project* _project;
 
         editor::render::tabs::MapEditor* _mapEditor = nullptr;
@@ -42,6 +44,8 @@ namespace editor::render::windows {
         void onRender() override;
 
         void build(const std::string &platform);
+
+        std::string getPlatform() const;
     };
 };
 

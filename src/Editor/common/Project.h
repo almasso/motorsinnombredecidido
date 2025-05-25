@@ -214,7 +214,10 @@ namespace editor {
         std::filesystem::path getBuildPath(const std::string &platform) const;
 
         void setPlayerLocalVariables(std::unordered_map<std::string, sol::object>* localVariables);
+
         std::unordered_map<std::string, sol::object>* getPlayerLocalVariables() const;
+
+        std::string getPlatform() const;
 
     private:
         std::string _name;
@@ -242,7 +245,7 @@ namespace editor {
 
         void buildSprites(std::string const& platform);
         void buildAnimations(std::string const& platform);
-        void launchBuild();
+        void launchBuild(const std::string &platform);
     };
 }
 
