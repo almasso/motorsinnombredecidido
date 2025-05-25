@@ -94,7 +94,6 @@ sol::table editor::render::tabs::PlayerSettings::buildPlayer() {
         localVariables[key] = value;
     }
     components["LocalVariables"] = localVariables;
-    components["Transform"] = sol::as_table<std::array<int,1>>({0});
     components["PlayerInput"] = sol::as_table<std::array<int,1>>({0});
     sol::table colliderSize = lua.create_table();
     colliderSize.add(16);

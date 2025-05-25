@@ -24,7 +24,7 @@ namespace editor::render::tabs {
 
         void save();
 
-        sol::table buildOverworldScene(const sol::table &playerComponents) const;
+        sol::table buildOverworldScene(sol::table &playerComponents) const;
 
         std::array<float, 3> getAudioSettings() const;
 
@@ -37,6 +37,7 @@ namespace editor::render::tabs {
         std::filesystem::path _filePath;
         std::string _gameName;
         std::string _startingMap;
+        int _startingPosition[2] = {0, 0};
         int _cameraSize[2] = { 18, 12 };
         float _textColor[4] = {0, 0, 0, 1};
         float _backgroundColor[4] = {1, 1, 1, 1};

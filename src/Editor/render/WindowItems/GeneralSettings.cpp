@@ -9,6 +9,7 @@
 #include <common/Project.h>
 #include <io/LocalizationManager.h>
 #include <render/RenderManager.h>
+#include <resources/Map.h>
 #include <resources/Sprite.h>
 #include <utils/tinyfiledialogs/tinyfiledialogs.h>
 
@@ -20,6 +21,15 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.g
     if (settings.valid()) {
         _gameName = settings["gameName"].get_or(_project->getName());
         _startingMap = settings["startingMap"].get_or(std::string());
+        sol::object startingPosition = settings["startingPosition"];
+        if (startingPosition.valid() && startingPosition.is<sol::table>()){
+            sol::table startingPositionTable = startingPosition;
+            if (startingPositionTable.size() == 2) {
+                for (std::size_t i = 0; i < 2; ++i) {
+                    _startingPosition[i] = startingPositionTable[i + 1].get_or(0);
+                }
+            }
+        }
         sol::object cameraSize = settings["cameraSize"];
         if (cameraSize.valid() && cameraSize.is<sol::table>()){
             sol::table cameraSizeTable = cameraSize;
@@ -78,6 +88,7 @@ void editor::render::tabs::GeneralSettings::save() {
     sol::table settings = io::LuaManager::GetInstance().getState().create_table();
     settings["gameName"] = _gameName;
     settings["startingMap"] = _startingMap;
+    settings["startingPosition"] = sol::as_table<std::array<int,2>>({_startingPosition[0], _startingPosition[1]});
     settings["cameraSize"] = sol::as_table<std::array<int,2>>({_cameraSize[0], _cameraSize[1]});
     settings["textColor"] = sol::as_table<std::array<float,4>>({_textColor[0], _textColor[1],_textColor[2], _textColor[3]});
     settings["backgroundColor"] = sol::as_table<std::array<float,4>>({_backgroundColor[0], _backgroundColor[1],_backgroundColor[2], _backgroundColor[3]});
@@ -102,9 +113,9 @@ uint32_t colorToHex(const float color[4]) {
     return (r << 24) | (g << 16) | (b << 8) | a;
 }
 
-sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol::table& playerComponents) const{
+sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(sol::table& playerComponents) const {
     auto& lua = io::LuaManager::GetInstance().getState();
-    auto dimensions = _project->getDimensions();
+    const auto dimensions = _project->getDimensions();
 
     sol::table scene = lua.create_table();
     sol::table manager = lua.create_table();
@@ -114,13 +125,20 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(const sol:
     movement["tileWidth"] = dimensions[0];
     movement["tileHeight"] = dimensions[1];
     components["MovementManager"] = movement;
-    overworld["startingMap"] = _startingMap == "" ? _project->getMaps().begin()->first : _startingMap;
+    overworld["startingMap"] = _startingMap.empty() ? _project->getMaps().begin()->first : _startingMap;
     components["OverworldManager"] = overworld;
     manager["handler"] = "Manager";
     manager["components"] = components;
     scene["manager"] = manager;
 
     sol::table player = lua.create_table();
+    sol::table transform = lua.create_table();
+    auto map = _project->getMap(_startingMap);
+    transform["position"] = sol::as_table<std::array<int,2>>({
+        (map->getMapX() + _startingPosition[0]) * dimensions[0],
+        (map->getMapY() + _startingPosition[1]) * dimensions[1]
+    });
+    playerComponents["Transform"] = transform;
     player["components"] = playerComponents;
     player["handler"] = "Player";
     sol::table camera = lua.create_table();
@@ -258,6 +276,20 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
             }
         }
         ImGui::EndCombo();
+    }
+    ImGui::Spacing();
+    ImGui::Spacing();
+    int playerPos[2] = {_startingPosition[0], _startingPosition[1]};
+    if (ImGui::InputInt2("##playerPos", playerPos)) {
+        resources::Map* temp = _project->getMap(_startingMap);
+        if (temp && playerPos[0] < temp->getMapWidth() && playerPos[0] >= 0) {
+            _startingPosition[0] = playerPos[0];
+            _somethingModified = true;
+        }
+        if (temp && playerPos[1] < temp->getMapHeight() && playerPos[1] >= 0) {
+            _startingPosition[1] = playerPos[1];
+            _somethingModified = true;
+        }
     }
     ImGui::Spacing();
     ImGui::Separator();
