@@ -316,8 +316,10 @@ void editor::render::tabs::MapEditor::drawToolbar() {
     ImGui::BeginChild("##dropdowns");
     {
         ImGui::SetNextItemWidth(250);
+        resources::Map* mapToDelete = nullptr;
+        std::string mapToDeleteName;
         if (ImGui::BeginCombo("##mapDropdown", _selectedMap != nullptr ? _selectedMap->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
-            for(auto it = _project->getMaps().begin(); it != _project->getMaps().end(); ++it) {
+            for(auto it = _project->getMaps().begin(); it != _project->getMaps().end();) {
                 auto map = *it;
                 bool isSelected = (map.second == _selectedMap);
                 if(ImGui::Selectable(map.second->getName().c_str(), isSelected)) {
@@ -336,16 +338,24 @@ void editor::render::tabs::MapEditor::drawToolbar() {
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                     if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
-                        resources::Map* mapTmp = map.second;
-                        it = _project->removeMap(map.second->getName());
-                        delete mapTmp;
-                        mapTmp = nullptr;
-                        _somethingModified = true;
+                        mapToDelete = map.second;
+                        mapToDeleteName = mapToDelete->getName();
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PopStyleColor();
                     ImGui::EndPopup();
                 }
+                ++it;
+            }
+            if(mapToDelete) {
+                _project->removeMap(mapToDeleteName);
+                if(_selectedMap == mapToDelete) {
+                    _selectedMap = nullptr;
+                    _selectedLayer = -1;
+                }
+                delete mapToDelete;
+                mapToDelete = nullptr;
+                _somethingModified = true;
             }
             ImGui::Separator();
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createmap").c_str())) {
@@ -407,8 +417,10 @@ void editor::render::tabs::MapEditor::drawToolbar() {
 void editor::render::tabs::MapEditor::drawTileSelector() {
     ImGui::BeginChild("##tileSelector", ImVec2(RenderManager::GetInstance().getWidth()/4, 0), true);
     {
+        resources::Tileset* tilesetToDelete = nullptr;
+        std::string tilesetToDeleteName;
         if (ImGui::BeginCombo("##tilesetDropdown", _selectedTileset != nullptr ? _selectedTileset->getName().c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.tilesetselector").c_str())) {
-            for(auto it = _project->getTilesets().begin(); it != _project->getTilesets().end(); ++it) {
+            for(auto it = _project->getTilesets().begin(); it != _project->getTilesets().end();) {
                 auto tileset = *it;
                 bool isSelected = (_selectedTileset == tileset.second);
                 if(ImGui::Selectable(tileset.second->getName().c_str(), isSelected)) {
@@ -426,16 +438,26 @@ void editor::render::tabs::MapEditor::drawTileSelector() {
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                     if (ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.delete").c_str())) {
-                        resources::Tileset* tilesetTmp = tileset.second;
-                        it = _project->removeTileset(tileset.second->getName());
-                        delete tilesetTmp;
-                        tilesetTmp = nullptr;
-                        _somethingModified = true;
+                        tilesetToDelete = tileset.second;
+                        tilesetToDeleteName = tilesetToDelete->getName();
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PopStyleColor();
                     ImGui::EndPopup();
                 }
+
+                ++it;
+            }
+
+            if(tilesetToDelete) {
+                _project->removeTileset(tilesetToDeleteName);
+                if(_selectedTileset == tilesetToDelete) {
+                    _selectedTileset = nullptr;
+                    _selectedTile = -1;
+                }
+                delete tilesetToDelete;
+                tilesetToDelete = nullptr;
+                _somethingModified = true;
             }
             ImGui::Separator();
             if (ImGui::Selectable(io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.createtileset").c_str())) {
