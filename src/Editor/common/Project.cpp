@@ -317,8 +317,11 @@ bool editor::Project::buildAPK() const {
 
     std::string key = (getBuildPath("Android") / "apk-sign-key.jks").string();
     std::string apkSigned = (getBuildPath("Android") / "app-release-signed.apk").string();
-    std::string apkSigner = std::filesystem::temp_directory_path().parent_path().parent_path().string() + "\\Android\\Sdk\\build-tools\\35.0.0\\apksigner.bat";
-    std::string cmd = apkSigner + " sign "
+    if (_androidApkSignerPath.empty()) {
+        showError("No hay asignado ningun path para el apk signer.");
+        return false;
+    }
+    std::string cmd = _androidApkSignerPath.string() + " sign "
     "--ks \"" + key + "\" "
     "--ks-pass pass:" + "123456" + " "
     "--ks-key-alias \"" + "myalias" + "\" "
@@ -326,8 +329,7 @@ bool editor::Project::buildAPK() const {
     "\"" + apk + "\"";
 
     if (system(cmd.c_str()) != 0) {
-        EditorError::showError_impl("Error al firmar el APK, revisa el APK signer path y verifica la instalacion del SDK de Android",
-            "Project",328);
+        showError("Error al firmar el APK, revisa el APK signer path y verifica la instalacion del SDK de Android");
         return false;
     }
 
@@ -496,6 +498,10 @@ std::string editor::Project::getPlatform() const {
 #else
         return "ERROR";
 #endif
+}
+
+void editor::Project::setAndroidApkSignerPath(std::filesystem::path const& path) {
+    _androidApkSignerPath = path;
 }
 
 void editor::Project::buildSprites(std::string const& platform) {

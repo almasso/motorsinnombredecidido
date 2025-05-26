@@ -219,6 +219,8 @@ namespace editor {
 
         std::string getPlatform() const;
 
+        void setAndroidApkSignerPath(std::filesystem::path const& path);
+
     private:
         std::string _name;
         std::filesystem::path _projectPath;
@@ -226,6 +228,7 @@ namespace editor {
         std::tm _lastModified;
         bool _setToDelete = false;
         bool _found = false;
+        std::filesystem::path _androidApkSignerPath;
 
         std::unordered_map<std::string, editor::resources::Tileset*> _tilesets;
         std::unordered_map<std::string, editor::resources::Sprite*> _sprites;

@@ -49,9 +49,11 @@ namespace editor::render::tabs {
         float _masterVolume = 1.0f;
         float _musicVolume = 0.5f;
         float _sfxVolume = 1.0f;
+        std::filesystem::path _androidApkSignerPath;
         void onRender() override;
         void beforeRender() override;
         void drawSettings();
+        void drawApkSignerPathSelector();
     };
 };
 

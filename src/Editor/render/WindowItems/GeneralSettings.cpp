@@ -15,7 +15,8 @@
 
 
 editor::render::tabs::GeneralSettings::GeneralSettings(editor::Project* project) :
-WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings").c_str()), _project(project) {
+    WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings").c_str()),
+    _project(project) {
     _filePath = _project->getPath() / "projectfiles" / "settings" / "generalSettings.lua";
     sol::table settings = io::LuaManager::GetInstance().getTable(_filePath.string(), true);
     if (settings.valid()) {
@@ -64,6 +65,23 @@ WindowItem(io::LocalizationManager::GetInstance().getString("window.mainwindow.g
         _masterVolume = settings["masterVolume"].get_or(1.0f);
         _musicVolume = settings["musicVolume"].get_or(0.5f);
         _sfxVolume = settings["sfxVolume"].get_or(1.0f);
+
+#ifdef _WIN32
+        std::string sdkContainerDir = getenv("LOCALAPPDATA");
+        std::string signerFileName = "apksigner.bat";
+#elifdef __APPLE__
+        std::string sdkContainerDir = "~/Libary";
+        std::string signerFileName = "apksigner";
+#elifdef  __linux__
+        std::string sdkContainerDir = "~";
+        std::string signerFileName = "apksigner";
+#endif
+        _androidApkSignerPath = sdkContainerDir + "/Android/Sdk/build-tools";
+        std::filesystem::directory_iterator dir(_androidApkSignerPath);
+        if (dir == std::filesystem::directory_iterator()) _androidApkSignerPath = std::filesystem::path();
+        else _androidApkSignerPath = dir->path() / signerFileName;
+        _androidApkSignerPath.make_preferred();
+        _project->setAndroidApkSignerPath(_androidApkSignerPath);
     }
 }
 
@@ -390,5 +408,47 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     if(ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.sfxVolume")).c_str(),
         &_sfxVolume, 0, 1)) {_somethingModified = true;}
     ImGui::Spacing();
+    drawApkSignerPathSelector();
     ImGui::EndChild();
+}
+#define MAX_SIGNER_BUFFER 1024
+void editor::render::tabs::GeneralSettings::drawApkSignerPathSelector() {
+    char* buffer = new char[MAX_SIGNER_BUFFER];
+    bool assigned = false;
+    if(ImGui::Button(io::LocalizationManager::GetInstance().getString("action.search").c_str())) {
+        const char* fileExtension[] = {"*.bat"};
+        const char* route = tinyfd_openFileDialog(
+                io::LocalizationManager::GetInstance().getString("action.selectapksigner").c_str(),
+                (_androidApkSignerPath).string().c_str(),
+                1,
+                fileExtension,
+                nullptr,
+                0
+        );
+        if(route != nullptr) {
+            assigned = true;
+            std::string fR(std::filesystem::path(route).lexically_normal().string());
+            strncpy(buffer, fR.c_str(), MAX_SIGNER_BUFFER - 1);
+            buffer[MAX_SIGNER_BUFFER - 1] = '\0';
+            _somethingModified = true;
+        }
+        else {
+            _androidApkSignerPath.string().copy(buffer, MAX_SIGNER_BUFFER - 1);
+            buffer[_androidApkSignerPath.string().size()] = '\0';
+        }
+    }
+    else {
+        _androidApkSignerPath.string().copy(buffer, MAX_SIGNER_BUFFER - 1);
+        buffer[_androidApkSignerPath.string().size()] = '\0';
+    }
+    ImGui::SameLine();
+    if(ImGui::InputText(io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.apkSignerPath").c_str(),
+                     buffer, MAX_SIGNER_BUFFER - 1, ImGuiInputTextFlags_EnterReturnsTrue)) {
+        _somethingModified = true;
+    }
+    if (assigned) {
+        _androidApkSignerPath = buffer;
+    }
+    delete[] buffer;
+    _project->setAndroidApkSignerPath(_androidApkSignerPath);
 }
