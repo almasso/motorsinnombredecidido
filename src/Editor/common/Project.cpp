@@ -317,7 +317,7 @@ bool editor::Project::buildAPK() const {
 
     std::string key = (getBuildPath("Android") / "apk-sign-key.jks").string();
     std::string apkSigned = (getBuildPath("Android") / "app-release-signed.apk").string();
-    std::string apkSigner = "C:\\Users\\Usuario\\AppData\\Local\\Android\\Sdk\\build-tools\\35.0.0\\apksigner.bat";
+    std::string apkSigner = std::filesystem::temp_directory_path().parent_path().parent_path().string() + "\\Android\\Sdk\\build-tools\\35.0.0\\apksigner.bat";
     std::string cmd = apkSigner + " sign "
     "--ks \"" + key + "\" "
     "--ks-pass pass:" + "123456" + " "
