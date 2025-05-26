@@ -30,7 +30,14 @@ bool editor::resources::events::DialogueBehaviour::read(sol::table const& params
 }
 
 bool editor::resources::events::DialogueBehaviour::writeParamsToEngine(std::ostream& behaviour, EventBuildDependencies& dependencies, Object const* container) {
-    behaviour << "\"" << _text << "\"";
+    std::string buildText = _text;
+    std::string from = "\n";
+    std::string to = "\\n";
+    for(std::size_t pos = buildText.find(from); pos != std::string::npos; pos = buildText.find(from, pos)) {
+        buildText.replace(pos, from.size(), to);
+        pos += to.size();
+    }
+    behaviour << "\"" << buildText << "\"";
     return true;
 }
 

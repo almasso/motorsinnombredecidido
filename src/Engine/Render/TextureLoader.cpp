@@ -55,6 +55,7 @@ void TextureLoader::ResizeTexture(SDL_Texture*& texture, int width, int height, 
         Error::ShowError("Error al crear textura vacía", SDL_GetError());
         return;
     }
+    SDL_SetTextureScaleMode(newTexture, SDL_SCALEMODE_NEAREST);
     SDL_SetRenderTarget(_renderer, newTexture);
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
     SDL_RenderClear(_renderer);
