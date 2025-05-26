@@ -350,7 +350,7 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     }
     if (_fontModified) {
         std::filesystem::path fontPath = _font.empty() ? std::filesystem::path() : _project->getAssetsPath() / _font;
-        RenderManager::GetInstance().requestFont(_font, static_cast<float>(_fontSize), _previewFont);
+        RenderManager::GetInstance().requestFont(fontPath, static_cast<float>(_fontSize), _previewFont);
         _fontModified = false;
     }
     ImGui::Spacing();
