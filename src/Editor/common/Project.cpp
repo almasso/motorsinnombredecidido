@@ -611,7 +611,7 @@ void editor::Project::launchBuild(const std::string& platform) {
     STARTUPINFO info={sizeof(info)};
     PROCESS_INFORMATION processInfo;
     auto exeDirectory = getBuildPath(platform).string();
-    auto exePath = (getBuildPath(platform) / (_gameName+".exe")).string();
+    auto exePath = (getBuildPath(platform) / ("Executable.exe")).string();
     if (CreateProcess(NULL, const_cast<LPSTR>(exePath.c_str()), NULL, NULL, TRUE, 0, NULL, exeDirectory.c_str(), &info, &processInfo)) {
         WaitForSingleObject(processInfo.hProcess, INFINITE);
         CloseHandle(processInfo.hProcess);
