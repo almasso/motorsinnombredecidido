@@ -22,3 +22,9 @@ target_include_directories(Executable PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/s
 set_target_properties(Executable PROPERTIES
         OUTPUT_NAME "Executable$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>"
 )
+
+if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(Executable PROPERTIES WIN32_EXECUTABLE TRUE)
+elseif(APPLE AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(Executable PROPERTIES MACOSX_BUNDLE TRUE)
+endif()

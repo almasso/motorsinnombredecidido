@@ -18,3 +18,9 @@ target_include_directories(Editor PRIVATE ${SDL3_INCLUDE_DIRS} ${ROOT_DIR}/src/E
 set_target_properties(Editor PROPERTIES
         OUTPUT_NAME "Editor$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>"
 )
+
+if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(Editor PROPERTIES WIN32_EXECUTABLE TRUE)
+elseif(APPLE AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(Editor PROPERTIES MACOSX_BUNDLE TRUE)
+endif()
