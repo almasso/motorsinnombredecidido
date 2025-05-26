@@ -1,6 +1,9 @@
 \chapter{Planteamiento del proyecto}
 \label{cap:planteamiento}
 
+\chapterquote{Una buena idea no es aquella que resuelve un solo problema, sino la que puede resolver varios problemas a la vez.}{Shigeru Miyamoto}
+
+
 \begin{resumen}
 En este capítulo se tratarán los objetivos principales del proyecto, así como las decisiones tomadas en cuanto a diseño del motor y del editor.
 \end{resumen}
@@ -18,7 +21,7 @@ El usuario podrá elegir la plataforma para la cual se va a generar el ejecutabl
 
 \medskip
 
-Por otra parte, se espera que el editor pueda generar diversos proyectos (es decir, distintos juegos), y sea capaz de guardar el estado de un proyecto y recuperarlo cuando el usuario desee, sin que se hayan perdido los cambios que se hayan realizado. Y, también, debe poder exportar proyectos, así como importarlos incluyendo aquellos que otros usuarios puedan haber diseñado en otras plataformas o sistemas sin mayor dificultad.
+Por otra parte, se espera que el editor pueda usarse para diversos proyectos (es decir, distintos juegos), y sea capaz de guardar el estado de un proyecto y recuperarlo cuando el usuario desee, sin que se hayan perdido los cambios que se hayan realizado. Y, también, debe poder exportar proyectos, así como importarlos incluyendo aquellos que otros usuarios puedan haber diseñado en otras plataformas o sistemas sin mayor dificultad.
 
 \medskip
 
@@ -49,7 +52,7 @@ Dentro de \textit{Android Studio}, se tiene que añadir también el módulo de N
 El resto de decisiones son propias de cada una de las partes de \baker{} y se detallan a continuación.
 
 \subsection{Diseño del motor}
-\subsubsection{Base con el sistema entidad-componente}
+\subsubsection{Base con el sistema entidad/componente}
 El objetivo del motor es poder ejecutar juegos RPG, por ello deberá implementar sus sistemas y permitir su uso a alto nivel. Sin embargo, aún teniendo la separación entre motor y \textit{gameplay} de un motor específico en este alto nivel, a bajo nivel estos sistemas estarán construidos alrededor de estructuras modulares propias de motores generalistas.
 
 \medskip  
@@ -58,11 +61,11 @@ La base del motor se estructurará atendiendo a un patrón EC (entidad/component
 
 \medskip  
 
-En este bucle de juego es en el que se actualizarán los elementos de cada juego. Estos elementos están organizados según una jerarquía. La primera pieza son las escenas. Cada escena se define como un conjunto de entidades. A su vez, cada una de estas entidades es quien representa cualquier elemento del juego: un personaje, un obstáculo, un cuadro de texto... Para definir cuál será el comportamiento de cada una de las entidades estas contienen un conjunto de componentes. Los componentes encapsulan funcionalidades específicas, se pueden crear de múltiples tipos permitiendo una gran flexibilidad a la hora de marcar el funcionamiento de cada entidad. Gracias a esta estructura se podrán implementar una amplia variedad de mecánicas mediante la creación de distintos componentes.  
+En este bucle de juego es en el que se actualizarán los elementos de cada juego. Estos elementos están organizados según una jerarquía. La primera pieza son las escenas. Cada escena se define como un conjunto de entidades. A su vez, cada una de estas entidades es quien representa cualquier elemento del juego: un personaje, un obstáculo, un cuadro de texto\ldots Para definir cuál será el comportamiento de cada una de las entidades estas contienen un conjunto de componentes. Los componentes encapsulan funcionalidades específicas, se pueden crear de múltiples tipos permitiendo una gran flexibilidad a la hora de marcar el funcionamiento de cada entidad. Gracias a esta estructura se podrán implementar una amplia variedad de mecánicas mediante la creación de distintos componentes.  
 
 \medskip
 
-Una vez con esta estructura montada, para funcionar necesita conocer qué escenas, entidades y componentes debe utilizar. Para este propósito se crea un sistema de gestión de recursos. Definimos recurso, o \textit{asset}, como todo aquel elemento externo al código del programa que este usará para obtener el comportamiento deseado, estos pueden ser por ejemplo imágenes, audios, fuentes de texto... La forma en la que este sistema se conecta con el anterior es a través de estos recursos. Cada una de las escenas se definirá en un fichero que el motor interpretará como un recurso con el que crearlas dentro del programa. De esta forma el motor no deberá conocer de antemano estas escenas y su contenido permitiendo un uso mucho más ligero.
+Una vez con esta estructura montada, para funcionar necesita conocer qué escenas, entidades y componentes debe utilizar. Para este propósito se crea un sistema de gestión de recursos. Definimos recurso, o \textit{asset}, como todo aquel elemento externo al código del programa que este usará para obtener el comportamiento deseado, estos pueden ser por ejemplo imágenes, audios, fuentes de texto\ldots La forma en la que este sistema se conecta con el anterior es a través de estos recursos. Cada una de las escenas se definirá en un fichero que el motor interpretará como un recurso con el que crearlas dentro del programa. De esta forma el motor no deberá conocer de antemano estas escenas y su contenido permitiendo un uso mucho más ligero.
 
 \smallskip
 
@@ -113,12 +116,12 @@ Las decisiones tomadas se registrarán, lo que permitirá diseñar desde el edit
 
 Por último, se desarrollará un componente destinado a facilitar el diseño de la lógica específica del juego mediante comandos sencillos: el gestor de eventos. Este componente constituirá el núcleo del sistema de interacción y comportamiento en el mundo del juego.
 
-\subsubsection{Sistema de eventos}
-Uno de los objetivos principales del motor es ofrecer la posibilidad de crear un RPG sin necesidad de conocimientos de programación. Para ello, se ha diseñado un sistema de eventos: una estructura que permite controlar la lógica del juego mediante instrucciones de alto nivel.
+\subsubsection{Sistema de gestión de eventos}
+Uno de los objetivos principales del motor es ofrecer la posibilidad de crear un RPG sin necesidad de conocimientos de programación. Para ello, se ha diseñado un sistema de creación y gestión de eventos: una estructura que permite controlar la lógica del juego mediante instrucciones de alto nivel.
 
 \medskip
 
-La idea fundamental es sencilla: gracias al componente de gestión de eventos, una entidad podrá contener un conjunto de eventos. Dentro del motor se define un evento como una combinación de una condición y una serie de comportamientos.
+La idea fundamental es sencilla: gracias al componente de gestión de eventos, una entidad podrá contener un conjunto de \comillas{manejadores} de eventos. Dentro del motor se define un evento como una combinación de una condición y una serie de comportamientos.
 
 \medskip
 
@@ -164,14 +167,14 @@ Todos estos elementos tienen la capacidad de poder ser configurados al gusto del
 
 \medskip
 
-Por otra parte, el editor cuenta con un sistema de persistencia, que permite una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todos los recursos utilizados (es decir, imágenes, sonidos, animaciones...) tienen que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
+Por otra parte, el editor cuenta con un sistema de persistencia, que permite una carga y guardado de los \textit{proyectos}, es decir, la representación de un juego en el editor. Todos los recursos utilizados (es decir, imágenes, sonidos, animaciones\ldots) tienen que estar referenciados en archivos de configuración del \textit{proyecto}, y el guardado actualizará estos archivos de configuración.
 
-\subsubsection{Modularidad y arquitectura}
-En cuanto a la estructura de la interfaz, se ha optado por utilizar una arquitectura típica en el desarrollo de \textit{software} no relacionado con videojuegos, basado en ventanas (o subventanas) anidadas en otras ventanas, con el uso de ventanas modales que aparecen sobre estas. Esta estructura permite una escalabilidad del proyecto mucho más sencilla en caso de futuras expansiones y una mayor modularidad con cada uno de los componentes que se quisiese integrar.
+\subsubsection{Modularidad y organización de la interfaz}
+La interfaz de \baker se ha diseñado siguiendo principios de modularidad y escalabilidad, inspirados en enfoques comunes en el desarrollo de interfaces gráficas generales. La estructura se basa en una disposición jerárquica de ventanas y subventanas, con el uso de ventanas modales para tareas específicas que requieren de la atención del usuario. Este enfoque permite una integración ordenada de nuevos componentes, facilitando la evolución y mantenimiento del editor a medida que crecen sus funcionalidades.
 
 \medskip
 
-Las ventanas tienen comunicación unas con otras utilizando al \textit{proyecto}, que almacena toda la información referente a cada uno de los juegos que el usuario crea (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
+Las distintas ventanas tienen comunicación unas con otras utilizando al objeto \textit{proyecto}, que almacena toda la información referente a cada uno de los juegos que el usuario crea (por ejemplo, referencias a los \textit{tilesets}, \textit{sprites}, animaciones o mapas creados).
 
 \smallskip
 
@@ -187,4 +190,4 @@ También, al ya haber elegido Lua como lenguaje de \textit{scripting} y de defin
 
 \smallskip
 
-Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}...). Es por eso que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos a los datos que el motor espera; esto se hará en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo tan fácilmente, al igual que ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.
+Los archivos de configuración del proyecto difieren de los que el motor espera recibir, ya que muchas veces el editor espera recibir más datos de los que el motor necesita (por ejemplo, rutas específicas de \textit{assets}, guardado de \textit{tilesets}\ldots). Es por eso que el editor se tiene que encargar de \comillas{traducir} estos ficheros de definición de datos a los datos que el motor espera; esto se hará en el tiempo de generación del ejecutable final. Esta decisión se ha tomado para que, si no se dispone de los ficheros de configuración del \textit{proyecto}, un usuario ajeno al diseño del juego sea incapaz de poder modificarlo tan fácilmente, al igual que ocurre en la gran mayoría de motores\footnote{Esto es debido a que, en muchos casos, se quiere que el jugador final evite poder hacer modificaciones al juego si no dispone del código original de este, evitando posibles casos de piratería o distribución no autorizada.}.

@@ -1,5 +1,12 @@
-\chapter{Motor}
+\chapter{Motor de \baker}
 \label{cap:motor}
+
+\chapterquote{Quiero crear una colección de juegos a lo largo de mi carrera, para que cuando esté en mi lecho de muerte pueda mirar atrás y ver que creé todas estas cosas maravillosas que le dieron alegría a la gente.}{Eric Barone}
+
+
+\begin{resumen}
+En este capítulo se explicará, de manera resumida, la implementación del motor de \baker{} junto con algunos sistemas que lo componen.
+\end{resumen}
 
 El desarrollo del motor se fundamenta en 4 capas, cada una con distintos sistemas y utilidades. 
 
@@ -141,7 +148,7 @@ Con esto, a partir de un objeto \texttt{ComponentData}, el \texttt{SceneManager}
   				\operation{+ get(string) : ResourceType}
   			\end{class}
 
-  			\begin{class}[text width=6.5cm]{ResourceMemoryManager}{7,-5}
+  			\begin{class}[text width=6cm]{ResourceMemoryManager}{7,-5}
   				\attribute{- resources : list<Resource>}
   				\attribute{- maxSize : int}
   				\attribute{- currentSize : int}
@@ -177,7 +184,7 @@ Además, el \texttt{RenderManager} gestiona la inicialización y el cierre de lo
 
 \medskip
 
-El resto de la funcionalidad de vídeo se concentra en los componentes de \textit{render} (\texttt{RenderComponent}) y en los recursos que utilizan. Implementa el método \texttt{Render(RenderManager*)} en el que realiza las llamadas a los métodos de \textit{renderizado} necesarios. Todos dependen de un \texttt{Transform} que indica posición, rotación y escala, y especifican su capa para organizar el orden de dibujo. Los \texttt{RenderComponent} se registran en la escena en \texttt{OnEnable} y se desregistran en \texttt{OnDisable}, con lo que la escena controla qué componentes están activos en cada momento.  
+El resto de la funcionalidad de vídeo se concentra en los componentes de \textit{render} (\texttt{RenderComponent}) y en los recursos que utilizan. Implementa el método \texttt{Render()} en el que realiza las llamadas a los métodos de \textit{renderizado} necesarios. Todos dependen de un \texttt{Transform} que indica posición, rotación y escala, y especifican su capa para organizar el orden de dibujo. Los \texttt{RenderComponent} se registran en la escena en \texttt{OnEnable} y se desregistran en \texttt{OnDisable}, con lo que la escena controla qué componentes están activos en cada momento.  
 
 \medskip
 
@@ -223,7 +230,7 @@ Este es el sistema que se encarga de controlar la reproducción de sonidos para 
 	\item \texttt{AudioMixer} simula una simplificación de cómo funciona un mezclador de audio. Puede recibir múltiples entradas de audio y ofrece una salida. Esto significa que, a un \texttt{AudioMixer}, se le pueden conectar tanto múltiples \texttt{AudioClip} como otros \texttt{AudioMixer}. Permite modificar el volumen de reproducción de todos sus elementos conectados. Esto es así para poder permitir un control más preciso de distintos tipos de sonidos. En los videojuegos es típico permitir al jugador controlar tanto el volumen general como el de la música o los efectos de sonido, por ejemplo. De esta manera se pueden estructurar en forma de árbol las distintas salidas de audio para ofrecer esta funcionalidad, como se ejemplifica en la figura \ref{fig:audiomixers}. Con esto y con una clase \texttt{AudioManager}, encargada de gestionar el dispositivo de salida y las conexiones entre los \texttt{AudioMixer}, se completa la implementación del componente \texttt{AudioSource}.
 \end{itemize}
 
-\figura{Vectorial/audiomixers}{width=0.7\textwidth}{fig:audiomixers}{Representación de un ejemplo de las conexiones de los elementos del sistema de audio del motor.}
+\figura{Vectorial/audiomixers}{width=\textwidth}{fig:audiomixers}{Representación de un ejemplo de las conexiones de los elementos del sistema de audio del motor.}
 
 \subsection{Colisiones}
 En lo que refiere a detección de colisiones no se busca que el sistema sea especialmente complejo. Los videojuegos que se ofrecerán crear con el motor no necesitan más que comprobaciones sencillas obtenidas a partir de intersecciones entre rectángulos. Para hacer esto el sistema de colisiones consta de dos elementos: 
@@ -277,7 +284,46 @@ Un evento es una estructura que consta de una condición y una secuencia de acci
 
 Además de esto los eventos también ofrecen una interfaz que permite pausar, reanudar o detener su ejecución y cambiar cuál será el próximo comportamiento en actuar. Esta última funcionalidad permite una gran flexibilidad en la posible lógica de estos eventos. A través de este método \texttt{jump(index)} y el uso de condiciones se puede simular en la ejecución de los comportamientos el funcionamiento de instrucciones de salto en una CPU. Se explicará más al respecto al hablar en profundidad de los comportamientos. 
 
-\figura{Vectorial/eventosmotor}{width=0.7\textwidth}{fig:eventosmotor}{Esquema de la estructura de un evento del motor.}
+%\figura{Vectorial/eventosmotor}{width=0.7\textwidth}{fig:eventosmotor}{Esquema de la estructura de un evento del motor.}
+
+\begin{figure}[t]
+	\centering
+		\begin{tikzpicture}[every node/.style={font=\small}]
+			\begin{class}[text width=5cm]{Event}{3,0}
+				\attribute{- condition : EventCondition}
+				\attribute{- behaviours : vector<EventBehaviour>}
+				\operation{+ update() : bool}
+				\operation{+ start() : void}
+				\operation{+ resume() : void}
+				\operation{+ pause() : void}
+				\operation{+ stop() : void}
+				\operation{+ jump(int) : void}
+			\end{class}
+	
+  			\begin{class}[text width=3cm]{EventCondition}{-1,-7}
+  				\attribute{- scene : Scene}
+  				\attribute{- entity : Entity}
+  				\attribute{- event : Event}
+  				\operation{+ met() : bool}
+  			\end{class}
+
+  			\begin{class}[text width=4cm]{EventBehaviour}{7,-7}
+  				\attribute{- manager : SceneManager}
+  				\attribute{- scene : Scene}
+  				\attribute{- entity : Entity}
+  				\attribute{- event : Event}
+  				\operation{+ init() : bool}
+  				\operation{+ onStart() : bool}
+  				\operation{+ act() : bool}
+  				\operation{+ done() : bool}
+  			\end{class}
+  
+  			\composition{Event}{}{}{EventCondition}
+  			\composition{Event}{}{}{EventBehaviour}
+		\end{tikzpicture}
+		\caption{Esquema de la estructura de un evento del motor.} 
+		\label{fig:eventosmotor}
+\end{figure}
 
 \subsection{Condiciones}
 Las condiciones, \texttt{EventCondition}, se encargan de determinar si ciertos elementos del juego están en algún estado concreto. A través de la función virtual \texttt{met()}, definiendo nuevas clases que hereden de esta, la comprobación de cada condición podrá tener definiciones distintas. Cada evento tiene una de estas condiciones asociadas y se iniciará en cuanto esta se cumpla. 
@@ -307,7 +353,7 @@ Los comportamientos tienen dos comprobaciones de compleción distintas: \texttt{
 
 \medskip
 
-Hay ciertos comportamientos que permiten alterar el flujo de estos dentro de un evento. \texttt{WaitForBehaviour} detiene este flujo hasta que se cumpla una \texttt{EventCondition} concreta. Combinándolo con la condición \texttt{BehaviourEndedCondition}, que comprueba si la acción lanzada por un comportamiento concreto se ha completado, se puede obtener el resultado recién mencionado, por ejemplo. Hay otros dos comportamientos que modifican el flujo de ejecución de un evento: \texttt{JumpBehaviour} y \texttt{JumpIfBehaviour}. Estos simulan el comportamiento de una instrucción de salto en una CPU, es decir, establecen cuál es el siguiente comportamiento desde el que se seguirá ejecutando la lista, independientemente de su posición en esta. La diferencia entre estos dos es que el primero siempre hará este salto, mientras que el segundo solo lo hará si se cumple una \texttt{EventCondition}. Gracias a estos se puede conseguir que ciertos comportamientos se ejecuten, no lo hagan o lo vuelvan a hacer según el estado del juego.
+Hay ciertos comportamientos que permiten alterar el flujo de estos dentro de un evento. \texttt{WaitForBehaviour} detiene este flujo hasta que se cumpla una condición concreta. Combinándolo con la condición \texttt{BehaviourEndedCondition}, que comprueba si la acción lanzada por un comportamiento concreto se ha completado, se puede obtener el resultado recién mencionado, por ejemplo. Hay otros dos comportamientos que modifican el flujo de ejecución de un evento: \texttt{JumpBehaviour} y \texttt{JumpIfBehaviour}. Estos simulan el comportamiento de una instrucción de salto en una CPU, es decir, establecen cuál es el siguiente comportamiento desde el que se seguirá ejecutando la lista, independientemente de su posición en esta. La diferencia entre estos dos es que el primero siempre hará este salto, mientras que el segundo solo lo hará si se cumple una \texttt{EventCondition}. Gracias a estos se puede conseguir que ciertos comportamientos se ejecuten, no lo hagan o lo vuelvan a hacer según el estado del juego.
 
 \smallskip
 
