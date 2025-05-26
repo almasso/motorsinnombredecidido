@@ -1,4 +1,56 @@
-\chapter{Título del Apéndice A}
+\chapter{Guía de pruebas de usuario}
 \label{Appendix:Key1}
 
-Los apéndices son secciones al final del documento en las que se agrega texto con el objetivo de ampliar los contenidos del documento principal.
+\textbf{Tutorial}:
+
+\begin{enumerate}
+	\item \textit{Crear un proyecto}: lo primero que tendrás que hacer es crear un proyecto. Haz clic en \comillas{Nuevo proyecto}. Dale un nombre, una localización, acepta y selecciónalo.
+
+	\figuraH{Vectorial/Pruebas/crearproyecto}{width=0.7\textwidth}
+	
+	\item \textit{Crear un mapa}: una vez abierto el proyecto estarás en la pestaña de edición de mapas. Aquí es donde establecerás el aspecto y comportamiento de cada zona. Lo primero que queremos es poder dibujar el escenario, por lo que necesitaremos un \textit{tileset}. En la parte izquierda de la ventana tienes el selector de \textit{tilesets}; abre el desplegable y selecciona \comillas{Crear un nuevo tileset}. Se desplegará una nueva ventana en la que podrás escoger el nombre de tu \textit{tileset}, qué imagen se usará y otras configuraciones. Una vez creado, lo podrás seleccionar.
+	
+	\figuraH{Vectorial/Pruebas/seleccionartileset}{width=0.7\textwidth}
+	
+	¡Ya tienes tu paleta! Ahora, vas a intentar conseguir un lienzo: crea un nuevo mapa. En la zona central superior de la ventana está el desplegable de selección de mapa; igual que con el de \textit{tileset}, despliégalo y crea un nuevo mapa. Podrás definir su nombre, su tamaño y su cantidad de capas.
+	
+	\figuraH{Vectorial/Pruebas/seleccionarmapa}{width=0.7\textwidth}
+	
+	Una vez que tengas el \textit{tileset} y el mapa creados, ¡es la hora de dibujar! Selecciona tu \textit{tileset} y tu mapa, escoge qué casilla del \textit{tileset} quieres usar y empieza a dibujar el mapa. Si ejecutas ahora el juego podrás ver una aplicación que muestra tu mapa.
+	
+	\figuraH{Vectorial/Pruebas/dibujar}{width=0.7\textwidth}
+	
+	\item \textit{Colisiones}: a continuación, vamos a agregar las colisiones a nuestro mapa. Para ello puedes utilizar el botón de \comillas{Mostrar colisiones}.
+	
+	\figuraH{Vectorial/Pruebas/colisiones}{width=0.7\textwidth}
+		
+	Una vez dentro de este modo, podrás modificar las colisiones del \textit{tileset} o del propio mapa. Cada vez que añadas un \textit{tile}, este combinará sus colisiones con las del resto de \textit{tiles} de esa casilla en el mapa, de forma que con que únicamente uno de ellos no permita el paso se añadirá un bloqueo en esa casilla. Si modificas directamente el valor de colisión de una casilla del mapa esto sobreescribirá esa combinación de las colisiones de los \textit{tiles}. Con esto podrás generar entornos más dinámicos y controlar las zonas por las que quieres que pueda avanzar el jugador.
+	
+	\figuraH{Vectorial/Pruebas/colisionesmapa}{width=0.7\textwidth}
+	
+	\item \textit{Establece tu personaje principal}: arriba podrás ver una pestaña en la que pone \comillas{Jugador}. Si la seleccionas cambiará la ventana. Aquí podrás escoger el aspecto del personaje. Una vez establecido podrás volver a probar la aplicación con tu personaje moviéndose en el mapa.
+	
+	\figuraH{Vectorial/Pruebas/jugador}{width=0.7\textwidth}
+	
+	\item \textit{¡Dale vida a tu mapa! Crea objetos}: si vuelves a la pestaña del mapa, podrás ver en la parte superior el siguiente icono:
+	
+	\figuraH{Vectorial/Pruebas/objetos}{width=0.7\textwidth}
+	
+	Si lo seleccionas, podrás ver que una casilla del mapa resalta en verde. Escoge la que quieras y clica el nuevo botón \comillas{Crear objeto} que hay ahora en la parte derecha de la ventana. Ahora, en esa misma zona, podrás editar tu objeto, cambiarle la imagen y la posición. Si vuelves a probar tu aplicación, verás que ahí está; pero no hace mucho, porque para eso tendremos que añadirle eventos.
+	
+	\figuraH{Vectorial/Pruebas/editorobj}{width=0.7\textwidth}
+	
+	\item \textit{Eventos}: en la parte superior del editor puedes escoger la ventana \comillas{Eventos}. Una vez entras por primera vez verás que está vacía, con un solo desplegable de selección. Ábrelo y crea un nuevo evento. Una vez creado verás dos partes diferenciadas en la ventana: \comillas{Condición} y \comillas{Comportamientos}. La condición es el criterio bajo el que quieres que se active ese evento. Puedes escoger el que quieras. Los comportamientos son todo aquello que ocurrirá una vez se active el evento. Puedes añadir tantos como quieras del tipo que quieras, y se aplicarán uno detrás de otro en el orden que los establezcas. Puedes moverlos en la lista o eliminarlos cuando quieras.
+	
+	\figuraH{Vectorial/Pruebas/eventos}{width=0.7\textwidth}
+	
+	Una vez hayas definido tu evento puedes volver a la pestaña del mapa y añadir el evento creado a tu objeto. Si pruebas la aplicación una vez más, verás cómo el objeto ejecuta el evento cuando se cumple la condición.
+	
+	\item \textit{Conexiones entre mapas}: a continuación, crea un segundo mapa. Puede ser más pequeño y sencillo. Una vez lo tengas listo, guárdalo (CTRL-S) y ve a la sección de conexiones entre mapas. Una vez allí podrás añadir varios mapas a un mundo. Puedes conectar los mapas que estén en un mismo mundo desplazándolos en la ventana; dos mapas que sean adyacentes se considerarán conectados y podrás pasar de uno a otro de forma natural en tu juego.
+	
+	\figuraH{Vectorial/Pruebas/conexiones}{width=0.7\textwidth}
+	
+	\item \textit{Otras configuraciones}: finalmente, podrás configurar aspectos generales de tu juego, como el tipo de fuente, el color y el tamaño del texto; el color de fondo de las cajas de texto; la cantidad de casillas que aparecerán en cámara; volúmenes de sonidos... Establece todos estos parámetros como tú prefieras y dale a \textit{play} para ver la versión definitiva de tu juego en acción.
+	
+	\figuraH{Vectorial/Pruebas/otrascnf}{width=0.7\textwidth}
+\end{enumerate}

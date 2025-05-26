@@ -75,8 +75,70 @@ Posteriormente, implementé otras funcionalidades del editor, como el inspector 
 Por último, me dediqué a realizar pruebas con usuarios y corregir los problemas que encontrábamos en estas. Finalmente, adapté la funcionalidad de \textit{build} para que también fuese posible generar una APK lista para usar en dispositivos Android.
 
 \section*{Alejandro Massó Martínez}
-Mi contribución al Proyecto se ha basado en la investigación, diseño y desarrollo del editor, la creación del \textit{toolchain} de generación de dependencias y compilación de los distintos subproyectos, y la redacción de esta memoria.
+Mi contribución al proyecto se ha basado en la investigación, diseño y desarrollo del editor, la creación de la \textit{toolchain} de generación de dependencias y compilación de los distintos subproyectos, y la redacción de este documento.
 
 \medskip
 
-%En primer lugar, hice una exhaustiva investigación acerca de 
+En primer lugar, hice una exhaustiva investigación acerca de distintos editores de videojuegos, tanto específicos de RPG como generalistas, y, con la información obtenida, comencé a dibujar algunos pequeños bocetos de la interfaz de la aplicación, así como recopilar las características más comunes de ambos, para poder implementarlas finalmente en nuestro editor.
+
+\medskip
+
+Posteriormente, implementé, en un repositorio aparte del del desarrollo del proyecto, una primera versión de la estructura del proyecto y de la \textit{toolchain}, utilizando CMake. Pese a que conseguí que se abriese una ventana tanto para el editor como para el ejecutable del juego final, no fui capaz de conseguir la vinculación del proyecto de CMake con \textit{Android Studio} para la generación del APK.
+
+\medskip
+
+Cuando mi compañero Alejandro consiguió la vinculación de \textit{Android Studio} con el CMake principal del proyecto, creé el repositorio final y modifiqué un poco su estructura, dividiéndola en los actuales módulos \comillas{proyectos} y \comillas{código fuente}, lo cual separaba la implementación del código de la declaración de los subdirectorios de CMake, algo que habíamos visto en la asignatura de \comillas{Proyectos 3} durante el transcurso del grado.
+
+\smallskip
+
+Sin embargo, estas modificaciones volvieron a complicar el enlazado de \textit{Android Studio}, pero tras unos arreglos y ajustes, finalmente la estructura final del repositorio estaba lista, y mis compañeros, que ya habían acabado con gran parte del diseño del motor, podían comenzar a programar.
+
+\medskip
+
+Una vez que la estructura del repositorio estaba terminada, y, con la investigación previamente realizada, comencé a diseñar un esquema inicial de clases para el editor utilizando la sintaxis UML. En el esquema, se detallaban las clases \texttt{Project} y \texttt{Window}, así como todos los distintos gestores que se iban a encargar de la inicialización y gestión de distintos módulos del editor. En un principio, el editor iba a utilizar código del motor, por ejemplo, toda la parte de \textit{renderizado}; pero finalmente, y debido a la inclusión de la librería \texttt{DearImGui}, decidí compartimentar e independizar el desarrollo del editor y del motor.
+
+\medskip
+
+Una vez que la estructura de la base estaba diseñada, comencé a implementar las clases en C++. Las clases estaban divididas en tres módulos: \textit{comunes}, \textit{lectura/escritura} y \textit{dibujado}. Comencé por la implementación de las clases comunes, es decir, \texttt{Editor}, que es la clase que se encarga de la inicialización entera del editor y de la inicialización de los gestores; y \texttt{Project}, que contiene la información más relevante de cada uno de los proyectos o juegos que se puedan hacer con el editor.
+
+\smallskip
+
+Después, implementé todos los distintos gestores del editor, como el \texttt{RenderManager}, que se encarga del dibujado de la interfaz en pantalla o el \texttt{InputManager}, que se encarga de la gestión de eventos de entrada del usuario mediante periféricos. Desde un primer momento, quise que el editor pudiese tener la opción de estar en múltiples idiomas, por lo que diseñé e implementé esta opción con el \texttt{LocalizationManager}, que además soporta otros idiomas que todavía no estén incorporados en el editor siempre y cuando se cumpla con la sintaxis esperada.
+
+\smallskip
+
+Implementé también el gestor de las preferencias de usuario, \texttt{PreferencesManager}; el gestor de los proyectos del editor, \texttt{ProjectsManager}, que permite la carga y guardado de los distintos proyectos creados por el usuario; y, el gestor de Lua, \texttt{LuaManager}, no sin antes haber hecho la descarga y compilación de Lua modificando el CMake, que, afortunadamente, debido al trabajo realizado anteriormente, fue una tarea sencilla.
+
+\medskip
+
+Luego de haber implementado todos los gestores que conforman la base del editor, era el turno de la parte de dibujado. La estructura diseñada previamente se conformaba de ventanas y \comillas{subventanas}, por lo que implementé la clase \texttt{Window} y \texttt{Subwindow}, que se aprovechaban de los conceptos de \textit{ventana} y \textit{ventana hija} de \texttt{DearImGui}. Como las ventanas se tienen que mostrar en una determinada jerarquía, implementé también la clase \texttt{WindowStack}. De esta manera, las ventanas que llegan posteriormente y se meten a la pila se renderizan una encima de la otra, como en todos los \textit{softwares} que requieren del uso de múltiples ventanas. Al haber varios tipos de ventana distintos (por ejemplo, las modales o las pestañas) tuve que implementar una interfaz base, \texttt{RenderObject}, que sirviese para todas.
+
+\medskip
+
+Cuando la base de dibujado estaba acabada, mi tarea fue la de implementar otras librerías necesarias para el motor, como \texttt{SDL\_ttf}, \texttt{SDL\_image} o \texttt{sol2}. \texttt{SDL\_ttf} dio algunos problemas con la configuración en CMake, pero al cabo de unos días fue solucionado y pude seguir adelante con el editor.
+
+\smallskip
+
+Primero, modifiqué parte de la implementación que había hecha con Lua para utilizar \texttt{sol2}, que iba a facilitar el desarrollo utilizando esta herramienta. Después, comencé a implementar las primeras ventanas del editor, como \texttt{WelcomeWindow}, que es la ventana de bienvenida que se ve al iniciar el editor. Para ello, tuve que buscar unas fuentes \texttt{.ttf} (decantándome al final por \textit{Raleway}), así como implementar un paquete de iconos para algunos botones. Elegí el paquete de iconos \textit{FontAwesome 6} debido a su fácil inclusión con \texttt{DearImGui}. Una vez terminada la base de la ventana de bienvenida, me dediqué a añadir funcionalidad secundaria a todos los pequeños elementos que se encontraban en esa ventana, como los botones de cada uno de los proyectos o los botones de añadir y eliminar proyecto.
+
+\smallskip
+
+Compaginé el desarrollo de estos elementos con el inicio de la redacción del estado de la cuestión de esta memoria, por lo que, tuve que buscar y leer algunos textos y artículos sobre los juegos de rol y, especialmente, sobre los videojuegos de rol; y pude reutilizar lo que mis compañeros investigaron sobre motores de videojuegos, y lo que investigué sobre editores para la redacción de la parte del desarrollo de videojuegos.
+
+\medskip
+
+Más tarde, tanto Miguel como Alejandro y yo decidimos en una reunión cuáles iban a ser los elementos imprescindibles que el editor tendría que tener en la \textit{build} final, y se decidió por tener un editor de mapas, un editor de objetos, un editor de eventos y un editor de \textit{sprites} y animaciones. Después de esta decisión, \textit{refactoricé} parte del código incorporado para hacerlo más flexible con los nuevos cambios, y comencé con el desarrollo de la ventana principal, \texttt{MainWindow} y del editor de mapas, \texttt{MapEditor}.
+
+\medskip
+
+El grueso del desarrollo del editor se centró en el editor de mapas, añadiendo cada funcionalidad y arreglando cada error que me iba encontrando por el camino. A parte de la estructura principal del editor de mapas, desarrollé los asistentes de creación (o \textit{wizards}) de los mapas y de los \textit{tilesets}. Una vez que la base de los recursos, desarrollada por Miguel, estaba terminada, pude conectarlos con los asistentes ya desarrollados y con el propio editor de mapas, que los necesitaría para poder guardar y modificar.
+
+\medskip
+
+Una vez acabado el editor de mapas, me centré en la redacción de la memoria, comenzando con los capítulos de diseño e implementación, y añadiendo más contenido al estado de la cuestión, que a estas alturas se dividiría en dos capítulos (\textit{Juegos de rol} y \textit{Videojuegos de rol}).
+
+\smallskip
+
+Después, volví a compaginar la redacción de la memoria con el desarrollo de una parte del editor, en este caso, el editor de \textit{sprites} y animaciones, así como los asistentes de creación pertinentes de ambas herramientas. Esta, sin contar el arreglo de algunos errores que me encontré, sería mi última aportación al desarrollo de código en el proyecto. 
+
+Por último, me dediqué a realizar pruebas de usuarios, seguir y acabar con la redacción de la memoria, y arreglar errores que se habían encontrado en el código durante las mencionadas pruebas.
