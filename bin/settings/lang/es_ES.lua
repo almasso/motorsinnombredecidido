@@ -1,6 +1,6 @@
 return {
 	["window.global.editorname"] = "RPGBaker",
-	["window.global.currentversion"] = "v.1.0.0-testing",
+	["window.global.currentversion"] = "v.1.0.0",
 	["window.global.yes"] = "Sí",
 	["window.global.no"] = "No",
 	["window.global.cancel"] = "Cancelar",

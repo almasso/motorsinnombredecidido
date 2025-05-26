@@ -331,6 +331,7 @@ void editor::render::tabs::MapEditor::drawToolbar() {
                     if(ImGui::MenuItem(io::LocalizationManager::GetInstance().getString("action.edit").c_str())) {
                         _mapWizard->setMapToModify(map.second, true);
                         _mapWizard->show();
+                        _selectedLayer = 0;
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
