@@ -41,6 +41,7 @@ SDL_Texture * TextureLoader::GetTexture(SDL_Surface *surface) {
     SDL_Texture* texture = SDL_CreateTextureFromSurface(_renderer, surface);
     SDL_DestroySurface(surface);
 
+    SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
     if (!texture) {
         Error::ShowError("Error al crear textura", SDL_GetError());
     }

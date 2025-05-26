@@ -241,6 +241,7 @@ void editor::render::RenderManager::updateDimensions() {
 
 ImTextureID editor::render::RenderManager::_loadTexture(const std::string &filepath) {
     SDL_Texture* texture = IMG_LoadTexture(_renderer, (filepath).c_str());
+    SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
     if(!texture) {
         showError(SDL_GetError())
         return 0;
