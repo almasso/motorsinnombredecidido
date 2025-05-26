@@ -22,7 +22,9 @@ editor::render::tabs::GeneralSettings::GeneralSettings(editor::Project* project)
     sol::table settings = io::LuaManager::GetInstance().getTable(_filePath.string(), true);
     if (settings.valid()) {
         _gameName = settings["gameName"].get_or(_project->getName());
+        _project->setGameName(_gameName);
         _gameIcon = std::filesystem::path(settings["gameIcon"].get_or(std::string()));
+        _project->setGameIcon(_gameIcon.string());
         std::string normalizedPath = (_project->getAssetsPath() / _gameIcon).lexically_normal().string();
         _loadedIcon = RenderManager::GetInstance().loadTexture(normalizedPath);
         _startingMap = settings["startingMap"].get_or(std::string());
@@ -224,6 +226,8 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(sol::table
     auto& lua = io::LuaManager::GetInstance().getState();
     const auto dimensions = _project->getDimensions();
 
+    std::string startingMap = _startingMap.empty() ? _project->getMaps().begin()->first : _startingMap;
+
     sol::table scene = lua.create_table();
     sol::table manager = lua.create_table();
     sol::table components = lua.create_table();
@@ -232,7 +236,7 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(sol::table
     movement["tileWidth"] = dimensions[0];
     movement["tileHeight"] = dimensions[1];
     components["MovementManager"] = movement;
-    overworld["startingMap"] = _startingMap.empty() ? _project->getMaps().begin()->first : _startingMap;
+    overworld["startingMap"] = startingMap;
     components["OverworldManager"] = overworld;
     manager["handler"] = "Manager";
     manager["components"] = components;
@@ -240,7 +244,7 @@ sol::table editor::render::tabs::GeneralSettings::buildOverworldScene(sol::table
 
     sol::table player = lua.create_table();
     sol::table transform = lua.create_table();
-    auto map = _project->getMap(_startingMap);
+    auto map = _project->getMap(startingMap);
     transform["position"] = sol::as_table<std::array<int,2>>({
         (map->getMapX() + _startingPosition[0]) * dimensions[0],
         (map->getMapY() + _startingPosition[1]) * dimensions[1]
@@ -395,6 +399,7 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
             else {
                 if(_loadedIcon != 0) RenderManager::GetInstance().destroyTexture(_loadedIcon);
                 _gameIcon = selectedPath.lexically_relative(_project->getAssetsPath());
+                _project->setGameIcon(_gameIcon.string());
                 std::string normalizedPath  = std::filesystem::path(selectedFile).lexically_normal().string();
                 _loadedIcon = RenderManager::GetInstance().loadTexture(normalizedPath);
                 _somethingModified = true;
