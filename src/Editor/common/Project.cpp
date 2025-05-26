@@ -10,7 +10,7 @@
 #include "io/LuaManager.h"
 #include <sstream>
 #include <iomanip>
-#include <iostream>
+#include <regex>
 #include <sol/sol.hpp>
 #include "EditorError.h"
 #include "resources/Tileset.h"
@@ -138,8 +138,10 @@ bool editor::Project::build(const std::string &platform, const sol::table& overW
         EditorError::showError_impl(e.what(), "Project",138);
         return false;
     }
+    if (platform == "Android") return buildAPK();
+    if (platform == "Windows") std::filesystem::rename(getBuildPath(platform)/"Executable.exe", getBuildPath(platform)/(_gameName+".exe"));
+    else std::filesystem::rename(getBuildPath(platform)/"Executable", getBuildPath(platform)/_gameName);
     if (platform == getPlatform()) launchBuild(platform);
-    else if (platform == "Android") return buildAPK();
     return true;
 }
 
@@ -151,7 +153,7 @@ void editor::Project::buildSettings(const std::string& platform) {
     config["memory"] = memory;
     config["initScene"] = "data/scenes/overworld.scene.lua";
     config["gameName"] = _gameName;
-    config["gameIcon"] = _gameIcon;
+    config["gameIcon"] = _gameIcon.empty() ? "data/assets/RPGBakerIcon.png" : "data/assets/" + _gameIcon;
     io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data"/"config.lua").string());
 }
 
@@ -317,18 +319,90 @@ bool editor::Project::buildAPK() const {
     }
     zipClose(zf, nullptr);
 
+
+    std::string decompiledDir = (getBuildPath("Android") / "apktool_out").string();
+    std::string apktoolJar = (getBuildPath("Android") / "apktool_2.11.1.jar").string();
+    std::string cmd = "java -jar \"" + apktoolJar + "\" d \"" + apk + "\" -o \"" + decompiledDir + "\" -f";
+    if (system(cmd.c_str()) != 0) {
+        return false;
+    }
+    std::string manifestPath = decompiledDir + "/AndroidManifest.xml";
+    std::ifstream in(manifestPath);
+    if (!in) {
+        return false;
+    }
+    std::stringstream buffer;
+    buffer << in.rdbuf();
+    std::string manifestContent = buffer.str();
+    in.close();
+
+    std::regex labelRegex(R"(android:label\s*=\s*\"[^\"]*\")");
+    if (std::regex_search(manifestContent, labelRegex)) {
+        manifestContent = std::regex_replace(manifestContent, labelRegex, "android:label=\"" + _gameName + "\"");
+    } else {
+        std::regex appTag(R"(<application\b)");
+        manifestContent = std::regex_replace(manifestContent, appTag, "<application android:label=\"" + _gameName + "\"");
+    }
+
+    std::regex iconRegex(R"(android:icon\s*=\s*\"[^\"]*\")");
+    if (std::regex_search(manifestContent, iconRegex)) {
+        manifestContent = std::regex_replace(manifestContent, iconRegex, "android:icon=\"@mipmap/ic_launcher\"");
+    } else {
+        std::regex appTag(R"(<application\b)");
+        manifestContent = std::regex_replace(manifestContent, appTag, "<application android:icon=\"@mipmap/ic_launcher\"");
+    }
+
+    std::string packagePrefix = "package=\"";
+    size_t pkgPos = manifestContent.find(packagePrefix);
+    if (pkgPos != std::string::npos) {
+        size_t pkgEnd = manifestContent.find("\"", pkgPos + packagePrefix.length());
+        if (pkgEnd != std::string::npos) {
+            std::string newPackage = "com.rpgbaker." + _gameName;
+            manifestContent.replace(pkgPos + packagePrefix.length(), pkgEnd - (pkgPos + packagePrefix.length()), newPackage);
+        }
+    }
+
+    std::ofstream out(manifestPath);
+    out << manifestContent;
+    out.close();
+
+    std::string iconSource = _gameIcon.empty()
+        ? (getBuildPath("Android") / "data" / "assets" / "RPGBakerIcon.png").string()
+        : (getBuildPath("Android") / "data" / "assets" / _gameIcon).string();
+
+    std::vector iconTargets = {
+        decompiledDir + "/res/mipmap-xxhdpi/ic_launcher.png",
+        decompiledDir + "/res/mipmap-xhdpi/ic_launcher.png",
+        decompiledDir + "/res/mipmap-hdpi/ic_launcher.png",
+        decompiledDir + "/res/mipmap-mdpi/ic_launcher.png"
+    };
+
+    for (const std::string& target : iconTargets) {
+        std::filesystem::path targetPath(target);
+        create_directories(targetPath.parent_path());
+        copy_file(iconSource, targetPath,
+            std::filesystem::copy_options::overwrite_existing);
+    }
+
+    std::string rebuiltApk = (getBuildPath("Android") / "rebuilt-unsigned.apk").string();
+    cmd = "java -jar \"" + apktoolJar + "\" b \"" + decompiledDir + "\" -o \"" + rebuiltApk + "\"";
+    if (system(cmd.c_str()) != 0) {
+        showError("Error al recompilar el APK");
+        return false;
+    }
+
     std::string key = (getBuildPath("Android") / "apk-sign-key.jks").string();
-    std::string apkSigned = (getBuildPath("Android") / "app-release-signed.apk").string();
+    std::string apkSigned = (getBuildPath("Android") / (_gameName+".apk")).string();
     if (_androidApkSignerPath.empty() || !exists(_androidApkSignerPath)) {
         showError("No hay asignado ningun path valido para el apk signer.");
         return false;
     }
-    std::string cmd = _androidApkSignerPath.string() + " sign "
+    cmd = _androidApkSignerPath.string() + " sign "
     "--ks \"" + key + "\" "
     "--ks-pass pass:" + "123456" + " "
     "--ks-key-alias \"" + "myalias" + "\" "
     "--out \"" + apkSigned + "\" "
-    "\"" + apk + "\"";
+    "\"" + rebuiltApk + "\"";
 
     if (system(cmd.c_str()) != 0) {
         showError("Error al firmar el APK, revisa el APK signer path y verifica la instalacion del SDK de Android");
@@ -336,8 +410,11 @@ bool editor::Project::buildAPK() const {
     }
 
     std::filesystem::remove_all(data);
+    std::filesystem::remove_all(decompiledDir);
     std::filesystem::remove(apk);
     std::filesystem::remove(key);
+    std::filesystem::remove(rebuiltApk);
+    std::filesystem::remove(apktoolJar);
 
     return true;
 }
@@ -535,7 +612,7 @@ void editor::Project::launchBuild(const std::string& platform) {
     STARTUPINFO info={sizeof(info)};
     PROCESS_INFORMATION processInfo;
     auto exeDirectory = getBuildPath(platform).string();
-    auto exePath = (getBuildPath(platform) / "Executable.exe").string();
+    auto exePath = (getBuildPath(platform) / (_gameName+".exe")).string();
     if (CreateProcess(NULL, const_cast<LPSTR>(exePath.c_str()), NULL, NULL, TRUE, 0, NULL, exeDirectory.c_str(), &info, &processInfo)) {
         WaitForSingleObject(processInfo.hProcess, INFINITE);
         CloseHandle(processInfo.hProcess);
@@ -545,7 +622,7 @@ void editor::Project::launchBuild(const std::string& platform) {
 #else
 void editor::Project::launchBuild(const std::string &platform) {
     SDL_PropertiesID prop = SDL_CreateProperties();
-    auto exePath = (getBuildPath(platform) / "Executable.exe").string();
+    auto exePath = (getBuildPath(platform) / _gameName).string();
     const char *args[] = { exePath.c_str(), NULL };
     SDL_SetPointerProperty(prop, SDL_PROP_PROCESS_CREATE_ARGS_POINTER, args);
     SDL_CreateProcessWithProperties(prop);
