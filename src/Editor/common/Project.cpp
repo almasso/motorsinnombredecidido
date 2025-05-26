@@ -4,6 +4,9 @@
 //
 
 #include "Project.h"
+
+#include <fstream>
+
 #include "io/LuaManager.h"
 #include <sstream>
 #include <iomanip>
@@ -16,6 +19,7 @@
 #include "resources/Animation.h"
 #include <SDL3/SDL_filesystem.h>
 #include "resources/events/Event.h"
+#include <minizip/zip.h>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -131,10 +135,11 @@ bool editor::Project::build(const std::string &platform, const sol::table& overW
         buildSprites(platform);
         buildAnimations(platform);
     } catch (std::filesystem::filesystem_error& e) {
-        EditorError::showError_impl(e.what(), "Project",128);
+        EditorError::showError_impl(e.what(), "Project",138);
         return false;
     }
     if (platform == getPlatform()) launchBuild(platform);
+    else if (platform == "Android") return buildAPK();
     return true;
 }
 
@@ -287,6 +292,50 @@ void editor::Project::saveProject() {
         for(auto& [key, animation] : _animations)
             animation->writeToLua();
     }
+}
+
+bool editor::Project::buildAPK() const {
+    std::string apk = (getBuildPath("Android") / "app-release-unsigned.apk").string();
+    std::string data = (getBuildPath("Android") / "data").string();
+    const zipFile zf = zipOpen(apk.c_str(), APPEND_STATUS_ADDINZIP);
+    if (!zf) {
+        return false;
+    }
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(data)) {
+        if (!is_regular_file(entry)) continue;
+        std::string relativePath = relative(entry.path(), data).generic_string();
+        std::string zipPath = "assets/data/" + relativePath;
+        std::ifstream file(entry.path(), std::ios::binary);
+        std::vector buffer(std::istreambuf_iterator<char>(file), {});
+        zip_fileinfo zi = {};
+        zipOpenNewFileInZip(zf, zipPath.c_str(), &zi, nullptr, 0, nullptr, 0, nullptr,
+                            Z_DEFLATED, Z_DEFAULT_COMPRESSION);
+        zipWriteInFileInZip(zf, buffer.data(), buffer.size());
+        zipCloseFileInZip(zf);
+    }
+    zipClose(zf, nullptr);
+
+    std::string key = (getBuildPath("Android") / "apk-sign-key.jks").string();
+    std::string apkSigned = (getBuildPath("Android") / "app-release-signed.apk").string();
+    std::string apkSigner = "C:\\Users\\Usuario\\AppData\\Local\\Android\\Sdk\\build-tools\\35.0.0\\apksigner.bat";
+    std::string cmd = apkSigner + " sign "
+    "--ks \"" + key + "\" "
+    "--ks-pass pass:" + "123456" + " "
+    "--ks-key-alias \"" + "myalias" + "\" "
+    "--out \"" + apkSigned + "\" "
+    "\"" + apk + "\"";
+
+    if (system(cmd.c_str()) != 0) {
+        EditorError::showError_impl("Error al firmar el APK, revisa el APK signer path y verifica la instalacion del SDK de Android",
+            "Project",328);
+        return false;
+    }
+
+    std::filesystem::remove_all(data);
+    std::filesystem::remove(apk);
+    std::filesystem::remove(key);
+
+    return true;
 }
 
 const int *editor::Project::getDimensions() const {

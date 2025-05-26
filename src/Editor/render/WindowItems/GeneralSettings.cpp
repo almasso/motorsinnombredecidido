@@ -279,6 +279,7 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     }
     ImGui::Spacing();
     ImGui::Spacing();
+    ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.startingPosition").c_str());
     int playerPos[2] = {_startingPosition[0], _startingPosition[1]};
     if (ImGui::InputInt2("##playerPos", playerPos)) {
         resources::Map* temp = _project->getMap(_startingMap);

@@ -243,8 +243,12 @@ namespace editor {
 
         void saveProject();
 
+        bool buildAPK() const;
+
         void buildSprites(std::string const& platform);
+
         void buildAnimations(std::string const& platform);
+
         void launchBuild(const std::string &platform);
     };
 }
