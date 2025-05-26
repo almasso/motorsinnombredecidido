@@ -416,7 +416,7 @@ void editor::render::tabs::GeneralSettings::drawApkSignerPathSelector() {
     char* buffer = new char[MAX_SIGNER_BUFFER];
     bool assigned = false;
     if(ImGui::Button(io::LocalizationManager::GetInstance().getString("action.search").c_str())) {
-        const char* fileExtension[] = {"*.bat"};
+        const char* fileExtension[] = {"*"};
         const char* route = tinyfd_openFileDialog(
                 io::LocalizationManager::GetInstance().getString("action.selectapksigner").c_str(),
                 (_androidApkSignerPath).string().c_str(),

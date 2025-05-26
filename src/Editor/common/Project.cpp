@@ -317,8 +317,8 @@ bool editor::Project::buildAPK() const {
 
     std::string key = (getBuildPath("Android") / "apk-sign-key.jks").string();
     std::string apkSigned = (getBuildPath("Android") / "app-release-signed.apk").string();
-    if (_androidApkSignerPath.empty()) {
-        showError("No hay asignado ningun path para el apk signer.");
+    if (_androidApkSignerPath.empty() || !exists(_androidApkSignerPath)) {
+        showError("No hay asignado ningun path valido para el apk signer.");
         return false;
     }
     std::string cmd = _androidApkSignerPath.string() + " sign "
