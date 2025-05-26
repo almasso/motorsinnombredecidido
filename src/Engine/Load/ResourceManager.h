@@ -46,7 +46,7 @@ public:
     /// @param configFile Ruta al archivo de configuración.
     /// @param scene Parámetro de salida para almacenar la escena inicial dada en el archivo de configuración.
     /// @return \c true en inicialización exitosa. \c false si el archivo de configuración no estaba bien.
-    static bool Init(std::string const& configFile, std::string& scene);
+    static bool Init(std::string const& configFile, std::string& scene, std::string& gameName);
 
     /// @~english
     /// @brief Unregisters every registered \c BaseResourceHandler and stops the \c ResourceManager 's work.

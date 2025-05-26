@@ -10,7 +10,7 @@
 RenderManager::RenderManager() : _screenScale(0), _window(nullptr), _renderer(nullptr), _width(0), _height(0) {
 }
 
-bool RenderManager::init(const int& width, const int& height) {
+bool RenderManager::init(const int& width, const int& height, std::string const& gameName) {
     if (!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
         {
             Error::ShowError("Error al inicializar SDL_VIDEO", SDL_GetError());
@@ -23,7 +23,7 @@ bool RenderManager::init(const int& width, const int& height) {
             return false;
         }
     }
-    if (!SDL_CreateWindowAndRenderer("Game", width, height, SDL_WINDOW_MAXIMIZED, &_window, &_renderer))
+    if (!SDL_CreateWindowAndRenderer(gameName.c_str(), width, height, SDL_WINDOW_MAXIMIZED, &_window, &_renderer))
     {
         Error::ShowError("Error al crear la ventana", SDL_GetError());
         return false;

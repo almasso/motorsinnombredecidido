@@ -18,8 +18,12 @@ CollisionManager* Main::_collisions = nullptr;
 SceneManager* Main::_scenes = nullptr;
 
 bool Main::Init() {
+    std::string startScene;
+    std::string gameName;
+    if (!ResourceManager::Init("data/config.lua", startScene, gameName))
+        return false;
     _render = new RenderManager();
-    if (!_render->init(1280, 720))
+    if (!_render->init(1280, 720, gameName))
         return false;
     _input = InputManager::Init();
     if (!_input)
@@ -31,9 +35,7 @@ bool Main::Init() {
     _collisions = CollisionManager::Instance();
     _time = new TimeManager();
     _time->init();
-    std::string startScene;
-    if (!ResourceManager::Init("data/config.lua",startScene))
-        return false;
+
     _scenes = SceneManager::Init(startScene);
     if (!_scenes)
         return false;

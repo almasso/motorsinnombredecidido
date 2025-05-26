@@ -56,6 +56,8 @@ namespace editor {
         template <std::convertible_to<std::string> T>
         void setName(T&& name) {
             _name = std::forward<T>(name);
+            if (_gameName.empty())
+                _gameName = std::forward<T>(name);
         }
 
         template <std::convertible_to<std::string> T>
@@ -220,6 +222,7 @@ namespace editor {
         std::string getPlatform() const;
 
         void setAndroidApkSignerPath(std::filesystem::path const& path);
+        void setGameName(std::string const& name);
 
     private:
         std::string _name;
@@ -229,6 +232,7 @@ namespace editor {
         bool _setToDelete = false;
         bool _found = false;
         std::filesystem::path _androidApkSignerPath;
+        std::string _gameName;
 
         std::unordered_map<std::string, editor::resources::Tileset*> _tilesets;
         std::unordered_map<std::string, editor::resources::Sprite*> _sprites;

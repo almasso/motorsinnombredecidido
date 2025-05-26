@@ -280,6 +280,7 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     std::strncpy(gameName, _gameName.c_str(), sizeof(gameName) - 1);
     if (ImGui::InputText("##settings", gameName, IM_ARRAYSIZE(gameName))) {
         _gameName = gameName;
+        _project->setGameName(gameName);
         _somethingModified = true;
     };
     ImGui::Spacing();
@@ -407,6 +408,10 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     ImGui::Spacing();
     if(ImGui::SliderFloat(("   " + io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.sfxVolume")).c_str(),
         &_sfxVolume, 0, 1)) {_somethingModified = true;}
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+    ImGui::Text("Configuración de build");
     ImGui::Spacing();
     drawApkSignerPathSelector();
     ImGui::EndChild();
