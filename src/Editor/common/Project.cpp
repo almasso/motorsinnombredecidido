@@ -140,7 +140,6 @@ bool editor::Project::build(const std::string &platform, const sol::table& overW
     }
     if (platform == "Android") return buildAPK();
     if (platform == "Windows") std::filesystem::rename(getBuildPath(platform)/"Executable.exe", getBuildPath(platform)/(_gameName+".exe"));
-    else std::filesystem::rename(getBuildPath(platform)/"Executable", getBuildPath(platform)/_gameName);
     if (platform == getPlatform()) launchBuild(platform);
     return true;
 }
@@ -622,7 +621,7 @@ void editor::Project::launchBuild(const std::string& platform) {
 #else
 void editor::Project::launchBuild(const std::string &platform) {
     SDL_PropertiesID prop = SDL_CreateProperties();
-    auto exePath = (getBuildPath(platform) / _gameName).string();
+    auto exePath = (getBuildPath(platform) / "Executable").string();
     const char *args[] = { exePath.c_str(), NULL };
     SDL_SetPointerProperty(prop, SDL_PROP_PROCESS_CREATE_ARGS_POINTER, args);
     SDL_CreateProcessWithProperties(prop);
