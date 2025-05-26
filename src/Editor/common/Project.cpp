@@ -538,7 +538,7 @@ void editor::Project::launchBuild(const std::string& platform) {
     }
 }
 #else
-void editor::Project::launchBuild() {
+void editor::Project::launchBuild(const std::string &platform) {
     SDL_PropertiesID prop = SDL_CreateProperties();
     auto exePath = (getBuildPath(platform) / "Executable.exe").string();
     const char *args[] = { exePath.c_str(), NULL };

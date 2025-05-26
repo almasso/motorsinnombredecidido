@@ -25,6 +25,4 @@ set_target_properties(Executable PROPERTIES
 
 if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
     set_target_properties(Executable PROPERTIES WIN32_EXECUTABLE TRUE)
-elseif(APPLE AND CMAKE_BUILD_TYPE STREQUAL "Release")
-    set_target_properties(Executable PROPERTIES MACOSX_BUNDLE TRUE)
 endif()

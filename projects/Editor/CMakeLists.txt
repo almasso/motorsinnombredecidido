@@ -21,6 +21,4 @@ set_target_properties(Editor PROPERTIES
 
 if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
     set_target_properties(Editor PROPERTIES WIN32_EXECUTABLE TRUE)
-elseif(APPLE AND CMAKE_BUILD_TYPE STREQUAL "Release")
-    set_target_properties(Editor PROPERTIES MACOSX_BUNDLE TRUE)
 endif()
