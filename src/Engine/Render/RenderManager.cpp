@@ -5,12 +5,14 @@
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_init.h>
 #include <Utils/Error.h>
+#include <SDL3_image/SDL_image.h>
+
 
 
 RenderManager::RenderManager() : _screenScale(0), _window(nullptr), _renderer(nullptr), _width(0), _height(0) {
 }
 
-bool RenderManager::init(const int& width, const int& height, std::string const& gameName) {
+bool RenderManager::init(const int& width, const int& height, std::string const& gameName, std::string const& gameIcon) {
     if (!SDL_InitSubSystem(SDL_INIT_VIDEO)) {
         {
             Error::ShowError("Error al inicializar SDL_VIDEO", SDL_GetError());
@@ -35,6 +37,12 @@ bool RenderManager::init(const int& width, const int& height, std::string const&
     _viewOffset = {w/2.f,h/2.f};
     _screenOffset = {0,0};
     _screenScale = 1;
+    if (!gameIcon.empty()) {
+        auto icon = IMG_Load(gameIcon.c_str());
+        SDL_SetWindowIcon(_window, icon);
+        SDL_DestroySurface(icon);
+    }
+
     return TextureLoader::Init(_renderer);
 }
 

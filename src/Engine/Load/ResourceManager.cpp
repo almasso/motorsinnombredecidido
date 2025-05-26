@@ -26,7 +26,7 @@ bool ResourceManager::initScenes(sol::table const& config, std::string& scene) {
     return !scene.empty();
 }
 
-bool ResourceManager::Init(std::string const& configFile, std::string& scene, std::string& gameName) {
+bool ResourceManager::Init(std::string const& configFile, std::string& scene, std::string& gameName, std::string& gameIcon) {
     assert(_memoryManager == nullptr);
     LuaReader::Init();
     sol::table config = LuaReader::GetTable(configFile);
@@ -39,6 +39,7 @@ bool ResourceManager::Init(std::string const& configFile, std::string& scene, st
     if (!initScenes(config,scene))
         return false;
     gameName = config.get_or<std::string>("gameName", "Game");
+    gameIcon = config.get_or<std::string>("gameIcon", "");
     return true;
 }
 

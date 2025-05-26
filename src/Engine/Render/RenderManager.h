@@ -12,7 +12,7 @@ class SDL_Renderer;
 class RenderManager {
     public:
     RenderManager();
-    bool init(const int& width, const int& height, std::string const& gameName);
+    bool init(const int& width, const int& height, std::string const& gameName, std::string const& gameIcon);
     void present() const;
     void clear() const;
     bool drawRect(const Rect &rect, const Color& color) const;

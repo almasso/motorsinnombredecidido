@@ -20,10 +20,11 @@ SceneManager* Main::_scenes = nullptr;
 bool Main::Init() {
     std::string startScene;
     std::string gameName;
-    if (!ResourceManager::Init("data/config.lua", startScene, gameName))
+    std::string gameIcon;
+    if (!ResourceManager::Init("data/config.lua", startScene, gameName, gameIcon))
         return false;
     _render = new RenderManager();
-    if (!_render->init(1280, 720, gameName))
+    if (!_render->init(1280, 720, gameName, gameIcon))
         return false;
     _input = InputManager::Init();
     if (!_input)
