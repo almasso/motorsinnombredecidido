@@ -7,7 +7,7 @@ var dir_700da30f51666cd81523daa4ef5fcfbf =
     [ "Camera.cpp", "Camera_8cpp.html", null ],
     [ "Camera.h", "Camera_8h.html", "Camera_8h" ],
     [ "Color.h", "Color_8h.html", "Color_8h" ],
-    [ "Font.cpp", "Font_8cpp.html", null ],
+    [ "Font.cpp", "Font_8cpp.html", "Font_8cpp" ],
     [ "Font.h", "Font_8h.html", "Font_8h" ],
     [ "Rectangle.cpp", "Rectangle_8cpp.html", null ],
     [ "Rectangle.h", "Rectangle_8h.html", "Rectangle_8h" ],
@@ -25,7 +25,7 @@ var dir_700da30f51666cd81523daa4ef5fcfbf =
     [ "TextTexture.h", "TextTexture_8h.html", "TextTexture_8h" ],
     [ "Texture.cpp", "Texture_8cpp.html", null ],
     [ "Texture.h", "Texture_8h.html", "Texture_8h" ],
-    [ "TextureLoader.cpp", "TextureLoader_8cpp.html", null ],
+    [ "TextureLoader.cpp", "TextureLoader_8cpp.html", "TextureLoader_8cpp" ],
     [ "TextureLoader.h", "TextureLoader_8h.html", "TextureLoader_8h" ],
     [ "Transform.cpp", "Transform_8cpp.html", null ],
     [ "Transform.h", "Transform_8h.html", "Transform_8h" ]

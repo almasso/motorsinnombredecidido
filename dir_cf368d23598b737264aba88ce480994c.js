@@ -6,7 +6,7 @@ var dir_cf368d23598b737264aba88ce480994c =
     [ "BaseResourceHandler.h", "BaseResourceHandler_8h.html", "BaseResourceHandler_8h" ],
     [ "LuaManager.cpp", "LuaManager_8cpp.html", null ],
     [ "LuaManager.h", "LuaManager_8h.html", "LuaManager_8h" ],
-    [ "LuaReader.cpp", "LuaReader_8cpp.html", null ],
+    [ "LuaReader.cpp", "LuaReader_8cpp.html", "LuaReader_8cpp" ],
     [ "LuaReader.h", "LuaReader_8h.html", "LuaReader_8h" ],
     [ "Resource.cpp", "Resource_8cpp.html", null ],
     [ "Resource.h", "Resource_8h.html", "Resource_8h" ],
