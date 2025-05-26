@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <string>
 #include <render/WindowItem.h>
+#include <resources/Map.h>
 #include <sol/table.hpp>
 
 struct ImFont;
@@ -36,6 +37,8 @@ namespace editor::render::tabs {
         bool _somethingModified = false;
         std::filesystem::path _filePath;
         std::string _gameName;
+        std::filesystem::path _gameIcon;
+        ImTextureID _loadedIcon = 0;
         std::string _startingMap;
         int _startingPosition[2] = {0, 0};
         int _cameraSize[2] = { 18, 12 };
@@ -52,6 +55,9 @@ namespace editor::render::tabs {
         std::filesystem::path _androidApkSignerPath;
         void onRender() override;
         void beforeRender() override;
+
+        void drawMapPreview(resources::Map * map);
+
         void drawSettings();
         void drawApkSignerPathSelector();
     };

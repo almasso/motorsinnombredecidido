@@ -134,7 +134,7 @@ return {
     ["window.mainwindow.generalSettings"] = "Settings",
     ["window.mainwindow.generalSettings.settings"] = "General Settings",
     ["window.mainwindow.generalSettings.gameName"] = "Game Name",
-    ["window.mainwindow.generalSettings.defaultGameName"] = "Game",
+    ["window.mainwindow.generalSettings.gameIcon"] = "Game Icon",
     ["window.mainwindow.generalSettings.startingMap"] = "Starting Map",
     ["window.mainwindow.generalSettings.startingPosition"] = "Starting Position",
     ["window.mainwindow.generalSettings.camera"] = "Camera",

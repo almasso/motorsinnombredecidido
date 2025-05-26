@@ -11,6 +11,7 @@
 #include <render/RenderManager.h>
 #include <resources/Map.h>
 #include <resources/Sprite.h>
+#include <resources/Tile.h>
 #include <utils/tinyfiledialogs/tinyfiledialogs.h>
 
 
@@ -21,6 +22,9 @@ editor::render::tabs::GeneralSettings::GeneralSettings(editor::Project* project)
     sol::table settings = io::LuaManager::GetInstance().getTable(_filePath.string(), true);
     if (settings.valid()) {
         _gameName = settings["gameName"].get_or(_project->getName());
+        _gameIcon = std::filesystem::path(settings["gameIcon"].get_or(std::string()));
+        std::string normalizedPath = (_project->getAssetsPath() / _gameIcon).lexically_normal().string();
+        _loadedIcon = RenderManager::GetInstance().loadTexture(normalizedPath);
         _startingMap = settings["startingMap"].get_or(std::string());
         sol::object startingPosition = settings["startingPosition"];
         if (startingPosition.valid() && startingPosition.is<sol::table>()){
@@ -101,10 +105,95 @@ void editor::render::tabs::GeneralSettings::beforeRender() {
     _itemFlags = _somethingModified ? ImGuiTabItemFlags_UnsavedDocument : 0;
 }
 
+void editor::render::tabs::GeneralSettings::drawMapPreview(resources::Map * map) {
+    const float previewSize = 256.0f;
+    ImGui::BeginChild("##mapPreview", ImVec2(previewSize, previewSize), true, ImGuiWindowFlags_NoScrollWithMouse);
+
+    int mapWidth = map->getMapWidth();
+    int mapHeight = map->getMapHeight();
+    int layers = map->getLayers();
+
+    if (mapWidth == 0 || mapHeight == 0 || layers == 0) {
+        ImGui::EndChild();
+        return;
+    }
+
+    int tileWidth = _project->getDimensions()[0];
+    int tileHeight = _project->getDimensions()[1];
+
+    float totalPixelWidth  = static_cast<float>(mapWidth * tileWidth);
+    float totalPixelHeight = static_cast<float>(mapHeight * tileHeight);
+
+    float scaleX = previewSize / totalPixelWidth;
+    float scaleY = previewSize / totalPixelHeight;
+    float scale = std::min(scaleX, scaleY);
+
+    float offsetX = (previewSize - totalPixelWidth * scale) * 0.5f;
+    float offsetY = (previewSize - totalPixelHeight * scale) * 0.5f;
+
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
+    ImVec2 origin = ImGui::GetCursorScreenPos();
+    auto& tiles = map->getTiles();
+
+    for (int j = 0; j < mapHeight; ++j) {
+        for (int i = 0; i < mapWidth; ++i) {
+            ImVec2 tilePos = ImVec2(
+                origin.x + offsetX + i * tileWidth * scale,
+                origin.y + offsetY + j * tileHeight * scale
+            );
+            ImVec2 tileEnd = ImVec2(
+                tilePos.x + tileWidth * scale,
+                tilePos.y + tileHeight * scale
+            );
+
+            for (int layer = 0; layer < layers; ++layer) {
+                int index = i + mapWidth * j;
+                if (layer < tiles.size() && index < tiles[layer].size()) {
+                    resources::Tile* tile = tiles[layer][index];
+                    if (tile && tile->texture) {
+                        drawList->AddImage(
+                            tile->texture,
+                            tilePos,
+                            tileEnd,
+                            tile->rect.Min,
+                            tile->rect.Max
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    int selX = _startingPosition[0];
+    int selY = _startingPosition[1];
+    if (selX >= 0 && selY >= 0 && selX < mapWidth && selY < mapHeight) {
+        ImVec2 rectPos = ImVec2(
+            origin.x + offsetX + selX * tileWidth * scale,
+            origin.y + offsetY + selY * tileHeight * scale
+        );
+        ImVec2 rectEnd = ImVec2(
+            rectPos.x + tileWidth * scale,
+            rectPos.y + tileHeight * scale
+        );
+
+        drawList->AddRect(
+            rectPos,
+            rectEnd,
+            IM_COL32(255, 255, 0, 255),
+            0.0f,
+            0,
+            2.0f
+        );
+    }
+
+    ImGui::EndChild();
+}
+
 void editor::render::tabs::GeneralSettings::save() {
     _somethingModified = false;
     sol::table settings = io::LuaManager::GetInstance().getState().create_table();
     settings["gameName"] = _gameName;
+    settings["gameIcon"] = _gameIcon.string();
     settings["startingMap"] = _startingMap;
     settings["startingPosition"] = sol::as_table<std::array<int,2>>({_startingPosition[0], _startingPosition[1]});
     settings["cameraSize"] = sol::as_table<std::array<int,2>>({_cameraSize[0], _cameraSize[1]});
@@ -275,6 +364,8 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
     ImGui::Spacing();
     ImGui::Separator();
     ImGui::Spacing();
+    ImGui::BeginChild("##gamesettings", ImVec2(2 * ImGui::GetContentRegionAvail().x / 3, 256), true);
+    ImGui::Dummy(ImVec2(0.0f, 16.0f));
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.gameName").c_str());
     char gameName[256];
     std::strncpy(gameName, _gameName.c_str(), sizeof(gameName) - 1);
@@ -283,21 +374,61 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
         _project->setGameName(gameName);
         _somethingModified = true;
     };
+    ImGui::Dummy(ImVec2(0.0f, 32.0f));
+    ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.gameIcon").c_str());
+    ImGui::Spacing();
+    if(ImGui::Button(io::LocalizationManager::GetInstance().getString("action.search").c_str())) {
+        const char* fileExtension[] = {"*.stb", "*.bmp", "*.gif", "*.jpg", "*.lbm", "*.pcx", "*.png", "*.pnm", "*.qoi", "*.svg", "*.tga", "*.xcf", "*.xpm", "*.xv"};
+        const char* selectedFile = tinyfd_openFileDialog(
+                io::LocalizationManager::GetInstance().getString("action.selectimage").c_str(),
+                (_project->getPath() / "assets/").string().c_str(),
+                14,
+                fileExtension,
+                nullptr,
+                0
+        );
+        if(selectedFile != nullptr) {
+            std::filesystem::path selectedPath = selectedFile;
+            if(selectedPath.parent_path() != _project->getPath() / "assets") {
+                showUserWarning(io::LocalizationManager::GetInstance().getString("error.assetlocationnotvalid"))
+            }
+            else {
+                if(_loadedIcon != 0) RenderManager::GetInstance().destroyTexture(_loadedIcon);
+                _gameIcon = selectedPath.lexically_relative(_project->getAssetsPath());
+                std::string normalizedPath  = std::filesystem::path(selectedFile).lexically_normal().string();
+                _loadedIcon = RenderManager::GetInstance().loadTexture(normalizedPath);
+                _somethingModified = true;
+            }
+        }
+    }
+    ImGui::SameLine();
+    char routeBuffer[1024];
+    strncpy(routeBuffer, _gameIcon.string().c_str(), sizeof(routeBuffer) - 1);
+    ImGui::InputText("##gameIcon", routeBuffer, IM_ARRAYSIZE(routeBuffer),ImGuiInputTextFlags_ReadOnly);
+    ImGui::EndChild();
+    ImGui::SameLine();
+    ImGui::Dummy(ImVec2(16.0f, 0.0f));
+    ImGui::SameLine();
+    constexpr ImVec2 iconSize = ImVec2(256, 256);
+    ImGui::Image(_loadedIcon, iconSize);
     ImGui::Spacing();
     ImGui::Separator();
     ImGui::Spacing();
+    ImGui::BeginChild("##mapSettings", ImVec2(2 * ImGui::GetContentRegionAvail().x / 3, 256), true);
+    ImGui::Dummy(ImVec2(0.0f, 16.0f));
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.startingMap").c_str());
     if (ImGui::BeginCombo("##mapDropdown", _startingMap != "" ? _startingMap.c_str() : io::LocalizationManager::GetInstance().getString("window.mainwindow.mapeditor.mapselector").c_str())) {
         for (auto [name, map] : _project->getMaps()) {
             if(ImGui::Selectable((name).c_str(), _startingMap == name)) {
                 _startingMap = name;
+                _startingPosition[0] = 0;
+                _startingPosition[1] = 0;
                 _somethingModified = true;
             }
         }
         ImGui::EndCombo();
     }
-    ImGui::Spacing();
-    ImGui::Spacing();
+    ImGui::Dummy(ImVec2(0.0f, 32.0f));
     ImGui::Text("%s", io::LocalizationManager::GetInstance().getString("window.mainwindow.generalSettings.startingPosition").c_str());
     int playerPos[2] = {_startingPosition[0], _startingPosition[1]};
     if (ImGui::InputInt2("##playerPos", playerPos)) {
@@ -311,6 +442,13 @@ void editor::render::tabs::GeneralSettings::drawSettings() {
             _somethingModified = true;
         }
     }
+    ImGui::Spacing();
+    ImGui::EndChild();
+    ImGui::SameLine();
+    ImGui::Dummy(ImVec2(16.0f, 0.0f));
+    ImGui::SameLine();
+    resources::Map* temp = _project->getMap(_startingMap);
+    if (temp) drawMapPreview(temp);
     ImGui::Spacing();
     ImGui::Separator();
     ImGui::Spacing();

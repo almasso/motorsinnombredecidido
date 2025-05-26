@@ -151,6 +151,7 @@ void editor::Project::buildSettings(const std::string& platform) {
     config["memory"] = memory;
     config["initScene"] = "data/scenes/overworld.scene.lua";
     config["gameName"] = _gameName;
+    config["gameIcon"] = _gameIcon;
     io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data"/"config.lua").string());
 }
 
@@ -507,6 +508,10 @@ void editor::Project::setAndroidApkSignerPath(std::filesystem::path const& path)
 
 void editor::Project::setGameName(std::string const& name) {
     _gameName = name;
+}
+
+void editor::Project::setGameIcon(std::string const &icon) {
+    _gameIcon = icon;
 }
 
 void editor::Project::buildSprites(std::string const& platform) {

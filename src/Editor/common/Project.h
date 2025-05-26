@@ -222,7 +222,10 @@ namespace editor {
         std::string getPlatform() const;
 
         void setAndroidApkSignerPath(std::filesystem::path const& path);
+
         void setGameName(std::string const& name);
+
+        void setGameIcon(std::string const& icon);
 
     private:
         std::string _name;
@@ -233,6 +236,7 @@ namespace editor {
         bool _found = false;
         std::filesystem::path _androidApkSignerPath;
         std::string _gameName;
+        std::string _gameIcon;
 
         std::unordered_map<std::string, editor::resources::Tileset*> _tilesets;
         std::unordered_map<std::string, editor::resources::Sprite*> _sprites;
