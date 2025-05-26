@@ -36,9 +36,13 @@ SDL_Texture* TextureLoader::GetTexture(const Color& color) {
 }
 
 SDL_Texture* TextureLoader::GetTexture(const std::string& filePath) {
+#ifdef __APPLE__
     auto currDir = GetCurrentDir;
-    std::string path = currDir + std::string("/") + filePath;
+    std::string path = currDir + filePath;
     SDL_free(currDir);
+#else
+    std::string path = filePath;
+#endif
     return GetTexture(IMG_Load(path.c_str()));
 }
 

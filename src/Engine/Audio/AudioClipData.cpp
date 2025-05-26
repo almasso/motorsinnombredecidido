@@ -23,9 +23,14 @@ AudioClipData::~AudioClipData() {
 
 bool AudioClipData::load() {
     specifier = new SDL_AudioSpec();
+#ifdef __APPLE__
     auto currDir = GetCurrentDir;
-    std::string clippath = currDir + std::string("/") + _path;
+    std::string clippath = currDir + _path;
     SDL_free(currDir);
+#else
+    std::string clippath = _path;
+#endif
+
     if (!SDL_LoadWAV(clippath.c_str(), specifier, &buffer, &bufferLen)) {
         Error::ShowError(std::string("Failed to load") + _path, SDL_GetError());
         return false;

@@ -19,9 +19,13 @@ bool Font::load() {
         index++;
     }
     int fontSize = std::stoi(_path.substr(0, index));
+#ifdef __APPLE__
     auto currDir = GetCurrentDir;
-    std::string fontPath = currDir + std::string("/") + _path.substr(index);
+    std::string fontPath = currDir + _path.substr(index);
     SDL_free(currDir);
+#else
+    std::string fontPath = _path.substr(index);
+#endif
     _font = TTF_OpenFont(fontPath.c_str(), fontSize);
     if (_font == nullptr) {
         Error::ShowError("Fallo al cargar la fuente " + fontPath, "Fallo al cargar la fuente " + fontPath + "\n" + SDL_GetError());

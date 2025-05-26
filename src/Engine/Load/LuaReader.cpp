@@ -69,9 +69,14 @@ bool LuaReader::init() {
 LuaReader::LuaReader() = default;
 
 bool LuaReader::ReadFile(const std::string& filename, std::string& fileContent) {
+#ifdef __APPLE__
     auto currDir = GetCurrentDir;
-    std::string filepath = currDir + std::string("/") + filename;
+    std::string filepath = currDir + filename;
     SDL_free(currDir);
+#else
+    std::string filepath = filename;
+#endif
+
     SDL_IOStream* file = SDL_IOFromFile(filepath.c_str(), "r");
     if (!file) {
         Error::ShowError("Error al abrir el archivo", "Error al abrir el archivo: " + filename + " - " + SDL_GetError());
