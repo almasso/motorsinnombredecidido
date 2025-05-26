@@ -153,7 +153,7 @@ void editor::Project::buildSettings(const std::string& platform) {
     config["memory"] = memory;
     config["initScene"] = "data/scenes/overworld.scene.lua";
     config["gameName"] = _gameName;
-    config["gameIcon"] = _gameIcon.empty() ? "data/assets/RPGBakerIcon.png" : "data/assets/" + _gameIcon;
+    config["gameIcon"] = _gameIcon.empty() ? "data/engine/RPGBakerIcon.png" : "data/assets/" + _gameIcon;
     io::LuaManager::GetInstance().writeToFile(config, (getBuildPath(platform)/"data"/"config.lua").string());
 }
 
@@ -367,7 +367,7 @@ bool editor::Project::buildAPK() const {
     out.close();
 
     std::string iconSource = _gameIcon.empty()
-        ? (getBuildPath("Android") / "data" / "assets" / "RPGBakerIcon.png").string()
+        ? (getBuildPath("Android") / "data" / "engine" / "RPGBakerIcon.png").string()
         : (getBuildPath("Android") / "data" / "assets" / _gameIcon).string();
 
     std::vector iconTargets = {
