@@ -19,6 +19,12 @@
 #include <Render/Transform.h>
 #include <Utils/Error.h>
 
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#else
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
+
 LuaReader* LuaReader::_instance = nullptr;
 
 void LuaReader::registerUserTypes() {
@@ -63,7 +69,10 @@ bool LuaReader::init() {
 LuaReader::LuaReader() = default;
 
 bool LuaReader::ReadFile(const std::string& filename, std::string& fileContent) {
-    SDL_IOStream* file = SDL_IOFromFile(filename.c_str(), "r");
+    auto currDir = GetCurrentDir;
+    std::string filepath = currDir + std::string("/") + filename;
+    SDL_free(currDir);
+    SDL_IOStream* file = SDL_IOFromFile(filepath.c_str(), "r");
     if (!file) {
         Error::ShowError("Error al abrir el archivo", "Error al abrir el archivo: " + filename + " - " + SDL_GetError());
         return false;

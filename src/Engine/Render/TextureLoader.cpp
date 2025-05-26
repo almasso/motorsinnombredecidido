@@ -5,6 +5,13 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
+#include <SDL3/SDL.h>
+#ifdef __APPLE__
+#define GetCurrentDir strdup(SDL_GetBasePath())
+#else
+#define GetCurrentDir SDL_GetCurrentDirectory()
+#endif
+
 SDL_Renderer* TextureLoader::_renderer = nullptr;
 
 bool TextureLoader::Init(SDL_Renderer* renderer)
@@ -29,7 +36,10 @@ SDL_Texture* TextureLoader::GetTexture(const Color& color) {
 }
 
 SDL_Texture* TextureLoader::GetTexture(const std::string& filePath) {
-    return GetTexture(IMG_Load(filePath.c_str()));
+    auto currDir = GetCurrentDir;
+    std::string path = currDir + std::string("/") + filePath;
+    SDL_free(currDir);
+    return GetTexture(IMG_Load(path.c_str()));
 }
 
 SDL_Texture * TextureLoader::GetTexture(SDL_Surface *surface) {
