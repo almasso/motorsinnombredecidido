@@ -10,11 +10,11 @@ Role-playing video games are one of the most influential genres in the industry\
 
 \smallskip
 
-The development of this type of game has undergone significant changes over the years, along with consequent improvements in hardware and software, which have allowed us to evolve from simple monochrome scenes with text-based interfaces to real-time 3D graphics, complex open worlds, and advanced interaction systems. These improvements have influenced not only the visual aspect but also the narrative, gameplay, and player immersion, enabling increasingly rich and personalized experiences.
+The development of this type of game has undergone significant changes over the years, along with consequent improvements in hardware and software, which have allowed them to evolve from simple monochrome scenes with text-based interfaces to real-time 3D graphics, complex open worlds, and advanced interaction systems. These improvements have influenced not only the visual aspect but also the narrative, gameplay, and player immersion, enabling increasingly rich and personalized experiences.
 
 \medskip
 
-Numerous video game development and editing tools have appeared in the last two decades, but the more commercial ones are designed for games of all kinds. As a result, they tend to offer more general features that are not closely related to role-playing game development, and they often restrict certain functionality, making the development process more complicated.
+Numerous video game development and editing tools have appeared in the last two decades, but the most commonly used ones are designed for games of all kinds. As a result, they tend to offer general features that are not closely related to role-playing game development, and they often restrict certain functionality, making the development process more complicated.
 
 \smallskip
 
@@ -29,7 +29,7 @@ Those tools that are specifically designed for role-playing game development hav
 The main motivation behind this project arises from the need to have easy-to-use and flexible tools, both for experimented independent developers who desire to create games without the limitations imposed by general-purpose engines, and for people with little knowledge of video game development or programming.
 
 \section*{Objectives}
-This project aims to develop a 2D game engine specifically designed for role-playing games, along with an editor that enables simple and straightforward game development for this engine. The editor will be capable of generating executable files that users can distribute without the need for any additional steps after development.
+This bachelor's thesis aims to develop \baker, a 2D role-playing game development environment consisting of a cross-platform engine capable of running on Windows, MacOS, Linux and Android, along with an editor, also cross-platform, that works on Windows, MacOS and Linux, and enables simple and straightforward game development for this engine. The editor will be capable of generating executable files that users can distribute without the need for any additional steps after development.
 
 \smallskip
 
@@ -39,8 +39,8 @@ The editor's interface will be designed for beginners in game development, while
 
 To accomplish this:
 \begin{itemize}
-	\item A cross-platform engine that allows the user to implement role-playing games will be developed.
-	\item A cross-platform editor that eases the implementation of a role-playing game in the developed engine will be developed.
+	\item A cross-platform (on Windows, MacOS, Linux and Android) engine that allows the user to implement role-playing games will be developed.
+	\item A cross-platform (on Windows, MacOS and Linux) editor that eases the implementation of a role-playing game in the developed engine will be developed.
 	\item \baker{} will be tested with users to demonstrate its functionality, and necessary conclusions will be drawn, along with potential improvements for the future.
 \end{itemize}
 
@@ -50,38 +50,36 @@ To accomplish this:
 		\begin{ganttchart}[
     		hgrid,
     		vgrid,
-    		time slot format=isodate-yearmonth,
     		title label font=\small,
-    		time slot unit=month,
     		title height=1.2,
-    		x unit=1.2cm
-  			]{2024-10}{2025-05}
+    		x unit=0.65cm
+  			]{1}{16}
   			
-  			\gantttitle[title/.style={fill=blue!30}]{2024}{3}
-  			\gantttitle[title/.style={fill=green!30}]{2025}{5}\\
+  			\gantttitle[title/.style={fill=blue!30, draw=black, line width=0.4pt}]{2024}{6}
+  			\gantttitle[title/.style={fill=green!30, draw=black, line width=0.4pt}]{2025}{10}\\
+  			
+  			\gantttitle[title/.style={fill=blue!15, draw=black, line width=0.4pt}]{Oct.}{2}
+  			\gantttitle[title/.style={fill=blue!15, draw=black, line width=0.4pt}]{Nov.}{2}
+  			\gantttitle[title/.style={fill=blue!15, draw=black, line width=0.4pt}]{Dec.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Jan.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Feb.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Mar.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Apr.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{May}{2}\\
 	
-			\gantttitle[title/.style={fill=blue!15}]{Oct.}{1}
-  			\gantttitle[title/.style={fill=blue!15}]{Nov.}{1}
-  			\gantttitle[title/.style={fill=blue!15}]{Dec.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Jan.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Feb.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Mar.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Apr.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{May}{1}\\
-	
-			\ganttbar{Research on the current state}{2024-10}{2025-02}\\
-			\ganttbar{\baker{} design}{2024-10}{2025-02}\\
-			\ganttbar{Engine development}{2025-02}{2025-05}\\
-			\ganttbar{Editor development}{2025-02}{2025-05}\\
-			\ganttbar{Document writing}{2025-03}{2025-05}\\
-			\ganttbar{User testing}{2025-05}{2025-05}
+			\ganttbar{Research on the current state}{1}{9}\\
+			\ganttbar{\baker{} design}{1}{9}\\
+			\ganttbar{Engine development}{9}{16}\\
+			\ganttbar{Editor development}{9}{16}\\
+			\ganttbar{Document writing}{11}{16}\\
+			\ganttbar{User testing}{13}{15}
 		\end{ganttchart}
 	}
 	\caption{Gantt diagram showing the temporal planning of the work.} 
 	\label{fig:ganttingles}
 \end{figure}
 
-To accomplish the previous objectives, the work plan will be divided in three phases: 
+To accomplish the previous objectives, the work plan will be divided in four phases: 
 \begin{itemize}
 	\item Research on the current state of engines and editors specifically designed for role-playing games, as well as on role-playing games themselves. This section will aim to identify the common features shared by all engines, editors and games, both open-source and commercial ones, and propose improvements to address the issues these tools may present for inexperienced new users. 
 	\item \baker{} design. Based on the common features identified in the previous phase, an initial design will be proposed to serve as a basis for the development of the project. This design, while not immutable, should be as close to final as possible to avoid any issues during the development phase.
@@ -93,6 +91,8 @@ To accomplish the previous objectives, the work plan will be divided in three ph
 		\end{itemize}
 	\item User testing. To ensure the correct functioning of \baker, the final tools will be tested by a variety of users not involved in their development. After the tests are completed, the necessary conclusions will be drawn, and the tools will be adjusted to address any critical issues that require attention before releasing the public version. Features that would require excessive effort to implement within the available time will be left as future work.
 \end{itemize}
+
+Figure \ref{fig:ganttingles} shows a Gantt chart illustrating the project timeline, which began in October 2024 and ended in May 2025. The research and design phase took place during the first part of the project, from its inception until mid-February; the implementation phase spanned from mid-February to the end of May; the writing of this document was carried out from early March to late May; and finally, user testing was conducted between the second half of April and the first half of May.
 
 
 \section*{Tools and Methodology}

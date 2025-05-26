@@ -8,11 +8,11 @@ Los videojuegos de rol constituyen uno de los géneros más influyentes de la in
 
 \smallskip
 
-El desarrollo de este tipo de juegos ha sufrido cambios mayúsculos con el paso de los años y con las consecuentes mejoras \textit{hardware} y \textit{software}, que nos han permitido evolucionar desde simples escenas monocromas y con interfaces basadas en texto hasta las representaciones tridimensionales en tiempo real, mundos abiertos complejos y sistemas de interacción avanzados. Estas mejoras han influido no solo en el apartado visual, sino también en la narrativa, la jugabilidad y la inmersión del jugador, permitiendo experiencias cada vez más ricas y personalizadas.
+El desarrollo de este tipo de juegos ha sufrido cambios mayúsculos con el paso de los años y con las consecuentes mejoras \textit{hardware} y \textit{software}, que los han permitido evolucionar desde simples escenas monocromas y con interfaces basadas en texto hasta las representaciones tridimensionales en tiempo real, mundos abiertos complejos y sistemas de interacción avanzados. Estas mejoras han influido no solo en el apartado visual, sino también en la narrativa, la jugabilidad y la inmersión del jugador, permitiendo experiencias cada vez más ricas y personalizadas.
 
 \medskip
 
-Numerosos programas de edición y desarrollo de videojuegos han aparecido en las últimas dos décadas, pero aquellos que son más comerciales están pensados para juegos de todo tipo, por lo que suelen tener características más generales y no tan estrechamente relacionadas con el desarrollo de juegos de rol, y muchas veces restringen algunas de sus funcionalidades, lo que dificulta el desarrollo.
+Numerosos programas de edición y desarrollo de videojuegos han aparecido en las últimas dos décadas, pero los más habitualmente usados están pensados para juegos de todo tipo, por lo que suelen tener características generales y no estrechamente relacionadas con el desarrollo de juegos de rol, y muchas veces restringen algunas de sus funcionalidades, lo que dificulta el desarrollo.
 
 \smallskip
 
@@ -27,7 +27,7 @@ Aquellos programas que sí que están pensados para el desarrollo específico de
 La motivación principal de este trabajo surge de la necesidad de contar con herramientas sencillas de utilizar y flexibles, tanto para desarrolladores independientes experimentados que quieran crear juegos sin las limitaciones impuestas por los motores de uso general, como para personas sin amplio conocimiento en el desarrollo de videojuegos o en la programación de estos.
 
 \section{Objetivos}
-Este trabajo de fin de grado tiene marcados como objetivos el desarrollo de un motor de videojuegos 2D, pensado específicamente para videojuegos de rol, acompañado de un editor que permita un desarrollo sencillo de videojuegos para este motor. El editor podrá generar ejecutables que el usuario solamente necesite distribuir sin la necesidad de hacer ningún paso extra posterior al desarrollo.
+Este trabajo de fin de grado tiene marcados como objetivos el desarrollo de \baker, un entorno de desarrollo de videojuegos de rol 2D, compuesto por un motor multiplataforma, que pueda funcionar en Windows, MacOS, Linux y Android; acompañado de un editor, también multiplataforma, que pueda funcionar en Windows, MacOS y Linux, y que permita un desarrollo sencillo de videojuegos para este motor. El editor podrá generar ejecutables que el usuario solamente necesite distribuir sin la necesidad de hacer ningún paso extra posterior al desarrollo.
 
 \smallskip
 
@@ -37,8 +37,8 @@ La interfaz del editor estará pensada para usuarios primerizos en el desarrollo
 
 Para ello:
 \begin{itemize}
-	\item Se desarrollará un motor multiplataforma que permita la implementación de videojuegos de rol.
-	\item Se desarrollará un editor multiplataforma que facilite la implementación de los videojuegos de rol en el motor desarrollado.
+	\item Se desarrollará un motor multiplataforma (en Windows, MacOS, Linux y Android) que permita la implementación de videojuegos de rol.
+	\item Se desarrollará un editor multiplataforma (en Windows, MacOS y Linux) que facilite la implementación de los videojuegos de rol en el motor desarrollado.
 	\item Se probarán ambas herramientas con usuarios para demostrar el funcionamiento de \baker{} y se extraerán las conclusiones necesarias, así como posibles mejoras de cara al futuro.
 \end{itemize}
 
@@ -48,49 +48,49 @@ Para ello:
 		\begin{ganttchart}[
     		hgrid,
     		vgrid,
-    		time slot format=isodate-yearmonth,
     		title label font=\small,
-    		time slot unit=month,
     		title height=1.2,
-    		x unit=1.2cm
-  			]{2024-10}{2025-05}
+    		x unit=0.65cm
+  			]{1}{16}
   			
-  			\gantttitle[title/.style={fill=blue!30}]{2024}{3}
-  			\gantttitle[title/.style={fill=green!30}]{2025}{5}\\
+  			\gantttitle[title/.style={fill=blue!30, draw=black, line width=0.4pt}]{2024}{6}
+  			\gantttitle[title/.style={fill=green!30, draw=black, line width=0.4pt}]{2025}{10}\\
   			
-  			\gantttitle[title/.style={fill=blue!15}]{Oct.}{1}
-  			\gantttitle[title/.style={fill=blue!15}]{Nov.}{1}
-  			\gantttitle[title/.style={fill=blue!15}]{Dic.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{En.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Feb.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Mar.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{Abr.}{1}
-  			\gantttitle[title/.style={fill=green!15}]{May.}{1}\\  		
-			
-			\ganttbar{Investigación del estado actual}{2024-10}{2025-02}\\	
-			\ganttbar{Diseño de \baker}{2024-10}{2025-02}\\
-			\ganttbar{Desarrollo del motor}{2025-02}{2025-05}\\
-			\ganttbar{Desarrollo del editor}{2025-02}{2025-05}\\
-			\ganttbar{Desarrollo de la memoria}{2025-03}{2025-05}\\
-			\ganttbar{Pruebas con usuarios}{2025-05}{2025-05}
+  			\gantttitle[title/.style={fill=blue!15, draw=black, line width=0.4pt}]{Oct.}{2}
+  			\gantttitle[title/.style={fill=blue!15, draw=black, line width=0.4pt}]{Nov.}{2}
+  			\gantttitle[title/.style={fill=blue!15, draw=black, line width=0.4pt}]{Dic.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{En.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Feb.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Mar.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{Abr.}{2}
+  			\gantttitle[title/.style={fill=green!15, draw=black, line width=0.4pt}]{May.}{2}\\
+  						
+			\ganttbar{Investigación del estado actual}{1}{9}\\	
+			\ganttbar{Diseño de \baker}{1}{9}\\
+			\ganttbar{Desarrollo del motor}{9}{16}\\
+			\ganttbar{Desarrollo del editor}{9}{16}\\
+			\ganttbar{Desarrollo de la memoria}{11}{16}\\
+			\ganttbar{Pruebas con usuarios}{13}{15}
 		\end{ganttchart}
 	}
 	\caption{Diagrama de Gantt mostrando la planificación temporal del trabajo.} 
 	\label{fig:ganttespanol}
 \end{figure}
 
-Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en tres fases:
+Para cumplir con los objetivos anteriores, se dividirá el plan de trabajo en cuatro fases:
 \begin{itemize}
 	\item Investigación del estado actual sobre los motores y editores específicos para videojuegos de rol, así como de los propios videojuegos de rol. En esta parte se intentarán abstraer las características comunes entre todos los motores, editores y videojuegos, tanto los de código libre como los que están bajo una capa de pago; y se intentarán proponer mejoras a los problemas que estos puedan tener de cara a nuevos usuarios poco experimentados.
 	\item Diseño de \baker. Con las características abstraídas en la fase anterior, se planteará un diseño inicial que servirá como base durante el desarrollo del trabajo. Este diseño, si bien no será inmutable, debería ser lo más \comillas{final} posible para evitar problemas durante la fase de desarrollo.
 	\item Desarrollo de \baker. Una vez finalizado el diseño, comenzará el desarrollo. Esta fase, a su vez, se dividirá en varias fases:
 		\begin{itemize}
-			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades de ambas herramientas, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo. 
+			\item Puesta en marcha del entorno de desarrollo. Se elegirá un entorno de desarrollo dependiendo de las necesidades del motor y del editor, y se configurará todo para que sea lo menos trabajoso posible durante el desarrollo. 
 			\item Desarrollo del motor. Se desarrollará un motor de acuerdo a los planes diseñados anteriormente, con soporte multiplataforma tanto para ordenador como para dispositivos móviles Android.
 			\item Desarrollo del editor. Al igual que con el motor, se desarrollará el editor de acuerdo al diseño preestablecido. Tendrá que tener soporte multiplataforma en PC, es decir, Windows, MacOS y Linux, no así con Android.
 		\end{itemize}
 	\item Pruebas con usuarios. Para garantizar el correcto funcionamiento de \baker, se probarán las herramientas finales con usuarios de diversa índole ajenos al desarrollo de estas. Al finalizar las pruebas, se extraerán las conclusiones necesarias, y se retocarán todas aquellas funcionalidades críticas que requieran de un arreglo antes de poder publicar la versión pública, dejando como trabajo futuro aquellas que supongan una excesiva carga como para poder desarrollarlas en el tiempo restante.
 \end{itemize}
+
+La figura \ref{fig:ganttespanol} muestra un diagrama de Gantt con la planificación temporal del trabajo, que se empezó en el mes de octubre de 2024 y ha terminado en mayo de 2025. La parte de investigación y diseño ha correspondido a la primera parte del trabajo, desde el inicio del proyecto hasta mediados de febrero; la implementación del proyecto, desde mediados de febrero hasta finales de mayo; el desarrollo de la memoria, desde principios de marzo hasta finales de mayo; y, finalmente, las pruebas de usuario, que se hicieron entre la segunda quincena de abril y la primera de mayo.
 
 
 \section{Herramientas y Metodología}
