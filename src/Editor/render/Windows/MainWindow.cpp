@@ -50,11 +50,12 @@ void editor::render::windows::MainWindow::beforeRender() {
 
 void editor::render::windows::MainWindow::onRender() {
     ImGui::BeginChild("##mainWindowToolbar");
-    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 3);
+    ImGui::SetCursorPosX(RenderManager::GetInstance().getWidth() - 350);
+
     ImGui::BeginDisabled(_project->getMaps().empty());
     std::string targets[] = {"Windows", "MacOS", "Linux", "Android"};
     ImGui::SetNextItemWidth(150.0f);
-    if (ImGui::BeginCombo("##mapDropdown", _buildTarget.c_str())) {
+    if (ImGui::BeginCombo("##buildTargetDropdown", _buildTarget.c_str())) {
         for(const std::string& target : targets) {
             bool isSelected = (_buildTarget == target);
             if(ImGui::Selectable(target.c_str(), isSelected)) {
@@ -64,7 +65,6 @@ void editor::render::windows::MainWindow::onRender() {
         ImGui::EndCombo();
     }
     ImGui::SameLine();
-    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + RenderManager::GetInstance().getWidth() / 2 - 30);
     ImGui::PushFont(RenderManager::GetInstance().getFont("FA 900"));
     if(ImGui::Button("##BuildButton", {60, 60})) {
         build(_buildTarget);
@@ -75,6 +75,7 @@ void editor::render::windows::MainWindow::onRender() {
     ImGui::TextColored({0, 255, 0, 255}, ICON_FA_PLAY);
     ImGui::PopFont();
     ImGui::EndChild();
+
     ImGui::SetCursorPos({0, 50});
     ImGui::BeginChild("##mainWindowtabbar");
     ImGui::BeginTabBar("tabBar");
