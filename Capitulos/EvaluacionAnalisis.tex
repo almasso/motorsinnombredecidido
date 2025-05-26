@@ -1,6 +1,13 @@
 \chapter{Evaluación y análisis}
 \label{cap:conclusiones}
 
+\chapterquote{\comillas{¿Cómo hacer pruebas?} es una pregunta que no puede responderse en general. Sin embargo, \comillas{¿cuándo se hacen las pruebas?} sí que tiene una respuesta: tan pronto y tan frecuentemente como sea posible.}{Bjarne Stroustrup}
+
+
+\begin{resumen}
+En este capítulo se explicarán las pruebas con usuarios realizadas, así como la metodología seguida en las pruebas y unas pequeñas conclusiones sobre estas.
+\end{resumen}
+
 Al conocer en profundidad cómo funcionan todos los sistemas del motor y el editor, no se puede tener la certeza de que estos funcionen como un usuario promedio espera. Por esto, realizar pruebas con usuarios sin sesgos es crucial para obtener la información de las posibles brechas entre los programas y esos usuarios. De cara a ofrecer una experiencia de uso agradable se analizarán las pruebas en busca de formas de mejorarla. Se buscarán distintos tipos de perfiles para obtener una mayor cantidad de datos sobre los posibles conflictos que estos tengan con los sistemas.
 
 \section{Objetivo de la evaluación}
@@ -15,7 +22,7 @@ Al inicio, se le pregunta a cada probador sobre su experiencia tanto en jugar co
 
 \smallskip
 
-Esta guía explica de forma concisa cómo utilizar cada uno de los sistemas disponibles en el editor. Con esta información, el probador seguirá la guía para entender los mecanismos y, posteriormente, podrá usarlos libremente según su criterio.
+Esta guía, disponible en el apéndice \ref{Appendix:Key1}, explica de forma concisa cómo utilizar cada uno de los sistemas disponibles en el editor. Con esta información, el probador seguirá la guía para entender los mecanismos y, posteriormente, podrá usarlos libremente según su criterio.
 
 \medskip
 
@@ -27,19 +34,19 @@ Estas pruebas están diseñadas para realizarse tanto de manera presencial como 
 
 \section{Resultados}
 
-Los usuarios pueden agruparse en 3 categorías según su experiencia con los videojuegos y, en particular, con los RPG.
+En total, las pruebas han sido realizadas con quince personas, las cuales podemos dividir en tres categorías según su experiencia con los videojuegos y, en particular, con los RPG.
 
 \smallskip 
 
-En primer lugar, están los usuarios menos familiarizados con el mundo de los videojuegos, con poca experiencia jugando en general y, en particular, con los juegos RPG. Con este tipo de usuario, el objetivo es evaluar qué tan intuitivas son las herramientas y la interfaz de usuario del editor, así como comprobar si se entienden bien las instrucciones de las pruebas. Este primer grupo logró crear mapas con cierto sentido, pero la mayoría utilizó únicamente una o dos capas, lo que limitó un poco el diseño. No dedicaron mucho tiempo a explorar los \textit{tilesets} y realizaron diseños bastante sencillos. Las configuraciones las entendieron bastante bien y, siguiendo la guía, lograron completarlas. En la creación de eventos se quedaron en los comportamientos más simples y no intentaron crear eventos complejos usando variables y condiciones. En general, la prueba fue satisfactoria y los resultados estuvieron dentro de lo esperado.
+En primer lugar, cinco de los usuarios que son los menos familiarizados con el mundo de los videojuegos, con poca experiencia jugando en general y, en particular, con los juegos RPG. Con este tipo de usuario, el objetivo es evaluar qué tan intuitivas son las herramientas y la interfaz de usuario del editor, así como comprobar si se entienden bien las instrucciones de las pruebas. Este primer grupo logró crear mapas con cierto sentido, pero la mayoría utilizó únicamente una o dos capas, lo que limitó un poco el diseño. No dedicaron mucho tiempo a explorar los \textit{tilesets} y realizaron diseños bastante sencillos. Las configuraciones las entendieron bastante bien y, siguiendo la guía, lograron completarlas. En la creación de eventos se quedaron en los comportamientos más simples y no intentaron crear eventos complejos usando variables y condiciones. En general, la prueba fue satisfactoria y los resultados estuvieron dentro de lo esperado.
 
 \medskip
 
-En segundo lugar, están los usuarios que sí juegan videojuegos y algunos incluso están relacionados con la industria, pero no tienen conocimientos de programación o desarrollo más allá de sus áreas específicas. Estos usuarios aprovecharon mucho más el apartado de \textit{mapeado}, utilizando más capas y varios \textit{tilesets} para crear mapas mucho más interesantes. En cuanto a los eventos, se les animó más que al primer grupo a intentar crear eventos algo más complejos, pero al parecer no tenían claro cómo estructurarlos para aprovechar al máximo las funcionalidades, y la mayoría se quedó en cosas más sencillas o requirió bastante ayuda por parte de los supervisores. Aunque los eventos no requieren conocimientos de programación, su estructura es similar a la de un sistema basado en lógica condicional, lo que exige más tiempo del disponible durante la prueba para entender cómo organizarlos correctamente.
+En segundo lugar, siete de los usuarios que sí juegan videojuegos y algunos incluso están relacionados con la industria, pero no tienen conocimientos de programación o desarrollo más allá de sus áreas específicas. Estos usuarios aprovecharon mucho más el apartado de \textit{mapeado}, utilizando más capas y varios \textit{tilesets} para crear mapas mucho más interesantes. En cuanto a los eventos, se les animó más que al primer grupo a intentar crear eventos algo más complejos, pero al parecer no tenían claro cómo estructurarlos para aprovechar al máximo las funcionalidades, y la mayoría se quedó en cosas más sencillas o requirió bastante ayuda por parte de los supervisores. Aunque los eventos no requieren conocimientos de programación, su estructura es similar a la de un sistema basado en lógica condicional, lo que exige más tiempo del disponible durante la prueba para entender cómo organizarlos correctamente.
 
 \medskip
 
-Por último, está el grupo de personas con conocimientos en el desarrollo de videojuegos, incluso en el desarrollo específico en \textit{RPG Maker}, lo cual fue muy útil para obtener \textit{feedback} comparativo. Este grupo comprendió bien las herramientas de \textit{mapeado} y señaló que echaba en falta algunas opciones más avanzadas que agilizaran el proceso, como la posibilidad de seleccionar varios \textit{tiles} a la vez o rellenar áreas con \textit{tiles} de un mismo tipo. También comentaron que el proceso de creación de \textit{sprites} y animaciones es lento, proponiendo algún tipo de automatización similar a la que existe para los \textit{tilesets}. En cuanto a los eventos, lograron entender cómo montar estructuras más avanzadas, lo cual fue un resultado positivo.
+Por último, está el grupo de tres usuarios con conocimientos en el desarrollo de videojuegos, incluso en el desarrollo específico en \textit{RPG Maker}, lo cual fue muy útil para obtener \textit{feedback} comparativo. Este grupo comprendió bien las herramientas de \textit{mapeado} y señaló que echaba en falta algunas opciones más avanzadas que agilizaran el proceso, como la posibilidad de seleccionar varios \textit{tiles} a la vez o rellenar áreas con \textit{tiles} de un mismo tipo. También comentaron que el proceso de creación de \textit{sprites} y animaciones es lento, proponiendo algún tipo de automatización similar a la que existe para los \textit{tilesets}. En cuanto a los eventos, lograron entender cómo montar estructuras más avanzadas, lo cual fue un resultado positivo.
 
 \medskip
 
