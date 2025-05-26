@@ -1,6 +1,8 @@
 \chapter{Videojuegos de rol}
 \label{cap:videojuegosrol}
 
+\chapterquote{En mi tarjeta de presentación, soy presidente de una empresa. En mi mente, soy desarrollador de videojuegos. Pero en mi corazón, soy un jugador.}{Satoru Iwata}
+
 \begin{resumen}
 En este capítulo se explicará qué son los videojuegos, haciendo un enfoque en los videojuegos de rol, se introducirá su historia y se hablará del proceso de desarrollo de estos, analizando la importancia de los motores y editores en el desarrollo de videojuegos.
 \end{resumen}
@@ -66,7 +68,7 @@ Por último, los juegos en 2.5D combinan elementos de ambos mundos: presentan gr
 
 \figura{Vectorial/botw}{width=0.7\textwidth}{fig:botw}{Escena de juego de \cite{BOTW}, extraída de \cite{BOTWForbes}.}
 
-\cite{FailGeneros} argumentan que las categorías existentes a día de hoy se quedan cortas para satisfacer los propósitos del género en videojuegos (identidad, agrupación, \textit{marketing} y educación), ya que dada la gran diversidad de juegos que hay ahora, resulta casi imposible poder agrupar la naturaleza multifacética de estos en etiquetas tan \comillas{tradicionales}.
+\cite{FailGeneros} argumentan que las categorías existentes a día de hoy se quedan cortas para satisfacer los propósitos del género en videojuegos (identidad, agrupación, \textit{marketing} y educación), ya que dada la gran diversidad de juegos actuales, resulta casi imposible poder agrupar la naturaleza multifacética de estos en etiquetas tan \comillas{tradicionales}.
 
 \smallskip
 
@@ -133,7 +135,7 @@ Otro fenómeno destacado fue la aparición de la saga \cite{pokemon}, que redefi
 
 \medskip
 
-En el nuevo milenio, que para \citeauthor{barton2008dungeons} es la \comillas{etapa de platino}, surgen sagas con juegos con gráficos mucho más sofisticados y con narrativas mucho más profundas, como la saga \textit{The Elder Scrolls}, más concretamente, su tercera entrega, \citegame{Morrowind}{tes}; la saga \citegame{Fallout}{fallout}; la saga \citegame{Baldur's Gate}{baldurs}; o la saga \citegame{Diablo}{diablo}, que llevan hasta el límite las propias definiciones del género por las mezclas con otros géneros (llegando a ser juegos \comillas{híbridos}). La potencia del \textit{hardware} va en aumento, lo que permite que haya un salto cualitativo, tanto gráfico como en jugabilidad, mientras que la tendencia de los mundos abiertos continúa y se mejora, llegando a ser algunos RPG como \citegame{The Elder Scrolls V: Skyrim}{skyrim} o \citegame{The Witcher 3: Wild Hunt}{witcher} los más vendidos\footnote{Según la revista \textit{TheGamer}, en un artículo del año 2021 (\url{https://www.thegamer.com/highest-selling-rpgs-all-time/}), sitúan a \textit{The Witcher 3} como el cuarto juego más vendido con treinta millones de copias, al igual que a \textit{The Elder Scrolls V}, que se sitúa en segundo lugar con las mismas ventas.}.
+Entre el final de los años 90 y el inicio del nuevo milenio, que para \citeauthor{barton2008dungeons} es la \comillas{etapa de platino}, surgen sagas con juegos con gráficos mucho más sofisticados y con narrativas mucho más profundas, como la saga \textit{The Elder Scrolls}, más concretamente, su tercera entrega, \citegame{Morrowind}{tes}; la saga \citegame{Fallout}{fallout}; la saga \citegame{Baldur's Gate}{baldurs}; o la saga \citegame{Diablo}{diablo}, que llevan hasta el límite las propias definiciones del género por las mezclas con otros géneros (llegando a ser juegos \comillas{híbridos}). La potencia del \textit{hardware} va en aumento, lo que permite que haya un salto cualitativo, tanto gráfico como en jugabilidad, mientras que la tendencia de los mundos abiertos continúa y se mejora, llegando a ser algunos RPG de la década de 2010 como \citegame{The Elder Scrolls V: Skyrim}{skyrim} o \citegame{The Witcher 3: Wild Hunt}{witcher} los más vendidos\footnote{Según la revista \textit{TheGamer}, en un artículo del año 2021 (\url{https://www.thegamer.com/highest-selling-rpgs-all-time/}), sitúan a \textit{The Witcher 3} como el cuarto juego más vendido con treinta millones de copias, al igual que a \textit{The Elder Scrolls V}, que se sitúa en segundo lugar con las mismas ventas.}.
 
 \section{Sobre el desarrollo de videojuegos}
 Para entender cómo, bien las empresas profesionales o bien equipos \textit{indies} desarrollan un videojuego desde cero, es imprescindible saber con exactitud cómo funciona el software internamente, y qué formas tienen los programadores o desarrolladores para comunicarse con las entrañas de este durante el proceso de desarrollo. Es por eso que en este apartado se explicará qué es un \textit{motor} y qué es un \textit{editor}.
@@ -148,7 +150,7 @@ El desarrollo de un videojuego es una tarea multidisciplinar que requiere la col
 	\item \textbf{Guionista}: se encarga de crear la historia, los diálogos, el trasfondo y el desarrollo narrativo del juego. Es fundamental en aquellos géneros donde la narrativa tiene un peso importante, como es el caso de algunos RPG.
 	\item \textbf{Probador}: su misión es detectar errores, evaluar la jugabilidad y asegurar que el producto final funcione correctamente. Esta fase se conoce comúnmente como QA (\textit{quality assurance}, aseguramiento de la calidad), y es esencial para garantizar una buena experiencia de usuario.
 	\item \textbf{Productor}: se encarga de coordinar al equipo, gestionar los tiempos, recursos y comunicación entre los distintos departamentos. Es el vínculo entre el equipo creativo y las partes interesadas externas (como clientes, editoras o inversores).
-	\item \textbf{Director creativo}: supervisa la visión general del juego y asegura que todos los elementos (jugabilidad, arte, narrativa...) estén alineados con el concepto original.
+	\item \textbf{Director creativo}: supervisa la visión general del juego y asegura que todos los elementos (jugabilidad, arte, narrativa\ldots) estén alineados con el concepto original.
 \end{itemize}
 
 \subsection{Motor de videojuegos}
@@ -235,12 +237,16 @@ En cuanto a los patrones arquitectónicos utilizados en el diseño de motores de
 \medskip
 El patrón ECS se basa en tres elementos fundamentales:
 \begin{itemize}
-	\item Entidades: son identificadores únicos que representan objetos del juego (por ejemplo, jugadores, enemigos, proyectiles...). Por sí solas, las entidades no contienen ni datos ni comportamiento.
+	\item Entidades: son identificadores únicos que representan objetos del juego (por ejemplo, jugadores, enemigos, proyectiles\ldots). Por sí solas, las entidades no contienen ni datos ni comportamiento.
 	\item Componentes: son estructuras de datos puras que contienen información específica de una entidad, como su posición, velocidad, salud, animación o inteligencia artificial. Cada entidad puede tener múltiples componentes.
 	\item Sistemas: son unidades lógicas encargadas de procesar todas las entidades que contienen un conjunto específico de componentes. Por ejemplo, un sistema de física puede procesar todas las entidades que tengan componentes de posición y velocidad, actualizando su movimiento en función del tiempo.
 \end{itemize}
 
 En algunas implementaciones mucho más sencillas, se eliminan los sistemas, dejando únicamente a las entidades y los componentes como base de la arquitectura. Esta implementación, conocida como patrón EC, es mucho menos escalable y modulable que el patrón ECS, pero es más próxima a la orientación a objetos. En este caso, son las propias entidades o los componentes los que se encargan del procesado de la lógica en lugar de los sistemas.
+
+\medskip
+
+Ambos patrones se utilizan habitualmente para estructurar la lógica del \textit{gameplay}, ya que permiten organizar el comportamiento de los objetos de juego de forma eficiente y escalable.
 
 \subsubsection{Bucle de juego}
 El bucle de juego (\textit{game loop}) es una estructura central en cualquier motor de videojuegos. Su propósito es mantener el flujo continuo de ejecución del juego, actualizando su estado y renderizando el resultado en pantalla de forma cíclica. Se trata de un patrón esencial que permite que el juego responda a las entradas del usuario, avance en el tiempo, y se represente visualmente de forma coherente.
@@ -250,7 +256,7 @@ El bucle de juego (\textit{game loop}) es una estructura central en cualquier mo
 Típicamente, un bucle de juego sigue los siguientes pasos en cada iteración (o fotograma):
 
 \begin{enumerate}
-	\item Procesamiento de entrada: se recogen y procesan las entradas del jugador, ya sea desde el teclado, ratón, \textit{gamepad}, red...
+	\item Procesamiento de entrada: se recogen y procesan las entradas del jugador, ya sea desde el teclado, ratón, \textit{gamepad}, red\ldots
 	\item Actualización del estado del juego: se actualiza la lógica del juego, incluyendo la física, la inteligencia artificial, las colisiones y cualquier otro sistema relevante.
 	\item \textit{Renderizado}: se genera la imagen correspondiente al nuevo estado del juego y se envía a la pantalla.
 \end{enumerate}
@@ -356,22 +362,22 @@ Para poder conectar la programación dirigida con datos con el propio código de
     		arrow/.style={->, thick}
 		]
 
-			\node[platform] (pc) at (-4, 4) {Motor de PC};
-			\node[platform] (ps) at (0, 4) {Motor de PlayStation};
-			\node[platform] (xb) at (4, 4) {Motor de Xbox};
+			\node[platform] (pc) at (-4, -1) {Motor de PC};
+			\node[platform] (ps) at (0, -1) {Motor de PlayStation};
+			\node[platform] (xb) at (4, -1) {Motor de Xbox};
 
-			\node[commonlayer] (abstr) at (0, 2.5) {Interfaz común};
+			\node[commonlayer] (abstr) at (0, 0.5) {Interfaz común};
 
-			\node[core] (engine) at (0, 1.25) {Componentes multiplataforma del motor};
+			\node[core] (engine) at (0, 1.75) {Componentes multiplataforma del motor};
 
-			\node[layer] (game) at (0, -1) {Juego};
+			\node[layer] (game) at (0, 4) {Juego};
 
 			\node[draw, thick, rounded corners, inner sep=10pt, fit=(pc) (ps) (xb) (abstr) (engine), label=left:{Motor}] (motor) {};
 
-			\draw[arrow] (pc.south) -- ([xshift=.-4cm]abstr.north);
-			\draw[arrow] (ps.south) -- (abstr.north);
-			\draw[arrow] (xb.south) -- ([xshift=4cm]abstr.north);
-			\draw[arrow] (game.north) -- ([xshift=-0.1cm]motor.south);
+			\draw[arrow] (pc.north) -- ([xshift=.-4cm]abstr.south);
+			\draw[arrow] (ps.north) -- (abstr.south);
+			\draw[arrow] (xb.north) -- ([xshift=4cm]abstr.south);
+			\draw[arrow] (game.south) -- ([xshift=-0.1cm]motor.north);
 
 		\end{tikzpicture}
 		\caption{Representación esquemática de la arquitectura de un motor multiplataforma} 
@@ -504,4 +510,4 @@ También encontramos proyectos de código abierto como \textit{EasyRPG}, que bus
 
 \medskip
 
-Por último, en la tabla \ref{tab:comparativarpg}, se encuentra una comparativa más resumida entre los distintos \textit{softwares} anteriormente mencionados con algunas de sus características más importantes.
+En la tabla \ref{tab:comparativarpg}, se encuentra una comparativa más resumida entre los distintos \textit{softwares} anteriormente mencionados con algunas de sus características más importantes.
